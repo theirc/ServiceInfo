@@ -21,7 +21,8 @@
 {% set source_dir = path_from_root('source') %}
 {% set venv_dir = path_from_root('env') %}
 
-{% set web_minions = salt['mine.get']('G@roles:web and G@environment:' + pillar['environment'], 'network.interfaces', expr_form='compound') %}
-{% set worker_minions = salt['mine.get']('G@roles:worker and G@environment:' + pillar['environment'], 'network.interfaces', expr_form='compound') %}
-{% set app_minions = salt['mine.get']('P@roles:(worker|web) and G@environment:' + pillar['environment'], 'network.interfaces', expr_form='compound') %}
-{% set balancer_minions = salt['mine.get']('G@roles:balancer and G@environment:' + pillar['environment'], 'network.interfaces', expr_form='compound') %}
+# This fixes a regresion in Salt https://github.com/caktus/django-project-template/issues/137
+{% set web_minions = salt['mine.get']('roles:web', 'network.interfaces', expr_form='grain') %}
+{% set worker_minions = salt['mine.get']('roles:worker', 'network.interfaces', expr_form='grain') %}
+{% set app_minions = salt['mine.get']('roles:(worker|web)', 'network.interfaces', expr_form='grain_pcre') %}
+{% set balancer_minions = salt['mine.get']('roles:balancer', 'network.interfaces', expr_form='grain') %}

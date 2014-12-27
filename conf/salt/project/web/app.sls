@@ -55,14 +55,18 @@ app_allow-{{ host_addr }}:
       - pkg: ufw
 {% endfor %}
 
-node_ppa:
-  pkgrepo.managed:
-    - ppa: chris-lea/node.js
+# node_ppa:
+#   pkgrepo.managed:
+#     - ppa: chris-lea/node.js
+
+npm:
+  pkg.installed:
+    - refresh: True
 
 nodejs:
   pkg.installed:
     - require:
-      - pkgrepo: node_ppa
+      - pkg: npm
     - refresh: True
 
 less:

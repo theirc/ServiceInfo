@@ -1,7 +1,7 @@
 environment: staging
 
 # FIXME: Change to match staging domain name
-domain: staging.example.com
+domain: 54.235.72.124
 
 repo:
   url: git@github.com:theirc/Service-Mapper.git

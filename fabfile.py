@@ -25,7 +25,7 @@ VALID_ROLES = (
 
 # FIXME: Once the master has been setup this should be set to IP of the master
 # This assumes a single master for both staging and production
-env.master = 'CHANGEME'
+env.master = '54.235.72.124'
 
 
 @task
@@ -132,7 +132,7 @@ def setup_minion(*roles):
     # install salt minion if it's not there already
     with settings(warn_only=True):
         with hide('running', 'stdout', 'stderr'):
-            installed = run('which salt-call')
+            installed = run('which salt-minion')
     if not installed:
         # install salt-minion from PPA
         sudo('apt-get update -qq -y')
