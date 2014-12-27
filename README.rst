@@ -1,6 +1,6 @@
 
 
-Service_Mapper
+Service Mapper
 ========================
 
 Below you will find basic setup and deployment instructions for the service_mapper
