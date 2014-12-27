@@ -118,6 +118,7 @@ nginx_conf:
     - template: jinja
     - context:
         public_root: "{{ vars.public_dir }}"
+        source_dir: "{{ vars.source_dir }}"
         log_dir: "{{ vars.log_dir }}"
         ssl_dir: "{{ vars.ssl_dir }}"
         servers:
