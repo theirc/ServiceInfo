@@ -5,9 +5,9 @@ Service_Mapper
 
 Below you will find basic setup and deployment instructions for the service_mapper
 project. To begin you should have the following applications installed on your
-local development system::
+local development system:
 
-- Python >= 2.7
+- Python >= 3.3 (3.4 recommended)
 - `pip <http://www.pip-installer.org/>`_ >= 1.5
 - `virtualenv <http://www.virtualenv.org/>`_ >= 1.10
 - `virtualenvwrapper <http://pypi.python.org/pypi/virtualenvwrapper>`_ >= 3.0
