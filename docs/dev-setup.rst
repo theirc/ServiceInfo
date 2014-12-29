@@ -93,7 +93,6 @@ Now, create the Postgres database and run the initial syncdb/migrate::
 
     createdb -E UTF-8 service_mapper
     psql service_mapper -c "CREATE EXTENSION postgis;"
-    python manage.py syncdb
     python manage.py migrate
 
 You should now be able to run the development server::
