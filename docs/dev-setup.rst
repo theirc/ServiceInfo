@@ -89,7 +89,7 @@ Exit the virtualenv and reactivate it to activate the settings just changed::
     deactivate
     workon service_mapper
 
-Now, create the Postgres database and run the initial syncdb/migrate::
+Now, create the Postgres database and run the initial migrate::
 
     createdb -E UTF-8 service_mapper
     psql service_mapper -c "CREATE EXTENSION postgis;"
