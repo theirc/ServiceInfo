@@ -8,6 +8,7 @@ from fabric.colors import red
 from fabric.contrib import files, project
 from fabric.contrib.console import confirm
 from fabric.utils import abort
+from fabric.context_managers import cd
 
 DEFAULT_SALT_LOGLEVEL = 'info'
 PROJECT_ROOT = os.path.dirname(__file__)
@@ -227,3 +228,8 @@ def deploy(loglevel=DEFAULT_SALT_LOGLEVEL):
         target = "-G 'environment:{0}'".format(env.environment)
         salt('saltutil.sync_all', target, loglevel)
         highstate(target)
+
+
+@task
+def build():
+    local("cd frontend && node_modules/browserify/bin/cmd.js -t hbsfy index.js -o bundle.js")
