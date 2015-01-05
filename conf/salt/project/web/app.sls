@@ -38,13 +38,6 @@ gunicorn_conf:
     - watch_in:
       - cmd: supervisor_update
 
-gunicorn_process:
-  supervisord.running:
-    - name: {{ pillar['project_name'] }}-server
-    - restart: True
-    - require:
-      - file: gunicorn_conf
-
 {% for host, ifaces in vars.balancer_minions.items() %}
 {% set host_addr = vars.get_primary_ip(ifaces) %}
 app_allow-{{ host_addr }}:
@@ -78,6 +71,37 @@ less:
     - require:
       - pkg: nodejs
 
+npm_installs:
+  cmd.run:
+    - name: npm install
+    - cwd: "{{ vars.source_dir }}/frontend"
+    - user: {{ pillar['project_name'] }}
+    - require:
+      - pkg: nodejs
+
+make_bundle:
+  cmd.run:
+    - name: node_modules/browserify/bin/cmd.js -t hbsfy index.js -o bundle.js
+    - cwd: "{{ vars.source_dir }}/frontend"
+    - user: {{ pillar['project_name'] }}
+    - require:
+      - cmd: npm_installs
+
+static_dir:
+  file.directory:
+    - name: {{ vars.static_dir }}
+    - user: {{ pillar['project_name'] }}
+    - group: www-data
+    - dir_mode: 775
+    - file_mode: 664
+    - makedirs: True
+    - recurse:
+      - user
+      - group
+      - mode
+    - require:
+      - file: root_dir
+
 collectstatic:
   cmd.run:
     - name: "{{ vars.path_from_root('manage.sh') }} collectstatic --noinput"
@@ -85,6 +109,8 @@ collectstatic:
     - group: {{ pillar['project_name'] }}
     - require:
       - file: manage
+      - file: static_dir
+      - cmd: make_bundle
 
 migrate:
   cmd.run:
@@ -95,3 +121,13 @@ migrate:
     - require:
       - file: manage
     - order: last
+
+gunicorn_process:
+  supervisord.running:
+    - name: {{ pillar['project_name'] }}-server
+    - restart: True
+    - require:
+      - file: gunicorn_conf
+      - cmd: collectstatic
+      - cmd: migrate
+

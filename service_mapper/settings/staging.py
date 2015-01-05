@@ -1,7 +1,6 @@
 from service_mapper.settings.base import *  # noqa
 
 os.environ.setdefault('CACHE_HOST', '127.0.0.1:11211')
-os.environ.setdefault('BROKER_HOST', '127.0.0.1:5672')
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -40,6 +39,8 @@ SESSION_COOKIE_HTTPONLY = True
 ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(';')
 
 # Uncomment if using celery worker configuration
-CELERY_SEND_TASK_ERROR_EMAILS = True
-BROKER_URL = 'amqp://service_mapper_staging:%(BROKER_PASSWORD)s@%(BROKER_HOST)s' \
-             '/service_mapper_staging' % os.environ
+if 'BROKER_PASSWORD' in os.environ:
+    CELERY_SEND_TASK_ERROR_EMAILS = True
+    os.environ.setdefault('BROKER_HOST', '127.0.0.1:5672')
+    BROKER_URL = 'amqp://service_mapper_staging:%(BROKER_PASSWORD)s@%(BROKER_HOST)s' \
+                 '/service_mapper_staging' % os.environ

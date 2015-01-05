@@ -7,8 +7,10 @@ base:
     - locale.utf8
     - project.devs
     - salt.minion
+{% if 'newrelic_license_key' in pillar['secrets'] %}
     - newrelic_sysmon
-  'environment:local':
+{% endif %}
+  'environment:vagrant':
     - match: grain
     - vagrant.user
   'roles:salt-master':
@@ -16,8 +18,11 @@ base:
     - salt.master
   'roles:web':
     - match: grain
+    - node
     - project.web.app
+{% if 'newrelic_license_key' in pillar['secrets'] %}
     - project.newrelic_webmon
+{% endif %}
   'roles:worker':
     - match: grain
     - project.worker.default
