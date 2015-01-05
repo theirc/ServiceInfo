@@ -227,3 +227,8 @@ def deploy(loglevel=DEFAULT_SALT_LOGLEVEL):
         target = "-G 'environment:{0}'".format(env.environment)
         salt('saltutil.sync_all', target, loglevel)
         highstate(target)
+
+
+@task
+def build():
+    local("cd frontend && node_modules/browserify/bin/cmd.js -t hbsfy index.js -o bundle.js")
