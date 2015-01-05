@@ -8,7 +8,6 @@ from fabric.colors import red
 from fabric.contrib import files, project
 from fabric.contrib.console import confirm
 from fabric.utils import abort
-from fabric.context_managers import cd
 
 DEFAULT_SALT_LOGLEVEL = 'info'
 PROJECT_ROOT = os.path.dirname(__file__)
