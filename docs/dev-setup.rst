@@ -51,6 +51,7 @@ local development system:
 - `virtualenv >= 1.11 <http://www.virtualenv.org/>`_
 - `virtualenvwrapper >= 3.0 <http://pypi.python.org/pypi/virtualenvwrapper>`_
 - Postgres >= 9.1 (9.3 recommended)
+- PostGIS
 - git >= 1.7
 
 The deployment uses SSH with agent forwarding so you'll need to enable agent
