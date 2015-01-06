@@ -18,7 +18,6 @@ base:
     - salt.master
   'roles:web':
     - match: grain
-    - node
     - project.web.app
 {% if 'newrelic_license_key' in pillar['secrets'] %}
     - project.newrelic_webmon

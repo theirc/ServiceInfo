@@ -63,13 +63,20 @@ nodejs:
       - pkg: npm
     - refresh: True
 
+node_alias:
+  # Stupid ubuntu (http://askubuntu.com/questions/235655/node-js-conflicts-sbin-node-vs-usr-bin-node/320271#320271)
+  cmd.run:
+    - name: update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
+    - require:
+        - pkg: nodejs
+
 less:
   cmd.run:
     - name: npm install less@1.5.1 -g
     - user: root
     - unless: "which lessc && lessc --version | grep 1.5.1"
     - require:
-      - pkg: nodejs
+      - cmd: node_alias
 
 npm_installs:
   cmd.run:
