@@ -70,6 +70,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+LOCALE_PATHS = (
+    os.path.join(PROJECT_ROOT, 'locale'),
+)
+
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (

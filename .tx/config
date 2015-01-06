@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.com
+
+# FIXME: change project_slug when real project is set up
+[temp-project-for-irc-service-mapper.djangopo]
+file_filter = locale/<lang>/LC_MESSAGES/django.po
+source_file = locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
