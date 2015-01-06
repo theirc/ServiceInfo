@@ -126,6 +126,8 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     # External apps
     'compressor',
+    # Our apps
+    'services',
 )
 
 # A sample logging configuration. The only tangible logging
