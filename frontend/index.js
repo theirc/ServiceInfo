@@ -17,4 +17,7 @@ $('body').on("click", ".back-button", function (event) {
 
 $(function(){
     Backbone.history.start();
+
+    var LangToggleView = require('./views/language-toggle');
+    var lt = new LangToggleView({el: $('#language-toggle')});
 });
