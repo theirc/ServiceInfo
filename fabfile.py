@@ -254,3 +254,22 @@ def deploy(loglevel=DEFAULT_SALT_LOGLEVEL):
 @task
 def build():
     local("cd frontend && node_modules/browserify/bin/cmd.js -t hbsfy index.js -o bundle.js")
+
+
+@task
+def makemessages():
+    local("python manage.py makemessages --ignore 'conf/*' --ignore 'docs/*' --ignore 'requirements/*' --ignore 'frontend/*' --ignore 'vagrant/*' -l en")
+
+@task
+def pushmessages():
+    local("tx push -s")
+
+@task
+def pullmessages():
+    local("tx pull -af")
+
+@task
+def compilemessages():
+    local("python manage.py compilemessages -l en -l ar -l fr")
+
+
