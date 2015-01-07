@@ -19,7 +19,7 @@ project_repo_identity:
 {% endif %}
 
 project_repo:
-  {% if grains['environment'] == 'local' %}
+  {% if grains['environment'] == 'vagrant' %}
   # Use rsync from the local dev env rather than forcing a commit and push
   # to github to update your vagrant source.
   cmd.run:
