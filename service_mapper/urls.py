@@ -1,4 +1,5 @@
 import os
+
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
@@ -7,12 +8,13 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import RedirectView
 from django.views.static import serve
 
+import api.urls
+
 # FIXME: Developers, remove this once we have any real translated strings.
 # There has to be one string or none of the tools produce any output, which
 # is confusing.
 # Translators: You do NOT need to translate this:
 foo = _("THIS IS A TEST")
-
 
 FRONTEND_DIR = os.path.join(settings.PROJECT_ROOT, 'frontend')
 
@@ -20,7 +22,7 @@ FRONTEND_DIR = os.path.join(settings.PROJECT_ROOT, 'frontend')
 urlpatterns = [
     # Django admin
     url(r'^admin/', include(admin.site.urls)),
-    # Add API around here somewhere when implemented
+    url(r'^api/', include(api.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

@@ -3,6 +3,6 @@
     "name": "i18next"
   },
   "test": {
-    "hello": "Hello, World"
+    "hello": "bonjour le monde"
   }
 }
