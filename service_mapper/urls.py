@@ -30,5 +30,5 @@ if settings.DEBUG:
         url(r'^$', RedirectView.as_view(url=settings.STATIC_URL + 'index.html'), name='index-html-redirect'),
         # The few files we want to serve statically when running locally
         url(r'^(?P<path>(index.html|bundle\.js))$', serve, kwargs={'document_root': settings.STATIC_ROOT}),
-        url(r'^(?P<path>(styles|locales)/.*)$', serve, kwargs={'document_root': settings.STATIC_ROOT}),
+        url(r'^(?P<path>(styles|images|locales)/.*)$', serve, kwargs={'document_root': settings.STATIC_ROOT}),
     ]
