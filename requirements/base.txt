@@ -1,6 +1,6 @@
 psycopg2==2.5.4
 Pillow==2.5.3
-Django==1.7.1
+Django==1.7.2
 django_compressor==1.4
 # Required by django-compressor
 django-appconf==0.6
@@ -8,3 +8,8 @@ six==1.6.1
 celery==3.1.17
 
 BeautifulSoup4==4.3.2
+
+djangorestframework==3.0.2
+# Optional, but used by DRF
+markdown==2.5.2
+django-filter==0.9.1

@@ -42,3 +42,11 @@ services_dir:
     - makedirs: True
     - require:
       - file: root_dir
+
+supervisor_conf_dir:
+  file.directory:
+    - name: /etc/supervisor/conf.d/
+    - user: root
+    - group: root
+    - mode: 755
+

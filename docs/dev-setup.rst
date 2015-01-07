@@ -16,27 +16,6 @@ work on the project locally. In a terminal, run:
     cd Service-Mapper/
 
 
-.. _frontend-setup:
-
-Frontend Setup
---------------
-
-Once you've cloned the project, open the ``frontend`` directory::
-
-    cd frontend/
-
-Next run a basic HTTP server with Python:
-
-.. code-block:: bash
-
-    # Python <= 2.7
-    python -m SimpleHTTPServer
-    # Python >= 3.0
-    python -m http.server
-
-Now visit http://localhost:8000/ in your browser.
-
-
 .. _backend-setup:
 
 Backend Setup
@@ -98,4 +77,6 @@ Now, create the Postgres database and run the initial migrate::
 
 You should now be able to run the development server::
 
-    python manage.py runserver
+    python manage.py runserver --nostatic
+
+Now visit http://localhost:8000/ in your browser.

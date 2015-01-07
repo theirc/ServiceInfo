@@ -10,9 +10,5 @@ module.exports = Backbone.View.extend({
     render: function() {
         var $el = this.$el;
         this.$el.html(template({name: "World"}));
-        i18n.init(function(t){
-            $el.i18n();
-            console.log(t("test.hello"));
-        })
     },
 })

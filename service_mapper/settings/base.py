@@ -1,7 +1,11 @@
 # Django settings for service_mapper project.
 import os
 
+# BASE_DIR = path/to/source/service_mapper
+# E.g. this file is BASE_DIR/settings/base.py
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+# PROJECT_ROOT = path/to/source
+# This file is PROJECT_ROOT/service_mapper/settings/base.py
 PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, os.pardir))
 
 DEBUG = True
@@ -63,11 +67,12 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'public', 'static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = '/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(PROJECT_ROOT, 'frontend'),
 )
 
 # List of finder classes that know how to find static files in
@@ -126,6 +131,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     # External apps
     'compressor',
+    'rest_framework',
     # Our apps
     'services',
 )
@@ -180,3 +186,13 @@ LOGGING = {
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    # FIXME: Will definitely need to change this
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'PAGINATE_BY': 10,
+}
