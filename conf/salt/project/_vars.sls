@@ -20,6 +20,7 @@
 {% set ssh_dir = "/home/" + pillar['project_name'] + "/.ssh/" %}
 {% set ssl_dir = path_from_root('ssl') %}
 {% set source_dir = path_from_root('source') %}
+{% set static_dir = path_from_root('public/static') %}
 {% set venv_dir = path_from_root('env') %}
 
 # This fixes a regresion in Salt https://github.com/caktus/django-project-template/issues/137
