@@ -1,10 +1,13 @@
 import os
+
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import RedirectView
 from django.views.static import serve
+
+import api.urls
 
 
 FRONTEND_DIR = os.path.join(settings.PROJECT_ROOT, 'frontend')
@@ -13,7 +16,7 @@ FRONTEND_DIR = os.path.join(settings.PROJECT_ROOT, 'frontend')
 urlpatterns = [
     # Django admin
     url(r'^admin/', include(admin.site.urls)),
-    # Add API around here somewhere when implemented
+    url(r'^api/', include(api.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
