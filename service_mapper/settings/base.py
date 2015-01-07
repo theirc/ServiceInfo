@@ -132,6 +132,8 @@ INSTALLED_APPS = (
     # External apps
     'compressor',
     'rest_framework',
+    # Our apps
+    'services',
 )
 
 # A sample logging configuration. The only tangible logging
