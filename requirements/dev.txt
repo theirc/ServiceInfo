@@ -20,3 +20,7 @@ flake8==2.2.5
   pyflakes==0.8.1
   pep8==1.5.7
   mccabe==0.3
+
+# FIXME: since vagrant uses dev.txt requirements and staging.py settings,
+# we need to include memcached here for now:
+python3-memcached==1.51
