@@ -37,6 +37,9 @@ class Provider(models.Model):
         _("description"),
     )
 
+    def __str__(self):
+        return self.name
+
 
 class ServiceArea(models.Model):
     # FIXME: Find out what a "service area" consists of
@@ -46,6 +49,9 @@ class ServiceArea(models.Model):
 class SelectionCriterion(models.Model):
     # FIXME: Find out what a "selection criterion" consists of
     pass  # ??
+
+    class Meta(object):
+        verbose_name_plural = _("selection criteria")
 
 
 class Service(models.Model):
@@ -81,3 +87,6 @@ class Service(models.Model):
         SelectionCriterion,
         verbose_name=_("selection criteria"),
     )
+
+    def __str__(self):
+        return self.name
