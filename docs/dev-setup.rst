@@ -32,6 +32,8 @@ local development system:
 - Postgres >= 9.1 (9.3 recommended)
 - PostGIS
 - git >= 1.7
+- node
+- npm
 
 The deployment uses SSH with agent forwarding so you'll need to enable agent
 forwarding if it is not already by adding ``ForwardAgent yes`` to your SSH config.
@@ -75,8 +77,12 @@ Now, create the Postgres database and run the initial migrate::
     psql service_mapper -c "CREATE EXTENSION postgis;"
     python manage.py migrate
 
+Build the frontend::
+
+    fab build
+
 You should now be able to run the development server::
 
-    python manage.py runserver --nostatic
+    python manage.py runserver
 
 Now visit http://localhost:8000/ in your browser.
