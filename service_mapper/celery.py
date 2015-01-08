@@ -1,13 +1,10 @@
-from __future__ import absolute_import
-
 import os
-
 from celery import Celery
-
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 
-# set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'service_mapper.settings')
+if not 'DJANGO_SETTINGS_MODULE' in os.environ:
+    raise ImproperlyConfigured("Need to set DJANGO_SETTINGS_MODULE in environment before starting celery")
 
 app = Celery('service_mapper')
 
