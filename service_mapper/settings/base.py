@@ -67,12 +67,16 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'public', 'static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/'
+STATIC_URL = '/app/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
     os.path.join(PROJECT_ROOT, 'frontend'),
+)
+
+LOCALE_PATHS = (
+    os.path.join(PROJECT_ROOT, 'locale'),
 )
 
 # List of finder classes that know how to find static files in
@@ -132,6 +136,8 @@ INSTALLED_APPS = (
     # External apps
     'compressor',
     'rest_framework',
+    # Our apps
+    'services',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -167,6 +173,10 @@ LOGGING = {
             'backupCount': 10,
         },
     },
+    'root': {
+        'handlers': ['file', 'mail_admins'],
+        'level': 'INFO',
+    },
     'loggers': {
         'django.request': {
             'handlers': ['mail_admins'],
@@ -176,6 +186,7 @@ LOGGING = {
         'service_mapper': {
             'handlers': ['file', 'mail_admins'],
             'level': 'INFO',
+            'propagate': True,
         },
     }
 }

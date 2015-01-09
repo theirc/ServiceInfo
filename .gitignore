@@ -15,3 +15,5 @@ secrets.sls*
 *.log
 frontend/node_modules
 frontend/bundle.js
+# .po files are generated using makemessages, no need to put in the repo
+locale/*/LC_MESSAGES/django.po
