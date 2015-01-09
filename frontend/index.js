@@ -20,4 +20,8 @@ $(function(){
 
     var LangToggleView = require('./views/language-toggle');
     var lt = new LangToggleView({el: $('#language-toggle')});
+
+    $("#menu-toggle").click(function() {
+        $('#menu-container').toggleClass("menu-closed menu-open");
+    });
 });

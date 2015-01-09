@@ -9,7 +9,7 @@ module.exports = Backbone.Router.extend({
     },
 
     home: function() {
-        var $el = $(document.querySelector('#application'));
+        var $el = $(document.querySelector('#page'));
         var view = new HomeView({el: $el});
         view.render();
     },
