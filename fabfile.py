@@ -49,6 +49,7 @@ def get_vagrant_ssh_config_value(name):
     cmd = "vagrant ssh-config | awk '/ %s / {print $2;}'" % name
     return subprocess.check_output(cmd, shell=True).strip()
 
+
 @task
 def vagrant_first_time():
     # Use this the first time deploying to the vagrant VM, it'll
@@ -65,6 +66,7 @@ def vagrant_first_time():
     env.hosts = ['{user}@{host}:{port}'.format(user=env.user, host=host, port=port)]
     env.key_filename = get_vagrant_ssh_config_value('IdentityFile')
     env.master = host
+
 
 @task
 def vagrant():
@@ -258,18 +260,20 @@ def build():
 
 @task
 def makemessages():
-    local("python manage.py makemessages --ignore 'conf/*' --ignore 'docs/*' --ignore 'requirements/*' --ignore 'frontend/*' --ignore 'vagrant/*' -l en")
+    local("python manage.py makemessages --ignore 'conf/*' --ignore 'docs/*' "
+          "--ignore 'requirements/*' --ignore 'frontend/*' --ignore 'vagrant/*' -l en")
+
 
 @task
 def pushmessages():
     local("tx push -s")
 
+
 @task
 def pullmessages():
     local("tx pull -af")
 
+
 @task
 def compilemessages():
     local("python manage.py compilemessages -l en -l ar -l fr")
-
-
