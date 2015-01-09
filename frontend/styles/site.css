@@ -28,6 +28,22 @@ html,body,#application {
     bottom: 0px;
 }
 
+#menu {
+    max-width: 280px;
+    background: #FEC82D;
+    list-style: none;
+    padding: 0px 5px;
+    min-width: 100px;
+    border: 1px solid grey;
+}
+#menu li {
+    border-bottom: 1px solid grey;
+    width: 100%
+}
+#menu li:last-child {
+    border-bottom: none;
+}
+
 @media only screen and (orientation: landscape) {
     #application-header {
         width: 150px;
@@ -41,10 +57,23 @@ html,body,#application {
     #page-container {
         display: inline-block;
     }
+    #menu-toggle {
+        display: none;
+    }
 }
 
 @media only screen and (orientation: portrait) {
     #menu {
+        position: absolute;
+        right: 0px;
+        top: 30px;
+    }
+    .menu-closed #menu {
         display: none;
+    }
+    #menu-toggle {
+        position: absolute;
+        right: 0px;
+        top: 0px;
     }
 }
