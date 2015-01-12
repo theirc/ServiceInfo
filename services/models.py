@@ -89,5 +89,40 @@ class Service(models.Model):
         verbose_name=_("selection criteria"),
     )
 
+    # Note: we don't let multiple versions of a service record pile up - there
+    # should be no more than two, one in current status and/or one in some other
+    # status.
+    STATUS_DRAFT = 'draft'
+    STATUS_CURRENT = 'current'
+    STATUS_REJECTED = 'rejected'
+    STATUS_CANCELED = 'canceled'
+    STATUS_CHOICES = (
+        # New service or edit of existing service is pending approval
+        (STATUS_DRAFT, _('draft')),
+        # This Service has been approved and not superseded. Only services with
+        # status 'current' appear in the public interface.
+        (STATUS_CURRENT, _('current')),
+        # The staff has rejected the service submission or edit
+        (STATUS_REJECTED, _('rejected')),
+        # The provider has canceled service. They can do this on draft or current services.
+        # It no longer appears in the public interface.
+        (STATUS_CANCELED, _('canceled')),
+    )
+    status = models.CharField(
+        _('status'),
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default=STATUS_DRAFT,
+    )
+    update_of = models.ForeignKey(
+        'self',
+        help_text=_('If a service record represents a modification of an existing service '
+                    'record that is still pending approval, this field links to the '
+                    'existing service record.'),
+        null=True,
+        blank=True,
+        related_name='pending_update',
+    )
+
     def __str__(self):
         return self.name
