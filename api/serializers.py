@@ -1,12 +1,13 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from rest_framework import serializers
+from email_user.models import EmailUser
 from services.models import Service, Provider
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User
-        fields = ('url', 'username', 'email', 'groups')
+        model = EmailUser
+        fields = ('url', 'email', 'groups')
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):

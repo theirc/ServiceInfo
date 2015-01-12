@@ -125,6 +125,7 @@ FIXTURE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'email_user',   # Must precede django.contrib.auth so templates override Django's.
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -205,3 +206,9 @@ REST_FRAMEWORK = {
     ],
     'PAGINATE_BY': 10,
 }
+
+
+AUTH_USER_MODEL = 'email_user.EmailUser'
+
+# Just use admin login view for now
+LOGIN_URL = 'admin:login'

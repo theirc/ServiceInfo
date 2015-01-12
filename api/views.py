@@ -1,5 +1,6 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from rest_framework import viewsets
+from email_user.models import EmailUser
 from .serializers import UserSerializer, GroupSerializer, ServiceSerializer, ProviderSerializer
 from services.models import Service, Provider
 
@@ -8,7 +9,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all()
+    queryset = EmailUser.objects.all()
     serializer_class = UserSerializer
 
 
