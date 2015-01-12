@@ -1,5 +1,5 @@
 import json
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from services.models import Provider
 from services.tests.factories import ProviderFactory
@@ -12,12 +12,16 @@ CREATED = 201
 class ProviderAPITest(TestCase):
     def setUp(self):
         # Just using Django auth for now
-        self.user = User.objects.create_superuser(
-            username='joe',
+        self.user = get_user_model().objects.create_superuser(
             password='password',
             email='joe@example.com',
         )
-        self.client.login(username='joe', password='password')
+        assert self.client.login(email='joe@example.com', password='password')
+
+        # Get the URL of the user for the API
+        rsp = self.client.get('/api/users/%d/' % self.user.id)
+        self.assertEqual(200, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        self.user_url = json.loads(rsp.content.decode('utf-8'))['url']
 
     def test_create_provider(self):
         url = '/api/providers/'
@@ -26,6 +30,7 @@ class ProviderAPITest(TestCase):
             'type': 1,
             'phone_number': '12345',
             'description': 'Test provider',
+            'user': self.user_url,
         }
         rsp = self.client.post(url, data=data)
         self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
