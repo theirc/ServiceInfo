@@ -12,10 +12,12 @@ class Provider(models.Model):
     ]
 
     name = models.CharField(
+        # Translators: Provider name
         _("name"),
         max_length=256,  # Length is a guess
     )
     type = models.IntegerField(
+        # Translators: Provider type
         _("type"),
         choices=PROVIDER_TYPE_CHOICES,
     )
@@ -34,6 +36,7 @@ class Provider(models.Model):
         default='',
     )
     description = models.TextField(
+        # Translators: Provider description
         _("description"),
     )
 
@@ -60,6 +63,7 @@ class Service(models.Model):
         verbose_name=_("provider"),
     )
     name = models.CharField(
+        # Translators: Service name
         _("name"),
         max_length=256,
     )
@@ -68,6 +72,7 @@ class Service(models.Model):
         verbose_name=_("area of service"),
     )
     description = models.TextField(
+        # Translators: Service description
         _("description"),
     )
     hours_of_service = models.TextField(  # FIXME: do we need to model these more specifically?
