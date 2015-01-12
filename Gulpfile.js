@@ -1,4 +1,6 @@
-var gulp = require('gulp');
+var gulp = require('gulp')
+,   less = require('gulp-less')
+;
 
 var EXPRESS_PORT = 8000;
 var EXPRESS_ROOT = __dirname + "/frontend";
@@ -25,6 +27,11 @@ function notifyLivereload(event) {
     // so we need to make it relative to the server root
     var fileName = require('path').relative(EXPRESS_ROOT, event.path);
 
+    gulp.src('frontend/styles/*.less')
+        .pipe(less())
+        .pipe(gulp.dest('frontend/styles'))
+    ;
+
     lr.changed({
         body: {
             files: [fileName]
@@ -35,5 +42,5 @@ function notifyLivereload(event) {
 gulp.task('default', function() {
     startExpress();
     startLiveReload();
-    gulp.watch(['*.html', '*.js'], notifyLivereload);
+    gulp.watch(['frontend/index.html', 'frontend/index.js', 'frontend/styles/site.less', 'frontend/templates/*.html', 'frontend/views/*.js'], notifyLivereload);
 });
