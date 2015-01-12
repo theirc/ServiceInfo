@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='service',
             name='update_of',
-            field=models.ForeignKey(related_name='pending_update', null=True, blank=True, to='services.Service', help_text='If a service record represents a modification of an existing service record that is still pending approval, this field links to the existing service record.'),
+            field=models.ForeignKey(unique=True, related_name='pending_update', null=True, blank=True, to='services.Service', help_text='If a service record represents a modification of an existing service record that is still pending approval, this field links to the existing service record.'),
             preserve_default=True,
         ),
     ]

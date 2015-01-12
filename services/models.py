@@ -122,6 +122,7 @@ class Service(models.Model):
         null=True,
         blank=True,
         related_name='pending_update',
+        unique=True,
     )
 
     def __str__(self):
