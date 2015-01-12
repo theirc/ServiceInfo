@@ -25,7 +25,6 @@ base:
   'roles:worker':
     - match: grain
     - project.worker.default
-    - project.worker.beat
   'roles:balancer':
     - match: grain
     - project.web.balancer
