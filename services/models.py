@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -23,11 +24,6 @@ class Provider(models.Model):
         _("phone number"),
         max_length=20,
     )
-    email = models.EmailField(
-        _("email"),
-        blank=True,
-        default='',
-    )
     website = models.URLField(
         _("website"),
         blank=True,
@@ -35,6 +31,11 @@ class Provider(models.Model):
     )
     description = models.TextField(
         _("description"),
+    )
+    user = models.OneToOneField(
+        to=settings.AUTH_USER_MODEL,
+        verbose_name=_('user'),
+        help_text=_('user account for this provider'),
     )
 
     def __str__(self):

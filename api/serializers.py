@@ -19,11 +19,11 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class ProviderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Provider
-        fields = ('id', 'name', 'type', 'phone_number', 'email', 'website', 'description')
+        fields = ('url', 'id', 'name', 'type', 'phone_number', 'website', 'description', 'user')
 
 
 class ServiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Service
-        fields = ('id', 'provider', 'name', 'area_of_service', 'description',
+        fields = ('url', 'id', 'provider', 'name', 'area_of_service', 'description',
                   'hours_of_service', 'additional_info', 'cost_of_service', 'selection_criteria')
