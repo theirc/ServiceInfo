@@ -582,7 +582,6 @@ input[type=range] {
     background: gray;
     position: fixed;
     bottom: 0px;
-    visibility: hidden;
 }
 
 #menu {
