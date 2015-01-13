@@ -13,3 +13,10 @@ djangorestframework==3.0.2
 # Optional, but used by DRF
 markdown==2.5.2
 django-filter==0.9.1
+
+# JIRA support
+jira==0.35
+tlslite==0.4.8
+requests==2.5.1
+requests-oauthlib==0.4.2
+oauthlib==0.7.2
