@@ -116,8 +116,12 @@ Build the frontend::
 
     fab build
 
-You should now be able to run the development server::
+You should now be able to run the development APIserver::
 
-    python manage.py runserver
+    python manage.py runserver --nostatic
+
+You can run the frontend server with Gulp, which will auto-reload the browser upon detected changes.
+
+    gulp
 
 Now visit http://localhost:8000/ in your browser.
