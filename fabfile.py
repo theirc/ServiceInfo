@@ -11,6 +11,7 @@ from fabric.contrib.console import confirm
 from fabric.utils import abort
 
 DEFAULT_SALT_LOGLEVEL = 'info'
+PROJECT_NAME = "service_mapper"
 PROJECT_ROOT = os.path.dirname(__file__)
 CONF_ROOT = os.path.join(PROJECT_ROOT, 'conf')
 
@@ -32,6 +33,7 @@ env.master = '54.235.72.124'
 @task
 def staging():
     env.environment = 'staging'
+    env.master = '54.93.66.254'  # Staging server on AWS Frankfurt
     env.hosts = [env.master]
 
 
@@ -277,3 +279,15 @@ def pullmessages():
 @task
 def compilemessages():
     local("python manage.py compilemessages -l en -l ar -l fr")
+
+
+@task
+def manage_run(command):
+    """
+    Run a Django management command on the remote server.
+    """
+    require('environment')
+    # Setup the call
+    settings = '{0}.settings.{1}'.format(PROJECT_NAME, env.environment)
+    manage_sh = u"DJANGO_SETTINGS_MODULE={0} /var/www/{1}/manage.sh ".format(settings,PROJECT_NAME)
+    sudo(manage_sh + command, user=PROJECT_NAME)
