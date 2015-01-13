@@ -21,9 +21,6 @@ work on the project locally. In a terminal, run:
 Frontend Setup
 --------------
 
-Frontend Setup
---------------
-
 The Service Mapper frontend runs separately from the backend.
 
 The Javascript dependencies are installed by Node's NPM, both for build
