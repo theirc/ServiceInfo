@@ -53,6 +53,17 @@ li {
 	margin: 0;
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
 /*
 *   Container Elements
 */
@@ -101,16 +112,17 @@ li {
 }
 
 .half {
-	width: 50%;
+	width: 47%;
 	margin: 0;
 	float: left;
 }
 
 .half:first-child {
-	padding: 0 5px 0 10px;
+float: left;
 }
+
 .half:last-child {
-	padding: 0 10px 0 5px;
+    float: right;
 }
 
 .main-content {
@@ -120,6 +132,17 @@ li {
 	border-radius: 6px;
 	padding: 0 15px 15px 15px;
 	overflow: auto;
+}
+
+.operating-hours {
+    font-weight: 400;
+    color: inherit;
+}
+
+@media (min-width:1px) and (max-width:400px) {
+    .operating-hours {
+        margin-top: 10px;
+    }
 }
 
 /*
@@ -219,6 +242,30 @@ li {
 *   Buttons
 */
 
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
 .btn-default {
 	border-color: #CCCCCC;
 	color: inherit;
@@ -233,6 +280,7 @@ li {
 	border-color: #3CB879;
 	width: 100%;
 	text-align: center;
+    font-size: inherit;
 	font-weight: 600;
 	color: #fff;
 	-webkit-border-radius: 4px;
@@ -246,6 +294,9 @@ li {
 
 .btn-group {
 	width: 100%;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .btn-group>.btn {
@@ -256,10 +307,14 @@ li {
 	border-width: 1px;
 	border-style: solid;
 	border-color: #ccc;
+    position: relative;
+    float: left;
 }
 
 .btn-group>.btn+.dropdown-toggle {
 	width: 15%;
+    padding-left: 8px;
+    padding-right: 8px;
 	background-color: #3cb879;
 	border-width: 1px;
 	border-style: solid;
@@ -281,6 +336,10 @@ li {
 	border-top: 8px solid;
 	border-right: 6px solid transparent;
 	border-left: 6px solid transparent;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
 }
 
 .dropdown-toggle.btn-default {
@@ -301,13 +360,28 @@ li {
 	box-shadow: none;
 }
 
+.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    -webkit-border-top-right-radius: 0;
+    -moz-border-top-right-radius: 0;
+    border-top-right-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    -moz-border-bottom-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
 .btn-group>.dropdown-toggle:not(:first-child) {
 	-webkit-border-bottom-left-radius: 0;
 	-moz-border-bottom-left-radius: 0;
 	border-bottom-left-radius: 0;
-	-webkit-border-bottom-right-radius: 4px;
-	-moz-border-bottom-right-radius: 4px;
-	border-bottom-right-radius: 4px;
+    -webkit-border-top-left-radius: 0;
+    -moz-border-top-left-radius: 0;
+    border-top-left-radius: 0;
+	-webkit-border-top-right-radius: 4px;
+	-moz-border-top-right-radius: 4px;
+	border-top-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-bottom-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 	text-align: center;
 	z-index: 3;
 }
@@ -342,8 +416,9 @@ li {
 
 fieldset {
 	padding: 10px;
-	margin-bottom: 30px;
+	margin: 0 0 30px;
 	border: 1px solid rgb(236, 236, 236);
+    min-width: 0;
 }
 
 fieldset > legend {
@@ -386,6 +461,11 @@ fieldset > legend {
 	margin-bottom: 0;
 }
 
+label {
+    max-width: 100%;
+    margin-bottom: 5px;
+}
+
 .control-label {
 	text-align: left;
 	padding-top: 6px;
@@ -398,6 +478,24 @@ fieldset > legend {
 	border-radius: 4px;
 	border-color: #CCCCCC;
 	box-shadow: none;
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .form-control:focus {
