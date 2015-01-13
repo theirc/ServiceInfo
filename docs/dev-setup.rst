@@ -49,9 +49,7 @@ versions of Node that include NPM. You can download it from http://nodejs.org/do
 
 With Node installed, you can install all frontend dependencies with `npm`.
 
-    cd frontend/
     npm install
-    cd ..
 
 
 Backend Setup
@@ -101,7 +99,7 @@ Then create a local settings file and set your ``DJANGO_SETTINGS_MODULE`` to use
     cp service_mapper/settings/local.example.py service_mapper/settings/local.py
     echo "export DJANGO_SETTINGS_MODULE=service_mapper.settings.local" >> $VIRTUAL_ENV/bin/postactivate
     echo "unset DJANGO_SETTINGS_MODULE" >> $VIRTUAL_ENV/bin/postdeactivate
-    echo "PATH=\$PATH:$PWD/frontend/node_modules/.bin" >> $VIRTUAL_ENV/bin/postactivate
+    echo "PATH=$PWD/frontend/node_modules/.bin:\$PATH" >> $VIRTUAL_ENV/bin/postactivate
 
 Exit the virtualenv and reactivate it to activate the settings just changed::
 
