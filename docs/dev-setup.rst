@@ -18,6 +18,42 @@ work on the project locally. In a terminal, run:
 
 .. _backend-setup:
 
+Frontend Setup
+--------------
+
+Frontend Setup
+--------------
+
+The Service Mapper frontend runs separately from the backend.
+
+The Javascript dependencies are installed by Node's NPM, both for build
+tools and frontend modules. Javascript libraries for the frontend app are
+installed from NPM and then packaged for the browser by Browserify. You'll
+need to install Node, which includes npm, in order to build the frontend
+application if you'd like to run it.
+
+On Mac, you can install Node with brew.
+
+    brew install node
+
+On Ubuntu and other Linux distributions, you should download and build the
+latest version of Node. Standard package managers rarely have the most recent
+versions of Node that include NPM. You can download it from http://nodejs.org/download/ and follow the standard build instructions
+
+    tar -zxvf node-v0.10.35.tar.gz
+    cd node-v0.10.35/
+    ./configure
+    make
+    sudo make install
+    cd ..
+
+With Node installed, you can install all frontend dependencies with `npm`.
+
+    cd frontend/
+    npm install
+    cd ..
+
+
 Backend Setup
 -------------
 
@@ -65,6 +101,7 @@ Then create a local settings file and set your ``DJANGO_SETTINGS_MODULE`` to use
     cp service_mapper/settings/local.example.py service_mapper/settings/local.py
     echo "export DJANGO_SETTINGS_MODULE=service_mapper.settings.local" >> $VIRTUAL_ENV/bin/postactivate
     echo "unset DJANGO_SETTINGS_MODULE" >> $VIRTUAL_ENV/bin/postdeactivate
+    echo "PATH=\$PATH:$PWD/frontend/node_modules/.bin" >> $VIRTUAL_ENV/bin/postactivate
 
 Exit the virtualenv and reactivate it to activate the settings just changed::
 

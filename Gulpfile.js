@@ -7,6 +7,8 @@ var EXPRESS_ROOT = __dirname + "/frontend";
 var LIVERELOAD_PORT = 35729;
 
 function startExpress() {
+    build();
+
     var express = require('express');
     var app = express();
     app.use(require('connect-livereload')());
@@ -19,6 +21,13 @@ function startLiveReload() {
     lr.listen(LIVERELOAD_PORT);
 }
 
+function build() {
+    gulp.src('frontend/styles/*.less')
+        .pipe(less())
+        .pipe(gulp.dest('frontend/styles'))
+    ;
+}
+
 // Notifies livereload of changes detected
 // by `gulp.watch()`
 function notifyLivereload(event) {
@@ -27,10 +36,7 @@ function notifyLivereload(event) {
     // so we need to make it relative to the server root
     var fileName = require('path').relative(EXPRESS_ROOT, event.path);
 
-    gulp.src('frontend/styles/*.less')
-        .pipe(less())
-        .pipe(gulp.dest('frontend/styles'))
-    ;
+    build();
 
     lr.changed({
         body: {

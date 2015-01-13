@@ -15,17 +15,14 @@
     "underscore": "^1.7.0"
   },
   "devDependencies": {
-    "less": "^2.2.0"
+    "connect-livereload": "^0.5.2",
+    "express": "^4.10.7",
+    "gulp": "^3.8.10",
+    "gulp-less": "^2.0.1",
+    "less": "^2.2.0",
+    "tiny-lr": "^0.1.4"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-      "watch-css": "catw -c 'lessc -' 'style/*.less' -o static/bundle.css -v",
-      "watch-js": "watchify browser/*.js -o static/bundle.js -dv",
-      "watch": "npm run watch-css & npm run watch-js",
-      "build-css": "catw -c 'lessc -' 'test.less' > test.css",
-      "build-js": "browserify browser/*.js > static/bundle.js",
-      "build": "npm run build-css && npm run build-js"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/theirc/Service-Mapper.git"
