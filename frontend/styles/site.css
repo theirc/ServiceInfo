@@ -1,18 +1,40 @@
 body {
   font-family: 'Source Sans Pro', Arial,sans-serif;
   font-size: 14px;
+  line-height: 1.4em;
   font-weight: 400;
   color: #333;
   background-color: #F3F3F4;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  margin: 0;
 }
 html,body,#application {
     height: 100%;
 }
 
+.language-toggle {
+    background-color: #3cb879; 
+}
+
 .language-toggle button {
-    border: 1px solid black;
+    border: 1px solid #3cb879;
+    height: 64px;
+    width: 33.33%;
+    -webkit-border-radius: 0;
+    -moz- border-radius: 0;
+    border-radius: 0;
+}
+
+.language-toggle button:not(:first-child) {
+    border-left-width: 2px;
+    border-left-style: solid;
+    border-left-color: #33A069;
+}
+
+.lang-btn-ar {
+    position: relative;
+    top: -1px;
 }
 
 /*
@@ -134,6 +156,11 @@ float: left;
 	overflow: auto;
 }
 
+.submit-form {
+    height: 32px;
+    margin-bottom: 10px;
+}
+
 .operating-hours {
     font-weight: 400;
     color: inherit;
@@ -222,7 +249,7 @@ float: left;
 
 .page-head {
 	background-color: #fff;
-	padding: 10px 15px 20px 15px;
+	padding: 24px 15px 20px 15px;
 }
 
 .page-title {
@@ -273,7 +300,7 @@ float: left;
 
 .primary-button {
 	margin: 0 auto;
-	padding: 6px 12px;
+	padding: 10px 12px;
 	background-color: #3cb879;
 	border-width: 1px;
 	border-style: solid;
@@ -286,6 +313,17 @@ float: left;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
+}
+
+.primary-button:hover, .primary-button:visited {
+    background-color: #33A069;
+    border: 1px solid #33A069;
+}
+
+.primary-button:focus {
+    background-color: #33A069;
+    border: 1px solid #33A069;
+    outline: 3px auto lightgray;    
 }
 
 /*
@@ -383,7 +421,7 @@ float: left;
     -moz-border-bottom-right-radius: 4px;
     border-bottom-right-radius: 4px;
 	text-align: center;
-	z-index: 3;
+	z-index: 0;
 }
 
 .btn-group>.dropdown-menu {
@@ -530,8 +568,8 @@ input[type=range] {
 
 #application-header {
     width: 100%;
-    height: 100px;
-    background: #FEC82D;
+    height: 80px;
+    background-color: #343538; 
 }
 
 #application-header img#logo {
@@ -540,41 +578,67 @@ input[type=range] {
 
 #application-footer {
     width: 100%;
-    height: 50px;
-    background: grey;
-
+    height: 64px;
+    background: gray;
     position: fixed;
     bottom: 0px;
+    visibility: hidden;
 }
 
 #menu {
-    max-width: 280px;
-    background: #FEC82D;
+    background: #343538;
     list-style: none;
-    padding: 0px 5px;
-    min-width: 100px;
-    border: 1px solid grey;
+    padding: 0;
+    font-size: inherit;
+    margin: 0;
 }
 #menu li {
-    border-bottom: 1px solid grey;
-    width: 100%
+    color: #fff;
+    display: block;
+    padding: 12px 14px 14px;
+    text-decoration: none;
+    border-top: 1px solid #45474a;
 }
+
+#menu li:hover, #menu li:visited{
+    background: #000;
+    text-decoration: none;
+    transition: color 0.25s linear 0s, background-color 0.25s ease-in-out 0s, border-color 0.25s ease-in-out 0s;
+    border-bottom: none;
+}
+
+#menu li:focus {
+    background: #000;
+    text-decoration: none;
+    transition: color 0.25s linear 0s, background-color 0.25s ease-in-out 0s, border-color 0.25s ease-in-out 0s;
+    border-bottom: none;
+    outline: 3px auto lightgray; 
+}
+
 #menu li:last-child {
     border-bottom: none;
 }
 
 @media only screen and (orientation: landscape) {
     #application-header {
-        width: 150px;
+        width: 25%;
         height: 100%;
         display: inline-block;
+        position: fixed;
+        float: left;
+        overflow: auto;
+    }
+    #application-header .brand {
+        background: #FEC82D;
     }
     #application-header img#logo {
-        width: 50%;
+        width: 100%;
         height: auto;
     }
     #page-container {
         display: inline-block;
+        width: 75%;
+        margin-left: 25%;
     }
     #menu-toggle {
         display: none;
@@ -582,17 +646,25 @@ input[type=range] {
 }
 
 @media only screen and (orientation: portrait) {
+    #application-header .brand {
+        height: 100%;
+    }
     #menu {
         position: absolute;
         right: 0px;
-        top: 30px;
+        top: 80px;
+        width: 100%;
     }
     .menu-closed #menu {
         display: none;
     }
     #menu-toggle {
         position: absolute;
-        right: 0px;
-        top: 0px;
+        right: 16px;
+        top: 18px;
+        padding: 10px 12px;
+        background-color: inherit;
+        color: white;
+        border-color: white;
     }
 }

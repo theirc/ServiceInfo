@@ -18,24 +18,25 @@
     <body>
         <div id="application">
             <header id="application-header">
-                <img src="images/logo.jpg" id="logo"></img>
+                <div class="brand">
+                    <img src="images/logo.jpg" id="logo"></img>
+                </div>
                 <div id=menu-container class="menu-closed">
-                    <button id=menu-toggle>=</button>
+                    <button id=menu-toggle class="btn menu">MENU</button>
                     <ul id="menu">
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
+                        <li>Service Map</li>
+                        <li>Provider Registration</li>
+                        <li>Feedback Tool</li>
+                        <li>Change Language</li>
                     </ul>
                 </div>
             </header>
             <div id="page-container">
                 <div id="page"></div>
-                <footer id="application-footer">
-                    <div id="language-toggle"></div>
-                </footer>
             </div>
+            <footer id="application-footer">
+                <div id="language-toggle" class="language-toggle"></div>
+            </footer>
         </div>
     </body>
 </html>
