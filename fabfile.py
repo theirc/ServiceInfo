@@ -257,7 +257,7 @@ def deploy(loglevel=DEFAULT_SALT_LOGLEVEL):
 
 @task
 def build():
-    local("cd frontend && node_modules/browserify/bin/cmd.js -t hbsfy index.js -o bundle.js")
+    local("cd frontend && ../node_modules/browserify/bin/cmd.js -t hbsfy index.js -o bundle.js")
 
 
 @task
