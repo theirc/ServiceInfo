@@ -3,10 +3,16 @@ from rest_framework import routers
 from api import views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
+# Override URL names for our user model - default would be based on 'email_user'
+# but we want to base them on 'user' instead.
+router.register(r'users', views.UserViewSet, base_name='user')
 router.register(r'groups', views.GroupViewSet)
 router.register(r'providers', views.ProviderViewSet)
+router.register(r'providertypes', views.ProviderTypeViewSet)
 router.register(r'services', views.ServiceViewSet)
+
+# See http://www.django-rest-framework.org/api-guide/routers/ for the
+# URL names that DRF comes up with, to make it easy to reverse them.
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

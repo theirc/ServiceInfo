@@ -2,7 +2,16 @@ import factory
 import factory.fuzzy
 from email_user.tests.factories import EmailUserFactory
 
-from services.models import Provider
+from services.models import Provider, ProviderType
+
+
+class ProviderTypeFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = ProviderType
+
+    name_en = factory.fuzzy.FuzzyText()
+    name_fr = factory.fuzzy.FuzzyText()
+    name_ar = factory.fuzzy.FuzzyText()
 
 
 class ProviderFactory(factory.DjangoModelFactory):
@@ -10,6 +19,6 @@ class ProviderFactory(factory.DjangoModelFactory):
         model = Provider
 
     name = factory.fuzzy.FuzzyText()
-    type = Provider.PROVIDER_TYPE_1
+    type = factory.SubFactory(ProviderTypeFactory)
     description = factory.fuzzy.FuzzyText()
     user = factory.SubFactory(EmailUserFactory)
