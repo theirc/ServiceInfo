@@ -18,7 +18,9 @@
     "connect-livereload": "^0.5.2",
     "express": "^4.10.7",
     "gulp": "^3.8.10",
+    "gulp-browserify": "^0.5.1",
     "gulp-less": "^2.0.1",
+    "gulp-rename": "^1.2.0",
     "less": "^2.2.0",
     "tiny-lr": "^0.1.4"
   },
