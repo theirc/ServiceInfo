@@ -18,6 +18,37 @@ work on the project locally. In a terminal, run:
 
 .. _backend-setup:
 
+Frontend Setup
+--------------
+
+The Service Mapper frontend runs separately from the backend.
+
+The Javascript dependencies are installed by Node's NPM, both for build
+tools and frontend modules. Javascript libraries for the frontend app are
+installed from NPM and then packaged for the browser by Browserify. You'll
+need to install Node, which includes npm, in order to build the frontend
+application if you'd like to run it.
+
+On Mac, you can install Node with brew.
+
+    brew install node
+
+On Ubuntu and other Linux distributions, you should download and build the
+latest version of Node. Standard package managers rarely have the most recent
+versions of Node that include NPM. You can download it from http://nodejs.org/download/ and follow the standard build instructions
+
+    tar -zxvf node-v0.10.35.tar.gz
+    cd node-v0.10.35/
+    ./configure
+    make
+    sudo make install
+    cd ..
+
+With Node installed, you can install all frontend dependencies with `npm`.
+
+    npm install
+
+
 Backend Setup
 -------------
 
@@ -65,6 +96,7 @@ Then create a local settings file and set your ``DJANGO_SETTINGS_MODULE`` to use
     cp service_mapper/settings/local.example.py service_mapper/settings/local.py
     echo "export DJANGO_SETTINGS_MODULE=service_mapper.settings.local" >> $VIRTUAL_ENV/bin/postactivate
     echo "unset DJANGO_SETTINGS_MODULE" >> $VIRTUAL_ENV/bin/postdeactivate
+    echo "PATH=$PWD/node_modules/.bin:\$PATH" >> $VIRTUAL_ENV/bin/postactivate
 
 Exit the virtualenv and reactivate it to activate the settings just changed::
 
@@ -81,8 +113,14 @@ Build the frontend::
 
     fab build
 
-You should now be able to run the development server::
+You should now be able to run the development APIserver::
 
-    python manage.py runserver
+    python manage.py runserver --nostatic
+
+Or, you can run the frontend server with Gulp, which will auto-reload the browser upon detected changes. You can run one or the other, but currently don't need to run both and they will both try
+to use the same port. When the backend and frontend talk to each other, running both will safely
+will be automated and this documentation will be updated.
+
+    gulp
 
 Now visit http://localhost:8000/ in your browser.
