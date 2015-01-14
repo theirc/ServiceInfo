@@ -1,26 +1,53 @@
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, get_language
+
+
+class ProviderType(models.Model):
+    name_en = models.CharField(
+        _("name in English"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    name_fr = models.CharField(
+        _("name in French"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    name_ar = models.CharField(
+        _("name in Arabic"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+
+    def __str__(self):
+        # Try to return the name field of the currently selected language
+        # if we have such a field and it has something in it.
+        # Otherwise, punt and return the English, French, or Arabic name,
+        # in that order.
+        language = get_language()
+        field_name = 'name_%s' % language[:2]
+        if hasattr(self, field_name) and getattr(self, field_name):
+            return getattr(self, field_name)
+        return self.name_en or self.name_fr or self.name_ar
+
+    def get_api_url(self):
+        return reverse('providertype-detail', args=[self.id])
 
 
 class Provider(models.Model):
-    # FIXME: Find out what the provider types are
-    PROVIDER_TYPE_1 = 1
-    PROVIDER_TYPE_2 = 2
-    PROVIDER_TYPE_CHOICES = [
-        (1, _("Provider type 1")),
-        (2, _("Provider type 2")),
-    ]
-
     name = models.CharField(
         # Translators: Provider name
         _("name"),
         max_length=256,  # Length is a guess
     )
-    type = models.IntegerField(
-        # Translators: Provider type
-        _("type"),
-        choices=PROVIDER_TYPE_CHOICES,
+    type = models.ForeignKey(
+        ProviderType,
+        verbose_name=_("type"),
     )
     phone_number = models.CharField(
         _("phone number"),
@@ -43,6 +70,9 @@ class Provider(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_api_url(self):
+        return reverse('provider-detail', args=[self.id])
 
 
 class ServiceArea(models.Model):
@@ -132,3 +162,6 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_api_url(self):
+        return reverse('service-detail', args=[self.id])

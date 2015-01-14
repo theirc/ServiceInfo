@@ -1,8 +1,9 @@
 import json
 from django.contrib.auth import get_user_model
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 from services.models import Provider
-from services.tests.factories import ProviderFactory
+from services.tests.factories import ProviderFactory, ProviderTypeFactory
 
 
 OK = 200
@@ -19,15 +20,13 @@ class ProviderAPITest(TestCase):
         assert self.client.login(email='joe@example.com', password='password')
 
         # Get the URL of the user for the API
-        rsp = self.client.get('/api/users/%d/' % self.user.id)
-        self.assertEqual(200, rsp.status_code, msg=rsp.content.decode('utf-8'))
-        self.user_url = json.loads(rsp.content.decode('utf-8'))['url']
+        self.user_url = reverse('user-detail', args=[self.user.id])
 
     def test_create_provider(self):
-        url = '/api/providers/'
+        url = reverse('provider-list')
         data = {
             'name': 'Joe Provider',
-            'type': 1,
+            'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12345',
             'description': 'Test provider',
             'user': self.user_url,
@@ -43,7 +42,7 @@ class ProviderAPITest(TestCase):
     def test_get_provider_list(self):
         p1 = ProviderFactory()
         p2 = ProviderFactory()
-        url = '/api/providers/'
+        url = reverse('provider-list')
         rsp = self.client.get(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
@@ -53,7 +52,7 @@ class ProviderAPITest(TestCase):
 
     def test_get_one_provider(self):
         p1 = ProviderFactory()
-        url = '/api/providers/%d/' % p1.id
+        url = reverse('provider-detail', args=[p1.id])
         rsp = self.client.get(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))

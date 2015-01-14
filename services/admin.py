@@ -1,9 +1,13 @@
 from django.contrib import admin
-from services.models import Provider, Service, ServiceArea, SelectionCriterion
+from services.models import Provider, Service, ServiceArea, SelectionCriterion, ProviderType
 
 
 class ProviderAdmin(admin.ModelAdmin):
     list_display = ['name', 'type']
+
+
+class ProviderTypeAdmin(admin.ModelAdmin):
+    list_display = ['name_en', 'name_fr', 'name_ar']
 
 
 class ServiceAdmin(admin.ModelAdmin):
@@ -12,6 +16,7 @@ class ServiceAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Provider, ProviderAdmin)
+admin.site.register(ProviderType, ProviderTypeAdmin)
 admin.site.register(Service, ServiceAdmin)
 admin.site.register(ServiceArea)
 admin.site.register(SelectionCriterion)
