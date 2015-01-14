@@ -2,8 +2,8 @@ from django.contrib.auth.models import Group
 from rest_framework import viewsets
 from email_user.models import EmailUser
 from .serializers import UserSerializer, GroupSerializer, ServiceSerializer, ProviderSerializer, \
-    ProviderTypeSerializer
-from services.models import Service, Provider, ProviderType
+    ProviderTypeSerializer, ServiceAreaSerializer
+from services.models import Service, Provider, ProviderType, ServiceArea
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -20,6 +20,11 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+
+class ServiceAreaViewSet(viewsets.ModelViewSet):
+    queryset = ServiceArea.objects.all()
+    serializer_class = ServiceAreaSerializer
 
 
 class ServiceViewSet(viewsets.ModelViewSet):

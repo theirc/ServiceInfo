@@ -1,6 +1,6 @@
 from django.conf import settings
+from django.contrib.gis.db import models
 from django.core.urlresolvers import reverse
-from django.db import models
 from django.utils.translation import ugettext_lazy as _, get_language
 
 
@@ -43,7 +43,7 @@ class Provider(models.Model):
     name = models.CharField(
         # Translators: Provider name
         _("name"),
-        max_length=256,  # Length is a guess
+        max_length=100,
     )
     type = models.ForeignKey(
         ProviderType,
@@ -67,6 +67,9 @@ class Provider(models.Model):
         verbose_name=_('user'),
         help_text=_('user account for this provider'),
     )
+    number_of_monthly_beneficiaries = models.IntegerField(
+        _("number of targeted beneficiaries monthly"),
+    )
 
     def __str__(self):
         return self.name
@@ -76,13 +79,35 @@ class Provider(models.Model):
 
 
 class ServiceArea(models.Model):
-    # FIXME: Find out what a "service area" consists of
-    pass
+    # FIXME: Translate name
+    name = models.CharField(max_length=100)
+    parent = models.ForeignKey(
+        to='self',
+        verbose_name=_('parent area'),
+        help_text=_('the area that contains this area'),
+        null=True,
+        blank=True,
+        related_name='children',
+    )
+    region = models.PolygonField(
+        blank=True,
+        null=True,
+    )
+
+    objects = models.GeoManager()
+
+    def get_api_url(self):
+        return reverse('servicearea-detail', args=[self.id])
 
 
 class SelectionCriterion(models.Model):
-    # FIXME: Find out what a "selection criterion" consists of
-    pass  # ??
+    """
+    A selection criterion limits who can receive the service.
+    It's just a text string. E.g. "age under 18".
+    """
+    text_en = models.CharField(max_length=100, blank=True, default='')
+    text_fr = models.CharField(max_length=100, blank=True, default='')
+    text_ar = models.CharField(max_length=100, blank=True, default='')
 
     class Meta(object):
         verbose_name_plural = _("selection criteria")
@@ -96,7 +121,7 @@ class Service(models.Model):
     name = models.CharField(
         # Translators: Service name
         _("name"),
-        max_length=256,
+        max_length=100,
     )
     area_of_service = models.ForeignKey(
         ServiceArea,
@@ -105,9 +130,6 @@ class Service(models.Model):
     description = models.TextField(
         # Translators: Service description
         _("description"),
-    )
-    hours_of_service = models.TextField(  # FIXME: do we need to model these more specifically?
-        _("hours of service"),
     )
     additional_info = models.TextField(
         _("additional info"),
@@ -122,6 +144,7 @@ class Service(models.Model):
     selection_criteria = models.ManyToManyField(
         SelectionCriterion,
         verbose_name=_("selection criteria"),
+        blank=True,
     )
 
     # Note: we don't let multiple versions of a service record pile up - there
@@ -159,6 +182,30 @@ class Service(models.Model):
         related_name='pending_update',
         unique=True,
     )
+
+    location = models.PointField(
+        _('location'),
+        blank=True,
+        null=True,
+    )
+
+    # Open & close hours by day. If None, service is closed that day.
+    sunday_open = models.TimeField(null=True, blank=True)
+    sunday_close = models.TimeField(null=True, blank=True)
+    monday_open = models.TimeField(null=True, blank=True)
+    monday_close = models.TimeField(null=True, blank=True)
+    tuesday_open = models.TimeField(null=True, blank=True)
+    tuesday_close = models.TimeField(null=True, blank=True)
+    wednesday_open = models.TimeField(null=True, blank=True)
+    wednesday_close = models.TimeField(null=True, blank=True)
+    thursday_open = models.TimeField(null=True, blank=True)
+    thursday_close = models.TimeField(null=True, blank=True)
+    friday_open = models.TimeField(null=True, blank=True)
+    friday_close = models.TimeField(null=True, blank=True)
+    saturday_open = models.TimeField(null=True, blank=True)
+    saturday_close = models.TimeField(null=True, blank=True)
+
+    objects = models.GeoManager()
 
     def __str__(self):
         return self.name
