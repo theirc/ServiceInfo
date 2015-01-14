@@ -1,5 +1,7 @@
 var gulp = require('gulp')
+,   rename = require('gulp-rename')
 ,   less = require('gulp-less')
+,   browserify = require('gulp-browserify')
 ;
 
 var EXPRESS_PORT = 8000;
@@ -25,6 +27,16 @@ function build() {
     gulp.src('frontend/styles/*.less')
         .pipe(less())
         .pipe(gulp.dest('frontend/styles'))
+    ;
+
+    gulp.src('frontend/index.js')
+        .pipe(browserify({
+            insertGlobals : true,
+            debug : !gulp.env.production,
+            transform: ['hbsfy'],
+        }))
+        .pipe(rename('bundle.js'))
+        .pipe(gulp.dest('frontend'))
     ;
 }
 
