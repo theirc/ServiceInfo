@@ -81,7 +81,7 @@ less:
 npm_installs:
   cmd.run:
     - name: npm install
-    - cwd: "{{ vars.source_dir }}/frontend"
+    - cwd: "{{ vars.source_dir }}"
     - user: {{ pillar['project_name'] }}
     - require:
       - pkg: nodejs
@@ -137,4 +137,3 @@ gunicorn_process:
       - file: gunicorn_conf
       - cmd: collectstatic
       - cmd: migrate
-
