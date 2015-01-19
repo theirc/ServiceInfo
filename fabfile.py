@@ -291,3 +291,14 @@ def manage_run(command):
     settings = '{0}.settings.{1}'.format(PROJECT_NAME, env.environment)
     manage_sh = u"DJANGO_SETTINGS_MODULE={0} /var/www/{1}/manage.sh ".format(settings,PROJECT_NAME)
     sudo(manage_sh + command, user=PROJECT_NAME)
+
+
+@task
+def ssh():
+    """
+    Convenience task to ssh to whatever host has been selected.
+
+    E.g. ``fab production ssh``
+    """
+    require('environment')
+    local("ssh %s" % env.hosts[0])
