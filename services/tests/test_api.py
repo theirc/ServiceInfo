@@ -1,5 +1,8 @@
+from http.client import FOUND
 import json
+from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.core import mail
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from services.models import Provider
@@ -22,14 +25,18 @@ class ProviderAPITest(TestCase):
         # Get the URL of the user for the API
         self.user_url = reverse('user-detail', args=[self.user.id])
 
-    def test_create_provider(self):
-        url = reverse('provider-list')
+    def test_create_provider_and_user(self):
+        # User is NOT logged in when creating a new provider/user
+        self.client.logout()
+
+        url = '/api/providers/create_provider/'
         data = {
             'name': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12345',
             'description': 'Test provider',
-            'user': self.user_url,
+            'email': 'fred@example.com',
+            'password': 'foobar',
         }
         rsp = self.client.post(url, data=data)
         self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
@@ -38,6 +45,25 @@ class ProviderAPITest(TestCase):
         result = json.loads(rsp.content.decode('utf-8'))
         provider = Provider.objects.get(id=result['id'])
         self.assertEqual('Joe Provider', provider.name)
+        user = get_user_model().objects.get(id=provider.user_id)
+        self.assertFalse(user.is_active)
+        self.assertTrue(user.activation_key)
+        # We should have sent an activation email
+        self.assertEqual(len(mail.outbox), 1)
+        # with a link
+        link = provider.user.get_activation_link()
+        self.assertIn(link, mail.outbox[0].body)
+        # user is not active
+        self.assertFalse(provider.user.is_active)
+        # Try activating them
+        rsp = self.client.get(link, follow=False)
+        self.assertEqual(FOUND, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        redirect_url = rsp['Location']
+        if redirect_url.startswith('http://testserver'):
+            redirect_url = redirect_url[len('http://testserver'):]
+        self.assertEqual(settings.ACCOUNT_ACTIVATION_REDIRECT_URL, redirect_url)
+        user = get_user_model().objects.get(id=provider.user_id)
+        self.assertTrue(user.is_active)
 
     def test_get_provider_list(self):
         p1 = ProviderFactory()
