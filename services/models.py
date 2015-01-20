@@ -11,14 +11,14 @@ class ProviderType(models.Model):
         default='',
         blank=True,
     )
-    name_fr = models.CharField(
-        _("name in French"),
+    name_ar = models.CharField(
+        _("name in Arabic"),
         max_length=256,
         default='',
         blank=True,
     )
-    name_ar = models.CharField(
-        _("name in Arabic"),
+    name_fr = models.CharField(
+        _("name in French"),
         max_length=256,
         default='',
         blank=True,
@@ -40,10 +40,26 @@ class ProviderType(models.Model):
 
 
 class Provider(models.Model):
-    name = models.CharField(
+    name_en = models.CharField(
         # Translators: Provider name
-        _("name"),
+        _("name in English"),
         max_length=256,  # Length is a guess
+        default='',
+        blank=True,
+    )
+    name_ar = models.CharField(
+        # Translators: Provider name
+        _("name in Arabic"),
+        max_length=256,  # Length is a guess
+        default='',
+        blank=True,
+    )
+    name_fr = models.CharField(
+        # Translators: Provider name
+        _("name in French"),
+        max_length=256,  # Length is a guess
+        default='',
+        blank=True,
     )
     type = models.ForeignKey(
         ProviderType,
@@ -58,9 +74,23 @@ class Provider(models.Model):
         blank=True,
         default='',
     )
-    description = models.TextField(
+    description_en = models.TextField(
         # Translators: Provider description
-        _("description"),
+        _("description in English"),
+        default='',
+        blank=True,
+    )
+    description_ar = models.TextField(
+        # Translators: Provider description
+        _("description in Arabic"),
+        default='',
+        blank=True,
+    )
+    description_fr = models.TextField(
+        # Translators: Provider description
+        _("description in French"),
+        default='',
+        blank=True,
     )
     user = models.OneToOneField(
         to=settings.AUTH_USER_MODEL,
@@ -93,24 +123,62 @@ class Service(models.Model):
         Provider,
         verbose_name=_("provider"),
     )
-    name = models.CharField(
+    name_en = models.CharField(
         # Translators: Service name
-        _("name"),
+        _("name in English"),
         max_length=256,
+        default='',
+        blank=True,
+    )
+    name_ar = models.CharField(
+        # Translators: Service name
+        _("name in Arabic"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    name_fr = models.CharField(
+        # Translators: Service name
+        _("name in French"),
+        max_length=256,
+        default='',
+        blank=True,
     )
     area_of_service = models.ForeignKey(
         ServiceArea,
         verbose_name=_("area of service"),
     )
-    description = models.TextField(
+    description_en = models.TextField(
         # Translators: Service description
-        _("description"),
+        _("description in English"),
+    )
+    description_ar = models.TextField(
+        # Translators: Service description
+        _("description in Arabic"),
+        default='',
+        blank=True,
+    )
+    description_fr = models.TextField(
+        # Translators: Service description
+        _("description in French"),
+        default='',
+        blank=True,
     )
     hours_of_service = models.TextField(  # FIXME: do we need to model these more specifically?
         _("hours of service"),
     )
-    additional_info = models.TextField(
-        _("additional info"),
+    additional_info_en = models.TextField(
+        _("additional information in English"),
+        blank=True,
+        default='',
+    )
+    additional_info_ar = models.TextField(
+        _("additional information in Arabic"),
+        blank=True,
+        default='',
+    )
+    additional_info_fr = models.TextField(
+        _("additional information in French"),
         blank=True,
         default='',
     )
