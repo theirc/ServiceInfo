@@ -289,7 +289,7 @@ def manage_run(command):
     require('environment')
     # Setup the call
     settings = '{0}.settings.{1}'.format(PROJECT_NAME, env.environment)
-    manage_sh = u"DJANGO_SETTINGS_MODULE={0} /var/www/{1}/manage.sh ".format(settings,PROJECT_NAME)
+    manage_sh = u"DJANGO_SETTINGS_MODULE={0} /var/www/{1}/manage.sh ".format(settings, PROJECT_NAME)
     sudo(manage_sh + command, user=PROJECT_NAME)
 
 
