@@ -38,11 +38,12 @@ class ActivationView(TemplateView):
 
         """
         activated_user = get_user_model().objects.activate_user(activation_key)
-        # Log the user in - copied from django-registration too
-        backend = get_backends()[0]  # Hack to bypass `authenticate()`.
-        activated_user.backend = "%s.%s" % (backend.__module__, backend.__class__.__name__)
-        request.user = activated_user
-        login(request, activated_user)
-        request.session.modified = True
+        if activated_user:
+            # Log the user in - copied from django-registration too
+            backend = get_backends()[0]  # Hack to bypass `authenticate()`.
+            activated_user.backend = "%s.%s" % (backend.__module__, backend.__class__.__name__)
+            request.user = activated_user
+            login(request, activated_user)
+            request.session.modified = True
 
         return activated_user
