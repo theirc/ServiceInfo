@@ -7,10 +7,48 @@ the API at `https://<yourserver>/api`.  This document will only
 cover the little complications, like getting authenticated, creating
 users, etc.
 
-Authentication
---------------
+Login
+-----
 
-TBD
+If a client has a user's email and password, it can get an auth
+token and use that in subsequent calls.
+
+POST to '/api/login/'::
+
+   { 'email': 'email@example.com', 'password': 'plaintext password' }
+
+If successful, response status will be 200 and the response
+content will include::
+
+   { 'token': 'a long string'}
+
+If failed, response status will be 400 and the response might look like::
+
+    {"non_field_errors":["Unable to log in with provided credentials."]}
+
+or::
+
+    {"email":["This field may not be blank."]}
+
+or::
+
+    {"non_field_errors":["User account is disabled."]}
+
+Using token-based auth
+----------------------
+
+Once the client has the token, it should pass it on subsequent requests per
+http://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication
+which says::
+
+    For clients to authenticate, the token key should be included in the
+    Authorization HTTP header. The key should be prefixed by the string
+    literal "Token", with whitespace separating the two strings. For example::
+
+        Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
+
+As you might expect, requests will be permitted or denied based on the
+permissions of the user whose token is passed.
 
 Creating a new provider
 -----------------------

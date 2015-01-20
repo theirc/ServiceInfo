@@ -1,4 +1,4 @@
-from http.client import FOUND
+from http.client import OK, CREATED, FOUND, BAD_REQUEST
 import json
 
 from django.conf import settings
@@ -13,10 +13,6 @@ from services.models import Provider, Service
 from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory
 
 
-OK = 200
-CREATED = 201
-
-
 class ProviderAPITest(TestCase):
     def setUp(self):
         # Just using Django auth for now
@@ -29,8 +25,63 @@ class ProviderAPITest(TestCase):
         # Get the URL of the user for the API
         self.user_url = reverse('user-detail', args=[self.user.id])
 
+    def test_create_provider_no_email(self):
+        # Create provider call is made when user is NOT logged in.
+        self.client.logout()
+
+        url = '/api/providers/create_provider/'
+        data = {
+            'name_en': 'Joe Provider',
+            'type': ProviderTypeFactory().get_api_url(),
+            'phone_number': '12345',
+            'description_en': 'Test provider',
+            'password': 'foobar',
+            'number_of_monthly_beneficiaries': '37',
+        }
+        rsp = self.client.post(url, data=data)
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(["Provider create call must provide email and password"], result)
+
+    def test_create_provider_invalid_email(self):
+        # Create provider call is made when user is NOT logged in.
+        self.client.logout()
+
+        url = '/api/providers/create_provider/'
+        data = {
+            'name_en': 'Joe Provider',
+            'type': ProviderTypeFactory().get_api_url(),
+            'phone_number': '12345',
+            'description_en': 'Test provider',
+            'email': 'this_is_not_an_email',
+            'password': 'foobar',
+            'number_of_monthly_beneficiaries': '37',
+        }
+        rsp = self.client.post(url, data=data)
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertIn('email', result)
+
+    def test_create_provider_no_password(self):
+        # Create provider call is made when user is NOT logged in.
+        self.client.logout()
+
+        url = '/api/providers/create_provider/'
+        data = {
+            'name_en': 'Joe Provider',
+            'type': ProviderTypeFactory().get_api_url(),
+            'phone_number': '12345',
+            'description_en': 'Test provider',
+            'email': 'fred@example.com',
+            'number_of_monthly_beneficiaries': '37',
+        }
+        rsp = self.client.post(url, data=data)
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(["Provider create call must provide email and password"], result)
+
     def test_create_provider_and_user(self):
-        # User is NOT logged in when creating a new provider/user
+        # Create provider call is made when user is NOT logged in.
         self.client.logout()
 
         url = '/api/providers/create_provider/'
@@ -111,6 +162,10 @@ class TokenAuthTest(TestCase):
         )
 
     def post_with_token(self, url, data):
+        """
+        Make a POST to a url, passing the token in the request headers.
+        Return the response.
+        """
         return self.client.post(
             url,
             data=data,
@@ -194,3 +249,48 @@ class ServiceAreaAPITest(TestCase):
         rsp = self.client.get(self.area2.get_api_url())
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual('http://testserver%s' % self.area1.get_api_url(), result['parent'])
+
+
+class APILoginViewTest(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_superuser(
+            password='password',
+            email='joe@example.com',
+        )
+        self.user_url = reverse('user-detail', args=[self.user.id])
+        self.token = Token.objects.get(user=self.user).key
+
+    def test_success(self):
+        # Call the API with the mail and password
+        # Should get back the user's auth token
+        rsp = self.client.post(reverse('api-login'),
+                               data={'email': self.user.email, 'password': 'password'})
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(self.token, result['token'])
+
+    def test_disabled_account(self):
+        self.user.is_active = False
+        self.user.save()
+        rsp = self.client.post(reverse('api-login'),
+                               data={'email': self.user.email, 'password': 'password'})
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual({'non_field_errors': ['User account is disabled.']}, response)
+
+    def test_bad_call(self):
+        # Call the API with username/password instead of email/password
+        rsp = self.client.post(reverse('api-login'),
+                               data={'username': 'Joe Sixpack', 'password': 'not_password'})
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual({'email': ['This field may not be blank.']}, response)
+
+    def test_bad_password(self):
+        # Call the API with a bad password
+        rsp = self.client.post(reverse('api-login'),
+                               data={'email': self.user.email, 'password': 'not_password'})
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual({'non_field_errors': ['Unable to log in with provided credentials.']},
+                         response)

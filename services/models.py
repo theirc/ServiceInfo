@@ -102,7 +102,7 @@ class Provider(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return self.name_en
 
     def get_api_url(self):
         return reverse('provider-detail', args=[self.id])
@@ -294,7 +294,7 @@ class Service(models.Model):
     objects = models.GeoManager()
 
     def __str__(self):
-        return self.name
+        return self.name_en
 
     def get_api_url(self):
         return reverse('service-detail', args=[self.id])
