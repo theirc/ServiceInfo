@@ -137,6 +137,7 @@ INSTALLED_APPS = (
     # External apps
     'compressor',
     'rest_framework',
+    'rest_framework.authtoken',
     # Our apps
     'services',
 )
@@ -204,6 +205,10 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
     'PAGINATE_BY': 10,
 }
 

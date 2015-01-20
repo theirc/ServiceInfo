@@ -2,10 +2,15 @@
 Copied and adapted from
 https://docs.djangoproject.com/en/1.7/topics/auth/customizing/#a-full-example
 """
-from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
+
+from rest_framework.authtoken.models import Token
 
 
 class EmailUserManager(BaseUserManager):
@@ -72,3 +77,10 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):              # __unicode__ on Python 2
         return self.email
+
+
+# Create an auth token for each user when they're created
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
