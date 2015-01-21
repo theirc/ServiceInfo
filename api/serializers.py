@@ -45,9 +45,9 @@ class ServiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Service
         fields = (
-            'url', 'id', 'provider', 
+            'url', 'id', 'provider',
             'name_en', 'name_ar', 'name_fr',
-            'area_of_service', 
+            'area_of_service',
             'description_en', 'description_ar', 'description_fr',
             'additional_info_en', 'additional_info_ar', 'additional_info_fr',
             'cost_of_service', 'selection_criteria',
@@ -69,7 +69,9 @@ class ServiceAreaSerializer(serializers.HyperlinkedModelSerializer):
         fields = (
             'url',
             'id',
-            'name',
+            'name_en',
+            'name_ar',
+            'name_fr',
             'parent',
             'children',
         )

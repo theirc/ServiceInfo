@@ -154,4 +154,33 @@ class Migration(migrations.Migration):
             field=models.ManyToManyField(to='services.SelectionCriterion', verbose_name='selection criteria', blank=True),
             preserve_default=True,
         ),
+        migrations.RenameField(
+            model_name='servicearea',
+            old_name='name',
+            new_name='name_en',
+        ),
+        migrations.AddField(
+            model_name='servicearea',
+            name='name_ar',
+            field=models.CharField(default='', blank=True, max_length=256, verbose_name='name in Arabic'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='servicearea',
+            name='name_fr',
+            field=models.CharField(default='', blank=True, max_length=256, verbose_name='name in French'),
+            preserve_default=True,
+        ),
+        migrations.AlterField(
+            model_name='servicearea',
+            name='name_en',
+            field=models.CharField(default='', blank=True, max_length=256, verbose_name='name in English'),
+            preserve_default=True,
+        ),
+        migrations.AlterField(
+            model_name='service',
+            name='description_en',
+            field=models.TextField(default='', verbose_name='description in English', blank=True),
+            preserve_default=True,
+        ),
     ]

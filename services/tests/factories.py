@@ -33,7 +33,9 @@ class ServiceAreaFactory(factory.DjangoModelFactory):
     class Meta:
         model = ServiceArea
 
-    name = factory.fuzzy.FuzzyText()
+    name_en = factory.fuzzy.FuzzyText()
+    name_ar = factory.fuzzy.FuzzyText()
+    name_fr = factory.fuzzy.FuzzyText()
 
 
 class ServiceFactory(factory.DjangoModelFactory):
@@ -41,6 +43,10 @@ class ServiceFactory(factory.DjangoModelFactory):
         model = Service
 
     provider = factory.SubFactory(ProviderFactory)
-    name = factory.fuzzy.FuzzyText()
-    description = factory.fuzzy.FuzzyText()
+    name_en = factory.fuzzy.FuzzyText()
+    name_ar = factory.fuzzy.FuzzyText()
+    name_fr = factory.fuzzy.FuzzyText()
+    description_en = factory.fuzzy.FuzzyText()
+    description_ar = factory.fuzzy.FuzzyText()
+    description_fr = factory.fuzzy.FuzzyText()
     area_of_service = factory.SubFactory(ServiceAreaFactory)

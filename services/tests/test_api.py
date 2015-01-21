@@ -75,15 +75,15 @@ class ServiceAPITest(TestCase):
         area = ServiceAreaFactory()
         data = {
             'provider': self.provider.get_api_url(),
-            'name': 'Some service',
+            'name_en': 'Some service',
             'area_of_service': area.get_api_url(),
-            'description': "Awesome\nService"
+            'description_en': "Awesome\nService"
         }
         rsp = self.client.post(reverse('service-list'), data=data)
         self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         service = Service.objects.get(id=result['id'])
-        self.assertEqual('Some service', service.name)
+        self.assertEqual('Some service', service.name_en)
 
 
 class ServiceAreaAPITest(TestCase):
@@ -103,9 +103,9 @@ class ServiceAreaAPITest(TestCase):
         self.assertEqual(OK, rsp.status_code)
         result = json.loads(rsp.content.decode('utf-8'))
         results = result['results']
-        names = [area.name for area in [self.area1, self.area2, self.area3]]
+        names = [area.name_en for area in [self.area1, self.area2, self.area3]]
         for item in results:
-            self.assertIn(item['name'], names)
+            self.assertIn(item['name_en'], names)
 
     def test_get_area(self):
         rsp = self.client.get(self.area1.get_api_url())

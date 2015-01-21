@@ -109,8 +109,24 @@ class Provider(models.Model):
 
 
 class ServiceArea(models.Model):
-    # FIXME: Translate name
-    name = models.CharField(max_length=100)
+    name_en = models.CharField(
+        _("name in English"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    name_ar = models.CharField(
+        _("name in Arabic"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    name_fr = models.CharField(
+        _("name in French"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
     parent = models.ForeignKey(
         to='self',
         verbose_name=_('parent area'),
@@ -176,6 +192,8 @@ class Service(models.Model):
     description_en = models.TextField(
         # Translators: Service description
         _("description in English"),
+        default='',
+        blank=True,
     )
     description_ar = models.TextField(
         # Translators: Service description
