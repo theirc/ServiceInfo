@@ -8,7 +8,7 @@ import django.contrib.gis.db.models.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('services', '0004_auto_20150112_1109'),
+        ('services', '0006_add_non_english_fields'),
     ]
 
     operations = [
@@ -146,18 +146,6 @@ class Migration(migrations.Migration):
             model_name='servicearea',
             name='region',
             field=django.contrib.gis.db.models.fields.PolygonField(null=True, srid=4326, blank=True),
-            preserve_default=True,
-        ),
-        migrations.AlterField(
-            model_name='provider',
-            name='name',
-            field=models.CharField(verbose_name='name', max_length=100),
-            preserve_default=True,
-        ),
-        migrations.AlterField(
-            model_name='service',
-            name='name',
-            field=models.CharField(verbose_name='name', max_length=100),
             preserve_default=True,
         ),
         migrations.AlterField(

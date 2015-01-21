@@ -189,9 +189,6 @@ class Service(models.Model):
         default='',
         blank=True,
     )
-    hours_of_service = models.TextField(  # FIXME: do we need to model these more specifically?
-        _("hours of service"),
-    )
     additional_info_en = models.TextField(
         _("additional information in English"),
         blank=True,
