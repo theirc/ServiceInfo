@@ -5,8 +5,8 @@ from django.contrib.auth import get_user_model
 from django.core import mail
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-from services.models import Provider
-from services.tests.factories import ProviderFactory, ProviderTypeFactory
+from services.models import Provider, Service
+from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory
 
 
 OK = 200
@@ -37,6 +37,7 @@ class ProviderAPITest(TestCase):
             'description_en': 'Test provider',
             'email': 'fred@example.com',
             'password': 'foobar',
+            'number_of_monthly_beneficiaries': '37',
         }
         rsp = self.client.post(url, data=data)
         self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
@@ -45,6 +46,7 @@ class ProviderAPITest(TestCase):
         result = json.loads(rsp.content.decode('utf-8'))
         provider = Provider.objects.get(id=result['id'])
         self.assertEqual('Joe Provider', provider.name_en)
+        self.assertEqual(37, provider.number_of_monthly_beneficiaries)
         user = get_user_model().objects.get(id=provider.user_id)
         self.assertFalse(user.is_active)
         self.assertTrue(user.activation_key)
@@ -83,3 +85,60 @@ class ProviderAPITest(TestCase):
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(p1.name_en, result['name_en'])
+
+
+class ServiceAPITest(TestCase):
+    def setUp(self):
+        # Just using Django auth for now
+        self.user = get_user_model().objects.create_superuser(
+            password='password',
+            email='joe@example.com',
+        )
+        assert self.client.login(email='joe@example.com', password='password')
+        self.provider = ProviderFactory()
+
+    def test_create_service(self):
+        area = ServiceAreaFactory()
+        data = {
+            'provider': self.provider.get_api_url(),
+            'name_en': 'Some service',
+            'area_of_service': area.get_api_url(),
+            'description_en': "Awesome\nService"
+        }
+        rsp = self.client.post(reverse('service-list'), data=data)
+        self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        service = Service.objects.get(id=result['id'])
+        self.assertEqual('Some service', service.name_en)
+
+
+class ServiceAreaAPITest(TestCase):
+    def setUp(self):
+        # Just using Django auth for now
+        self.user = get_user_model().objects.create_superuser(
+            password='password',
+            email='joe@example.com',
+        )
+        assert self.client.login(email='joe@example.com', password='password')
+        self.area1 = ServiceAreaFactory()
+        self.area2 = ServiceAreaFactory(parent=self.area1)
+        self.area3 = ServiceAreaFactory(parent=self.area1)
+
+    def test_get_areas(self):
+        rsp = self.client.get(reverse('servicearea-list'))
+        self.assertEqual(OK, rsp.status_code)
+        result = json.loads(rsp.content.decode('utf-8'))
+        results = result['results']
+        names = [area.name_en for area in [self.area1, self.area2, self.area3]]
+        for item in results:
+            self.assertIn(item['name_en'], names)
+
+    def test_get_area(self):
+        rsp = self.client.get(self.area1.get_api_url())
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(self.area1.id, result['id'])
+        self.assertIn('http://testserver%s' % self.area2.get_api_url(), result['children'])
+        self.assertIn('http://testserver%s' % self.area3.get_api_url(), result['children'])
+        rsp = self.client.get(self.area2.get_api_url())
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual('http://testserver%s' % self.area1.get_api_url(), result['parent'])
