@@ -10,6 +10,7 @@ router.register(r'groups', views.GroupViewSet)
 router.register(r'providers', views.ProviderViewSet)
 router.register(r'providertypes', views.ProviderTypeViewSet)
 router.register(r'services', views.ServiceViewSet)
+router.register(r'serviceareas', views.ServiceAreaViewSet)
 
 # See http://www.django-rest-framework.org/api-guide/routers/ for the
 # URL names that DRF comes up with, to make it easy to reverse them.
