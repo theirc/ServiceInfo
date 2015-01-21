@@ -84,12 +84,14 @@ npm_installs:
     - cwd: "{{ vars.source_dir }}"
     - user: {{ pillar['project_name'] }}
     - require:
-      - pkg: nodejs
+      - cmd: node_alias
 
 make_bundle:
   cmd.run:
-    - name: node_modules/browserify/bin/cmd.js -t hbsfy index.js -o bundle.js
-    - cwd: "{{ vars.source_dir }}/frontend"
+# FIXME: SHould be able to use this command, but npm install is not creating the .bin links
+#    - name: "{{ vars.source_dir }}/node_modules/.bin/browserify -t hbsfy frontend/index.js -o frontend/bundle.js"
+    - name: "{{ vars.source_dir }}/node_modules/browserify/bin/cmd.js -t hbsfy frontend/index.js -o frontend/bundle.js"
+    - cwd: "{{ vars.source_dir }}"
     - user: {{ pillar['project_name'] }}
     - require:
       - cmd: npm_installs

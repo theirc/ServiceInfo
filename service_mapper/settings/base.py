@@ -17,7 +17,7 @@ ADMINS = (
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'service_mapper',
         'USER': '',
         'PASSWORD': '',
@@ -217,3 +217,11 @@ AUTH_USER_MODEL = 'email_user.EmailUser'
 
 # Just use admin login view for now
 LOGIN_URL = 'admin:login'
+
+# How many days a new user has to activate their account
+# by following the link in their new account email message.
+ACCOUNT_ACTIVATION_DAYS = 3
+
+# When someone successfully activates their user account,
+# redirect them to this URL.
+ACCOUNT_ACTIVATION_REDIRECT_URL = '/nosuchurl'
