@@ -10,15 +10,19 @@ class ProviderTypeFactory(factory.DjangoModelFactory):
         model = ProviderType
 
     name_en = factory.fuzzy.FuzzyText()
-    name_fr = factory.fuzzy.FuzzyText()
     name_ar = factory.fuzzy.FuzzyText()
+    name_fr = factory.fuzzy.FuzzyText()
 
 
 class ProviderFactory(factory.DjangoModelFactory):
     class Meta:
         model = Provider
 
-    name = factory.fuzzy.FuzzyText()
+    name_en = factory.fuzzy.FuzzyText()
+    name_ar = factory.fuzzy.FuzzyText()
+    name_fr = factory.fuzzy.FuzzyText()
     type = factory.SubFactory(ProviderTypeFactory)
-    description = factory.fuzzy.FuzzyText()
+    description_en = factory.fuzzy.FuzzyText()
+    description_ar = factory.fuzzy.FuzzyText()
+    description_fr = factory.fuzzy.FuzzyText()
     user = factory.SubFactory(EmailUserFactory)
