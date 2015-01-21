@@ -28,8 +28,10 @@ class ProviderTypeSerializer(serializers.HyperlinkedModelSerializer):
 class ProviderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Provider
-        fields = ('url', 'id', 'name', 'type', 'phone_number', 'website', 'description', 'user',
-                  'number_of_monthly_beneficiaries')
+        fields = ('url', 'id', 'name_en', 'name_ar', 'name_fr',
+                  'type', 'phone_number', 'website',
+                  'description_en', 'description_ar', 'description_fr',
+                  'user', 'number_of_monthly_beneficiaries')
         extra_kwargs = {
             # Override how serializer comes up with the view name (URL name) for users,
             # because by default it'll base it on the model name from the user field,
@@ -43,8 +45,12 @@ class ServiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Service
         fields = (
-            'url', 'id', 'provider', 'name', 'area_of_service', 'description',
-            'additional_info', 'cost_of_service', 'selection_criteria',
+            'url', 'id', 'provider', 
+            'name_en', 'name_ar', 'name_fr',
+            'area_of_service', 
+            'description_en', 'description_ar', 'description_fr',
+            'additional_info_en', 'additional_info_ar', 'additional_info_fr',
+            'cost_of_service', 'selection_criteria',
             'status', 'update_of',
             'location',
             'sunday_open', 'sunday_close',

@@ -3,7 +3,6 @@
     <head>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
         <link rel="stylesheet" href="styles/site.css" type="text/css" />
@@ -19,23 +18,25 @@
     <body>
         <div id="application">
             <header id="application-header">
-                <img src="images/logo.jpg" id="logo"></img>
+                <div class="brand">
+                    <img src="images/logo.jpg" id="logo"></img>
+                </div>
                 <div id=menu-container class="menu-closed">
-                    <button id=menu-toggle>=</button>
+                    <button id=menu-toggle class="btn menu">MENU</button>
                     <ul id="menu">
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
+                        <li>Service Map</li>
+                        <li>Provider Registration</li>
+                        <li>Feedback Tool</li>
+                        <li>Change Language</li>
                     </ul>
                 </div>
-            </header><div id="page-container">
+            </header>
+            <div id="page-container">
                 <div id="page"></div>
-                <footer id="application-footer">
-                    <div id="language-toggle"></div>
-                </footer>
             </div>
+            <footer id="application-footer">
+                <div id="language-toggle" class="language-toggle"></div>
+            </footer>
         </div>
     </body>
 </html>

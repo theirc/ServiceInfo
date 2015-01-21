@@ -109,11 +109,11 @@ Now, create the Postgres database and run the initial migrate::
     psql service_mapper -c "CREATE EXTENSION postgis;"
     python manage.py migrate
 
-You should now be able to run the development APIserver::
+You should now be able to run the development API server::
 
     python manage.py runserver
 
-Or, you can run the frontend server with Gulp, which will auto-reload the browser upon detected changes. You can run one or the other, but currently don't need to run both and they will both try
+You can run the frontend server with Gulp, which will auto-reload the browser upon detected changes. You can run one or the other, but currently don't need to run both and they will both try
 to use the same port. When the backend and frontend talk to each other, running both will safely
 will be automated and this documentation will be updated.
 

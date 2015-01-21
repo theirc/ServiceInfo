@@ -25,10 +25,10 @@ class ProviderAPITest(TestCase):
     def test_create_provider(self):
         url = reverse('provider-list')
         data = {
-            'name': 'Joe Provider',
+            'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12345',
-            'description': 'Test provider',
+            'description_en': 'Test provider',
             'user': self.user_url,
             'number_of_monthly_beneficiaries': '37',
         }
@@ -38,7 +38,7 @@ class ProviderAPITest(TestCase):
         # Make sure they gave us back the id of the new record
         result = json.loads(rsp.content.decode('utf-8'))
         provider = Provider.objects.get(id=result['id'])
-        self.assertEqual('Joe Provider', provider.name)
+        self.assertEqual('Joe Provider', provider.name_en)
         self.assertEqual(37, provider.number_of_monthly_beneficiaries)
 
     def test_get_provider_list(self):
@@ -50,7 +50,7 @@ class ProviderAPITest(TestCase):
         result = json.loads(rsp.content.decode('utf-8'))
         for item in result['results']:
             provider = Provider.objects.get(id=item['id'])
-            self.assertIn(provider.name, [p1.name, p2.name])
+            self.assertIn(provider.name_en, [p1.name_en, p2.name_en])
 
     def test_get_one_provider(self):
         p1 = ProviderFactory()
@@ -58,7 +58,7 @@ class ProviderAPITest(TestCase):
         rsp = self.client.get(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
-        self.assertEqual(p1.name, result['name'])
+        self.assertEqual(p1.name_en, result['name_en'])
 
 
 class ServiceAPITest(TestCase):
