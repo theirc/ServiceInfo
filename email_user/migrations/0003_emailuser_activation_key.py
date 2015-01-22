@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('email_user', '0001_initial'),
+        ('email_user', '0002_create_auth_tokens'),
     ]
 
     operations = [

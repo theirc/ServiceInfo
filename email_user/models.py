@@ -2,20 +2,27 @@
 Copied and adapted from
 https://docs.djangoproject.com/en/1.7/topics/auth/customizing/#a-full-example
 """
+import re
+
 import datetime
 import hashlib
 import random
+
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.core.urlresolvers import reverse
-from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.template import RequestContext, TemplateDoesNotExist
 from django.template.loader import render_to_string
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
-import re
+
+from rest_framework.authtoken.models import Token
 import six
+
 
 SHA1_RE = re.compile('^[a-f0-9]{40}$')
 
@@ -247,3 +254,10 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
         """
         return reverse('registration_activate',
                        kwargs=dict(activation_key=self.activation_key))
+
+
+# Create an auth token for each user when they're created
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
