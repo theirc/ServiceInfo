@@ -650,9 +650,14 @@ input[type=range] {
     right: 0px;
     top: 80px;
     width: 100%;
+    overflow: hidden;
+    transition: max-height 0.25s;
   }
   .menu-closed #menu {
-    display: none;
+    max-height: 0px;
+  }
+  .menu-open #menu {
+    max-height: 500px;
   }
   #menu-toggle {
     position: absolute;

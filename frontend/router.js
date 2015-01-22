@@ -1,17 +1,29 @@
 "use strict";
-var HomeView = require('./views/home');
-var ProviderFormView = require('./views/provider-form');
 var $ = require('jquery'),
     Backbone = require('backbone');
 
+var views = {
+    "home": require('./views/home'),
+    "register": require('./views/provider-form'),
+    "feedback": require('./views/feedback'),
+    "map": require('./views/map'),
+};
+
+function loadPage(name) {
+    return function() {
+        var $el = $(document.querySelector('#page'));
+        var view = new views[name]({el: $el});
+        view.render();
+        $('#menu-container').addClass("menu-closed");
+        $('#menu-container').removeClass("menu-open");
+    }
+}
+
 module.exports = Backbone.Router.extend({
     routes: {
-        "": "home",
-    },
-
-    home: function() {
-        var $el = $(document.querySelector('#page'));
-        var view = new ProviderFormView({el: $el});
-        view.render();
+        "": loadPage("home"),
+        "register": loadPage("register"),
+        "feedback": loadPage("feedback"),
+        "map": loadPage("map"),
     },
 })
