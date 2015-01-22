@@ -23,6 +23,9 @@ urlpatterns = [
     # (This will end up as something like "/api/login/")
     url(r'^login/$', views.APILogin.as_view(), name='api-login'),
 
+    # Activate a user
+    url(r'^activate/$', view=views.APIActivationView.as_view(), name='api-activate'),
+
     # Additionally, we include login URLs for the browsable API.
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

@@ -1,3 +1,4 @@
+from datetime import timedelta
 from http.client import OK, CREATED, FOUND, BAD_REQUEST
 import json
 
@@ -8,9 +9,34 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from rest_framework.authtoken.models import Token
+from email_user.models import EmailUser
+from email_user.tests.factories import EmailUserFactory
 
 from services.models import Provider, Service
 from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory
+
+
+class APITestMixin(object):
+    def get_with_token(self, url):
+        """
+        Make a GET to a url, passing self.token in the request headers.
+        Return the response.
+        """
+        return self.client.get(
+            url,
+            HTTP_AUTHORIZATION="Token %s" % self.token
+        )
+
+    def post_with_token(self, url, data):
+        """
+        Make a POST to a url, passing self.token in the request headers.
+        Return the response.
+        """
+        return self.client.post(
+            url,
+            data=data,
+            HTTP_AUTHORIZATION="Token %s" % self.token
+        )
 
 
 class ProviderAPITest(TestCase):
@@ -142,7 +168,7 @@ class ProviderAPITest(TestCase):
         self.assertEqual(p1.name_en, result['name_en'])
 
 
-class TokenAuthTest(TestCase):
+class TokenAuthTest(APITestMixin, TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_superuser(
             password='password',
@@ -150,27 +176,6 @@ class TokenAuthTest(TestCase):
         )
         self.user_url = reverse('user-detail', args=[self.user.id])
         self.token = Token.objects.get(user=self.user).key
-
-    def get_with_token(self, url):
-        """
-        Make a GET to a url, passing the token in the request headers.
-        Return the response.
-        """
-        return self.client.get(
-            url,
-            HTTP_AUTHORIZATION="Token %s" % self.token
-        )
-
-    def post_with_token(self, url, data):
-        """
-        Make a POST to a url, passing the token in the request headers.
-        Return the response.
-        """
-        return self.client.post(
-            url,
-            data=data,
-            HTTP_AUTHORIZATION="Token %s" % self.token
-        )
 
     def test_get_one_provider(self):
         p1 = ProviderFactory()
@@ -294,3 +299,91 @@ class APILoginViewTest(TestCase):
         response = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual({'non_field_errors': ['Unable to log in with provided credentials.']},
                          response)
+
+
+class ActivationTest(APITestMixin, TestCase):
+    def setUp(self):
+        self.user = EmailUserFactory(is_active=False)
+        self.user.activation_key = self.user.create_activation_key()
+        self.user.save()
+        self.url = reverse('api-activate')
+
+    def test_basic_activation(self):
+        rsp = self.client.post(
+            path=self.url,
+            data={'activation_key': self.user.activation_key}
+        )
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        # Make sure the user is now active
+        self.user = EmailUser.objects.get(pk=self.user.pk)
+        self.assertTrue(self.user.is_active)
+        # Make sure we get back a token
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertIn('token', result)
+        self.token = result['token']
+
+        # Make sure it's the right token
+        token_object = Token.objects.get(user=self.user)
+        self.assertEqual(self.token, token_object.key)
+
+        # Make sure the token works - make user superuser just for simplicity
+        self.user.is_superuser = True
+        self.user.save()
+        p1 = ProviderFactory()
+        url = reverse('provider-detail', args=[p1.id])
+        rsp = self.get_with_token(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+
+    def test_already_activated(self):
+        # Save the key
+        key = self.user.activation_key
+        # Activate the user
+        rsp = self.client.post(
+            path=self.url,
+            data={'activation_key': self.user.activation_key}
+        )
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        # Now activate them again - should fail
+        rsp = self.client.post(
+            path=self.url,
+            data={'activation_key': key}
+        )
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(response, {'activation_key': [
+            'Activation key is invalid or has already been used.']})
+
+    def test_expired(self):
+        self.user.date_joined = \
+            self.user.date_joined - timedelta(days=settings.ACCOUNT_ACTIVATION_DAYS)
+        self.user.save()
+        rsp = self.client.post(
+            path=self.url,
+            data={'activation_key': self.user.activation_key}
+        )
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(response, {'activation_key': ['Activation link has expired.']})
+        # Also, the user should have been deleted
+        self.assertFalse(EmailUser.objects.filter(pk=self.user.pk).exists())
+
+    def test_not_passing_key(self):
+        rsp = self.client.post(
+            path=self.url,
+            data={}
+        )
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(response, {'activation_key': ['This field may not be blank.']})
+
+    def test_bad_key_format(self):
+        rsp = self.client.post(
+            path=self.url,
+            data={'activation_key': 'not a sha1 string'}
+        )
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(response,
+                         {'activation_key': [
+                             'Activation key is not a valid format. Make sure the '
+                             'activation link has been copied correctly.']})

@@ -9,6 +9,7 @@ import hashlib
 import random
 
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.core.mail import EmailMultiAlternatives
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
@@ -61,10 +62,11 @@ class EmailUserManager(BaseUserManager):
         If the key is valid and has not expired, return the ``User``
         after activating.
 
-        If the key is not valid or has expired, return ``False``.
+        Raises django's ValidationError exception:
 
-        If the key is valid but the ``User`` is already active,
-        return ``False``.
+        * If the key is not valid or has expired
+
+        * If the key is valid but the ``User`` is already active
 
         To prevent reactivation of an account which has been
         deactivated by site administrators, the activation key is
@@ -79,13 +81,24 @@ class EmailUserManager(BaseUserManager):
             try:
                 user = self.get(activation_key=activation_key)
             except self.model.DoesNotExist:
-                return False
-            if not user.activation_key_expired():
-                user.is_active = True
-                user.activation_key = self.model.ACTIVATED
-                user.save()
-                return user
-        return False
+                msg = _('Activation key is invalid or has already been used.')
+                raise ValidationError(msg)
+            if user.activation_key_expired():
+                # Note: we don't currently give them any way to get a fresh
+                # link, but if they try to register again with the same email,
+                # it'll fail due to the unactivatable User still hanging around.
+                # It's useless at this point, so delete it.
+                user.delete()
+                msg = _('Activation link has expired.')
+                raise ValidationError(msg)
+            user.is_active = True
+            user.activation_key = self.model.ACTIVATED
+            user.save()
+            return user
+        else:
+            msg = _('Activation key is not a valid format. Make sure the activation link '
+                    'has been copied correctly.')
+            raise ValidationError(msg)
 
 
 class EmailUser(AbstractBaseUser, PermissionsMixin):

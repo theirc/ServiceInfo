@@ -7,6 +7,30 @@ the API at `https://<yourserver>/api`.  This document will only
 cover the little complications, like getting authenticated, creating
 users, etc.
 
+User activation
+---------------
+
+If the client has a user activation key, it can try to activate
+the user by POSTing to '/api/activate/' with
+
+    { 'activation_key': 'the key string' }
+
+If successful, response status will be 200 and the response content will
+include::
+
+   { 'token': 'a long string'}
+
+The token can be used to make subsequent API calls with the permissions
+of that user (see below).
+
+Otherwise, the response status will be 400 and the body might
+contain::
+
+    {'activation_key': ['Activation key is invalid or has already been used.']}
+    {'activation_key': ['Activation link has expired.']}
+    {'activation_key': ['Activation key is not a valid format. Make sure the activation link has been copied correctly.']}
+    {'activation_key': ['This field may not be blank.']}
+
 Login
 -----
 

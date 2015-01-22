@@ -1,10 +1,10 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import exceptions, serializers
 
-from email_user.models import EmailUser
+from email_user.models import EmailUser, SHA1_RE
 from services.models import Service, Provider, ProviderType, ServiceArea
 
 
@@ -84,6 +84,9 @@ class ServiceAreaSerializer(serializers.HyperlinkedModelSerializer):
 class APILoginSerializer(serializers.Serializer):
     """
     Serializer for our "login" API.
+    Both validates the call parameters and authenticates
+    the user, returning the user in the validated_data
+    if successful.
 
     Adapted from authtoken/serializers.py for our email-based user model
     """
@@ -109,4 +112,36 @@ class APILoginSerializer(serializers.Serializer):
             raise exceptions.ValidationError(msg)
 
         attrs['user'] = user
+        return attrs
+
+
+class APIActivationSerializer(serializers.Serializer):
+    """
+    Serializer for our "activate" API.
+
+    Raises ValidationError if the call is invalid.
+    """
+    activation_key = serializers.CharField()
+
+    def validate(self, attrs):
+        activation_key = attrs.get('activation_key')
+        if activation_key:
+            if not SHA1_RE.search(activation_key):
+                msg = _('Activation key is not a valid format. Make sure the activation link '
+                        'has been copied correctly.')
+                raise exceptions.ValidationError({'activation_key': msg})
+            User = get_user_model()
+            try:
+                user = User.objects.get(activation_key=activation_key)
+            except User.DoesNotExist:
+                msg = _('Activation key is invalid or has already been used.')
+                raise exceptions.ValidationError({'activation_key': msg})
+            else:
+                if user.activation_key_expired():
+                    user.delete()
+                    msg = _('Activation link has expired.')
+                    raise exceptions.ValidationError({'activation_key': msg})
+        else:
+            msg = _('Must include "activation_key"')
+            raise exceptions.ValidationError({'activation_key': msg})
         return attrs

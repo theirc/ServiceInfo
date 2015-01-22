@@ -1,17 +1,18 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.contrib.sites.models import Site, RequestSite
+from django.core.exceptions import ValidationError as DjangoValidationError
 
 from rest_framework import parsers, renderers, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import list_route
-from rest_framework.exceptions import ValidationError
+from rest_framework.exceptions import ValidationError as DRFValidationError
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, ProviderSerializer, \
-    ProviderTypeSerializer, ServiceAreaSerializer, APILoginSerializer
+    ProviderTypeSerializer, ServiceAreaSerializer, APILoginSerializer, APIActivationSerializer
 from email_user.forms import EmailUserCreationForm
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea
@@ -85,7 +86,7 @@ class ProviderViewSet(viewsets.ModelViewSet):
         that user.
         """
         if 'email' not in request.data or 'password' not in request.data:
-            raise ValidationError("Provider create call must provide email and password")
+            raise DRFValidationError("Provider create call must provide email and password")
 
         # Validate the user data
         form = EmailUserCreationForm(data={
@@ -94,7 +95,7 @@ class ProviderViewSet(viewsets.ModelViewSet):
             'password2': request.data['password'],
             })
         if not form.is_valid():
-            raise ValidationError(form.errors)
+            raise DRFValidationError(form.errors)
 
         user = get_user_model().objects.create_user(
             email=request.data['email'],
@@ -141,4 +142,28 @@ class APILogin(APIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key})
+
+
+class APIActivationView(APIView):
+    """
+    Given a user activation key, activate the user and
+    return an auth token.
+    """
+    throttle_classes = ()
+    permission_classes = ()
+    parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser,)
+    renderer_classes = (renderers.JSONRenderer,)
+
+    def post(self, request):
+        serializer = APIActivationSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        activation_key = serializer.validated_data['activation_key']
+
+        try:
+            user = get_user_model().objects.activate_user(activation_key=activation_key)
+        except DjangoValidationError as e:
+            raise DRFValidationError(e.messages)
+
+        token, unused = Token.objects.get_or_create(user=user)
         return Response({'token': token.key})
