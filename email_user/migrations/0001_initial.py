@@ -10,7 +10,10 @@ class Migration(migrations.Migration):
     dependencies = [
         ('auth', '0001_initial'),
     ]
-
+    needed_by = (
+        # User model needs to be created before the authtoken model:
+        ('authtoken', '0001_initial'),
+    )
     operations = [
         migrations.CreateModel(
             name='EmailUser',

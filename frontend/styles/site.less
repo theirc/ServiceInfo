@@ -14,7 +14,7 @@ html,body,#application {
 }
 
 .language-toggle {
-    background-color: #3cb879; 
+    background-color: #3cb879;
 }
 
 .language-toggle button {
@@ -290,7 +290,7 @@ float: left;
 .primary-button:focus {
     background-color: #33A069;
     border: 1px solid #33A069;
-    outline: 3px auto lightgray;    
+    outline: 3px auto lightgray;
 }
 
 /*
@@ -393,7 +393,7 @@ float: left;
 }
 
 .btn-group>.dropdown-menu {
-	width: 100%;	
+	width: 100%;
 }
 
 .btn-group>.dropdown-menu>li {
@@ -540,7 +540,7 @@ input[type=range] {
 #application-header {
     width: 100%;
     height: 80px;
-    background-color: #343538; 
+    background-color: #343538;
 }
 
 #application-header img#logo {
@@ -582,7 +582,7 @@ input[type=range] {
     text-decoration: none;
     transition: color 0.25s linear 0s, background-color 0.25s ease-in-out 0s, border-color 0.25s ease-in-out 0s;
     border-bottom: none;
-    outline: 3px auto lightgray; 
+    outline: 3px auto lightgray;
 }
 
 #menu li:last-child {
@@ -628,9 +628,14 @@ input[type=range] {
         right: 0px;
         top: 80px;
         width: 100%;
+        overflow: hidden;
+        transition: max-height 0.25s;
     }
     .menu-closed #menu {
-        display: none;
+        max-height: 0px;
+    }
+    .menu-open #menu {
+        max-height: 500px;
     }
     #menu-toggle {
         position: absolute;

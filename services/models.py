@@ -1,6 +1,6 @@
 from django.conf import settings
+from django.contrib.gis.db import models
 from django.core.urlresolvers import reverse
-from django.db import models
 from django.utils.translation import ugettext_lazy as _, get_language
 
 
@@ -11,14 +11,14 @@ class ProviderType(models.Model):
         default='',
         blank=True,
     )
-    name_fr = models.CharField(
-        _("name in French"),
+    name_ar = models.CharField(
+        _("name in Arabic"),
         max_length=256,
         default='',
         blank=True,
     )
-    name_ar = models.CharField(
-        _("name in Arabic"),
+    name_fr = models.CharField(
+        _("name in French"),
         max_length=256,
         default='',
         blank=True,
@@ -40,10 +40,26 @@ class ProviderType(models.Model):
 
 
 class Provider(models.Model):
-    name = models.CharField(
+    name_en = models.CharField(
         # Translators: Provider name
-        _("name"),
+        _("name in English"),
         max_length=256,  # Length is a guess
+        default='',
+        blank=True,
+    )
+    name_ar = models.CharField(
+        # Translators: Provider name
+        _("name in Arabic"),
+        max_length=256,  # Length is a guess
+        default='',
+        blank=True,
+    )
+    name_fr = models.CharField(
+        # Translators: Provider name
+        _("name in French"),
+        max_length=256,  # Length is a guess
+        default='',
+        blank=True,
     )
     type = models.ForeignKey(
         ProviderType,
@@ -58,31 +74,86 @@ class Provider(models.Model):
         blank=True,
         default='',
     )
-    description = models.TextField(
+    description_en = models.TextField(
         # Translators: Provider description
-        _("description"),
+        _("description in English"),
+        default='',
+        blank=True,
+    )
+    description_ar = models.TextField(
+        # Translators: Provider description
+        _("description in Arabic"),
+        default='',
+        blank=True,
+    )
+    description_fr = models.TextField(
+        # Translators: Provider description
+        _("description in French"),
+        default='',
+        blank=True,
     )
     user = models.OneToOneField(
         to=settings.AUTH_USER_MODEL,
         verbose_name=_('user'),
         help_text=_('user account for this provider'),
     )
+    number_of_monthly_beneficiaries = models.IntegerField(
+        _("number of targeted beneficiaries monthly"),
+    )
 
     def __str__(self):
-        return self.name
+        return self.name_en
 
     def get_api_url(self):
         return reverse('provider-detail', args=[self.id])
 
 
 class ServiceArea(models.Model):
-    # FIXME: Find out what a "service area" consists of
-    pass
+    name_en = models.CharField(
+        _("name in English"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    name_ar = models.CharField(
+        _("name in Arabic"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    name_fr = models.CharField(
+        _("name in French"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    parent = models.ForeignKey(
+        to='self',
+        verbose_name=_('parent area'),
+        help_text=_('the area that contains this area'),
+        null=True,
+        blank=True,
+        related_name='children',
+    )
+    region = models.PolygonField(
+        blank=True,
+        null=True,
+    )
+
+    objects = models.GeoManager()
+
+    def get_api_url(self):
+        return reverse('servicearea-detail', args=[self.id])
 
 
 class SelectionCriterion(models.Model):
-    # FIXME: Find out what a "selection criterion" consists of
-    pass  # ??
+    """
+    A selection criterion limits who can receive the service.
+    It's just a text string. E.g. "age under 18".
+    """
+    text_en = models.CharField(max_length=100, blank=True, default='')
+    text_fr = models.CharField(max_length=100, blank=True, default='')
+    text_ar = models.CharField(max_length=100, blank=True, default='')
 
     class Meta(object):
         verbose_name_plural = _("selection criteria")
@@ -93,24 +164,61 @@ class Service(models.Model):
         Provider,
         verbose_name=_("provider"),
     )
-    name = models.CharField(
+    name_en = models.CharField(
         # Translators: Service name
-        _("name"),
+        _("name in English"),
         max_length=256,
+        default='',
+        blank=True,
+    )
+    name_ar = models.CharField(
+        # Translators: Service name
+        _("name in Arabic"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    name_fr = models.CharField(
+        # Translators: Service name
+        _("name in French"),
+        max_length=256,
+        default='',
+        blank=True,
     )
     area_of_service = models.ForeignKey(
         ServiceArea,
         verbose_name=_("area of service"),
     )
-    description = models.TextField(
+    description_en = models.TextField(
         # Translators: Service description
-        _("description"),
+        _("description in English"),
+        default='',
+        blank=True,
     )
-    hours_of_service = models.TextField(  # FIXME: do we need to model these more specifically?
-        _("hours of service"),
+    description_ar = models.TextField(
+        # Translators: Service description
+        _("description in Arabic"),
+        default='',
+        blank=True,
     )
-    additional_info = models.TextField(
-        _("additional info"),
+    description_fr = models.TextField(
+        # Translators: Service description
+        _("description in French"),
+        default='',
+        blank=True,
+    )
+    additional_info_en = models.TextField(
+        _("additional information in English"),
+        blank=True,
+        default='',
+    )
+    additional_info_ar = models.TextField(
+        _("additional information in Arabic"),
+        blank=True,
+        default='',
+    )
+    additional_info_fr = models.TextField(
+        _("additional information in French"),
         blank=True,
         default='',
     )
@@ -122,6 +230,7 @@ class Service(models.Model):
     selection_criteria = models.ManyToManyField(
         SelectionCriterion,
         verbose_name=_("selection criteria"),
+        blank=True,
     )
 
     # Note: we don't let multiple versions of a service record pile up - there
@@ -160,8 +269,32 @@ class Service(models.Model):
         unique=True,
     )
 
+    location = models.PointField(
+        _('location'),
+        blank=True,
+        null=True,
+    )
+
+    # Open & close hours by day. If None, service is closed that day.
+    sunday_open = models.TimeField(null=True, blank=True)
+    sunday_close = models.TimeField(null=True, blank=True)
+    monday_open = models.TimeField(null=True, blank=True)
+    monday_close = models.TimeField(null=True, blank=True)
+    tuesday_open = models.TimeField(null=True, blank=True)
+    tuesday_close = models.TimeField(null=True, blank=True)
+    wednesday_open = models.TimeField(null=True, blank=True)
+    wednesday_close = models.TimeField(null=True, blank=True)
+    thursday_open = models.TimeField(null=True, blank=True)
+    thursday_close = models.TimeField(null=True, blank=True)
+    friday_open = models.TimeField(null=True, blank=True)
+    friday_close = models.TimeField(null=True, blank=True)
+    saturday_open = models.TimeField(null=True, blank=True)
+    saturday_close = models.TimeField(null=True, blank=True)
+
+    objects = models.GeoManager()
+
     def __str__(self):
-        return self.name
+        return self.name_en
 
     def get_api_url(self):
         return reverse('service-detail', args=[self.id])
