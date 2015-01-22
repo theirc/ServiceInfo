@@ -27,6 +27,8 @@ function startLiveReload() {
 }
 
 function writeString(filename, string) {
+    // create a fake file read stream from a string, so that config writing can be piped into gulp
+
     var src = require('stream').Readable({ objectMode: true })
     src._read = function () {
         this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }))
@@ -84,9 +86,7 @@ function notifyLivereload(event) {
 gulp.task('default', function() {
     startExpress();
     startLiveReload();
-    gulp.watch(['frontend/index.html', 'frontend/*.js', 'frontend/styles/site.less', 'frontend/templates/*.html', 'frontend/views/*.js'], notifyLivereload);
+    gulp.watch(['frontend/index.html', 'frontend/index.js', 'frontend/router.js', 'frontend/styles/site.less', 'frontend/templates/*.html', 'frontend/views/*.js'], notifyLivereload);
 });
 
-gulp.task('build', function() {
-    build();
-});
+gulp.task('build', build);
