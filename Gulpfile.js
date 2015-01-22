@@ -60,5 +60,5 @@ function notifyLivereload(event) {
 gulp.task('default', function() {
     startExpress();
     startLiveReload();
-    gulp.watch(['frontend/index.html', 'frontend/index.js', 'frontend/styles/site.less', 'frontend/templates/*.html', 'frontend/views/*.js'], notifyLivereload);
+    gulp.watch(['frontend/index.html', 'frontend/index.js', 'frontend/router.js', 'frontend/styles/site.less', 'frontend/templates/*.html', 'frontend/views/*.js'], notifyLivereload);
 });

@@ -37,14 +37,36 @@ module.exports = Backbone.View.extend({
             top: target.top,
             left: target.left,
         };
+        this.$el.css(this.$el.position());
         this.$el.addClass('hidden');
         this.$el.animate(anim, {duration: 0.5});
+
+        this._hiddenPos = anim;
     },
 
     show: function() {
-        this.$el.css('top', 'auto');
-        this.$el.css('left', 'auto');
-        this.$el.css.removeClass('hidden');
+        var curPos = this.$el.position();
+        var $el = this.$el;
+
+        $el.css('visibility', 'hidden');
+        $el.removeClass('hidden');
+        $el.css({
+            top: 'auto',
+            left: 'auto',
+        })
+
+        var anim = $el.position();
+
+        $el.addClass('hidden');
+        $el.css(curPos);
+        $el.css('visibility', 'visible');
+        $el.animate(anim, {duration: 0.5, complete: function() {
+            $el.css({
+                top: 'auto',
+                left: 'auto',
+            })
+        }});
+        $el.removeClass('hidden');
     },
 
     events: {
