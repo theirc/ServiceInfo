@@ -578,12 +578,18 @@ input[type=range] {
 #application-header img#logo {
   height: 100%;
 }
-#application-footer {
+#language-toggle {
   width: 100%;
   height: 64px;
   background: gray;
   position: fixed;
   bottom: 0px;
+  transition: all 1s;
+}
+#language-toggle.hidden {
+  transform: translateX(-50%) scale(0.1);
+  opacity: 0;
+  transition: all 1s;
 }
 #menu {
   background: #343538;
