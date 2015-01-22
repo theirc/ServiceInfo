@@ -88,9 +88,7 @@ npm_installs:
 
 make_bundle:
   cmd.run:
-# FIXME: SHould be able to use this command, but npm install is not creating the .bin links
-#    - name: "{{ vars.source_dir }}/node_modules/.bin/browserify -t hbsfy frontend/index.js -o frontend/bundle.js"
-    - name: "{{ vars.source_dir }}/node_modules/browserify/bin/cmd.js -t hbsfy frontend/index.js -o frontend/bundle.js"
+    - name: "{{ vars.source_dir }}/node_modules/.bin/gulp build"
     - cwd: "{{ vars.source_dir }}"
     - user: {{ pillar['project_name'] }}
     - require:

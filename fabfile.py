@@ -257,7 +257,7 @@ def deploy(loglevel=DEFAULT_SALT_LOGLEVEL):
 
 @task
 def build():
-    local("browserify -t hbsfy frontend/index.js -o frontend/bundle.js")
+    local("gulp build")
 
 
 @task
