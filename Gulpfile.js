@@ -62,3 +62,5 @@ gulp.task('default', function() {
     startLiveReload();
     gulp.watch(['frontend/index.html', 'frontend/index.js', 'frontend/router.js', 'frontend/styles/site.less', 'frontend/templates/*.html', 'frontend/views/*.js'], notifyLivereload);
 });
+
+gulp.task('build', build);
