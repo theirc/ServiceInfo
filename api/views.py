@@ -1,16 +1,19 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.contrib.sites.models import Site, RequestSite
-from rest_framework import viewsets
 
+from rest_framework import parsers, renderers, viewsets
+from rest_framework.authtoken.models import Token
 from rest_framework.decorators import list_route
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
+from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, ProviderSerializer, \
+    ProviderTypeSerializer, ServiceAreaSerializer, APILoginSerializer
 from email_user.forms import EmailUserCreationForm
 from email_user.models import EmailUser
-from .serializers import UserSerializer, GroupSerializer, ServiceSerializer, ProviderSerializer, \
-    ProviderTypeSerializer, ServiceAreaSerializer
 from services.models import Service, Provider, ProviderType, ServiceArea
 
 
@@ -118,3 +121,24 @@ class ProviderViewSet(viewsets.ModelViewSet):
             # Make sure this works though
             assert 'user' in request.data
         return super().create(request, *args, **kwargs)
+
+
+class APILogin(APIView):
+    """
+    Allow front-end to pass us an email and a password and get
+    back an auth token for the user.
+
+    (Adapted from the corresponding view in DRF for our email-based
+    user model.)
+    """
+    throttle_classes = ()
+    permission_classes = ()
+    parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser,)
+    renderer_classes = (renderers.JSONRenderer,)
+
+    def post(self, request):
+        serializer = APILoginSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key})

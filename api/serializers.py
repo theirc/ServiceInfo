@@ -1,5 +1,9 @@
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group
-from rest_framework import serializers
+from django.utils.translation import ugettext_lazy as _
+
+from rest_framework import exceptions, serializers
+
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea
 
@@ -75,3 +79,34 @@ class ServiceAreaSerializer(serializers.HyperlinkedModelSerializer):
             'parent',
             'children',
         )
+
+
+class APILoginSerializer(serializers.Serializer):
+    """
+    Serializer for our "login" API.
+
+    Adapted from authtoken/serializers.py for our email-based user model
+    """
+    email = serializers.EmailField()
+    password = serializers.CharField()
+
+    def validate(self, attrs):
+        email = attrs.get('email')
+        password = attrs.get('password')
+
+        if email and password:
+            user = authenticate(email=email, password=password)
+
+            if user:
+                if not user.is_active:
+                    msg = _('User account is disabled.')
+                    raise exceptions.ValidationError(msg)
+            else:
+                msg = _('Unable to log in with provided credentials.')
+                raise exceptions.ValidationError(msg)
+        else:
+            msg = _('Must include "email" and "password"')
+            raise exceptions.ValidationError(msg)
+
+        attrs['user'] = user
+        return attrs
