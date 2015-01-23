@@ -101,17 +101,29 @@ li {
 }
 
 .half {
-	width: 47%;
+	width: 100%;
 	margin: 0;
-	float: left;
+	float: none;
+
+	@media (min-width: 1000px) {
+		width: 48%;
+		float: left;
+	}
 }
 
 .half:first-child {
-float: left;
+float: none;
+	@media (min-width: 1000px) {
+		float: left;
+	}
 }
 
 .half:last-child {
-    float: right;
+    float: none;
+
+	@media (min-width: 1000px) {
+		float: right;
+	}
 }
 
 .main-content {
@@ -477,6 +489,8 @@ label {
 	padding-top: 6px;
 	font-weight: 600;
 	display: block;
+	clear: left;
+	clear: right;
 }
 
 .form-control {
