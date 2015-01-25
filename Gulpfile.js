@@ -1,9 +1,12 @@
 var gulp = require('gulp')
+,   gutil = require('gulp-util')
 ,   rename = require('gulp-rename')
 ,   less = require('gulp-less')
+,   bg = require('gulp-bg')
 ,   browserify = require('gulp-browserify')
 ;
 
+var API_PORT = 4005;
 var EXPRESS_PORT = 8000;
 var EXPRESS_ROOT = __dirname + "/frontend";
 var LIVERELOAD_PORT = 35729;
@@ -23,6 +26,25 @@ function startLiveReload() {
     lr.listen(LIVERELOAD_PORT);
 }
 
+function writeString(filename, string) {
+    // create a fake file read stream from a string, so that config writing can be piped into gulp
+
+    var src = require('stream').Readable({ objectMode: true })
+    src._read = function () {
+        this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }))
+        this.push(null)
+    }
+    return src
+}
+
+function injectEnvConfig() {
+    var config = {
+        api_location: "//localhost:"+API_PORT+"/",
+    };
+    return writeString("config.json", JSON.stringify(config))
+        .pipe(gulp.dest('frontend/'))
+}
+
 function build() {
     gulp.src('frontend/styles/*.less')
         .pipe(less())
@@ -38,6 +60,8 @@ function build() {
         .pipe(rename('bundle.js'))
         .pipe(gulp.dest('frontend'))
     ;
+
+    injectEnvConfig();
 }
 
 // Notifies livereload of changes detected
@@ -47,6 +71,8 @@ function notifyLivereload(event) {
     // `gulp.watch()` events provide an absolute path
     // so we need to make it relative to the server root
     var fileName = require('path').relative(EXPRESS_ROOT, event.path);
+
+    bg("python", "manage.py", "runserver", API_PORT)
 
     build();
 
