@@ -1,13 +1,61 @@
-<h1>login</h1>
-<form class=form-login>
-    <div>
-        <span class="error-email"></span>
-        <input name=email></input>
+<!-- Page Head -->
+    <div class="page-head">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div class="page-title" data-i18n="Login-Form.Page-Head.Page-Title.Title"></div>
+                    <div class="page-descr" data-i18n="Login-Form.Page-Head.Page-Description.Page-Description"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <span class="error-password"></span>
-        <input type=password name=password></input>
-    </div>
+<!-- End Page Head -->
 
-    <button class="btn submit">login</button>
-</form>
+<!-- Main Content -->
+<div class="main-content">
+	<div class="container">
+		<div class="row">
+			<form class=form-login>
+				<div class="form-group">
+			        <span class="error-email"></span>
+			        <input name=email></input>
+			    </div>
+				<div class="form-group">
+			        <span class="error-password"></span>
+			        <input type=password name=password></input>
+			    </div>
+
+			    <button class="btn submit">login</button>
+			</form>
+
+<!-- End Main Content -->
+
+
+
+
+
+
+
+<!-- Main Content -->
+<div class="main-content">
+	<div class="container">
+		<div class="row">
+			<div class="form">
+				<div class="form-group">
+                    <label for="id_username" class="control-label" data-i18n="Login-Form.Form.Username"></label>
+                    <input for="id-username" type="text" class="form-control" tabindex="1"></input>
+				</div>
+				<div class="form-group">
+                    <label for="id_password" class="control-label" data-i18n="Login-Form.Form.Password"></label>
+                    <input for="id-password" type="text" class="form-control" tabindex="2"></input>
+				</div>
+			</div>
+            <form>
+              <div class="submit-form">
+                <button class="primary-button" tabindex="17" data-i18n="Login-Form.Form-Submit-Options.Submit"></button>
+              </div>
+            </form>
+		</div>
+	</div>
+</div>
+<!-- End Main Content -->
