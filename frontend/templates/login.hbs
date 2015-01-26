@@ -17,45 +17,15 @@
 		<div class="row">
 			<form class=form-login>
 				<div class="form-group">
-			        <span class="error-email"></span>
-			        <input name=email></input>
+			        <label for="email" class="control-label" data-i18n="Login-Form.Form.Username"><span class="error-email"></span></label>
+			        <input name=email type="text" class="form-control" tabindex="1"></input>
 			    </div>
 				<div class="form-group">
-			        <span class="error-password"></span>
-			        <input type=password name=password></input>
+			        <label for="id_password" class="control-label" data-i18n="Login-Form.Form.Password"><span class="error-password"></span></label>
+			        <input type=password name=password class="form-control" tabindex="2"></input>
 			    </div>
-
-			    <button class="btn submit">login</button>
 			</form>
-
-<!-- End Main Content -->
-
-
-
-
-
-
-
-<!-- Main Content -->
-<div class="main-content">
-	<div class="container">
-		<div class="row">
-			<div class="form">
-				<div class="form-group">
-                    <label for="id_username" class="control-label" data-i18n="Login-Form.Form.Username"></label>
-                    <input for="id-username" type="text" class="form-control" tabindex="1"></input>
-				</div>
-				<div class="form-group">
-                    <label for="id_password" class="control-label" data-i18n="Login-Form.Form.Password"></label>
-                    <input for="id-password" type="text" class="form-control" tabindex="2"></input>
-				</div>
-			</div>
-            <form>
-              <div class="submit-form">
-                <button class="primary-button" tabindex="17" data-i18n="Login-Form.Form-Submit-Options.Submit"></button>
-              </div>
-            </form>
-		</div>
-	</div>
-</div>
+			<form class="form-submit">
+			    <button class="submit primary-button" tabindex="3" data-i18n="Login-Form.Form-Submit-Options.Submit">login</button>
+			</form>
 <!-- End Main Content -->
