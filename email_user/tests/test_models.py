@@ -1,5 +1,3 @@
-from datetime import timedelta
-from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 from email_user.models import EmailUser
@@ -20,28 +18,16 @@ class UserActivationTest(TestCase):
         self.assertEqual(user.activation_key, EmailUser.ACTIVATED)
 
     def test_already_activated(self):
-        self.user.is_active = True
-        self.user.activation_key = EmailUser.ACTIVATED
-        self.user.save()
-
+        key = self.user.activation_key
+        EmailUser.objects.activate_user(key)
         with self.assertRaises(ValidationError):
-            EmailUser.objects.activate_user(self.user.activation_key)
+            EmailUser.objects.activate_user(key)
 
     def test_wrong_key(self):
         another_key = self.user.create_activation_key()
 
         with self.assertRaises(ValidationError):
             EmailUser.objects.activate_user(another_key)
-
-    def test_expired_key(self):
-        self.user.date_joined = \
-            self.user.date_joined - timedelta(days=settings.ACCOUNT_ACTIVATION_DAYS)
-        self.user.save()
-
-        with self.assertRaises(ValidationError):
-            EmailUser.objects.activate_user(self.user.activation_key)
-        # Also, the user should have been deleted
-        self.assertFalse(EmailUser.objects.filter(pk=self.user.pk).exists())
 
     def test_bad_format(self):
         with self.assertRaises(ValidationError):

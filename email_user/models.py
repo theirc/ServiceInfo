@@ -4,11 +4,11 @@ https://docs.djangoproject.com/en/1.7/topics/auth/customizing/#a-full-example
 """
 import re
 
-import datetime
 import hashlib
 import random
 
 from django.conf import settings
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMultiAlternatives
 from django.core.urlresolvers import reverse
@@ -18,6 +18,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template import RequestContext, TemplateDoesNotExist
 from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
@@ -26,6 +28,9 @@ import six
 
 
 SHA1_RE = re.compile('^[a-f0-9]{40}$')
+PASSWORD_RESET_KEY_RE = re.compile(
+    r'^(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})$')
+token_generator = PasswordResetTokenGenerator()
 
 
 class EmailUserManager(BaseUserManager):
@@ -59,12 +64,11 @@ class EmailUserManager(BaseUserManager):
         Validate an activation key and activate the corresponding
         ``User`` if valid.
 
-        If the key is valid and has not expired, return the ``User``
-        after activating.
+        If the key is valid, return the ``User`` after activating.
 
         Raises django's ValidationError exception:
 
-        * If the key is not valid or has expired
+        * If the key is not valid
 
         * If the key is valid but the ``User`` is already active
 
@@ -74,31 +78,39 @@ class EmailUserManager(BaseUserManager):
         after successful activation.
 
         """
-        # Make sure the key we're trying conforms to the pattern of a
-        # SHA1 hash; if it doesn't, no point trying to look it up in
-        # the database.
-        if SHA1_RE.search(activation_key):
-            try:
-                user = self.get(activation_key=activation_key)
-            except self.model.DoesNotExist:
-                msg = _('Activation key is invalid or has already been used.')
-                raise ValidationError(msg)
-            if user.activation_key_expired():
-                # Note: we don't currently give them any way to get a fresh
-                # link, but if they try to register again with the same email,
-                # it'll fail due to the unactivatable User still hanging around.
-                # It's useless at this point, so delete it.
-                user.delete()
-                msg = _('Activation link has expired.')
-                raise ValidationError(msg)
-            user.is_active = True
-            user.activation_key = self.model.ACTIVATED
-            user.save()
-            return user
-        else:
-            msg = _('Activation key is not a valid format. Make sure the activation link '
-                    'has been copied correctly.')
+        try:
+            user = self.get(activation_key=activation_key)
+        except self.model.DoesNotExist:
+            msg = _('Activation key is invalid or has already been used.')
             raise ValidationError(msg)
+        user.is_active = True
+        user.activation_key = self.model.ACTIVATED
+        user.save()
+        return user
+
+    def validate_password_reset_key(self, key):
+        """
+        Given a key that came from get_password_reset_key, and
+        is still valid (they expire, or become invalid if the user's password
+        or last login time changes), return the user object that
+        the key is for.  Else, return None.
+        :param key: A key that came from get_password_key (presumably)
+        :return: an EmailUser object, or None.
+        """
+        m = PASSWORD_RESET_KEY_RE.match(key)
+        if not m:
+            return None
+        uidb64 = m.group('uidb64')
+        token = m.group('token')
+        try:
+            uid = urlsafe_base64_decode(uidb64)
+            user = self.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, self.model.DoesNotExist):
+            user = None
+        else:
+            if token_generator.check_token(user, token):
+                return user
+        return None
 
 
 class EmailUser(AbstractBaseUser, PermissionsMixin):
@@ -143,34 +155,6 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):              # __unicode__ on Python 2
         return self.email
 
-    # From django-registration-redux:
-    def activation_key_expired(self):
-        """
-        Determine whether this ``RegistrationProfile``'s activation
-        key has expired, returning a boolean -- ``True`` if the key
-        has expired.
-
-        Key expiration is determined by a two-step process:
-
-        1. If the user has already activated, the key will have been
-           reset to the string constant ``ACTIVATED``. Re-activating
-           is not permitted, and so this method returns ``True`` in
-           this case.
-
-        2. Otherwise, the date the user signed up is incremented by
-           the number of days specified in the setting
-           ``ACCOUNT_ACTIVATION_DAYS`` (which should be the number of
-           days after signup during which a user is allowed to
-           activate their account); if the result is less than or
-           equal to the current date, the key has expired and this
-           method returns ``True``.
-
-        """
-        expiration_date = datetime.timedelta(days=settings.ACCOUNT_ACTIVATION_DAYS)
-        return (self.activation_key == self.ACTIVATED or
-                (self.date_joined + expiration_date <= now()))
-    activation_key_expired.boolean = True
-
     def create_activation_key(self):
         salt = hashlib.sha1(six.text_type(random.random()).encode('ascii')).hexdigest()[:5]
         salt = salt.encode('ascii')
@@ -179,7 +163,10 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
             username = email.encode('utf-8')
         return hashlib.sha1(salt+username).hexdigest()
 
-    def send_activation_email(self, site, request=None):
+    def has_valid_activation_key(self):
+        return not self.is_active and self.activation_key and self.activation_key != self.ACTIVATED
+
+    def send_activation_email(self, site, request, base_activation_link):
         """
         Send an activation email to the user.
 
@@ -207,10 +194,6 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
         ``activation_key``
             The activation key for the new account.
 
-        ``expiration_days``
-            The number of days remaining during which the account may
-            be activated.
-
         ``site``
             An object representing the site on which the user
             registered; depending on whether ``django.contrib.sites``
@@ -236,21 +219,62 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
         self.activation_key = self.create_activation_key()
         ctx_dict.update({
             'user': self,
-            'activation_key': self.activation_key,
-            'expiration_days': settings.ACCOUNT_ACTIVATION_DAYS,
+            'activation_link': base_activation_link + self.activation_key,
             'site': site,
         })
-        subject = (getattr(settings, 'REGISTRATION_EMAIL_SUBJECT_PREFIX', '') +
-                   render_to_string('registration/activation_email_subject.txt', ctx_dict))
+        self.send_email_to_user(ctx_dict,
+                                'registration/activation_email_subject.txt',
+                                'registration/activation_email.txt',
+                                'registration/activation_email.html'
+                                )
+        self.save()
+
+    def get_activation_link(self, base_activation_link):
+        """
+        Appends the activation key to the base_activation_link and
+        returns it.
+        :param base_activation_link:
+        :return:
+        """
+        return base_activation_link + self.activation_key
+
+    def get_password_reset_key(self):
+        """
+        Return a long opaque string that can be re-used in other methods
+        to allow changing the user's password without knowing the current one.
+        This uses Django's default mechanisms.
+        :return: A long string
+        """
+        uidb64 = urlsafe_base64_encode(force_bytes(self.pk))
+        token = token_generator.make_token(self)
+        key = "%s/%s" % (uidb64.decode('utf-8'), token)
+        return key
+
+    def send_password_reset_email(self, base_url, site):
+        ctx_dict = {
+            'user': self,
+            'reset_link': base_url + self.get_password_reset_key(),
+            'site': site,
+        }
+        self.send_email_to_user(
+            ctx_dict,
+            'registration/password_reset_subject.txt',
+            'registration/password_reset_email.txt',
+            'registration/password_reset_email.html',
+        )
+
+    def send_email_to_user(self, ctx_dict, subject_template, message_text_template,
+                           message_html_template):
+        subject = render_to_string(subject_template, ctx_dict)
         # Email subject *must not* contain newlines
         subject = ''.join(subject.splitlines())
 
-        message_txt = render_to_string('registration/activation_email.txt', ctx_dict)
+        message_txt = render_to_string(message_text_template, ctx_dict)
         email_message = EmailMultiAlternatives(subject, message_txt, settings.DEFAULT_FROM_EMAIL,
                                                [self.email])
 
         try:
-            message_html = render_to_string('registration/activation_email.html', ctx_dict)
+            message_html = render_to_string(message_html_template, ctx_dict)
         except TemplateDoesNotExist:
             message_html = None
 
@@ -258,15 +282,6 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
             email_message.attach_alternative(message_html, 'text/html')
 
         email_message.send()
-        self.save()
-
-    def get_activation_link(self):
-        """
-        Return the site-independent part of the activation link - just
-        the URL path, without the schema or domain.
-        """
-        return reverse('registration_activate',
-                       kwargs=dict(activation_key=self.activation_key))
 
 
 # Create an auth token for each user when they're created

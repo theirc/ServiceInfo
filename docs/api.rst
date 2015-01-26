@@ -5,20 +5,97 @@ For the most part, the API uses the defaults of Django REST Framework
 to provide access to the models in the usual way. You can browse
 the API at `https://<yourserver>/api`.  This document will only
 cover the little complications, like getting authenticated, creating
-users, etc.
+users, password reset, etc.
+
+Creating a new provider
+-----------------------
+
+The usual way to create a new instance of a model would be to POST
+to the model's list URL. However, for new provider registration, it's
+necessary to be able to create a new provider when not authenticated,
+and the usual APIs don't allow that. We also want to create both a
+user and a provider record. So we've created a custom call
+just for this.
+
+To use it, POST to ``/api/provider/create_provider/``. The request data
+is almost the same as it would be to create a Provider normally,
+except instead of a 'user' field, it expects 'email' and 'password'
+fields, plus a 'base_activation_link' field::
+
+    {'email': 'user's email address',
+     'password': 'plaintext password',
+     'base_activation_link': 'used to build activation link',
+     # remaining fields are for Provider, omitting 'user' field
+    }
+
+The 'email' and 'password' fields ought to be self-explanatory.
+
+The 'base_activation_link' should be a URL that the activation key
+can be appended to, giving the link the user should be sent to activate
+their account.  E.g. base_activation_link might be "https://example.com/activate?key="
+and then the API would append the actual key string ("XYZ") and send the result
+("https://example.com/activate?key=XYZ") in the email to the user.
+The resulting link should invoke the client, which should then use
+the user activation API (see below) with the given key.
+
+When the create_provider call is successful,
+a new, inactive user will be created, and an email sent to the user with
+the activation link.
+
+Also, a new provider will be created for that user.
+
+200 is returned and the response body is the
+response from creating a provider, for example::
+
+    {'description_ar': '',
+     'description_en': 'Test provider',
+     'description_fr': '',
+     'id': 2,
+     'name_ar': '',
+     'name_en': 'Joe Provider',
+     'name_fr': '',
+     'number_of_monthly_beneficiaries': 37,
+     'phone_number': '12345',
+     'type': 'http://testserver/api/providertypes/2/',
+     'url': 'http://testserver/api/providers/2/',
+     'user': 'http://testserver/api/users/16/',
+     'website': ''}
+
+If there's a problem, 400 is returned and the response body might
+be something like one of these::
+
+    {'email': ['Enter a valid email address.']}
+    {'email': ['This field may not be blank.']}
+    {'password': ['This field may not be blank.']}
+
+Resend activation link
+----------------------
+
+If a user has lost their activation link, the client can POST to
+``/api/lost_activation_link/``::
+
+    {'email': 'user's email address',
+     'base_activation_link': 'used to build activation link',
+    }
+
+and if there's a account under that email waiting to be activated,
+an email will be sent to that email containing an
+activation link and a 200 returned. Otherwise, a 400 status
+and error message will come back.  FILL ME IN.
 
 User activation
 ---------------
 
-If the client has a user activation key, it can try to activate
-the user by POSTing to '/api/activate/' with
+If the client has a user activation key, the client can try to activate
+the user by POSTing to ``/api/activate/`` with
 
     { 'activation_key': 'the key string' }
 
 If successful, response status will be 200 and the response content will
 include::
 
-   { 'token': 'a long string'}
+   { 'token': 'a long string',
+     'email': 'the user's email address'}
 
 The token can be used to make subsequent API calls with the permissions
 of that user (see below).
@@ -26,9 +103,8 @@ of that user (see below).
 Otherwise, the response status will be 400 and the body might
 contain::
 
-    {'activation_key': ['Activation key is invalid or has already been used.']}
-    {'activation_key': ['Activation link has expired.']}
-    {'activation_key': ['Activation key is not a valid format. Make sure the activation link has been copied correctly.']}
+    {'activation_key': ['Activation key is invalid. Check that it was copied correctly '
+                        'and has not already been used.']}
     {'activation_key': ['This field may not be blank.']}
 
 Login
@@ -39,24 +115,20 @@ token and use that in subsequent calls.
 
 POST to '/api/login/'::
 
-   { 'email': 'email@example.com', 'password': 'plaintext password' }
+   { 'email': 'email@example.com',
+     'password': 'plaintext password' }
 
 If successful, response status will be 200 and the response
 content will include::
 
    { 'token': 'a long string'}
 
-If failed, response status will be 400 and the response might look like::
+If failed, response status will be 400 and the response might look like
+one of these::
 
-    {"non_field_errors":["Unable to log in with provided credentials."]}
-
-or::
-
-    {"email":["This field may not be blank."]}
-
-or::
-
-    {"non_field_errors":["User account is disabled."]}
+    {"non_field_errors": ["Unable to log in with provided credentials."]}
+    {"email": ["This field may not be blank."]}
+    {"non_field_errors": ["User account is disabled."]}
 
 Using token-based auth
 ----------------------
@@ -74,21 +146,54 @@ which says::
 As you might expect, requests will be permitted or denied based on the
 permissions of the user whose token is passed.
 
-Creating a new provider
------------------------
 
-The usual way to create a new instance of a model would be to POST
-to the model's list URL. However, for new provider registration, it's
-necessary to be able to create a new provider when not authenticated,
-and the usual APIs don't allow that. So we've created a custom call
-just for this.
+Password reset
+--------------
 
-To use it, POST to ``/api/provider/create_provider/``. The request data
-is almost the same as it would be to create a Provider normally,
-except instead of a 'user' field, it expects 'email' and 'passwword'
-fields.
+If a user wants to reset their password, the client should POST to
+``/api/password_reset_request/``::
 
-A new, inactive user will be created, and an email sent to the user with a
-link they'll need to follow in order to activate their account.
+    {'email': 'user@example.com',
+     'base_reset_link': 'https://example.com/reset?key=',
+    }
 
-Also, a new provider will be created for that user.
+where email is the user's email. The server will generate a new
+key (a long string that the client should not try to interpret),
+specific for this user to reset their email, append it to
+the base_reset_link, and email it to the given email address,
+then return 200.  Or if there's no such user or other error,
+return 400 and an error message.
+
+The front end should arrange to handle the resulting URL.
+Ask the user for a new password. Then POST to
+``/api/password_reset/``::
+
+    {'key': 'the password reset key',
+     'password': 'the new password'}
+
+If the response status is OK (200), then the body will have
+
+    {'email': 'the user's email address',
+     'token': 'a valid auth token for the user'}
+
+Otherwise the status will be 400 and the body will have error
+messages.  The reset can fail because the
+key is missing, has the wrong syntax, is not recognized, has
+already been used, has expired, etc::
+
+    {"email": ["No user with that email"]}
+    {"non_field_errors": ["Password reset key is not valid"]}
+
+
+If the front end wants to check if the password reset key looks
+like it's probably valid before prompting the user for a new
+password, it can optionally POST to``/api/password_reset_check/``::
+
+    {'key': 'the password reset key'}
+
+and will get back OK if the key appears to be valid, and the
+associated email address in the response::
+
+    {'email': 'user@example.com'},
+
+Otherwise,it'll get a 400 but no other data.

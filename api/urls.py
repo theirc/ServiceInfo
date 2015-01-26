@@ -26,6 +26,19 @@ urlpatterns = [
     # Activate a user
     url(r'^activate/$', view=views.APIActivationView.as_view(), name='api-activate'),
 
+    # Resend activation link
+    url(r'^resend_activation_link/$', view=views.ResendActivationLinkView.as_view(),
+        name='resend-activation-link'),
+
+    # Request a password reset
+    url(r'^password_reset_request/$', view=views.PasswordResetRequest.as_view(),
+        name='password-reset-request'),
+    # See if a password reset token appears to be valid
+    url(r'^password_reset_check/$', view=views.PasswordResetCheck.as_view(),
+        name='password-reset-check'),
+    url(r'^password_reset/$', view=views.PasswordReset.as_view(),
+        name='password-reset'),
+
     # Additionally, we include login URLs for the browsable API.
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

@@ -4,7 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import exceptions, serializers
 
-from email_user.models import EmailUser, SHA1_RE
+from email_user.forms import EmailUserCreationForm
+from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea
 
 
@@ -43,6 +44,31 @@ class ProviderSerializer(serializers.HyperlinkedModelSerializer):
             # name for users.
             'user': {'view_name': 'user-detail'}
         }
+
+
+class CreateProviderSerializer(ProviderSerializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
+    base_activation_link = serializers.URLField()
+
+    class Meta:
+        model = Provider
+        fields = [field for field in ProviderSerializer.Meta.fields
+                  if field not in ['user']]
+        fields += ['email', 'password', 'base_activation_link']
+
+    def validate(self, attrs):
+        email = attrs.get('email')
+        password = attrs.get('password')
+
+        form = EmailUserCreationForm(data={
+            'email': email,
+            'password1': password,
+            'password2': password,
+            })
+        if not form.is_valid():
+            raise exceptions.ValidationError(form.errors)
+        return attrs
 
 
 class ServiceSerializer(serializers.HyperlinkedModelSerializer):
@@ -96,19 +122,14 @@ class APILoginSerializer(serializers.Serializer):
     def validate(self, attrs):
         email = attrs.get('email')
         password = attrs.get('password')
+        user = authenticate(email=email, password=password)
 
-        if email and password:
-            user = authenticate(email=email, password=password)
-
-            if user:
-                if not user.is_active:
-                    msg = _('User account is disabled.')
-                    raise exceptions.ValidationError(msg)
-            else:
-                msg = _('Unable to log in with provided credentials.')
+        if user:
+            if not user.is_active:
+                msg = _('User account is disabled.')
                 raise exceptions.ValidationError(msg)
         else:
-            msg = _('Must include "email" and "password"')
+            msg = _('Unable to log in with provided credentials.')
             raise exceptions.ValidationError(msg)
 
         attrs['user'] = user
@@ -125,23 +146,83 @@ class APIActivationSerializer(serializers.Serializer):
 
     def validate(self, attrs):
         activation_key = attrs.get('activation_key')
-        if activation_key:
-            if not SHA1_RE.search(activation_key):
-                msg = _('Activation key is not a valid format. Make sure the activation link '
-                        'has been copied correctly.')
-                raise exceptions.ValidationError({'activation_key': msg})
-            User = get_user_model()
-            try:
-                user = User.objects.get(activation_key=activation_key)
-            except User.DoesNotExist:
-                msg = _('Activation key is invalid or has already been used.')
-                raise exceptions.ValidationError({'activation_key': msg})
-            else:
-                if user.activation_key_expired():
-                    user.delete()
-                    msg = _('Activation link has expired.')
-                    raise exceptions.ValidationError({'activation_key': msg})
-        else:
-            msg = _('Must include "activation_key"')
+        User = get_user_model()
+        try:
+            User.objects.get(activation_key=activation_key)
+        except User.DoesNotExist:
+            msg = _('Activation key is invalid. Check that it was copied correctly '
+                    'and has not already been used.')
             raise exceptions.ValidationError({'activation_key': msg})
+        return attrs
+
+
+class PasswordResetRequestSerializer(serializers.Serializer):
+    """
+    Serializer for our API to request a password reset.
+
+    Validates the email.
+    """
+    email = serializers.EmailField()
+    base_reset_link = serializers.URLField()
+
+    def validate(self, attrs):
+        User = get_user_model()
+        try:
+            attrs['user'] = User.objects.get(email__iexact=attrs.get('email'))
+        except User.DoesNotExist:
+            msg = _("No user with that email")
+            raise exceptions.ValidationError({'email': msg})
+        return attrs
+
+
+class PasswordResetCheckSerializer(serializers.Serializer):
+    """
+    Serializer for our API to check if a password
+    reset key appears to be valid.
+    """
+    email = serializers.EmailField()
+    key = serializers.CharField()
+
+    def validate(self, attrs):
+        key = attrs.get('key')
+        user = get_user_model().objects.validate_password_reset_key(key)
+        if not user:
+            msg = _("Password reset key is not valid")
+            raise exceptions.ValidationError(msg)
+        attrs['user'] = user
+        return attrs
+
+
+class PasswordResetSerializer(serializers.Serializer):
+    """
+    Serializer for our API to reset a password.
+    """
+    password = serializers.CharField()
+    key = serializers.CharField()
+
+    def validate(self, attrs):
+        key = attrs.get('key')
+        user = get_user_model().objects.validate_password_reset_key(key)
+        if not user:
+            msg = _("Password reset key is not valid")
+            raise exceptions.ValidationError(msg)
+        attrs['user'] = user
+        return attrs
+
+
+class ResendActivationLinkSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    base_activation_link = serializers.URLField()
+
+    def validate(self, attrs):
+        email = attrs.get('email')
+        try:
+            user = get_user_model().objects.get(email__iexact=email)
+        except get_user_model().DoesNotExist:
+            msg = _("No user with that email")
+            raise exceptions.ValidationError({'email': msg})
+        if not user.has_valid_activation_key():
+            msg = _("User is not pending activation")
+            raise exceptions.ValidationError({'email': msg})
+        attrs['user'] = user
         return attrs
