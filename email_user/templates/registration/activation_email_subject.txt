@@ -12,10 +12,6 @@ being used. This template has the following context:
 ``activation_key``
     The activation key for the new account.
 
-``expiration_days``
-    The number of days remaining during which the account may be
-    activated.
-
 ``site``
     An object representing the site on which the user registered;
     depending on whether ``django.contrib.sites`` is installed, this

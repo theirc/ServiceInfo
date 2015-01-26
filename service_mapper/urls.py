@@ -7,7 +7,6 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 
 import api.urls
-import email_user.urls
 
 FRONTEND_DIR = os.path.join(settings.PROJECT_ROOT, 'frontend')
 
@@ -25,8 +24,7 @@ urlpatterns = [
     url(r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete',
         name='password_reset_complete'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
-  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
-  + [url(r'', include(email_user.urls))]
+  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     urlpatterns += [
