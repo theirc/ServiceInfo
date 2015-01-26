@@ -21,12 +21,13 @@
   		}
   	},
   	"Form": {
-	  	"Username": "Username",
+	  	"Email": "Email",
 	  	"Password": "Password"
   	},
-	"Form-Submit-Options": {
-		"Submit": "Submit Answers"
-	}
+  	"Form-Submit-Options": {
+  		"Submit": "Login",
+      "Register": "Register to be a Service Provider here"
+  	}
   },
   "Provider-Registration-Form": {
   	"Page-Head": {
