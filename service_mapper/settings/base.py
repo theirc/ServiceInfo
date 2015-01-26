@@ -102,6 +102,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -135,6 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.sitemaps',
     # External apps
+    'corsheaders',
     'compressor',
     'rest_framework',
     'rest_framework.authtoken',
@@ -225,3 +227,5 @@ ACCOUNT_ACTIVATION_DAYS = 3
 # When someone successfully activates their user account,
 # redirect them to this URL.
 ACCOUNT_ACTIVATION_REDIRECT_URL = '/nosuchurl'
+
+CORS_ORIGIN_ALLOW_ALL = True

@@ -19,6 +19,8 @@ function startExpress() {
     app.use(require('connect-livereload')());
     app.use(express.static(EXPRESS_ROOT));
     app.listen(EXPRESS_PORT);
+
+    bg("python", "manage.py", "runserver", API_PORT)();
 }
 
 function startLiveReload() {
@@ -71,8 +73,6 @@ function notifyLivereload(event) {
     // `gulp.watch()` events provide an absolute path
     // so we need to make it relative to the server root
     var fileName = require('path').relative(EXPRESS_ROOT, event.path);
-
-    bg("python", "manage.py", "runserver", API_PORT)
 
     build();
 
