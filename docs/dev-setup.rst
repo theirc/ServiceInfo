@@ -46,6 +46,7 @@ versions of Node that include NPM. You can download it from http://nodejs.org/do
 
 With Node installed, you can install all frontend dependencies with `npm`.
 
+    npm config set python python2.7
     npm install
 
 
