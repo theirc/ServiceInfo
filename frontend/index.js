@@ -9,6 +9,9 @@ window.$ = $;
 
 var Router = require('./router');
 var router = new Router();
+var config = {
+    api_location: "//localhost:8000",
+};
 
 $('body').on("click", ".back-button", function (event) {
     event.preventDefault();
@@ -16,6 +19,10 @@ $('body').on("click", ".back-button", function (event) {
 });
 
 $(function(){
+    $.getJSON('/config.json', function(data) {
+        $.extend(config, data);
+    });
+
     Backbone.history.start();
 
     var LangToggleView = require('./views/language-toggle');
