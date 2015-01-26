@@ -1,5 +1,6 @@
 var config = {
     api_location: "//localhost:8000",
+    lang: 'en',
 };
 
 module.exports = {

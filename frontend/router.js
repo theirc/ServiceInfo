@@ -1,6 +1,9 @@
 "use strict";
 var $ = require('jquery'),
-    Backbone = require('backbone');
+    config = require('./config'),
+    i18n = require('i18next-client'),
+    Backbone = require('backbone')
+;
 
 var views = {
     "home": require('./views/home'),
@@ -15,6 +18,11 @@ function loadPage(name) {
         var $el = $(document.querySelector('#page'));
         var view = new views[name]({el: $el});
         view.render();
+        i18n.init(function(){
+            view.$el.i18n({
+                lng: config.get('lang'),
+            });
+        });
         $('#menu-container').addClass("menu-closed");
         $('#menu-container').removeClass("menu-open");
     }

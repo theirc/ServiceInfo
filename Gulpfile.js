@@ -76,11 +76,13 @@ function notifyLivereload(event) {
 
     build();
 
-    lr.changed({
-        body: {
-            files: [fileName]
-        }
-    });
+    setTimeout(function(){
+        lr.changed({
+            body: {
+                files: [fileName]
+            }
+        });
+    }, 500); // For some reason, triggering live reload too early serves the old version
 }
 
 gulp.task('default', function() {
