@@ -7,6 +7,16 @@ the API at `https://<yourserver>/api`.  This document will only
 cover the little complications, like getting authenticated, creating
 users, password reset, etc.
 
+Ownership
+---------
+
+The API enforces ownership in a few places. When creating records that
+are owned by a particular provider, the provider is forced to be that
+of the currently authenticated user. Similarly, when querying records
+of those models, only those owned by the currently authenticated user
+are returned. The relevant record types are Service and SelectionCriterion
+for creation, and those plus Provider for querying.
+
 Creating a new provider
 -----------------------
 

@@ -2,7 +2,7 @@ import factory
 import factory.fuzzy
 from email_user.tests.factories import EmailUserFactory
 
-from services.models import Provider, ProviderType, Service, ServiceArea
+from services.models import Provider, ProviderType, Service, ServiceArea, SelectionCriterion
 
 
 class ProviderTypeFactory(factory.DjangoModelFactory):
@@ -50,3 +50,13 @@ class ServiceFactory(factory.DjangoModelFactory):
     description_ar = factory.fuzzy.FuzzyText()
     description_fr = factory.fuzzy.FuzzyText()
     area_of_service = factory.SubFactory(ServiceAreaFactory)
+
+
+class SelectionCriterionFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = SelectionCriterion
+
+    provider = factory.SubFactory(ProviderFactory)
+    text_en = factory.fuzzy.FuzzyText()
+    text_ar = factory.fuzzy.FuzzyText()
+    text_fr = factory.fuzzy.FuzzyText()
