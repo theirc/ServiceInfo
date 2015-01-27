@@ -78,13 +78,16 @@ db_allow-{{ host_addr }}:
 {% endfor %}
 
 {% for extension in pillar.get('postgresql_extensions', []) %}
+# Add the extensions to the project database
 create-{{ extension }}-extension:
   cmd.run:
-    - name: psql -U postgres {{ pillar['project_name'] }}_{{ pillar['environment'] }} -c "CREATE EXTENSION postgis;"
-    - unless: psql -U postgres {{ pillar['project_name'] }}_{{ pillar['environment'] }} -c "\dx+" | grep postgis
+    - name: psql -U postgres {{ pillar['project_name'] }}_{{ pillar['environment'] }} -c "CREATE EXTENSION {{ extension }};"
+    - unless: psql -U postgres {{ pillar['project_name'] }}_{{ pillar['environment'] }} -c "\dx+" | grep {{ extension }}
     - user: postgres
     - require:
+{% if extension == 'postgis' %}
       - pkg: postgis-packages
+{% endif %}
       - postgres_database: database-{{ pillar['project_name'] }}
     - require_in:
       - virtualenv: venv
