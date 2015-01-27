@@ -40,6 +40,7 @@ def staging():
 @task
 def production():
     env.environment = 'production'
+    env.master = '54.93.51.232'
     env.hosts = [env.master]
 
 
