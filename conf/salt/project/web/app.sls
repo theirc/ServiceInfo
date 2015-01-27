@@ -81,15 +81,15 @@ less:
 npm_installs:
   cmd.run:
     - name: npm install
-    - cwd: "{{ vars.source_dir }}/frontend"
+    - cwd: "{{ vars.source_dir }}"
     - user: {{ pillar['project_name'] }}
     - require:
-      - pkg: nodejs
+      - cmd: node_alias
 
 make_bundle:
   cmd.run:
-    - name: node_modules/browserify/bin/cmd.js -t hbsfy index.js -o bundle.js
-    - cwd: "{{ vars.source_dir }}/frontend"
+    - name: "{{ vars.source_dir }}/node_modules/.bin/gulp build"
+    - cwd: "{{ vars.source_dir }}"
     - user: {{ pillar['project_name'] }}
     - require:
       - cmd: npm_installs
@@ -137,4 +137,3 @@ gunicorn_process:
       - file: gunicorn_conf
       - cmd: collectstatic
       - cmd: migrate
-

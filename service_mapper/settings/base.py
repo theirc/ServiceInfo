@@ -17,7 +17,7 @@ ADMINS = (
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'service_mapper',
         'USER': '',
         'PASSWORD': '',
@@ -108,6 +108,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
@@ -134,9 +135,11 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
+    'django.contrib.sites',
     # External apps
     'compressor',
     'rest_framework',
+    'rest_framework.authtoken',
     # Our apps
     'services',
 )
@@ -204,6 +207,10 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
     'PAGINATE_BY': 10,
 }
 
@@ -212,3 +219,7 @@ AUTH_USER_MODEL = 'email_user.EmailUser'
 
 # Just use admin login view for now
 LOGIN_URL = 'admin:login'
+
+STAGING_SITE_ID = 2
+PRODUCTION_SITE_ID = 3
+DEV_SITE_ID = 4
