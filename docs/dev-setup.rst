@@ -16,28 +16,38 @@ work on the project locally. In a terminal, run:
     cd Service-Mapper/
 
 
-.. _frontend-setup:
+.. _backend-setup:
 
 Frontend Setup
 --------------
 
-Once you've cloned the project, open the ``frontend`` directory::
+The Service Mapper frontend runs separately from the backend.
 
-    cd frontend/
+The Javascript dependencies are installed by Node's NPM, both for build
+tools and frontend modules. Javascript libraries for the frontend app are
+installed from NPM and then packaged for the browser by Browserify. You'll
+need to install Node, which includes npm, in order to build the frontend
+application if you'd like to run it.
 
-Next run a basic HTTP server with Python:
+On Mac, you can install Node with brew.
 
-.. code-block:: bash
+    brew install node
 
-    # Python <= 2.7
-    python -m SimpleHTTPServer
-    # Python >= 3.0
-    python -m http.server
+On Ubuntu and other Linux distributions, you should download and build the
+latest version of Node. Standard package managers rarely have the most recent
+versions of Node that include NPM. You can download it from http://nodejs.org/download/ and follow the standard build instructions
 
-Now visit http://localhost:8000/ in your browser.
+    tar -zxvf node-v0.10.35.tar.gz
+    cd node-v0.10.35/
+    ./configure
+    make
+    sudo make install
+    cd ..
 
+With Node installed, you can install all frontend dependencies with `npm`.
 
-.. _backend-setup:
+    npm install
+
 
 Backend Setup
 -------------
@@ -51,7 +61,10 @@ local development system:
 - `virtualenv >= 1.11 <http://www.virtualenv.org/>`_
 - `virtualenvwrapper >= 3.0 <http://pypi.python.org/pypi/virtualenvwrapper>`_
 - Postgres >= 9.1 (9.3 recommended)
+- PostGIS
 - git >= 1.7
+- node
+- npm
 
 The deployment uses SSH with agent forwarding so you'll need to enable agent
 forwarding if it is not already by adding ``ForwardAgent yes`` to your SSH config.
@@ -83,19 +96,27 @@ Then create a local settings file and set your ``DJANGO_SETTINGS_MODULE`` to use
     cp service_mapper/settings/local.example.py service_mapper/settings/local.py
     echo "export DJANGO_SETTINGS_MODULE=service_mapper.settings.local" >> $VIRTUAL_ENV/bin/postactivate
     echo "unset DJANGO_SETTINGS_MODULE" >> $VIRTUAL_ENV/bin/postdeactivate
+    echo "PATH=$PWD/node_modules/.bin:\$PATH" >> $VIRTUAL_ENV/bin/postactivate
 
 Exit the virtualenv and reactivate it to activate the settings just changed::
 
     deactivate
     workon service_mapper
 
-Now, create the Postgres database and run the initial syncdb/migrate::
+Now, create the Postgres database and run the initial migrate::
 
     createdb -E UTF-8 service_mapper
     psql service_mapper -c "CREATE EXTENSION postgis;"
-    python manage.py syncdb
     python manage.py migrate
 
-You should now be able to run the development server::
+You should now be able to run the development API server::
 
     python manage.py runserver
+
+You can run the frontend server with Gulp, which will auto-reload the browser upon detected changes. You can run one or the other, but currently don't need to run both and they will both try
+to use the same port. When the backend and frontend talk to each other, running both will safely
+will be automated and this documentation will be updated.
+
+    gulp
+
+Now visit http://localhost:8000/ in your browser.

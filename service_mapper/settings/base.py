@@ -1,7 +1,11 @@
 # Django settings for service_mapper project.
 import os
 
+# BASE_DIR = path/to/source/service_mapper
+# E.g. this file is BASE_DIR/settings/base.py
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+# PROJECT_ROOT = path/to/source
+# This file is PROJECT_ROOT/service_mapper/settings/base.py
 PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, os.pardir))
 
 DEBUG = True
@@ -13,7 +17,7 @@ ADMINS = (
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'service_mapper',
         'USER': '',
         'PASSWORD': '',
@@ -63,11 +67,16 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'public', 'static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = '/app/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(PROJECT_ROOT, 'frontend'),
+)
+
+LOCALE_PATHS = (
+    os.path.join(PROJECT_ROOT, 'locale'),
 )
 
 # List of finder classes that know how to find static files in
@@ -99,6 +108,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
@@ -116,6 +126,7 @@ FIXTURE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'email_user',   # Must precede django.contrib.auth so templates override Django's.
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -124,8 +135,13 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
+    'django.contrib.sites',
     # External apps
     'compressor',
+    'rest_framework',
+    'rest_framework.authtoken',
+    # Our apps
+    'services',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -161,6 +177,10 @@ LOGGING = {
             'backupCount': 10,
         },
     },
+    'root': {
+        'handlers': ['file', 'mail_admins'],
+        'level': 'INFO',
+    },
     'loggers': {
         'django.request': {
             'handlers': ['mail_admins'],
@@ -170,6 +190,7 @@ LOGGING = {
         'service_mapper': {
             'handlers': ['file', 'mail_admins'],
             'level': 'INFO',
+            'propagate': True,
         },
     }
 }
@@ -178,3 +199,27 @@ LOGGING = {
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    # FIXME: Will definitely need to change this
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'PAGINATE_BY': 10,
+}
+
+
+AUTH_USER_MODEL = 'email_user.EmailUser'
+
+# Just use admin login view for now
+LOGIN_URL = 'admin:login'
+
+STAGING_SITE_ID = 2
+PRODUCTION_SITE_ID = 3
+DEV_SITE_ID = 4

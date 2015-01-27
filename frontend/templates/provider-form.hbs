@@ -1,0 +1,190 @@
+<!-- Page Head -->
+    <div class="page-head">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div class="page-title" data-i18n="Provider-Registration-Form.Page-Head.Page-Title.Title"></div>
+                    <div class="page-descr" data-i18n="Provider-Registration-Form.Page-Head.Page-Description.Page-Description"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- End Page Head -->
+
+<!-- Main Content -->
+
+<!-- Forms -->
+      <div class="main-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+
+            <form>
+              <fieldset>
+                <legend data-i18n="Provider-Registration-Form.Form-Sections.Basic.Legend"></legend>
+                <div class="form-group">
+
+                  <div class="half">
+                    <div class="form-group">
+                      <label for="id_full_name" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Name"></label>
+                      <input type="text" name="full-name" class="form-control" tabindex="1"></input>
+                    </div>               
+                  </div>
+
+                  <div class="half">
+                    <div class="form-group">
+                      <label for="id_type_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Service-Type"></label>
+                      <div class="btn-group" tabindex="2">
+                        <button type="button" class="btn btn-default" data-toggle="dropdown">Select type of service</button>
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                          <span class="caret"></span>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Type 1</a></li>
+                          <li><a href="#">Type 2</a></li>
+                          <li><a href="#">Type 3</a></li>
+                          <li><a href="#">Type 4</a></li>
+                          <li><a href="#">Type 5</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="form-group">
+
+                  <div class="half">
+                    <div class="form-group">
+                      <label for="id_provider_phone-number" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Phone-Number"></label>
+                      <div class="form-group">
+                        <input type="tel" name="usrtel" class="form-control" tabindex="3">
+                      </div>  
+                    </div>               
+                  </div>
+
+                  <div class="half">
+                    <div class="form-group">
+                      <label for="id_provider_email" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Email"></label>
+                        <div class="form-group">
+                          <input type="email" name="provideremail" class="form-control" placeholder="Enter your Email" tabindex="4">
+                        </div>                 
+                    </div>
+                  </div>
+
+                </div>
+                <div class="form-group">
+                  <label for="id_provider_website" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Website"></label>
+                  <div class="form-group">
+                    <input type="url" name="providerurl" class="form-control" placeholder="Enter your website url" tabindex="5">
+                  </div>                 
+                </div>
+                <div class="form-group">
+                  <label for="id_provider_description" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Description"></label>
+                  <div class="form-group">
+                    <textarea rows="4" name="other-comments" class="form-control" tabindex="6"></textarea>
+                  </div> 
+                </div>
+              </fieldset>
+            </form>
+
+            <form>
+              <fieldset>
+                <legend data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Legend"></legend>
+                <div class="form-group">
+                  <label for="id_name_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Service-Name"></label>
+                    <div class="form-group">
+                      <input type="text" name="name_of_service" class="form-control" tabindex="7">
+                    </div>                 
+                </div>
+                <div class="form-group">
+                  <label for="id_area_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Service-Area"></label>
+                    <div class="btn-group" tabindex="8">
+                        <button type="button" class="btn btn-default" data-toggle="dropdown">Select an Area</button>
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Area 1</a></li>
+                            <li><a href="#">Area 2</a></li>
+                            <li><a href="#">Area 3</a></li>
+                            <li><a href="#">Area 4</a></li>
+                            <li><a href="#">Area 5</a></li>
+                        </ul>
+                    </div>                  
+                </div>
+                <div class="form-group">
+                  <label for="id_description_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Service-Description"></label>
+                  <div class="form-group">
+                    <textarea rows="2" name="other-comments" class="form-control" tabindex="9"></textarea>
+                  </div> 
+                </div>
+                <div class="form-group">
+                  <label for="id_hours_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Service-Hours"></label>
+                  <div class="half">
+                  <div class="form-group">
+                    <label for="opening-time" class="operating-hours">Opening Time:</label>
+                    <input type="time" name="time_of_service" class="form-control" tabindex="10">
+                  </div>
+                  </div>
+                  <div class="half">
+                  <div class="form-group">
+                    <label for="closing-time" class="operating-hours">Closing Time:</label>
+                    <input type="time" name="time_of_service" class="form-control" tabindex="11">
+                  </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="id_additional_information" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Additional-Information"></label>
+                  <div class="form-group">
+                    <textarea rows="4" name="additional_information" class="form-control" tabindex="12"></textarea>
+                  </div> 
+                </div>
+                <div class="form-group">
+                  <label for="id_cost_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Service-Cost"></label>
+                    <div class="form-group">
+                      <input type="text" name="cost_of_service" class="form-control" tabindex="13">
+                    </div>                 
+                </div>
+                <div class="form-group">
+                  <label for="id_selection_criteria" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Selection-Criteria"></label>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="Selection_Criteria_1" id="Selection_Criteria_1" value="option1" checked="" tabindex="14">
+                      Option 1
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="Selection_Criteria_2" id="Selection_Criteria_2" value="option2" tabindex="15">
+                      Option 2
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="Selection_Criteria_3" id="Selection_Criteria_3" value="option3" tabindex="16">
+                      Option 3
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+            <form>
+              <div class="submit-form">
+                  <div class="half">
+                    <button class="primary-button" tabindex="17" data-i18n="Provider-Registration-Form.Form-Sections.Form-Submit-Options.Submit"></button>
+                  </div>
+                  <div class="half">
+                    <button class="primary-button" tabindex="18" data-i18n="Provider-Registration-Form.Form-Sections.Form-Submit-Options.Clear"></button>
+                  </div>
+              </div>
+            </form>
+              
+            </div>
+          </div>
+        </div>
+
+<!-- End Forms -->
+    
+<!-- End Main Content -->

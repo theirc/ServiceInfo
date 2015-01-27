@@ -13,3 +13,9 @@ public/static/
 public/media/
 secrets.sls*
 *.log
+frontend/node_modules
+frontend/bundle.js
+frontend/styles/site.css
+# .po files are generated using makemessages, no need to put in the repo
+locale/*/LC_MESSAGES/django.po
+node_modules

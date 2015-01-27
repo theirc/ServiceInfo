@@ -38,13 +38,6 @@ gunicorn_conf:
     - watch_in:
       - cmd: supervisor_update
 
-gunicorn_process:
-  supervisord.running:
-    - name: {{ pillar['project_name'] }}-server
-    - restart: True
-    - require:
-      - file: gunicorn_conf
-
 {% for host, ifaces in vars.balancer_minions.items() %}
 {% set host_addr = vars.get_primary_ip(ifaces) %}
 app_allow-{{ host_addr }}:
@@ -70,13 +63,51 @@ nodejs:
       - pkg: npm
     - refresh: True
 
+node_alias:
+  # Stupid ubuntu (http://askubuntu.com/questions/235655/node-js-conflicts-sbin-node-vs-usr-bin-node/320271#320271)
+  cmd.run:
+    - name: update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
+    - require:
+        - pkg: nodejs
+
 less:
   cmd.run:
     - name: npm install less@1.5.1 -g
     - user: root
     - unless: "which lessc && lessc --version | grep 1.5.1"
     - require:
-      - pkg: nodejs
+      - cmd: node_alias
+
+npm_installs:
+  cmd.run:
+    - name: npm install
+    - cwd: "{{ vars.source_dir }}"
+    - user: {{ pillar['project_name'] }}
+    - require:
+      - cmd: node_alias
+
+make_bundle:
+  cmd.run:
+    - name: "{{ vars.source_dir }}/node_modules/.bin/gulp build"
+    - cwd: "{{ vars.source_dir }}"
+    - user: {{ pillar['project_name'] }}
+    - require:
+      - cmd: npm_installs
+
+static_dir:
+  file.directory:
+    - name: {{ vars.static_dir }}
+    - user: {{ pillar['project_name'] }}
+    - group: www-data
+    - dir_mode: 775
+    - file_mode: 664
+    - makedirs: True
+    - recurse:
+      - user
+      - group
+      - mode
+    - require:
+      - file: root_dir
 
 collectstatic:
   cmd.run:
@@ -85,6 +116,8 @@ collectstatic:
     - group: {{ pillar['project_name'] }}
     - require:
       - file: manage
+      - file: static_dir
+      - cmd: make_bundle
 
 migrate:
   cmd.run:
@@ -95,3 +128,12 @@ migrate:
     - require:
       - file: manage
     - order: last
+
+gunicorn_process:
+  supervisord.running:
+    - name: {{ pillar['project_name'] }}-server
+    - restart: True
+    - require:
+      - file: gunicorn_conf
+      - cmd: collectstatic
+      - cmd: migrate

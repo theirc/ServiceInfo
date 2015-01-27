@@ -1,0 +1,8 @@
+{
+  "app": {
+    "name": "i18next"
+  },
+  "test": {
+    "hello": "bonjour le monde"
+  }
+}

@@ -54,6 +54,12 @@ postgis-packages:
     - installed
     - names:
       - postgresql-{{ version }}-postgis-2.1
+      - binutils
+      - libproj-dev
+      - gdal-bin
+      - libgeoip1
+      - python-gdal
+      - postgresql-server-dev-{{ version }}
     - require:
       - pkg: db-packages
 {% endif %}

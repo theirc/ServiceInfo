@@ -1,4 +1,5 @@
 import os
+import subprocess
 import tempfile
 
 import yaml
@@ -10,6 +11,7 @@ from fabric.contrib.console import confirm
 from fabric.utils import abort
 
 DEFAULT_SALT_LOGLEVEL = 'info'
+PROJECT_NAME = "service_mapper"
 PROJECT_ROOT = os.path.dirname(__file__)
 CONF_ROOT = os.path.join(PROJECT_ROOT, 'conf')
 
@@ -31,20 +33,49 @@ env.master = '54.235.72.124'
 @task
 def staging():
     env.environment = 'staging'
+    env.master = '54.93.66.254'  # Staging server on AWS Frankfurt
+    env.hosts = [env.master]
 
 
 @task
 def production():
     env.environment = 'production'
+    env.hosts = [env.master]
+
+
+def get_vagrant_ssh_config_value(name):
+    """
+    Return the value of the named ssh config parm from vagrant.
+    (Run 'vagrant ssh-config' to see what the available parms are.)
+    """
+    cmd = "vagrant ssh-config | awk '/ %s / {print $2;}'" % name
+    return subprocess.check_output(cmd, shell=True).strip()
+
+
+@task
+def vagrant_first_time():
+    # Use this the first time deploying to the vagrant VM, it'll
+    # use Vagrant's default ssh user.  After that, you can use the
+    # 'vagrant' target and connect in as your own user.
+    env.environment = 'vagrant'
+
+    # Use built-in vagrant ssh.  This'll probably use the local
+    # port 2222 that redirects to wherever vagrant is listening
+    # for ssh connections, but we don't really care.
+    env.user = get_vagrant_ssh_config_value('User')
+    host = get_vagrant_ssh_config_value('HostName')
+    port = get_vagrant_ssh_config_value('Port')
+    env.hosts = ['{user}@{host}:{port}'.format(user=env.user, host=host, port=port)]
+    env.key_filename = get_vagrant_ssh_config_value('IdentityFile')
+    env.master = host
 
 
 @task
 def vagrant():
-    env.environment = 'local'
+    # Use dev's own user, directly to port 22 on the VM
+    env.environment = 'vagrant'
     env.master = '33.33.33.10'
-    env.user = 'vagrant'
-    vagrant_version = local('vagrant -v', capture=True).split()[-1]
-    env.key_filename = '/opt/vagrant/embedded/gems/gems/vagrant-%s/keys/vagrant' % vagrant_version
+    env.hosts = [env.master]
 
 
 @task
@@ -75,36 +106,36 @@ def sync():
     """Rysnc local states and pillar data to the master."""
     # Check for missing local secrets so that they don't get deleted
     # project.rsync_project fails if host is not set
-    with settings(host=env.master, host_string=env.master):
-        if not have_secrets():
-            get_secrets()
-        else:
-            # Check for differences in the secrets files
-            for environment in ['staging', 'production']:
-                remote_file = os.path.join('/srv/pillar/', environment, 'secrets.sls')
-                with lcd(os.path.join(CONF_ROOT, 'pillar', environment)):
-                    if files.exists(remote_file):
-                        get(remote_file, 'secrets.sls.remote')
-                    else:
-                        local('touch secrets.sls.remote')
-                    with settings(warn_only=True):
-                        result = local('diff -u secrets.sls.remote secrets.sls')
-                        if result.failed and not confirm(red("Above changes will be made to secrets.sls. Continue?")):
-                            abort("Aborted. File have been copied to secrets.sls.remote. " +
+    if not have_secrets():
+        get_secrets()
+    else:
+        # Check for differences in the secrets files
+        for environment in [env.environment]:
+            remote_file = os.path.join('/srv/pillar/', environment, 'secrets.sls')
+            with lcd(os.path.join(CONF_ROOT, 'pillar', environment)):
+                if files.exists(remote_file):
+                    get(remote_file, 'secrets.sls.remote')
+                else:
+                    local('touch secrets.sls.remote')
+                with settings(warn_only=True):
+                    result = local('diff -u secrets.sls.remote secrets.sls')
+                    if result.failed and not confirm(
+                            red("Above changes will be made to secrets.sls. Continue?")):
+                        abort("Aborted. File have been copied to secrets.sls.remote. " +
                               "Resolve conflicts, then retry.")
-                        else:
-                            local("rm secrets.sls.remote")
-        salt_root = CONF_ROOT if CONF_ROOT.endswith('/') else CONF_ROOT + '/'
-        project.rsync_project(local_dir=salt_root, remote_dir='/tmp/salt', delete=True)
-        sudo('rm -rf /srv/salt /srv/pillar')
-        sudo('mv /tmp/salt/* /srv/')
-        sudo('rm -rf /tmp/salt/')
+                    else:
+                        local("rm secrets.sls.remote")
+    salt_root = CONF_ROOT if CONF_ROOT.endswith('/') else CONF_ROOT + '/'
+    project.rsync_project(local_dir=salt_root, remote_dir='/tmp/salt', delete=True)
+    sudo('rm -rf /srv/salt /srv/pillar')
+    sudo('mv /tmp/salt/* /srv/')
+    sudo('rm -rf /tmp/salt/')
 
 
 def have_secrets():
     """Check if the local secret files exist for all environments."""
     found = True
-    for environment in ['staging', 'production']:
+    for environment in [env.environment]:
         local_file = os.path.join(CONF_ROOT, 'pillar', environment, 'secrets.sls')
         found = found and os.path.exists(local_file)
     return found
@@ -113,13 +144,13 @@ def have_secrets():
 @task
 def get_secrets():
     """Grab the latest secrets file from the master."""
-    with settings(host=env.master):
-        for environment in ['staging', 'production']:
-            local_file = os.path.join(CONF_ROOT, 'pillar', environment, 'secrets.sls')
-            if os.path.exists(local_file):
-                local('cp {0} {0}.bak'.format(local_file))
-            remote_file = os.path.join('/srv/pillar/', environment, 'secrets.sls')
-            get(remote_file, local_file)
+    require('environment')
+    for environment in [env.environment]:
+        local_file = os.path.join(CONF_ROOT, 'pillar', environment, 'secrets.sls')
+        if os.path.exists(local_file):
+            local('cp {0} {0}.bak'.format(local_file))
+        remote_file = os.path.join('/srv/pillar/', environment, 'secrets.sls')
+        get(remote_file, local_file)
 
 
 @task
@@ -187,42 +218,87 @@ def add_role(name):
 @task
 def salt(cmd, target="'*'", loglevel=DEFAULT_SALT_LOGLEVEL):
     """Run arbitrary salt commands."""
-    with settings(warn_only=True, host_string=env.master):
+    with settings(warn_only=True):
         sudo("salt {0} -l{1} {2} ".format(target, loglevel, cmd))
 
 
 @task
 def highstate(target="'*'", loglevel=DEFAULT_SALT_LOGLEVEL):
     """Run highstate on master."""
-    with settings(host_string=env.master):
-        print("This can take a long time without output, be patient")
-        salt('state.highstate', target, loglevel)
+    print("This can take a long time without output, be patient")
+    execute(salt, 'state.highstate', target, loglevel, hosts=[env.master])
 
 
 @task
 def accept_key(name):
     """Accept minion key on master."""
-    with settings(host_string=env.master):
-        sudo('salt-key --accept={0} -y'.format(name))
-        sudo('salt-key -L')
+    sudo('salt-key --accept={0} -y'.format(name))
+    sudo('salt-key -L')
 
 
 @task
 def delete_key(name):
     """Delete specific key on master."""
-    with settings(host_string=env.master):
-        sudo('salt-key -L')
-        sudo('salt-key --delete={0} -y'.format(name))
-        sudo('salt-key -L')
+    sudo('salt-key -L')
+    sudo('salt-key --delete={0} -y'.format(name))
+    sudo('salt-key -L')
 
 
 @task
 def deploy(loglevel=DEFAULT_SALT_LOGLEVEL):
     """Deploy to a given environment by pushing the latest states and executing the highstate."""
     require('environment')
-    with settings(host_string=env.master):
-        if env.environment != "local":
-            sync()
-        target = "-G 'environment:{0}'".format(env.environment)
-        salt('saltutil.sync_all', target, loglevel)
-        highstate(target)
+    if env.environment != "local":
+        sync()
+    target = "-G 'environment:{0}'".format(env.environment)
+    salt('saltutil.sync_all', target, loglevel)
+    highstate(target)
+
+
+@task
+def build():
+    local("gulp build")
+
+
+@task
+def makemessages():
+    local("python manage.py makemessages --ignore 'conf/*' --ignore 'docs/*' "
+          "--ignore 'requirements/*' --ignore 'frontend/*' --ignore 'vagrant/*' -l en")
+
+
+@task
+def pushmessages():
+    local("tx push -s")
+
+
+@task
+def pullmessages():
+    local("tx pull -af")
+
+
+@task
+def compilemessages():
+    local("python manage.py compilemessages -l en -l ar -l fr")
+
+
+@task
+def manage_run(command):
+    """
+    Run a Django management command on the remote server.
+    """
+    require('environment')
+    # Setup the call
+    settings = '{0}.settings.{1}'.format(PROJECT_NAME, env.environment)
+    manage_sh = u"DJANGO_SETTINGS_MODULE={0} /var/www/{1}/manage.sh ".format(settings, PROJECT_NAME)
+    sudo(manage_sh + command, user=PROJECT_NAME)
+
+
+@task
+def ssh():
+    """
+    Convenience task to ssh to whatever host has been selected.
+
+    E.g. ``fab production ssh``
+    """
+    require('environment')
+    local("ssh %s" % env.hosts[0])

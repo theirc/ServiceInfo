@@ -52,3 +52,47 @@ This runs the Salt highstate for the given environment. This handles both the co
 of the server as well as updating the latest source code. This can take a few minutes and
 does not produce any output while it is running. Once it has finished the output should be
 checked for errors.
+
+
+New server on AWS
+-----------------
+
+#. Create a new EC2 server. Some tips:
+
+ * Put it in a region close to where most users will be, e.g. Ireland (eu-west-1).
+   (To switch regions in the AWS EC2 console, look near the top-right of the window for
+   a light-gray selector on a black background.)
+ * Use an AMI (image) of Ubuntu 12.04 server, 64-bit, EBS - e.g. ubuntu-trusty-14.04-amd64-server-20140927 (ami-b83c0aa5)
+ * Be sure to save the private key that is created, or use
+   an existing one you already own. (Caktus: key pairs are stored
+   in LastPass, search for CTS.) The AWS private key is only
+   needed until CTS has been deployed the first time, but it
+   is essential until then.
+
+#. If needed, add a new environment in the fabfile and Salt config files.
+
+#. Add the new server's ssh key to your ssh-agent, e.g.::
+
+    ssh-add /path/to/newserver.pem
+
+   This will allow you to ssh into the new server as ``ubuntu`` initially.
+   After we've finished our deploy, you'll have your own userid on
+   the server that you can use to ssh in.
+
+#. Create a master::
+
+    fab -u ubuntu staging setup_master
+
+#. Create a minion and assign initial roles::
+
+    fab -u ubuntu staging setup_minion:balancer,queue,cache,web,worker
+
+#. Initial deploy::
+
+    fab -u ubuntu staging deploy
+
+After that, developer accounts will exist on the server with ssh access,
+so "-u ubuntu" will no longer be needed.  You'll be able to update
+the server with::
+
+  fab staging deploy

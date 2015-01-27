@@ -1,0 +1,49 @@
+{
+  "app": {
+    "name": "i18next"
+  },
+  "test": {
+    "hello": "Hello, World"
+  },
+  "menu": {
+  	"Map": "Service Map",
+  	"Registration": "Provider Registration",
+  	"Feedback": "Feedback Tool",
+  	"Change-Language": "Change Language"
+  },
+  "Provider-Registration-Form": {
+  	"Page-Head": {
+  		"Page-Title": {
+  			"Title": "New Service Provider Registration Form"
+  		},
+  		"Page-Description": {
+  			"Page-Description": "Fill out the form below to apply to be a service provider."
+  		}
+  	},
+  	"Form-Sections": {
+  		"Basic": {
+  			"Legend": "Basic details to register a service provider:",
+  			"Name": "Full Name",
+  			"Service-Type": "Type of Service",
+  			"Phone-Number": "Phone Number",
+  			"Email": "Email (Optional Field)",
+  			"Website": "Website (Optional Field)",
+  			"Description": "Description"
+  		},
+  		"Service-Information": {
+  			"Legend": "Service Information",
+  			"Service-Name": "Name of Service",
+  			"Service-Area": "Area of Service",
+  			"Service-Description": "Description",
+  			"Service-Hours": "Hours of Service",
+  			"Additional-Information": "Additional Information (Optional Field)",
+  			"Service-Cost": "Cost of Service (Optional Field)",
+  			"Selection-Criteria": "Selection Criteria (Optional Field)"
+  		},
+  		"Form-Submit-Options": {
+  			"Submit": "Submit Answers",
+  			"Clear": "Remove Answers"
+  		}
+  	}
+  }
+}
