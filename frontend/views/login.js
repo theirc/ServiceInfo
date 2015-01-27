@@ -52,8 +52,7 @@ module.exports = Backbone.View.extend({
                 success: function(data) {
                     config.set('forever.authToken', data.token);
                     toggleLoginMenuItem();
-                    router = new Backbone.Router();
-                    router.navigate('', {trigger: true});
+                    window.location.hash = 'service';
                 },
             })
         }
