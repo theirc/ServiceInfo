@@ -12,7 +12,11 @@ $(function() {
 function toggleLoginMenuItem() {
     if (config.get('forever.authToken')) {
         $('.menu-item-login').hide();
+        $('.menu-item-logout').show();
     } else {
+        $('.menu-item-login').show();
+        $('.menu-item-logout').hide();
+
         // TODO: Remove this later
         window.location.hash = 'login';
     }

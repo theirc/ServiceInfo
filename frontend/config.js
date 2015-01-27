@@ -12,6 +12,9 @@ module.exports = {
             localStorage[k] = v;
         }
     },
+    remove: function(k) {
+        localStorage.removeItem(k);
+    },
 }
 
 var $ = require('jquery');

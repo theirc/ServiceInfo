@@ -37,5 +37,10 @@ module.exports = Backbone.Router.extend({
         "feedback": loadPage("feedback"),
         "map": loadPage("map"),
         "login": loadPage("login"),
+        "logout": function() {
+            config.remove('forever.authToken');
+            window.location.hash = '';
+            window.location.reload();
+        },
     },
 })
