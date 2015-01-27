@@ -109,6 +109,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
@@ -135,6 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
+    'django.contrib.sites',
     # External apps
     'corsheaders',
     'compressor',
@@ -220,6 +222,7 @@ AUTH_USER_MODEL = 'email_user.EmailUser'
 # Just use admin login view for now
 LOGIN_URL = 'admin:login'
 
+
 # How many days a new user has to activate their account
 # by following the link in their new account email message.
 ACCOUNT_ACTIVATION_DAYS = 3
@@ -229,3 +232,7 @@ ACCOUNT_ACTIVATION_DAYS = 3
 ACCOUNT_ACTIVATION_REDIRECT_URL = '/nosuchurl'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+STAGING_SITE_ID = 2
+PRODUCTION_SITE_ID = 3
+DEV_SITE_ID = 4
