@@ -6,7 +6,7 @@ var $ = require('jquery'),
 ;
 
 var views = {
-    "home": require('./views/home'),
+
     "register": require('./views/provider-form'),
     "feedback": require('./views/feedback'),
     "map": require('./views/map'),
@@ -30,7 +30,7 @@ function loadPage(name) {
 
 module.exports = Backbone.Router.extend({
     routes: {
-        "": loadPage("home"),
+        
         "register": loadPage("register"),
         "feedback": loadPage("feedback"),
         "map": loadPage("map"),
