@@ -11,6 +11,20 @@
   	"Feedback": "Feedback Tool",
   	"Change-Language": "Change Language"
   },
+  "Service-Map": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Service Provider Map"
+      },
+      "Page-Description": {
+        "Page-Description": "Use the filtered search below to find a service provider who meets your needs."
+      }
+    },
+    "Filtered-Search": {
+      "Label": "Search by name, location, service, or other",
+      "Search": "Search"
+    }
+  },
   "Provider-Registration-Form": {
   	"Page-Head": {
   		"Page-Title": {
