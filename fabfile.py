@@ -262,22 +262,39 @@ def build():
 
 @task
 def makemessages():
+    """
+    Find all the translatable English messages in our source and
+    pull them out into locale/en/LC_MESSAGES/django.po
+    """
     local("python manage.py makemessages --ignore 'conf/*' --ignore 'docs/*' "
-          "--ignore 'requirements/*' --ignore 'frontend/*' --ignore 'vagrant/*' -l en")
+          "--ignore 'requirements/*' --ignore 'frontend/*' --ignore 'vagrant/*' "
+          "--no-location --no-obsolete "
+          "-l en")
 
 
 @task
 def pushmessages():
+    """
+    Upload the latest locale/en/LC_MESSAGES/django.po to Transifex
+    """
     local("tx push -s")
 
 
 @task
 def pullmessages():
+    """
+    Pull the latest locale/ar/LC_MESSAGES/django.po and
+    locale/fr/LC_MESSAGES/django.po from Transifex.
+    """
     local("tx pull -af")
 
 
 @task
 def compilemessages():
+    """
+    Compile all the .po files into the .mo files that Django
+    will get translated messages from at runtime.
+    """
     local("python manage.py compilemessages -l en -l ar -l fr")
 
 
