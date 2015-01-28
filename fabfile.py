@@ -29,8 +29,8 @@ VALID_ROLES = (
 @task
 def staging():
     env.environment = 'staging'
-    # 54.93.66.254
-    env.master = 'bob-staging.caktusgroup.com'  # Staging server on AWS Frankfurt
+    # 54.93.66.254 Staging server on AWS Frankfurt
+    env.master = 'serviceinfo-staging.rescue.org'
     env.hosts = [env.master]
 
 
@@ -38,7 +38,7 @@ def staging():
 def production():
     env.environment = 'production'
     # 54.93.51.232
-    env.master = 'bob.caktusgroup.com'
+    env.master = 'serviceinfo.rescue.org'
     env.hosts = [env.master]
 
 

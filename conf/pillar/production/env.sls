@@ -1,9 +1,7 @@
 environment: production
 
-# FIXME: Change to match production domain name
-# production = bob.caktusgroup.com = 54.93.51.232
-# serviceinfo.rescue.org is in progress but not ready yet
-domain: bob.caktusgroup.com
+# production 54.93.51.232
+domain: serviceinfo.rescue.org
 
 repo:
   url: git@github.com:theirc/Service-Mapper.git
