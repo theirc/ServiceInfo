@@ -45,5 +45,15 @@
   			"Clear": "Remove Answers"
   		}
   	}
+  },
+  "Service-List": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Service Provider Services List"
+      },
+      "Page-Description": {
+        "Page-Description": "Below is a list of services you hav applied to provide. Approved services are marked in green. Un-approved services are marked in red. Services pending approval are unmarked."
+      }
+    }
   }
 }
