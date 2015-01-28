@@ -48,7 +48,9 @@ module.exports = Backbone.View.extend({
                 error: function(e) {
                     console.error("login fail:", e.responseJSON);
                     for (var k in e.responseJSON) {
-                        if (e.responseJSON.hasOwnProperty(k)) {
+                        if (k == 'non_field_errors') {
+                            $el.find('.non-field-errors').text(e.responseJSON[k]);
+                        } else if (e.responseJSON.hasOwnProperty(k)) {
                             $el.find('.error-' + k).text(e.responseJSON[k]);
                         }
                     }
