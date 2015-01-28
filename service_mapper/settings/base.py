@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.sitemaps',
     'django.contrib.sites',
+    'django.contrib.gis',
     # External apps
     'compressor',
     'rest_framework',
