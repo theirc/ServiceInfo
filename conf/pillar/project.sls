@@ -1,4 +1,4 @@
-project_name: service_mapper
+project_name: service_info
 
 python_version: 3.4
 
