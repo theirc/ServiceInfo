@@ -25,21 +25,20 @@ VALID_ROLES = (
     'cache',
 )
 
-# FIXME: Once the master has been setup this should be set to IP of the master
-# This assumes a single master for both staging and production
-env.master = '54.235.72.124'
-
 
 @task
 def staging():
     env.environment = 'staging'
-    env.master = '54.93.66.254'  # Staging server on AWS Frankfurt
+    # 54.93.66.254 Staging server on AWS Frankfurt
+    env.master = 'serviceinfo-staging.rescue.org'
     env.hosts = [env.master]
 
 
 @task
 def production():
     env.environment = 'production'
+    # 54.93.51.232
+    env.master = 'serviceinfo.rescue.org'
     env.hosts = [env.master]
 
 
