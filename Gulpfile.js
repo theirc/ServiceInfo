@@ -7,7 +7,7 @@ var gulp = require('gulp')
 ;
 
 var API_PORT = 4005;
-var EXPRESS_PORT = 8005;
+var EXPRESS_PORT = 8000;
 var EXPRESS_ROOT = __dirname + "/frontend";
 var LIVERELOAD_PORT = 3572;
 
