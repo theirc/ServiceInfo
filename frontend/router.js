@@ -7,6 +7,7 @@ var views = {
     "register": require('./views/provider-form'),
     "feedback": require('./views/feedback'),
     "map": require('./views/map'),
+    "service-list": require('./views/service-list'),
 };
 
 function loadPage(name) {
@@ -25,5 +26,6 @@ module.exports = Backbone.Router.extend({
         "register": loadPage("register"),
         "feedback": loadPage("feedback"),
         "map": loadPage("map"),
+        "service-list": loadPage("service-list"),
     },
 })

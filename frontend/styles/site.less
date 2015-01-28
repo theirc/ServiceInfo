@@ -106,7 +106,7 @@ li {
 	margin: 0;
 	float: none;
 
-	@media (min-width: 1000px) {
+	@media (min-width: 767px) {
 		width: 48%;
 		float: left;
 	}
@@ -252,21 +252,30 @@ float: none;
 */
 
 .page-head {
-	background-color: none;
+	background-color: inherit;
 	padding: 24px 15px 20px 15px;
 }
 
 .page-title {
 	font-size: 28px;
 	margin-bottom: 10px;
+	line-height: 1.3em;
 	color: #333333;
 }
 
 .page-descr {
 	font-size: 14px;
     line-height: 1.6em;
-	padding-bottom: 0;
+	padding-bottom: 0.5em;
 	color: #666666;
+
+	@media (min-width: 767px) {
+		padding-bottom: 0;
+	}
+
+	@media (min-width: 1000px) {
+		padding-bottom: 2em;
+	}
 }
 
 /*
