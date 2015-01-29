@@ -263,6 +263,8 @@ def build():
 def makemessages():
     local("python manage.py makemessages --ignore 'conf/*' --ignore 'docs/*' "
           "--ignore 'requirements/*' --ignore 'frontend/*' --ignore 'vagrant/*' -l en")
+    local("i18next-conv -s frontend/locales/en/translation.json -t "
+          "locale/en/LC_MESSAGES/frontend.po -l en")
 
 
 @task
