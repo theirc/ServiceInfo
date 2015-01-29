@@ -11,7 +11,8 @@ from rest_framework.authtoken.models import Token
 from email_user.models import EmailUser
 from email_user.tests.factories import EmailUserFactory
 from services.models import Provider, Service
-from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory
+from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceTypeFactory, \
+    ServiceAreaFactory
 
 
 class APITestMixin(object):
@@ -237,6 +238,7 @@ class ServiceAPITest(TestCase):
         area = ServiceAreaFactory()
         data = {
             'provider': self.provider.get_api_url(),
+            'type': ServiceTypeFactory().get_api_url(),
             'name_en': 'Some service',
             'area_of_service': area.get_api_url(),
             'description_en': "Awesome\nService"

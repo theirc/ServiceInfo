@@ -18,7 +18,7 @@ Layout
 
 Below is the server layout created by this provisioning process::
 
-    /var/www/service_mapper/
+    /var/www/service_info/
         source/
         env/
         log/

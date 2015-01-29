@@ -1,11 +1,10 @@
 environment: production
 
-# FIXME: Change to match production domain name
-domain: example.com
+# production 54.93.51.232
+domain: serviceinfo.rescue.org
 
-# FIXME: Update to the correct project repo
 repo:
-  url: git@github.com:CHANGEME/CHANGEME.git
+  url: git@github.com:theirc/Service-Mapper.git
   branch: master
 
 # Addtional public environment variables to set for the project
