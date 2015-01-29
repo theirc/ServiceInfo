@@ -9,6 +9,7 @@ class ProviderTypeFactory(factory.DjangoModelFactory):
     class Meta:
         model = ProviderType
 
+    number = factory.Sequence(lambda n: n)
     name_en = factory.fuzzy.FuzzyText()
     name_ar = factory.fuzzy.FuzzyText()
     name_fr = factory.fuzzy.FuzzyText()
