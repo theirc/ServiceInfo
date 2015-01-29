@@ -17,14 +17,13 @@
 </p>
 <p>
     {% blocktrans %}
-    To activate this account, please click the following link within the next
-    {{ expiration_days }} days:
+    To activate this account, please click the following link:
     {% endblocktrans %}
 </p>
 
 <p>
-    <a href="{{ request.scheme }}://{{ request.get_host }}{{ user.get_activation_link }}">
-        {{ request.scheme }}://{{ request.get_host }}{{ user.get_activation_link }}
+    <a href="{{ activation_link }}">
+        {{ activation_link }}
     </a>
 </p>
 <p>
@@ -45,12 +44,8 @@ Used to generate the html body of the activation email. Should display a
 link the user can click to activate the account. This template has the
 following context:
 
-``activation_key``
-    The activation key for the new account.
-
-``expiration_days``
-    The number of days remaining during which the account may be
-    activated.
+``activation_link``
+    The activation link for the new account.
 
 ``site``
     An object representing the site on which the user registered;

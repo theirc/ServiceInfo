@@ -1,6 +1,6 @@
 import sys
 
-from service_mapper.settings.base import *  # noqa
+from service_info.settings.base import *  # noqa
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -19,6 +19,8 @@ CELERY_ALWAYS_EAGER = True
 CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 
 COMPRESS_ENABLED = False
+
+SITE_ID = DEV_SITE_ID
 
 # Special test settings
 if 'test' in sys.argv:

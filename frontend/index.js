@@ -3,6 +3,7 @@ var Backbone = require('backbone');
 Backbone.$ = require('jquery');
 var handlebars = require('handlebars');
 var underscore = require('underscore');
+var config = require('./config');
 var _ = underscore;
 
 window.$ = $;
@@ -16,6 +17,7 @@ $('body').on("click", ".back-button", function (event) {
 });
 
 $(function(){
+
     Backbone.history.start();
 
     var LangToggleView = require('./views/language-toggle');

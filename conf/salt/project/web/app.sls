@@ -2,6 +2,7 @@
 
 include:
   - supervisor.pip
+  - project.db
   - project.dirs
   - project.venv
   - project.django
@@ -78,6 +79,15 @@ less:
     - require:
       - cmd: node_alias
 
+# npm install does not seem to be very good at updating
+# installs. Clear out node_modules and do it from scratch
+# each time.
+clear_node_modules:
+  file.absent:
+    - name: "{{ vars.source_dir }}/node_modules"
+    - require:
+      - cmd: node_alias
+
 npm_installs:
   cmd.run:
     - name: npm install
@@ -85,6 +95,7 @@ npm_installs:
     - user: {{ pillar['project_name'] }}
     - require:
       - cmd: node_alias
+      - file: clear_node_modules
 
 make_bundle:
   cmd.run:
@@ -118,6 +129,7 @@ collectstatic:
       - file: manage
       - file: static_dir
       - cmd: make_bundle
+      - postgres_database: database-{{ pillar['project_name'] }}
 
 migrate:
   cmd.run:
@@ -127,6 +139,7 @@ migrate:
     - onlyif: "{{ vars.path_from_root('manage.sh') }} migrate --list | grep '\\[ \\]'"
     - require:
       - file: manage
+      - postgres_database: database-{{ pillar['project_name'] }}
     - order: last
 
 gunicorn_process:
