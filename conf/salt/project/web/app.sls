@@ -79,6 +79,15 @@ less:
     - require:
       - cmd: node_alias
 
+# npm install does not seem to be very good at updating
+# installs. Clear out node_modules and do it from scratch
+# each time.
+clear_node_modules:
+  file.absent:
+    - name: "{{ vars.source_dir }}/node_modules"
+    - require:
+      - cmd: node_alias
+
 npm_installs:
   cmd.run:
     - name: npm install
@@ -86,6 +95,7 @@ npm_installs:
     - user: {{ pillar['project_name'] }}
     - require:
       - cmd: node_alias
+      - file: clear_node_modules
 
 make_bundle:
   cmd.run:
