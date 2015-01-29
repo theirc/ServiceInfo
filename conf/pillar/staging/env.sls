@@ -1,6 +1,6 @@
 environment: staging
 
-domain: bob-staging.caktusgroup.com
+domain: serviceinfo-staging.rescue.org
 
 repo:
   url: git@github.com:theirc/Service-Mapper.git
@@ -10,5 +10,4 @@ repo:
 env:
   FOO: BAR
 
-# original Caktus staging server: 54.235.72.124
 # IRC Frankfurt: 54.93.66.254

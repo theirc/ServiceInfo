@@ -14,9 +14,9 @@ from rest_framework.views import APIView
 from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, ProviderSerializer, \
     ProviderTypeSerializer, ServiceAreaSerializer, APILoginSerializer, APIActivationSerializer, \
     PasswordResetRequestSerializer, PasswordResetCheckSerializer, PasswordResetSerializer, \
-    ResendActivationLinkSerializer, CreateProviderSerializer
+    ResendActivationLinkSerializer, CreateProviderSerializer, ServiceTypeSerializer
 from email_user.models import EmailUser
-from services.models import Service, Provider, ProviderType, ServiceArea
+from services.models import Service, Provider, ProviderType, ServiceType, ServiceArea
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -48,6 +48,11 @@ class ServiceViewSet(viewsets.ModelViewSet):
 class ProviderTypeViewSet(viewsets.ModelViewSet):
     queryset = ProviderType.objects.all()
     serializer_class = ProviderTypeSerializer
+
+
+class ServiceTypeViewSet(viewsets.ModelViewSet):
+    queryset = ServiceType.objects.all()
+    serializer_class = ServiceTypeSerializer
 
 
 class ProviderViewSet(viewsets.ModelViewSet):
@@ -200,7 +205,7 @@ class PasswordResetCheck(APIView):
         # The serializer validation does all the work in this one
         serializer = PasswordResetCheckSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        return Response({'email': serializer.validated_data['user']})
+        return Response({'email': serializer.validated_data['user'].email})
 
 
 class PasswordReset(APIView):

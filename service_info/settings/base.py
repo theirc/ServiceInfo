@@ -1,11 +1,11 @@
-# Django settings for service_mapper project.
+# Django settings for service_info project.
 import os
 
-# BASE_DIR = path/to/source/service_mapper
+# BASE_DIR = path/to/source/service_info
 # E.g. this file is BASE_DIR/settings/base.py
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 # PROJECT_ROOT = path/to/source
-# This file is PROJECT_ROOT/service_mapper/settings/base.py
+# This file is PROJECT_ROOT/service_info/settings/base.py
 PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, os.pardir))
 
 DEBUG = True
@@ -18,7 +18,7 @@ ADMINS = (
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'service_mapper',
+        'NAME': 'service_info',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -113,10 +113,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'service_mapper.urls'
+ROOT_URLCONF = 'service_info.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'service_mapper.wsgi.application'
+WSGI_APPLICATION = 'service_info.wsgi.application'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
@@ -137,6 +137,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.sitemaps',
     'django.contrib.sites',
+    'django.contrib.gis',
     # External apps
     'corsheaders',
     'compressor',
@@ -174,7 +175,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'basic',
-            'filename': os.path.join(PROJECT_ROOT, 'service_mapper.log'),
+            'filename': os.path.join(PROJECT_ROOT, 'service_info.log'),
             'maxBytes': 10 * 1024 * 1024,  # 10 MB
             'backupCount': 10,
         },
@@ -189,7 +190,7 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-        'service_mapper': {
+        'service_info': {
             'handlers': ['file', 'mail_admins'],
             'level': 'INFO',
             'propagate': True,

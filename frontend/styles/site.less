@@ -585,14 +585,14 @@ input[type=range] {
 
 #application-header {
     width: 100%;
-    height: 80px;
+    height: 70px;
     background-color: #343538;
     -webkit-box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
     -moz-box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
     box-shadow: 4px 0px 6px rgba(200, 200, 200, 1)
 }
 
-#application-header img#logo {
+#application-header .brand #logo {
     height: 100%;
 }
 
@@ -614,6 +614,11 @@ input[type=range] {
     font-size: inherit;
     margin: 0;
 }
+
+#menu a {
+	color: white;
+}
+
 #menu li {
     color: #fff;
     display: block;
@@ -652,14 +657,17 @@ input[type=range] {
         overflow: auto;
     }
     #application-header .brand {
-        background: #FEC82D;
-        padding: .5em .5em 0.1em;
+        background: #fec325;
+        padding: .25em .25em 0.1em;
         text-align: center
     }
-    #application-header img#logo {
-        width: 80%;
-        height: auto;
-
+    #application-header .brand #logo {
+    	background-image: url(/images/irc_logo.jpg);
+    	background-image: url(/images/irc_logo.svg);
+    	background-size: 100%;
+        width: 120px;
+        height: 150px;
+        margin: 0 auto;
     }
     #page-container {
         display: inline-block;
@@ -674,6 +682,14 @@ input[type=range] {
 @media only screen and (orientation: portrait) {
     #application-header .brand {
         height: 100%;
+    }
+    #application-header .brand #logo {
+    	background-image: url(/images/irc_logo.jpg);
+    	background-image: url(/images/irc_logo.svg);
+    	background-size: 100%;
+        width: 54px;
+        height: 70px;
+        margin: 0;
     }
     #menu {
         position: absolute;
@@ -692,11 +708,12 @@ input[type=range] {
     #menu-toggle {
         position: absolute;
         right: 16px;
-        top: 18px;
-        padding: 10px 12px;
+        top: 16px;
+        padding: 8px 10px;
         background-color: inherit;
         color: white;
         border-color: white;
+        font-size: .75em;
     }
 }
 
