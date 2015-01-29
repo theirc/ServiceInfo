@@ -6,7 +6,6 @@ var $ = require('jquery'),
 ;
 
 var views = {
-
     "register": require('./views/provider-form'),
     "service": require('./views/service-form'),
     "feedback": require('./views/feedback'),
@@ -31,7 +30,13 @@ function loadPage(name) {
 
 module.exports = Backbone.Router.extend({
     routes: {
+        "": function() {
+            if (config.get('forever.authToken')) {
 
+            } else {
+
+            }
+        },
         "register": loadPage("register"),
         "service": loadPage("service"),
         "feedback": loadPage("feedback"),

@@ -44,7 +44,7 @@
   			"Name": "Full Name",
   			"Service-Type": "Type of Service",
   			"Phone-Number": "Phone Number",
-  			"Email": "Email (Optional Field)",
+  			"Email": "Email",
   			"Website": "Website (Optional Field)",
   			"Description": "Description"
   		},
