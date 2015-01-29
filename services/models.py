@@ -214,6 +214,11 @@ class ServiceType(models.Model):
         return reverse('servicetype-detail', args=[self.id])
 
 
+class ServiceManager(models.GeoManager):
+    def get_queryset(self):
+        return super().get_queryset().exclude(status=Service.STATUS_ARCHIVED)
+
+
 class Service(models.Model):
     provider = models.ForeignKey(
         Provider,
@@ -295,6 +300,7 @@ class Service(models.Model):
     STATUS_CURRENT = 'current'
     STATUS_REJECTED = 'rejected'
     STATUS_CANCELED = 'canceled'
+    STATUS_ARCHIVED = 'archived'
     STATUS_CHOICES = (
         # New service or edit of existing service is pending approval
         (STATUS_DRAFT, _('draft')),
@@ -306,6 +312,8 @@ class Service(models.Model):
         # The provider has canceled service. They can do this on draft or current services.
         # It no longer appears in the public interface.
         (STATUS_CANCELED, _('canceled')),
+        # The record is obsolete and we don't want to see it anymore
+        (STATUS_ARCHIVED, _('archived')),
     )
     status = models.CharField(
         _('status'),
@@ -351,7 +359,7 @@ class Service(models.Model):
         verbose_name=_("type"),
     )
 
-    objects = models.GeoManager()
+    objects = ServiceManager()
 
     def __str__(self):
         return self.name_en
