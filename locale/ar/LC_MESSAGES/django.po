@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Service Info\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-26 10:39-0500\n"
-"PO-Revision-Date: 2015-01-28 15:29+0000\n"
+"PO-Revision-Date: 2015-01-29 07:04+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -67,7 +67,7 @@ msgid ""
 "Raw passwords are not stored, so there is no way to see this user's "
 "password, but you can change the password using <a href=\"password/\">this "
 "form</a>."
-msgstr ""
+msgstr "لا يتم تخزين كلمات السر الخام، لذلك ليس هناك طريقة لمعرفة كلمة مرور هذا المستخدم، ولكن يمكنك تغيير كلمة المرور باستخدام <a href=\"password/\"> هذا النموذج </a>."
 
 #: email_user/models.py:36
 msgid "Users must have an email address"
@@ -119,7 +119,7 @@ msgid ""
 "    %(site.name)s.  If this wasn't you, please ignore this email\n"
 "    and your address will be removed from our records.\n"
 "    "
-msgstr ""
+msgstr "\nأنت (أو شخص يتظاهر بأنه أنت) وطلب لتسجيل حساب في\n%(site.name)s إذا لم يكن هذا لكم، يرجى تجاهل هذا البريد الإلكتروني\nوسيتم إزالة عنوانك من سجلاتنا."
 
 #: email_user/templates/registration/activation_email.html:19
 #, python-format
@@ -128,7 +128,7 @@ msgid ""
 "    To activate this account, please click the following link within the next\n"
 "    %(expiration_days)s days:\n"
 "    "
-msgstr ""
+msgstr "\nلتفعيل هذا الحساب، يرجى الضغط على الرابط التالي خلال الإيام\n %(expiration_days)s التالية."
 
 #: email_user/templates/registration/activation_email.html:31
 #, python-format
@@ -137,7 +137,7 @@ msgid ""
 "    Sincerely,\n"
 "    %(site.name)s Management\n"
 "    "
-msgstr "\nمع خالص التقدير,\nsite.name)s)%\n الإدارة "
+msgstr "\nمع خالص التقدير,\n%(site.name)s\n الإدارة "
 
 #: email_user/templates/registration/activation_email.txt:3
 #, python-format
@@ -146,7 +146,7 @@ msgid ""
 "You (or someone pretending to be you) have asked to register an account at\n"
 "%(site.name)s.  If this wasn't you, please ignore this email\n"
 "and your address will be removed from our records.\n"
-msgstr ""
+msgstr "\nأنت (أو شخص يتظاهر بأنه أنت) وطلب لتسجيل حساب في\n%(site.name)s إذا لم يكن هذا لكم، يرجى تجاهل هذا البريد الإلكتروني\nوسيتم إزالة عنوانك من سجلاتنا.\n"
 
 #: email_user/templates/registration/activation_email.txt:8
 #, python-format
@@ -154,7 +154,7 @@ msgid ""
 "\n"
 "To activate this account, please click the following link within the next\n"
 "%(expiration_days)s days:\n"
-msgstr ""
+msgstr "\nلتفعيل هذا الحساب، يرجى الضغط على الرابط التالي خلال الإيام\n %(expiration_days)s التالية.\n"
 
 #: email_user/templates/registration/activation_email.txt:15
 #, python-format
@@ -162,7 +162,7 @@ msgid ""
 "\n"
 "Sincerely,\n"
 "%(site.name)s Management\n"
-msgstr ""
+msgstr "\nمع خالص التقدير,\n%(site.name)s\n الإدارة.\n"
 
 #: email_user/templates/registration/activation_email_subject.txt:1
 msgid "Account activation on"
@@ -177,7 +177,7 @@ msgstr "لم يتم تفعيل الحساب "
 msgid ""
 "You're receiving this email because you requested a password reset for your "
 "user account at %(site_name)s."
-msgstr ""
+msgstr "كنت تتلقى هذا البريد الإلكتروني لأنك طلبت إعادة تعيين كلمة المرور لحساب المستخدم الخاص بك في %(site_name)s.."
 
 #: email_user/templates/registration/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
@@ -194,7 +194,7 @@ msgstr "شكرا لاستخدام موقعنا!"
 #: email_user/templates/registration/password_reset_email.html:12
 #, python-format
 msgid "The %(site_name)s team"
-msgstr ""
+msgstr "فريق %(site_name)s"
 
 #. Translators: Provider name
 #. Translators: Service name
@@ -316,7 +316,7 @@ msgid ""
 "If a service record represents a modification of an existing service record "
 "that is still pending approval, this field links to the existing service "
 "record."
-msgstr ""
+msgstr "إذا يمثل رقما قياسيا خدمة تعديل لسجل الخدمة الحالية التي لا تزال في انتظار الموافقة، وهذا الروابط ميدانية إلى سجل الخدمة الحالية. للتغيرر"
 
 #: services/models.py:273
 msgid "location"
