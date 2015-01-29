@@ -102,6 +102,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -138,6 +139,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.gis',
     # External apps
+    'corsheaders',
     'compressor',
     'rest_framework',
     'rest_framework.authtoken',
@@ -220,6 +222,17 @@ AUTH_USER_MODEL = 'email_user.EmailUser'
 
 # Just use admin login view for now
 LOGIN_URL = 'admin:login'
+
+
+# How many days a new user has to activate their account
+# by following the link in their new account email message.
+ACCOUNT_ACTIVATION_DAYS = 3
+
+# When someone successfully activates their user account,
+# redirect them to this URL.
+ACCOUNT_ACTIVATION_REDIRECT_URL = '/nosuchurl'
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 STAGING_SITE_ID = 2
 PRODUCTION_SITE_ID = 3
