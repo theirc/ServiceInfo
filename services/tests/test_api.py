@@ -271,7 +271,6 @@ class ServiceAPITest(APITestMixin, TestCase):
 
 class SelectionCriterionAPITest(APITestMixin, TestCase):
     def test_create_selection_criterion(self):
-        provider = ProviderFactory(user=self.user)
         rsp = self.client.post(reverse('selectioncriterion-list'),
                                data={
                                    'text_en': 'English',
@@ -282,32 +281,18 @@ class SelectionCriterionAPITest(APITestMixin, TestCase):
         result = json.loads(rsp.content.decode('utf-8'))
         criterion = SelectionCriterion.objects.get(id=result['id'])
         self.assertEqual('English', criterion.text_en)
-        self.assertEqual(provider, criterion.provider)
-
-    def test_create_selection_criterion_wrong_provider(self):
-        # Passing the wrong provider is of no avail, we'll still use the current user's
-        provider = ProviderFactory(user=self.user)
-        wrong_provider = ProviderFactory(name_en='Wrong provider')
-        rsp = self.client.post(reverse('selectioncriterion-list'),
-                               data={
-                                   'provider': wrong_provider.get_api_url(),
-                                   'text_en': 'English',
-                                   'text_ar': '',
-                                   'text_fr': '',
-                                   })
-        self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
-        result = json.loads(rsp.content.decode('utf-8'))
-        criterion = SelectionCriterion.objects.get(id=result['id'])
-        self.assertEqual('English', criterion.text_en)
-        self.assertEqual(provider, criterion.provider)
 
     def test_get_selection_criteria(self):
         # Only returns user's own selection criteria
-        provider = ProviderFactory(user=self.user)
-        s1 = SelectionCriterionFactory(provider=provider)
-        s2 = SelectionCriterionFactory(provider=provider)
+        # Defined as those attached to the user's services
+        service = ServiceFactory(provider__user=self.user)
+        s1 = SelectionCriterionFactory()
+        s2 = SelectionCriterionFactory()
+        service.selection_criteria.add(s1, s2)
         other_provider = ProviderFactory()
-        s3 = SelectionCriterionFactory(provider=other_provider)
+        other_service = ServiceFactory(provider=other_provider)
+        s3 = SelectionCriterionFactory()
+        other_service.selection_criteria.add(s3)
         rsp = self.client.get(reverse('selectioncriterion-list'))
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))

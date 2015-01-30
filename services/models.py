@@ -155,9 +155,6 @@ class SelectionCriterion(models.Model):
     text_fr = models.CharField(max_length=100, blank=True, default='')
     text_ar = models.CharField(max_length=100, blank=True, default='')
 
-    # These are specific to one provider
-    provider = models.ForeignKey(Provider)
-
     class Meta(object):
         verbose_name_plural = _("selection criteria")
 
@@ -287,6 +284,7 @@ class Service(models.Model):
     )
     selection_criteria = models.ManyToManyField(
         SelectionCriterion,
+        related_name='services',
         verbose_name=_("selection criteria"),
         blank=True,
     )

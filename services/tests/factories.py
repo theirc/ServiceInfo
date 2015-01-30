@@ -71,7 +71,6 @@ class SelectionCriterionFactory(factory.DjangoModelFactory):
     class Meta:
         model = SelectionCriterion
 
-    provider = factory.SubFactory(ProviderFactory)
     text_en = factory.fuzzy.FuzzyText()
     text_ar = factory.fuzzy.FuzzyText()
     text_fr = factory.fuzzy.FuzzyText()

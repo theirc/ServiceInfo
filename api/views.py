@@ -66,7 +66,8 @@ class SelectionCriterionViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         # Only make visible the SelectionCriteria owned by the current provider
-        return self.queryset.filter(provider__user=self.request.user)
+        # (attached to services of the current provider)
+        return self.queryset.filter(services__provider__user=self.request.user)
 
     def get_object(self):
         # Users can only access their own records
