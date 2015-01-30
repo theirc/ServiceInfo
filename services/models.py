@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _, get_language
 
 
 class ProviderType(models.Model):
+    number = models.IntegerField(unique=True)
     name_en = models.CharField(
         _("name in English"),
         max_length=256,
@@ -284,6 +285,7 @@ class Service(models.Model):
     )
     selection_criteria = models.ManyToManyField(
         SelectionCriterion,
+        related_name='services',
         verbose_name=_("selection criteria"),
         blank=True,
     )

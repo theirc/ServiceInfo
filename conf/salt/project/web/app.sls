@@ -79,23 +79,17 @@ less:
     - require:
       - cmd: node_alias
 
-# npm install does not seem to be very good at updating
-# installs. Clear out node_modules and do it from scratch
-# each time.
-clear_node_modules:
-  file.absent:
-    - name: "{{ vars.source_dir }}/node_modules"
-    - require:
-      - cmd: node_alias
-
+# Need to run install in case this is the first time, and
+# update in case it's not the first time.  Unfortunately there's
+# not a single command that will figure out for itself what to do,
+# and it seems safest to just run both.
 npm_installs:
   cmd.run:
-    - name: npm install
+    - name: npm install; npm update
     - cwd: "{{ vars.source_dir }}"
     - user: {{ pillar['project_name'] }}
     - require:
       - cmd: node_alias
-      - file: clear_node_modules
 
 make_bundle:
   cmd.run:
@@ -104,6 +98,22 @@ make_bundle:
     - user: {{ pillar['project_name'] }}
     - require:
       - cmd: npm_installs
+
+# MAJOR HACK!
+# For now, this needs to run after make_bundle because it writes out
+# an incorrect config.json
+config_json:
+  file.managed:
+    - name: "{{ vars.source_dir }}/frontend/config.json"
+    - source: salt://project/web/config.json
+    - user: {{ pillar['project_name'] }}
+    - mode: 644
+    - template: jinja
+    - context:
+        # code will append "api/stuff" to this to call the API:
+        api_location: "//{{ pillar['domain'] }}/"
+    - require:
+      - cmd: make_bundle
 
 static_dir:
   file.directory:
