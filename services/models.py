@@ -285,6 +285,7 @@ class Service(models.Model):
     )
     selection_criteria = models.ManyToManyField(
         SelectionCriterion,
+        related_name='services',
         verbose_name=_("selection criteria"),
         blank=True,
     )
