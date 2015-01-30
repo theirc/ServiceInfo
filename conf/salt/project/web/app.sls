@@ -110,7 +110,8 @@ config_json:
     - mode: 644
     - template: jinja
     - context:
-        api_location: "//{{ pillar['domain'] }}"
+        # code will append "api/stuff" to this to call the API:
+        api_location: "//{{ pillar['domain'] }}/"
     - require:
       - cmd: make_bundle
 
