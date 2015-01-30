@@ -14,9 +14,11 @@ from rest_framework.views import APIView
 from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, ProviderSerializer, \
     ProviderTypeSerializer, ServiceAreaSerializer, APILoginSerializer, APIActivationSerializer, \
     PasswordResetRequestSerializer, PasswordResetCheckSerializer, PasswordResetSerializer, \
-    ResendActivationLinkSerializer, CreateProviderSerializer, SelectionCriterionSerializer
+    ResendActivationLinkSerializer, CreateProviderSerializer, ServiceTypeSerializer, \
+    SelectionCriterionSerializer
 from email_user.models import EmailUser
-from services.models import Service, Provider, ProviderType, ServiceArea, SelectionCriterion
+from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
+    SelectionCriterion
 from services.utils import permission_names_to_objects, USER_PERMISSION_NAMES
 
 
@@ -78,6 +80,11 @@ class SelectionCriterionViewSet(viewsets.ModelViewSet):
 class ProviderTypeViewSet(viewsets.ModelViewSet):
     queryset = ProviderType.objects.all()
     serializer_class = ProviderTypeSerializer
+
+
+class ServiceTypeViewSet(viewsets.ModelViewSet):
+    queryset = ServiceType.objects.all()
+    serializer_class = ServiceTypeSerializer
 
 
 class ProviderViewSet(viewsets.ModelViewSet):

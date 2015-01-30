@@ -14,22 +14,22 @@ def define_sites(apps, schema_editor):
     Site.objects.update_or_create(
         id=settings.DEV_SITE_ID,
         defaults=dict(
-            name='Bob Dev',
-            domain='bob-dev.caktusgroup.com',
+            name='IRC Service Info Dev',
+            domain='localhost:8000',
         )
     )
     Site.objects.update_or_create(
         id=settings.STAGING_SITE_ID,
         defaults=dict(
-            name='Bob Staging',
-            domain='bob-staging.caktusgroup.com',
+            name='IRC Service Info Staging',
+            domain='serviceinfo-staging.rescue.org',
         )
     )
     Site.objects.update_or_create(
         id=settings.PRODUCTION_SITE_ID,
         defaults=dict(
-            name='Bob',
-            domain='bob.caktusgroup.com',
+            name='IRC Service Info',
+            domain='serviceinfo-staging.rescue.org',
         )
     )
 

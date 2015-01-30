@@ -1,5 +1,5 @@
-IRC's Service Mapper
-====================
+IRC's Service Info
+==================
 
 Please see the `documentation`_ for more information, including
 `Development Setup`_ to configure your local development environment.

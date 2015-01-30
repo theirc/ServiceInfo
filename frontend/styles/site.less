@@ -96,7 +96,7 @@ li {
 
 @media (min-width: 1px) and (max-width: 768px) {
 	.row {
-		padding: 0;
+		padding: 15px 0;
 	}
 }
 
@@ -124,6 +124,30 @@ float: none;
 	@media (min-width: 1000px) {
 		float: right;
 	}
+}
+
+.third {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	float: none;
+	&:first-child {
+		margin-top: 2em;
+	}
+
+	@media (min-width: 1000px) {
+		width: 31.0%;
+		float: left;
+		padding: 1.0%;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+}
+
+.center-text {
+	text-align: center;
 }
 
 .main-content {
@@ -228,18 +252,19 @@ float: none;
 
 .page-head {
 	background-color: none;
-	padding: 24px 15px 20px 15px;
+	padding: 24px 15px 0 15px;
 }
 
 .page-title {
 	font-size: 28px;
+	line-height: 1.25em;
 	margin-bottom: 10px;
 	color: #333333;
 }
 
 .page-descr {
 	font-size: 14px;
-    line-height: 1.6em;
+    line-height: 1.5em;
 	padding-bottom: 0;
 	color: #666666;
 }
@@ -482,6 +507,13 @@ fieldset > legend {
 label {
     max-width: 100%;
     margin-bottom: 5px;
+
+    .error {
+        float: right;
+    }
+}
+.error {
+    color: darkred;
 }
 
 .control-label {
@@ -553,20 +585,33 @@ input[type=range] {
 
 #application-header {
     width: 100%;
-    height: 80px;
+    height: 70px;
     background-color: #343538;
+    -webkit-box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
+    -moz-box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
+    box-shadow: 4px 0px 6px rgba(200, 200, 200, 1)
 }
 
-#application-header img#logo {
+#application-header .brand #logo {
     height: 100%;
 }
 
-#application-footer {
+#language-toggle {
     width: 100%;
     height: 64px;
     background: gray;
     position: fixed;
     bottom: 0px;
+    transition: all 1s;
+    -webkit-box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
+    -moz-box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
+    box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
+}
+
+#language-toggle.hidden {
+    transform: translateX(-50%) scale(0.1);
+    opacity: 0;
+    transition: all 1s;
 }
 
 #menu {
@@ -576,6 +621,11 @@ input[type=range] {
     font-size: inherit;
     margin: 0;
 }
+
+#menu a {
+	color: white;
+}
+
 #menu li {
     color: #fff;
     display: block;
@@ -614,14 +664,17 @@ input[type=range] {
         overflow: auto;
     }
     #application-header .brand {
-        background: #FEC82D;
-        padding: .5em .5em 0.1em;
+        background: #fec325;
+        padding: .25em .25em 0.1em;
         text-align: center
     }
-    #application-header img#logo {
-        width: 80%;
-        height: auto;
-
+    #application-header .brand #logo {
+        background-image: url(../images/irc_logo.jpg);
+        background-image: url(../images/irc_logo.svg);
+        background-size: 100%;
+        width: 120px;
+        height: 150px;
+        margin: 0 auto;
     }
     #page-container {
         display: inline-block;
@@ -636,6 +689,14 @@ input[type=range] {
 @media only screen and (orientation: portrait) {
     #application-header .brand {
         height: 100%;
+    }
+    #application-header .brand #logo {
+        background-image: url(../images/irc_logo.jpg);
+        background-image: url(../images/irc_logo.svg);
+        background-size: 100%;
+        width: 54px;
+        height: 70px;
+        margin: 0;
     }
     #menu {
         position: absolute;
@@ -654,18 +715,53 @@ input[type=range] {
     #menu-toggle {
         position: absolute;
         right: 16px;
-        top: 18px;
-        padding: 10px 12px;
+        top: 16px;
+        padding: 8px 10px;
         background-color: inherit;
         color: white;
         border-color: white;
+        font-size: .75em;
     }
 }
 
 @media only screen and (min-width: 1000px) {
 	#page-container {
 	    display: inline-block;
-	    width: calc(100% - 200px);
 	    margin-left: 200px;
+	}
+}
+
+/*
+Login page
+*/
+
+.service-provider-map,
+.feedback-tool,
+.service-provider-registration {
+	margin: 1.5em;
+	padding: 16px 10px;
+	background-color: white;
+	border-width: 1px;
+	border-style: solid;
+	border-color: white;
+	width: auto;
+	text-align: center;
+	color: #666;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	vertical-align: top;
+	-webkit-box-shadow: 0px 2px 6px rgba(200, 200, 200, 0.4);
+	-moz-box-shadow: 0px 2px 6px rgba(200, 200, 200, 0.4);
+	box-shadow: 0px 2px 6px rgba(200, 200, 200, 0.4);
+
+	p {
+		color: #666;
+		font-size: 115%;
+		margin-bottom: 0;
+	}
+
+	@media (min-width: 1000px) {
+		margin-top: 33.0%;
 	}
 }

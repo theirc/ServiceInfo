@@ -12,7 +12,7 @@ from email_user.models import EmailUser
 from email_user.tests.factories import EmailUserFactory
 from services.models import Provider, Service, SelectionCriterion
 from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory, \
-    ServiceFactory, SelectionCriterionFactory
+    ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory
 from services.utils import permission_names_to_objects, USER_PERMISSION_NAMES
 
 
@@ -235,7 +235,8 @@ class ServiceAPITest(APITestMixin, TestCase):
             'provider': wrong_provider.get_api_url(),  # should just be ignored
             'name_en': 'Some service',
             'area_of_service': area.get_api_url(),
-            'description_en': "Awesome\nService"
+            'description_en': "Awesome\nService",
+            'type': ServiceTypeFactory().get_api_url(),
         }
         rsp = self.client.post(reverse('service-list'), data=data)
         self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))

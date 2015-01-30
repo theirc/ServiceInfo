@@ -162,6 +162,61 @@ class SelectionCriterion(models.Model):
         verbose_name_plural = _("selection criteria")
 
 
+class ServiceType(models.Model):
+    number = models.IntegerField(unique=True)
+    name_en = models.CharField(
+        _("name in English"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    name_ar = models.CharField(
+        _("name in Arabic"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    name_fr = models.CharField(
+        _("name in French"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+
+    comments_en = models.CharField(
+        _("comments in English"),
+        max_length=512,
+        default='',
+        blank=True,
+    )
+    comments_ar = models.CharField(
+        _("comments in Arabic"),
+        max_length=512,
+        default='',
+        blank=True,
+    )
+    comments_fr = models.CharField(
+        _("comments in French"),
+        max_length=512,
+        default='',
+        blank=True,
+    )
+
+    def __str__(self):
+        # Try to return the name field of the currently selected language
+        # if we have such a field and it has something in it.
+        # Otherwise, punt and return the English, French, or Arabic name,
+        # in that order.
+        language = get_language()
+        field_name = 'name_%s' % language[:2]
+        if hasattr(self, field_name) and getattr(self, field_name):
+            return getattr(self, field_name)
+        return self.name_en or self.name_fr or self.name_ar
+
+    def get_api_url(self):
+        return reverse('servicetype-detail', args=[self.id])
+
+
 class Service(models.Model):
     provider = models.ForeignKey(
         Provider,
@@ -293,6 +348,11 @@ class Service(models.Model):
     friday_close = models.TimeField(null=True, blank=True)
     saturday_open = models.TimeField(null=True, blank=True)
     saturday_close = models.TimeField(null=True, blank=True)
+
+    type = models.ForeignKey(
+        ServiceType,
+        verbose_name=_("type"),
+    )
 
     objects = models.GeoManager()
 

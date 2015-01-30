@@ -10,6 +10,7 @@ router.register(r'groups', views.GroupViewSet)
 router.register(r'providers', views.ProviderViewSet)
 router.register(r'providertypes', views.ProviderTypeViewSet)
 router.register(r'services', views.ServiceViewSet)
+router.register(r'servicetypes', views.ServiceTypeViewSet)
 router.register(r'serviceareas', views.ServiceAreaViewSet)
 router.register(r'selectioncriteria', views.SelectionCriterionViewSet,
                 base_name='selectioncriterion')
