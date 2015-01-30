@@ -2,6 +2,7 @@
 
 include:
   - supervisor.pip
+  - project.db
   - project.dirs
   - project.venv
   - project.django
@@ -78,9 +79,13 @@ less:
     - require:
       - cmd: node_alias
 
+# Need to run install in case this is the first time, and
+# update in case it's not the first time.  Unfortunately there's
+# not a single command that will figure out for itself what to do,
+# and it seems safest to just run both.
 npm_installs:
   cmd.run:
-    - name: npm install
+    - name: npm install; npm update
     - cwd: "{{ vars.source_dir }}"
     - user: {{ pillar['project_name'] }}
     - require:
@@ -93,6 +98,22 @@ make_bundle:
     - user: {{ pillar['project_name'] }}
     - require:
       - cmd: npm_installs
+
+# MAJOR HACK!
+# For now, this needs to run after make_bundle because it writes out
+# an incorrect config.json
+config_json:
+  file.managed:
+    - name: "{{ vars.source_dir }}/frontend/config.json"
+    - source: salt://project/web/config.json
+    - user: {{ pillar['project_name'] }}
+    - mode: 644
+    - template: jinja
+    - context:
+        # code will append "api/stuff" to this to call the API:
+        api_location: "//{{ pillar['domain'] }}/"
+    - require:
+      - cmd: make_bundle
 
 static_dir:
   file.directory:
@@ -118,6 +139,7 @@ collectstatic:
       - file: manage
       - file: static_dir
       - cmd: make_bundle
+      - postgres_database: database-{{ pillar['project_name'] }}
 
 migrate:
   cmd.run:
@@ -127,6 +149,7 @@ migrate:
     - onlyif: "{{ vars.path_from_root('manage.sh') }} migrate --list | grep '\\[ \\]'"
     - require:
       - file: manage
+      - postgres_database: database-{{ pillar['project_name'] }}
     - order: last
 
 gunicorn_process:

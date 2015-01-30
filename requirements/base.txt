@@ -13,6 +13,7 @@ djangorestframework==3.0.2
 # Optional, but used by DRF
 markdown==2.5.2
 django-filter==0.9.1
+django-cors-headers==1.0.0
 
 # JIRA support
 jira==0.35
