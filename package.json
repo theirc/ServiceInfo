@@ -1,5 +1,5 @@
 {
-  "name": "service_mapper",
+  "name": "service_info",
   "version": "0.0.1",
   "description": "A mapping service for refugees",
   "directories": {
@@ -24,9 +24,13 @@
     "gulp-rename": "^1.2.0",
     "gulp-util": "^3.0.2",
     "less": "^2.2.0",
-    "tiny-lr": "^0.1.4"
+    "tiny-lr": "^0.1.4",
+    "i18next-conv": "^0.1.4"
   },
-  "scripts": {},
+  "config": {
+  },
+  "scripts": {
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/theirc/Service-Mapper.git"

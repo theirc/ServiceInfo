@@ -6,7 +6,7 @@ from rest_framework import exceptions, serializers
 
 from email_user.forms import EmailUserCreationForm
 from email_user.models import EmailUser
-from services.models import Service, Provider, ProviderType, ServiceArea
+from services.models import Service, Provider, ProviderType, ServiceType, ServiceArea
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -71,6 +71,17 @@ class CreateProviderSerializer(ProviderSerializer):
         return attrs
 
 
+class ServiceTypeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ServiceType
+        fields = (
+            'url',
+            'number',
+            'name_en', 'name_fr', 'name_ar',
+            'comments_en', 'comments_fr', 'comments_ar',
+        )
+
+
 class ServiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Service
@@ -90,6 +101,7 @@ class ServiceSerializer(serializers.HyperlinkedModelSerializer):
             'thursday_open', 'thursday_close',
             'friday_open', 'friday_close',
             'saturday_open', 'saturday_close',
+            'type',
         )
 
 

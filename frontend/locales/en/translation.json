@@ -11,6 +11,24 @@
   	"Feedback": "Feedback Tool",
   	"Change-Language": "Change Language"
   },
+  "Login-Form": {
+  	"Page-Head": {
+  		"Page-Title": {
+  			"Title": "Log In"
+  		},
+  		"Page-Description": {
+  			"Page-Description": "If you are a service provider and have an existing account sign into your account below."
+  		}
+  	},
+  	"Form": {
+	  	"Email": "Email",
+	  	"Password": "Password"
+  	},
+  	"Form-Submit-Options": {
+  		"Submit": "Login",
+      "Register": "Register to be a Service Provider here"
+  	}
+  },
   "Provider-Registration-Form": {
   	"Page-Head": {
   		"Page-Title": {

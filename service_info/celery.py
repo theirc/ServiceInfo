@@ -7,7 +7,7 @@ if 'DJANGO_SETTINGS_MODULE' not in os.environ:
     raise ImproperlyConfigured("Need to set DJANGO_SETTINGS_MODULE in environment "
                                "before starting celery")
 
-app = Celery('service_mapper')
+app = Celery('service_info')
 
 # Using a string here means the worker will not have to
 # pickle the object when using Windows.

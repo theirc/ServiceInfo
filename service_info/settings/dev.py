@@ -1,6 +1,6 @@
 import sys
 
-from service_mapper.settings.base import *  # noqa
+from service_info.settings.base import *  # noqa
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
