@@ -19,7 +19,7 @@ module.exports = {
 
 var $ = require('jquery');
 $(function($){
-    $.getJSON('/config.json', function(data) {
+    $.getJSON('../config.json', function(data) {
         $.extend(config, data);
         for (var k in localStorage) {
             if (localStorage.hasOwnProperty(k)) {
