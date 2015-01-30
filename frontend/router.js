@@ -1,13 +1,17 @@
 "use strict";
 var $ = require('jquery'),
-    Backbone = require('backbone');
+    config = require('./config'),
+    i18n = require('i18next-client'),
+    Backbone = require('backbone')
+;
 
 var views = {
-    "home": require('./views/home'),
     "register": require('./views/provider-form'),
+    "service": require('./views/service-form'),
     "feedback": require('./views/feedback'),
     "map": require('./views/map'),
     "service-list": require('./views/service-list'),
+    "login": require('./views/login'),
 };
 
 function loadPage(name) {
@@ -15,6 +19,11 @@ function loadPage(name) {
         var $el = $(document.querySelector('#page'));
         var view = new views[name]({el: $el});
         view.render();
+        i18n.init(function(){
+            view.$el.i18n({
+                lng: config.get('lang'),
+            });
+        });
         $('#menu-container').addClass("menu-closed");
         $('#menu-container').removeClass("menu-open");
     }
@@ -22,10 +31,17 @@ function loadPage(name) {
 
 module.exports = Backbone.Router.extend({
     routes: {
-        "": loadPage("home"),
+
         "register": loadPage("register"),
+        "service": loadPage("service"),
         "feedback": loadPage("feedback"),
         "map": loadPage("map"),
         "service-list": loadPage("service-list"),
+        "login": loadPage("login"),
+        "logout": function() {
+            config.remove('forever.authToken');
+            window.location.hash = '';
+            window.location.reload();
+        },
     },
 })

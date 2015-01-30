@@ -21,7 +21,7 @@ work on the project locally. In a terminal, run:
 Frontend Setup
 --------------
 
-The Service Mapper frontend runs separately from the backend.
+The frontend runs separately from the backend.
 
 The Javascript dependencies are installed by Node's NPM, both for build
 tools and frontend modules. Javascript libraries for the frontend app are
@@ -52,7 +52,7 @@ With Node installed, you can install all frontend dependencies with `npm`.
 Backend Setup
 -------------
 
-Below you will find basic setup instructions for the Service-Mapper
+Below you will find basic setup instructions for the
 project. To begin you should have the following applications installed on your
 local development system:
 
@@ -88,25 +88,25 @@ we need to install that globally in our Python 2.x environment::
 To setup your local environment you should create a virtualenv and install the
 necessary requirements::
 
-    mkvirtualenv --python=/usr/bin/python3.4 service_mapper
+    mkvirtualenv --python=/usr/bin/python3.4 service_info
     $VIRTUAL_ENV/bin/pip install -r $PWD/requirements/dev.txt
 
 Then create a local settings file and set your ``DJANGO_SETTINGS_MODULE`` to use it::
 
-    cp service_mapper/settings/local.example.py service_mapper/settings/local.py
-    echo "export DJANGO_SETTINGS_MODULE=service_mapper.settings.local" >> $VIRTUAL_ENV/bin/postactivate
+    cp service_info/settings/local.example.py service_info/settings/local.py
+    echo "export DJANGO_SETTINGS_MODULE=service_info.settings.local" >> $VIRTUAL_ENV/bin/postactivate
     echo "unset DJANGO_SETTINGS_MODULE" >> $VIRTUAL_ENV/bin/postdeactivate
     echo "PATH=$PWD/node_modules/.bin:\$PATH" >> $VIRTUAL_ENV/bin/postactivate
 
 Exit the virtualenv and reactivate it to activate the settings just changed::
 
     deactivate
-    workon service_mapper
+    workon service_info
 
 Now, create the Postgres database and run the initial migrate::
 
-    createdb -E UTF-8 service_mapper
-    psql service_mapper -c "CREATE EXTENSION postgis;"
+    createdb -E UTF-8 service_info
+    psql service_info -c "CREATE EXTENSION postgis;"
     python manage.py migrate
 
 You should now be able to run the development API server::

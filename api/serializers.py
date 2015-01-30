@@ -6,7 +6,8 @@ from rest_framework import exceptions, serializers
 
 from email_user.forms import EmailUserCreationForm
 from email_user.models import EmailUser
-from services.models import Service, Provider, ProviderType, ServiceArea
+from services.models import Service, Provider, ProviderType, ServiceType, ServiceArea, \
+    SelectionCriterion
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -71,6 +72,23 @@ class CreateProviderSerializer(ProviderSerializer):
         return attrs
 
 
+class ServiceTypeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ServiceType
+        fields = (
+            'url',
+            'number',
+            'name_en', 'name_fr', 'name_ar',
+            'comments_en', 'comments_fr', 'comments_ar',
+        )
+
+
+class SelectionCriterionSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = SelectionCriterion
+        fields = ('url', 'id', 'text_en', 'text_ar', 'text_fr')
+
+
 class ServiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Service
@@ -90,7 +108,15 @@ class ServiceSerializer(serializers.HyperlinkedModelSerializer):
             'thursday_open', 'thursday_close',
             'friday_open', 'friday_close',
             'saturday_open', 'saturday_close',
+            'type',
         )
+
+    def save(self, **kwargs):
+        # Force the value of the provider to be that of the user who's
+        # creating or modifying the record
+        user = self.context['request'].user
+        kwargs['provider'] = Provider.objects.get(user=user)
+        super().save(**kwargs)
 
 
 class ServiceAreaSerializer(serializers.HyperlinkedModelSerializer):

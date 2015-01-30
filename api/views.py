@@ -6,7 +6,7 @@ from django.utils.timezone import now
 from rest_framework import parsers, renderers, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import list_route
-from rest_framework.exceptions import ValidationError as DRFValidationError
+from rest_framework.exceptions import ValidationError as DRFValidationError, PermissionDenied
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -14,9 +14,12 @@ from rest_framework.views import APIView
 from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, ProviderSerializer, \
     ProviderTypeSerializer, ServiceAreaSerializer, APILoginSerializer, APIActivationSerializer, \
     PasswordResetRequestSerializer, PasswordResetCheckSerializer, PasswordResetSerializer, \
-    ResendActivationLinkSerializer, CreateProviderSerializer
+    ResendActivationLinkSerializer, CreateProviderSerializer, ServiceTypeSerializer, \
+    SelectionCriterionSerializer
 from email_user.models import EmailUser
-from services.models import Service, Provider, ProviderType, ServiceArea
+from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
+    SelectionCriterion
+from services.utils import permission_names_to_objects, USER_PERMISSION_NAMES
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -44,10 +47,45 @@ class ServiceViewSet(viewsets.ModelViewSet):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
 
+    def get_queryset(self):
+        # Only make visible the Services owned by the current provider
+        return self.queryset.filter(provider__user=self.request.user)
+
+    def get_object(self):
+        # Users can only access their own records
+        # Overriding get_queryset() should be enough, but just in case...
+        obj = super().get_object()
+        if not obj.provider.user == self.request.user:
+            raise PermissionDenied
+        return obj
+
+
+class SelectionCriterionViewSet(viewsets.ModelViewSet):
+    queryset = SelectionCriterion.objects.all()
+    serializer_class = SelectionCriterionSerializer
+
+    def get_queryset(self):
+        # Only make visible the SelectionCriteria owned by the current provider
+        # (attached to services of the current provider)
+        return self.queryset.filter(services__provider__user=self.request.user)
+
+    def get_object(self):
+        # Users can only access their own records
+        # Overriding get_queryset() should be enough, but just in case...
+        obj = super().get_object()
+        if not obj.provider.user == self.request.user:
+            raise PermissionDenied
+        return obj
+
 
 class ProviderTypeViewSet(viewsets.ModelViewSet):
     queryset = ProviderType.objects.all()
     serializer_class = ProviderTypeSerializer
+
+
+class ServiceTypeViewSet(viewsets.ModelViewSet):
+    queryset = ServiceType.objects.all()
+    serializer_class = ServiceTypeSerializer
 
 
 class ProviderViewSet(viewsets.ModelViewSet):
@@ -70,6 +108,21 @@ class ProviderViewSet(viewsets.ModelViewSet):
 
     queryset = Provider.objects.all()
     serializer_class = ProviderSerializer
+
+    def get_queryset(self):
+        # If user is authenticated, it's not a create_provider call.
+        # Limit visible providers to the user's own.
+        if self.request.user.is_authenticated():
+            return self.queryset.filter(user=self.request.user)
+        return self.queryset.all()  # Add ".all()" to force re-evaluation each time
+
+    def get_object(self):
+        # Users can only access their own records
+        # Overriding get_queryset() should be enough, but just in case...
+        obj = super().get_object()
+        if not obj.user == self.request.user:
+            raise PermissionDenied
+        return obj
 
     @list_route(methods=['post'], permission_classes=[AllowAny])
     def create_provider(self, request, *args, **kwargs):
@@ -96,6 +149,10 @@ class ProviderViewSet(viewsets.ModelViewSet):
         )
         user.send_activation_email(request.site, request, request.data['base_activation_link'])
 
+        # Give them the typical permissions
+        # FIXME: we should just do a group
+        user.user_permissions.add(*permission_names_to_objects(USER_PERMISSION_NAMES))
+
         # Now we have a user, let's just call the built-in create
         # method to create the provider for us. We just need to
         # add the 'user' field to the request data.
@@ -111,6 +168,10 @@ class ProviderViewSet(viewsets.ModelViewSet):
             assert 'user' in request.data
         return super().create(request, *args, **kwargs)
 
+
+#
+# UNAUTHENTICATED views
+#
 
 class APILogin(APIView):
     """
@@ -200,7 +261,7 @@ class PasswordResetCheck(APIView):
         # The serializer validation does all the work in this one
         serializer = PasswordResetCheckSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        return Response({'email': serializer.validated_data['user']})
+        return Response({'email': serializer.validated_data['user'].email})
 
 
 class PasswordReset(APIView):

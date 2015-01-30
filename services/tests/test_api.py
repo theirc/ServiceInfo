@@ -10,11 +10,26 @@ from rest_framework.authtoken.models import Token
 
 from email_user.models import EmailUser
 from email_user.tests.factories import EmailUserFactory
-from services.models import Provider, Service
-from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory
+from services.models import Provider, Service, SelectionCriterion
+from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory, \
+    ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory
+from services.utils import permission_names_to_objects, USER_PERMISSION_NAMES
 
 
 class APITestMixin(object):
+    def setUp(self):
+        """Return a new user who has permissions like a regular provider"""
+        self.email = 'joe@example.com'
+        self.password = 'password'
+        self.user = get_user_model().objects.create_user(
+            password=self.password,
+            email=self.email,
+        )
+        self.user.user_permissions.add(*permission_names_to_objects(USER_PERMISSION_NAMES))
+        assert self.client.login(email=self.email, password=self.password)
+        # Get the URL of the user for the API
+        self.user_url = reverse('user-detail', args=[self.user.id])
+
     def get_with_token(self, url):
         """
         Make a GET to a url, passing self.token in the request headers.
@@ -38,27 +53,16 @@ class APITestMixin(object):
 
     def check_token(self):
         """
-        Assert that the token is valid and lets the client
-        access the API.
+        Assert that the token is valid and lets the client access the API.
         """
-        p1 = ProviderFactory()
+        # Create a record that this user has access to
+        p1 = ProviderFactory(user=self.user)
         url = reverse('provider-detail', args=[p1.id])
         rsp = self.get_with_token(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
 
-class ProviderAPITest(TestCase):
-    def setUp(self):
-        # Just using Django auth for now
-        self.user = get_user_model().objects.create_superuser(
-            password='password',
-            email='joe@example.com',
-        )
-        assert self.client.login(email='joe@example.com', password='password')
-
-        # Get the URL of the user for the API
-        self.user_url = reverse('user-detail', args=[self.user.id])
-
+class ProviderAPITest(APITestMixin):
     def test_create_provider_no_email(self):
         # Create provider call is made when user is NOT logged in.
         self.client.logout()
@@ -184,7 +188,7 @@ class ProviderAPITest(TestCase):
             self.assertIn(provider.name_en, [p1.name_en, p2.name_en])
 
     def test_get_one_provider(self):
-        p1 = ProviderFactory()
+        p1 = ProviderFactory(user=self.user)
         url = reverse('provider-detail', args=[p1.id])
         rsp = self.client.get(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
@@ -194,15 +198,11 @@ class ProviderAPITest(TestCase):
 
 class TokenAuthTest(APITestMixin, TestCase):
     def setUp(self):
-        self.user = get_user_model().objects.create_superuser(
-            password='password',
-            email='joe@example.com',
-        )
-        self.user_url = reverse('user-detail', args=[self.user.id])
+        super().setUp()
         self.token = Token.objects.get(user=self.user).key
 
     def test_get_one_provider(self):
-        p1 = ProviderFactory()
+        p1 = ProviderFactory(user=self.user)
         url = reverse('provider-detail', args=[p1.id])
         rsp = self.get_with_token(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
@@ -223,39 +223,90 @@ class TokenAuthTest(APITestMixin, TestCase):
         self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
 
-class ServiceAPITest(TestCase):
+class ServiceAPITest(APITestMixin, TestCase):
     def setUp(self):
-        # Just using Django auth for now
-        self.user = get_user_model().objects.create_superuser(
-            password='password',
-            email='joe@example.com',
-        )
-        assert self.client.login(email='joe@example.com', password='password')
-        self.provider = ProviderFactory()
+        super().setUp()
+        self.provider = ProviderFactory(user=self.user, name_en="Our provider")
 
     def test_create_service(self):
         area = ServiceAreaFactory()
+        wrong_provider = ProviderFactory(name_en="Wrong provider")
         data = {
-            'provider': self.provider.get_api_url(),
+            'provider': wrong_provider.get_api_url(),  # should just be ignored
             'name_en': 'Some service',
             'area_of_service': area.get_api_url(),
-            'description_en': "Awesome\nService"
+            'description_en': "Awesome\nService",
+            'type': ServiceTypeFactory().get_api_url(),
         }
         rsp = self.client.post(reverse('service-list'), data=data)
         self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         service = Service.objects.get(id=result['id'])
         self.assertEqual('Some service', service.name_en)
+        self.assertEqual(self.provider, service.provider)
+
+    def test_get_service(self):
+        service = ServiceFactory(provider=self.provider)
+        rsp = self.client.get(service.get_api_url())
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(service.pk, result['id'])
+
+    def test_get_services(self):
+        # Should only get user's own services
+        provider = self.provider
+        s1 = ServiceFactory(provider=provider)
+        s2 = ServiceFactory(provider=provider)
+        other_provider = ProviderFactory()
+        s3 = ServiceFactory(provider=other_provider)
+        rsp = self.client.get(reverse('service-list'))
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        services = result['results']
+        service_ids = [x['id'] for x in services]
+        self.assertEqual(2, len(services))
+        self.assertIn(s1.id, service_ids)
+        self.assertIn(s2.id, service_ids)
+        self.assertNotIn(s3.id, service_ids)
 
 
-class ServiceAreaAPITest(TestCase):
+class SelectionCriterionAPITest(APITestMixin, TestCase):
+    def test_create_selection_criterion(self):
+        rsp = self.client.post(reverse('selectioncriterion-list'),
+                               data={
+                                   'text_en': 'English',
+                                   'text_ar': '',
+                                   'text_fr': '',
+                                   })
+        self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        criterion = SelectionCriterion.objects.get(id=result['id'])
+        self.assertEqual('English', criterion.text_en)
+
+    def test_get_selection_criteria(self):
+        # Only returns user's own selection criteria
+        # Defined as those attached to the user's services
+        service = ServiceFactory(provider__user=self.user)
+        s1 = SelectionCriterionFactory()
+        s2 = SelectionCriterionFactory()
+        service.selection_criteria.add(s1, s2)
+        other_provider = ProviderFactory()
+        other_service = ServiceFactory(provider=other_provider)
+        s3 = SelectionCriterionFactory()
+        other_service.selection_criteria.add(s3)
+        rsp = self.client.get(reverse('selectioncriterion-list'))
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        criteria = result['results']
+        criteria_ids = [x['id'] for x in criteria]
+        self.assertEqual(2, len(criteria))
+        self.assertIn(s1.id, criteria_ids)
+        self.assertIn(s2.id, criteria_ids)
+        self.assertNotIn(s3.id, criteria_ids)
+
+
+class ServiceAreaAPITest(APITestMixin, TestCase):
     def setUp(self):
-        # Just using Django auth for now
-        self.user = get_user_model().objects.create_superuser(
-            password='password',
-            email='joe@example.com',
-        )
-        assert self.client.login(email='joe@example.com', password='password')
+        super().setUp()
         self.area1 = ServiceAreaFactory()
         self.area2 = ServiceAreaFactory(parent=self.area1)
         self.area3 = ServiceAreaFactory(parent=self.area1)
@@ -280,13 +331,9 @@ class ServiceAreaAPITest(TestCase):
         self.assertEqual('http://testserver%s' % self.area1.get_api_url(), result['parent'])
 
 
-class LoginTest(TestCase):
+class LoginTest(APITestMixin, TestCase):
     def setUp(self):
-        self.user = get_user_model().objects.create_superuser(
-            password='password',
-            email='joe@example.com',
-        )
-        self.user_url = reverse('user-detail', args=[self.user.id])
+        super().setUp()
         self.token = Token.objects.get(user=self.user).key
 
     def test_success(self):
@@ -345,8 +392,9 @@ class LoginTest(TestCase):
 
 class ResendActivationLinkTest(APITestMixin, TestCase):
     def setUp(self):
-        # Create an inactive user/provider
-        self.user = EmailUserFactory(is_active=False)
+        super().setUp()
+        # An inactive user/provider
+        self.user.is_active = False
         self.user.activation_key = self.user.create_activation_key()
         self.user.save()
         self.url = reverse('resend-activation-link')
@@ -388,7 +436,8 @@ class ResendActivationLinkTest(APITestMixin, TestCase):
 
 class ActivationTest(APITestMixin, TestCase):
     def setUp(self):
-        self.user = EmailUserFactory(is_active=False)
+        super().setUp()
+        self.user.is_active = False
         self.user.activation_key = self.user.create_activation_key()
         self.user.save()
         self.url = reverse('api-activate')
@@ -417,7 +466,7 @@ class ActivationTest(APITestMixin, TestCase):
         # Make sure the token works - make user superuser just for simplicity
         self.user.is_superuser = True
         self.user.save()
-        p1 = ProviderFactory()
+        p1 = ProviderFactory(user=self.user)
         url = reverse('provider-detail', args=[p1.id])
         rsp = self.get_with_token(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
@@ -474,8 +523,8 @@ class ActivationTest(APITestMixin, TestCase):
 
 class PasswordResetTest(APITestMixin, TestCase):
     def setUp(self):
-        self.first_password = 'firstpass'
-        self.user = EmailUserFactory(password=self.first_password)
+        super().setUp()
+        self.first_password = self.password
         self.assertEqual(self.user,
                          authenticate(email=self.user.email, password=self.first_password))
         self.request_url = reverse('password-reset-request')
