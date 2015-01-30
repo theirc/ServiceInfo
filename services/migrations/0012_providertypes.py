@@ -29,20 +29,21 @@ def create_types(apps, schema_editor):
         )
 
 
+def remove_types(apps, schema_editor):
+    # The reverse migration removes the number field, which
+    # means we have no way to add it right
+    ProviderType = apps.get_model('services', 'ProviderType')
+    ProviderType.objects.all().delete()
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('services', '0010_create_service_types'),
+        ('services', '0011_providertype_number'),
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='providertype',
-            name='number',
-            field=models.IntegerField(unique=True, default=0),
-            preserve_default=False,
-        ),
-        migrations.RunPython(create_types, no_op),
+        migrations.RunPython(create_types, remove_types),
     ]
 
 
