@@ -17,7 +17,7 @@ module.exports = {
     },
 
     load: function(t) {
-        $.ajax('//localhost:4005/api/'+t+'/', {
+        $.ajax(config.get('api_location')+'/api/'+t+'/', {
             method: 'GET',
             success: function(data) {
                 console.log(data);

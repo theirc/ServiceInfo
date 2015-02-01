@@ -4,18 +4,18 @@
         password
         base_activation_link
 
-        'url',
-        'id',
-        'name_en',
-        'name_ar',
-        'name_fr',
-        'type',
-        'phone_number',
-        'website',
-        'description_en',
-        'description_ar',
-        'description_fr',
-        'number_of_monthly_beneficiaries'
+        url
+        id
+        name_en
+        name_ar
+        name_fr
+        type
+        phone_number
+        website
+        description_en
+        description_ar
+        description_fr
+        number_of_monthly_beneficiaries
 
         'user',
 -->
@@ -49,7 +49,7 @@
                   <div class="half">
                     <div class="form-group">
                       <label for="name" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Name"></span><span class=error></label>
-                      <input type="text" name="name" data-i18n-field class="form-control" tabindex="1"></input>
+                      <input type="text" name="name" data-i18n-field class="form-control" ></input>
                     </div>
                   </div>
 
@@ -57,7 +57,7 @@
                       <div class="form-group">
                           <label for="email" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Email"></span><span class="error"></span></label>
                           <div class="form-group">
-                              <input type="email" name="email" class="form-control" placeholder="Enter your Email" tabindex="4">
+                              <input type="email" name="email" class="form-control" placeholder="Enter your Email" >
                           </div>
                       </div>
                   </div>
@@ -67,7 +67,7 @@
                     <div class="half">
                         <div class="form-group">
                             <label for="password1" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Password"></span><span class=error></label>
-                                <input type="password" name="password1" data-i18n-field class="form-control" tabindex="1"></input>
+                                <input type="password" name="password1" class="form-control" ></input>
                         </div>
                     </div>
 
@@ -75,7 +75,7 @@
                         <div class="form-group">
                             <label for="password2" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.PasswordConfirm"></span><span class="error"></span></label>
                             <div class="form-group">
-                                <input type="password" name="password2" class="form-control" tabindex="4">
+                                <input type="password" name="password2" class="form-control" >
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                     <div class="form-group">
                       <label for="type" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Service-Type"></span><span class=error></label>
                       <div class="form-group">
-                          <select name="type">
+                          <select name="type" class=form-control>
                               <option value=1>Type 1</option>
                               <option value=2>Type 2</option>
                               <option value=3>Type 3</option>
@@ -101,7 +101,7 @@
                     <div class="form-group">
                       <label for="phone_number" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Phone-Number"></span><span class=error></label>
                       <div class="form-group">
-                        <input type="tel" name="phone_number" class="form-control" tabindex="3">
+                        <input type="tel" name="phone_number" class="form-control" >
                       </div>
                     </div>
                   </div>
@@ -110,15 +110,23 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="id_provider_website" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Website"></span><span class=error></label>
-                  <div class="form-group">
-                    <input type="url" name="website" class="form-control" placeholder="Enter your website url" tabindex="5">
+                  <div class=half>
+                      <label for="website" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Website"></span><span class=error></label>
+                      <div class="form-group">
+                        <input type="url" name="website" class="form-control" placeholder="Enter your website url" >
+                      </div>
+                  </div>
+                  <div class=half>
+                      <label for="number_of_monthly_beneficiaries" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.MonthlyBeneficiaries"></span><span class=error></label>
+                      <div class="form-group">
+                          <input required type="number" name="number_of_monthly_beneficiaries" class="form-control">
+                      </div>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="id_provider_description" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Description"></span><span class=error></label>
+                  <label for="description" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Description"></span><span class=error></label>
                   <div class="form-group">
-                    <textarea rows="4" name="description" data-i18n-field class="form-control" tabindex="6"></textarea>
+                    <textarea rows="4" name="description" data-i18n-field class="form-control" ></textarea>
                   </div>
                 </div>
               </fieldset>

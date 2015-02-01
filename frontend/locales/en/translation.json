@@ -42,10 +42,13 @@
   		"Basic": {
   			"Legend": "Basic details to register a service provider:",
   			"Name": "Full Name",
+            "Password": "Password",
+            "PasswordConfirm": "Confirm Password",
   			"Service-Type": "Type of Service",
   			"Phone-Number": "Phone Number",
   			"Email": "Email",
   			"Website": "Website (Optional Field)",
+            "MonthlyBeneficiaries": "Number of Monthly Beneficiaries",
   			"Description": "Description"
   		},
   		"Service-Information": {

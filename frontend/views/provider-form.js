@@ -20,6 +20,8 @@ module.exports = Backbone.View.extend({
         "click .form-btn-submit": function() {
             var data = {};
             var $el = this.$el;
+
+
             $el.find('[name]').each(function() {
                 var $field = $(this);
                 var value = $field.val();
@@ -32,18 +34,35 @@ module.exports = Backbone.View.extend({
                 }
 
                 data[name] = value;
-                console.log(name + ': ' + value);
+                // console.log(name + ': ' + value);
             });
+
+            $el.find('.error').text('');
+            var errors = {};
+            if (data['password1'].length === 0) {
+                errors['password1'] = ["Password must not be blank"];
+            }
+            if (data['password2'].length === 0) {
+                errors['password2'] = ["Password must be repeated"];
+            } else if (data['password1'] != data['password2']) {
+                errors['password2'] = ["Passwords must match"];
+            }
+            if (!errors['password1'] && !errors['password2']) {
+                data['password'] = data['password1'];
+            }
 
             $.ajax('//localhost:4005/api/providers/create_provider/', {
                 method: 'POST',
                 data: data,
                 error: function(e) {
-                    $el.find('.error').text('');
-                    $.each(e.responseJSON, function(k) {
-                        console.log(k + ': ' + this[0]);
+                    $.extend(errors, e.responseJSON);
+                    $.each(errors, function(k) {
+                        console.log(k + ' (error): ' + this[0]);
 
-                        $el.find('[for='+k+'] .error').text(this[0]);
+                        var $error = $el.find('[for='+k+'] .error');
+                        if ($error) {
+                            $error.text(this[0]);
+                        }
                     })
                 },
             });
