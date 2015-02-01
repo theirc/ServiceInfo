@@ -63,6 +63,8 @@ module.exports = Backbone.View.extend({
             }
             if (!errors['password1'] && !errors['password2']) {
                 data['password'] = data['password1'];
+                delete data.password1;
+                delete data.password2;
             }
 
             $.ajax('//localhost:4005/api/providers/create_provider/', {
