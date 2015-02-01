@@ -19,7 +19,8 @@ module.exports = Backbone.View.extend({
     events: {
         "click .form-btn-submit": function() {
             var data = {};
-            this.$el.find('[name]').each(function() {
+            var $el = this.$el;
+            $el.find('[name]').each(function() {
                 var $field = $(this);
                 var value = $field.val();
                 var name = $field.attr('name');
@@ -31,7 +32,22 @@ module.exports = Backbone.View.extend({
                 }
 
                 data[name] = value;
+                console.log(name + ': ' + value);
             });
+
+            $.ajax('//localhost:4005/api/providers/create_provider/', {
+                method: 'POST',
+                data: data,
+                error: function(e) {
+                    $el.find('.error').text('');
+                    $.each(e.responseJSON, function(k) {
+                        console.log(k + ': ' + this[0]);
+
+                        $el.find('[for='+k+'] .error').text(this[0]);
+                    })
+                },
+            });
+
             return false;
         },
         "click .form-btn-clear": function() {

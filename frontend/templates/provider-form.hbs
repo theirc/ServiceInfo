@@ -1,3 +1,25 @@
+<!-- As defined by the Provider serializer, these fields are expected:
+
+        email
+        password
+        base_activation_link
+
+        'url',
+        'id',
+        'name_en',
+        'name_ar',
+        'name_fr',
+        'type',
+        'phone_number',
+        'website',
+        'description_en',
+        'description_ar',
+        'description_fr',
+        'number_of_monthly_beneficiaries'
+
+        'user',
+-->
+
 <!-- Page Head -->
     <div class="page-head">
         <div class="container">
@@ -22,67 +44,81 @@
             <form>
               <fieldset>
                 <legend data-i18n="Provider-Registration-Form.Form-Sections.Basic.Legend"></legend>
-                <div class="form-group">
 
+                <div class="form-group">
                   <div class="half">
                     <div class="form-group">
-                      <label for="name" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Name"></label>
+                      <label for="name" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Name"></span><span class=error></label>
                       <input type="text" name="name" data-i18n-field class="form-control" tabindex="1"></input>
                     </div>
                   </div>
 
                   <div class="half">
-                    <div class="form-group">
-                      <label for="id_type_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Service-Type"></label>
-                      <div class="btn-group" tabindex="2">
-                        <button type="button" class="btn btn-default" data-toggle="dropdown">Select type of service</button>
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                          <span class="caret"></span>
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Type 1</a></li>
-                          <li><a href="#">Type 2</a></li>
-                          <li><a href="#">Type 3</a></li>
-                          <li><a href="#">Type 4</a></li>
-                          <li><a href="#">Type 5</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="form-group">
-
-                  <div class="half">
-                    <div class="form-group">
-                      <label for="id_provider_phone-number" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Phone-Number"></label>
                       <div class="form-group">
-                        <input type="tel" name="usrtel" class="form-control" tabindex="3">
+                          <label for="email" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Email"></span><span class="error"></span></label>
+                          <div class="form-group">
+                              <input type="email" name="email" class="form-control" placeholder="Enter your Email" tabindex="4">
+                          </div>
                       </div>
-                    </div>
                   </div>
+                </div>
 
-                  <div class="half">
-                    <div class="form-group">
-                      <label for="id_provider_email" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Email"></label>
+                <div class="form-group">
+                    <div class="half">
                         <div class="form-group">
-                          <input type="email" name="provideremail" class="form-control" placeholder="Enter your Email" tabindex="4">
+                            <label for="password1" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Password"></span><span class=error></label>
+                                <input type="password" name="password1" data-i18n-field class="form-control" tabindex="1"></input>
                         </div>
                     </div>
+
+                    <div class="half">
+                        <div class="form-group">
+                            <label for="password2" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.PasswordConfirm"></span><span class="error"></span></label>
+                            <div class="form-group">
+                                <input type="password" name="password2" class="form-control" tabindex="4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=form-group>
+                  <div class="half">
+                    <div class="form-group">
+                      <label for="type" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Service-Type"></span><span class=error></label>
+                      <div class="form-group">
+                          <select name="type">
+                              <option value=1>Type 1</option>
+                              <option value=2>Type 2</option>
+                              <option value=3>Type 3</option>
+                              <option value=4>Type 4</option>
+                              <option value=5>Type 5</option>
+                          </select>
+                      </div>
+                    </div>
                   </div>
 
+                  <div class="half">
+                    <div class="form-group">
+                      <label for="phone_number" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Phone-Number"></span><span class=error></label>
+                      <div class="form-group">
+                        <input type="tel" name="phone_number" class="form-control" tabindex="3">
+                      </div>
+                    </div>
+                  </div>
+
+
                 </div>
+
                 <div class="form-group">
-                  <label for="id_provider_website" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Website"></label>
+                  <label for="id_provider_website" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Website"></span><span class=error></label>
                   <div class="form-group">
-                    <input type="url" name="providerurl" class="form-control" placeholder="Enter your website url" tabindex="5">
+                    <input type="url" name="website" class="form-control" placeholder="Enter your website url" tabindex="5">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="id_provider_description" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Description"></label>
+                  <label for="id_provider_description" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Description"></span><span class=error></label>
                   <div class="form-group">
-                    <textarea rows="4" name="other-comments" class="form-control" tabindex="6"></textarea>
+                    <textarea rows="4" name="description" data-i18n-field class="form-control" tabindex="6"></textarea>
                   </div>
                 </div>
               </fieldset>

@@ -15,6 +15,18 @@ module.exports = {
     remove: function(k) {
         localStorage.removeItem(k);
     },
+
+    load: function(t) {
+        $.ajax('//localhost:4005/api/'+t+'/', {
+            method: 'GET',
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(e) {
+                console.error(e);
+            },
+        });
+    },
 }
 
 var $ = require('jquery');
