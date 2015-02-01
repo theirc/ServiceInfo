@@ -53,6 +53,9 @@ module.exports = Backbone.View.extend({
 
             $el.find('.error').text('');
             var errors = {};
+
+            // Password Handling
+
             if (data['password1'].length === 0) {
                 errors['password1'] = ["Password must not be blank"];
             }
@@ -66,6 +69,9 @@ module.exports = Backbone.View.extend({
                 delete data.password1;
                 delete data.password2;
             }
+
+            // Base Activation Link
+            data["base_activation_link"] = location.protocol+'//'+location.host+location.pathname+'#';
 
             $.ajax('//localhost:4005/api/providers/create_provider/', {
                 method: 'POST',
