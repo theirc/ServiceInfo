@@ -87,6 +87,9 @@ module.exports = Backbone.View.extend({
                         }
                     })
                 },
+                success: function(data) {
+                    window.location = '#/register/confirm';
+                },
             });
 
             return false;
