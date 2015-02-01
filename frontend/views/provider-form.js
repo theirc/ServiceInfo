@@ -1,6 +1,7 @@
 var Backbone = require('backbone'),
 template = require("../templates/provider-form.hbs"),
 i18n = require('i18next-client');
+var config = require('../config');
 
 module.exports = Backbone.View.extend({
     initialize: function(){
@@ -12,6 +13,19 @@ module.exports = Backbone.View.extend({
         $el.html(template({
 
         }));
+
+        config.load('providertypes', function(e, data) {
+            $typeSel = $el.find('select[name=type]');
+            $.each(data, function() {
+                $option = $('<option></option>');
+                $option.attr({
+                    value: this.url,
+                });
+                $option.text(this['name_' + config.get('lang')]);
+                $typeSel.append($option)
+            })
+            console.log($typeSel);
+        })
 
         console.log($el);
     },

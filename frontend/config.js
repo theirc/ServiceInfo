@@ -1,12 +1,14 @@
-var config = {
-    api_location: "//localhost:8000",
+var _config = {
+    api_location: "//localhost:8000/",
     lang: 'en',
 };
+var _loaded = false;
+var _pending = [];
 
-module.exports = {
-    get: function(k) { return config[k]; },
+var config = module.exports = {
+    get: function(k) { return _config[k]; },
     set: function(k, v) {
-        config[k] = v;
+        _config[k] = v;
         if (k.indexOf('forever.') === 0) {
             console.log(k, v);
             localStorage[k] = v;
@@ -16,14 +18,21 @@ module.exports = {
         localStorage.removeItem(k);
     },
 
-    load: function(t) {
-        $.ajax(config.get('api_location')+'/api/'+t+'/', {
+    load: function(t, cb) {
+        if (!_loaded) {
+            _pending.push(function() {
+                config.load(t, cb);
+            })
+            return;
+        }
+        $.ajax(config.get('api_location')+'api/'+t+'/', {
             method: 'GET',
             success: function(data) {
-                console.log(data);
+                _config[t] = data.results;
+                cb(null, data.results);
             },
             error: function(e) {
-                console.error(e);
+                cb(e);
             },
         });
     },
@@ -31,13 +40,17 @@ module.exports = {
 
 var $ = require('jquery');
 $(function($){
-    var config_url = document.location.pathname + 'config.json';
+    var config_url = './config.json';
     $.getJSON(config_url, function(data) {
-        $.extend(config, data);
+        $.extend(_config, data);
         for (var k in localStorage) {
             if (localStorage.hasOwnProperty(k)) {
-                config[k] = localStorage[k];
+                _config[k] = localStorage[k];
             }
+        }
+        _loaded = true;
+        for (var i=0; i < _pending.length; i++) {
+            _pending[i]();
         }
     });
 });
