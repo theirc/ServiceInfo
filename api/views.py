@@ -57,7 +57,9 @@ class ServiceViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         # Only make visible the Services owned by the current provider
-        return self.queryset.filter(provider__user=self.request.user)
+        # and not archived
+        return self.queryset.filter(provider__user=self.request.user)\
+            .exclude(status=Service.STATUS_ARCHIVED)
 
     def get_object(self):
         # Users can only access their own records

@@ -146,6 +146,17 @@ class ServiceArea(models.Model):
     def get_api_url(self):
         return reverse('servicearea-detail', args=[self.id])
 
+    def __str__(self):
+        # Try to return the name field of the currently selected language
+        # if we have such a field and it has something in it.
+        # Otherwise, punt and return the English, French, or Arabic name,
+        # in that order.
+        language = get_language()
+        field_name = 'name_%s' % language[:2]
+        if hasattr(self, field_name) and getattr(self, field_name):
+            return getattr(self, field_name)
+        return self.name_en or self.name_fr or self.name_ar
+
 
 class SelectionCriterion(models.Model):
     """
@@ -158,6 +169,9 @@ class SelectionCriterion(models.Model):
 
     class Meta(object):
         verbose_name_plural = _("selection criteria")
+
+    def __str__(self):
+        return ', '.join([self.text_en, self.text_fr, self.text_ar])
 
 
 class ServiceType(models.Model):
@@ -213,11 +227,6 @@ class ServiceType(models.Model):
 
     def get_api_url(self):
         return reverse('servicetype-detail', args=[self.id])
-
-
-class ServiceManager(models.GeoManager):
-    def get_queryset(self):
-        return super().get_queryset().exclude(status=Service.STATUS_ARCHIVED)
 
 
 class Service(models.Model):
@@ -361,7 +370,7 @@ class Service(models.Model):
         verbose_name=_("type"),
     )
 
-    objects = ServiceManager()
+    objects = models.GeoManager()
 
     def __str__(self):
         return self.name_en
