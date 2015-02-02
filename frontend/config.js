@@ -1,4 +1,4 @@
-var _config = {
+var config_data = {
     api_location: "//localhost:8000/",
     lang: 'en',
 };
@@ -6,29 +6,31 @@ var _loaded = false;
 var _pending = [];
 
 var config = module.exports = {
-    get: function(k) { return _config[k]; },
-    set: function(k, v) {
-        _config[k] = v;
-        if (k.indexOf('forever.') === 0) {
-            console.log(k, v);
-            localStorage[k] = v;
+    get: function(key) {
+        return config_data[key];
+    },
+    set: function(key, value) {
+        config_data[key] = value;
+        if (key.indexOf('forever.') === 0) {
+            console.log(key, value);
+            localStorage[key] = value;
         }
     },
-    remove: function(k) {
-        localStorage.removeItem(k);
+    remove: function(key) {
+        localStorage.removeItem(key);
     },
 
-    load: function(t, cb) {
+    load: function(type, cb) {
         if (!_loaded) {
             _pending.push(function() {
-                config.load(t, cb);
+                config.load(type, cb);
             })
             return;
         }
-        $.ajax(config.get('api_location')+'api/'+t+'/', {
+        $.ajax(config.get('api_location')+'api/'+type+'/', {
             method: 'GET',
             success: function(data) {
-                _config[t] = data.results;
+                config_data[type] = data.results;
                 cb(null, data.results);
             },
             error: function(e) {
@@ -42,10 +44,10 @@ var $ = require('jquery');
 $(function($){
     var config_url = './config.json';
     $.getJSON(config_url, function(data) {
-        $.extend(_config, data);
-        for (var k in localStorage) {
-            if (localStorage.hasOwnProperty(k)) {
-                _config[k] = localStorage[k];
+        $.extend(config_data, data);
+        for (var key in localStorage) {
+            if (localStorage.hasOwnProperty(key)) {
+                config_data[key] = localStorage[key];
             }
         }
         _loaded = true;

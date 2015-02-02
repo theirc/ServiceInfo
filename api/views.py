@@ -139,6 +139,7 @@ class ProviderViewSet(viewsets.ModelViewSet):
         send them an activation email, and create a provider using
         that user.
         """
+        1/0
         serializer = CreateProviderSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 

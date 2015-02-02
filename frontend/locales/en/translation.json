@@ -38,6 +38,11 @@
   			"Page-Description": "Fill out the form below to apply to be a service provider."
   		}
   	},
+    "Errors": {
+        "Password-Blank": "Password must not be blank",
+        "Password-Repeat": "Password must be repeated",
+        "Password-Match": "Passwords must match"
+    },
   	"Form-Sections": {
   		"Basic": {
   			"Legend": "Basic details to register a service provider:",

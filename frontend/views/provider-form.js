@@ -40,7 +40,7 @@ module.exports = Backbone.View.extend({
                 var $field = $(this);
                 var value = $field.val();
                 var name = $field.attr('name');
-                var ml = typeof $field.data('i18n-field')==="undefined" ? false : true;
+                var ml = typeof $field.data('i18n-field') !== "undefined";
 
                 if (ml) {
                     var cur_lang = localStorage['lang'];
@@ -57,12 +57,12 @@ module.exports = Backbone.View.extend({
             // Password Handling
 
             if (data['password1'].length === 0) {
-                errors['password1'] = ["Password must not be blank"];
+                errors['password1'] = [i18n.t('Provider-Registration-Form.Errors.Password-Blank')];
             }
             if (data['password2'].length === 0) {
-                errors['password2'] = ["Password must be repeated"];
+                errors['password2'] = [i18n.t('Provider-Registration-Form.Errors.Password-Repeat')];
             } else if (data['password1'] != data['password2']) {
-                errors['password2'] = ["Passwords must match"];
+                errors['password2'] = [i18n.t('Provider-Registration-Form.Errors.Password-Match')];
             }
             if (!errors['password1'] && !errors['password2']) {
                 data['password'] = data['password1'];
@@ -73,7 +73,7 @@ module.exports = Backbone.View.extend({
             // Base Activation Link
             data["base_activation_link"] = location.protocol+'//'+location.host+location.pathname+'?#/register/verify/';
 
-            $.ajax('//localhost:4005/api/providers/create_provider/', {
+            $.ajax(config.get('api_location')+'api/providers/create_provider/', {
                 method: 'POST',
                 data: data,
                 error: function(e) {
