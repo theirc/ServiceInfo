@@ -5,7 +5,7 @@ from django.utils.timezone import now
 
 from rest_framework import parsers, renderers, viewsets
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import list_route
+from rest_framework.decorators import list_route, detail_route
 from rest_framework.exceptions import ValidationError as DRFValidationError, PermissionDenied
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -44,6 +44,14 @@ class ServiceAreaViewSet(viewsets.ModelViewSet):
 
 
 class ServiceViewSet(viewsets.ModelViewSet):
+    # This docstring shows up when browsing the API in a web browser:
+    """
+    Service view
+
+    In addition to the usual URLs, you can append 'cancel/' to
+    the service's URL and POST to cancel a service that's in
+    draft or current state.  (User must be the provider or superuser).
+    """
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
 
@@ -58,6 +66,16 @@ class ServiceViewSet(viewsets.ModelViewSet):
         if not obj.provider.user == self.request.user:
             raise PermissionDenied
         return obj
+
+    @detail_route(methods=['post'])
+    def cancel(self, request, *args, **kwargs):
+        """Cancel a service. Should be current or draft"""
+        obj = self.get_object()
+        if obj.status not in [Service.STATUS_DRAFT, Service.STATUS_CURRENT]:
+            raise DRFValidationError(
+                {'status': 'Service record must be current or pending changes to be canceled'})
+        obj.cancel()
+        return Response()
 
 
 class SelectionCriterionViewSet(viewsets.ModelViewSet):
