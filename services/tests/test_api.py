@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from rest_framework.authtoken.models import Token
+from rest_framework.test import APIClient
 
 from email_user.models import EmailUser
 from email_user.tests.factories import EmailUserFactory
@@ -29,13 +30,14 @@ class APITestMixin(object):
         assert self.client.login(email=self.email, password=self.password)
         # Get the URL of the user for the API
         self.user_url = reverse('user-detail', args=[self.user.id])
+        self.api_client = APIClient()
 
     def get_with_token(self, url):
         """
         Make a GET to a url, passing self.token in the request headers.
         Return the response.
         """
-        return self.client.get(
+        return self.api_client.get(
             url,
             HTTP_AUTHORIZATION="Token %s" % self.token
         )
@@ -45,10 +47,11 @@ class APITestMixin(object):
         Make a POST to a url, passing self.token in the request headers.
         Return the response.
         """
-        return self.client.post(
+        return self.api_client.post(
             url,
             data=data,
-            HTTP_AUTHORIZATION="Token %s" % self.token
+            HTTP_AUTHORIZATION="Token %s" % self.token,
+            format='json'
         )
 
     def check_token(self):
@@ -62,7 +65,7 @@ class APITestMixin(object):
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
 
-class ProviderAPITest(APITestMixin):
+class ProviderAPITest(APITestMixin, TestCase):
     def test_create_provider_no_email(self):
         # Create provider call is made when user is NOT logged in.
         self.client.logout()
@@ -77,10 +80,12 @@ class ProviderAPITest(APITestMixin):
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
         }
-        rsp = self.client.post(url, data=data)
+        rsp = self.api_client.post(url, data=data, format='json')
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
-        self.assertEqual({'email': ['This field may not be blank.']}, result)
+        err = result['email'][0]  # Must be an email error
+        # Could be different depending on whether we submitted as a form or as json
+        self.assertIn(err, ['This field may not be blank.', 'This field is required.'])
 
     def test_create_provider_existing_email(self):
         self.client.logout()
@@ -98,7 +103,7 @@ class ProviderAPITest(APITestMixin):
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
         }
-        rsp = self.client.post(url, data=data)
+        rsp = self.api_client.post(url, data=data, format='json')
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual({'email': ['A user with that email already exists.']}, result)
@@ -118,7 +123,7 @@ class ProviderAPITest(APITestMixin):
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
         }
-        rsp = self.client.post(url, data=data)
+        rsp = self.api_client.post(url, data=data, format='json')
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual({'email': ['Enter a valid email address.']}, result)
@@ -137,10 +142,11 @@ class ProviderAPITest(APITestMixin):
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
         }
-        rsp = self.client.post(url, data=data)
+        rsp = self.api_client.post(url, data=data, format='json')
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
-        self.assertEqual({'password': ['This field may not be blank.']}, result)
+        err = result['password'][0]
+        self.assertIn(err, ['This field may not be blank.', 'This field is required.'])
 
     def test_create_provider_and_user(self):
         # Create provider call is made when user is NOT logged in.
@@ -157,7 +163,7 @@ class ProviderAPITest(APITestMixin):
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
         }
-        rsp = self.client.post(url, data=data)
+        rsp = self.api_client.post(url, data=data, format='json')
         self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
         # Make sure they gave us back the id of the new record
