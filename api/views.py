@@ -147,7 +147,7 @@ class ProviderViewSet(viewsets.ModelViewSet):
             password=request.data['password'],
             is_active=False
         )
-        user.send_activation_email(request.site, request, request.POST['base_activation_link'])
+        user.send_activation_email(request.site, request, request.data['base_activation_link'])
 
         # Give them the typical permissions
         # FIXME: we should just do a group
@@ -156,10 +156,17 @@ class ProviderViewSet(viewsets.ModelViewSet):
         # Now we have a user, let's just call the built-in create
         # method to create the provider for us. We just need to
         # add the 'user' field to the request data.
-        request.POST._mutable = True
-        request.POST['user'] = user.get_api_url()
-        # Make sure this works though
-        assert 'user' in request.data
+        if hasattr(request.data, 'dicts'):
+            # This is gross but seems to be necessary for now,
+            # becausing just setting an item on the MergeDict
+            # appears to be a no-op.
+            request.data.dicts[0]._mutable = True
+            request.data.dicts[0]['user'] = user.get_api_url()
+        else:   # pragma: no cover
+            # Maybe we have Django 1.9 and MergeDict is gone :-)
+            request.data['user'] = user.get_api_url()
+            # Make sure this works though
+            assert 'user' in request.data
         return super().create(request, *args, **kwargs)
 
 
