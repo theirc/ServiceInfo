@@ -71,7 +71,7 @@ module.exports = Backbone.View.extend({
             }
 
             // Base Activation Link
-            data["base_activation_link"] = location.protocol+'//'+location.host+location.pathname+'#/register/verify';
+            data["base_activation_link"] = location.protocol+'//'+location.host+location.pathname+'?#/register/verify/';
 
             $.ajax('//localhost:4005/api/providers/create_provider/', {
                 method: 'POST',
