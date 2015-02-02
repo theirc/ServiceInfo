@@ -19,7 +19,6 @@ from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, 
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
     SelectionCriterion
-from services.utils import permission_names_to_objects, USER_PERMISSION_NAMES
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -168,8 +167,7 @@ class ProviderViewSet(viewsets.ModelViewSet):
         user.send_activation_email(request.site, request, request.data['base_activation_link'])
 
         # Give them the typical permissions
-        # FIXME: we should just do a group
-        user.user_permissions.add(*permission_names_to_objects(USER_PERMISSION_NAMES))
+        user.groups.add(Group.objects.get(name='Providers'))
 
         # Now we have a user, let's just call the built-in create
         # method to create the provider for us. We just need to

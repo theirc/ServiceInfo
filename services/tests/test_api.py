@@ -2,6 +2,7 @@ from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND
 import json
 
 from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth.models import Group
 from django.core import mail
 from django.core.urlresolvers import reverse
 from django.test import TestCase
@@ -14,7 +15,6 @@ from email_user.tests.factories import EmailUserFactory
 from services.models import Provider, Service, SelectionCriterion
 from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory, \
     ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory
-from services.utils import permission_names_to_objects, USER_PERMISSION_NAMES
 
 
 class APITestMixin(object):
@@ -26,7 +26,7 @@ class APITestMixin(object):
             password=self.password,
             email=self.email,
         )
-        self.user.user_permissions.add(*permission_names_to_objects(USER_PERMISSION_NAMES))
+        self.user.groups.add(Group.objects.get(name='Providers'))
         assert self.client.login(email=self.email, password=self.password)
         # Get the URL of the user for the API
         self.user_url = reverse('user-detail', args=[self.user.id])
@@ -181,6 +181,10 @@ class ProviderAPITest(APITestMixin, TestCase):
         self.assertIn(link, mail.outbox[0].body)
         # user is not active
         self.assertFalse(provider.user.is_active)
+        # We have to make them active to check their permissions, because inactive
+        # users have none
+        user.is_active = True
+        self.assertTrue(user.has_perm('services.add_service'))
 
     def test_get_provider_list(self):
         p1 = ProviderFactory()
