@@ -16,9 +16,6 @@ function toggleLoginMenuItem() {
     } else {
         $('.menu-item-login').show();
         $('.menu-item-logout').hide();
-
-        // TODO: Remove this later
-        window.location.hash = 'login';
     }
 };
 

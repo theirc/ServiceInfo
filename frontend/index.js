@@ -7,6 +7,7 @@ var config = require('./config');
 var _ = underscore;
 
 window.$ = $;
+window.require = require;
 
 var Router = require('./router');
 var router = new Router();

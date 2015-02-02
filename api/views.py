@@ -160,6 +160,7 @@ class ProviderViewSet(viewsets.ModelViewSet):
             # This is gross but seems to be necessary for now,
             # becausing just setting an item on the MergeDict
             # appears to be a no-op.
+            request.data.dicts[0]._mutable = True
             request.data.dicts[0]['user'] = user.get_api_url()
         else:   # pragma: no cover
             # Maybe we have Django 1.9 and MergeDict is gone :-)
