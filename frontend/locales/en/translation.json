@@ -21,7 +21,7 @@
       }
     },
     "Filtered-Search": {
-      "Label": "Search by name, location, service, or other",
+      "Label": "Search by name, location, service, or other search term",
       "Search": "Search"
     }
   },

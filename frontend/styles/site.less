@@ -92,6 +92,7 @@ li {
 
 .row {
 	padding: 15px 5px;
+    clear: both;
 }
 
 @media (min-width: 1px) and (max-width: 768px) {
@@ -228,7 +229,7 @@ float: none;
 
 .page-head {
 	background-color: none;
-	padding: 24px 15px 20px 15px;
+	padding: 24px 15px 20px;
 }
 
 .page-title {
@@ -641,6 +642,13 @@ input[type=range] {
     }
 }
 
+@media only screen and (max-width: 767px) {
+    #application-header .brand #logo{
+        width: 90px;
+        height: 120px;
+    }
+}
+
 @media only screen and (orientation: portrait) {
     #application-header .brand {
         height: 100%;
@@ -683,26 +691,151 @@ input[type=range] {
 	#page-container {
 	    display: inline-block;
 	    width: calc(100% - 200px);
-	    margin-left: 200px;
+	    margin-left: 212px;
 	}
 }
+
+/*
+Service Map
+*/
 
 /*
 *   Button Group - Search
 */
 
 .btn-group-input {
-	width: 100%;
     vertical-align: middle;
-    -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
-    -moz-box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
-    box-shadow: inset 1 1px 1px rgba(0,0,0,.2);}
 
     input.group-input {
-    	width: 75%;
+        width: 75%;
+        float: left;
+        margin: 0;
+        -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
+        -moz-box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
+        box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
+        -webkit-border-top-right-radius: 0;
+        -moz-border-top-right-radius: 0;
+        border-top-right-radius: 0;
+        -webkit-border-bottom-right-radius: 0;
+        -moz-border-bottom-right-radius: 0;
+        border-bottom-right-radius: 0;
+        text-align: left;
+
+        @media only screen and (max-width: 767px) {
+            padding: 9px;
+        }
     }
 
     button.group-submit {
-    	width: 25%;
+        width: 25%;
+        padding: 13px;
+        border-top-width: 2px;
+        -webkit-border-bottom-left-radius: 0;
+        -moz-border-bottom-left-radius: 0;
+        border-bottom-left-radius: 0;
+        -webkit-border-top-left-radius: 0;
+        -moz-border-top-left-radius: 0;
+        border-top-left-radius: 0;
+        -webkit-border-top-right-radius: 4px;
+        -moz-border-top-right-radius: 4px;
+        border-top-right-radius: 4px;
+        -webkit-border-bottom-right-radius: 4px;
+        -moz-border-bottom-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        text-align: center;
+
+        @media only screen and (max-width: 767px) {
+            padding: 10px;
+        }
     }
 }
+
+
+
+.search {
+    padding: 0 15px;
+}
+
+#service-map .map {
+    position: relative;
+    background: white;
+    width: 100%;
+    min-height: 20em;
+    margin: 0;
+    padding: 0;
+    -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.1);
+    -moz-box-shadow: inset 1 1px 1px rgba(0,0,0,.1);
+    box-shadow: inset 2px 2px 8px rgba(0,0,0,.1);
+}
+
+#service-map .map .icon {
+
+}
+
+.map .tool-tip {
+    position: absolute;
+    width: 2em;
+    line-height: 2em;
+    margin-left: 2px;
+    margin-top: -1em;
+    background-image: url(/images/POI-Marker-Green.png);
+    background-image: url(/images/POI-Marker.svg);
+    background-size: 100%;
+    background-repeat: none;
+    width: 32px;
+    height: 44px;
+    margin: 0;
+    padding: 0;
+}
+
+.tool-tip:hover .tip {
+    opacity: 1;
+}
+
+.tip {
+    background: #333;
+    background: #262525;
+    border-radius: 5px;
+    bottom: 26px;
+    color: #fff;
+    padding: 12px 15px;
+    bottom: 3.6em;
+    position: absolute;
+    z-index: 98;
+    opacity: 0;
+    font-weight: normal;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition:  opacity 0.5s;
+    -ms-transition: opacity 0.5s;
+    -o-transition:  opacity 0.5s;
+    transition:  opacity 0.5s;
+    min-width: 10em;
+    transform: translate(50%,0);
+    margin-left: 50%;
+    right:50%;
+
+    &:before {
+        border: solid;
+        border-color: #262525 transparent;
+        transform: translate(50%,0);
+        margin-left: 50%;
+        right:50%;
+        border-width: 20px 20px 0px;
+        bottom: -10px;
+        content: "";
+        position: absolute;
+        z-index: 99;
+        opacity: 1;
+    }
+
+    .poi-name,
+    .poi-descr {
+        display: block;
+    }
+
+}
+
+
+
+
+
