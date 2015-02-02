@@ -188,7 +188,7 @@ class ProviderViewSet(viewsets.ModelViewSet):
             response = super().create(request, *args, **kwargs)
             # If we got here without blowing up, send the user's activation email
             user.send_activation_email(request.site, request, request.data['base_activation_link'])
-        return response
+            return response
 
 
 #
