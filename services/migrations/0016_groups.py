@@ -13,6 +13,7 @@ from services.utils import permission_names_to_objects
 STAFF_PERMISSIONS = [
     'services.change_provider',
     'services.change_service'
+    'services.change_selectioncriterion',
 ]
 
 # Typical provider permissions
