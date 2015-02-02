@@ -1,4 +1,4 @@
-from http.client import OK, CREATED, BAD_REQUEST
+from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND
 import json
 
 from django.contrib.auth import get_user_model, authenticate
@@ -267,6 +267,43 @@ class ServiceAPITest(APITestMixin, TestCase):
         self.assertIn(s1.id, service_ids)
         self.assertIn(s2.id, service_ids)
         self.assertNotIn(s3.id, service_ids)
+
+    def test_cancel_current_service(self):
+        service = ServiceFactory(provider=self.provider, status=Service.STATUS_CURRENT)
+        url = service.get_api_url() + 'cancel/'
+        print(url)
+        rsp = self.client.post(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        service = Service.objects.get(pk=service.pk)
+        self.assertEqual(Service.STATUS_CANCELED, service.status)
+
+    def test_cancel_draft_service(self):
+        service = ServiceFactory(provider=self.provider, status=Service.STATUS_DRAFT)
+        url = service.get_api_url() + 'cancel/'
+        print(url)
+        rsp = self.client.post(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        service = Service.objects.get(pk=service.pk)
+        self.assertEqual(Service.STATUS_CANCELED, service.status)
+
+    def test_cancel_rejected_service(self):
+        service = ServiceFactory(provider=self.provider, status=Service.STATUS_REJECTED)
+        url = service.get_api_url() + 'cancel/'
+        print(url)
+        rsp = self.client.post(url)
+        self.assertEqual(BAD_REQUEST, rsp.status_code)
+        service = Service.objects.get(pk=service.pk)
+        self.assertEqual(Service.STATUS_REJECTED, service.status)
+
+    def test_cancel_another_providers_service(self):
+        other_provider = ProviderFactory()
+        service = ServiceFactory(provider=other_provider, status=Service.STATUS_CURRENT)
+        url = service.get_api_url() + 'cancel/'
+        print(url)
+        rsp = self.client.post(url)
+        self.assertEqual(NOT_FOUND, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        service = Service.objects.get(pk=service.pk)
+        self.assertEqual(Service.STATUS_CURRENT, service.status)
 
 
 class SelectionCriterionAPITest(APITestMixin, TestCase):

@@ -207,3 +207,18 @@ associated email address in the response::
     {'email': 'user@example.com'},
 
 Otherwise,it'll get a 400 but no other data.
+
+Cancel a Service
+----------------
+
+A provider can cancel a current service to withdraw it from the
+directory, or cancel a service record that is in draft status to
+cancel the requested new service or change.
+
+The URL for this API is the service's URL with 'cancel/' appended.
+POST to it to do the cancel.
+
+On success it'll return a 200.  If the service isn't in a valid
+state to be canceled, it'll return 400. If the service doesn't
+belong to the provider making the call, it'll return a 404 (because
+only services belonging to a provider are visible to the provider).

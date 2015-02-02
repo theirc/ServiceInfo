@@ -368,3 +368,19 @@ class Service(models.Model):
 
     def get_api_url(self):
         return reverse('service-detail', args=[self.id])
+
+    def cancel(self):
+        """
+        Cancel a pending service update, or withdraw a current service
+        from the directory.
+        """
+        previous_status = self.status
+        self.status = Service.STATUS_CANCELED
+        self.save()
+
+        if previous_status == Service.STATUS_DRAFT:
+            # TODO: Trigger JIRA ticket update saying the provider canceled their change
+            pass
+        elif previous_status == Service.STATUS_CURRENT:
+            # TODO Trigger new JIRA ticket to notify staff that provider has withdrawn the service
+            pass
