@@ -8,6 +8,7 @@ var $ = require('jquery'),
 var views = {
     "register": require('./views/provider-form'),
     "register-confirm": require('./views/provider-form-confirm'),
+    "account-activate": require('./views/account-activate'),
     "service": require('./views/service-form'),
     "feedback": require('./views/feedback'),
     "map": require('./views/map'),
@@ -18,7 +19,7 @@ function loadPage(name) {
     return function() {
         var $el = $(document.querySelector('#page'));
         var view = new views[name]({el: $el});
-        view.render();
+        view.render.apply(view, arguments);
         i18n.init(function(){
             view.$el.i18n({
                 lng: config.get('lang'),
@@ -40,6 +41,7 @@ module.exports = Backbone.Router.extend({
         },
         "register": loadPage("register"),
         "register/confirm": loadPage("register-confirm"),
+        "register/verify/:token": loadPage("account-activate"),
         "service": loadPage("service"),
         "feedback": loadPage("feedback"),
         "map": loadPage("map"),
