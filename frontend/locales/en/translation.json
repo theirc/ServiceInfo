@@ -72,5 +72,15 @@
   			"Clear": "Remove Answers"
   		}
   	}
+  },
+  "Provider-Registration-Confirmation": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Your Information was Submitted Successfully"
+      },
+      "Page-Description": {
+        "Page-Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+      }
+    } 
   }
 }
