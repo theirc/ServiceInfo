@@ -40,7 +40,7 @@ class APITestMixin(object):
             HTTP_AUTHORIZATION="Token %s" % self.token
         )
 
-    def post_with_token(self, url, data):
+    def post_with_token(self, url, data=None):
         """
         Make a POST to a url, passing self.token in the request headers.
         Return the response.
@@ -227,6 +227,7 @@ class ServiceAPITest(APITestMixin, TestCase):
     def setUp(self):
         super().setUp()
         self.provider = ProviderFactory(user=self.user, name_en="Our provider")
+        self.token = Token.objects.get(user=self.user).key
 
     def test_create_service(self):
         area = ServiceAreaFactory()
@@ -271,8 +272,7 @@ class ServiceAPITest(APITestMixin, TestCase):
     def test_cancel_current_service(self):
         service = ServiceFactory(provider=self.provider, status=Service.STATUS_CURRENT)
         url = service.get_api_url() + 'cancel/'
-        print(url)
-        rsp = self.client.post(url)
+        rsp = self.post_with_token(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         service = Service.objects.get(pk=service.pk)
         self.assertEqual(Service.STATUS_CANCELED, service.status)
@@ -280,8 +280,7 @@ class ServiceAPITest(APITestMixin, TestCase):
     def test_cancel_draft_service(self):
         service = ServiceFactory(provider=self.provider, status=Service.STATUS_DRAFT)
         url = service.get_api_url() + 'cancel/'
-        print(url)
-        rsp = self.client.post(url)
+        rsp = self.post_with_token(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         service = Service.objects.get(pk=service.pk)
         self.assertEqual(Service.STATUS_CANCELED, service.status)
@@ -289,8 +288,7 @@ class ServiceAPITest(APITestMixin, TestCase):
     def test_cancel_rejected_service(self):
         service = ServiceFactory(provider=self.provider, status=Service.STATUS_REJECTED)
         url = service.get_api_url() + 'cancel/'
-        print(url)
-        rsp = self.client.post(url)
+        rsp = self.post_with_token(url)
         self.assertEqual(BAD_REQUEST, rsp.status_code)
         service = Service.objects.get(pk=service.pk)
         self.assertEqual(Service.STATUS_REJECTED, service.status)
@@ -299,8 +297,7 @@ class ServiceAPITest(APITestMixin, TestCase):
         other_provider = ProviderFactory()
         service = ServiceFactory(provider=other_provider, status=Service.STATUS_CURRENT)
         url = service.get_api_url() + 'cancel/'
-        print(url)
-        rsp = self.client.post(url)
+        rsp = self.post_with_token(url)
         self.assertEqual(NOT_FOUND, rsp.status_code, msg=rsp.content.decode('utf-8'))
         service = Service.objects.get(pk=service.pk)
         self.assertEqual(Service.STATUS_CURRENT, service.status)
