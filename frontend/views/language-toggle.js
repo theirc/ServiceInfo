@@ -6,6 +6,9 @@ module.exports = Backbone.View.extend({
     initialize: function(){
         this.render();
         this.setLanguage(localStorage['lang'] || 'en');
+        if (localStorage['lang']) {
+            this.hide(true);
+        }
     },
 
     render: function() {
@@ -26,7 +29,7 @@ module.exports = Backbone.View.extend({
         });
     },
 
-    hide: function() {
+    hide: function(immediate) {
         var target;
         if (window.innerHeight > window.innerWidth){
             target = $('#menu-toggle').position();
@@ -39,7 +42,11 @@ module.exports = Backbone.View.extend({
         };
         this.$el.css(this.$el.position());
         this.$el.addClass('hidden');
-        this.$el.animate(anim, {duration: 0.5});
+        if (immediate) {
+            this.$el.css(anim);
+        } else {
+            this.$el.animate(anim, {duration: 0.5});
+        }
 
         this._hiddenPos = anim;
     },
