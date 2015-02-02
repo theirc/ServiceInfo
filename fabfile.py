@@ -269,6 +269,8 @@ def makemessages():
           "--ignore 'requirements/*' --ignore 'frontend/*' --ignore 'vagrant/*' "
           "--no-location --no-obsolete "
           "-l en")
+    local("i18next-conv -s frontend/locales/en/translation.json -t "
+          "locale/en/LC_MESSAGES/frontend.po -l en")
 
 
 @task
