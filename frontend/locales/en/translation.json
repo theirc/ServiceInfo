@@ -45,6 +45,7 @@
             "Password": "Password",
             "PasswordConfirm": "Confirm Password",
   			"Service-Type": "Type of Service",
+            "Service-Type-Choose": "Choose a Service Type",
   			"Phone-Number": "Phone Number",
   			"Email": "Email",
   			"Website": "Website (Optional Field)",
