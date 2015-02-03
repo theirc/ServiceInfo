@@ -787,25 +787,25 @@ table {
 	text-align: left;
 	background-color: #fff;
 	border-collapse: collapse;
-	margin: 0;
-	-webkit-transform: translate(-50%, 0);
-	-moz-transform: translate(-50%, 0);
+	margin: 0 0 0 50%;
 	transform: translate(-50%, 0);
-	margin-left: 50%;
 	tr {
+        border-right-width: 5px;
+        border-right-style: solid; 
+
 		&:nth-child(even) {
 	    	background-color: #e8e8e8;
-	    	border-right: 5px solid #e8e8e8;
+	    	border-right-color: #e8e8e8;
 		}
 		&:nth-child(odd) {
 	   		background-color: #fff;
-	   		border-right: 5px solid #fff;
+	   		border-right-color: #fff;
 		}
 		&.approved {
-			border-right: 5px solid #3cb879
+			border-right-color: #3cb879;
 		}
 		&.denied {
-			border-right: 5px solid #E04733;
+			border-right-color: #E04733;
 		}
 	}
 	th {
@@ -829,6 +829,10 @@ table {
 	    padding-left: 8px;
 	}
 
+    .vertical-header {
+        display: none;
+    }
+
 	@media (min-width: 1px) and (max-width: 767px) {
 
 		/* Force table to not be like tables anymore */
@@ -842,11 +846,11 @@ table {
 		}
 
 		/* Hide table headers (but not display: none;, for accessibility) */
-		thead tr {
-			position: absolute;
-			top: -9999px;
-			left: -9999px;
-		}
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
 
 		tr {
 			border-top: 1px solid #c8c8c8;
@@ -864,28 +868,26 @@ table {
 		td {
 			border: none;
 			position: relative;
-			padding-left: 37%;
 			border-bottom: 1px solid #DDD;
+            padding-left: 1em;
 		}
 
-		td:before {
+		.vertical-td {
 			position: absolute;
 			top: 0;
 			left: 0;
 			padding: 8px;
-			width: 29%;
+			padding-left: 37%;
 			padding-right: 10px;
 			font-weight: bold;
 			white-space: nowrap;
 			border-left: 5px solid #fdc82f !important;
 		}
 
-		/*
-		Label the data
-		*/
-		td:nth-of-type(2):before { content: "Name:"; }
-		td:nth-of-type(3):before { content: "Type:"; }
-		td:nth-of-type(4):before { content: "Area:"; }
-		td:nth-of-type(1):before { content: "Status:"; }
+    .vertical-header {
+        display: inline-block;
+    }
+
+
 	}
 }

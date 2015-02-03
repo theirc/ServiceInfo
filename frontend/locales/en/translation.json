@@ -79,7 +79,15 @@
         "Title": "Services List"
       },
       "Page-Description": {
-        "Page-Description": "Below is a list of services you hav applied to provide. Approved services are marked in green. Un-approved services are marked in red. Services pending approval are unmarked."
+        "Page-Description": "Below is a list of services you have applied to provide. Approved services are marked in green. Un-approved services are marked in red. Services pending approval are unmarked."
+      }
+    },
+    "Table": {
+      "Thead": {
+        "Name": "Name:",
+        "Type": "Type:",
+        "Area": "Area:",
+        "Status": "Status:"
       }
     }
   }
