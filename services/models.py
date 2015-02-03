@@ -393,3 +393,24 @@ class Service(models.Model):
         elif previous_status == Service.STATUS_CURRENT:
             # TODO Trigger new JIRA ticket to notify staff that provider has withdrawn the service
             pass
+
+    def staff_approve(self):
+        """
+        Staff approving the service (new or changed)
+        """
+        # if there's already a current record, archive it
+        if self.update_of and self.update_of.status == Service.STATUS_CURRENT:
+            self.update_of.status = Service.STATUS_ARCHIVED
+            self.update_of.save()
+        self.status = Service.STATUS_CURRENT
+        self.save()
+        # FIXME: Trigger email to user
+        # FIXME: Trigger JIRA ticket update?
+
+    def staff_reject(self):
+        """
+        Staff rejecting the service (new or changed)
+        """
+        self.status = Service.STATUS_REJECTED
+        self.save()
+        # FIXME: Trigger JIRA ticket update?

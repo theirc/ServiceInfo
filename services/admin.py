@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.utils.translation import ugettext_lazy as _
 from services.models import Provider, Service, ServiceArea, SelectionCriterion, ProviderType, \
     ServiceType
@@ -19,6 +19,7 @@ class ServiceTypeAdmin(admin.ModelAdmin):
 
 
 class ServiceAdmin(admin.ModelAdmin):
+    actions = ['approve', 'reject']
     fieldsets = (
         (None, {
             'fields': [
@@ -71,7 +72,7 @@ class ServiceAdmin(admin.ModelAdmin):
                     ]
     list_display_links = ['name_en', 'name_ar', 'name_fr', 'provider', 'area_of_service']
     list_filter = ['status', 'type']
-    readonly_fields = ['provider', 'update_of']
+    readonly_fields = ['provider', 'update_of', 'status']
 
     def formfield_for_manytomany(self, db_field, request=None, **kwargs):
         if db_field.name == "selection_criteria":
@@ -85,24 +86,29 @@ class ServiceAdmin(admin.ModelAdmin):
             #     SelectionCriterion.objects.filter(services__provider__user=service.provider.user)
         return super().formfield_for_manytomany(db_field, request, **kwargs)
 
-    def save_model(self, request, obj, form, change):
-        """Notice if staff user is changing the status of the service
-        in a way that we need to do something about."""
-        if change:
-            current_service = Service.objects.get(pk=obj.pk)
-            if current_service.status == Service.STATUS_DRAFT:
-                new_status = obj.status
-                if new_status == Service.STATUS_CURRENT:
-                    # if there's already a current record, archive it
-                    if obj.update_of and obj.update_of.status == Service.STATUS_CURRENT:
-                        obj.update_of.status = Service.STATUS_ARCHIVED
-                        obj.update_of.save()
-                elif new_status == Service.STATUS_REJECTED:
-                    # Staff user rejected them
-                    # We don't really need to do anything, but hold a place here
-                    # in case we need to someday.
-                    pass
-        obj.save()
+    def approve(self, request, queryset):
+        # All must be in DRAFT status
+        if queryset.exclude(status=Service.STATUS_DRAFT).exists():
+            self.message_user(request,
+                              _("Only services in draft status may be approved"),
+                              messages.ERROR)
+            return
+        for service in queryset:
+            service.staff_approve()
+        self.message_user(request, _("Services have been approved"))
+    approve.short_description = _("Approve new or changed service")
+
+    def reject(self, request, queryset):
+        # All must be in DRAFT status
+        if queryset.exclude(status=Service.STATUS_DRAFT).exists():
+            self.message_user(request,
+                              _("Only services in draft status may be rejected"),
+                              messages.ERROR)
+            return
+        for service in queryset:
+            service.staff_reject()
+        self.message_user(request, _("Services have been rejected"))
+    reject.short_description = _("Reject new or changed service")
 
 
 admin.site.register(Provider, ProviderAdmin)
