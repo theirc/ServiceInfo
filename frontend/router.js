@@ -13,13 +13,18 @@ var views = {
     "feedback": require('./views/feedback'),
     "map": require('./views/map'),
     "login": require('./views/login'),
-    "account-activation": require('./views/account-activation'),
 };
 
-function loadPage(name) {
+function loadPage(name, params) {
     return function() {
         var $el = $(document.querySelector('#page'));
-        var view = new views[name]({el: $el});
+        var opts = {
+            el: $el
+        };
+        for (var i=0; i < params.length; i++) {
+            opts[params[i]] = arguments[i];
+        }
+        var view = new views[name](opts);
         view.render.apply(view, arguments);
         i18n.init(function(){
             view.$el.i18n({
@@ -42,12 +47,11 @@ module.exports = Backbone.Router.extend({
         },
         "register": loadPage("register"),
         "register/confirm": loadPage("register-confirm"),
-        "register/verify/:key": loadPage("account-activate"),
+        "register/verify/:key": loadPage("account-activate", ['key']),
         "service": loadPage("service"),
         "feedback": loadPage("feedback"),
         "map": loadPage("map"),
         "login": loadPage("login"),
-        "account/activation": loadPage("account-activation"),
         "logout": function() {
             config.remove('forever.authToken');
             window.location.hash = '';

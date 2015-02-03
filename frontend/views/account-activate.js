@@ -6,32 +6,40 @@ var Backbone = require('backbone'),
 
 var Activation = Backbone.Model.extend({
     initialize: function() {
-        this.set('status', i18n.t("Account-Activation.Status.Pending"));
+        var self = this;
+        self.set('status', "Pending");
 
         $.ajax(config.get('api_location') + 'api/activate/', {
             type: 'POST',
             // contentType: 'JSON',
             data: {
-                'activation_key': this.get('key'),
+                'activation_key': self.get('key'),
             },
             success: function(resp) {
                 config.set('forever.authToken', resp.token);
             },
             error: function(e) {
-                console.error(e);
+                self.set('status', 'Failed');
             },
         })
     },
 })
 
 module.exports = Backbone.View.extend({
-    initialize: function(){
-        this.render();
+    initialize: function(opts){
+        var $this = this;
+        this.activation = new Activation({key: opts.key});
+        this.activation.on('change', function() {
+            $this.render();
+        });
     },
 
-    render: function(key) {
+    render: function() {
         var $el = this.$el;
-        var activation = new Activation({key: key});
-        this.$el.html(template());
+        var status = this.activation.get('status');
+        this.$el.html(template({
+            status: status,
+            failed: status == 'Failed',
+        }));
     },
 })
