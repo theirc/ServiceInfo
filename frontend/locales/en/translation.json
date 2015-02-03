@@ -82,5 +82,18 @@
         "Page-Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
       }
     } 
+  },
+  "Password-Reset": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Password Reset"
+      },
+      "Page-Description": {
+        "Page-Description": "To reset your password enter your email address in the field below then click submit. Clicking submit will send a link to your email account that will direct you to the password reset page."
+      }
+    },
+    "Input-Label": {
+      "User-Email": "Enter your email:"
+    }
   }
 }
