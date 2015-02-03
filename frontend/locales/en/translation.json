@@ -94,6 +94,25 @@
     },
     "Input-Label": {
       "User-Email": "Enter your email:"
+    },
+    "Submit-Options": {
+      "Submit": "Submit"
+    }
+  },
+  "Password-Reset-Form": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Password Reset Form"
+      },
+      "Page-Description": {
+        "Page-Description": "Enter your new password in the text field below, then click submit to update your password."
+      }
+    },
+    "Input-Label": {
+      "New-Password": "Enter your new password:"
+    },
+    "Submit-Options": {
+      "Submit": "Submit"
     }
   }
 }
