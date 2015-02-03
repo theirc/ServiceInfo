@@ -72,5 +72,20 @@
   			"Clear": "Remove Answers"
   		}
   	}
+  },
+  "Account-Activation": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Your account activation is pending Review.",
+        "Title": "Your account has been activated.",
+        "Title": "Your account activation Failed."
+      },
+      "Page-Description": {
+        "Page-Description": "There was a problem setting up your service provider account. Please click the resend confirmation email button below to have another confirmation email sent to your email account." 
+      }
+    },
+    "Buttons": {
+      "Resend-Email": "Resend Verification Email"
+    }
   }
 }

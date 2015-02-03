@@ -12,6 +12,7 @@ var views = {
     "feedback": require('./views/feedback'),
     "map": require('./views/map'),
     "login": require('./views/login'),
+    "account-activation": require('./views/account-activation'),
 };
 
 function loadPage(name) {
@@ -44,6 +45,7 @@ module.exports = Backbone.Router.extend({
         "feedback": loadPage("feedback"),
         "map": loadPage("map"),
         "login": loadPage("login"),
+        "account/activation": loadPage("account-activation"),
         "logout": function() {
             config.remove('forever.authToken');
             window.location.hash = '';
