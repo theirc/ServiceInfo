@@ -38,14 +38,23 @@
   			"Page-Description": "Fill out the form below to apply to be a service provider."
   		}
   	},
+    "Errors": {
+        "Password-Blank": "Password must not be blank",
+        "Password-Repeat": "Password must be repeated",
+        "Password-Match": "Passwords must match"
+    },
   	"Form-Sections": {
   		"Basic": {
   			"Legend": "Basic details to register a service provider:",
   			"Name": "Full Name",
+            "Password": "Password",
+            "PasswordConfirm": "Confirm Password",
   			"Service-Type": "Type of Service",
+            "Service-Type-Choose": "Choose a Service Type",
   			"Phone-Number": "Phone Number",
-  			"Email": "Email (Optional Field)",
+  			"Email": "Email",
   			"Website": "Website (Optional Field)",
+            "MonthlyBeneficiaries": "Number of Monthly Beneficiaries",
   			"Description": "Description"
   		},
   		"Service-Information": {
@@ -63,5 +72,15 @@
   			"Clear": "Remove Answers"
   		}
   	}
+  },
+  "Provider-Registration-Confirmation": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Your Information was Submitted Successfully"
+      },
+      "Page-Description": {
+        "Page-Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+      }
+    } 
   }
 }
