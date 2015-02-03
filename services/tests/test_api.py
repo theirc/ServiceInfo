@@ -147,6 +147,28 @@ class ProviderAPITest(APITestMixin, TestCase):
         result = json.loads(rsp.content.decode('utf-8'))
         err = result['password'][0]
         self.assertIn(err, ['This field may not be blank.', 'This field is required.'])
+        self.assertFalse(get_user_model().objects.filter(email='fred@example.com').exists())
+
+    def test_create_provider_no_number_of_beneficiaries(self):
+        # Number of beneficiaries is a required field
+        # if we leave it out, the request should fail
+        # AND there should not be a new user created
+        self.client.logout()
+
+        url = '/api/providers/create_provider/'
+        data = {
+            'name_en': 'Joe Provider',
+            'type': ProviderTypeFactory().get_api_url(),
+            'phone_number': '12345',
+            'description_en': 'Test provider',
+            'email': 'fred@example.com',
+            'password': 'foobar',
+            'number_of_monthly_beneficiaries': '',
+            'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
+        }
+        rsp = self.api_client.post(url, data=data, format='json')
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        self.assertFalse(get_user_model().objects.filter(email='fred@example.com').exists())
 
     def test_create_provider_and_user(self):
         # Create provider call is made when user is NOT logged in.
