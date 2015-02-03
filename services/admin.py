@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import admin, messages
 from django.utils.translation import ugettext_lazy as _
 from services.models import Provider, Service, ServiceArea, SelectionCriterion, ProviderType, \
@@ -34,6 +35,10 @@ class SelectionCriterionInlineAdmin(admin.TabularInline):
 
 
 class ServiceAdmin(admin.ModelAdmin):
+    class Media:
+        css = {
+            "all": ("css/admin_styles.css",)
+        }
     actions = ['approve', 'reject']
     fieldsets = (
         (None, {
@@ -57,7 +62,7 @@ class ServiceAdmin(admin.ModelAdmin):
                 'additional_info_fr',
             ]
         }),
-        (_('Hours'), {
+        (_('Hours (all times in time zone {timezone})').format(timezone=settings.TIME_ZONE), {
             'classes': ('collapse',),
             'fields': [
                 ('sunday_open', 'sunday_close',),

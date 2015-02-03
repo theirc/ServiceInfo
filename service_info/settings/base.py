@@ -39,7 +39,7 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/New_York'
+TIME_ZONE = 'Asia/Beirut'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -57,7 +57,12 @@ USE_I18N = True
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
-USE_L10N = True
+# And that's what we want, otherwise we have no control.
+USE_L10N = False
+# Time display format:
+TIME_FORMAT = "G:i"  # 24-hour time without leading zero; minutes
+# Time input format(s):
+TIME_INPUT_FORMATS = ('%H:%M',)  # 24-hour time, with leading zero; minutes
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
