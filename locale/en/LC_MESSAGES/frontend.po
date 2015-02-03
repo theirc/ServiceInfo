@@ -48,23 +48,44 @@ msgstr "New Service Provider Registration Form"
 msgid "Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
 msgstr "Fill out the form below to apply to be a service provider."
 
+msgid "Provider-Registration-Form##Errors##Password-Blank"
+msgstr "Password must not be blank"
+
+msgid "Provider-Registration-Form##Errors##Password-Repeat"
+msgstr "Password must be repeated"
+
+msgid "Provider-Registration-Form##Errors##Password-Match"
+msgstr "Passwords must match"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Legend"
 msgstr "Basic details to register a service provider:"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Name"
 msgstr "Full Name"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
+msgstr "Password"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##PasswordConfirm"
+msgstr "Confirm Password"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type"
 msgstr "Type of Service"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type-Choose"
+msgstr "Choose a Service Type"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
 msgstr "Phone Number"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
-msgstr "Email (Optional Field)"
+msgstr "Email"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
 msgstr "Website (Optional Field)"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
+msgstr "Number of Monthly Beneficiaries"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Description"
 msgstr "Description"

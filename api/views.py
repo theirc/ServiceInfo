@@ -1,11 +1,12 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError as DjangoValidationError
+from django.db.transaction import atomic
 from django.utils.timezone import now
 
 from rest_framework import parsers, renderers, viewsets
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import list_route
+from rest_framework.decorators import list_route, detail_route
 from rest_framework.exceptions import ValidationError as DRFValidationError, PermissionDenied
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -44,6 +45,14 @@ class ServiceAreaViewSet(viewsets.ModelViewSet):
 
 
 class ServiceViewSet(viewsets.ModelViewSet):
+    # This docstring shows up when browsing the API in a web browser:
+    """
+    Service view
+
+    In addition to the usual URLs, you can append 'cancel/' to
+    the service's URL and POST to cancel a service that's in
+    draft or current state.  (User must be the provider or superuser).
+    """
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
 
@@ -58,6 +67,16 @@ class ServiceViewSet(viewsets.ModelViewSet):
         if not obj.provider.user == self.request.user:
             raise PermissionDenied
         return obj
+
+    @detail_route(methods=['post'])
+    def cancel(self, request, *args, **kwargs):
+        """Cancel a service. Should be current or draft"""
+        obj = self.get_object()
+        if obj.status not in [Service.STATUS_DRAFT, Service.STATUS_CURRENT]:
+            raise DRFValidationError(
+                {'status': 'Service record must be current or pending changes to be canceled'})
+        obj.cancel()
+        return Response()
 
 
 class SelectionCriterionViewSet(viewsets.ModelViewSet):
@@ -139,35 +158,37 @@ class ProviderViewSet(viewsets.ModelViewSet):
         send them an activation email, and create a provider using
         that user.
         """
-        serializer = CreateProviderSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        with atomic():  # If we throw an exception anywhere in here, rollback all changes
+            serializer = CreateProviderSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
 
-        user = get_user_model().objects.create_user(
-            email=request.data['email'],
-            password=request.data['password'],
-            is_active=False
-        )
-        user.send_activation_email(request.site, request, request.data['base_activation_link'])
+            user = get_user_model().objects.create_user(
+                email=request.data['email'],
+                password=request.data['password'],
+                is_active=False
+            )
+            # Give them the typical permissions
+            # FIXME: we should just do a group
+            user.user_permissions.add(*permission_names_to_objects(USER_PERMISSION_NAMES))
 
-        # Give them the typical permissions
-        # FIXME: we should just do a group
-        user.user_permissions.add(*permission_names_to_objects(USER_PERMISSION_NAMES))
-
-        # Now we have a user, let's just call the built-in create
-        # method to create the provider for us. We just need to
-        # add the 'user' field to the request data.
-        if hasattr(request.data, 'dicts'):
-            # This is gross but seems to be necessary for now,
-            # becausing just setting an item on the MergeDict
-            # appears to be a no-op.
-            request.data.dicts[0]._mutable = True
-            request.data.dicts[0]['user'] = user.get_api_url()
-        else:   # pragma: no cover
-            # Maybe we have Django 1.9 and MergeDict is gone :-)
-            request.data['user'] = user.get_api_url()
-            # Make sure this works though
-            assert 'user' in request.data
-        return super().create(request, *args, **kwargs)
+            # Now we have a user, let's just call the built-in create
+            # method to create the provider for us. We just need to
+            # add the 'user' field to the request data.
+            if hasattr(request.data, 'dicts'):
+                # This is gross but seems to be necessary for now,
+                # becausing just setting an item on the MergeDict
+                # appears to be a no-op.
+                request.data.dicts[0]._mutable = True
+                request.data.dicts[0]['user'] = user.get_api_url()
+            else:   # pragma: no cover
+                # Maybe we have Django 1.9 and MergeDict is gone :-)
+                request.data['user'] = user.get_api_url()
+                # Make sure this works though
+                assert 'user' in request.data
+            response = super().create(request, *args, **kwargs)
+            # If we got here without blowing up, send the user's activation email
+            user.send_activation_email(request.site, request, request.data['base_activation_link'])
+            return response
 
 
 #
