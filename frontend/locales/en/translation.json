@@ -90,5 +90,19 @@
         "Status": "Status:"
       }
     }
+  },
+  "Home": {
+    "Service-Map": {
+      "Title": "View The Service Map",
+      "Body": "Use the service map to locate service providers."
+      },
+    "Feedback": {
+      "Title": "Provide Feedback",
+      "Body": "Tell us about your experience working with your service provider."
+      },
+    "Log-in": {
+      "Title": "Service Provider Login",
+      "Body": "Log in to an existing service provider account, or create a new account."
+    }
   }
 }
