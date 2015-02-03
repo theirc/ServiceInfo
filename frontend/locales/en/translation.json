@@ -72,5 +72,12 @@
   			"Clear": "Remove Answers"
   		}
   	}
+  },
+  "Account-Activation": {
+    "Status": {
+      "Pending": "Activation Pending...",
+      "Failure": "Activation failed!",
+      "Success": "Your account has been activated."
+    }
   }
 }

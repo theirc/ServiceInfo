@@ -41,7 +41,7 @@ module.exports = Backbone.Router.extend({
         },
         "register": loadPage("register"),
         "register/confirm": loadPage("register-confirm"),
-        "register/verify/:token": loadPage("account-activate"),
+        "register/verify/:key": loadPage("account-activate"),
         "service": loadPage("service"),
         "feedback": loadPage("feedback"),
         "map": loadPage("map"),
