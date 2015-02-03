@@ -10,7 +10,7 @@ import random
 from django.conf import settings
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.core.exceptions import ValidationError
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.db import models
@@ -270,18 +270,18 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
         subject = ''.join(subject.splitlines())
 
         message_txt = render_to_string(message_text_template, ctx_dict)
-        email_message = EmailMultiAlternatives(subject, message_txt, settings.DEFAULT_FROM_EMAIL,
-                                               [self.email])
-
         try:
             message_html = render_to_string(message_html_template, ctx_dict)
         except TemplateDoesNotExist:
             message_html = None
 
-        if message_html:
-            email_message.attach_alternative(message_html, 'text/html')
-
-        email_message.send()
+        send_mail(
+            subject=subject,
+            message=message_txt,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[self.email],
+            html_message=message_html
+        )
 
 
 # Create an auth token for each user when they're created

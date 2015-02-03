@@ -11,9 +11,13 @@ PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, os.pardir))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+TEAM_EMAIL = 'servicemap-team@caktusgroup.com'
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
+    ('Caktus IRC Service Info Team', TEAM_EMAIL),
 )
+SERVER_EMAIL = TEAM_EMAIL
+DEFAULT_FROM_EMAIL = TEAM_EMAIL
 
 DATABASES = {
     'default': {
