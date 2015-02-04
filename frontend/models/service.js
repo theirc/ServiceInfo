@@ -2,6 +2,7 @@ var Backbone = require('backbone');
 var config = require('../config');
 var _base = require('./_base');
 var servicearea = require('./servicearea');
+var servicetype = require('./servicetype');
 
 
 var Service = _base.BaseModel.extend({
@@ -13,6 +14,13 @@ var Service = _base.BaseModel.extend({
         area.fetch().then(function(){
             self.servicearea = area;
             self._data.servicearea = area.data();
+        });
+
+        url = this.get('type');
+        var type = new servicetype.ServiceType({url: url});
+        type.fetch().then(function(){
+            self.type = type;
+            self._data.servicetype = type.data();
         });
     },
 })
