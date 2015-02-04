@@ -1,5 +1,6 @@
 # Django settings for service_info project.
 import os
+from django.utils.translation import ugettext_lazy as _
 
 # BASE_DIR = path/to/source/service_info
 # E.g. this file is BASE_DIR/settings/base.py
@@ -42,6 +43,12 @@ TIME_ZONE = 'America/New_York'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
+
+LANGUAGES = [
+    ('ar', _('Arabic')),
+    ('en', _('English')),
+    ('fr', _('French')),
+]
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
