@@ -166,6 +166,7 @@ class SelectionCriterion(models.Model):
     text_en = models.CharField(max_length=100, blank=True, default='')
     text_fr = models.CharField(max_length=100, blank=True, default='')
     text_ar = models.CharField(max_length=100, blank=True, default='')
+    service = models.ForeignKey('services.Service', related_name='selection_criteria')
 
     class Meta(object):
         verbose_name_plural = _("selection criteria")
@@ -296,12 +297,6 @@ class Service(models.Model):
         _("cost of service"),
         blank=True,
         default='',
-    )
-    selection_criteria = models.ManyToManyField(
-        SelectionCriterion,
-        related_name='services',
-        verbose_name=_("selection criteria"),
-        blank=True,
     )
 
     # Note: we don't let multiple versions of a service record pile up - there
