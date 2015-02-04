@@ -11,7 +11,7 @@ from fabric.contrib.console import confirm
 from fabric.utils import abort
 
 DEFAULT_SALT_LOGLEVEL = 'info'
-PROJECT_NAME = "service_mapper"
+PROJECT_NAME = "service_info"
 PROJECT_ROOT = os.path.dirname(__file__)
 CONF_ROOT = os.path.join(PROJECT_ROOT, 'conf')
 
@@ -25,21 +25,20 @@ VALID_ROLES = (
     'cache',
 )
 
-# FIXME: Once the master has been setup this should be set to IP of the master
-# This assumes a single master for both staging and production
-env.master = '54.235.72.124'
-
 
 @task
 def staging():
     env.environment = 'staging'
-    env.master = '54.93.66.254'  # Staging server on AWS Frankfurt
+    # 54.93.66.254 Staging server on AWS Frankfurt
+    env.master = 'serviceinfo-staging.rescue.org'
     env.hosts = [env.master]
 
 
 @task
 def production():
     env.environment = 'production'
+    # 54.93.51.232
+    env.master = 'serviceinfo.rescue.org'
     env.hosts = [env.master]
 
 
@@ -262,22 +261,41 @@ def build():
 
 @task
 def makemessages():
+    """
+    Find all the translatable English messages in our source and
+    pull them out into locale/en/LC_MESSAGES/django.po
+    """
     local("python manage.py makemessages --ignore 'conf/*' --ignore 'docs/*' "
-          "--ignore 'requirements/*' --ignore 'frontend/*' --ignore 'vagrant/*' -l en")
+          "--ignore 'requirements/*' --ignore 'frontend/*' --ignore 'vagrant/*' "
+          "--no-location --no-obsolete "
+          "-l en")
+    local("i18next-conv -s frontend/locales/en/translation.json -t "
+          "locale/en/LC_MESSAGES/frontend.po -l en")
 
 
 @task
 def pushmessages():
+    """
+    Upload the latest locale/en/LC_MESSAGES/django.po to Transifex
+    """
     local("tx push -s")
 
 
 @task
 def pullmessages():
+    """
+    Pull the latest locale/ar/LC_MESSAGES/django.po and
+    locale/fr/LC_MESSAGES/django.po from Transifex.
+    """
     local("tx pull -af")
 
 
 @task
 def compilemessages():
+    """
+    Compile all the .po files into the .mo files that Django
+    will get translated messages from at runtime.
+    """
     local("python manage.py compilemessages -l en -l ar -l fr")
 
 

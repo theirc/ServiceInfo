@@ -9,7 +9,7 @@ var gulp = require('gulp')
 var API_PORT = 4005;
 var EXPRESS_PORT = 8000;
 var EXPRESS_ROOT = __dirname + "/frontend";
-var LIVERELOAD_PORT = 35729;
+var LIVERELOAD_PORT = 3572;
 
 function startExpress() {
     build();
@@ -19,6 +19,8 @@ function startExpress() {
     app.use(require('connect-livereload')());
     app.use(express.static(EXPRESS_ROOT));
     app.listen(EXPRESS_PORT);
+
+    bg("python", "manage.py", "runserver", API_PORT)();
 }
 
 function startLiveReload() {
@@ -72,21 +74,21 @@ function notifyLivereload(event) {
     // so we need to make it relative to the server root
     var fileName = require('path').relative(EXPRESS_ROOT, event.path);
 
-    bg("python", "manage.py", "runserver", API_PORT)
-
     build();
 
-    lr.changed({
-        body: {
-            files: [fileName]
-        }
-    });
+    setTimeout(function(){
+        lr.changed({
+            body: {
+                files: [fileName]
+            }
+        });
+    }, 500); // For some reason, triggering live reload too early serves the old version
 }
 
 gulp.task('default', function() {
     startExpress();
     startLiveReload();
-    gulp.watch(['frontend/index.html', 'frontend/index.js', 'frontend/router.js', 'frontend/styles/site.less', 'frontend/templates/*.html', 'frontend/views/*.js'], notifyLivereload);
+    gulp.watch(['frontend/index.html', 'frontend/index.js', 'frontend/router.js', 'frontend/styles/site.less', 'frontend/templates/*.hbs', 'frontend/views/*.js'], notifyLivereload);
 });
 
 gulp.task('build', build);

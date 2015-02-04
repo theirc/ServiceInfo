@@ -5,7 +5,7 @@ Server Provisioning
 Overview
 ------------------------
 
-Service_Mapper is deployed on the following stack.
+This project is deployed on the following stack.
 
 - OS: Ubuntu 14.04 LTS
 - Python: 3.4
@@ -250,19 +250,19 @@ ________________________
 Many Django projects make use of `Celery <http://celery.readthedocs.org/en/latest/>`_
 for handling long running task outside of request/response cycle. Enabling a worker
 makes use of `Django setup for Celery <http://celery.readthedocs.org/en/latest/django/first-steps-with-django.html>`_.
-As documented you should create/import your Celery app in ``service_mapper/__init__.py`` so that you
+As documented you should create/import your Celery app in ``service_info/__init__.py`` so that you
 can run the worker via::
 
-    celery -A service_mapper worker
+    celery - A worker
 
 Additionally you will need to configure the project settings for Celery::
 
-    # service_mapper.settings.staging.py
+    # service_info.settings.staging.py
     import os
-    from service_mapper.settings.base import *
+    from service_info.settings.base import *
 
     # Other settings would be here
-    BROKER_URL = 'amqp://service_mapper_staging:%(BROKER_PASSWORD)s@%(BROKER_HOST)s/service_mapper_staging' % os.environ
+    BROKER_URL = 'amqp://service_info_staging:%(BROKER_PASSWORD)s@%(BROKER_HOST)s/service_info_staging' % os.environ
 
 You will also need to add the ``BROKER_URL`` to the ``service_mapper.settings.production`` so
 that the vhost is set correctly. These are the minimal settings to make Celery work. Refer to the
@@ -276,7 +276,7 @@ environment variable in the ``env`` dictionary of ``conf/pillar/<environment>/en
 To add the states you should add the ``worker`` role when provisioning the minion.
 At least one server in the stack should be provisioned with the ``queue`` role as well.
 This will use RabbitMQ as the broker by default. The
-RabbitMQ user will be named service_mapper_<environment> and the vhost will be named service_mapper_<environment>
+RabbitMQ user will be named service_info_<environment> and the vhost will be named service_info_<environment>
 for each environment. It requires that you add a password for the RabbitMQ user to each of
 the ``conf/pillar/<environment>/secrets.sls``::
 
@@ -299,13 +299,13 @@ using the ``balancer`` role. See the ``secrets.ex`` file for an example.
 You can use the below OpenSSL commands to generate the key and signing request::
 
   # Generate a new 2048 bit RSA key
-  openssl genrsa -out service_mapper.key 2048
+  openssl genrsa -out service_info.key 2048
   # Make copy of the key with the passphrase
-  cp service_mapper.key service_mapper.key.secure
+  cp service_info.key service_info.key.secure
   # Remove any passphrase
-  openssl rsa -in service_mapper.secure -out service_mapper.key
+  openssl rsa -in service_info.secure -out service_info.key
   # Generate signing request
-  openssl req -new -key service_mapper.key -out service_mapper.csr
+  openssl req -new -key service_info.key -out service_info.csr
 
 The last command will prompt you for information for the signing request including
 the organization for which the request is being made, the location (country, city, state),

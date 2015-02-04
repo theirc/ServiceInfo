@@ -11,6 +11,24 @@
   	"Feedback": "Feedback Tool",
   	"Change-Language": "Change Language"
   },
+  "Login-Form": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Log In"
+      },
+      "Page-Description": {
+        "Page-Description": "If you are a service provider and have an existing account sign into your account below."
+      }
+    },
+    "Form": {
+      "Email": "Email",
+      "Password": "Password"
+    },
+    "Form-Submit-Options": {
+      "Submit": "Login",
+      "Register": "Register to be a Service Provider here"
+    }
+  },
   "Service-Map": {
     "Page-Head": {
       "Page-Title": {
@@ -34,14 +52,23 @@
   			"Page-Description": "Fill out the form below to apply to be a service provider."
   		}
   	},
+    "Errors": {
+        "Password-Blank": "Password must not be blank",
+        "Password-Repeat": "Password must be repeated",
+        "Password-Match": "Passwords must match"
+    },
   	"Form-Sections": {
   		"Basic": {
   			"Legend": "Basic details to register a service provider:",
   			"Name": "Full Name",
+            "Password": "Password",
+            "PasswordConfirm": "Confirm Password",
   			"Service-Type": "Type of Service",
+            "Service-Type-Choose": "Choose a Service Type",
   			"Phone-Number": "Phone Number",
-  			"Email": "Email (Optional Field)",
+  			"Email": "Email",
   			"Website": "Website (Optional Field)",
+            "MonthlyBeneficiaries": "Number of Monthly Beneficiaries",
   			"Description": "Description"
   		},
   		"Service-Information": {

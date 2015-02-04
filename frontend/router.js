@@ -1,12 +1,17 @@
 "use strict";
 var $ = require('jquery'),
-    Backbone = require('backbone');
+    config = require('./config'),
+    i18n = require('i18next-client'),
+    Backbone = require('backbone')
+;
 
 var views = {
-    "home": require('./views/home'),
     "register": require('./views/provider-form'),
+    "register-confirm": require('./views/provider-form-confirm'),
+    "service": require('./views/service-form'),
     "feedback": require('./views/feedback'),
     "map": require('./views/map'),
+    "login": require('./views/login'),
 };
 
 function loadPage(name) {
@@ -14,6 +19,11 @@ function loadPage(name) {
         var $el = $(document.querySelector('#page'));
         var view = new views[name]({el: $el});
         view.render();
+        i18n.init(function(){
+            view.$el.i18n({
+                lng: config.get('lang'),
+            });
+        });
         $('#menu-container').addClass("menu-closed");
         $('#menu-container').removeClass("menu-open");
     }
@@ -21,9 +31,23 @@ function loadPage(name) {
 
 module.exports = Backbone.Router.extend({
     routes: {
-        "": loadPage("home"),
+        "": function() {
+            if (config.get('forever.authToken')) {
+
+            } else {
+
+            }
+        },
         "register": loadPage("register"),
+        "register/confirm": loadPage("register-confirm"),
+        "service": loadPage("service"),
         "feedback": loadPage("feedback"),
         "map": loadPage("map"),
+        "login": loadPage("login"),
+        "logout": function() {
+            config.remove('forever.authToken');
+            window.location.hash = '';
+            window.location.reload();
+        },
     },
 })

@@ -33,11 +33,11 @@ want to use this for development/testing it is helpful to change your local sett
 staging instead of dev::
 
     # Example local.py
-    from service_mapper.settings.staging import *
+    from service_info.settings.staging import *
 
     # Override settings here
-    DATABASES['default']['NAME'] = 'service_mapper_local'
-    DATABASES['default']['USER'] = 'service_mapper_local'
+    DATABASES['default']['NAME'] = 'service_info_local'
+    DATABASES['default']['USER'] = 'service_info_local'
 
     DEBUG = True
 

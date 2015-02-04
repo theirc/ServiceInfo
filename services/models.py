@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _, get_language
 
 
 class ProviderType(models.Model):
+    number = models.IntegerField(unique=True)
     name_en = models.CharField(
         _("name in English"),
         max_length=256,
@@ -159,6 +160,66 @@ class SelectionCriterion(models.Model):
         verbose_name_plural = _("selection criteria")
 
 
+class ServiceType(models.Model):
+    number = models.IntegerField(unique=True)
+    name_en = models.CharField(
+        _("name in English"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    name_ar = models.CharField(
+        _("name in Arabic"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    name_fr = models.CharField(
+        _("name in French"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+
+    comments_en = models.CharField(
+        _("comments in English"),
+        max_length=512,
+        default='',
+        blank=True,
+    )
+    comments_ar = models.CharField(
+        _("comments in Arabic"),
+        max_length=512,
+        default='',
+        blank=True,
+    )
+    comments_fr = models.CharField(
+        _("comments in French"),
+        max_length=512,
+        default='',
+        blank=True,
+    )
+
+    def __str__(self):
+        # Try to return the name field of the currently selected language
+        # if we have such a field and it has something in it.
+        # Otherwise, punt and return the English, French, or Arabic name,
+        # in that order.
+        language = get_language()
+        field_name = 'name_%s' % language[:2]
+        if hasattr(self, field_name) and getattr(self, field_name):
+            return getattr(self, field_name)
+        return self.name_en or self.name_fr or self.name_ar
+
+    def get_api_url(self):
+        return reverse('servicetype-detail', args=[self.id])
+
+
+class ServiceManager(models.GeoManager):
+    def get_queryset(self):
+        return super().get_queryset().exclude(status=Service.STATUS_ARCHIVED)
+
+
 class Service(models.Model):
     provider = models.ForeignKey(
         Provider,
@@ -229,6 +290,7 @@ class Service(models.Model):
     )
     selection_criteria = models.ManyToManyField(
         SelectionCriterion,
+        related_name='services',
         verbose_name=_("selection criteria"),
         blank=True,
     )
@@ -240,6 +302,7 @@ class Service(models.Model):
     STATUS_CURRENT = 'current'
     STATUS_REJECTED = 'rejected'
     STATUS_CANCELED = 'canceled'
+    STATUS_ARCHIVED = 'archived'
     STATUS_CHOICES = (
         # New service or edit of existing service is pending approval
         (STATUS_DRAFT, _('draft')),
@@ -251,6 +314,8 @@ class Service(models.Model):
         # The provider has canceled service. They can do this on draft or current services.
         # It no longer appears in the public interface.
         (STATUS_CANCELED, _('canceled')),
+        # The record is obsolete and we don't want to see it anymore
+        (STATUS_ARCHIVED, _('archived')),
     )
     status = models.CharField(
         _('status'),
@@ -291,10 +356,31 @@ class Service(models.Model):
     saturday_open = models.TimeField(null=True, blank=True)
     saturday_close = models.TimeField(null=True, blank=True)
 
-    objects = models.GeoManager()
+    type = models.ForeignKey(
+        ServiceType,
+        verbose_name=_("type"),
+    )
+
+    objects = ServiceManager()
 
     def __str__(self):
         return self.name_en
 
     def get_api_url(self):
         return reverse('service-detail', args=[self.id])
+
+    def cancel(self):
+        """
+        Cancel a pending service update, or withdraw a current service
+        from the directory.
+        """
+        previous_status = self.status
+        self.status = Service.STATUS_CANCELED
+        self.save()
+
+        if previous_status == Service.STATUS_DRAFT:
+            # TODO: Trigger JIRA ticket update saying the provider canceled their change
+            pass
+        elif previous_status == Service.STATUS_CURRENT:
+            # TODO Trigger new JIRA ticket to notify staff that provider has withdrawn the service
+            pass

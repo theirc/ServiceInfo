@@ -1,0 +1,295 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Dan Poirier <dpoirier@caktusgroup.com>, 2015
+# Omar Meksassi <omar.meksassi@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Service Info\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-02 08:05-0500\n"
+"PO-Revision-Date: 2015-02-02 07:30+0000\n"
+"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
+"Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+msgid "User account is disabled."
+msgstr "تم تعطيل حساب المستخدم."
+
+msgid "Unable to log in with provided credentials."
+msgstr "غير قادر على الدخول مع المعلومات المتوفرة."
+
+msgid ""
+"Activation key is invalid. Check that it was copied correctly and has not "
+"already been used."
+msgstr "مفتاح تنشيط غير صالح. تحقق من الذي تم نسخه بشكل صحيح وأنه لم يتم بالفعل استخدامه."
+
+msgid "No user with that email"
+msgstr "لا مستخدم بهذا البريد الإلكتروني "
+
+msgid "Password reset key is not valid"
+msgstr "مفتاح إعادة تعيين كلمة المرور غير صالح"
+
+msgid "User is not pending activation"
+msgstr "المستخدم ليس في حالة إنتظار التفعيل "
+
+msgid "Permissions"
+msgstr "ضوابط"
+
+msgid "Important dates"
+msgstr "التواريخ الهامة"
+
+msgid "A user with that email already exists."
+msgstr "البريد الإلكتروني موجود من قبل."
+
+msgid "The two password fields didn't match."
+msgstr "حقلي كلمة السر غير متطابقة."
+
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+msgid "Required. 255 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "يجب 255 حرفا أو أقل. الحروف والأرقام و @/ / + / - / _ فقط."
+
+msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
+msgstr "قد تحتوي فقط على الأحرف والأرقام و @/ / + / - / _."
+
+msgid "Password"
+msgstr "كلمة السر"
+
+msgid ""
+"Raw passwords are not stored, so there is no way to see this user's "
+"password, but you can change the password using <a href=\"password/\">this "
+"form</a>."
+msgstr "لا يتم تخزين كلمات السر الخام، لذلك ليس هناك طريقة لمعرفة كلمة مرور هذا المستخدم، ولكن يمكنك تغيير كلمة المرور باستخدام <a href=\"password/\"> هذا النموذج </a>."
+
+msgid "Users must have an email address"
+msgstr "يجب أن يكون للمستخدمين عنوان بريد إلكتروني"
+
+msgid "Activation key is invalid or has already been used."
+msgstr "مفتاح تنشيط غير صالح أو تم إستخدامه."
+
+msgid "email address"
+msgstr "البريد الإلكتروني"
+
+msgid "staff status"
+msgstr "حالة الموظفين "
+
+msgid "Designates whether the user can log into this admin site."
+msgstr "يحدد ما إذا كان المستخدم يستطيع الدخول إلى إدارة الموقع."
+
+msgid "active"
+msgstr "نشيط "
+
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr "يهدد ما إذا كان المستخدم سيعمل على أنه مستخدم نشيط.لا تنقر هذه إذا أردت أن يبقى المستخدم. "
+
+msgid "date joined"
+msgstr "تاريخ الاشتراك"
+
+msgid "activation key"
+msgstr "مفتاح التفعيل "
+
+msgid "user"
+msgstr "المستخدم"
+
+msgid "registration"
+msgstr "تسجيل"
+
+#, python-format
+msgid ""
+"\n"
+"    You (or someone pretending to be you) have asked to register an account at\n"
+"    %(site.name)s.  If this wasn't you, please ignore this email\n"
+"    and your address will be removed from our records.\n"
+"    "
+msgstr "\nأنت (أو شخص يتظاهر بأنه أنت) وطلب لتسجيل حساب في\n%(site.name)s إذا لم يكن هذا لكم، يرجى تجاهل هذا البريد الإلكتروني\nوسيتم إزالة عنوانك من سجلاتنا."
+
+msgid ""
+"\n"
+"    To activate this account, please click the following link:\n"
+"    "
+msgstr "\nلتفعيل هذا الحساب، يرجى الضغط على الرابط التالي."
+
+#, python-format
+msgid ""
+"\n"
+"    Sincerely,\n"
+"    %(site.name)s Management\n"
+"    "
+msgstr "\nمع خالص التقدير,\n%(site.name)s\n الإدارة "
+
+#, python-format
+msgid ""
+"\n"
+"You (or someone pretending to be you) have asked to register an account at\n"
+"%(site.name)s.  If this wasn't you, please ignore this email\n"
+"and your address will be removed from our records.\n"
+msgstr "\nأنت (أو شخص يتظاهر بأنه أنت) وطلب لتسجيل حساب في\n%(site.name)s إذا لم يكن هذا لكم، يرجى تجاهل هذا البريد الإلكتروني\nوسيتم إزالة عنوانك من سجلاتنا.\n"
+
+msgid ""
+"\n"
+"To activate this account, please click the following link:\n"
+msgstr "\nلتفعيل هذا الحساب، يرجى الضغط على الرابط التالي.\n"
+
+#, python-format
+msgid ""
+"\n"
+"Sincerely,\n"
+"%(site.name)s Management\n"
+msgstr "\nمع خالص التقدير,\n%(site.name)s\n الإدارة.\n"
+
+msgid "Account activation on"
+msgstr "تم تفعيل الحساب "
+
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site.name)s."
+msgstr "كنت تتلقى هذا البريد الإلكتروني لأنك طلبت إعادة تعيين كلمة المرور لحساب المستخدم الخاص بك في %(site.name)s."
+
+msgid "Please go to the following page and choose a new password:"
+msgstr "يرجى الدخول إلى الصفحة التالية واختر كلمة سر جديدة:"
+
+msgid "Your username is your email address:"
+msgstr "إسم المستخدم هو عنوان بريدك الإلكتروني:"
+
+msgid "Thanks for using our site!"
+msgstr "شكرا لاستخدام موقعنا!"
+
+#, python-format
+msgid "The %(site_name)s team"
+msgstr "فريق %(site_name)s"
+
+#, python-format
+msgid ""
+"\n"
+"You (or someone pretending to be you) have asked to reset the\n"
+"password of an account at\n"
+"%(site_name)s.  If this wasn't you, please ignore this email.\n"
+msgstr "\nأنت (أو شخص يتظاهر بأنه أنت) وطلب لتسجيل حساب في\n%(site_name)s إذا لم يكن هذا لكم، يرجى تجاهل هذا البريد الإلكتروني\nوسيتم إزالة عنوانك من سجلاتنا.\n"
+
+msgid ""
+"\n"
+"To reset the password, please click the following link:\n"
+msgstr "\nلتفعيل هذا الحساب، يرجى الضغط على الرابط التالي.\n"
+
+#, python-format
+msgid ""
+"\n"
+"Sincerely,\n"
+"%(site_name)s Management\n"
+msgstr "\nمع خالص التقدير,\n%(site_name)s\n الإدارة \n"
+
+#. Translators: Provider name
+#. Translators: Service name
+msgid "name in English"
+msgstr "الاسم في اللغة الإنجليزية"
+
+#. Translators: Provider name
+#. Translators: Service name
+msgid "name in Arabic"
+msgstr "الإسم في اللغة العربية "
+
+#. Translators: Provider name
+#. Translators: Service name
+msgid "name in French"
+msgstr "الإسم في اللغة الفرنسية "
+
+msgid "type"
+msgstr "نوع "
+
+msgid "phone number"
+msgstr "رقم الهاتف "
+
+msgid "website"
+msgstr "الموقع"
+
+#. Translators: Provider description
+#. Translators: Service description
+msgid "description in English"
+msgstr "الوصف في اللغة الإنكليزية "
+
+#. Translators: Provider description
+#. Translators: Service description
+msgid "description in Arabic"
+msgstr "الوصف في اللغة العربية "
+
+#. Translators: Provider description
+#. Translators: Service description
+msgid "description in French"
+msgstr "الوصف في اللغة الفرنسية "
+
+msgid "user account for this provider"
+msgstr "حساب المستخدم لهذا المزود"
+
+msgid "number of targeted beneficiaries monthly"
+msgstr "عدد المستفيدين شهريا"
+
+msgid "parent area"
+msgstr "المنطقة الأم "
+
+msgid "the area that contains this area"
+msgstr "المنطقة تابعة لمنطقة أخرى "
+
+msgid "selection criteria"
+msgstr "معايير الاختيار"
+
+msgid "comments in English"
+msgstr "تعليقات باللغة الإنجليزية"
+
+msgid "comments in Arabic"
+msgstr "تعليقات باللغة العربية"
+
+msgid "comments in French"
+msgstr "تعليقات باللغة الفرنسية"
+
+msgid "provider"
+msgstr "مزود "
+
+msgid "area of service"
+msgstr "منطقة الخدمة"
+
+msgid "additional information in English"
+msgstr "معلومات إضافية في اللغة الإنجليزية"
+
+msgid "additional information in Arabic"
+msgstr "معلومات إضافية باللغة العربية"
+
+msgid "additional information in French"
+msgstr "معلومات إضافية باللغة الفرنسية"
+
+msgid "cost of service"
+msgstr "كلفة الخدمة"
+
+msgid "draft"
+msgstr "مسودة"
+
+msgid "current"
+msgstr "الحالي "
+
+msgid "rejected"
+msgstr "مرفوض"
+
+msgid "canceled"
+msgstr "ألغيت"
+
+msgid "status"
+msgstr "الوضع "
+
+msgid ""
+"If a service record represents a modification of an existing service record "
+"that is still pending approval, this field links to the existing service "
+"record."
+msgstr "إذا يمثل رقما قياسيا خدمة تعديل لسجل الخدمة الحالية التي لا تزال في انتظار الموافقة، وهذا الروابط ميدانية إلى سجل الخدمة الحالية. للتغيرر"
+
+msgid "location"
+msgstr "المكان "

@@ -37,6 +37,7 @@ pip_requirements:
     - upgrade: true
     - require:
       - virtualenv: venv
+      - file: project_repo
 
 project_path:
   file.managed:
