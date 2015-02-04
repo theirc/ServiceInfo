@@ -2,6 +2,10 @@ from django.conf import settings
 from django.contrib.gis.db import models
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _, get_language
+from django.core.urlresolvers import reverse
+from django.contrib.sites.models import Site
+
+from . import jira_support
 
 
 class ProviderType(models.Model):
@@ -295,8 +299,8 @@ class Service(models.Model):
         blank=True,
     )
 
-    # Note: we don't let multiple versions of a service record pile up - there
-    # should be no more than two, one in current status and/or one in some other
+    # Note: we don't let multiple non-archived versions of a service record pile up
+    # there should be no more than two, one in current status and/or one in some other
     # status.
     STATUS_DRAFT = 'draft'
     STATUS_CURRENT = 'current'
@@ -369,6 +373,9 @@ class Service(models.Model):
     def get_api_url(self):
         return reverse('service-detail', args=[self.id])
 
+    def get_admin_edit_url(self):
+        return reverse('admin:services_service_change', args=[self.id])
+
     def cancel(self):
         """
         Cancel a pending service update, or withdraw a current service
@@ -379,8 +386,92 @@ class Service(models.Model):
         self.save()
 
         if previous_status == Service.STATUS_DRAFT:
-            # TODO: Trigger JIRA ticket update saying the provider canceled their change
-            pass
+            JiraUpdateRecord.objects.create(service=self,
+                update_type=JiraUpdateRecord.CANCEL_DRAFT_SERVICE)
         elif previous_status == Service.STATUS_CURRENT:
-            # TODO Trigger new JIRA ticket to notify staff that provider has withdrawn the service
-            pass
+            JiraUpdateRecord.objects.create(service=self,
+                update_type=JiraUpdateRecord.CANCEL_CURRENT_SERVICE)
+
+    def save(self, *args, **kwargs):
+        new_service = self.pk is None
+        super().save(*args, **kwargs)
+        if new_service:
+            JiraUpdateRecord.objects.create(service=self, update_type=JiraUpdateRecord.NEW_SERVICE)
+
+
+class JiraUpdateRecord(models.Model):
+    service = models.ForeignKey(Service, blank=True, null=True, related_name='jira_records')
+    provider = models.ForeignKey(Provider, blank=True, null=True, related_name='jira_records')
+    PROVIDER_CHANGE = 'provider-change'
+    NEW_SERVICE = 'new-service'
+    CANCEL_DRAFT_SERVICE = 'cancel-draft-service'
+    CANCEL_CURRENT_SERVICE = 'cancel-current-service'
+    UPDATE_CHOICES = (
+        (PROVIDER_CHANGE, _('Provider updated their information')),
+        (NEW_SERVICE, _('New service submitted by provider')),
+        (CANCEL_DRAFT_SERVICE, _('Provider canceled a draft service')),
+        (CANCEL_CURRENT_SERVICE, _('Provider canceled a current service')),
+    )
+    update_type = models.CharField(
+        _('update type'),
+        max_length=max([len(x[0]) for x in UPDATE_CHOICES]),
+        choices=UPDATE_CHOICES,
+    )
+    jira_issue_key = models.CharField(
+        _("JIRA issue"),
+        max_length=256,
+        blank=True,
+        default='')
+
+    class Meta(object):
+        # The service udpate types can each only happen once per service
+        unique_together = (('service', 'update_type'),)
+
+    def save(self, *args, **kwargs):
+        errors = []
+        if self.update_type == '':
+            errors.append('must have a non-blank update_type')
+        elif self.update_type == self.PROVIDER_CHANGE:
+            if not self.provider:
+                errors.append('%s must specify provider' % self.update_type)
+            if self.service:
+                errors.append('%s must not specify service' % self.update_type)
+        elif self.update_type in (self.NEW_SERVICE, self.CANCEL_DRAFT_SERVICE, self.CANCEL_CURRENT_SERVICE):
+            if not self.service:
+                errors.append('%s must specify service' % self.update_type)
+            if self.provider:
+                errors.append('%s must not specify provider' % self.update_type)
+        else:
+            errors.append('unrecognized update type: %s' % self.update_type)
+        if errors:
+            raise Exception('%s cannot be saved: %s' % (str(self), ', '.join(e for e in errors)))
+        super().save(*args, **kwargs)
+
+    def do_jira_work(self, jira=None):
+        sentinel_value = 'PENDING'
+        # Bail out early if we don't yet have a pk, if we already have a JIRA
+        # issue key set, or if some other thread is already working on getting
+        # an issue created/updated.
+        if not self.pk or JiraUpdateRecord.objects.filter(pk=self.pk, jira_issue_key='').update(
+            jira_issue_key=sentinel_value) != 1:
+            return
+
+        try:
+            if not jira:
+                jira = jira_support.get_jira()
+
+            if self.update_type == JiraUpdateRecord.NEW_SERVICE:
+                kwargs = jira_support.default_newissue_kwargs()
+                new_or_change = 'Changed' if self.service.update_of else 'New'
+                kwargs['summary'] = '%s service from %s' % (new_or_change, self.service.provider)
+                kwargs['description'] = 'Details here:\nhttp://%s%s' % (
+                    Site.objects.get_current(), self.service.get_admin_edit_url())
+                new_issue = jira.create_issue(**kwargs)
+                self.jira_issue_key = new_issue.key
+                self.save()
+            # TODO other types of updates
+        finally:
+            # If we've not managed to save a valid JIRA issue key, reset value to
+            # empty string so it'll be tried again later.
+            JiraUpdateRecord.objects.filter(pk=self.pk, jira_issue_key=sentinel_value).update(
+                jira_issue_key='')
