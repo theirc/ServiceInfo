@@ -11,6 +11,7 @@ var views = {
     "service": require('./views/service-form'),
     "feedback": require('./views/feedback'),
     "map": require('./views/map'),
+    "service-list": require('./views/service-list'),
     "login": require('./views/login'),
 };
 
@@ -43,6 +44,7 @@ module.exports = Backbone.Router.extend({
         "service": loadPage("service"),
         "feedback": loadPage("feedback"),
         "map": loadPage("map"),
+        "service-list": loadPage("service-list"),
         "login": loadPage("login"),
         "logout": function() {
             config.remove('forever.authToken');
