@@ -156,6 +156,22 @@ which says::
 As you might expect, requests will be permitted or denied based on the
 permissions of the user whose token is passed.
 
+User language
+-------------
+
+The client can store and retrieve a short string containing the
+code for the current user's preferred language::
+
+     GET /api/language/
+       --> {'language': 'en'}
+
+     POST {'language': 'en'} to /api/language/
+
+At present, the language code should be one of
+
+* "en": English
+* "ar": Arabic
+* "fr": French
 
 Password reset
 --------------

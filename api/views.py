@@ -8,7 +8,7 @@ from rest_framework import parsers, renderers, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import list_route, detail_route
 from rest_framework.exceptions import ValidationError as DRFValidationError, PermissionDenied
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -16,11 +16,25 @@ from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, 
     ProviderTypeSerializer, ServiceAreaSerializer, APILoginSerializer, APIActivationSerializer, \
     PasswordResetRequestSerializer, PasswordResetCheckSerializer, PasswordResetSerializer, \
     ResendActivationLinkSerializer, CreateProviderSerializer, ServiceTypeSerializer, \
-    SelectionCriterionSerializer
+    SelectionCriterionSerializer, LanguageSerializer
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
     SelectionCriterion
 from services.utils import permission_names_to_objects, USER_PERMISSION_NAMES
+
+
+class LanguageView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, format=None):
+        return Response({'language': request.user.language})
+
+    def post(self, request):
+        serializer = LanguageSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        request.user.language = serializer.data['language']
+        request.user.save()
+        return Response()
 
 
 class UserViewSet(viewsets.ModelViewSet):

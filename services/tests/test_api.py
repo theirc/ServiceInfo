@@ -393,6 +393,32 @@ class ServiceAreaAPITest(APITestMixin, TestCase):
         self.assertEqual('http://testserver%s' % self.area1.get_api_url(), result['parent'])
 
 
+class LanguageTest(APITestMixin, TestCase):
+    def setUp(self):
+        super().setUp()
+        self.token = Token.objects.get(user=self.user).key
+
+    def test_get_set_get(self):
+        url = reverse('user-language')
+        rsp = self.get_with_token(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual('', result['language'])
+        TEST_LANG = 'fr'
+        rsp = self.post_with_token(url, {'language': TEST_LANG})
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        rsp = self.get_with_token(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(TEST_LANG, result['language'])
+
+    def test_set_invalid_language(self):
+        url = reverse('user-language')
+        TEST_LANG = 'nonesuch'
+        rsp = self.post_with_token(url, {'language': TEST_LANG})
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+
+
 class LoginTest(APITestMixin, TestCase):
     def setUp(self):
         super().setUp()
