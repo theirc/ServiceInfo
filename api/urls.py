@@ -26,6 +26,9 @@ urlpatterns = [
     # (This will end up as something like "/api/login/")
     url(r'^login/$', views.APILogin.as_view(), name='api-login'),
 
+    # Special call to get/set current user's language
+    url(r'^language/$', views.LanguageView.as_view(), name='user-language'),
+
     # Activate a user
     url(r'^activate/$', view=views.APIActivationView.as_view(), name='api-activate'),
 

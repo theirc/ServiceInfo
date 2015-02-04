@@ -133,6 +133,14 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
 
     activation_key = models.CharField(_('activation key'), max_length=40, default='')
 
+    language = models.CharField(
+        _('language'),
+        help_text=_('User\'s preferred language.'),
+        max_length=10,
+        default='',
+        blank=True,
+    )
+
     objects = EmailUserManager()
 
     class Meta(object):

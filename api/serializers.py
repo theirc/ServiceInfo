@@ -1,8 +1,10 @@
+from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import exceptions, serializers
+from rest_framework.exceptions import ValidationError
 
 from email_user.forms import EmailUserCreationForm
 from email_user.models import EmailUser
@@ -14,6 +16,19 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = EmailUser
         fields = ('url', 'id', 'email', 'groups')
+
+
+class LanguageSerializer(serializers.Serializer):
+    language = serializers.CharField(max_length=10)
+
+    def validate_language(self, value):
+        # See if it's a valid language code
+        language_dict = dict(settings.LANGUAGES)
+        if value not in language_dict:
+            raise ValidationError(
+                "Invalid language code %r. The valid codes are %s."
+                % (value, ', '.join(language_dict.keys())))
+        return value
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
