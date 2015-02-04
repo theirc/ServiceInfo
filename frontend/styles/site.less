@@ -44,6 +44,7 @@ html,body,#application {
 h1,h2,h3,h4,h5,h6,b {
 	font-weight: 600;
 	margin: 0;
+	line-height: 1.3em;
 }
 
 p {
@@ -107,7 +108,7 @@ li {
 	float: none;
     clear: both;
 
-	@media (min-width: 1000px) {
+	@media (min-width: 767px) {
 		width: 48%;
 		float: left;
 	}
@@ -138,7 +139,7 @@ float: none;
 	}
 
 	@media (min-width: 1000px) {
-		width: 31.0%;
+		width: 31.3333%;
 		float: left;
 		padding: 1.0%;
 
@@ -262,14 +263,19 @@ float: none;
 	font-size: 28px;
 	line-height: 1.25em;
 	margin-bottom: 10px;
+	line-height: 1.3em;
 	color: #333333;
 }
 
 .page-descr {
 	font-size: 14px;
-    line-height: 1.5em;
-	padding-bottom: 0;
+    line-height: 1.6em;
+	padding-bottom: 0.5em;
 	color: #666666;
+
+	@media (min-width: 767px) {
+		padding-bottom: 0;
+	}
 }
 
 /*
@@ -741,7 +747,7 @@ Login page
 .service-provider-map,
 .feedback-tool,
 .service-provider-registration {
-	margin: 1.5em;
+	margin: .75em;
 	padding: 16px 10px;
 	background-color: white;
 	border-width: 1px;
@@ -765,6 +771,122 @@ Login page
 	}
 
 	@media (min-width: 1000px) {
-		margin-top: 33.0%;
+
+        margin-top: 33.0%;
+    }
+}
+
+
+/*
+Table
+*/
+
+table {
+ 	width: 97.25%;
+	text-align: left;
+	background-color: #fff;
+	border-collapse: collapse;
+	margin: 0 0 0 50%;
+	transform: translate(-50%, 0);
+	tr {
+        border-right-width: 5px;
+        border-right-style: solid; 
+
+		&:nth-child(even) {
+	    	background-color: #e8e8e8;
+	    	border-right-color: #e8e8e8;
+		}
+		&:nth-child(odd) {
+	   		background-color: #fff;
+	   		border-right-color: #fff;
+		}
+		&.approved {
+			border-right-color: #3cb879;
+		}
+		&.denied {
+			border-right-color: #E04733;
+		}
+	}
+	th {
+		background-color: #fdc82f !important;
+		padding: 16px 24px 16px 8px !important;
+		border-right: 1px dotted #EBAF00;
+		border-bottom: none;
+		font-size: 110%;
+		font-weight: bold;
+		&:last-child {
+			border-right: 5px solid #fdc82f;
+		}
+	}
+
+	td {
+	    vertical-align: middle;
+	    border-top: 0;
+	    padding-top: 8px;
+	    padding-right: 8px;
+	    padding-bottom: 8px;
+	    padding-left: 8px;
+	}
+
+    .vertical-header {
+        display: none;
+    }
+
+	@media (min-width: 1px) and (max-width: 767px) {
+
+		/* Force table to not be like tables anymore */
+		table#service-status,
+		thead,
+		tbody,
+		th,
+		td,
+		tr {
+			display: block;
+		}
+
+		/* Hide table headers (but not display: none;, for accessibility) */
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+		tr {
+			border-top: 1px solid #c8c8c8;
+			&.approved {
+				border-right: 5px solid #3cb879
+			}
+			&.denied {
+				border-right: 5px solid #E04733;
+			}
+			&:last-child {
+				border-bottom: 1px solid #c8c8c8;
+			}
+		}
+
+		td {
+			border: none;
+			position: relative;
+			border-bottom: 1px solid #DDD;
+            padding-left: 1em;
+		}
+
+		.vertical-td {
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding: 8px;
+			padding-left: 37%;
+			padding-right: 10px;
+			font-weight: bold;
+			white-space: nowrap;
+			border-left: 5px solid #fdc82f !important;
+		}
+
+    .vertical-header {
+        display: inline-block;
+    }
+
+
 	}
 }

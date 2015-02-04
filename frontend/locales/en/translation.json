@@ -73,6 +73,38 @@
   		}
   	}
   },
+  "Service-List": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Services List"
+      },
+      "Page-Description": {
+        "Page-Description": "Below is a list of services you have applied to provide. Approved services are marked in green. Un-approved services are marked in red. Services pending approval are unmarked."
+      }
+    },
+    "Table": {
+      "Thead": {
+        "Name": "Name:",
+        "Type": "Type:",
+        "Area": "Area:",
+        "Status": "Status:"
+      }
+    }
+  },
+  "Home": {
+    "Service-Map": {
+      "Title": "View The Service Map",
+      "Body": "Use the service map to locate service providers."
+      },
+    "Feedback": {
+      "Title": "Provide Feedback",
+      "Body": "Tell us about your experience working with your service provider."
+      },
+    "Log-in": {
+      "Title": "Service Provider Login",
+      "Body": "Log in to an existing service provider account, or create a new account."
+    }
+  },
   "Provider-Registration-Confirmation": {
     "Page-Head": {
       "Page-Title": {
