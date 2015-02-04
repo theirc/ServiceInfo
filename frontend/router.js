@@ -28,8 +28,8 @@ function loadPage(name, params) {
                 opts[params[i]] = arguments[i];
             }
             var view = new views[name](opts);
-            view.render.apply(view, arguments);
             i18n.init(function(){
+                view.render.apply(view, arguments);
                 view.$el.i18n({
                     lng: config.get('lang'),
                 });

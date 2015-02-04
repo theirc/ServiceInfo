@@ -17,6 +17,7 @@ module.exports = Backbone.View.extend({
             $el.html(template({
                 services: services.data(),
             }));
+            $el.i18n();
         });
     },
 
