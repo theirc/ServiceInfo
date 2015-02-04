@@ -18,22 +18,25 @@ var views = {
 
 function loadPage(name, params) {
     return function() {
-        var $el = $(document.querySelector('#page'));
-        var opts = {
-            el: $el
-        };
-        for (var i=0; i < params.length; i++) {
-            opts[params[i]] = arguments[i];
-        }
-        var view = new views[name](opts);
-        view.render.apply(view, arguments);
-        i18n.init(function(){
-            view.$el.i18n({
-                lng: config.get('lang'),
+        config.ready(function(){
+            var $el = $(document.querySelector('#page'));
+            var opts = {
+                el: $el
+            };
+            var params = params || [];
+            for (var i=0; i < params.length; i++) {
+                opts[params[i]] = arguments[i];
+            }
+            var view = new views[name](opts);
+            view.render.apply(view, arguments);
+            i18n.init(function(){
+                view.$el.i18n({
+                    lng: config.get('lang'),
+                });
             });
-        });
-        $('#menu-container').addClass("menu-closed");
-        $('#menu-container').removeClass("menu-open");
+            $('#menu-container').addClass("menu-closed");
+            $('#menu-container').removeClass("menu-open");
+        })
     }
 }
 
