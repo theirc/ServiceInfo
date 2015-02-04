@@ -86,7 +86,7 @@ class ServiceTypeSerializer(serializers.HyperlinkedModelSerializer):
 class SelectionCriterionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SelectionCriterion
-        fields = ('url', 'id', 'text_en', 'text_ar', 'text_fr')
+        fields = ('url', 'id', 'text_en', 'text_ar', 'text_fr', 'service')
 
 
 class ServiceSerializer(serializers.HyperlinkedModelSerializer):

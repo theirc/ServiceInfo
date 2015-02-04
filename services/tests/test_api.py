@@ -311,11 +311,13 @@ class ServiceAPITest(APITestMixin, TestCase):
 
 class SelectionCriterionAPITest(APITestMixin, TestCase):
     def test_create_selection_criterion(self):
+        service = ServiceFactory()
         rsp = self.client.post(reverse('selectioncriterion-list'),
                                data={
                                    'text_en': 'English',
                                    'text_ar': '',
                                    'text_fr': '',
+                                   'service': service.get_api_url(),
                                    })
         self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
