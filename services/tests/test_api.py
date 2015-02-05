@@ -39,7 +39,7 @@ class APITestMixin(object):
         """
         return self.api_client.get(
             url,
-            HTTP_AUTHORIZATION="Token %s" % self.token
+            HTTP_SERVICEINFOAUTHORIZATION="Token %s" % self.token
         )
 
     def post_with_token(self, url, data=None):
@@ -50,7 +50,7 @@ class APITestMixin(object):
         return self.api_client.post(
             url,
             data=data,
-            HTTP_AUTHORIZATION="Token %s" % self.token,
+            HTTP_SERVICEINFOAUTHORIZATION="Token %s" % self.token,
             format='json'
         )
 

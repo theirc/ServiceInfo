@@ -28,7 +28,7 @@ $(function(){
         beforeSend: function(xhr) {
             if (config.get('forever.authToken')) {
                 xhr.setRequestHeader(
-                    "Authorization",
+                    "ServiceInfoAuthorization",
                     "Token "+config.get('forever.authToken')
                 );
             }
