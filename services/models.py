@@ -1,9 +1,8 @@
 from django.conf import settings
 from django.contrib.gis.db import models
+from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _, get_language
-from django.core.urlresolvers import reverse
-from django.contrib.sites.models import Site
 
 from . import jira_support
 
@@ -386,10 +385,12 @@ class Service(models.Model):
         self.save()
 
         if previous_status == Service.STATUS_DRAFT:
-            JiraUpdateRecord.objects.create(service=self,
+            JiraUpdateRecord.objects.create(
+                service=self,
                 update_type=JiraUpdateRecord.CANCEL_DRAFT_SERVICE)
         elif previous_status == Service.STATUS_CURRENT:
-            JiraUpdateRecord.objects.create(service=self,
+            JiraUpdateRecord.objects.create(
+                service=self,
                 update_type=JiraUpdateRecord.CANCEL_CURRENT_SERVICE)
 
     def save(self, *args, **kwargs):
@@ -436,13 +437,14 @@ class JiraUpdateRecord(models.Model):
                 errors.append('%s must specify provider' % self.update_type)
             if self.service:
                 errors.append('%s must not specify service' % self.update_type)
-        elif self.update_type in (self.NEW_SERVICE, self.CANCEL_DRAFT_SERVICE, self.CANCEL_CURRENT_SERVICE):
+        elif self.update_type in (
+                self.NEW_SERVICE, self.CANCEL_DRAFT_SERVICE, self.CANCEL_CURRENT_SERVICE):
             if not self.service:
                 errors.append('%s must specify service' % self.update_type)
             if self.provider:
                 errors.append('%s must not specify provider' % self.update_type)
         else:
-            errors.append('unrecognized update type: %s' % self.update_type)
+            errors.append('unrecognized update_type: %s' % self.update_type)
         if errors:
             raise Exception('%s cannot be saved: %s' % (str(self), ', '.join(e for e in errors)))
         super().save(*args, **kwargs)
@@ -453,7 +455,7 @@ class JiraUpdateRecord(models.Model):
         # issue key set, or if some other thread is already working on getting
         # an issue created/updated.
         if not self.pk or JiraUpdateRecord.objects.filter(pk=self.pk, jira_issue_key='').update(
-            jira_issue_key=sentinel_value) != 1:
+                jira_issue_key=sentinel_value) != 1:
             return
 
         try:

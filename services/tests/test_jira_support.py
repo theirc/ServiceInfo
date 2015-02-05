@@ -1,9 +1,9 @@
 import datetime
 from unittest import mock
 
-from django.test import TestCase
 from django.conf import settings
 from django.contrib.sites.models import Site
+from django.test import TestCase, override_settings
 
 from ..models import JiraUpdateRecord
 from ..tasks import process_jira_work
@@ -16,6 +16,11 @@ class JiraUpdateRecordModelTest(TestCase):
             JiraUpdateRecord.objects.create(update_type='')
         self.assertTrue('non-blank update_type' in str(cm.exception))
 
+    def test_unrecognized_type_not_allowed(self):
+        with self.assertRaises(Exception) as cm:
+            JiraUpdateRecord.objects.create(update_type='alsdkfjasldkfj')
+        self.assertTrue('unrecognized update_type' in str(cm.exception))
+
     def test_types_require_service(self):
         require_service_types = [
             JiraUpdateRecord.NEW_SERVICE,
@@ -25,7 +30,8 @@ class JiraUpdateRecordModelTest(TestCase):
         for update_type in require_service_types:
             with self.assertRaises(Exception) as cm:
                 JiraUpdateRecord.objects.create(update_type=update_type)
-            self.assertTrue('must specify service' in str(cm.exception),
+            self.assertTrue(
+                'must specify service' in str(cm.exception),
                 msg='Unexpected exception message (%s) for %s' % (str(cm.exception), update_type))
 
     def test_types_require_no_provider(self):
@@ -38,7 +44,8 @@ class JiraUpdateRecordModelTest(TestCase):
         for update_type in disallow_provider_types:
             with self.assertRaises(Exception) as cm:
                 JiraUpdateRecord.objects.create(update_type=update_type, provider=provider)
-            self.assertTrue('must not specify provider' in str(cm.exception),
+            self.assertTrue(
+                'must not specify provider' in str(cm.exception),
                 msg='Unexpected exception message (%s) for %s' % (str(cm.exception), update_type))
 
     def test_types_require_provider(self):
@@ -46,7 +53,8 @@ class JiraUpdateRecordModelTest(TestCase):
         for update_type in require_provider_types:
             with self.assertRaises(Exception) as cm:
                 JiraUpdateRecord.objects.create(update_type=update_type)
-            self.assertTrue('must specify provider' in str(cm.exception),
+            self.assertTrue(
+                'must specify provider' in str(cm.exception),
                 msg='Unexpected exception message (%s) for %s' % (str(cm.exception), update_type))
 
     def test_types_require_no_service(self):
@@ -55,7 +63,8 @@ class JiraUpdateRecordModelTest(TestCase):
         for update_type in disallow_service_types:
             with self.assertRaises(Exception) as cm:
                 JiraUpdateRecord.objects.create(update_type=update_type, service=service)
-            self.assertTrue('must not specify service' in str(cm.exception),
+            self.assertTrue(
+                'must not specify service' in str(cm.exception),
                 msg='Unexpected exception message (%s) for %s' % (str(cm.exception), update_type))
 
 
@@ -93,8 +102,10 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         self.assertTrue('issuetype' in call_kwargs)
         self.assertEqual({'name': 'Task'}, call_kwargs['issuetype'])
         self.assertTrue('description' in call_kwargs)
-        admin_url = 'http://%s%s' % (Site.objects.get_current().domain, self.test_service.get_admin_edit_url())
-        self.assertTrue(admin_url in call_kwargs['description'],
+        admin_url = 'http://%s%s' % (
+            Site.objects.get_current().domain, self.test_service.get_admin_edit_url())
+        self.assertTrue(
+            admin_url in call_kwargs['description'],
             msg='%s not found in %s' % (admin_url, call_kwargs['description']))
         self.assertTrue('duedate' in call_kwargs)
         expected_duedate = datetime.date.today() + datetime.timedelta(days=settings.JIRA_DUEIN_DAYS)
@@ -123,24 +134,22 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         self.assertEqual(test_key_val, self.jira_record.jira_issue_key)
 
     def test_create_jira_issue_uses_provided_jira(self, mock_JIRA):
+        # This 2nd mock will take precendence by default, we test to
+        # ensure that if the original mock is passed in it is called.
         with mock.patch('services.jira_support.JIRA') as JIRA:
-            issue_key = self.setup_issue_key(JIRA)
-            self.jira_record.do_jira_work(JIRA())
-            self.assertFalse(mock_JIRA.called)
+            issue_key = self.setup_issue_key(mock_JIRA)
+            self.jira_record.do_jira_work(mock_JIRA())
+            self.assertFalse(JIRA.called)
             self.assertEqual(issue_key, self.jira_record.jira_issue_key)
 
 
+# These settings are not used for real since we don't talk to JIRA
+# actually but theya re needed for the task to try to do any work.
+@override_settings(JIRA_USER='dummy', JIRA_PASSWORD='dummy', JIRA_SERVER='nonsense')
 @mock.patch('services.jira_support.JIRA', autospec=True)
 class JiraTaskTest(MockJiraTestMixin, TestCase):
     def setUp(self):
         self.test_service = ServiceFactory()
-        self.jira_record = self.test_service.jira_records.get(
-            update_type=JiraUpdateRecord.NEW_SERVICE)
-        # not used for real since we don't talk to JIRA really,
-        # but needed for the task to try to do anything.
-        settings.JIRA_USER = 'dummy'
-        settings.JIRA_PASSWORD = 'dummy'
-        settings.JIRA_SERVER = 'nonsense'
 
     def test_missing_config_does_nothing(self, mock_JIRA):
         settings.JIRA_USER = ''
@@ -155,7 +164,7 @@ class JiraTaskTest(MockJiraTestMixin, TestCase):
         self.assertEqual(0, JiraUpdateRecord.objects.filter(jira_issue_key='').count())
 
     def test_process_multiple_records(self, mock_JIRA):
-        second_service = ServiceFactory()
+        ServiceFactory()
         self.assertEqual(2, JiraUpdateRecord.objects.filter(jira_issue_key='').count())
         self.setup_issue_key(mock_JIRA)
         process_jira_work()
