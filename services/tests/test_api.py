@@ -240,10 +240,10 @@ class TokenAuthTest(APITestMixin, TestCase):
     def test_create_provider(self):
         url = reverse('provider-list')
         data = {
-            'name': 'Joe Provider',
+            'name_fr': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12345',
-            'description': 'Test provider',
+            'description_en': 'Test provider',
             'user': self.user_url,
             'number_of_monthly_beneficiaries': '37',
         }
@@ -273,6 +273,18 @@ class ServiceAPITest(APITestMixin, TestCase):
         service = Service.objects.get(id=result['id'])
         self.assertEqual('Some service', service.name_en)
         self.assertEqual(self.provider, service.provider)
+
+    def test_create_service_no_name(self):
+        area = ServiceAreaFactory()
+        data = {
+            'area_of_service': area.get_api_url(),
+            'description_en': "Awesome\nService",
+            'type': ServiceTypeFactory().get_api_url(),
+        }
+        rsp = self.client.post(reverse('service-list'), data=data)
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertIn('name', result)
 
     def test_get_service(self):
         service = ServiceFactory(provider=self.provider)
