@@ -184,6 +184,7 @@ class SelectionCriterion(models.Model):
     def __str__(self):
         return ', '.join([self.text_en, self.text_fr, self.text_ar])
 
+
 class ServiceType(NameInCurrentLanguageMixin, models.Model):
     number = models.IntegerField(unique=True)
     name_en = models.CharField(
