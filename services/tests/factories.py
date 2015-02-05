@@ -75,3 +75,4 @@ class SelectionCriterionFactory(factory.DjangoModelFactory):
     text_en = factory.fuzzy.FuzzyText()
     text_ar = factory.fuzzy.FuzzyText()
     text_fr = factory.fuzzy.FuzzyText()
+    service = factory.SubFactory(ServiceFactory)
