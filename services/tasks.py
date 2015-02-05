@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 def process_jira_work():
 
     if not all((settings.JIRA_USER, settings.JIRA_PASSWORD, settings.JIRA_SERVER)):
-        logger.warning('JIRA configuration values are not all set, cannot do JIRA work.')
+        logger.error('JIRA configuration values are not all set, cannot do JIRA work.')
         return
 
     work_qs = JiraUpdateRecord.objects.order_by('id').filter(jira_issue_key='')
