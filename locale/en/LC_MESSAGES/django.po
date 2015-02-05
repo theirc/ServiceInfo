@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-03 14:18-0500\n"
+"POT-Creation-Date: 2015-02-05 09:00-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,6 +94,12 @@ msgid "date joined"
 msgstr ""
 
 msgid "activation key"
+msgstr ""
+
+msgid "language"
+msgstr ""
+
+msgid "User's preferred language."
 msgstr ""
 
 msgid "user"
@@ -186,6 +192,46 @@ msgid ""
 "\n"
 "Sincerely,\n"
 "%(site_name)s Management\n"
+msgstr ""
+
+msgid "Arabic"
+msgstr ""
+
+msgid "English"
+msgstr ""
+
+msgid "French"
+msgstr ""
+
+#, python-format
+msgid "Dear %(provider_name)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"Your service %(service_name)s has been vetted and approved by International "
+"Rescue Committee staff.\n"
+"It has been published on the following link: <a href=\"%(service_link)s\">"
+"%(service_link)s</a>\n"
+msgstr ""
+
+msgid "For more information please contact support at serviceinfo@rescue.org"
+msgstr ""
+
+msgid "Thanks for your submission."
+msgstr ""
+
+msgid "Best Regards"
+msgstr ""
+
+msgid "Service Info"
+msgstr ""
+
+msgid "Support:"
+msgstr ""
+
+msgid "Service has been approved"
 msgstr ""
 
 #. Translators: Provider name
