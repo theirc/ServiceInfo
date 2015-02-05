@@ -20,35 +20,40 @@
             <div class="col-sm-8 col-sm-offset-2">
 
             <form>
+              <input type=hidden name=provider></input>
+
               <fieldset>
                 <legend data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Legend"></legend>
                 <div class="form-group">
                   <label for="id_name_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Service-Name"></label>
                     <div class="form-group">
-                      <input type="text" name="name_of_service" class="form-control" tabindex="7">
+                      <input type="text" name="name_of_service" class="form-control"  >
                     </div>
                 </div>
                 <div class="form-group">
-                  <label for="id_area_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Service-Area"></label>
-                    <div class="btn-group" tabindex="8">
-                        <button type="button" class="btn btn-default" data-toggle="dropdown">Select an Area</button>
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Area 1</a></li>
-                            <li><a href="#">Area 2</a></li>
-                            <li><a href="#">Area 3</a></li>
-                            <li><a href="#">Area 4</a></li>
-                            <li><a href="#">Area 5</a></li>
-                        </ul>
+                  <label for="area_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Service-Area"></label>
+                    <div class="btn-group"  >
+                        <select name=area_of_service class="form-control">
+                            {{#each areas_of_services}}
+                                <option value="{{ this.url }}">{{ this.name }}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="type" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Type"></label>
+                    <div class="btn-group">
+                        <select name=type class="form-control">
+                            {{#each types}}
+                                <option value="{{ this.url }}">{{ this.name }}</option>
+                            {{/each}}
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
                   <label for="id_description_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Service-Description"></label>
                   <div class="form-group">
-                    <textarea rows="2" name="other-comments" class="form-control" tabindex="9"></textarea>
+                    <textarea rows="2" name="other-comments" class="form-control"  ></textarea>
                   </div>
                 </div>
                 <div class="form-group">
@@ -114,10 +119,10 @@
             <form>
               <div class="submit-form">
                   <div class="half">
-                    <button class="primary-button" tabindex="17" data-i18n="Provider-Registration-Form.Form-Sections.Form-Submit-Options.Submit"></button>
+                    <button class="form-btn-submit primary-button" tabindex="17" data-i18n="Provider-Registration-Form.Form-Sections.Form-Submit-Options.Submit"></button>
                   </div>
                   <div class="half">
-                    <button class="primary-button" tabindex="18" data-i18n="Provider-Registration-Form.Form-Sections.Form-Submit-Options.Clear"></button>
+                    <button class="form-btn-clear primary-button" tabindex="18" data-i18n="Provider-Registration-Form.Form-Sections.Form-Submit-Options.Clear"></button>
                   </div>
               </div>
             </form>
