@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-02 10:20+0000\n"
+"PO-Revision-Date: 2015-02-04 06:34+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -56,23 +56,44 @@ msgid ""
 "Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
 msgstr "Remplissez le formulaire ci-dessous pour demander à être un fournisseur de services."
 
+msgid "Provider-Registration-Form##Errors##Password-Blank"
+msgstr "Mot de passe ne doit pas être vide"
+
+msgid "Provider-Registration-Form##Errors##Password-Repeat"
+msgstr "Mot de passe doit être répété"
+
+msgid "Provider-Registration-Form##Errors##Password-Match"
+msgstr "Les mots de passe doivent correspondre"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Legend"
 msgstr "Détails de base d'enregistrement d'un fournisseur de service:"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Name"
 msgstr "plein nom"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
+msgstr "mot de passe"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##PasswordConfirm"
+msgstr "Confirmez Le Mot De Passe"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type"
 msgstr "Type de service"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type-Choose"
+msgstr "Choisissez un type de service"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
 msgstr "Numéro de téléphone"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
-msgstr "Email (champ optionel)"
+msgstr "Email"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
 msgstr "Site Web (champ optionel)"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
+msgstr "Nombre de bénéficiaires mensuelles"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Description"
 msgstr "description"
