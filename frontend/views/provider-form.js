@@ -24,10 +24,7 @@ module.exports = Backbone.View.extend({
                 $option.text(this['name_' + config.get('lang')]);
                 $typeSel.append($option)
             })
-            console.log($typeSel);
         })
-
-        console.log($el);
     },
 
     events: {

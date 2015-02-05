@@ -52,21 +52,31 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="id_hours_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Service-Hours"></label>
-                  <div class="half">
-                  <div class="form-group">
-                    <label for="opening-time" class="operating-hours">Opening Time:</label>
-                    <input type="time" name="time_of_service" class="form-control" tabindex="10">
+                  <label for="time_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Service-Hours"></label>
+                  {{#each daysofweek}}
+                  <div class=row>
+                      <div class="third">
+                          <div class="form-group">
+                            <label for="opening-time" class="operating-hours">Opening Time:</label>
+                            <input type="time" name="time_of_service" class="form-control" tabindex="10">
+                          </div>
+                      </div>
+                      <div class="third">
+                          <label>&nbsp;</label>
+                          <div class="operating-hours-to">{{ this }}
+                          </div>
+                      </div>
+                      <div class="third">
+                          <div class="form-group">
+                            <label for="closing-time" class="operating-hours">Closing Time:</label>
+                            <input type="time" name="time_of_service" class="form-control" tabindex="11">
+                          </div>
+                      </div>
                   </div>
-                  </div>
-                  <div class="half">
-                  <div class="form-group">
-                    <label for="closing-time" class="operating-hours">Closing Time:</label>
-                    <input type="time" name="time_of_service" class="form-control" tabindex="11">
-                  </div>
-                  </div>
+                  {{/each}}
+
                 </div>
-                <div class="form-group">
+                <div class="form-group row">
                   <label for="id_additional_information" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Additional-Information"></label>
                   <div class="form-group">
                     <textarea rows="4" name="additional_information" class="form-control" tabindex="12"></textarea>
