@@ -19,13 +19,13 @@ var views = {
 };
 
 function loadPage(name, params) {
+    var params = params || [];
     return function() {
         config.ready(function(){
             var $el = $(document.querySelector('#page'));
             var opts = {
                 el: $el
             };
-            var params = params || [];
             for (var i=0; i < params.length; i++) {
                 opts[params[i]] = arguments[i];
             }
