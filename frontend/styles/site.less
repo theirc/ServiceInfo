@@ -135,18 +135,35 @@ float: none;
 	padding: 0;
 	float: none;
 	&:first-child {
-		margin-top: 2em;
+		margin-top: 1em;
 	}
 
 	@media (min-width: 1000px) {
 		width: 31.3333%;
 		float: left;
-		padding: 1.0%;
-
-		&:first-child {
-			margin-top: 0;
-		}
+        margin-top: 1em;
 	}
+}
+
+.quarter {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    float: none;
+    clear: both;
+
+    &:first-child{
+        margin-top: 2em;
+    }
+
+    @media (min-width: 1000px) {
+        width: 19.0%;
+        float: left;
+
+        &:first-child{
+            margin-top: 0;
+        }
+    }
 }
 
 .center-text {

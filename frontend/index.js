@@ -4,7 +4,10 @@ Backbone.$ = require('jquery');
 var handlebars = require('handlebars');
 var underscore = require('underscore');
 var config = require('./config');
+var api = require('./api');
 var _ = underscore;
+
+var models = require('./models/models');
 
 window.$ = $;
 window.require = require;
@@ -20,6 +23,17 @@ $('body').on("click", ".back-button", function (event) {
 $(function(){
 
     Backbone.history.start();
+
+    $.ajaxSetup({
+        beforeSend: function(xhr) {
+            if (config.get('forever.authToken')) {
+                xhr.setRequestHeader(
+                    "ServiceInfoAuthorization",
+                    "Token "+config.get('forever.authToken')
+                );
+            }
+        }
+    });
 
     var LangToggleView = require('./views/language-toggle');
     var lt = new LangToggleView({el: $('#language-toggle')});

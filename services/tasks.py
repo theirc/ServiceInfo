@@ -1,19 +1,38 @@
 import logging
 
 from django.conf import settings
+from django.contrib.sites.models import Site
 
 from celery.task import task
 
 from . import jira_support
-from .models import JiraUpdateRecord
 
 
 logger = logging.getLogger(__name__)
 
 
 @task
-def process_jira_work():
+def email_provider_about_service_approval_task(service_pk):
+    from .models import Service
+    service = Service.objects.get(pk=service_pk)
+    context = {
+        'site': Site.objects.get_current(),
+        'service': service,
+        'provider': service.provider,
+        'user': service.provider.user,
+    }
+    # FIXME: choose user's preferred language before rendering the email
+    service.provider.user.send_email_to_user(
+        context,
+        'email/service_approved_subject.txt',
+        'email/service_approved_body.txt',
+        'email/service_approved_body.html',
+    )
 
+
+@task
+def process_jira_work():
+    from .models import JiraUpdateRecord
     if not all((settings.JIRA_USER, settings.JIRA_PASSWORD, settings.JIRA_SERVER)):
         logger.error('JIRA configuration values are not all set, cannot do JIRA work.')
         return

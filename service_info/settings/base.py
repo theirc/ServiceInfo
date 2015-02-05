@@ -223,7 +223,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        'api.auth.ServiceInfoTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
     'PAGINATE_BY': 10,
