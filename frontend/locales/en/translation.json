@@ -73,6 +73,23 @@
   		}
   	}
   },
+  "Account-Activation": {
+    "Pending": {
+        "Title": "Your account activation is pending...",
+        "Description": ""
+    },
+    "Success": {
+        "Title": "Your account has been activated.",
+        "Description": ""
+    },
+    "Failed": {
+        "Title": "Your account activation Failed.",
+        "Description": "There was a problem setting up your service provider account. Please click the resend confirmation email button below to have another confirmation email sent to your email account."
+    },
+    "Buttons": {
+      "Resend-Email": "Resend Verification Email"
+    }
+  },
   "Service-List": {
     "Page-Head": {
       "Page-Title": {

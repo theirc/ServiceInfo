@@ -5,10 +5,6 @@ var Backbone = require('backbone'),
     $ = require('jquery')
 ;
 
-$(function() {
-    toggleLoginMenuItem();
-})
-
 function toggleLoginMenuItem() {
     if (config.get('forever.authToken')) {
         $('.menu-item-login').hide();
@@ -18,6 +14,8 @@ function toggleLoginMenuItem() {
         $('.menu-item-logout').hide();
     }
 };
+config.change('forever.authToken', toggleLoginMenuItem);
+
 
 module.exports = Backbone.View.extend({
     initialize: function(){
@@ -55,7 +53,6 @@ module.exports = Backbone.View.extend({
                 },
                 success: function(data) {
                     config.set('forever.authToken', data.token);
-                    toggleLoginMenuItem();
                     window.location.hash = 'service';
                 },
             })

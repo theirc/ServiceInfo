@@ -119,3 +119,24 @@ msgstr "Submit Answers"
 
 msgid "Provider-Registration-Form##Form-Sections##Form-Submit-Options##Clear"
 msgstr "Remove Answers"
+
+msgid "Account-Activation##Pending##Title"
+msgstr "Your account activation is pending..."
+
+msgid "Account-Activation##Pending##Description"
+msgstr ""
+
+msgid "Account-Activation##Success##Title"
+msgstr "Your account has been activated."
+
+msgid "Account-Activation##Success##Description"
+msgstr ""
+
+msgid "Account-Activation##Failed##Title"
+msgstr "Your account activation Failed."
+
+msgid "Account-Activation##Failed##Description"
+msgstr "There was a problem setting up your service provider account. Please click the resend confirmation email button below to have another confirmation email sent to your email account."
+
+msgid "Account-Activation##Buttons##Resend-Email"
+msgstr "Resend Verification Email"
