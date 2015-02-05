@@ -8,6 +8,9 @@ env:
 - DJANGO_SETTINGS_MODULE="service_info.settings.dev"
 install:
 - pip install -r requirements/dev.txt --use-mirrors
+before_script:
+- createdb -E UTF-8 service_info -U postgres -O $USER
+- python manage.py migrate --noinput
 script:
 - coverage run manage.py test
 - coverage report -m --fail-under 60
