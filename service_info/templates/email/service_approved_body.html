@@ -1,0 +1,30 @@
+{% load i18n %}
+
+A service has been approved.  (This text is a placeholder.)
+
+{% comment %}
+**email/service_approved_body.html**
+
+Used to generate the body of the service approved email.
+
+This template has the following context:
+
+``service``
+  The Service that has been approved
+
+``provider``
+  The Provider of the service
+
+``user``
+  The user associated with the provider (who will get the email)
+
+``site``
+    An object representing the site on which the user registered;
+    depending on whether ``django.contrib.sites`` is installed, this
+    may be an instance of either ``django.contrib.sites.models.Site``
+    (if the sites application is installed) or
+    ``django.contrib.sites.models.RequestSite`` (if not). Consult `the
+    documentation for the Django sites framework
+    <http://docs.djangoproject.com/en/dev/ref/contrib/sites/>`_ for
+    details regarding these objects' interfaces.
+{% endcomment %}

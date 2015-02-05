@@ -8,7 +8,7 @@ module.exports = {
             var headers = {};
             var token = config.get('forever.authToken');
             if (token) {
-                headers['Authorization'] = 'Token ' + token;
+                headers['ServiceInfoAuthorization'] = 'Token ' + token;
             }
             $.ajax(config.get('api_location')+path, {
                 type: method,

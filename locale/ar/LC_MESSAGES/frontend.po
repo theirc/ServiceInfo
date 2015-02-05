@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-02 08:23+0000\n"
+"PO-Revision-Date: 2015-02-04 06:31+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -56,23 +56,44 @@ msgid ""
 "Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
 msgstr "إملء النموذج أدناه لتكون مزود خدمات."
 
+msgid "Provider-Registration-Form##Errors##Password-Blank"
+msgstr "لا يجب أن تكون كلمة المرور فارغة"
+
+msgid "Provider-Registration-Form##Errors##Password-Repeat"
+msgstr "يجب تكرار كلمة المرور"
+
+msgid "Provider-Registration-Form##Errors##Password-Match"
+msgstr "يجب أن تتطابق كلمات المرور"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Legend"
 msgstr "التفاصيل الأساسية لتسجيل مزود خدمات:"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Name"
 msgstr "الاسم الكامل"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
+msgstr "كلمة السر"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##PasswordConfirm"
+msgstr "تأكيد كلمة المرور"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type"
 msgstr "نوع الخدمة"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type-Choose"
+msgstr "اختيار نوع الخدمة"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
 msgstr "رقم الهاتف"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
-msgstr "البريد الإلكتروني (حقل اختياري)"
+msgstr "البريد الإلكتروني"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
 msgstr "موقع (حقل اختياري)"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
+msgstr "عدد المستفيدين شهرياَ"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Description"
 msgstr "توصيف "

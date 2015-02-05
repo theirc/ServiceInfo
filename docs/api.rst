@@ -143,15 +143,11 @@ one of these::
 Using token-based auth
 ----------------------
 
-Once the client has the token, it should pass it on subsequent requests per
-http://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication
-which says::
+Once the client has the token, it should pass it on subsequent requests,
+including it in the ServiceInfoAuthorization HTTP header, prefixed by the
+string literal "Token" with whitespace between::
 
-    For clients to authenticate, the token key should be included in the
-    Authorization HTTP header. The key should be prefixed by the string
-    literal "Token", with whitespace separating the two strings. For example::
-
-        Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
+        ServiceInfoAuthorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
 
 As you might expect, requests will be permitted or denied based on the
 permissions of the user whose token is passed.
