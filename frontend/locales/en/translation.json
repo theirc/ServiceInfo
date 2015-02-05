@@ -61,6 +61,7 @@
   			"Legend": "Service Information",
   			"Service-Name": "Name of Service",
   			"Service-Area": "Area of Service",
+            "Type": "Service Type",
   			"Service-Description": "Description",
   			"Service-Hours": "Hours of Service",
   			"Additional-Information": "Additional Information (Optional Field)",
@@ -130,7 +131,7 @@
       "Page-Description": {
         "Page-Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
       }
-    } 
+    }
   },
   "Password-Reset": {
     "Page-Head": {

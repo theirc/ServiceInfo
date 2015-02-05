@@ -47,7 +47,9 @@ module.exports = Backbone.View.extend({
             areas_of_services: serviceareas,
             types: types,
         }));
-        $el.find('[name=provider]').val(this.provider.get('url'));
+        if (this.provider) {
+            $el.find('[name=provider]').val(this.provider.get('url'));
+        }
         $el.i18n();
     },
 

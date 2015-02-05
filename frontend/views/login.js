@@ -6,6 +6,7 @@ var Backbone = require('backbone'),
 ;
 
 function toggleLoginMenuItem() {
+    $('.menu-item-login, .menu-item-logout').hide();
     if (config.get('forever.authToken')) {
         $('.menu-item-login').hide();
         $('.menu-item-logout').show();
@@ -15,6 +16,9 @@ function toggleLoginMenuItem() {
     }
 };
 config.change('forever.authToken', toggleLoginMenuItem);
+$(function() {
+    toggleLoginMenuItem();
+})
 
 
 module.exports = Backbone.View.extend({
