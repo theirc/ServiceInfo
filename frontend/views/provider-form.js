@@ -29,24 +29,8 @@ module.exports = Backbone.View.extend({
 
     events: {
         "click .form-btn-submit": function() {
-            var data = {};
             var $el = this.$el;
-
-
-            $el.find('[name]').each(function() {
-                var $field = $(this);
-                var value = $field.val();
-                var name = $field.attr('name');
-                var ml = typeof $field.data('i18n-field') !== "undefined";
-
-                if (ml) {
-                    var cur_lang = localStorage['lang'];
-                    name = name + '_' + cur_lang;
-                }
-
-                data[name] = value;
-                // console.log(name + ': ' + value);
-            });
+            var data = forms.collect($el);
 
             $el.find('.error').text('');
             var errors = {};
