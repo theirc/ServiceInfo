@@ -148,6 +148,17 @@ class ServiceArea(models.Model):
     def get_api_url(self):
         return reverse('servicearea-detail', args=[self.id])
 
+    def __str__(self):
+        # Try to return the name field of the currently selected language
+        # if we have such a field and it has something in it.
+        # Otherwise, punt and return the English, French, or Arabic name,
+        # in that order.
+        language = get_language()
+        field_name = 'name_%s' % language[:2]
+        if hasattr(self, field_name) and getattr(self, field_name):
+            return getattr(self, field_name)
+        return self.name_en or self.name_fr or self.name_ar
+
 
 class SelectionCriterion(models.Model):
     """
@@ -157,9 +168,13 @@ class SelectionCriterion(models.Model):
     text_en = models.CharField(max_length=100, blank=True, default='')
     text_fr = models.CharField(max_length=100, blank=True, default='')
     text_ar = models.CharField(max_length=100, blank=True, default='')
+    service = models.ForeignKey('services.Service', related_name='selection_criteria')
 
     class Meta(object):
         verbose_name_plural = _("selection criteria")
+
+    def __str__(self):
+        return ', '.join([self.text_en, self.text_fr, self.text_ar])
 
 
 class ServiceType(models.Model):
@@ -215,11 +230,6 @@ class ServiceType(models.Model):
 
     def get_api_url(self):
         return reverse('servicetype-detail', args=[self.id])
-
-
-class ServiceManager(models.GeoManager):
-    def get_queryset(self):
-        return super().get_queryset().exclude(status=Service.STATUS_ARCHIVED)
 
 
 class Service(models.Model):
@@ -290,12 +300,6 @@ class Service(models.Model):
         blank=True,
         default='',
     )
-    selection_criteria = models.ManyToManyField(
-        SelectionCriterion,
-        related_name='services',
-        verbose_name=_("selection criteria"),
-        blank=True,
-    )
 
     # Note: we don't let multiple versions of a service record pile up - there
     # should be no more than two, one in current status and/or one in some other
@@ -363,7 +367,7 @@ class Service(models.Model):
         verbose_name=_("type"),
     )
 
-    objects = ServiceManager()
+    objects = models.GeoManager()
 
     def __str__(self):
         return self.name_en
@@ -391,3 +395,24 @@ class Service(models.Model):
         elif previous_status == Service.STATUS_CURRENT:
             # TODO Trigger new JIRA ticket to notify staff that provider has withdrawn the service
             pass
+
+    def staff_approve(self):
+        """
+        Staff approving the service (new or changed)
+        """
+        # if there's already a current record, archive it
+        if self.update_of and self.update_of.status == Service.STATUS_CURRENT:
+            self.update_of.status = Service.STATUS_ARCHIVED
+            self.update_of.save()
+        self.status = Service.STATUS_CURRENT
+        self.save()
+        # FIXME: Trigger email to user
+        # FIXME: Trigger JIRA ticket update?
+
+    def staff_reject(self):
+        """
+        Staff rejecting the service (new or changed)
+        """
+        self.status = Service.STATUS_REJECTED
+        self.save()
+        # FIXME: Trigger JIRA ticket update?
