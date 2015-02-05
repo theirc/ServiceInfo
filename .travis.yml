@@ -9,8 +9,8 @@ env:
 install:
 - pip install -r requirements/dev.txt --use-mirrors
 before_script:
-- psql -U postgres -c "create extension postgis"
 - createdb -E UTF-8 service_info -U postgres -O $USER
+- psql service_info -c "CREATE EXTENSION postgis;" -U postgres
 - python manage.py migrate --noinput
 script:
 - coverage run manage.py test
