@@ -3,6 +3,8 @@ from django.contrib.gis.db import models
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _, get_language
 
+from services.tasks import email_provider_about_service_approval_task
+
 
 class ProviderType(models.Model):
     number = models.IntegerField(unique=True)
@@ -368,6 +370,11 @@ class Service(models.Model):
 
     def get_api_url(self):
         return reverse('service-detail', args=[self.id])
+
+    def email_provider_about_approval(self):
+        """Schedule a task to send an email to the provider"""
+        # FIXME: Somebody needs to call this at the appropriate time :-)
+        email_provider_about_service_approval_task.delay(self.pk)
 
     def cancel(self):
         """
