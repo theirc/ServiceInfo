@@ -245,6 +245,15 @@ ACCOUNT_ACTIVATION_DAYS = 3
 ACCOUNT_ACTIVATION_REDIRECT_URL = '/nosuchurl'
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_HEADERS = (
+    'x-requested-with',
+    'content-type',
+    'accept',
+    'origin',
+    'authorization',
+    'x-csrftoken',
+    'serviceinfoauthorization',
+)
 
 STAGING_SITE_ID = 2
 PRODUCTION_SITE_ID = 3
