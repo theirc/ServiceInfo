@@ -1,6 +1,7 @@
 # Django settings for service_info project.
 import os
 from django.utils.translation import ugettext_lazy as _
+from celery.schedules import crontab
 
 # BASE_DIR = path/to/source/service_info
 # E.g. this file is BASE_DIR/settings/base.py
@@ -222,7 +223,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        'api.auth.ServiceInfoTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
     'PAGINATE_BY': 10,
@@ -244,7 +245,31 @@ ACCOUNT_ACTIVATION_DAYS = 3
 ACCOUNT_ACTIVATION_REDIRECT_URL = '/nosuchurl'
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_HEADERS = (
+    'x-requested-with',
+    'content-type',
+    'accept',
+    'origin',
+    'authorization',
+    'x-csrftoken',
+    'serviceinfoauthorization',
+)
 
 STAGING_SITE_ID = 2
 PRODUCTION_SITE_ID = 3
 DEV_SITE_ID = 4
+
+# Periodic celery tasks
+CELERYBEAT_SCHEDULE = {
+    'jira-work': {
+        'task': 'services.tasks.process_jira_work',
+        'schedule': crontab(minute='*/5'),
+    },
+}
+
+# JIRA settings
+JIRA_SERVER = 'http://54.154.50.144:8080/'
+JIRA_USER = os.environ.get('JIRA_USER', '')
+JIRA_PASSWORD = os.environ.get('JIRA_PASSWORD', '')
+JIRA_PROJECT_KEY = 'SM'
+JIRA_DUEIN_DAYS = 2

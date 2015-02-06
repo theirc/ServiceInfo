@@ -4,7 +4,7 @@ var _base = require('./_base');
 
 
 var ServiceType = _base.BaseModel.extend({
-    apiname: 'servicetype',
+    apiname: 'servicetypes',
 })
 
 var ServiceTypes = _base.BaseCollection.extend({

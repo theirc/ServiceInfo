@@ -106,7 +106,7 @@ li {
 	width: 100%;
 	margin: 0;
 	float: none;
-    clear: both;
+    // clear: both;
 
 	@media (min-width: 767px) {
 		width: 48%;
@@ -150,7 +150,7 @@ float: none;
     margin: 0;
     padding: 0;
     float: none;
-    clear: both;
+    // clear: both;
 
     &:first-child{
         margin-top: 2em;
@@ -190,9 +190,21 @@ float: none;
     color: inherit;
 }
 
+.operating-hours-to {
+    padding: 12px 12px 0px 12px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    margin-top: -10px;
+}
+
 @media (min-width:1px) and (max-width:400px) {
     .operating-hours {
         margin-top: 10px;
+    }
+}
+@media (max-width: 1000px) {
+    .operating-hours-to {
+        border: none;
     }
 }
 
@@ -807,7 +819,7 @@ table {
 	transform: translate(-50%, 0);
 	tr {
         border-right-width: 5px;
-        border-right-style: solid; 
+        border-right-style: solid;
 
 		&:nth-child(even) {
 	    	background-color: #e8e8e8;

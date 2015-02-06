@@ -15,6 +15,10 @@ window.require = require;
 var Router = require('./router');
 var router = new Router();
 
+handlebars.registerHelper('toLowerCase', function(str) {
+  return str.toLowerCase();
+});
+
 $('body').on("click", ".back-button", function (event) {
     event.preventDefault();
     window.history.back();
@@ -28,7 +32,7 @@ $(function(){
         beforeSend: function(xhr) {
             if (config.get('forever.authToken')) {
                 xhr.setRequestHeader(
-                    "Authorization",
+                    "ServiceInfoAuthorization",
                     "Token "+config.get('forever.authToken')
                 );
             }

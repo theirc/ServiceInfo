@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-02 08:05-0500\n"
-"PO-Revision-Date: 2015-02-02 07:30+0000\n"
+"POT-Creation-Date: 2015-02-05 12:53-0500\n"
+"PO-Revision-Date: 2015-02-06 07:27+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -97,6 +97,12 @@ msgstr "تاريخ الاشتراك"
 
 msgid "activation key"
 msgstr "مفتاح التفعيل "
+
+msgid "language"
+msgstr "لغة"
+
+msgid "User's preferred language."
+msgstr "اللغة المفضلة للمستخدم."
 
 msgid "user"
 msgstr "المستخدم"
@@ -188,6 +194,45 @@ msgid ""
 "Sincerely,\n"
 "%(site_name)s Management\n"
 msgstr "\nمع خالص التقدير,\n%(site_name)s\n الإدارة \n"
+
+msgid "Arabic"
+msgstr "العربية"
+
+msgid "English"
+msgstr "الإنجليزية"
+
+msgid "French"
+msgstr "الفرنسية"
+
+msgid "Service has been approved"
+msgstr "تمت الموافقة على الخدمة"
+
+msgid "Description and Additional Information"
+msgstr "معلومات إضافية"
+
+msgid "Hours"
+msgstr "ساعات"
+
+msgid "Location"
+msgstr "موقع"
+
+msgid "Only services in draft status may be approved"
+msgstr "يجوز الموافقة على الخدمات الوحيدة في مشروع وضع"
+
+msgid "Services have been approved"
+msgstr "تمت الموافقة على الخدمات"
+
+msgid "Approve new or changed service"
+msgstr "الموافقة على الخدمة الجديدة أو تغييرها"
+
+msgid "Only services in draft status may be rejected"
+msgstr "قد يتم رفض خدمات الوحيدة في مشروع وضع"
+
+msgid "Services have been rejected"
+msgstr "رفضت الخدمات"
+
+msgid "Reject new or changed service"
+msgstr "رفض الخدمة الجديدة أو تغييرها"
 
 #. Translators: Provider name
 #. Translators: Service name
@@ -282,6 +327,9 @@ msgstr "مرفوض"
 msgid "canceled"
 msgstr "ألغيت"
 
+msgid "archived"
+msgstr "أرشفة"
+
 msgid "status"
 msgstr "الوضع "
 
@@ -293,3 +341,21 @@ msgstr "إذا يمثل رقما قياسيا خدمة تعديل لسجل ال�
 
 msgid "location"
 msgstr "المكان "
+
+msgid "Provider updated their information"
+msgstr "تحديث معلوماتهم مزود"
+
+msgid "New service submitted by provider"
+msgstr "الخدمة الجديدة المقدمة من قبل مزود"
+
+msgid "Provider canceled a draft service"
+msgstr "إلغاء مزود مشروع الخدمة"
+
+msgid "Provider canceled a current service"
+msgstr "إلغاء مزود خدمة الحالية"
+
+msgid "update type"
+msgstr "نوع آخر التطورات"
+
+msgid "JIRA issue"
+msgstr "قضية جيرة"
