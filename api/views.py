@@ -20,7 +20,6 @@ from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, 
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
     SelectionCriterion
-from services.utils import permission_names_to_objects, USER_PERMISSION_NAMES
 
 
 class LanguageView(APIView):
