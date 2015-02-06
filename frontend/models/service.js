@@ -31,6 +31,7 @@ var Service = _base.BaseModel.extend({
         var data = _base.BaseModel.prototype.data.apply(this, arguments);
         data.isApproved = this.isApproved();
         data.isRejected = this.isRejected();
+        return data;
     },
 
     isApproved: function() {
@@ -48,7 +49,6 @@ var Services = _base.BaseCollection.extend({
     loadSubModels: function () {
         var p = [];
         $.each(this.models, function() {
-            console.log(this);
             p.push(this.loadSubModels());
         });
         return Promise.all(p);
