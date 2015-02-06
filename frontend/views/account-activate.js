@@ -17,6 +17,7 @@ var Activation = Backbone.Model.extend({
             },
             success: function(resp) {
                 config.set('forever.authToken', resp.token);
+                self.set('status', 'Success');
             },
             error: function(e) {
                 self.set('status', 'Failed');
@@ -41,5 +42,6 @@ module.exports = Backbone.View.extend({
             status: status,
             failed: status == 'Failed',
         }));
+        $el.i18n();
     },
 })
