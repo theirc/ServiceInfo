@@ -425,7 +425,7 @@ class Service(NameInCurrentLanguageMixin, models.Model):
             self.update_of.save()
         self.status = Service.STATUS_CURRENT
         self.save()
-        # FIXME: Trigger email to user
+        email_provider_about_service_approval_task.delay(self.pk)
         # FIXME: Trigger JIRA ticket update?
 
     def staff_reject(self):
