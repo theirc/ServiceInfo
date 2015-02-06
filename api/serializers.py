@@ -13,6 +13,11 @@ from services.models import Service, Provider, ProviderType, ServiceType, Servic
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name='user-detail',
+        lookup_field='pk'
+    )
+
     class Meta:
         model = EmailUser
         fields = ('url', 'id', 'email', 'groups')
