@@ -15,14 +15,13 @@ module.exports = Backbone.View.extend({
         var services = this.services;
         this.services.fetch().then(function(r){
             window.services = services;
-            services.loadSubModels();
-            // setTimeout(function(){
+            var p = services.loadSubModels();
+            p.then(function(){
                 $el.html(template({
                     services: services.data(),
                 }));
                 $el.i18n();
-            // }, 500);
-
+            });
         });
     },
 
