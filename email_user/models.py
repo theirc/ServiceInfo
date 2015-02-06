@@ -284,7 +284,7 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
 
             subject = render_to_string(subject_template, ctx_dict)
             # Email subject *must not* contain newlines
-            subject = ''.join(subject.splitlines())
+            subject = (' '.join(subject.splitlines())).strip()
 
             message_txt = render_to_string(message_text_template, ctx_dict)
             try:
