@@ -182,9 +182,7 @@ class ProviderViewSet(viewsets.ModelViewSet):
                 password=request.data['password'],
                 is_active=False
             )
-            # Give them the typical permissions
-            # FIXME: we should just do a group
-            user.user_permissions.add(*permission_names_to_objects(USER_PERMISSION_NAMES))
+            user.groups.add(Group.objects.get(name='Providers'))
 
             # Now we have a user, let's just call the built-in create
             # method to create the provider for us. We just need to
