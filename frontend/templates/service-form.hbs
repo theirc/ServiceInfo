@@ -62,7 +62,7 @@
                   <div class=row>
                       <div class="third">
                           <div class="form-group">
-                            <label for="id_{{toLowerCase this}}_open" class="operating-hours" data-i18n="Service-Form.Hours-Open"></label>
+                            <label for="id_{{toLowerCase this}}_open" class="operating-hours"><span data-i18n="Service-Form.Hours-Open"></span><span class=error></span></label>
                             <input type="time" id="id_{{toLowerCase this}}_open" name="{{toLowerCase this}}_open" class="form-control">
                           </div>
                       </div>
@@ -73,7 +73,7 @@
                       </div>
                       <div class="third">
                           <div class="form-group">
-                            <label for="id_{{toLowerCase this}}_close" class="operating-hours" data-i18n="Service-Form.Hours-Open"></label>
+                            <label for="id_{{toLowerCase this}}_close" class="operating-hours"><span data-i18n="Service-Form.Hours-Close"></span><span class=error></span></label>
                             <input type="time" id="id_{{toLowerCase this}}_close" name="{{toLowerCase this}}_close" class="form-control">
                           </div>
                       </div>
@@ -84,7 +84,7 @@
                 <div class="form-group row">
                   <label for="id_additional_information" class="control-label" data-i18n="Service-Form.Additional-Information"></label>
                   <div class="form-group">
-                    <textarea rows="4" name="additional_information" class="form-control"></textarea>
+                    <textarea rows="4" data-i18n-field name="additional_information" class="form-control"></textarea>
                   </div>
                 </div>
                 <div class="form-group">
@@ -92,27 +92,6 @@
                     <div class="form-group">
                       <input id="id_cost_of_service" type="text" name="cost_of_service" class="form-control">
                     </div>
-                </div>
-                <div class="form-group">
-                  <label for="id_selection_criteria" class="control-label" data-i18n="Service-Form.Selection-Criteria"></label>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="Selection_Criteria_1" id="Selection_Criteria_1" value="option1" checked="">
-                      Option 1
-                    </label>
-                  </div>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="Selection_Criteria_2" id="Selection_Criteria_2" value="option2">
-                      Option 2
-                    </label>
-                  </div>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="Selection_Criteria_3" id="Selection_Criteria_3" value="option3">
-                      Option 3
-                    </label>
-                  </div>
                 </div>
               </fieldset>
             </form>

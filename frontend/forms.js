@@ -21,8 +21,15 @@ module.exports = {
         return data;
     },
 
+    getFieldLabel: function($form, name) {
+        var $field = $form.find('[name={}]'.replace('{}', name));
+        var id = $field.attr('id');
+        return $form.find('label[for='+ id +']');
+    },
+
     submit: function($form, action, data, errors) {
         var errors = errors || {};
+        var self = this;
 
         return new Promise(function(resolve, error) {
             $.ajax(config.get('api_location')+action, {
@@ -31,7 +38,7 @@ module.exports = {
                 error: function(e) {
                     $.extend(errors, e.responseJSON);
                     $.each(errors, function(k) {
-                        var $error = $form.find('[for='+k+'] .error');
+                        var $error = self.getFieldLabel($form, k).find('.error');
                         if ($error) {
                             $error.text(this[0]);
                         }
