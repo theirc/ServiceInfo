@@ -29,6 +29,23 @@
       "Register": "Register to be a Service Provider here"
   	}
   },
+  "Service-Form": {
+      "Legend": "Service Information",
+      "Service-Name": "Name of Service",
+      "Service-Area": "Area of Service",
+      "Type": "Service Type",
+      "Service-Description": "Description",
+      "Service-Hours": "Hours of Service",
+      "Additional-Information": "Additional Information (Optional Field)",
+      "Service-Cost": "Cost of Service (Optional Field)",
+      "Selection-Criteria": "Selection Criteria (Optional Field)",
+      "Hours-Open": "Opening Time:",
+      "Hours-Close": "Closing Time:",
+      "Form-Submit-Options": {
+          "Submit": "Submit Answers",
+          "Clear": "Remove Answers"
+      }
+  },
   "Provider-Registration-Form": {
   	"Page-Head": {
   		"Page-Title": {
