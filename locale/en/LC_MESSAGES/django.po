@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-05 09:00-0500\n"
+"POT-Creation-Date: 2015-02-06 11:44-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -234,6 +234,33 @@ msgstr ""
 msgid "Service has been approved"
 msgstr ""
 
+msgid "Description and Additional Information"
+msgstr ""
+
+msgid "Hours"
+msgstr ""
+
+msgid "Location"
+msgstr ""
+
+msgid "Only services in draft status may be approved"
+msgstr ""
+
+msgid "Services have been approved"
+msgstr ""
+
+msgid "Approve new or changed service"
+msgstr ""
+
+msgid "Only services in draft status may be rejected"
+msgstr ""
+
+msgid "Services have been rejected"
+msgstr ""
+
+msgid "Reject new or changed service"
+msgstr ""
+
 #. Translators: Provider name
 #. Translators: Service name
 msgid "name in English"
@@ -340,4 +367,22 @@ msgid ""
 msgstr ""
 
 msgid "location"
+msgstr ""
+
+msgid "Provider updated their information"
+msgstr ""
+
+msgid "New service submitted by provider"
+msgstr ""
+
+msgid "Provider canceled a draft service"
+msgstr ""
+
+msgid "Provider canceled a current service"
+msgstr ""
+
+msgid "update type"
+msgstr ""
+
+msgid "JIRA issue"
 msgstr ""

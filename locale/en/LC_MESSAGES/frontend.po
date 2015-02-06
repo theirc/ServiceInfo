@@ -42,6 +42,45 @@ msgstr "Login"
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "Register to be a Service Provider here"
 
+msgid "Service-Form##Legend"
+msgstr "Service Information"
+
+msgid "Service-Form##Service-Name"
+msgstr "Name of Service"
+
+msgid "Service-Form##Service-Area"
+msgstr "Area of Service"
+
+msgid "Service-Form##Type"
+msgstr "Service Type"
+
+msgid "Service-Form##Service-Description"
+msgstr "Description"
+
+msgid "Service-Form##Service-Hours"
+msgstr "Hours of Service"
+
+msgid "Service-Form##Additional-Information"
+msgstr "Additional Information (Optional Field)"
+
+msgid "Service-Form##Service-Cost"
+msgstr "Cost of Service (Optional Field)"
+
+msgid "Service-Form##Selection-Criteria"
+msgstr "Selection Criteria (Optional Field)"
+
+msgid "Service-Form##Hours-Open"
+msgstr "Opening Time:"
+
+msgid "Service-Form##Hours-Close"
+msgstr "Closing Time:"
+
+msgid "Service-Form##Form-Submit-Options##Submit"
+msgstr "Submit Answers"
+
+msgid "Service-Form##Form-Submit-Options##Clear"
+msgstr "Remove Answers"
+
 msgid "Provider-Registration-Form##Page-Head##Page-Title##Title"
 msgstr "New Service Provider Registration Form"
 
@@ -98,6 +137,9 @@ msgstr "Name of Service"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Area"
 msgstr "Area of Service"
+
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Type"
+msgstr "Service Type"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Description"
 msgstr "Description"
