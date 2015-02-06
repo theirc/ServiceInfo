@@ -23,6 +23,7 @@ VALID_ROLES = (
     'db-master',
     'queue',
     'cache',
+    'beat',
 )
 
 
