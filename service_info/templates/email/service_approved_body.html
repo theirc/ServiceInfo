@@ -1,7 +1,29 @@
-{% load i18n %}
+{% load i18n %}{# tried to keep the fragements to be translated the same in both templates #}
+<p>
+  {% blocktrans with provider_name=provider.name %}Dear {{ provider_name }}{% endblocktrans %}
+</p>
 
-A service has been approved.  (This text is a placeholder.)
+<p>
+{% blocktrans with service_name=service.name service_link=service.public_link %}
+Your service {{ service_name }} has been vetted and approved by International Rescue Committee staff.
+It has been published on the following link: <a href="{{ service_link }}">{{ service_link }}</a>
+{% endblocktrans %}
+</p>
 
+<p>
+  {% trans "For more information please contact support at serviceinfo@rescue.org" %}
+  {% trans "Thanks for your submission." %}
+</p>
+
+<p>
+{% trans "Best Regards" %}
+</p>
+
+<pre>
+{% trans "Service Info" %}
+www.serviceinfo.rescue.org <Facebook Link> <Twitter Link>
+{% trans "Support:" %} <a href="mailto:serviceinfo@rescue.org">serviceinfo@rescue.org</a> +96176667752
+</pre>
 {% comment %}
 **email/service_approved_body.html**
 

@@ -41,7 +41,7 @@ class ServiceApprovalEmailTaskTest(TestCase):
 
         # Make this fancier later - probably just want to make sure that it has
         # the name of the service or something. Maybe test translation too.
-        self.assertEqual(
-            mail.outbox[0].body,
-            'A service has been approved.  (This text is a placeholder.)\n\n'
-        )
+        body = mail.outbox[0].body
+        self.assertIn("Your service", body)
+        self.assertIn(self.service.name_en, body)
+        self.assertIn(self.provider.name_en, body)

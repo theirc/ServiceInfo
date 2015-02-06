@@ -140,3 +140,69 @@ msgstr "There was a problem setting up your service provider account. Please cli
 
 msgid "Account-Activation##Buttons##Resend-Email"
 msgstr "Resend Verification Email"
+
+msgid "Service-List##Page-Head##Page-Title##Title"
+msgstr "Services List"
+
+msgid "Service-List##Page-Head##Page-Description##Page-Description"
+msgstr "Below is a list of services you have applied to provide. Approved services are marked in green. Un-approved services are marked in red. Services pending approval are unmarked."
+
+msgid "Service-List##Table##Thead##Name"
+msgstr "Name:"
+
+msgid "Service-List##Table##Thead##Type"
+msgstr "Type:"
+
+msgid "Service-List##Table##Thead##Area"
+msgstr "Area:"
+
+msgid "Service-List##Table##Thead##Status"
+msgstr "Status:"
+
+msgid "Home##Service-Map##Title"
+msgstr "View The Service Map"
+
+msgid "Home##Service-Map##Body"
+msgstr "Use the service map to locate service providers."
+
+msgid "Home##Feedback##Title"
+msgstr "Provide Feedback"
+
+msgid "Home##Feedback##Body"
+msgstr "Tell us about your experience working with your service provider."
+
+msgid "Home##Log-in##Title"
+msgstr "Service Provider Login"
+
+msgid "Home##Log-in##Body"
+msgstr "Log in to an existing service provider account, or create a new account."
+
+msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
+msgstr "Your Information was Submitted Successfully"
+
+msgid "Provider-Registration-Confirmation##Page-Head##Page-Description##Page-Description"
+msgstr "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+
+msgid "Password-Reset##Page-Head##Page-Title##Title"
+msgstr "Password Reset"
+
+msgid "Password-Reset##Page-Head##Page-Description##Page-Description"
+msgstr "To reset your password enter your email address in the field below then click submit. Clicking submit will send a link to your email account that will direct you to the password reset page."
+
+msgid "Password-Reset##Input-Label##User-Email"
+msgstr "Enter your email:"
+
+msgid "Password-Reset##Submit-Options##Submit"
+msgstr "Submit"
+
+msgid "Password-Reset-Form##Page-Head##Page-Title##Title"
+msgstr "Password Reset Form"
+
+msgid "Password-Reset-Form##Page-Head##Page-Description##Page-Description"
+msgstr "Enter your new password in the text field below, then click submit to update your password."
+
+msgid "Password-Reset-Form##Input-Label##New-Password"
+msgstr "Enter your new password:"
+
+msgid "Password-Reset-Form##Submit-Options##Submit"
+msgstr "Submit"

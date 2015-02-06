@@ -21,7 +21,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, activate, get_language
 
 from rest_framework.authtoken.models import Token
 import six
@@ -273,23 +273,35 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
 
     def send_email_to_user(self, ctx_dict, subject_template, message_text_template,
                            message_html_template):
-        subject = render_to_string(subject_template, ctx_dict)
-        # Email subject *must not* contain newlines
-        subject = ''.join(subject.splitlines())
-
-        message_txt = render_to_string(message_text_template, ctx_dict)
+        """Construct an email from a context and templates and send it to the
+        user, translating if we know their preferred language.
+        """
+        cur_language = get_language()
         try:
-            message_html = render_to_string(message_html_template, ctx_dict)
-        except TemplateDoesNotExist:
-            message_html = None
+            if self.language:
+                # We know the user's preferred language, so use it:
+                activate(self.language)
 
-        send_mail(
-            subject=subject,
-            message=message_txt,
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[self.email],
-            html_message=message_html
-        )
+            subject = render_to_string(subject_template, ctx_dict)
+            # Email subject *must not* contain newlines
+            subject = (' '.join(subject.splitlines())).strip()
+
+            message_txt = render_to_string(message_text_template, ctx_dict)
+            try:
+                message_html = render_to_string(message_html_template, ctx_dict)
+            except TemplateDoesNotExist:
+                message_html = None
+
+            send_mail(
+                subject=subject,
+                message=message_txt,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[self.email],
+                html_message=message_html
+            )
+        finally:
+            # Put language back to what it was
+            activate(cur_language)
 
 
 # Create an auth token for each user when they're created

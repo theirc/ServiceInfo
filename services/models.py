@@ -8,7 +8,21 @@ from . import jira_support
 from .tasks import email_provider_about_service_approval_task
 
 
-class ProviderType(models.Model):
+class NameInCurrentLanguageMixin(object):
+    @property
+    def name(self):
+        # Try to return the name field of the currently selected language
+        # if we have such a field and it has something in it.
+        # Otherwise, punt and return the first of the English, Arabic, or
+        # French names that has anything in it.
+        language = get_language()
+        field_name = 'name_%s' % language[:2]
+        if hasattr(self, field_name) and getattr(self, field_name):
+            return getattr(self, field_name)
+        return self.name_en or self.name_ar or self.name_fr
+
+
+class ProviderType(NameInCurrentLanguageMixin, models.Model):
     number = models.IntegerField(unique=True)
     name_en = models.CharField(
         _("name in English"),
@@ -30,21 +44,13 @@ class ProviderType(models.Model):
     )
 
     def __str__(self):
-        # Try to return the name field of the currently selected language
-        # if we have such a field and it has something in it.
-        # Otherwise, punt and return the English, French, or Arabic name,
-        # in that order.
-        language = get_language()
-        field_name = 'name_%s' % language[:2]
-        if hasattr(self, field_name) and getattr(self, field_name):
-            return getattr(self, field_name)
-        return self.name_en or self.name_fr or self.name_ar
+        return self.name
 
     def get_api_url(self):
         return reverse('providertype-detail', args=[self.id])
 
 
-class Provider(models.Model):
+class Provider(NameInCurrentLanguageMixin, models.Model):
     name_en = models.CharField(
         # Translators: Provider name
         _("name in English"),
@@ -113,7 +119,7 @@ class Provider(models.Model):
         return reverse('provider-detail', args=[self.id])
 
 
-class ServiceArea(models.Model):
+class ServiceArea(NameInCurrentLanguageMixin, models.Model):
     name_en = models.CharField(
         _("name in English"),
         max_length=256,
@@ -179,7 +185,7 @@ class SelectionCriterion(models.Model):
         return ', '.join([self.text_en, self.text_fr, self.text_ar])
 
 
-class ServiceType(models.Model):
+class ServiceType(NameInCurrentLanguageMixin, models.Model):
     number = models.IntegerField(unique=True)
     name_en = models.CharField(
         _("name in English"),
@@ -234,7 +240,7 @@ class ServiceType(models.Model):
         return reverse('servicetype-detail', args=[self.id])
 
 
-class Service(models.Model):
+class Service(NameInCurrentLanguageMixin, models.Model):
     provider = models.ForeignKey(
         Provider,
         verbose_name=_("provider"),
@@ -419,7 +425,7 @@ class Service(models.Model):
             self.update_of.save()
         self.status = Service.STATUS_CURRENT
         self.save()
-        # FIXME: Trigger email to user
+        email_provider_about_service_approval_task.delay(self.pk)
         # FIXME: Trigger JIRA ticket update?
 
     def staff_reject(self):

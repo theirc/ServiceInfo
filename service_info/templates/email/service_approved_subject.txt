@@ -1,6 +1,5 @@
 {% load i18n %}{% trans "Service has been approved" %} {{ site.name }}
 
-
 {% comment %}
 **email/service_approved_subject.txt**
 
