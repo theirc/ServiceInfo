@@ -1,7 +1,9 @@
 var Backbone = require('backbone'),
 template = require("../templates/provider-form.hbs"),
-i18n = require('i18next-client');
-var config = require('../config');
+i18n = require('i18next-client'),
+config = require('../config'),
+forms = require('../forms')
+;
 
 module.exports = Backbone.View.extend({
     initialize: function(){
@@ -24,32 +26,13 @@ module.exports = Backbone.View.extend({
                 $option.text(this['name_' + config.get('lang')]);
                 $typeSel.append($option)
             })
-            console.log($typeSel);
         })
-
-        console.log($el);
     },
 
     events: {
         "click .form-btn-submit": function() {
-            var data = {};
             var $el = this.$el;
-
-
-            $el.find('[name]').each(function() {
-                var $field = $(this);
-                var value = $field.val();
-                var name = $field.attr('name');
-                var ml = typeof $field.data('i18n-field') !== "undefined";
-
-                if (ml) {
-                    var cur_lang = localStorage['lang'];
-                    name = name + '_' + cur_lang;
-                }
-
-                data[name] = value;
-                // console.log(name + ': ' + value);
-            });
+            var data = forms.collect($el);
 
             $el.find('.error').text('');
             var errors = {};
@@ -73,24 +56,14 @@ module.exports = Backbone.View.extend({
             // Base Activation Link
             data["base_activation_link"] = location.protocol+'//'+location.host+location.pathname+'?#/register/verify/';
 
-            $.ajax(config.get('api_location')+'api/providers/create_provider/', {
-                method: 'POST',
-                data: data,
-                error: function(e) {
-                    $.extend(errors, e.responseJSON);
-                    $.each(errors, function(k) {
-                        console.log(k + ' (error): ' + this[0]);
-
-                        var $error = $el.find('[for='+k+'] .error');
-                        if ($error) {
-                            $error.text(this[0]);
-                        }
-                    })
-                },
-                success: function(data) {
+            forms.submit($el, 'api/providers/create_provider/', data, errors).then(
+                function success(data) {
                     window.location = '#/register/confirm';
                 },
-            });
+                function error(errors) {
+                    console.error(errors);
+                }
+            );
 
             return false;
         },

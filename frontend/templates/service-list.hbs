@@ -25,7 +25,7 @@
 		</thead>
 		<tbody>
             {{#each services}}
-			<tr class="approved">
+			<tr class="{{#if this.isApproved }}approved{{/if}} {{#if this.isRejected}}denied{{/if}}">
 				<td>
 					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td">{{ this.name }}</span>
 				</td>
