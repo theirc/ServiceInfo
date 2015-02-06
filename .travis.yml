@@ -1,0 +1,28 @@
+language: python
+sudo: false
+python:
+- '3.4'
+addons:
+  postgresql: '9.3'
+env:
+- DJANGO_SETTINGS_MODULE="service_info.settings.dev"
+install:
+- pip install -r requirements/dev.txt --use-mirrors
+before_script:
+- createdb -E UTF-8 service_info -U postgres -O $USER
+- psql service_info -c "CREATE EXTENSION postgis;" -U postgres
+- python manage.py migrate --noinput
+script:
+- coverage run manage.py test
+- coverage report -m --fail-under 60
+- flake8 .
+notifications:
+  email:
+  - servicemap-team@caktusgroup.com
+  hipchat:
+    rooms:
+      secure: d8q9OOxEIz0PMe9HJhmx2dL4VvjDs2BE/v+QLQKZ5j5VcejtZl+NMR/D2x8b/7j10Re2e5bk6Sn9obPAEvQcHePRby/i5BNR7K+MtN4Wi3cEYmCi0xEpPc2c1p+J2Tfb7EXG6Kzx2ocUKnl+nE1E7Yxn+vSgg5RTFmUw2AB6syw=
+    template:
+    - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}
+      (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Change view</a>)'
+    format: html
