@@ -85,7 +85,7 @@ New server on AWS
 
 #. Create a minion and assign initial roles::
 
-    fab -u ubuntu staging setup_minion:balancer,queue,cache,web,worker
+    fab -u ubuntu staging setup_minion:balancer,queue,cache,web,worker,beat
 
 #. Initial deploy::
 
