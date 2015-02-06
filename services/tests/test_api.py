@@ -707,3 +707,24 @@ class PasswordResetTest(APITestMixin, TestCase):
         response = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(response,
                          {"non_field_errors": ["Password reset key is not valid"]})
+
+
+class UserAPITest(APITestMixin, TestCase):
+    def setUp(self):
+        super().setUp()
+        self.token = Token.objects.get(user=self.user).key
+
+    def test_list_users(self):
+        url = reverse('user-list')
+        rsp = self.get_with_token(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        pks = [item['id'] for item in response['results']]
+        self.assertIn(self.user.pk, pks)
+
+    def test_get_user(self):
+        url = reverse('user-detail', kwargs={'pk': self.user.pk})
+        rsp = self.get_with_token(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(self.user.pk, response['id'])
