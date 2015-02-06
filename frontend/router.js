@@ -21,17 +21,18 @@ var views = {
 function loadPage(name, params) {
     var params = params || [];
     return function() {
+        var viewArguments = Array.prototype.slice.apply(arguments);
         config.ready(function(){
             var $el = $(document.querySelector('#page'));
             var opts = {
                 el: $el
             };
             for (var i=0; i < params.length; i++) {
-                opts[params[i]] = arguments[i];
-            }
+                opts[params[i]] = viewArguments[i];
+            };
             var view = new views[name](opts);
             i18n.init(function(){
-                view.render.apply(view, arguments);
+                view.render.apply(view, viewArguments);
                 view.$el.i18n({
                     lng: config.get('lang'),
                 });
