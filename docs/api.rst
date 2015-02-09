@@ -7,6 +7,16 @@ the API at `https://<yourserver>/api`.  This document will only
 cover the little complications, like getting authenticated, creating
 users, password reset, etc.
 
+Ownership
+---------
+
+The API enforces ownership in a few places. When creating records that
+are owned by a particular provider, the provider is forced to be that
+of the currently authenticated user. Similarly, when querying records
+of those models, only those owned by the currently authenticated user
+are returned. The relevant record types are Service and SelectionCriterion
+for creation, and those plus Provider for querying.
+
 Creating a new provider
 -----------------------
 
@@ -133,19 +143,31 @@ one of these::
 Using token-based auth
 ----------------------
 
-Once the client has the token, it should pass it on subsequent requests per
-http://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication
-which says::
+Once the client has the token, it should pass it on subsequent requests,
+including it in the ServiceInfoAuthorization HTTP header, prefixed by the
+string literal "Token" with whitespace between::
 
-    For clients to authenticate, the token key should be included in the
-    Authorization HTTP header. The key should be prefixed by the string
-    literal "Token", with whitespace separating the two strings. For example::
-
-        Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
+        ServiceInfoAuthorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
 
 As you might expect, requests will be permitted or denied based on the
 permissions of the user whose token is passed.
 
+User language
+-------------
+
+The client can store and retrieve a short string containing the
+code for the current user's preferred language::
+
+     GET /api/language/
+       --> {'language': 'en'}
+
+     POST {'language': 'en'} to /api/language/
+
+At present, the language code should be one of
+
+* "en": English
+* "ar": Arabic
+* "fr": French
 
 Password reset
 --------------
@@ -197,3 +219,18 @@ associated email address in the response::
     {'email': 'user@example.com'},
 
 Otherwise,it'll get a 400 but no other data.
+
+Cancel a Service
+----------------
+
+A provider can cancel a current service to withdraw it from the
+directory, or cancel a service record that is in draft status to
+cancel the requested new service or change.
+
+The URL for this API is the service's URL with 'cancel/' appended.
+POST to it to do the cancel.
+
+On success it'll return a 200.  If the service isn't in a valid
+state to be canceled, it'll return 400. If the service doesn't
+belong to the provider making the call, it'll return a 404 (because
+only services belonging to a provider are visible to the provider).

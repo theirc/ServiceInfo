@@ -29,6 +29,23 @@
       "Register": "Register to be a Service Provider here"
   	}
   },
+  "Service-Form": {
+      "Legend": "Service Information",
+      "Service-Name": "Name of Service",
+      "Service-Area": "Area of Service",
+      "Type": "Service Type",
+      "Service-Description": "Description",
+      "Service-Hours": "Hours of Service",
+      "Additional-Information": "Additional Information (Optional Field)",
+      "Service-Cost": "Cost of Service (Optional Field)",
+      "Selection-Criteria": "Selection Criteria (Optional Field)",
+      "Hours-Open": "Opening Time:",
+      "Hours-Close": "Closing Time:",
+      "Form-Submit-Options": {
+          "Submit": "Submit Answers",
+          "Clear": "Remove Answers"
+      }
+  },
   "Provider-Registration-Form": {
   	"Page-Head": {
   		"Page-Title": {
@@ -38,20 +55,30 @@
   			"Page-Description": "Fill out the form below to apply to be a service provider."
   		}
   	},
+    "Errors": {
+        "Password-Blank": "Password must not be blank",
+        "Password-Repeat": "Password must be repeated",
+        "Password-Match": "Passwords must match"
+    },
   	"Form-Sections": {
   		"Basic": {
   			"Legend": "Basic details to register a service provider:",
   			"Name": "Full Name",
+            "Password": "Password",
+            "PasswordConfirm": "Confirm Password",
   			"Service-Type": "Type of Service",
+            "Service-Type-Choose": "Choose a Service Type",
   			"Phone-Number": "Phone Number",
-  			"Email": "Email (Optional Field)",
+  			"Email": "Email",
   			"Website": "Website (Optional Field)",
+            "MonthlyBeneficiaries": "Number of Monthly Beneficiaries",
   			"Description": "Description"
   		},
   		"Service-Information": {
   			"Legend": "Service Information",
   			"Service-Name": "Name of Service",
   			"Service-Area": "Area of Service",
+            "Type": "Service Type",
   			"Service-Description": "Description",
   			"Service-Hours": "Hours of Service",
   			"Additional-Information": "Additional Information (Optional Field)",
@@ -63,5 +90,96 @@
   			"Clear": "Remove Answers"
   		}
   	}
+  },
+  "Account-Activation": {
+    "Pending": {
+        "Title": "Your account activation is pending...",
+        "Description": ""
+    },
+    "Success": {
+        "Title": "Your account has been activated.",
+        "Description": ""
+    },
+    "Failed": {
+        "Title": "Your account activation Failed.",
+        "Description": "There was a problem setting up your service provider account. Please click the resend confirmation email button below to have another confirmation email sent to your email account."
+    },
+    "Buttons": {
+      "Resend-Email": "Resend Verification Email"
+    }
+  },
+  "Service-List": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Services List"
+      },
+      "Page-Description": {
+        "Page-Description": "Below is a list of services you have applied to provide. Approved services are marked in green. Un-approved services are marked in red. Services pending approval are unmarked."
+      }
+    },
+    "Table": {
+      "Thead": {
+        "Name": "Name:",
+        "Type": "Type:",
+        "Area": "Area:",
+        "Status": "Status:"
+      }
+    }
+  },
+  "Home": {
+    "Service-Map": {
+      "Title": "View The Service Map",
+      "Body": "Use the service map to locate service providers."
+      },
+    "Feedback": {
+      "Title": "Provide Feedback",
+      "Body": "Tell us about your experience working with your service provider."
+      },
+    "Log-in": {
+      "Title": "Service Provider Login",
+      "Body": "Log in to an existing service provider account, or create a new account."
+    }
+  },
+  "Provider-Registration-Confirmation": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Your Information was Submitted Successfully"
+      },
+      "Page-Description": {
+        "Page-Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+      }
+    }
+  },
+  "Password-Reset": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Password Reset"
+      },
+      "Page-Description": {
+        "Page-Description": "To reset your password enter your email address in the field below then click submit. Clicking submit will send a link to your email account that will direct you to the password reset page."
+      }
+    },
+    "Input-Label": {
+      "User-Email": "Enter your email:"
+    },
+    "Submit-Options": {
+      "Submit": "Submit"
+    }
+  },
+  "Password-Reset-Form": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Password Reset Form"
+      },
+      "Page-Description": {
+        "Page-Description": "Enter your new password in the text field below, then click submit to update your password."
+      }
+    },
+    "Input-Label": {
+      "New-Password": "Enter your new password:"
+    },
+    "Submit-Options": {
+      "Submit": "Submit"
+    }
   }
 }

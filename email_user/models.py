@@ -10,7 +10,7 @@ import random
 from django.conf import settings
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.core.exceptions import ValidationError
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.db import models
@@ -21,7 +21,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, activate, get_language
 
 from rest_framework.authtoken.models import Token
 import six
@@ -132,6 +132,14 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), default=now)
 
     activation_key = models.CharField(_('activation key'), max_length=40, default='')
+
+    language = models.CharField(
+        _('language'),
+        help_text=_('User\'s preferred language.'),
+        max_length=10,
+        default='',
+        blank=True,
+    )
 
     objects = EmailUserManager()
 
@@ -265,23 +273,35 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
 
     def send_email_to_user(self, ctx_dict, subject_template, message_text_template,
                            message_html_template):
-        subject = render_to_string(subject_template, ctx_dict)
-        # Email subject *must not* contain newlines
-        subject = ''.join(subject.splitlines())
-
-        message_txt = render_to_string(message_text_template, ctx_dict)
-        email_message = EmailMultiAlternatives(subject, message_txt, settings.DEFAULT_FROM_EMAIL,
-                                               [self.email])
-
+        """Construct an email from a context and templates and send it to the
+        user, translating if we know their preferred language.
+        """
+        cur_language = get_language()
         try:
-            message_html = render_to_string(message_html_template, ctx_dict)
-        except TemplateDoesNotExist:
-            message_html = None
+            if self.language:
+                # We know the user's preferred language, so use it:
+                activate(self.language)
 
-        if message_html:
-            email_message.attach_alternative(message_html, 'text/html')
+            subject = render_to_string(subject_template, ctx_dict)
+            # Email subject *must not* contain newlines
+            subject = (' '.join(subject.splitlines())).strip()
 
-        email_message.send()
+            message_txt = render_to_string(message_text_template, ctx_dict)
+            try:
+                message_html = render_to_string(message_html_template, ctx_dict)
+            except TemplateDoesNotExist:
+                message_html = None
+
+            send_mail(
+                subject=subject,
+                message=message_txt,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[self.email],
+                html_message=message_html
+            )
+        finally:
+            # Put language back to what it was
+            activate(cur_language)
 
 
 # Create an auth token for each user when they're created

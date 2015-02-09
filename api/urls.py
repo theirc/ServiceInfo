@@ -12,6 +12,8 @@ router.register(r'providertypes', views.ProviderTypeViewSet)
 router.register(r'services', views.ServiceViewSet)
 router.register(r'servicetypes', views.ServiceTypeViewSet)
 router.register(r'serviceareas', views.ServiceAreaViewSet)
+router.register(r'selectioncriteria', views.SelectionCriterionViewSet,
+                base_name='selectioncriterion')
 
 # See http://www.django-rest-framework.org/api-guide/routers/ for the
 # URL names that DRF comes up with, to make it easy to reverse them.
@@ -23,6 +25,9 @@ urlpatterns = [
     # Provide a special call to get an auth token
     # (This will end up as something like "/api/login/")
     url(r'^login/$', views.APILogin.as_view(), name='api-login'),
+
+    # Special call to get/set current user's language
+    url(r'^language/$', views.LanguageView.as_view(), name='user-language'),
 
     # Activate a user
     url(r'^activate/$', view=views.APIActivationView.as_view(), name='api-activate'),

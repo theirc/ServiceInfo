@@ -1,0 +1,42 @@
+{% load i18n %}{# tried to keep the fragements to be translated the same in both templates #}
+{% blocktrans with provider_name=provider.name %}Dear {{ provider_name }}{% endblocktrans %}
+{% blocktrans with service_name=service.name service_link=service.public_link %}
+Your service {{ service_name }} has been vetted and approved by International Rescue Committee staff.
+It has been published on the following link: <a href="{{ service_link }}">{{ service_link }}</a>
+{% endblocktrans %}
+
+{% trans "For more information please contact support at serviceinfo@rescue.org" %}
+{% trans "Thanks for your submission." %}
+
+{% trans "Best Regards" %}
+
+{% trans "Service Info" %}
+www.serviceinfo.rescue.org <Facebook Link> <Twitter Link>
+{% trans "Support:" %} <a href="mailto:serviceinfo@rescue.org">serviceinfo@rescue.org</a> +96176667752
+
+{% comment %}
+**email/service_approved_body.txt**
+
+Used to generate the body of the service approved email.
+
+This template has the following context:
+
+``service``
+  The Service that has been approved
+
+``provider``
+  The Provider of the service
+
+``user``
+  The user associated with the provider (who will get the email)
+
+``site``
+    An object representing the site on which the user registered;
+    depending on whether ``django.contrib.sites`` is installed, this
+    may be an instance of either ``django.contrib.sites.models.Site``
+    (if the sites application is installed) or
+    ``django.contrib.sites.models.RequestSite`` (if not). Consult `the
+    documentation for the Django sites framework
+    <http://docs.djangoproject.com/en/dev/ref/contrib/sites/>`_ for
+    details regarding these objects' interfaces.
+{% endcomment %}

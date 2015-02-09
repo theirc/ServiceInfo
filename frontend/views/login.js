@@ -5,22 +5,21 @@ var Backbone = require('backbone'),
     $ = require('jquery')
 ;
 
-$(function() {
-    toggleLoginMenuItem();
-})
-
 function toggleLoginMenuItem() {
+    $('.menu-item-login, .menu-item-logout').hide();
     if (config.get('forever.authToken')) {
         $('.menu-item-login').hide();
         $('.menu-item-logout').show();
     } else {
         $('.menu-item-login').show();
         $('.menu-item-logout').hide();
-
-        // TODO: Remove this later
-        window.location.hash = 'login';
     }
 };
+config.change('forever.authToken', toggleLoginMenuItem);
+$(function() {
+    toggleLoginMenuItem();
+})
+
 
 module.exports = Backbone.View.extend({
     initialize: function(){
@@ -58,7 +57,6 @@ module.exports = Backbone.View.extend({
                 },
                 success: function(data) {
                     config.set('forever.authToken', data.token);
-                    toggleLoginMenuItem();
                     window.location.hash = 'service';
                 },
             })

@@ -20,94 +20,88 @@
             <div class="col-sm-8 col-sm-offset-2">
 
             <form>
+              <input type=hidden name=provider></input>
+
               <fieldset>
-                <legend data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Legend"></legend>
+                <legend data-i18n="Service-Form.Legend"></legend>
                 <div class="form-group">
-                  <label for="id_name_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Service-Name"></label>
+                  <label for="name" class="control-label"><span data-i18n="Service-Form.Service-Name"></span><span class="error"></span></label>
                     <div class="form-group">
-                      <input type="text" name="name_of_service" class="form-control" tabindex="7">
+                      <input type="text" name="name" data-i18n-field class="form-control"  >
                     </div>
                 </div>
                 <div class="form-group">
-                  <label for="id_area_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Service-Area"></label>
-                    <div class="btn-group" tabindex="8">
-                        <button type="button" class="btn btn-default" data-toggle="dropdown">Select an Area</button>
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Area 1</a></li>
-                            <li><a href="#">Area 2</a></li>
-                            <li><a href="#">Area 3</a></li>
-                            <li><a href="#">Area 4</a></li>
-                            <li><a href="#">Area 5</a></li>
-                        </ul>
+                  <label for="area_of_service" class="control-label"><span data-i18n="Service-Form.Service-Area"></span><span class="error"></span></label>
+                    <div class="btn-group"  >
+                        <select name=area_of_service class="form-control">
+                            {{#each areas_of_services}}
+                                <option value="{{ this.url }}">{{ this.name }}</option>
+                            {{/each}}
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
-                  <label for="id_description_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Service-Description"></label>
+                  <label for="type" class="control-label"><span data-i18n="Service-Form.Type"></span><span class="error"></span></label>
+                    <div class="btn-group">
+                        <select name=type class="form-control">
+                            {{#each types}}
+                                <option value="{{ this.url }}">{{ this.name }}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="id_description" class="control-label"><span  data-i18n="Service-Form.Service-Description"><span class="error"></span></label>
                   <div class="form-group">
-                    <textarea rows="2" name="other-comments" class="form-control" tabindex="9"></textarea>
+                    <textarea rows="2" name="description" data-i18n-field class="form-control"  ></textarea>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="id_hours_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Service-Hours"></label>
-                  <div class="half">
+                  <label for="time_of_service" class="control-label"><span data-i18n="Service-Form.Service-Hours"></span><span class="error"></span></label>
+                  {{#each daysofweek}}
+                  <div class=row>
+                      <div class="third">
+                          <div class="form-group">
+                            <label for="id_{{toLowerCase this}}_open" class="operating-hours"><span data-i18n="Service-Form.Hours-Open"></span><span class=error></span></label>
+                            <input type="time" id="id_{{toLowerCase this}}_open" name="{{toLowerCase this}}_open" class="form-control">
+                          </div>
+                      </div>
+                      <div class="third">
+                          <label>&nbsp;</label>
+                          <div class="operating-hours-to">{{ this }}
+                          </div>
+                      </div>
+                      <div class="third">
+                          <div class="form-group">
+                            <label for="id_{{toLowerCase this}}_close" class="operating-hours"><span data-i18n="Service-Form.Hours-Close"></span><span class=error></span></label>
+                            <input type="time" id="id_{{toLowerCase this}}_close" name="{{toLowerCase this}}_close" class="form-control">
+                          </div>
+                      </div>
+                  </div>
+                  {{/each}}
+
+                </div>
+                <div class="form-group row">
+                  <label for="id_additional_information" class="control-label" data-i18n="Service-Form.Additional-Information"></label>
                   <div class="form-group">
-                    <label for="opening-time" class="operating-hours">Opening Time:</label>
-                    <input type="time" name="time_of_service" class="form-control" tabindex="10">
-                  </div>
-                  </div>
-                  <div class="half">
-                  <div class="form-group">
-                    <label for="closing-time" class="operating-hours">Closing Time:</label>
-                    <input type="time" name="time_of_service" class="form-control" tabindex="11">
-                  </div>
+                    <textarea rows="4" data-i18n-field name="additional_information" class="form-control"></textarea>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="id_additional_information" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Additional-Information"></label>
-                  <div class="form-group">
-                    <textarea rows="4" name="additional_information" class="form-control" tabindex="12"></textarea>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="id_cost_of_service" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Service-Cost"></label>
+                  <label for="id_cost_of_service" class="control-label" data-i18n="Service-Form.Service-Cost"></label>
                     <div class="form-group">
-                      <input type="text" name="cost_of_service" class="form-control" tabindex="13">
+                      <input id="id_cost_of_service" type="text" name="cost_of_service" class="form-control">
                     </div>
-                </div>
-                <div class="form-group">
-                  <label for="id_selection_criteria" class="control-label" data-i18n="Provider-Registration-Form.Form-Sections.Service-Information.Selection-Criteria"></label>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="Selection_Criteria_1" id="Selection_Criteria_1" value="option1" checked="" tabindex="14">
-                      Option 1
-                    </label>
-                  </div>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="Selection_Criteria_2" id="Selection_Criteria_2" value="option2" tabindex="15">
-                      Option 2
-                    </label>
-                  </div>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="Selection_Criteria_3" id="Selection_Criteria_3" value="option3" tabindex="16">
-                      Option 3
-                    </label>
-                  </div>
                 </div>
               </fieldset>
             </form>
             <form>
               <div class="submit-form">
                   <div class="half">
-                    <button class="primary-button" tabindex="17" data-i18n="Provider-Registration-Form.Form-Sections.Form-Submit-Options.Submit"></button>
+                    <button class="form-btn-submit primary-button" data-i18n="Service-Form.Form-Submit-Options.Submit"></button>
                   </div>
                   <div class="half">
-                    <button class="primary-button" tabindex="18" data-i18n="Provider-Registration-Form.Form-Sections.Form-Submit-Options.Clear"></button>
+                    <button class="form-btn-clear primary-button" data-i18n="Service-Form.Form-Submit-Options.Clear"></button>
                   </div>
               </div>
             </form>

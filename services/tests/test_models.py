@@ -1,9 +1,11 @@
+from unittest.mock import patch
+
 from django.test import TestCase
 from django.utils import translation
 
 from email_user.tests.factories import EmailUserFactory
 from services.models import ServiceType, ProviderType, Provider, Service
-from services.tests.factories import ProviderFactory
+from services.tests.factories import ProviderFactory, ServiceFactory
 
 
 class ProviderTest(TestCase):
@@ -54,3 +56,9 @@ class ServiceTest(TestCase):
         # str returns name_en
         service = Service(name_en="Frederick")
         self.assertEqual("Frederick", str(service))
+
+    def test_email_provider_about_approval(self):
+        service = ServiceFactory()
+        with patch('services.models.email_provider_about_service_approval_task') as mock_task:
+            service.email_provider_about_approval()
+        mock_task.delay.assert_called_with(service.pk)

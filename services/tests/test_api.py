@@ -1,65 +1,71 @@
-from http.client import OK, CREATED, BAD_REQUEST
+from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND
 import json
 
 from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth.models import Group
 from django.core import mail
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from rest_framework.authtoken.models import Token
+from rest_framework.test import APIClient
 
 from email_user.models import EmailUser
 from email_user.tests.factories import EmailUserFactory
-from services.models import Provider, Service
-from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceTypeFactory, \
-    ServiceAreaFactory
+from services.models import Provider, Service, SelectionCriterion
+from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory, \
+    ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory
 
 
 class APITestMixin(object):
+    def setUp(self):
+        """Return a new user who has permissions like a regular provider"""
+        self.email = 'joe@example.com'
+        self.password = 'password'
+        self.user = get_user_model().objects.create_user(
+            password=self.password,
+            email=self.email,
+        )
+        self.user.groups.add(Group.objects.get(name='Providers'))
+        assert self.client.login(email=self.email, password=self.password)
+        # Get the URL of the user for the API
+        self.user_url = reverse('user-detail', args=[self.user.id])
+        self.api_client = APIClient()
+
     def get_with_token(self, url):
         """
         Make a GET to a url, passing self.token in the request headers.
         Return the response.
         """
-        return self.client.get(
+        return self.api_client.get(
             url,
-            HTTP_AUTHORIZATION="Token %s" % self.token
+            HTTP_SERVICEINFOAUTHORIZATION="Token %s" % self.token
         )
 
-    def post_with_token(self, url, data):
+    def post_with_token(self, url, data=None):
         """
         Make a POST to a url, passing self.token in the request headers.
         Return the response.
         """
-        return self.client.post(
+        return self.api_client.post(
             url,
             data=data,
-            HTTP_AUTHORIZATION="Token %s" % self.token
+            HTTP_SERVICEINFOAUTHORIZATION="Token %s" % self.token,
+            format='json'
         )
 
     def check_token(self):
         """
-        Assert that the token is valid and lets the client
-        access the API.
+        Assert that the token is valid and lets the client access the API.
         """
-        p1 = ProviderFactory()
+        # Create a record that this user has access to
+        p1 = ProviderFactory(user=self.user)
         url = reverse('provider-detail', args=[p1.id])
         rsp = self.get_with_token(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
 
-class ProviderAPITest(TestCase):
-    def setUp(self):
-        # Just using Django auth for now
-        self.user = get_user_model().objects.create_superuser(
-            password='password',
-            email='joe@example.com',
-        )
-        assert self.client.login(email='joe@example.com', password='password')
-
-        # Get the URL of the user for the API
-        self.user_url = reverse('user-detail', args=[self.user.id])
-
+class ProviderAPITest(APITestMixin, TestCase):
     def test_create_provider_no_email(self):
         # Create provider call is made when user is NOT logged in.
         self.client.logout()
@@ -74,10 +80,12 @@ class ProviderAPITest(TestCase):
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
         }
-        rsp = self.client.post(url, data=data)
+        rsp = self.api_client.post(url, data=data, format='json')
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
-        self.assertEqual({'email': ['This field may not be blank.']}, result)
+        err = result['email'][0]  # Must be an email error
+        # Could be different depending on whether we submitted as a form or as json
+        self.assertIn(err, ['This field may not be blank.', 'This field is required.'])
 
     def test_create_provider_existing_email(self):
         self.client.logout()
@@ -95,7 +103,7 @@ class ProviderAPITest(TestCase):
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
         }
-        rsp = self.client.post(url, data=data)
+        rsp = self.api_client.post(url, data=data, format='json')
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual({'email': ['A user with that email already exists.']}, result)
@@ -115,7 +123,7 @@ class ProviderAPITest(TestCase):
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
         }
-        rsp = self.client.post(url, data=data)
+        rsp = self.api_client.post(url, data=data, format='json')
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual({'email': ['Enter a valid email address.']}, result)
@@ -134,10 +142,33 @@ class ProviderAPITest(TestCase):
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
         }
-        rsp = self.client.post(url, data=data)
+        rsp = self.api_client.post(url, data=data, format='json')
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
-        self.assertEqual({'password': ['This field may not be blank.']}, result)
+        err = result['password'][0]
+        self.assertIn(err, ['This field may not be blank.', 'This field is required.'])
+        self.assertFalse(get_user_model().objects.filter(email='fred@example.com').exists())
+
+    def test_create_provider_no_number_of_beneficiaries(self):
+        # Number of beneficiaries is a required field
+        # if we leave it out, the request should fail
+        # AND there should not be a new user created
+        self.client.logout()
+
+        url = '/api/providers/create_provider/'
+        data = {
+            'name_en': 'Joe Provider',
+            'type': ProviderTypeFactory().get_api_url(),
+            'phone_number': '12345',
+            'description_en': 'Test provider',
+            'email': 'fred@example.com',
+            'password': 'foobar',
+            'number_of_monthly_beneficiaries': '',
+            'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
+        }
+        rsp = self.api_client.post(url, data=data, format='json')
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        self.assertFalse(get_user_model().objects.filter(email='fred@example.com').exists())
 
     def test_create_provider_and_user(self):
         # Create provider call is made when user is NOT logged in.
@@ -154,7 +185,7 @@ class ProviderAPITest(TestCase):
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
         }
-        rsp = self.client.post(url, data=data)
+        rsp = self.api_client.post(url, data=data, format='json')
         self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
         # Make sure they gave us back the id of the new record
@@ -172,6 +203,10 @@ class ProviderAPITest(TestCase):
         self.assertIn(link, mail.outbox[0].body)
         # user is not active
         self.assertFalse(provider.user.is_active)
+        # We have to make them active to check their permissions, because inactive
+        # users have none
+        user.is_active = True
+        self.assertTrue(user.has_perm('services.add_service'))
 
     def test_get_provider_list(self):
         p1 = ProviderFactory()
@@ -185,7 +220,7 @@ class ProviderAPITest(TestCase):
             self.assertIn(provider.name_en, [p1.name_en, p2.name_en])
 
     def test_get_one_provider(self):
-        p1 = ProviderFactory()
+        p1 = ProviderFactory(user=self.user)
         url = reverse('provider-detail', args=[p1.id])
         rsp = self.client.get(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
@@ -195,15 +230,11 @@ class ProviderAPITest(TestCase):
 
 class TokenAuthTest(APITestMixin, TestCase):
     def setUp(self):
-        self.user = get_user_model().objects.create_superuser(
-            password='password',
-            email='joe@example.com',
-        )
-        self.user_url = reverse('user-detail', args=[self.user.id])
+        super().setUp()
         self.token = Token.objects.get(user=self.user).key
 
     def test_get_one_provider(self):
-        p1 = ProviderFactory()
+        p1 = ProviderFactory(user=self.user)
         url = reverse('provider-detail', args=[p1.id])
         rsp = self.get_with_token(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
@@ -213,10 +244,10 @@ class TokenAuthTest(APITestMixin, TestCase):
     def test_create_provider(self):
         url = reverse('provider-list')
         data = {
-            'name': 'Joe Provider',
+            'name_fr': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12345',
-            'description': 'Test provider',
+            'description_en': 'Test provider',
             'user': self.user_url,
             'number_of_monthly_beneficiaries': '37',
         }
@@ -224,40 +255,138 @@ class TokenAuthTest(APITestMixin, TestCase):
         self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
 
-class ServiceAPITest(TestCase):
+class ServiceAPITest(APITestMixin, TestCase):
     def setUp(self):
-        # Just using Django auth for now
-        self.user = get_user_model().objects.create_superuser(
-            password='password',
-            email='joe@example.com',
-        )
-        assert self.client.login(email='joe@example.com', password='password')
-        self.provider = ProviderFactory()
+        super().setUp()
+        self.provider = ProviderFactory(user=self.user, name_en="Our provider")
+        self.token = Token.objects.get(user=self.user).key
 
     def test_create_service(self):
         area = ServiceAreaFactory()
+        wrong_provider = ProviderFactory(name_en="Wrong provider")
         data = {
-            'provider': self.provider.get_api_url(),
-            'type': ServiceTypeFactory().get_api_url(),
+            'provider': wrong_provider.get_api_url(),  # should just be ignored
             'name_en': 'Some service',
             'area_of_service': area.get_api_url(),
-            'description_en': "Awesome\nService"
+            'description_en': "Awesome\nService",
+            'type': ServiceTypeFactory().get_api_url(),
         }
         rsp = self.client.post(reverse('service-list'), data=data)
         self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         service = Service.objects.get(id=result['id'])
         self.assertEqual('Some service', service.name_en)
+        self.assertEqual(self.provider, service.provider)
+
+    def test_create_service_no_name(self):
+        area = ServiceAreaFactory()
+        data = {
+            'area_of_service': area.get_api_url(),
+            'description_en': "Awesome\nService",
+            'type': ServiceTypeFactory().get_api_url(),
+        }
+        rsp = self.client.post(reverse('service-list'), data=data)
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertIn('name', result)
+
+    def test_get_service(self):
+        service = ServiceFactory(provider=self.provider)
+        rsp = self.client.get(service.get_api_url())
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(service.pk, result['id'])
+
+    def test_get_services(self):
+        # Should only get user's own services
+        provider = self.provider
+        s1 = ServiceFactory(provider=provider)
+        s2 = ServiceFactory(provider=provider)
+        other_provider = ProviderFactory()
+        s3 = ServiceFactory(provider=other_provider)
+        rsp = self.client.get(reverse('service-list'))
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        services = result['results']
+        service_ids = [x['id'] for x in services]
+        self.assertEqual(2, len(services))
+        self.assertIn(s1.id, service_ids)
+        self.assertIn(s2.id, service_ids)
+        self.assertNotIn(s3.id, service_ids)
+
+    def test_cancel_current_service(self):
+        service = ServiceFactory(provider=self.provider, status=Service.STATUS_CURRENT)
+        url = service.get_api_url() + 'cancel/'
+        rsp = self.post_with_token(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        service = Service.objects.get(pk=service.pk)
+        self.assertEqual(Service.STATUS_CANCELED, service.status)
+
+    def test_cancel_draft_service(self):
+        service = ServiceFactory(provider=self.provider, status=Service.STATUS_DRAFT)
+        url = service.get_api_url() + 'cancel/'
+        rsp = self.post_with_token(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        service = Service.objects.get(pk=service.pk)
+        self.assertEqual(Service.STATUS_CANCELED, service.status)
+
+    def test_cancel_rejected_service(self):
+        service = ServiceFactory(provider=self.provider, status=Service.STATUS_REJECTED)
+        url = service.get_api_url() + 'cancel/'
+        rsp = self.post_with_token(url)
+        self.assertEqual(BAD_REQUEST, rsp.status_code)
+        service = Service.objects.get(pk=service.pk)
+        self.assertEqual(Service.STATUS_REJECTED, service.status)
+
+    def test_cancel_another_providers_service(self):
+        other_provider = ProviderFactory()
+        service = ServiceFactory(provider=other_provider, status=Service.STATUS_CURRENT)
+        url = service.get_api_url() + 'cancel/'
+        rsp = self.post_with_token(url)
+        self.assertEqual(NOT_FOUND, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        service = Service.objects.get(pk=service.pk)
+        self.assertEqual(Service.STATUS_CURRENT, service.status)
 
 
-class ServiceAreaAPITest(TestCase):
+class SelectionCriterionAPITest(APITestMixin, TestCase):
+    def test_create_selection_criterion(self):
+        service = ServiceFactory()
+        rsp = self.client.post(reverse('selectioncriterion-list'),
+                               data={
+                                   'text_en': 'English',
+                                   'text_ar': '',
+                                   'text_fr': '',
+                                   'service': service.get_api_url(),
+                                   })
+        self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        criterion = SelectionCriterion.objects.get(id=result['id'])
+        self.assertEqual('English', criterion.text_en)
+
+    def test_get_selection_criteria(self):
+        # Only returns user's own selection criteria
+        # Defined as those attached to the user's services
+        service = ServiceFactory(provider__user=self.user)
+        s1 = SelectionCriterionFactory()
+        s2 = SelectionCriterionFactory()
+        service.selection_criteria.add(s1, s2)
+        other_provider = ProviderFactory()
+        other_service = ServiceFactory(provider=other_provider)
+        s3 = SelectionCriterionFactory()
+        other_service.selection_criteria.add(s3)
+        rsp = self.client.get(reverse('selectioncriterion-list'))
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        criteria = result['results']
+        criteria_ids = [x['id'] for x in criteria]
+        self.assertEqual(2, len(criteria))
+        self.assertIn(s1.id, criteria_ids)
+        self.assertIn(s2.id, criteria_ids)
+        self.assertNotIn(s3.id, criteria_ids)
+
+
+class ServiceAreaAPITest(APITestMixin, TestCase):
     def setUp(self):
-        # Just using Django auth for now
-        self.user = get_user_model().objects.create_superuser(
-            password='password',
-            email='joe@example.com',
-        )
-        assert self.client.login(email='joe@example.com', password='password')
+        super().setUp()
         self.area1 = ServiceAreaFactory()
         self.area2 = ServiceAreaFactory(parent=self.area1)
         self.area3 = ServiceAreaFactory(parent=self.area1)
@@ -282,13 +411,35 @@ class ServiceAreaAPITest(TestCase):
         self.assertEqual('http://testserver%s' % self.area1.get_api_url(), result['parent'])
 
 
-class LoginTest(TestCase):
+class LanguageTest(APITestMixin, TestCase):
     def setUp(self):
-        self.user = get_user_model().objects.create_superuser(
-            password='password',
-            email='joe@example.com',
-        )
-        self.user_url = reverse('user-detail', args=[self.user.id])
+        super().setUp()
+        self.token = Token.objects.get(user=self.user).key
+
+    def test_get_set_get(self):
+        url = reverse('user-language')
+        rsp = self.get_with_token(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual('', result['language'])
+        TEST_LANG = 'fr'
+        rsp = self.post_with_token(url, {'language': TEST_LANG})
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        rsp = self.get_with_token(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(TEST_LANG, result['language'])
+
+    def test_set_invalid_language(self):
+        url = reverse('user-language')
+        TEST_LANG = 'nonesuch'
+        rsp = self.post_with_token(url, {'language': TEST_LANG})
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+
+
+class LoginTest(APITestMixin, TestCase):
+    def setUp(self):
+        super().setUp()
         self.token = Token.objects.get(user=self.user).key
 
     def test_success(self):
@@ -347,8 +498,9 @@ class LoginTest(TestCase):
 
 class ResendActivationLinkTest(APITestMixin, TestCase):
     def setUp(self):
-        # Create an inactive user/provider
-        self.user = EmailUserFactory(is_active=False)
+        super().setUp()
+        # An inactive user/provider
+        self.user.is_active = False
         self.user.activation_key = self.user.create_activation_key()
         self.user.save()
         self.url = reverse('resend-activation-link')
@@ -390,7 +542,8 @@ class ResendActivationLinkTest(APITestMixin, TestCase):
 
 class ActivationTest(APITestMixin, TestCase):
     def setUp(self):
-        self.user = EmailUserFactory(is_active=False)
+        super().setUp()
+        self.user.is_active = False
         self.user.activation_key = self.user.create_activation_key()
         self.user.save()
         self.url = reverse('api-activate')
@@ -419,7 +572,7 @@ class ActivationTest(APITestMixin, TestCase):
         # Make sure the token works - make user superuser just for simplicity
         self.user.is_superuser = True
         self.user.save()
-        p1 = ProviderFactory()
+        p1 = ProviderFactory(user=self.user)
         url = reverse('provider-detail', args=[p1.id])
         rsp = self.get_with_token(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
@@ -476,8 +629,8 @@ class ActivationTest(APITestMixin, TestCase):
 
 class PasswordResetTest(APITestMixin, TestCase):
     def setUp(self):
-        self.first_password = 'firstpass'
-        self.user = EmailUserFactory(password=self.first_password)
+        super().setUp()
+        self.first_password = self.password
         self.assertEqual(self.user,
                          authenticate(email=self.user.email, password=self.first_password))
         self.request_url = reverse('password-reset-request')
@@ -570,3 +723,24 @@ class PasswordResetTest(APITestMixin, TestCase):
         response = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(response,
                          {"non_field_errors": ["Password reset key is not valid"]})
+
+
+class UserAPITest(APITestMixin, TestCase):
+    def setUp(self):
+        super().setUp()
+        self.token = Token.objects.get(user=self.user).key
+
+    def test_list_users(self):
+        url = reverse('user-list')
+        rsp = self.get_with_token(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        pks = [item['id'] for item in response['results']]
+        self.assertIn(self.user.pk, pks)
+
+    def test_get_user(self):
+        url = reverse('user-detail', kwargs={'pk': self.user.pk})
+        rsp = self.get_with_token(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(self.user.pk, response['id'])

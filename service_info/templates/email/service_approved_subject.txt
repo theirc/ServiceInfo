@@ -1,0 +1,29 @@
+{% load i18n %}{% trans "Service has been approved" %} {{ site.name }}
+
+{% comment %}
+**email/service_approved_subject.txt**
+
+Used to generate the subject line of the service approved email. Because the
+subject line of an email must be a single line of text, any output
+from this template will be forcibly condensed to a single line before
+being used. This template has the following context:
+
+``service``
+  The Service that has been approved
+
+``provider``
+  The Provider of the service
+
+``user``
+  The user associated with the provider (who will get the email)
+
+``site``
+    An object representing the site on which the user registered;
+    depending on whether ``django.contrib.sites`` is installed, this
+    may be an instance of either ``django.contrib.sites.models.Site``
+    (if the sites application is installed) or
+    ``django.contrib.sites.models.RequestSite`` (if not). Consult `the
+    documentation for the Django sites framework
+    <http://docs.djangoproject.com/en/dev/ref/contrib/sites/>`_ for
+    details regarding these objects' interfaces.
+{% endcomment %}
