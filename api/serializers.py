@@ -132,8 +132,17 @@ class SelectionCriterionSerializer(RequireOneTranslationMixin,
         required_translated_fields = ['text']
 
 
+class SelectionCriterionSerializerForService(SelectionCriterionSerializer):
+    # Serializer to use when nesting criteria data in a service
+    # Remove 'service' from the required fields
+    class Meta(SelectionCriterionSerializer.Meta):
+        fields = [name for name in SelectionCriterionSerializer.Meta.fields if name != 'service']
+
+
 class ServiceSerializer(RequireOneTranslationMixin,
                         serializers.HyperlinkedModelSerializer):
+    selection_criteria = SelectionCriterionSerializerForService(many=True, required=False)
+
     class Meta:
         model = Service
         fields = (
@@ -142,7 +151,8 @@ class ServiceSerializer(RequireOneTranslationMixin,
             'area_of_service',
             'description_en', 'description_ar', 'description_fr',
             'additional_info_en', 'additional_info_ar', 'additional_info_fr',
-            'cost_of_service', 'selection_criteria',
+            'cost_of_service',
+            'selection_criteria',
             'status', 'update_of',
             'location',
             'sunday_open', 'sunday_close',
@@ -155,6 +165,21 @@ class ServiceSerializer(RequireOneTranslationMixin,
             'type',
         )
         required_translated_fields = ['name', 'description']
+
+    def create(self, validated_data):
+        # Force the value of the provider to be that of the user who's
+        # creating or modifying the record
+        user = self.context['request'].user
+        validated_data['provider'] = Provider.objects.get(user=user)
+
+        # Create selection criteria to go with the service
+        criteria = validated_data.pop('selection_criteria')
+        service = Service.objects.create(**validated_data)
+        for kwargs in criteria:
+            # Force criterion to link to the new service
+            kwargs['service'] = service
+            SelectionCriterion.objects.create(**kwargs)
+        return service
 
     def save(self, **kwargs):
         # Force the value of the provider to be that of the user who's

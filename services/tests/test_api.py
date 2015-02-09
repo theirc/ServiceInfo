@@ -1,10 +1,11 @@
-from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND
+from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND, METHOD_NOT_ALLOWED
 import json
 
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.models import Group
 from django.core import mail
 from django.core.urlresolvers import reverse
+from django.forms import model_to_dict
 from django.test import TestCase
 
 from rest_framework.authtoken.models import Token
@@ -31,6 +32,7 @@ class APITestMixin(object):
         # Get the URL of the user for the API
         self.user_url = reverse('user-detail', args=[self.user.id])
         self.api_client = APIClient()
+        self.token = Token.objects.get(user=self.user).key
 
     def get_with_token(self, url):
         """
@@ -48,6 +50,18 @@ class APITestMixin(object):
         Return the response.
         """
         return self.api_client.post(
+            url,
+            data=data,
+            HTTP_SERVICEINFOAUTHORIZATION="Token %s" % self.token,
+            format='json'
+        )
+
+    def put_with_token(self, url, data=None):
+        """
+        Make a PUT to a url, passing self.token in the request headers.
+        Return the response.
+        """
+        return self.api_client.put(
             url,
             data=data,
             HTTP_SERVICEINFOAUTHORIZATION="Token %s" % self.token,
@@ -227,6 +241,19 @@ class ProviderAPITest(APITestMixin, TestCase):
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(p1.name_en, result['name_en'])
 
+    def test_update_provider(self):
+        p1 = ProviderFactory(user=self.user)
+        url = reverse('provider-detail', args=[p1.id])
+        print(url)
+        data = model_to_dict(p1)
+        data['type'] = p1.type.get_api_url()
+        data['user'] = p1.user.get_api_url()
+        data['name_en'] = "Charles Darwin"
+        rsp = self.put_with_token(url, data)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        p2 = Provider.objects.get(pk=p1.id)
+        self.assertEqual("Charles Darwin", p2.name_en)
+
 
 class TokenAuthTest(APITestMixin, TestCase):
     def setUp(self):
@@ -270,13 +297,39 @@ class ServiceAPITest(APITestMixin, TestCase):
             'area_of_service': area.get_api_url(),
             'description_en': "Awesome\nService",
             'type': ServiceTypeFactory().get_api_url(),
+            'selection_criteria': [
+                {'text_en': 'Crit 1'},
+                {'text_fr': 'Crit 2'},
+                {'text_ar': 'Crit 3'},
+            ]
         }
-        rsp = self.client.post(reverse('service-list'), data=data)
+        rsp = self.post_with_token(reverse('service-list'), data=data)
         self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         service = Service.objects.get(id=result['id'])
         self.assertEqual('Some service', service.name_en)
         self.assertEqual(self.provider, service.provider)
+        criteria = SelectionCriterion.objects.filter(service=service)
+        self.assertEqual(3, len(criteria))
+        self.assertEqual('Crit 1', [record.text_en for record in criteria if record.text_en][0])
+        self.assertEqual('Crit 2', [record.text_fr for record in criteria if record.text_fr][0])
+        self.assertEqual('Crit 3', [record.text_ar for record in criteria if record.text_ar][0])
+
+    def test_update_service(self):
+        # It's not allowed to update a service using the API
+        service = ServiceFactory(provider=self.provider)
+
+        data = model_to_dict(service)
+        data['url'] = service.get_api_url()
+        data['type'] = service.type.get_api_url()
+        data['provider'] = service.provider.get_api_url()
+        data['area_of_service'] = service.area_of_service.get_api_url()
+        data['selection_criteria'] = [
+            {'text_en': 'Crit en'},
+            {'text_fr': 'Crit fr'}
+        ]
+        rsp = self.put_with_token(reverse('service-list'), data=data)
+        self.assertEqual(METHOD_NOT_ALLOWED, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
     def test_create_service_no_name(self):
         area = ServiceAreaFactory()
