@@ -88,6 +88,9 @@
                       <div class="form-group">
                           <select name="type" class=form-control>
                               <option value="" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Service-Type-Choose"></option>
+                              {{#each providertypes}}
+                                <option value="{{ this.url }}">{{ this.name }}</option>
+                              {{/each}}
                           </select>
                       </div>
                     </div>
