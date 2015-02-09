@@ -96,9 +96,9 @@ li {
     clear: both;
 }
 
-@media (min-width: 1px) and (max-width: 768px) {
+@media (min-width: 1px) and (max-width: 1000px) {
 	.row {
-		padding: 15px 0;
+		padding: 0;
 	}
 }
 
@@ -176,7 +176,6 @@ float: none;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
 	padding: 0 15px 15px 15px;
-	overflow: auto;
     clear: both;
 }
 
@@ -200,6 +199,7 @@ float: none;
     padding: 12px 12px 0px 12px;
     border-bottom: 1px solid #ccc;
     text-align: center;
+    font-weight: 600;
     margin-top: -10px;
 }
 
@@ -212,6 +212,27 @@ float: none;
     .operating-hours-to {
         border: none;
     }
+}
+
+#service-hours {
+	.row {
+		padding: 5px 0;
+	}
+	.third {
+		width: 100%;
+		padding: 0;
+		margin-top: 0;
+	
+		@media (min-width: 1000px){
+			width: 30.75%;
+			padding: 0 1.292%;
+	
+		}
+
+		.form-group{
+			margin-bottom: 18px,	
+		}
+	}
 }
 
 /*
@@ -366,12 +387,14 @@ float: none;
 .primary-button:hover, .primary-button:visited {
     background-color: #33A069;
     border: 1px solid #33A069;
+    cursor: pointer;
 }
 
 .primary-button:focus {
     background-color: #33A069;
     border: 1px solid #33A069;
     outline: 3px auto lightgray;
+    cursor: pointer;
 }
 
 /*
@@ -511,7 +534,7 @@ fieldset {
 fieldset > legend {
 	font-size: 16px;
 	font-weight: 600;
-	padding: 0 10px;
+	padding: 6px 10px;
 	margin: 0 0 5px -10px;
 	color: #3cb879;
 	border-bottom: none;
@@ -523,7 +546,7 @@ fieldset > legend {
 
 .form-group {
 	padding: 0;
-	margin-bottom: 18px;
+	margin-bottom: 14px;
 	height: auto;
 	float: none;
 }
@@ -602,6 +625,14 @@ label {
 input.form-control {
     -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
     box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
+}
+
+select.form-control {
+    width: 100%;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 /*
@@ -745,7 +776,7 @@ input[type=range] {
     #menu {
         position: absolute;
         right: 0px;
-        top: 80px;
+        top: 68px;
         width: 100%;
         overflow: hidden;
         transition: max-height 0.25s;
@@ -755,6 +786,9 @@ input[type=range] {
     }
     .menu-open #menu {
         max-height: 500px;
+        li{
+            text-align: center;
+        }
     }
     #menu-toggle {
         position: absolute;

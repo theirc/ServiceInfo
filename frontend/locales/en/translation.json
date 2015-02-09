@@ -5,10 +5,15 @@
   "test": {
     "hello": "Hello, World"
   },
-  "menu": {
-  	"Map": "Service Map",
-  	"Registration": "Provider Registration",
-  	"Feedback": "Feedback Tool",
+  "Menu": {
+    "Menu-Toggle": "MENU",
+    "Login": "Login",
+    "Logout": "Logout",
+    "Services": "Services",
+    "Add-Services": "Add Services",
+  	"Service-Map": "Service Map",
+  	"Provider-Registration": "Provider Registration",
+  	"Feedback-Tool": "Feedback Tool",
   	"Change-Language": "Change Language"
   },
   "Login-Form": {
