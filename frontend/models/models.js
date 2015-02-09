@@ -3,4 +3,5 @@ module.exports = {
     servicearea: require('./servicearea'),
     servicetype: require('./servicetype'),
     provider: require('./provider'),
+    providertype: require('./providertype'),
 };
