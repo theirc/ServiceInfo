@@ -92,13 +92,13 @@ li {
 */
 
 .row {
-	padding: 15px 5px;
+	padding: 10px 30px;
     clear: both;
 }
 
 @media (min-width: 1px) and (max-width: 768px) {
 	.row {
-		padding: 15px 0;
+		padding: 10px 15px;
 	}
 }
 
@@ -256,7 +256,7 @@ float: none;
 
 .page-head {
 	background-color: none;
-	padding: 24px 15px 0 15px;
+	padding: 8px 0 0;
 }
 
 .page-title {
@@ -803,7 +803,7 @@ Service Map
 }
 
 .search {
-    padding: 0 15px;
+    padding: 0;
 }
 
 #service-map .map {
@@ -816,10 +816,10 @@ Service Map
     -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.1);
     -moz-box-shadow: inset 1 1px 1px rgba(0,0,0,.1);
     box-shadow: inset 2px 2px 8px rgba(0,0,0,.1);
-}
 
-#service-map .map .icon {
-
+    @media only screen and (min-width: 1000px) {
+        min-height: 30em;
+    }
 }
 
 .map .tool-tip {
