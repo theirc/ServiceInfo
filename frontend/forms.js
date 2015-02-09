@@ -37,8 +37,8 @@ module.exports = {
                 method: 'POST',
                 data: data,
                 error: function(e) {
+                    console.error(arguments);
                     $.extend(errors, e.responseJSON);
-                    var n = 0;
                     var missing = {};
                     $.each(errors, function(k) {
                         var $error = self.getFieldLabel($form, k).find('.error');
@@ -47,12 +47,11 @@ module.exports = {
                         } else {
                             missing[k] = this[0];
                         }
-                        n ++;
                     })
-                    if (n === 0) {
+                    if (e.status >= 500) {
                         $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
                     }
-                    console.log(i18n.t('Global.FormSubmissionError'));
+                    console.error(e.status);
                     error(missing);
                 },
                 success: resolve,
