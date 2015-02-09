@@ -166,6 +166,28 @@ class ServiceSerializer(RequireOneTranslationMixin,
         )
         required_translated_fields = ['name', 'description']
 
+    def validate(self, attrs):
+        # Look for "new" services that are updates of existing ones
+        # and do special things with them.
+        attrs = super().validate(attrs)
+        if attrs.get('update_of', False):
+            if attrs['status'] != Service.STATUS_DRAFT:
+                raise exceptions.ValidationError(
+                    {'status': _("A service that is an update of another must have draft status")}
+                )
+            parent = attrs['update_of']
+            if parent.status not in [Service.STATUS_DRAFT, Service.STATUS_CURRENT]:
+                raise exceptions.ValidationError(
+                    {'update_of': _("You may only submit updates to current or draft services")}
+                )
+            # Find the topmost record in the possible chain of update_of's
+            topmost = parent
+            while topmost.update_of:
+                topmost = topmost.update_of
+            # Always point at the topmost record
+            attrs['update_of'] = topmost
+        return attrs
+
     def create(self, validated_data):
         # Force the value of the provider to be that of the user who's
         # creating or modifying the record

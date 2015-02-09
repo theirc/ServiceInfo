@@ -228,6 +228,14 @@ to create a new Service and set update_of to the previous record, which
 will kick off a backend process where a human will review the changes
 and switch the new service to being the active one if they approve.
 
+Clients may submit an edit of a record that is a pending change to
+a current record. Just create yet another new record and set update_of
+to the draft record they're updating.
+
+When that happens, though, the previous draft record will be archived,
+essentially making it go away, and only the most recent submitted
+update record will be visible in most places.
+
 Cancel a Service
 ----------------
 

@@ -345,7 +345,6 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         null=True,
         blank=True,
         related_name='pending_update',
-        unique=True,
     )
 
     location = models.PointField(
@@ -388,7 +387,6 @@ class Service(NameInCurrentLanguageMixin, models.Model):
 
     def email_provider_about_approval(self):
         """Schedule a task to send an email to the provider"""
-        # FIXME: Somebody needs to call this at the appropriate time :-)
         email_provider_about_service_approval_task.delay(self.pk)
 
     def cancel(self):
@@ -413,7 +411,27 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         new_service = self.pk is None
         super().save(*args, **kwargs)
         if new_service:
-            JiraUpdateRecord.objects.create(service=self, update_type=JiraUpdateRecord.NEW_SERVICE)
+            # Now we've safely saved this new record.
+            # If this is a draft update, make sure there aren't any others
+            if self.status == Service.STATUS_DRAFT and self.update_of:
+                other_services = Service.objects.filter(
+                    status=Service.STATUS_DRAFT,
+                    update_of=self.update_of)\
+                    .exclude(pk=self.pk)
+                for other_service in other_services:
+                    other_service.status = Service.STATUS_ARCHIVED
+                    other_service.save()
+                    JiraUpdateRecord.objects.create(
+                        service=other_service,
+                        update_type=JiraUpdateRecord.CANCEL_DRAFT_SERVICE)
+            if self.update_of:
+                JiraUpdateRecord.objects.create(
+                    service=self,
+                    update_type=JiraUpdateRecord.CHANGE_SERVICE)
+            else:
+                JiraUpdateRecord.objects.create(
+                    service=self,
+                    update_type=JiraUpdateRecord.NEW_SERVICE)
 
     def staff_approve(self):
         """
@@ -423,9 +441,10 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         if self.update_of and self.update_of.status == Service.STATUS_CURRENT:
             self.update_of.status = Service.STATUS_ARCHIVED
             self.update_of.save()
+        self.update_of = None
         self.status = Service.STATUS_CURRENT
         self.save()
-        email_provider_about_service_approval_task.delay(self.pk)
+        self.email_provider_about_approval()
         # FIXME: Trigger JIRA ticket update?
 
     def staff_reject(self):
@@ -442,11 +461,13 @@ class JiraUpdateRecord(models.Model):
     provider = models.ForeignKey(Provider, blank=True, null=True, related_name='jira_records')
     PROVIDER_CHANGE = 'provider-change'
     NEW_SERVICE = 'new-service'
+    CHANGE_SERVICE = 'change-service'
     CANCEL_DRAFT_SERVICE = 'cancel-draft-service'
     CANCEL_CURRENT_SERVICE = 'cancel-current-service'
     UPDATE_CHOICES = (
         (PROVIDER_CHANGE, _('Provider updated their information')),
         (NEW_SERVICE, _('New service submitted by provider')),
+        (CHANGE_SERVICE, _('Change to existing service submitted by provider')),
         (CANCEL_DRAFT_SERVICE, _('Provider canceled a draft service')),
         (CANCEL_CURRENT_SERVICE, _('Provider canceled a current service')),
     )
@@ -475,7 +496,8 @@ class JiraUpdateRecord(models.Model):
             if self.service:
                 errors.append('%s must not specify service' % self.update_type)
         elif self.update_type in (
-                self.NEW_SERVICE, self.CANCEL_DRAFT_SERVICE, self.CANCEL_CURRENT_SERVICE):
+                self.NEW_SERVICE, self.CANCEL_DRAFT_SERVICE, self.CANCEL_CURRENT_SERVICE,
+                self.CHANGE_SERVICE):
             if not self.service:
                 errors.append('%s must specify service' % self.update_type)
             if self.provider:
@@ -499,7 +521,7 @@ class JiraUpdateRecord(models.Model):
             if not jira:
                 jira = jira_support.get_jira()
 
-            if self.update_type == JiraUpdateRecord.NEW_SERVICE:
+            if self.update_type in [JiraUpdateRecord.NEW_SERVICE, JiraUpdateRecord.CHANGE_SERVICE]:
                 kwargs = jira_support.default_newissue_kwargs()
                 new_or_change = 'Changed' if self.service.update_of else 'New'
                 kwargs['summary'] = '%s service from %s' % (new_or_change, self.service.provider)
