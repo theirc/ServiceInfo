@@ -289,6 +289,9 @@ def pullmessages():
     locale/fr/LC_MESSAGES/django.po from Transifex.
     """
     local("tx pull -af")
+    for lang in ('en', 'fr', 'ar'):
+        local("i18next-conv -s frontend/locales/%(lang)s/translation.json -t "
+              "locale/%(lang)s/LC_MESSAGES/frontend.po -l %(lang)s" % locals())
 
 
 @task
