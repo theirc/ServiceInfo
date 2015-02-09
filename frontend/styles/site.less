@@ -108,7 +108,7 @@ li {
 	float: none;
     // clear: both;
 
-	@media (min-width: 767px) {
+	@media (min-width: 1000px) {
 		width: 48%;
 		float: left;
 	}
@@ -183,6 +183,12 @@ float: none;
 .submit-form {
     height: 32px;
     margin-bottom: 10px;
+
+    .primary-button {
+        @media (min-width:1px) and (max-width:1000px){
+            margin-bottom: 18px;
+        }
+    }
 }
 
 .operating-hours {
