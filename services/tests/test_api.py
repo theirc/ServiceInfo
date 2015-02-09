@@ -686,6 +686,8 @@ class PasswordResetTest(APITestMixin, TestCase):
         self.first_password = self.password
         self.assertEqual(self.user,
                          authenticate(email=self.user.email, password=self.first_password))
+        # Get fresh copy of user, with latest last_login etc.
+        self.user = get_user_model().objects.get(pk=self.user.pk)
         self.request_url = reverse('password-reset-request')
         self.check_url = reverse('password-reset-check')
         self.reset_url = reverse('password-reset')
