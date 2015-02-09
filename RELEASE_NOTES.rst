@@ -2,6 +2,17 @@ Service Invo
 
 Release Notes
 
+0.0.3 - Feb. 9, 2015
+--------------------
+
+* Provider self-registration
+* Menus update depending on whether user logged in
+* List services
+* Submit a new service
+* Create new JIRA ticket when new service is submitted
+* Send email when service is approved
+* Updates to translations
+
 0.0.2 - Jan. 30, 2015
 ---------------------
 
