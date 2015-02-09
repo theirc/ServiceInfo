@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-05 12:53-0500\n"
-"PO-Revision-Date: 2015-02-06 07:52+0000\n"
+"POT-Creation-Date: 2015-02-06 11:44-0500\n"
+"PO-Revision-Date: 2015-02-09 08:43+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -202,6 +202,32 @@ msgstr "Englais"
 
 msgid "French"
 msgstr "français"
+
+#, python-format
+msgid "Dear %(provider_name)s"
+msgstr "cher %(provider_name)s"
+
+#, python-format
+msgid ""
+"\n"
+"Your service %(service_name)s has been vetted and approved by International Rescue Committee staff.\n"
+"It has been published on the following link: <a href=\"%(service_link)s\">%(service_link)s</a>\n"
+msgstr "\nVotre service %(service_name)s a été examinée et approuvée par International Rescue Committee\nIl a été publié sur le lien suivant: <a href=\"%(service_link)s\">%(service_link)s</a>\n"
+
+msgid "For more information please contact support at serviceinfo@rescue.org"
+msgstr "Pour plus d'informations se il vous plaît contacter le support au serviceinfo@rescue.org"
+
+msgid "Thanks for your submission."
+msgstr "Merci pour votre présentation."
+
+msgid "Best Regards"
+msgstr "Cordialement"
+
+msgid "Service Info"
+msgstr "Info Service"
+
+msgid "Support:"
+msgstr "Support:"
 
 msgid "Service has been approved"
 msgstr "Service a été approuvé"

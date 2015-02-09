@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-06 07:44+0000\n"
+"PO-Revision-Date: 2015-02-09 08:48+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -48,6 +48,45 @@ msgstr "تسجيل الدخول"
 
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "سجل لتكون مقدم خدمات هنا"
+
+msgid "Service-Form##Legend"
+msgstr "معلومات عن الخدمة "
+
+msgid "Service-Form##Service-Name"
+msgstr "اسم الخدمة"
+
+msgid "Service-Form##Service-Area"
+msgstr "منطقة الخدمة"
+
+msgid "Service-Form##Type"
+msgstr "نوع الخدمة"
+
+msgid "Service-Form##Service-Description"
+msgstr "تفصيل"
+
+msgid "Service-Form##Service-Hours"
+msgstr "ساعات الخدمة"
+
+msgid "Service-Form##Additional-Information"
+msgstr "معلومات إضافية (حقل اختياري)"
+
+msgid "Service-Form##Service-Cost"
+msgstr "تكلفة الخدمة (حقل اختياري)"
+
+msgid "Service-Form##Selection-Criteria"
+msgstr "معايير الاختيار (حقل اختياري)"
+
+msgid "Service-Form##Hours-Open"
+msgstr "ساعات البدء:"
+
+msgid "Service-Form##Hours-Close"
+msgstr "ساعات الإغلاق:"
+
+msgid "Service-Form##Form-Submit-Options##Submit"
+msgstr "إرسال الأجوبة"
+
+msgid "Service-Form##Form-Submit-Options##Clear"
+msgstr "إزالة الأجوبة"
 
 msgid "Provider-Registration-Form##Page-Head##Page-Title##Title"
 msgstr "إستمارة تسجيل مزود خدمات جديد "
@@ -108,6 +147,9 @@ msgstr "اسم الخدمة"
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Service-Area"
 msgstr "منطقة الخدمة"
+
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Type"
+msgstr "نوع الخدمة"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Service-"

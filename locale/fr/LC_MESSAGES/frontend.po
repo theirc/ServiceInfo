@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-06 07:58+0000\n"
+"PO-Revision-Date: 2015-02-09 08:46+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -48,6 +48,45 @@ msgstr "entrer"
 
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "Inscrivez-vous pour être un fournisseur de service ici"
+
+msgid "Service-Form##Legend"
+msgstr "Informations sur le service"
+
+msgid "Service-Form##Service-Name"
+msgstr "Nom du service"
+
+msgid "Service-Form##Service-Area"
+msgstr "Zone de service"
+
+msgid "Service-Form##Type"
+msgstr "type de service"
+
+msgid "Service-Form##Service-Description"
+msgstr "description"
+
+msgid "Service-Form##Service-Hours"
+msgstr "Heures de service"
+
+msgid "Service-Form##Additional-Information"
+msgstr "Informations supplémentaires (champ facultatif)"
+
+msgid "Service-Form##Service-Cost"
+msgstr "Coût du service (champ facultatif)"
+
+msgid "Service-Form##Selection-Criteria"
+msgstr "Critères de sélection (champ optionnel)"
+
+msgid "Service-Form##Hours-Open"
+msgstr "Temps d'ouverture:"
+
+msgid "Service-Form##Hours-Close"
+msgstr "Temps de cloture:"
+
+msgid "Service-Form##Form-Submit-Options##Submit"
+msgstr "Valider les réponses"
+
+msgid "Service-Form##Form-Submit-Options##Clear"
+msgstr "Retirer Réponses"
 
 msgid "Provider-Registration-Form##Page-Head##Page-Title##Title"
 msgstr "Nouveau fournisseur de service  formulaire d'inscription"
@@ -108,6 +147,9 @@ msgstr "Nom du service"
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Service-Area"
 msgstr "Zone de service"
+
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Type"
+msgstr "type de service"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Service-"
