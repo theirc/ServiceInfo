@@ -120,8 +120,14 @@ msgstr "Phone Number"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
 msgstr "Email"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##EmailPlaceholder"
+msgstr "Enter your Email"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
 msgstr "Website (Optional Field)"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##WebsitePlaceholder"
+msgstr "Enter your Website URL"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
 msgstr "Number of Monthly Beneficiaries"
