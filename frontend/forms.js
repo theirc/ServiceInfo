@@ -30,12 +30,15 @@ module.exports = {
     submit: function($form, action, data, errors) {
         var errors = errors || {};
         var self = this;
+        var $submit = $form.find('.form-btn-submit');
+        $submit.attr('disabled', 'disabled');
 
         return new Promise(function(resolve, error) {
             $.ajax(config.get('api_location')+action, {
                 method: 'POST',
                 data: data,
                 error: function(e) {
+                    $submit.removeAttr('disabled');
                     $.extend(errors, e.responseJSON);
                     $.each(errors, function(k) {
                         var $error = self.getFieldLabel($form, k).find('.error');
@@ -45,7 +48,10 @@ module.exports = {
                     })
                     error(errors);
                 },
-                success: resolve,
+                success: function() {
+                    $submit.removeAttr('disabled');
+                    resolve.apply(this, arguments);
+                },
             });
         });
     },
