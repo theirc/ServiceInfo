@@ -398,6 +398,47 @@ class ServiceAPITest(APITestMixin, TestCase):
         service = Service.objects.get(pk=service.pk)
         self.assertEqual(Service.STATUS_CURRENT, service.status)
 
+    def test_create_update_to_current_service(self):
+        s1 = ServiceFactory(provider=self.provider, status=Service.STATUS_CURRENT)
+        # Grab the data using the API so it's easy to prepare the
+        # data for an update:
+        rsp = self.get_with_token(s1.get_api_url())
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        data = json.loads(rsp.content.decode('utf-8'))
+        del data['url']
+        del data['id']
+        data['update_of'] = s1.get_api_url()
+        data['status'] = Service.STATUS_DRAFT
+        rsp = self.post_with_token(reverse('service-list'), data)
+        self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        # Should be another one that is an update of this one
+        s2 = Service.objects.get(update_of=s1, status=Service.STATUS_DRAFT)
+        self.assertEqual(Service.STATUS_DRAFT, s2.status)
+
+    def test_create_update_to_draft(self):
+        # If we submit an "update of" the one that's already a draft, it
+        # should supersede the one in draft
+
+        # current one:
+        s1 = ServiceFactory(provider=self.provider, status=Service.STATUS_CURRENT)
+        # draft update to the current one:
+        s2 = ServiceFactory(provider=self.provider, status=Service.STATUS_DRAFT,
+                            update_of=s1)
+        # Get s2's data just for convenience in submitting a changed one
+        rsp = self.get_with_token(s2.get_api_url())
+        data = json.loads(rsp.content.decode('utf-8'))
+        del data['url']
+        del data['id']
+        data['update_of'] = s2.get_api_url()
+        rsp = self.post_with_token(reverse('service-list'), data)
+        self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        # s2 should have been archived out of the way
+        s2 = Service.objects.get(pk=s2.pk)
+        self.assertEqual(Service.STATUS_ARCHIVED, s2.status)
+        # And now s3 is an update of s1, not s2
+        s3 = Service.objects.get(update_of=s1, status=Service.STATUS_DRAFT)
+        self.assertNotEqual(s2.pk, s3.pk)
+
 
 class SelectionCriterionAPITest(APITestMixin, TestCase):
     def test_create_selection_criterion(self):
