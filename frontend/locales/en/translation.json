@@ -70,7 +70,9 @@
             "Service-Type-Choose": "Choose a Service Type",
   			"Phone-Number": "Phone Number",
   			"Email": "Email",
+            "EmailPlaceholder": "Enter your Email",
   			"Website": "Website (Optional Field)",
+            "WebsitePlaceholder": "Enter your Website URL",
             "MonthlyBeneficiaries": "Number of Monthly Beneficiaries",
   			"Description": "Description"
   		},
