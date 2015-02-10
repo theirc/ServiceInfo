@@ -45,6 +45,7 @@ var BaseModel = Backbone.Model.extend({
                 data[key] = this.get(name);
             }
         }
+        data['id'] = this.get('id');
         return data;
     },
 });
