@@ -439,6 +439,26 @@ class ServiceAPITest(APITestMixin, TestCase):
         s3 = Service.objects.get(update_of=s1, status=Service.STATUS_DRAFT)
         self.assertNotEqual(s2.pk, s3.pk)
 
+    def test_create_update_to_top_draft(self):
+        # If we submit an update of a draft for a service that's never been
+        # approved (so the draft isn't an update of anything else), the new one
+        # should just replace the previous one
+        s1 = ServiceFactory(provider=self.provider, status=Service.STATUS_DRAFT)
+        rsp = self.get_with_token(s1.get_api_url())
+        data = json.loads(rsp.content.decode('utf-8'))
+        del data['url']
+        del data['id']
+        data['update_of'] = s1.get_api_url()
+        rsp = self.post_with_token(reverse('service-list'), data)
+        self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        # s1 should have been archived out of the way
+        s1 = Service.objects.get(pk=s1.pk)
+        self.assertEqual(Service.STATUS_ARCHIVED, s1.status)
+        # And now s2 is an update of nothing
+        s2 = Service.objects.get(status=Service.STATUS_DRAFT)
+        self.assertIsNone(s2.update_of)
+        self.assertEqual(Service.STATUS_DRAFT, s2.status)
+
 
 class SelectionCriterionAPITest(APITestMixin, TestCase):
     def test_create_selection_criterion(self):
