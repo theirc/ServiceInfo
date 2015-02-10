@@ -28,7 +28,7 @@ class APITestMixin(object):
             email=self.email,
         )
         self.user.groups.add(Group.objects.get(name='Providers'))
-        assert self.client.login(email=self.email, password=self.password)
+        self.token = Token.objects.get(user=self.user).key
         # Get the URL of the user for the API
         self.user_url = reverse('user-detail', args=[self.user.id])
         self.api_client = APIClient()
@@ -82,7 +82,7 @@ class APITestMixin(object):
 class ProviderAPITest(APITestMixin, TestCase):
     def test_create_provider_no_email(self):
         # Create provider call is made when user is NOT logged in.
-        self.client.logout()
+        self.token = None
 
         url = '/api/providers/create_provider/'
         data = {
@@ -102,8 +102,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         self.assertIn(err, ['This field may not be blank.', 'This field is required.'])
 
     def test_create_provider_existing_email(self):
-        self.client.logout()
-
+        self.token = None
         existing_user = EmailUserFactory()
 
         url = '/api/providers/create_provider/'
@@ -124,7 +123,7 @@ class ProviderAPITest(APITestMixin, TestCase):
 
     def test_create_provider_invalid_email(self):
         # Create provider call is made when user is NOT logged in.
-        self.client.logout()
+        self.token = None
 
         url = '/api/providers/create_provider/'
         data = {
@@ -144,7 +143,7 @@ class ProviderAPITest(APITestMixin, TestCase):
 
     def test_create_provider_no_password(self):
         # Create provider call is made when user is NOT logged in.
-        self.client.logout()
+        self.token = None
 
         url = '/api/providers/create_provider/'
         data = {
@@ -167,7 +166,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         # Number of beneficiaries is a required field
         # if we leave it out, the request should fail
         # AND there should not be a new user created
-        self.client.logout()
+        self.token = None
 
         url = '/api/providers/create_provider/'
         data = {
@@ -186,7 +185,7 @@ class ProviderAPITest(APITestMixin, TestCase):
 
     def test_create_provider_and_user(self):
         # Create provider call is made when user is NOT logged in.
-        self.client.logout()
+        self.token = None
 
         url = '/api/providers/create_provider/'
         data = {
@@ -226,7 +225,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         p1 = ProviderFactory()
         p2 = ProviderFactory()
         url = reverse('provider-list')
-        rsp = self.client.get(url)
+        rsp = self.get_with_token(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         for item in result['results']:
@@ -236,7 +235,7 @@ class ProviderAPITest(APITestMixin, TestCase):
     def test_get_one_provider(self):
         p1 = ProviderFactory(user=self.user)
         url = reverse('provider-detail', args=[p1.id])
-        rsp = self.client.get(url)
+        rsp = self.get_with_token(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(p1.name_en, result['name_en'])
@@ -257,7 +256,6 @@ class ProviderAPITest(APITestMixin, TestCase):
 class TokenAuthTest(APITestMixin, TestCase):
     def setUp(self):
         super().setUp()
-        self.token = Token.objects.get(user=self.user).key
 
     def test_get_one_provider(self):
         p1 = ProviderFactory(user=self.user)
@@ -295,6 +293,7 @@ class ServiceAPITest(APITestMixin, TestCase):
             'name_en': 'Some service',
             'area_of_service': area.get_api_url(),
             'description_en': "Awesome\nService",
+            'selection_criteria': [],  # none required
             'type': ServiceTypeFactory().get_api_url(),
             'selection_criteria': [
                 {'text_en': 'Crit 1'},
@@ -332,19 +331,21 @@ class ServiceAPITest(APITestMixin, TestCase):
 
     def test_create_service_no_name(self):
         area = ServiceAreaFactory()
+        criterion = SelectionCriterionFactory()
         data = {
             'area_of_service': area.get_api_url(),
             'description_en': "Awesome\nService",
+            'selection_criteria': [criterion.get_api_url()],
             'type': ServiceTypeFactory().get_api_url(),
         }
-        rsp = self.client.post(reverse('service-list'), data=data)
+        rsp = self.post_with_token(reverse('service-list'), data=data)
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertIn('name', result)
 
     def test_get_service(self):
         service = ServiceFactory(provider=self.provider)
-        rsp = self.client.get(service.get_api_url())
+        rsp = self.get_with_token(service.get_api_url())
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(service.pk, result['id'])
 
@@ -355,7 +356,7 @@ class ServiceAPITest(APITestMixin, TestCase):
         s2 = ServiceFactory(provider=provider)
         other_provider = ProviderFactory()
         s3 = ServiceFactory(provider=other_provider)
-        rsp = self.client.get(reverse('service-list'))
+        rsp = self.get_with_token(reverse('service-list'))
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         services = result['results']
@@ -443,13 +444,14 @@ class ServiceAPITest(APITestMixin, TestCase):
 class SelectionCriterionAPITest(APITestMixin, TestCase):
     def test_create_selection_criterion(self):
         service = ServiceFactory()
-        rsp = self.client.post(reverse('selectioncriterion-list'),
-                               data={
-                                   'text_en': 'English',
-                                   'text_ar': '',
-                                   'text_fr': '',
-                                   'service': service.get_api_url(),
-                                   })
+        rsp = self.post_with_token(
+            reverse('selectioncriterion-list'),
+            data={
+                'text_en': 'English',
+                'text_ar': '',
+                'text_fr': '',
+                'service': service.get_api_url(),
+                })
         self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         criterion = SelectionCriterion.objects.get(id=result['id'])
@@ -466,7 +468,7 @@ class SelectionCriterionAPITest(APITestMixin, TestCase):
         other_service = ServiceFactory(provider=other_provider)
         s3 = SelectionCriterionFactory()
         other_service.selection_criteria.add(s3)
-        rsp = self.client.get(reverse('selectioncriterion-list'))
+        rsp = self.get_with_token(reverse('selectioncriterion-list'))
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         criteria = result['results']
@@ -485,7 +487,7 @@ class ServiceAreaAPITest(APITestMixin, TestCase):
         self.area3 = ServiceAreaFactory(parent=self.area1)
 
     def test_get_areas(self):
-        rsp = self.client.get(reverse('servicearea-list'))
+        rsp = self.get_with_token(reverse('servicearea-list'))
         self.assertEqual(OK, rsp.status_code)
         result = json.loads(rsp.content.decode('utf-8'))
         results = result['results']
@@ -494,12 +496,12 @@ class ServiceAreaAPITest(APITestMixin, TestCase):
             self.assertIn(item['name_en'], names)
 
     def test_get_area(self):
-        rsp = self.client.get(self.area1.get_api_url())
+        rsp = self.get_with_token(self.area1.get_api_url())
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(self.area1.id, result['id'])
         self.assertIn('http://testserver%s' % self.area2.get_api_url(), result['children'])
         self.assertIn('http://testserver%s' % self.area3.get_api_url(), result['children'])
-        rsp = self.client.get(self.area2.get_api_url())
+        rsp = self.get_with_token(self.area2.get_api_url())
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual('http://testserver%s' % self.area1.get_api_url(), result['parent'])
 

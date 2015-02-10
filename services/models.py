@@ -184,6 +184,9 @@ class SelectionCriterion(models.Model):
     def __str__(self):
         return ', '.join([self.text_en, self.text_fr, self.text_ar])
 
+    def get_api_url(self):
+        return reverse('selectioncriterion-detail', args=[self.id])
+
 
 class ServiceType(NameInCurrentLanguageMixin, models.Model):
     number = models.IntegerField(unique=True)
