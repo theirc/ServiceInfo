@@ -51,7 +51,6 @@ module.exports = {
                     if (e.status >= 500) {
                         $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
                     }
-                    console.error(e.status);
                     error(missing);
                 },
                 success: resolve,
