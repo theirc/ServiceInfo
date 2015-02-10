@@ -22,7 +22,6 @@ module.exports = Backbone.View.extend({
             current_service = new service.Service({id: opts.id});
             waiting.push(current_service.fetch());
         }
-        console.log('fetching service...', opts);
 
         Promise.all(waiting).then(function(){
             self.provider = providers.models[0];
@@ -31,7 +30,6 @@ module.exports = Backbone.View.extend({
             if (opts.id) {
                 self.update_of = current_service;
             }
-            console.log('ready', current_service);
 
             self.render();
         });
@@ -47,11 +45,6 @@ module.exports = Backbone.View.extend({
         if (this.servicetypes) {
             types = this.servicetypes.data();
         }
-        var update_of = {};
-        if (this.update_of) {
-            update_of = this.update_of.data();
-        }
-        console.log('update_of', update_of);
         $el.html(template({
             daysofweek: [
                     'Sunday',
@@ -64,10 +57,12 @@ module.exports = Backbone.View.extend({
                 ],
             areas_of_services: serviceareas,
             types: types,
-            update_of: update_of,
         }));
         if (this.provider) {
             $el.find('[name=provider]').val(this.provider.get('url'));
+        }
+        if (this.update_of) {
+            forms.initial($el, this.update_of);
         }
         $el.i18n();
     },
