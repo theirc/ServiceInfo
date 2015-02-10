@@ -419,11 +419,10 @@ class Service(NameInCurrentLanguageMixin, models.Model):
                     update_of=self.update_of)\
                     .exclude(pk=self.pk)
                 for other_service in other_services:
-                    other_service.status = Service.STATUS_ARCHIVED
-                    other_service.save()
                     JiraUpdateRecord.objects.create(
                         service=other_service,
                         update_type=JiraUpdateRecord.CANCEL_DRAFT_SERVICE)
+                other_services.update(status=Service.STATUS_ARCHIVED)
             if self.update_of:
                 JiraUpdateRecord.objects.create(
                     service=self,

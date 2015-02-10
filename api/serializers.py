@@ -170,11 +170,10 @@ class ServiceSerializer(RequireOneTranslationMixin,
         # Look for "new" services that are updates of existing ones
         # and do special things with them.
         attrs = super().validate(attrs)
+        # We don't allow service updates via the API, and all new services should
+        # start with draft status, so just force it.
+        attrs['status'] = Service.STATUS_DRAFT
         if attrs.get('update_of', False):
-            if attrs['status'] != Service.STATUS_DRAFT:
-                raise exceptions.ValidationError(
-                    {'status': _("A service that is an update of another must have draft status")}
-                )
             parent = attrs['update_of']
             if parent.status not in [Service.STATUS_DRAFT, Service.STATUS_CURRENT]:
                 raise exceptions.ValidationError(
