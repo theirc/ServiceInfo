@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-09 14:51-0500\n"
+"POT-Creation-Date: 2015-02-10 15:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid "You may only submit updates to current or draft services"
+msgstr ""
 
 msgid "User account is disabled."
 msgstr ""
@@ -237,7 +240,8 @@ msgstr ""
 msgid "Description and Additional Information"
 msgstr ""
 
-msgid "Hours"
+#, python-brace-format
+msgid "Hours (all times in time zone {timezone})"
 msgstr ""
 
 msgid "Location"
@@ -373,6 +377,9 @@ msgid "Provider updated their information"
 msgstr ""
 
 msgid "New service submitted by provider"
+msgstr ""
+
+msgid "Change to existing service submitted by provider"
 msgstr ""
 
 msgid "Provider canceled a draft service"

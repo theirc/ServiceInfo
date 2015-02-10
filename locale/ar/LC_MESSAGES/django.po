@@ -9,15 +9,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-09 08:31-0500\n"
-"PO-Revision-Date: 2015-02-09 13:41+0000\n"
-"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
+"POT-Creation-Date: 2015-02-10 15:41+0200\n"
+"PO-Revision-Date: 2015-02-10 13:42+0000\n"
+"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+msgid "You may only submit updates to current or draft services"
+msgstr ""
 
 msgid "User account is disabled."
 msgstr "تم تعطيل حساب المستخدم."
@@ -236,8 +239,9 @@ msgstr "تمت الموافقة على الخدمة"
 msgid "Description and Additional Information"
 msgstr "معلومات إضافية"
 
-msgid "Hours"
-msgstr "ساعات"
+#, python-brace-format
+msgid "Hours (all times in time zone {timezone})"
+msgstr ""
 
 msgid "Location"
 msgstr "المكان "
@@ -373,6 +377,9 @@ msgstr "تحديث معلوماتهم مزود"
 
 msgid "New service submitted by provider"
 msgstr "الخدمة الجديدة المقدمة من قبل مزود"
+
+msgid "Change to existing service submitted by provider"
+msgstr ""
 
 msgid "Provider canceled a draft service"
 msgstr "إلغاء مزود مشروع الخدمة"
