@@ -8,15 +8,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-06 11:44-0500\n"
-"PO-Revision-Date: 2015-02-09 08:43+0000\n"
-"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
+"POT-Creation-Date: 2015-02-10 15:41+0200\n"
+"PO-Revision-Date: 2015-02-10 13:42+0000\n"
+"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "You may only submit updates to current or draft services"
+msgstr ""
 
 msgid "User account is disabled."
 msgstr "Le compte d'utilisateur est désactivé."
@@ -235,8 +238,9 @@ msgstr "Service a été approuvé"
 msgid "Description and Additional Information"
 msgstr "Description et Informations supplémentaires"
 
-msgid "Hours"
-msgstr "heures"
+#, python-brace-format
+msgid "Hours (all times in time zone {timezone})"
+msgstr ""
 
 msgid "Location"
 msgstr "emplacement"
@@ -372,6 +376,9 @@ msgstr "Fournisseur mis à jour leurs informations"
 
 msgid "New service submitted by provider"
 msgstr "Nouveau service soumis par le fournisseur"
+
+msgid "Change to existing service submitted by provider"
+msgstr ""
 
 msgid "Provider canceled a draft service"
 msgstr "Fournisseur annulé un projet de services"

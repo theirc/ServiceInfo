@@ -132,8 +132,17 @@ class SelectionCriterionSerializer(RequireOneTranslationMixin,
         required_translated_fields = ['text']
 
 
+class SelectionCriterionSerializerForService(SelectionCriterionSerializer):
+    # Serializer to use when nesting criteria data in a service
+    # Remove 'service' from the required fields
+    class Meta(SelectionCriterionSerializer.Meta):
+        fields = [name for name in SelectionCriterionSerializer.Meta.fields if name != 'service']
+
+
 class ServiceSerializer(RequireOneTranslationMixin,
                         serializers.HyperlinkedModelSerializer):
+    selection_criteria = SelectionCriterionSerializerForService(many=True, required=False)
+
     class Meta:
         model = Service
         fields = (
@@ -142,7 +151,8 @@ class ServiceSerializer(RequireOneTranslationMixin,
             'area_of_service',
             'description_en', 'description_ar', 'description_fr',
             'additional_info_en', 'additional_info_ar', 'additional_info_fr',
-            'cost_of_service', 'selection_criteria',
+            'cost_of_service',
+            'selection_criteria',
             'status', 'update_of',
             'location',
             'sunday_open', 'sunday_close',
@@ -155,6 +165,42 @@ class ServiceSerializer(RequireOneTranslationMixin,
             'type',
         )
         required_translated_fields = ['name', 'description']
+
+    def validate(self, attrs):
+        # Look for "new" services that are updates of existing ones
+        # and do special things with them.
+        attrs = super().validate(attrs)
+        # We don't allow service updates via the API, and all new services should
+        # start with draft status, so just force it.
+        attrs['status'] = Service.STATUS_DRAFT
+        if attrs.get('update_of', False):
+            parent = attrs['update_of']
+            if parent.status not in [Service.STATUS_DRAFT, Service.STATUS_CURRENT]:
+                raise exceptions.ValidationError(
+                    {'update_of': _("You may only submit updates to current or draft services")}
+                )
+            # Find the topmost record in the possible chain of update_of's
+            topmost = parent
+            while topmost.update_of:
+                topmost = topmost.update_of
+            # Always point at the topmost record
+            attrs['update_of'] = topmost
+        return attrs
+
+    def create(self, validated_data):
+        # Force the value of the provider to be that of the user who's
+        # creating or modifying the record
+        user = self.context['request'].user
+        validated_data['provider'] = Provider.objects.get(user=user)
+
+        # Create selection criteria to go with the service
+        criteria = validated_data.pop('selection_criteria')
+        service = Service.objects.create(**validated_data)
+        for kwargs in criteria:
+            # Force criterion to link to the new service
+            kwargs['service'] = service
+            SelectionCriterion.objects.create(**kwargs)
+        return service
 
     def save(self, **kwargs):
         # Force the value of the provider to be that of the user who's
