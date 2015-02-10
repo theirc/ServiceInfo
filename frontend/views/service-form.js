@@ -63,6 +63,7 @@ module.exports = Backbone.View.extend({
         }
         if (this.update_of) {
             forms.initial($el, this.update_of);
+            forms.getField($el, 'update_of').val(this.update_of.get('url'));
         }
         $el.i18n();
     },

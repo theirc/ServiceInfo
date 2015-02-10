@@ -8,6 +8,7 @@ var forms = module.exports = {
             var $field = $(this);
             var value = $field.val();
             var name = $field.attr('name');
+            console.log(name, value);
             var ml = typeof $field.data('i18n-field') !== "undefined";
 
             if (ml) {
