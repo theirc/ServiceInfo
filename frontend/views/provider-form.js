@@ -2,31 +2,33 @@ var Backbone = require('backbone'),
 template = require("../templates/provider-form.hbs"),
 i18n = require('i18next-client'),
 config = require('../config'),
+providertype = require('../models/providertype'),
 forms = require('../forms')
 ;
 
 module.exports = Backbone.View.extend({
     initialize: function(){
-        this.render();
+        self = this;
+
+        var providertypes = new providertype.ProviderTypes();
+
+        Promise.all([providertypes.fetch()]).then(function(){
+            self.providertypes = providertypes;
+            self.render();
+        });
     },
 
     render: function() {
         var $el = this.$el;
+        var providertypes = [];
+        if (self.providertypes) {
+            providertypes = self.providertypes.data();
+        }
+
         $el.html(template({
-
+            "providertypes": providertypes,
         }));
-
-        config.load('providertypes', function(e, data) {
-            $typeSel = $el.find('select[name=type]');
-            $.each(data, function() {
-                $option = $('<option></option>');
-                $option.attr({
-                    value: this.url,
-                });
-                $option.text(this['name_' + config.get('lang')]);
-                $typeSel.append($option)
-            })
-        })
+        $el.i18n();
     },
 
     events: {

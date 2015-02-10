@@ -48,16 +48,16 @@
                 <div class="form-group">
                   <div class="half">
                     <div class="form-group">
-                      <label for="name" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Name"></span><span class=error></label>
-                      <input type="text" name="name" data-i18n-field class="form-control" ></input>
+                      <label for="id_name" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Name"></span><span class=error></label>
+                      <input id="id_name" type="text" name="name" data-i18n-field class="form-control" ></input>
                     </div>
                   </div>
 
                   <div class="half">
                       <div class="form-group">
-                          <label for="email" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Email"></span><span class="error"></span></label>
+                          <label for="id_email" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Email"></span><span class="error"></span></label>
                           <div class="form-group">
-                              <input type="email" name="email" class="form-control" placeholder="Enter your Email" >
+                              <input id="id_email" type="email" name="email" class="form-control" placeholder="Enter your Email" >
                           </div>
                       </div>
                   </div>
@@ -66,16 +66,16 @@
                 <div class="form-group">
                     <div class="half">
                         <div class="form-group">
-                            <label for="password1" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Password"></span><span class=error></label>
-                                <input type="password" name="password1" class="form-control" ></input>
+                            <label for="id_password1" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Password"></span><span class=error></label>
+                                <input id="id_password1" type="password" name="password1" class="form-control" ></input>
                         </div>
                     </div>
 
                     <div class="half">
                         <div class="form-group">
-                            <label for="password2" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.PasswordConfirm"></span><span class="error"></span></label>
+                            <label for="id_password2" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.PasswordConfirm"></span><span class="error"></span></label>
                             <div class="form-group">
-                                <input type="password" name="password2" class="form-control" >
+                                <input id="id_password2"  type="password" name="password2" class="form-control" >
                             </div>
                         </div>
                     </div>
@@ -84,10 +84,13 @@
                 <div class=form-group>
                   <div class="half">
                     <div class="form-group">
-                      <label for="type" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Service-Type"></span><span class=error></label>
+                      <label for="id_type" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Service-Type"></span><span class=error></label>
                       <div class="form-group">
-                          <select name="type" class=form-control>
+                          <select id="id_type" name="type" class=form-control>
                               <option value="" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Service-Type-Choose"></option>
+                              {{#each providertypes}}
+                                <option value="{{ this.url }}">{{ this.name }}</option>
+                              {{/each}}
                           </select>
                       </div>
                     </div>
@@ -95,9 +98,9 @@
 
                   <div class="half">
                     <div class="form-group">
-                      <label for="phone_number" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Phone-Number"></span><span class=error></label>
+                      <label for="id_phone_number" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Phone-Number"></span><span class=error></label>
                       <div class="form-group">
-                        <input type="tel" name="phone_number" class="form-control" >
+                        <input id="id_phone_number" type="tel" name="phone_number" class="form-control" >
                       </div>
                     </div>
                   </div>
@@ -107,9 +110,9 @@
 
                 <div class="form-group">
                   <div class=half>
-                      <label for="website" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Website"></span><span class=error></label>
+                      <label for="id_website" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Website"></span><span class=error></label>
                       <div class="form-group">
-                        <input type="url" name="website" class="form-control" placeholder="Enter your website url" >
+                        <input id="id_website" type="url" name="website" class="form-control" placeholder="Enter your website url" >
                       </div>
                   </div>
                   <div class=half>
@@ -120,9 +123,9 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="description" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Description"></span><span class=error></label>
+                  <label for="id_description" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Description"></span><span class=error></label>
                   <div class="form-group">
-                    <textarea rows="4" name="description" data-i18n-field class="form-control" ></textarea>
+                    <textarea id="id_description" rows="4" name="description" data-i18n-field class="form-control" ></textarea>
                   </div>
                 </div>
               </fieldset>

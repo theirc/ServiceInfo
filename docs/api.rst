@@ -220,6 +220,22 @@ associated email address in the response::
 
 Otherwise,it'll get a 400 but no other data.
 
+Editing a Service
+-----------------
+
+Users of the API may NOT modify existing service records. They need
+to create a new Service and set update_of to the previous record, which
+will kick off a backend process where a human will review the changes
+and switch the new service to being the active one if they approve.
+
+Clients may submit an edit of a record that is a pending change to
+a current record. Just create yet another new record and set update_of
+to the draft record they're updating.
+
+When that happens, though, the previous draft record will be archived,
+essentially making it go away, and only the most recent submitted
+update record will be visible in most places.
+
 Cancel a Service
 ----------------
 
