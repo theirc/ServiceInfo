@@ -2,23 +2,36 @@ var Backbone = require('backbone'),
 template = require("../templates/service-form.hbs"),
 i18n = require('i18next-client'),
 forms = require('../forms'),
+service = require('../models/service'),
 provider = require('../models/provider'),
 servicearea = require('../models/servicearea'),
 servicetype = require('../models/servicetype')
 ;
 
 module.exports = Backbone.View.extend({
-    initialize: function(){
+    initialize: function(opts){
         self = this;
 
         var providers = new provider.Providers();
         var serviceareas = new servicearea.ServiceAreas();
         var servicetypes = new servicetype.ServiceTypes();
 
-        Promise.all([providers.fetch(), serviceareas.fetch(), servicetypes.fetch()]).then(function(){
+        var waiting = [providers.fetch(), serviceareas.fetch(), servicetypes.fetch()];
+        var current_service;
+        if (opts.id) {
+            current_service = new service.Service({id: opts.id});
+            waiting.push(current_service.fetch());
+        }
+        console.log('fetching service...', opts);
+
+        Promise.all(waiting).then(function(){
             self.provider = providers.models[0];
             self.serviceareas = serviceareas;
             self.servicetypes = servicetypes;
+            if (opts.id) {
+                self.update_of = current_service;
+            }
+            console.log('ready', current_service);
 
             self.render();
         });
@@ -34,6 +47,11 @@ module.exports = Backbone.View.extend({
         if (this.servicetypes) {
             types = this.servicetypes.data();
         }
+        var update_of = {};
+        if (this.update_of) {
+            update_of = this.update_of.data();
+        }
+        console.log('update_of', update_of);
         $el.html(template({
             daysofweek: [
                     'Sunday',
@@ -46,6 +64,7 @@ module.exports = Backbone.View.extend({
                 ],
             areas_of_services: serviceareas,
             types: types,
+            update_of: update_of,
         }));
         if (this.provider) {
             $el.find('[name=provider]').val(this.provider.get('url'));
