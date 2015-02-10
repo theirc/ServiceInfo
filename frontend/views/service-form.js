@@ -62,7 +62,7 @@ module.exports = Backbone.View.extend({
 
             forms.submit($el, 'api/services/', data).then(
                 function success(data) {
-                    window.location = '#/register/confirm';
+                    window.location = '#/service-list';
                 },
                 function error(errors) {
                     console.error(errors);
