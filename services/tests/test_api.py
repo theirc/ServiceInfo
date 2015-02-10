@@ -244,7 +244,6 @@ class ProviderAPITest(APITestMixin, TestCase):
     def test_update_provider(self):
         p1 = ProviderFactory(user=self.user)
         url = reverse('provider-detail', args=[p1.id])
-        print(url)
         data = model_to_dict(p1)
         data['type'] = p1.type.get_api_url()
         data['user'] = p1.user.get_api_url()
