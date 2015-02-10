@@ -335,7 +335,7 @@ class ServiceAPITest(APITestMixin, TestCase):
         data = {
             'area_of_service': area.get_api_url(),
             'description_en': "Awesome\nService",
-            'selection_criteria': [criterion.get_api_url()],
+            'selection_criteria': [model_to_dict(criterion)],
             'type': ServiceTypeFactory().get_api_url(),
         }
         rsp = self.post_with_token(reverse('service-list'), data=data)
