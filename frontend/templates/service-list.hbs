@@ -27,7 +27,9 @@
             {{#each services}}
 			<tr class="{{#if this.isApproved }}approved{{/if}} {{#if this.isRejected}}denied{{/if}}">
 				<td>
-					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td">{{ this.name }}</span>
+					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td">
+                        <a href="#/service/{{ this.id }}">{{ this.name }}</a>
+                    </span>
 				</td>
 				<td>
 					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Name"></div><span class="vertical-td">{{ this.servicetype.name }}</span>

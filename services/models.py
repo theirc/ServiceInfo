@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.gis.db import models
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
+from django.db.transaction import atomic
 from django.utils.translation import ugettext_lazy as _, get_language
 
 from . import jira_support
@@ -412,28 +413,46 @@ class Service(NameInCurrentLanguageMixin, models.Model):
 
     def save(self, *args, **kwargs):
         new_service = self.pk is None
-        super().save(*args, **kwargs)
-        if new_service:
-            # Now we've safely saved this new record.
-            # If this is a draft update, make sure there aren't any others
-            if self.status == Service.STATUS_DRAFT and self.update_of:
-                other_services = Service.objects.filter(
-                    status=Service.STATUS_DRAFT,
-                    update_of=self.update_of)\
-                    .exclude(pk=self.pk)
-                for other_service in other_services:
+
+        with atomic():  # All or none of this
+            if (new_service
+                    and self.status == Service.STATUS_DRAFT
+                    and self.update_of
+                    and self.update_of.status == Service.STATUS_DRAFT
+                    and not self.update_of.update_of):
+                # This is a new update of a top-level draft, just replace it
+                parent = self.update_of
+                parent.status = Service.STATUS_ARCHIVED
+                parent.save()
+                JiraUpdateRecord.objects.create(
+                    service=parent,
+                    update_type=JiraUpdateRecord.CANCEL_DRAFT_SERVICE)
+                self.update_of = None
+
+            super().save(*args, **kwargs)
+
+            if new_service:
+                # Now we've safely saved this new record.
+                # If this is a draft update, make sure there aren't any others
+                if self.status == Service.STATUS_DRAFT and self.update_of:
+                    other_services = Service.objects.filter(
+                        status=Service.STATUS_DRAFT,
+                        update_of=self.update_of)\
+                        .exclude(pk=self.pk)\
+                        .distinct()
+                    for other_service in other_services:
+                        JiraUpdateRecord.objects.create(
+                            service=other_service,
+                            update_type=JiraUpdateRecord.CANCEL_DRAFT_SERVICE)
+                    other_services.update(status=Service.STATUS_ARCHIVED)
+                if self.update_of:
                     JiraUpdateRecord.objects.create(
-                        service=other_service,
-                        update_type=JiraUpdateRecord.CANCEL_DRAFT_SERVICE)
-                other_services.update(status=Service.STATUS_ARCHIVED)
-            if self.update_of:
-                JiraUpdateRecord.objects.create(
-                    service=self,
-                    update_type=JiraUpdateRecord.CHANGE_SERVICE)
-            else:
-                JiraUpdateRecord.objects.create(
-                    service=self,
-                    update_type=JiraUpdateRecord.NEW_SERVICE)
+                        service=self,
+                        update_type=JiraUpdateRecord.CHANGE_SERVICE)
+                else:
+                    JiraUpdateRecord.objects.create(
+                        service=self,
+                        update_type=JiraUpdateRecord.NEW_SERVICE)
 
     def staff_approve(self):
         """
