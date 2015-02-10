@@ -41,6 +41,9 @@
       "Selection-Criteria": "Selection Criteria (Optional Field)",
       "Hours-Open": "Opening Time:",
       "Hours-Close": "Closing Time:",
+      "Selection-Criteria": "Selection Criteria",
+      "Add-Criteria": "Add New Criteria",
+      "Remove-Criteria": "Remove Criteria",
       "Form-Submit-Options": {
           "Submit": "Submit Answers",
           "Clear": "Remove Answers"
