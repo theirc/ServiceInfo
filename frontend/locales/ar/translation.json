@@ -5,10 +5,15 @@
     "test": {
         "hello": "مرحبا بالعالم"
     },
-    "menu": {
-        "Map": "خريطة الخدمات ",
-        "Registration": "تسجيل مزود الخدمات ",
-        "Feedback": "أداة تسجيل الملاحظات ",
+    "Menu": {
+        "Menu-Toggle": "قائمة",
+        "Login": "تسجيل الدخول",
+        "Logout": "تسجيل الخروج",
+        "Services": "الخدمات",
+        "Add-Services": "إضافة خدمات",
+        "Service-Map": "خدمة خريطة",
+        "Provider-Registration": "التسجيل مزود",
+        "Feedback-Tool": "ردود الفعل أداة",
         "Change-Language": "تغيير اللغة"
     },
     "Login-Form": {
@@ -30,7 +35,15 @@
         }
     },
     "Service-Form": {
-        "Legend": "معلومات عن الخدمة ",
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "استمارة التسجيل خدمة جديدة"
+            },
+            "Page-Description": {
+                "Page-Description": "ملء النموذج أدناه لتطبيق لخدمة جديدة وافقت."
+            }
+        },
+        "Legend": "معلومات عن الخدمة",
         "Service-Name": "اسم الخدمة",
         "Service-Area": "منطقة الخدمة",
         "Type": "نوع الخدمة",
@@ -66,11 +79,13 @@
                 "Name": "الاسم الكامل",
                 "Password": "كلمة السر",
                 "PasswordConfirm": "تأكيد كلمة المرور",
-                "Service-Type": "نوع الخدمة",
-                "Service-Type-Choose": "اختيار نوع الخدمة",
+                "Provider-Type": "نوع مزود",
+                "Provider-Type-Choose": "اختر نوع مزود",
                 "Phone-Number": "رقم الهاتف",
                 "Email": "البريد الإلكتروني",
+                "EmailPlaceholder": "أدخل البريد الإلكتروني الخاص بك",
                 "Website": "موقع (حقل اختياري)",
+                "WebsitePlaceholder": "أدخل URL موقع الويب الخاص بك",
                 "MonthlyBeneficiaries": "عدد المستفيدين شهرياَ",
                 "Description": "توصيف "
             },

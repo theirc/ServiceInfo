@@ -1,10 +1,17 @@
+# 
+# Translators:
+# Omar Meksassi <omar.meksassi@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: node-gettext\n"
+"Project-Id-Version: Service Info\n"
+"PO-Revision-Date: 2015-02-11 14:32+0000\n"
+"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
+"Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "app##name"
 msgstr "i18next"
@@ -12,17 +19,32 @@ msgstr "i18next"
 msgid "test##hello"
 msgstr "Bonjour Le Monde"
 
-msgid "menu##Map"
-msgstr "carte de service"
+msgid "Menu##Menu-Toggle"
+msgstr "Menu"
 
-msgid "menu##Registration"
+msgid "Menu##Login"
+msgstr "Login"
+
+msgid "Menu##Logout"
+msgstr "Logout"
+
+msgid "Menu##Services"
+msgstr "services"
+
+msgid "Menu##Add-Services"
+msgstr "Ajouter des services"
+
+msgid "Menu##Service-Map"
+msgstr "service Map"
+
+msgid "Menu##Provider-Registration"
 msgstr "Inscription des fournisseurs"
 
-msgid "menu##Feedback"
-msgstr "Outil de Commentaire"
+msgid "Menu##Feedback-Tool"
+msgstr "Commentaires Outil"
 
-msgid "menu##Change-Language"
-msgstr "Change de langue"
+msgid "Menu##Change-Language"
+msgstr "Changer de langue"
 
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "entrer"
@@ -41,6 +63,12 @@ msgstr "entrer"
 
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "Inscrivez-vous pour être un fournisseur de service ici"
+
+msgid "Service-Form##Page-Head##Page-Title##Title"
+msgstr "Formulaire d'inscription Nouveau service"
+
+msgid "Service-Form##Page-Head##Page-Description##Page-Description"
+msgstr "Remplissez le formulaire ci-dessous pour demander qu'un nouveau service approuvé."
 
 msgid "Service-Form##Legend"
 msgstr "Informations sur le service"
@@ -84,7 +112,8 @@ msgstr "Retirer Réponses"
 msgid "Provider-Registration-Form##Page-Head##Page-Title##Title"
 msgstr "Nouveau fournisseur de service  formulaire d'inscription"
 
-msgid "Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
+msgid ""
+"Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
 msgstr "Remplissez le formulaire ci-dessous pour demander à être un fournisseur de services."
 
 msgid "Provider-Registration-Form##Errors##Password-Blank"
@@ -108,11 +137,11 @@ msgstr "mot de passe"
 msgid "Provider-Registration-Form##Form-Sections##Basic##PasswordConfirm"
 msgstr "Confirmez Le Mot De Passe"
 
-msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type"
-msgstr "Type de service"
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type"
+msgstr "Type de prestataire"
 
-msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type-Choose"
-msgstr "Choisissez un type de service"
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
+msgstr "Choisissez un type de fournisseur"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
 msgstr "Numéro de téléphone"
@@ -120,8 +149,14 @@ msgstr "Numéro de téléphone"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
 msgstr "Email"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##EmailPlaceholder"
+msgstr "Entrez votre Email"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
 msgstr "Site Web (champ optionel)"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##WebsitePlaceholder"
+msgstr "Entrez votre URL de site web"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
 msgstr "Nombre de bénéficiaires mensuelles"
@@ -132,28 +167,39 @@ msgstr "description"
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Legend"
 msgstr "Informations sur le service"
 
-msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Name"
+msgid ""
+"Provider-Registration-Form##Form-Sections##Service-Information##Service-Name"
 msgstr "Nom du service"
 
-msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Area"
+msgid ""
+"Provider-Registration-Form##Form-Sections##Service-Information##Service-Area"
 msgstr "Zone de service"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Type"
 msgstr "type de service"
 
-msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Description"
+msgid ""
+"Provider-Registration-Form##Form-Sections##Service-Information##Service-"
+"Description"
 msgstr "Description"
 
-msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Hours"
+msgid ""
+"Provider-Registration-Form##Form-Sections##Service-Information##Service-"
+"Hours"
 msgstr "Heures de service"
 
-msgid "Provider-Registration-Form##Form-Sections##Service-Information##Additional-Information"
+msgid ""
+"Provider-Registration-Form##Form-Sections##Service-Information##Additional-"
+"Information"
 msgstr "Informations supplémentaires (champ facultatif)"
 
-msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Cost"
+msgid ""
+"Provider-Registration-Form##Form-Sections##Service-Information##Service-Cost"
 msgstr "Coût du service (champ facultatif)"
 
-msgid "Provider-Registration-Form##Form-Sections##Service-Information##Selection-Criteria"
+msgid ""
+"Provider-Registration-Form##Form-Sections##Service-Information##Selection-"
+"Criteria"
 msgstr "Critères de sélection (champ optionnel)"
 
 msgid "Provider-Registration-Form##Form-Sections##Form-Submit-Options##Submit"
@@ -222,7 +268,9 @@ msgstr "Connectez-vous à un compte de fournisseur de services existant ou en cr
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
 msgstr "Votre information a été soumis avec succès"
 
-msgid "Provider-Registration-Confirmation##Page-Head##Page-Description##Page-Description"
+msgid ""
+"Provider-Registration-Confirmation##Page-Head##Page-Description##Page-"
+"Description"
 msgstr "Nous avons envoyé un e-mail de confirmation sur le compte e-mail utilisée lors de votre inscription. Cliquez sur le lien de confirmation dans l'e-mail pour terminer le processus d'inscription."
 
 msgid "Password-Reset##Page-Head##Page-Title##Title"
