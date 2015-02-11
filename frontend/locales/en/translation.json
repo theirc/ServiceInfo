@@ -5,10 +5,15 @@
   "test": {
     "hello": "Hello, World"
   },
-  "menu": {
-  	"Map": "Service Map",
-  	"Registration": "Provider Registration",
-  	"Feedback": "Feedback Tool",
+  "Menu": {
+    "Menu-Toggle": "MENU",
+    "Login": "Login",
+    "Logout": "Logout",
+    "Services": "Services",
+    "Add-Services": "Add Services",
+  	"Service-Map": "Service Map",
+  	"Provider-Registration": "Provider Registration",
+  	"Feedback-Tool": "Feedback Tool",
   	"Change-Language": "Change Language"
   },
   "Login-Form": {
@@ -30,21 +35,29 @@
   	}
   },
   "Service-Form": {
-      "Legend": "Service Information",
-      "Service-Name": "Name of Service",
-      "Service-Area": "Area of Service",
-      "Type": "Service Type",
-      "Service-Description": "Description",
-      "Service-Hours": "Hours of Service",
-      "Additional-Information": "Additional Information (Optional Field)",
-      "Service-Cost": "Cost of Service (Optional Field)",
-      "Selection-Criteria": "Selection Criteria (Optional Field)",
-      "Hours-Open": "Opening Time:",
-      "Hours-Close": "Closing Time:",
-      "Form-Submit-Options": {
-          "Submit": "Submit Answers",
-          "Clear": "Remove Answers"
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "New Service Registration Form"
+      },
+      "Page-Description": {
+        "Page-Description": "Fill out the form below to apply to have a new service approved."
       }
+    },
+    "Legend": "Service Information",
+    "Service-Name": "Name of Service",
+    "Service-Area": "Area of Service",
+    "Type": "Service Type",
+    "Service-Description": "Description",
+    "Service-Hours": "Hours of Service",
+    "Additional-Information": "Additional Information (Optional Field)",
+    "Service-Cost": "Cost of Service (Optional Field)",
+    "Selection-Criteria": "Selection Criteria (Optional Field)",
+    "Hours-Open": "Opening Time:",
+    "Hours-Close": "Closing Time:",
+    "Form-Submit-Options": {
+        "Submit": "Submit Answers",
+        "Clear": "Remove Answers"
+    }
   },
   "Provider-Registration-Form": {
   	"Page-Head": {
@@ -66,8 +79,8 @@
   			"Name": "Full Name",
             "Password": "Password",
             "PasswordConfirm": "Confirm Password",
-  			"Service-Type": "Type of Service",
-            "Service-Type-Choose": "Choose a Service Type",
+  			"Provider-Type": "Provider Type",
+            "Provider-Type-Choose": "Choose a Provider Type",
   			"Phone-Number": "Phone Number",
   			"Email": "Email",
             "EmailPlaceholder": "Enter your Email",
