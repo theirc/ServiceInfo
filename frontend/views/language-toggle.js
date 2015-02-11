@@ -22,7 +22,7 @@ module.exports = Backbone.View.extend({
     },
 
     setLanguage: function(lang) {
-        i18n.init(function(t){
+        i18n.init({fallbackLng: 'en'}, function(t){
             $("body").i18n({
                 lng: lang,
             });
