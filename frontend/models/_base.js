@@ -33,16 +33,29 @@ var BaseModel = Backbone.Model.extend({
     data: function() {
         var data = this._data;
         var key;
+        var lang1 = config.get('lang');
+        var lang2, lang3, name1, name2, name3;
+        if (lang1 === 'en') {
+           lang2 = 'ar';
+           lang3 = 'fr';
+        } else if (lang1 === 'ar') {
+           lang2 = 'en';
+           lang3 = 'fr';
+        } else {
+           lang2 = 'en';
+           lang3 = 'ar';
+        }
         for (var name in this.attributes) {
-            if (name.indexOf('_en') > 0) {
+            if (name.indexOf('_en') > 0 || name.indexOf('_ar') > 0 || name.indexOf('_fr') > 0) {
                 key = name.split('_')[0];
+                if (! data[key]) {
+                   name1 = key + '_' + lang1;
+                   name2 = key + '_' + lang2;
+                   name3 = key + '_' + lang3;
+                   data[key] = this.get(name1) || this.get(name2) || this.get(name3);
+                }
             } else {
-                key = name;
-            }
-            if (name.indexOf('_ar')===name.length-3 || name.indexOf('_fr')===name.length-3) {
-                continue;
-            } else {
-                data[key] = this.get(name);
+               data[name] = this.get(name);
             }
         }
         data['id'] = this.get('id');
