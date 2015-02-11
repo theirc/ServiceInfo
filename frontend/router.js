@@ -39,7 +39,7 @@ function loadPage(name, params) {
             i18n.init(function(){
                 view.render.apply(view, viewArguments);
                 view.$el.i18n({
-                    lng: config.get('lang'),
+                    lng: config.get('forever.language') || 'en',
                 });
             });
             $('#menu-container').addClass("menu-closed");

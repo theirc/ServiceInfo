@@ -1,14 +1,53 @@
 var Backbone = require('backbone'),
+config = require("../config"),
 template = require("../templates/language-toggle.hbs"),
 i18n = require('i18next-client');
 
+// To change the app's language, call config.set('forever.language', lang)
+// where lang is e.g. 'en', 'fr', or 'ar'.
+// The config change handler below will handle the magic.
+
 module.exports = Backbone.View.extend({
     initialize: function(){
+        var language = config.get('forever.language'),
+            lt = this;
         this.render();
-        this.setLanguage(localStorage['lang'] || 'en');
-        if (localStorage['lang']) {
+        this.setLanguage(language);
+        if (language) {
             this.hide(true);
-        }
+        };
+        // Get called when forever.language is changed in the config.
+        // This will (1) update the app and (2) if the user is logged in,
+        // update their preferred language.
+        config.change('forever.language', function (key, change, value) {
+            // If user is logged in, save their language preference
+            var token,
+                headers = {};
+            if (change === 'set') {
+                // Update the app
+                lt.setLanguage(value);
+                if (value) {
+                    // make sure language toggle is hidden
+                    lt.hide(true);
+                }
+                token = config.get('forever.authToken');
+                if (token) {
+                    // user is logged in
+                    // remember user's preference in the backend
+                    headers.ServiceInfoAuthorization = 'Token ' + token;
+                    $.ajax(config.get('api_location') + 'api/language/', {
+                        type: 'POST',
+                        headers: headers,
+                        data: {
+                            'language': value
+                        },
+                        error: function (data) {
+                            console.log(data);  // FIXME?
+                        }
+                    });
+                }
+            }
+        });
     },
 
     render: function() {
@@ -22,11 +61,13 @@ module.exports = Backbone.View.extend({
     },
 
     setLanguage: function(lang) {
-        i18n.init(function(t){
-            $("body").i18n({
-                lng: lang,
-            });
-        });
+    // Update the app's language. If lang not truthy, use English.
+        i18n.init({
+              lng: lang || 'en'
+            }, function(t){
+                $("body").i18n();
+            }
+        );
     },
 
     hide: function(immediate) {
@@ -79,8 +120,7 @@ module.exports = Backbone.View.extend({
     events: {
         "click button": function(ev) {
             var lang = $(ev.target).data('lang');
-            localStorage['lang'] = lang;
-            this.setLanguage(lang);
+            config.set('forever.language', lang);
             this.hide();
         },
     },

@@ -11,7 +11,7 @@ var forms = module.exports = {
             var ml = typeof $field.data('i18n-field') !== "undefined";
 
             if (ml) {
-                var cur_lang = localStorage['lang'];
+                var cur_lang = config.get('forever.language') || 'en';
                 name = name + '_' + cur_lang;
             }
 
