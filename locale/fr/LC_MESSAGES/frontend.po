@@ -1,17 +1,10 @@
-# 
-# Translators:
-# Omar Meksassi <omar.meksassi@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-06 07:58+0000\n"
-"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
-"Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
+"Project-Id-Version: node-gettext\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
 msgid "app##name"
 msgstr "i18next"
@@ -49,11 +42,49 @@ msgstr "entrer"
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "Inscrivez-vous pour être un fournisseur de service ici"
 
+msgid "Service-Form##Legend"
+msgstr "Informations sur le service"
+
+msgid "Service-Form##Service-Name"
+msgstr "Nom du service"
+
+msgid "Service-Form##Service-Area"
+msgstr "Zone de service"
+
+msgid "Service-Form##Type"
+msgstr "type de service"
+
+msgid "Service-Form##Service-Description"
+msgstr "description"
+
+msgid "Service-Form##Service-Hours"
+msgstr "Heures de service"
+
+msgid "Service-Form##Additional-Information"
+msgstr "Informations supplémentaires (champ facultatif)"
+
+msgid "Service-Form##Service-Cost"
+msgstr "Coût du service (champ facultatif)"
+
+msgid "Service-Form##Selection-Criteria"
+msgstr "Critères de sélection (champ optionnel)"
+
+msgid "Service-Form##Hours-Open"
+msgstr "Temps d'ouverture:"
+
+msgid "Service-Form##Hours-Close"
+msgstr "Temps de cloture:"
+
+msgid "Service-Form##Form-Submit-Options##Submit"
+msgstr "Valider les réponses"
+
+msgid "Service-Form##Form-Submit-Options##Clear"
+msgstr "Retirer Réponses"
+
 msgid "Provider-Registration-Form##Page-Head##Page-Title##Title"
 msgstr "Nouveau fournisseur de service  formulaire d'inscription"
 
-msgid ""
-"Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
+msgid "Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
 msgstr "Remplissez le formulaire ci-dessous pour demander à être un fournisseur de services."
 
 msgid "Provider-Registration-Form##Errors##Password-Blank"
@@ -101,36 +132,28 @@ msgstr "description"
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Legend"
 msgstr "Informations sur le service"
 
-msgid ""
-"Provider-Registration-Form##Form-Sections##Service-Information##Service-Name"
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Name"
 msgstr "Nom du service"
 
-msgid ""
-"Provider-Registration-Form##Form-Sections##Service-Information##Service-Area"
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Area"
 msgstr "Zone de service"
 
-msgid ""
-"Provider-Registration-Form##Form-Sections##Service-Information##Service-"
-"Description"
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Type"
+msgstr "type de service"
+
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Description"
 msgstr "Description"
 
-msgid ""
-"Provider-Registration-Form##Form-Sections##Service-Information##Service-"
-"Hours"
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Hours"
 msgstr "Heures de service"
 
-msgid ""
-"Provider-Registration-Form##Form-Sections##Service-Information##Additional-"
-"Information"
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Additional-Information"
 msgstr "Informations supplémentaires (champ facultatif)"
 
-msgid ""
-"Provider-Registration-Form##Form-Sections##Service-Information##Service-Cost"
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Cost"
 msgstr "Coût du service (champ facultatif)"
 
-msgid ""
-"Provider-Registration-Form##Form-Sections##Service-Information##Selection-"
-"Criteria"
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Selection-Criteria"
 msgstr "Critères de sélection (champ optionnel)"
 
 msgid "Provider-Registration-Form##Form-Sections##Form-Submit-Options##Submit"
@@ -199,9 +222,7 @@ msgstr "Connectez-vous à un compte de fournisseur de services existant ou en cr
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
 msgstr "Votre information a été soumis avec succès"
 
-msgid ""
-"Provider-Registration-Confirmation##Page-Head##Page-Description##Page-"
-"Description"
+msgid "Provider-Registration-Confirmation##Page-Head##Page-Description##Page-Description"
 msgstr "Nous avons envoyé un e-mail de confirmation sur le compte e-mail utilisée lors de votre inscription. Cliquez sur le lien de confirmation dans l'e-mail pour terminer le processus d'inscription."
 
 msgid "Password-Reset##Page-Head##Page-Title##Title"

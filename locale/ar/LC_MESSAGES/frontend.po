@@ -1,17 +1,10 @@
-# 
-# Translators:
-# Omar Meksassi <omar.meksassi@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-06 07:44+0000\n"
-"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
-"Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
+"Project-Id-Version: node-gettext\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ar\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural= n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 
 msgid "app##name"
 msgstr "i18next"
@@ -49,11 +42,49 @@ msgstr "تسجيل الدخول"
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "سجل لتكون مقدم خدمات هنا"
 
+msgid "Service-Form##Legend"
+msgstr "معلومات عن الخدمة "
+
+msgid "Service-Form##Service-Name"
+msgstr "اسم الخدمة"
+
+msgid "Service-Form##Service-Area"
+msgstr "منطقة الخدمة"
+
+msgid "Service-Form##Type"
+msgstr "نوع الخدمة"
+
+msgid "Service-Form##Service-Description"
+msgstr "تفصيل"
+
+msgid "Service-Form##Service-Hours"
+msgstr "ساعات الخدمة"
+
+msgid "Service-Form##Additional-Information"
+msgstr "معلومات إضافية (حقل اختياري)"
+
+msgid "Service-Form##Service-Cost"
+msgstr "تكلفة الخدمة (حقل اختياري)"
+
+msgid "Service-Form##Selection-Criteria"
+msgstr "معايير الاختيار (حقل اختياري)"
+
+msgid "Service-Form##Hours-Open"
+msgstr "ساعات البدء:"
+
+msgid "Service-Form##Hours-Close"
+msgstr "ساعات الإغلاق:"
+
+msgid "Service-Form##Form-Submit-Options##Submit"
+msgstr "إرسال الأجوبة"
+
+msgid "Service-Form##Form-Submit-Options##Clear"
+msgstr "إزالة الأجوبة"
+
 msgid "Provider-Registration-Form##Page-Head##Page-Title##Title"
 msgstr "إستمارة تسجيل مزود خدمات جديد "
 
-msgid ""
-"Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
+msgid "Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
 msgstr "إملء النموذج أدناه لتكون مزود خدمات."
 
 msgid "Provider-Registration-Form##Errors##Password-Blank"
@@ -101,36 +132,28 @@ msgstr "توصيف "
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Legend"
 msgstr "معلومات عن الخدمة"
 
-msgid ""
-"Provider-Registration-Form##Form-Sections##Service-Information##Service-Name"
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Name"
 msgstr "اسم الخدمة"
 
-msgid ""
-"Provider-Registration-Form##Form-Sections##Service-Information##Service-Area"
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Area"
 msgstr "منطقة الخدمة"
 
-msgid ""
-"Provider-Registration-Form##Form-Sections##Service-Information##Service-"
-"Description"
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Type"
+msgstr "نوع الخدمة"
+
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Description"
 msgstr "توصيف "
 
-msgid ""
-"Provider-Registration-Form##Form-Sections##Service-Information##Service-"
-"Hours"
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Hours"
 msgstr "ساعات الخدمة"
 
-msgid ""
-"Provider-Registration-Form##Form-Sections##Service-Information##Additional-"
-"Information"
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Additional-Information"
 msgstr "معلومات إضافية (حقل اختياري)"
 
-msgid ""
-"Provider-Registration-Form##Form-Sections##Service-Information##Service-Cost"
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Cost"
 msgstr "تكلفة الخدمة (حقل اختياري)"
 
-msgid ""
-"Provider-Registration-Form##Form-Sections##Service-Information##Selection-"
-"Criteria"
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Selection-Criteria"
 msgstr "معايير الاختيار (حقل اختياري)"
 
 msgid "Provider-Registration-Form##Form-Sections##Form-Submit-Options##Submit"
@@ -199,9 +222,7 @@ msgstr "تسجيل الدخول إلى حساب مزود خدمة القائمة
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
 msgstr "قدم بياناتك بنجاح"
 
-msgid ""
-"Provider-Registration-Confirmation##Page-Head##Page-Description##Page-"
-"Description"
+msgid "Provider-Registration-Confirmation##Page-Head##Page-Description##Page-Description"
 msgstr "لقد قمنا بإرسال رسالة تأكيد بالبريد الإلكتروني إلى حساب البريد الإلكتروني الذي استخدمته أثناء التسجيل. انقر على رابط التأكيد في رسالة البريد الإلكتروني لاستكمال عملية التسجيل."
 
 msgid "Password-Reset##Page-Head##Page-Title##Title"

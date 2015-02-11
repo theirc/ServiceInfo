@@ -1,3 +1,5 @@
+import string
+
 import factory
 import factory.fuzzy
 from email_user.tests.factories import EmailUserFactory
@@ -29,6 +31,7 @@ class ProviderFactory(factory.DjangoModelFactory):
     description_fr = factory.fuzzy.FuzzyText()
     user = factory.SubFactory(EmailUserFactory)
     number_of_monthly_beneficiaries = 0
+    phone_number = factory.fuzzy.FuzzyText(chars=string.digits)
 
 
 class ServiceTypeFactory(factory.DjangoModelFactory):
