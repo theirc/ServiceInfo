@@ -19,6 +19,7 @@
           <div class="row">
             <form>
               <input type=hidden name=provider></input>
+              <input type=hidden name=update_of></input>
 
               <fieldset>
                 <legend data-i18n="Service-Form.Legend"></legend>
@@ -34,13 +35,13 @@
                   <div class="half">
                     <div class="form-group">
                       <label for="area_of_service" class="control-label"><span data-i18n="Service-Form.Service-Area"></span><span class="error"></span></label>
-                        <div class="btn-group"  >
-                            <select name=area_of_service class="form-control">
-                                {{#each areas_of_services}}
-                                    <option value="{{ this.url }}">{{ this.name }}</option>
-                                {{/each}}
-                            </select>
-                        </div>
+                      <div class="btn-group"  >
+                          <select name=area_of_service class="form-control">
+                              {{#each areas_of_services}}
+                                  <option value="{{ this.url }}">{{ this.name }}</option>
+                              {{/each}}
+                          </select>
+                      </div>
                     </div>
                   </div>
                   <div class="half">
