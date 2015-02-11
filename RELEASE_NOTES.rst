@@ -1,6 +1,13 @@
-Service Invo
+Service Info
 
 Release Notes
+
+0.0.4 - Feb. 11, 2015
+---------------------
+
+* Submit edits to existing services
+* Display data fields in user's preferred language where available
+* Many and various smaller design and behavioral fixes
 
 0.0.3 - Feb. 9, 2015
 --------------------
