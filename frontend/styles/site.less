@@ -689,6 +689,7 @@ input[type=range] {
 }
 
 #language-toggle.hidden {
+    -webkit-transform: translateX(-50%) scale(0.1);
     transform: translateX(-50%) scale(0.1);
     opacity: 0;
     transition: all 1s;
@@ -788,6 +789,9 @@ input[type=range] {
     }
     .menu-closed #menu {
         max-height: 0px;
+        li{
+            text-align: center;
+        }
     }
     .menu-open #menu {
         max-height: 500px;
