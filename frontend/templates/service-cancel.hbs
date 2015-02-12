@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
                 {{#if is_draft }}
-                    <div class="page-title" data-i18n="Service-Cancel.Page-Head.Page-Title.Title"></div>
+                    <div class="page-title" data-i18n="Service-Remove-Change.Page-Head.Page-Title.Title"></div>
                 {{else}}
                     <div class="page-title" data-i18n="Service-Delete.Page-Head.Page-Title.Title"></div>
                 {{/if}}
@@ -27,7 +27,7 @@
                 <dt data-i18n="Service-List.Table.Thead.Status"></dt>
                 <dd>{{ service.status }}</dd>
                 {{#if update_of }}
-                <dt data-i18n="Service-Cancel.Update-Of"></dt>
+                <dt data-i18n="Service-Remove-Change.Update-Of"></dt>
                 <dd>{{ update_of.name }}</dd>
                 {{/if}}
             </dl>
@@ -39,9 +39,9 @@
                   <div class="half">
                     <button class="form-btn-submit primary-button"
                      {{#if is_draft }}
-                       data-i18n="Service-Cancel.Submit"
+                       data-i18n="Service-Remove-Change.Remove-Change"
                      {{else}}
-                       data-i18n="Service-Delete.Submit"
+                       data-i18n="Service-Delete.Delete-Service"
                      {{/if}}
                     ></button>
                   </div>

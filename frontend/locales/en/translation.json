@@ -34,14 +34,14 @@
       "Register": "Register to be a Service Provider here"
   	}
   },
-  "Service-Cancel": {
+  "Service-Remove-Change": {
     "Page-Head": {
       "Page-Title": {
-        "Title": "Cancel Change"
+        "Title": "Remove Change"
       }
     },
     "Update-Of": "Update of",
-    "Submit": "Cancel changes"
+    "Remove-Change": "Remove change"
   },
   "Service-Delete": {
     "Page-Head": {
@@ -49,7 +49,7 @@
         "Title": "Delete Service"
       }
     },
-    "Submit": "Delete service"
+    "Delete-Service": "Delete service"
   },
   "Service-Form": {
     "Page-Head": {
@@ -155,7 +155,7 @@
         "Type": "Type:",
         "Area": "Area:",
         "Status": "Status:",
-        "Cancel": "Cancel:"
+        "Remove": "Remove:"
       }
     },
     "Cancel": "Cancel",
