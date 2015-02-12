@@ -1,4 +1,5 @@
 var Backbone = require('backbone'),
+api = require('../api'),
 config = require('../config'),
 template = require("../templates/service-cancel.hbs"),
 i18n = require('i18next-client'),
@@ -42,16 +43,15 @@ module.exports = Backbone.View.extend({
     events: {
         "click .form-btn-submit": function() {
             var data = forms.collect(this.$el);
-            var url = config.get('api_location') + 'api/services/' + data.id + '/cancel/';
-            $.ajax(url, {
-                type: 'POST',
-                success: function(resp) {
+            var path = 'api/services/' + data.id + '/cancel/';
+            api.request('POST', path).then(
+                function success(resp) {
                     window.location = "#/service-list";
                 },
-                error: function(e) {
+                function error(e) {
                     console.error(e);
-                },
-            })
+                }
+            );
 
             return false;
         }
