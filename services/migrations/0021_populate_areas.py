@@ -75,33 +75,3 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RunPython(create_areas, no_op),
     ]
-
-
-"""
-
-Number
-Mount Lebanon
-Tripoli and surroundings
-1
-Baabda بعبدا
-Mineih-Dinniyiالمنيه-الضنية
-2
-Beirutبيروت
-Zghartaزغرتا
-3
-Aleyعاليه
-Bcharriبشري
-4
-Choufالشوف
-Tripoliطرابلس
-5
-Keserwaneكسروان
-Kouraالكورة
-6
-El-Metnالمتن
- Batroun البترون
-7
-Jbeilجبيل
-
-
-"""
