@@ -13,7 +13,7 @@ from rest_framework.test import APIClient
 
 from email_user.models import EmailUser
 from email_user.tests.factories import EmailUserFactory
-from services.models import Provider, Service, SelectionCriterion
+from services.models import Provider, Service, SelectionCriterion, ServiceArea
 from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory, \
     ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory
 
@@ -502,6 +502,7 @@ class SelectionCriterionAPITest(APITestMixin, TestCase):
 class ServiceAreaAPITest(APITestMixin, TestCase):
     def setUp(self):
         super().setUp()
+        ServiceArea.objects.all().delete()
         self.area1 = ServiceAreaFactory()
         self.area2 = ServiceAreaFactory(parent=self.area1)
         self.area3 = ServiceAreaFactory(parent=self.area1)
