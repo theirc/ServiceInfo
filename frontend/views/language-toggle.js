@@ -13,7 +13,7 @@ module.exports = Backbone.View.extend({
             lt = this;
         this.render();
         this.setLanguage(language);
-        if (language) {
+        if (config.isset('forever.language')) {
             this.hide(true);
         };
         // Get called when forever.language is changed in the config.
@@ -61,9 +61,8 @@ module.exports = Backbone.View.extend({
     },
 
     setLanguage: function(lang) {
-    // Update the app's language. If lang not truthy, use English.
         i18n.init({
-              lng: lang || 'en'
+              lng: lang
             }, function(t){
                 $("body").i18n();
             }

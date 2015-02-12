@@ -22,7 +22,7 @@ var BaseModel = Backbone.Model.extend({
     get: function(prop) {
         var value = Backbone.Model.prototype.get.call(this, prop);
         if (typeof value === 'undefined') {
-            var lang = config.get('forever.language') || 'en';
+            var lang = config.get('forever.language');
             var tvalue = Backbone.Model.prototype.get.call(this, prop + '_' + lang);
             if (tvalue) {
                 return tvalue;
@@ -34,7 +34,7 @@ var BaseModel = Backbone.Model.extend({
     data: function() {
         var data = this._data;
         var key;
-        var lang1 = config.get('forever.language') || 'en';
+        var lang1 = config.get('forever.language');
         var lang2, lang3, name1, name2, name3;
         if (lang1 === 'en') {
            lang2 = 'ar';
