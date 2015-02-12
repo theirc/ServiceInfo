@@ -1,8 +1,200 @@
 {
-  "app": {
-    "name": "i18next"
-  },
-  "test": {
-    "hello": "مرحبا بالعالم"
-  }
+    "app": {
+        "name": "i18next"
+    },
+    "test": {
+        "hello": "مرحبا بالعالم"
+    },
+    "Menu": {
+        "Menu-Toggle": "قائمة",
+        "Login": "تسجيل الدخول",
+        "Logout": "تسجيل الخروج",
+        "Services": "الخدمات",
+        "Add-Services": "إضافة خدمات",
+        "Service-Map": "خدمة خريطة",
+        "Provider-Registration": "التسجيل مزود",
+        "Feedback-Tool": "ردود الفعل أداة",
+        "Change-Language": "تغيير اللغة"
+    },
+    "Login-Form": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "تسجيل الدخول"
+            },
+            "Page-Description": {
+                "Page-Description": "إذا كنت من مزودي الخدمات ولك حساب، أدخل معلوماتك في الأسفل."
+            }
+        },
+        "Form": {
+            "Email": "البريد الإلكتروني",
+            "Password": "كلمة السر"
+        },
+        "Form-Submit-Options": {
+            "Submit": "تسجيل الدخول",
+            "Register": "سجل لتكون مقدم خدمات هنا"
+        }
+    },
+    "Service-Form": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "استمارة التسجيل خدمة جديدة"
+            },
+            "Page-Description": {
+                "Page-Description": "ملء النموذج أدناه لتطبيق لخدمة جديدة وافقت."
+            }
+        },
+        "Legend": "معلومات عن الخدمة",
+        "Service-Name": "اسم الخدمة",
+        "Service-Area": "منطقة الخدمة",
+        "Type": "نوع الخدمة",
+        "Service-Description": "تفصيل",
+        "Service-Hours": "ساعات الخدمة",
+        "Additional-Information": "معلومات إضافية (حقل اختياري)",
+        "Service-Cost": "تكلفة الخدمة (حقل اختياري)",
+        "Selection-Criteria": "معايير الاختيار (حقل اختياري)",
+        "Hours-Open": "ساعات البدء:",
+        "Hours-Close": "ساعات الإغلاق:",
+        "Form-Submit-Options": {
+            "Submit": "إرسال الأجوبة",
+            "Clear": "إزالة الأجوبة"
+        }
+    },
+    "Provider-Registration-Form": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "إستمارة تسجيل مزود خدمات جديد "
+            },
+            "Page-Description": {
+                "Page-Description": "إملء النموذج أدناه لتكون مزود خدمات."
+            }
+        },
+        "Errors": {
+            "Password-Blank": "لا يجب أن تكون كلمة المرور فارغة",
+            "Password-Repeat": "يجب تكرار كلمة المرور",
+            "Password-Match": "يجب أن تتطابق كلمات المرور"
+        },
+        "Form-Sections": {
+            "Basic": {
+                "Legend": "التفاصيل الأساسية لتسجيل مزود خدمات:",
+                "Name": "الاسم الكامل",
+                "Password": "كلمة السر",
+                "PasswordConfirm": "تأكيد كلمة المرور",
+                "Provider-Type": "نوع مزود",
+                "Provider-Type-Choose": "اختر نوع مزود",
+                "Phone-Number": "رقم الهاتف",
+                "Email": "البريد الإلكتروني",
+                "EmailPlaceholder": "أدخل البريد الإلكتروني الخاص بك",
+                "Website": "موقع (حقل اختياري)",
+                "WebsitePlaceholder": "أدخل URL موقع الويب الخاص بك",
+                "MonthlyBeneficiaries": "عدد المستفيدين شهرياَ",
+                "Description": "توصيف "
+            },
+            "Service-Information": {
+                "Legend": "معلومات عن الخدمة",
+                "Service-Name": "اسم الخدمة",
+                "Service-Area": "منطقة الخدمة",
+                "Type": "نوع الخدمة",
+                "Service-Description": "توصيف ",
+                "Service-Hours": "ساعات الخدمة",
+                "Additional-Information": "معلومات إضافية (حقل اختياري)",
+                "Service-Cost": "تكلفة الخدمة (حقل اختياري)",
+                "Selection-Criteria": "معايير الاختيار (حقل اختياري)"
+            },
+            "Form-Submit-Options": {
+                "Submit": "إرسال الأجوبة",
+                "Clear": "إزالة الأجوبة"
+            }
+        }
+    },
+    "Account-Activation": {
+        "Pending": {
+            "Title": "تفعيل حسابك معلقة ...",
+            "Description": "حساب التنشيط ## قيد الانتظار ## الوصف"
+        },
+        "Success": {
+            "Title": "تم تفعيل حسابك.",
+            "Description": "حساب التنشيط ## النجاح ## الوصف"
+        },
+        "Failed": {
+            "Title": "فشل تفعيل حسابك.",
+            "Description": "كانت هناك مشكلة إنشاء حساب مزود الخدمة الخاص بك. يرجى النقر على زر تأكيد بالبريد الإلكتروني إعادة إرسال أدناه لديك بريد إلكتروني آخر تأكيدا إرسالها إلى حساب البريد الإلكتروني الخاص بك."
+        },
+        "Buttons": {
+            "Resend-Email": "إعادة إرسال التحقق من البريد الإلكتروني"
+        }
+    },
+    "Service-List": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "قائمة الخدمات"
+            },
+            "Page-Description": {
+                "Page-Description": "وفيما يلي قائمة من الخدمات التي تطبق على توفير. وتتميز الخدمات وافق باللون الأخضر. وتتميز خدمات لم يفوافق عليها في الحمراء. خدمات بانتظار الموافقة هي لا تحمل علامات مميزة."
+            }
+        },
+        "Table": {
+            "Thead": {
+                "Name": "الاسم:",
+                "Type": "النوع:",
+                "Area": "المنطقة:",
+                "Status": "الحالة:"
+            }
+        }
+    },
+    "Home": {
+        "Service-Map": {
+            "Title": "عرض خريطة الخدمات ",
+            "Body": "استخدام خدمة خرائط لتحديد مقدمي الخدمات."
+        },
+        "Feedback": {
+            "Title": "شاركنا رأيك",
+            "Body": "أخبرنا عن تجربتك العمل مع مزود الخدمة الخاص بك."
+        },
+        "Log-in": {
+            "Title": "مقدم الخدمة تسجيل الدخول",
+            "Body": "تسجيل الدخول إلى حساب مزود خدمة القائمة، أو إنشاء حساب جديد."
+        }
+    },
+    "Provider-Registration-Confirmation": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "قدم بياناتك بنجاح"
+            },
+            "Page-Description": {
+                "Page-Description": "لقد قمنا بإرسال رسالة تأكيد بالبريد الإلكتروني إلى حساب البريد الإلكتروني الذي استخدمته أثناء التسجيل. انقر على رابط التأكيد في رسالة البريد الإلكتروني لاستكمال عملية التسجيل."
+            }
+        }
+    },
+    "Password-Reset": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "إعادة تعيين كلمة المرور"
+            },
+            "Page-Description": {
+                "Page-Description": "لإعادة تعيين كلمة المرور الخاصة بك أدخل عنوان بريدك الإلكتروني في الحقل أدناه ثم انقر فوق تقديم. سوف النقر تقديم إرسال ارتباط لحساب البريد الإلكتروني الخاص بك من شأنها أن توجهك إلى صفحة إعادة تعيين كلمة المرور."
+            }
+        },
+        "Input-Label": {
+            "User-Email": "أدخل بريدك الإلكتروني:"
+        },
+        "Submit-Options": {
+            "Submit": "عرض"
+        }
+    },
+    "Password-Reset-Form": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "كلمة نموذج إعادة تعيين"
+            },
+            "Page-Description": {
+                "Page-Description": "أدخل كلمة المرور الجديدة في حقل النص أدناه، ثم انقر فوق تقديم لتحديث كلمة السر الخاصة بك."
+            }
+        },
+        "Input-Label": {
+            "New-Password": "أدخل كلمة المرور الجديدة:"
+        },
+        "Submit-Options": {
+            "Submit": "إرسال الأجوبة"
+        }
+    }
 }

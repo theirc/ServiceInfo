@@ -131,7 +131,10 @@ POST to '/api/login/'::
 If successful, response status will be 200 and the response
 content will include::
 
-   { 'token': 'a long string'}
+   { 'token': 'a long string',
+     'language': 'xx'  # User's preferred language code, e.g. 'en' or 'ar',
+                       # or '' if we don't know
+   }
 
 If failed, response status will be 400 and the response might look like
 one of these::

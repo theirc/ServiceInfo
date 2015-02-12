@@ -96,9 +96,9 @@ li {
     clear: both;
 }
 
-@media (min-width: 1px) and (max-width: 768px) {
+@media (min-width: 1px) and (max-width: 1000px) {
 	.row {
-		padding: 15px 0;
+		padding: 0;
 	}
 }
 
@@ -108,7 +108,7 @@ li {
 	float: none;
     // clear: both;
 
-	@media (min-width: 767px) {
+	@media (min-width: 1000px) {
 		width: 48%;
 		float: left;
 	}
@@ -176,13 +176,18 @@ float: none;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
 	padding: 0 15px 15px 15px;
-	overflow: auto;
     clear: both;
 }
 
 .submit-form {
     height: 32px;
     margin-bottom: 10px;
+
+    .primary-button {
+        @media (min-width:1px) and (max-width:1000px){
+            margin-bottom: 18px;
+        }
+    }
 }
 
 .operating-hours {
@@ -194,6 +199,7 @@ float: none;
     padding: 12px 12px 0px 12px;
     border-bottom: 1px solid #ccc;
     text-align: center;
+    font-weight: 600;
     margin-top: -10px;
 }
 
@@ -206,6 +212,27 @@ float: none;
     .operating-hours-to {
         border: none;
     }
+}
+
+#service-hours {
+	.row {
+		padding: 5px 0;
+	}
+	.third {
+		width: 100%;
+		padding: 0;
+		margin-top: 0;
+	
+		@media (min-width: 1000px){
+			width: 30.75%;
+			padding: 0 1.292%;
+	
+		}
+
+		.form-group{
+			margin-bottom: 18px,	
+		}
+	}
 }
 
 /*
@@ -360,12 +387,14 @@ float: none;
 .primary-button:hover, .primary-button:visited {
     background-color: #33A069;
     border: 1px solid #33A069;
+    cursor: pointer;
 }
 
 .primary-button:focus {
     background-color: #33A069;
     border: 1px solid #33A069;
     outline: 3px auto lightgray;
+    cursor: pointer;
 }
 
 .primary-button[disabled] {
@@ -510,7 +539,7 @@ fieldset {
 fieldset > legend {
 	font-size: 16px;
 	font-weight: 600;
-	padding: 0 10px;
+	padding: 6px 10px;
 	margin: 0 0 5px -10px;
 	color: #3cb879;
 	border-bottom: none;
@@ -522,7 +551,7 @@ fieldset > legend {
 
 .form-group {
 	padding: 0;
-	margin-bottom: 18px;
+	margin-bottom: 14px;
 	height: auto;
 	float: none;
 }
@@ -603,6 +632,14 @@ input.form-control {
     box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
 }
 
+select.form-control {
+    width: 100%;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 /*
 *   Radio Button
 */
@@ -652,6 +689,7 @@ input[type=range] {
 }
 
 #language-toggle.hidden {
+    -webkit-transform: translateX(-50%) scale(0.1);
     transform: translateX(-50%) scale(0.1);
     opacity: 0;
     transition: all 1s;
@@ -667,6 +705,10 @@ input[type=range] {
 
 #menu a {
 	color: white;
+
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 #menu li {
@@ -744,16 +786,22 @@ input[type=range] {
     #menu {
         position: absolute;
         right: 0px;
-        top: 80px;
+        top: 68px;
         width: 100%;
         overflow: hidden;
         transition: max-height 0.25s;
     }
     .menu-closed #menu {
         max-height: 0px;
+        li {
+            text-align: center;
+        }
     }
     .menu-open #menu {
         max-height: 500px;
+        li {
+            text-align: center;
+        }
     }
     #menu-toggle {
         position: absolute;

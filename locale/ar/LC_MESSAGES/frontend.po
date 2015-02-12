@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-09 08:48+0000\n"
+"PO-Revision-Date: 2015-02-11 14:30+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -19,16 +19,31 @@ msgstr "i18next"
 msgid "test##hello"
 msgstr "مرحبا بالعالم"
 
-msgid "menu##Map"
-msgstr "خريطة الخدمات "
+msgid "Menu##Menu-Toggle"
+msgstr "قائمة"
 
-msgid "menu##Registration"
-msgstr "تسجيل مزود الخدمات "
+msgid "Menu##Login"
+msgstr "تسجيل الدخول"
 
-msgid "menu##Feedback"
-msgstr "أداة تسجيل الملاحظات "
+msgid "Menu##Logout"
+msgstr "تسجيل الخروج"
 
-msgid "menu##Change-Language"
+msgid "Menu##Services"
+msgstr "الخدمات"
+
+msgid "Menu##Add-Services"
+msgstr "إضافة خدمات"
+
+msgid "Menu##Service-Map"
+msgstr "خدمة خريطة"
+
+msgid "Menu##Provider-Registration"
+msgstr "التسجيل مزود"
+
+msgid "Menu##Feedback-Tool"
+msgstr "ردود الفعل أداة"
+
+msgid "Menu##Change-Language"
 msgstr "تغيير اللغة"
 
 msgid "Login-Form##Page-Head##Page-Title##Title"
@@ -49,8 +64,14 @@ msgstr "تسجيل الدخول"
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "سجل لتكون مقدم خدمات هنا"
 
+msgid "Service-Form##Page-Head##Page-Title##Title"
+msgstr "استمارة التسجيل خدمة جديدة"
+
+msgid "Service-Form##Page-Head##Page-Description##Page-Description"
+msgstr "ملء النموذج أدناه لتطبيق لخدمة جديدة وافقت."
+
 msgid "Service-Form##Legend"
-msgstr "معلومات عن الخدمة "
+msgstr "معلومات عن الخدمة"
 
 msgid "Service-Form##Service-Name"
 msgstr "اسم الخدمة"
@@ -116,11 +137,11 @@ msgstr "كلمة السر"
 msgid "Provider-Registration-Form##Form-Sections##Basic##PasswordConfirm"
 msgstr "تأكيد كلمة المرور"
 
-msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type"
-msgstr "نوع الخدمة"
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type"
+msgstr "نوع مزود"
 
-msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type-Choose"
-msgstr "اختيار نوع الخدمة"
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
+msgstr "اختر نوع مزود"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
 msgstr "رقم الهاتف"
@@ -128,8 +149,14 @@ msgstr "رقم الهاتف"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
 msgstr "البريد الإلكتروني"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##EmailPlaceholder"
+msgstr "أدخل البريد الإلكتروني الخاص بك"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
 msgstr "موقع (حقل اختياري)"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##WebsitePlaceholder"
+msgstr "أدخل URL موقع الويب الخاص بك"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
 msgstr "عدد المستفيدين شهرياَ"

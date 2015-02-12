@@ -229,7 +229,6 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'api.auth.ServiceInfoTokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
     ),
     'PAGINATE_BY': 10,
 }
