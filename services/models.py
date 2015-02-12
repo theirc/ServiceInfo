@@ -502,14 +502,6 @@ class JiraUpdateRecord(models.Model):
         max_length=256,
         blank=True,
         default='')
-    locked = models.BooleanField(
-        _("Whether a task is currently updating this record"),
-        default=False,
-    )
-    done = models.BooleanField(
-        _("Whether this record's work has been done"),
-        default=False,
-    )
 
     class Meta(object):
         # The service udpate types can each only happen once per service
@@ -545,12 +537,12 @@ class JiraUpdateRecord(models.Model):
         super().save(*args, **kwargs)
 
     def do_jira_work(self, jira=None):
-        # Bail out early if we don't yet have a pk, or the work has been done,
-        # or if some other thread is
-        # already working on getting an issue created or updated.
-        if (not self.pk or
-                JiraUpdateRecord.objects.filter(pk=self.pk, done=False, locked=False)
-                .update(locked=True) != 1):
+        sentinel_value = 'PENDING'
+        # Bail out early if we don't yet have a pk, if we already have a JIRA
+        # issue key set, or if some other thread is already working on getting
+        # an issue created/updated.
+        if not self.pk or JiraUpdateRecord.objects.filter(pk=self.pk, jira_issue_key='').update(
+                jira_issue_key=sentinel_value) != 1:
             return
 
         try:
@@ -570,7 +562,6 @@ class JiraUpdateRecord(models.Model):
                     Site.objects.get_current(), self.service.get_admin_edit_url())
                 new_issue = jira.create_issue(**kwargs)
                 self.jira_issue_key = new_issue.key
-                self.done = True
                 self.save()
             elif self.update_type == self.CANCEL_DRAFT_SERVICE:
                 # Track down the issue that's already been created so we
@@ -582,10 +573,11 @@ class JiraUpdateRecord(models.Model):
                 issue_key = previous_record.jira_issue_key
                 comment = 'Pending draft change was canceled by the provider'
                 jira.add_comment(issue_key, comment)
-                self.done = True
+                self.jira_issue_key = issue_key
                 self.save()
             # TODO other types of updates
         finally:
-            # Unlock the record
-            JiraUpdateRecord.objects.filter(pk=self.pk, locked=True).update(
-                locked=False)
+            # If we've not managed to save a valid JIRA issue key, reset value to
+            # empty string so it'll be tried again later.
+            JiraUpdateRecord.objects.filter(pk=self.pk, jira_issue_key=sentinel_value).update(
+                jira_issue_key='')

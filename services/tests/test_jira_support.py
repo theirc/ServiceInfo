@@ -130,7 +130,6 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
     def test_create_jira_issue_noop_if_already_created(self, mock_JIRA):
         test_key_val = 'ALREADY-SET'
         self.jira_record.jira_issue_key = test_key_val
-        self.jira_record.done = True
         self.jira_record.save()
         self.jira_record.do_jira_work()
         self.assertFalse(mock_JIRA.called)
@@ -166,7 +165,6 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         # First create a record from when the draft service was started
         issue_key = 'XXX-123'
         self.jira_record.jira_issue_key = issue_key
-        self.jira_record.done = True
         self.jira_record.save()
 
         service = self.jira_record.service
@@ -192,7 +190,7 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         )
         # Pretend we've created a JIRA issue when the draft was started.
         issue_key = 'XXX-123'
-        draft_service.jira_records.update(jira_issue_key=issue_key, done=True)
+        draft_service.jira_records.update(jira_issue_key=issue_key)
 
         # Now cancel the draft
         draft_service.cancel()
@@ -206,6 +204,8 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         # from what the "new service" case sets.
         self.assertEqual(issue_key, call_args[0])
         self.assertIn('change was canceled', call_args[1])
+        record = JiraUpdateRecord.objects.get(pk=cancel_record.pk)
+        self.assertEqual(issue_key, record.jira_issue_key)
 
 
 # These settings are not used for real since we don't talk to JIRA
