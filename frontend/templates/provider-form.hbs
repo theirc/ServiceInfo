@@ -65,6 +65,8 @@
                   </div>
                 </div>
 
+                {{!-- FIXME: For now, don't allow changing password of an existing user --}}
+                {{#if is_new }}
                 <div class="row">
                   <div class="form-group">
                       <div class="half">
@@ -84,6 +86,7 @@
                       </div>
                   </div>
                 </div>
+                {{/if}}
 
                 <div class="row">
                   <div class=form-group>
@@ -145,7 +148,9 @@
                   <button class="form-btn-submit primary-button" tabindex="17" data-i18n="Provider-Registration-Form.Form-Sections.Form-Submit-Options.Submit"></button>
                 </div>
                 <div class="half">
+                  {{# if is_new }}
                   <button class="form-btn-clear primary-button" tabindex="18" data-i18n="Provider-Registration-Form.Form-Sections.Form-Submit-Options.Clear"></button>
+                  {{/if}}
                 </div>
               </div>
             </form>
