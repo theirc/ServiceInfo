@@ -57,6 +57,9 @@ module.exports = Backbone.View.extend({
                 },
                 success: function(data) {
                     config.set('forever.authToken', data.token);
+                    if (data.language) {
+                        config.set('forever.language', data.language);
+                    }
                     window.location.hash = 'service';
                 },
             })
