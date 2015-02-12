@@ -10,5 +10,6 @@ module.exports = Backbone.View.extend({
     render: function() {
         var $el = this.$el;
         this.$el.html(template({}));
+        $el.i18n();
     },
 })
