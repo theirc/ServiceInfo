@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from django.test import TestCase, override_settings
 
-from ..models import JiraUpdateRecord
+from ..models import JiraUpdateRecord, Service
 from ..tasks import process_jira_work
 from .factories import ServiceFactory, ProviderFactory
 
@@ -116,6 +116,8 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
 
     def test_create_issue_kwargs_for_update(self, mock_JIRA):
         self.test_service.update_of = ServiceFactory()
+        self.jira_record.update_type = JiraUpdateRecord.CHANGE_SERVICE
+        self.jira_record.save()
         self.setup_issue_key(mock_JIRA)
         self.jira_record.do_jira_work()
         call_args, call_kwargs = mock_JIRA.return_value.create_issue.call_args
@@ -128,6 +130,7 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
     def test_create_jira_issue_noop_if_already_created(self, mock_JIRA):
         test_key_val = 'ALREADY-SET'
         self.jira_record.jira_issue_key = test_key_val
+        self.jira_record.done = True
         self.jira_record.save()
         self.jira_record.do_jira_work()
         self.assertFalse(mock_JIRA.called)
@@ -142,9 +145,71 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
             self.assertFalse(JIRA.called)
             self.assertEqual(issue_key, self.jira_record.jira_issue_key)
 
+    def test_cancel_current_service_creates_jira_issue(self, mock_JIRA):
+        service = self.jira_record.service
+        service.status = service.STATUS_CURRENT
+        service.save()
+        service.cancel()
+        self.jira_record = \
+            service.jira_records.get(update_type=JiraUpdateRecord.CANCEL_CURRENT_SERVICE)
+        self.jira_record.save()
+        self.setup_issue_key(mock_JIRA)
+        self.jira_record.do_jira_work()
+        call_args, call_kwargs = mock_JIRA.return_value.create_issue.call_args
+        # Only checking summary as that has the essentially different value
+        # from what the "new service" case sets.
+        self.assertTrue('summary' in call_kwargs)
+        self.assertTrue('canceled service' in call_kwargs['summary'].lower())
+        self.assertTrue(self.test_service.provider.name_en in call_kwargs['summary'])
+
+    def test_cancel_draft_new_service_comments_on_jira_issue(self, mock_JIRA):
+        # First create a record from when the draft service was started
+        issue_key = 'XXX-123'
+        self.jira_record.jira_issue_key = issue_key
+        self.jira_record.done = True
+        self.jira_record.save()
+
+        service = self.jira_record.service
+        service.status = service.STATUS_DRAFT
+        service.save()
+
+        service.cancel()
+        cancel_record = service.jira_records.get(update_type=JiraUpdateRecord.CANCEL_DRAFT_SERVICE)
+
+        cancel_record.do_jira_work()
+        call_args, call_kwargs = mock_JIRA.return_value.add_comment.call_args
+        # Only checking summary as that has the essentially different value
+        # from what the "new service" case sets.
+        self.assertEqual(issue_key, call_args[0])
+        self.assertIn('change was canceled', call_args[1])
+
+    def test_cancel_draft_service_change_comments_on_jira_issue(self, mock_JIRA):
+        # make the service we're canceling look like a change to an existing service
+        existing_service = ServiceFactory()
+        draft_service = ServiceFactory(
+            update_of=existing_service,
+            status=Service.STATUS_DRAFT,
+        )
+        # Pretend we've created a JIRA issue when the draft was started.
+        issue_key = 'XXX-123'
+        draft_service.jira_records.update(jira_issue_key=issue_key, done=True)
+
+        # Now cancel the draft
+        draft_service.cancel()
+        # We should get a new jira update record
+        cancel_record = \
+            draft_service.jira_records.get(update_type=JiraUpdateRecord.CANCEL_DRAFT_SERVICE)
+        # run it:
+        cancel_record.do_jira_work()
+        call_args, call_kwargs = mock_JIRA.return_value.add_comment.call_args
+        # Only checking summary as that has the essentially different value
+        # from what the "new service" case sets.
+        self.assertEqual(issue_key, call_args[0])
+        self.assertIn('change was canceled', call_args[1])
+
 
 # These settings are not used for real since we don't talk to JIRA
-# actually but theya re needed for the task to try to do any work.
+# actually but they are needed for the task to try to do any work.
 @override_settings(JIRA_USER='dummy', JIRA_PASSWORD='dummy', JIRA_SERVER='nonsense')
 @mock.patch('services.jira_support.JIRA', autospec=True)
 class JiraTaskTest(MockJiraTestMixin, TestCase):
