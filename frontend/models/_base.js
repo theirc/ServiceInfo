@@ -77,7 +77,7 @@ var BaseCollection = Backbone.Collection.extend({
     },
 
     parse: function(resp) {
-        return resp.results;
+        return resp;
     },
 
     data: function() {
