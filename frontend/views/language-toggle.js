@@ -42,7 +42,7 @@ module.exports = Backbone.View.extend({
                             'language': value
                         },
                         error: function (data) {
-                            console.log(data);  // FIXME?
+                            console.error(data);
                         }
                     });
                 }
