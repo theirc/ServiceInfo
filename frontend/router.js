@@ -8,6 +8,7 @@ var $ = require('jquery'),
 var views = {
     "register": require('./views/provider-form'),
     "register-confirm": require('./views/provider-form-confirm'),
+    "register-changed": require('./views/provider-form-changed'),
     "account-activate": require('./views/account-activate'),
     "service": require('./views/service-form'),
     "feedback": require('./views/feedback'),
@@ -58,6 +59,7 @@ module.exports = Backbone.Router.extend({
             }
         },
         "register": loadPage("register"),
+        "register/changed": loadPage("register-changed"),
         "register/confirm": loadPage("register-confirm"),
         "register/verify/:key": loadPage("account-activate", ['key']),
         "service": loadPage("service"),
@@ -70,6 +72,7 @@ module.exports = Backbone.Router.extend({
         "password-reset-form": loadPage("password-reset-form"),
         "logout": function() {
             config.remove('forever.authToken');
+            config.remove('forever.email');
             window.location.hash = '';
             window.location.reload();
         },

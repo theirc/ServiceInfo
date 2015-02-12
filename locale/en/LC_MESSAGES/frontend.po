@@ -39,6 +39,9 @@ msgstr "Feedback Tool"
 msgid "Menu##Change-Language"
 msgstr "Change Language"
 
+msgid "Global##FormSubmissionError"
+msgstr "There was an unknown error submitting your form."
+
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "Log In"
 
