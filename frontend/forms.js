@@ -1,4 +1,5 @@
 var config = require('./config');
+var i18n = require('i18next-client');
 
 var forms = module.exports = {
     collect: function($form) {
@@ -51,13 +52,19 @@ var forms = module.exports = {
                 error: function(e) {
                     $submit.removeAttr('disabled');
                     $.extend(errors, e.responseJSON);
+                    var missing = {};
                     $.each(errors, function(k) {
                         var $error = self.getFieldLabel($form, k).find('.error');
                         if ($error) {
                             $error.text(this[0]);
+                        } else {
+                            missing[k] = this[0];
                         }
                     })
-                    error(errors);
+                    if (e.status >= 500) {
+                        $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
+                    }
+                    error(missing);
                 },
                 success: function() {
                     $submit.removeAttr('disabled');

@@ -54,6 +54,9 @@ module.exports = Backbone.View.extend({
                             $el.find('.error-' + k).text(e.responseJSON[k]);
                         }
                     }
+                    if (e.status >= 500) {
+                       $el.find('.error-submission').text(i18n.t('Global.FormSubmissionError'));
+                    }
                 },
                 success: function(data) {
                     config.set('forever.authToken', data.token);

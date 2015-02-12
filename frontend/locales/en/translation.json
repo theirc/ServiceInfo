@@ -16,6 +16,9 @@
   	"Feedback-Tool": "Feedback Tool",
   	"Change-Language": "Change Language"
   },
+  "Global": {
+    "FormSubmissionError": "There was an unknown error submitting your form."
+  },
   "Login-Form": {
   	"Page-Head": {
   		"Page-Title": {
