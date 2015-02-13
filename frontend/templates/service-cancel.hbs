@@ -1,0 +1,58 @@
+<!-- Page Head -->
+    <div class="page-head">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                {{#if is_draft }}
+                    <div class="page-title" data-i18n="Service-Remove-Change.Page-Head.Page-Title.Title"></div>
+                {{else}}
+                    <div class="page-title" data-i18n="Service-Delete.Page-Head.Page-Title.Title"></div>
+                {{/if}}
+                   <div class="page-descr"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- End Page Head -->
+
+<!-- Main Content -->
+
+<!-- Forms -->
+      <div class="main-content">
+        <div class="container">
+          <div class="row">
+            <dl>
+                <dt data-i18n="Service-Form.Service-Name"></dt>
+                <dd>{{ service.name }}</dd>
+                <dt data-i18n="Service-List.Table.Thead.Status"></dt>
+                <dd>{{ service.status }}</dd>
+                {{#if update_of }}
+                <dt data-i18n="Service-Remove-Change.Update-Of"></dt>
+                <dd>{{ update_of.name }}</dd>
+                {{/if}}
+            </dl>
+          </div>
+          <div class="row">
+            <form>
+              <input type="hidden" name="id"></input>
+              <div class="submit-form">
+                  <div class="half">
+                    <button class="form-btn-submit primary-button"
+                     {{#if is_draft }}
+                       data-i18n="Service-Remove-Change.Remove-Change"
+                     {{else}}
+                       data-i18n="Service-Delete.Delete-Service"
+                     {{/if}}
+                    ></button>
+                  </div>
+                  <div class="half"></div>
+              </div>
+            </form>
+
+            </div>
+          </div>
+        </div>
+
+<!-- End Forms -->
+
+<!-- End Main Content -->
