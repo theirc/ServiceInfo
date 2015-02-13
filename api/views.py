@@ -8,7 +8,7 @@ from rest_framework import parsers, renderers, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import list_route, detail_route
 from rest_framework.exceptions import ValidationError as DRFValidationError, PermissionDenied
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -73,7 +73,8 @@ class ServiceViewSet(viewsets.ModelViewSet):
         # Only make visible the Services owned by the current provider
         # and not archived
         return self.queryset.filter(provider__user=self.request.user)\
-            .exclude(status=Service.STATUS_ARCHIVED)
+            .exclude(status=Service.STATUS_ARCHIVED)\
+            .exclude(status=Service.STATUS_CANCELED)
 
     def get_object(self):
         # Users can only access their own records
@@ -113,6 +114,9 @@ class SelectionCriterionViewSet(viewsets.ModelViewSet):
 
 
 class ProviderTypeViewSet(viewsets.ModelViewSet):
+    # Unauth'ed users need to be able to read the provider types so
+    # they can register as providers.
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ProviderType.objects.all()
     serializer_class = ProviderTypeSerializer
 
@@ -234,7 +238,8 @@ class APILogin(APIView):
         token, created = Token.objects.get_or_create(user=user)
         user.last_login = now()
         user.save(update_fields=['last_login'])
-        return Response({'token': token.key})
+        return Response({'token': token.key,
+                         'language': user.language})
 
 
 class APIActivationView(APIView):

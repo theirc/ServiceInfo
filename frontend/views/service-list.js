@@ -17,8 +17,12 @@ module.exports = Backbone.View.extend({
             window.services = services;
             var p = services.loadSubModels();
             p.then(function(){
+                var records = services.data();
+                for (var i = 0; i < records.length; i++) {
+                    records[i].is_draft = records[i].status === 'draft';
+                }
                 $el.html(template({
-                    services: services.data(),
+                    services: records
                 }));
                 $el.i18n();
             });

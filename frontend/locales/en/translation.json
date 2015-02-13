@@ -16,6 +16,9 @@
   	"Feedback-Tool": "Feedback Tool",
   	"Change-Language": "Change Language"
   },
+  "Global": {
+    "FormSubmissionError": "There was an unknown error submitting your form."
+  },
   "Login-Form": {
   	"Page-Head": {
   		"Page-Title": {
@@ -33,6 +36,23 @@
   		"Submit": "Login",
       "Register": "Register to be a Service Provider here"
   	}
+  },
+  "Service-Remove-Change": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Remove Change"
+      }
+    },
+    "Update-Of": "Update of",
+    "Remove-Change": "Remove change"
+  },
+  "Service-Delete": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Delete Service"
+      }
+    },
+    "Delete-Service": "Delete service"
   },
   "Service-Form": {
     "Page-Head": {
@@ -62,10 +82,10 @@
   "Provider-Registration-Form": {
   	"Page-Head": {
   		"Page-Title": {
-  			"Title": "New Service Provider Registration Form"
+            "Title": "Service Provider Registration Form"
   		},
   		"Page-Description": {
-  			"Page-Description": "Fill out the form below to apply to be a service provider."
+            "Page-Description": "Fill out the form below."
   		}
   	},
     "Errors": {
@@ -137,9 +157,12 @@
         "Name": "Name:",
         "Type": "Type:",
         "Area": "Area:",
-        "Status": "Status:"
+        "Status": "Status:",
+        "Remove": "Remove:"
       }
-    }
+    },
+    "Cancel": "Cancel",
+    "Delete": "Delete"
   },
   "Home": {
     "Service-Map": {
@@ -162,6 +185,16 @@
       },
       "Page-Description": {
         "Page-Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+      }
+    }
+  },
+  "Provider-Registration-Changed": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Your Information was Submitted Successfully"
+      },
+      "Page-Description": {
+        "Page-Description": "Your information has been updated."
       }
     }
   },

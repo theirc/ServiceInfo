@@ -21,6 +21,7 @@
 				<th data-i18n="Service-List.Table.Thead.Type"></th>
 				<th data-i18n="Service-List.Table.Thead.Area"></th>
 				<th data-i18n="Service-List.Table.Thead.Status"></th>
+				<th data-i18n="Service-List.Table.Thead.Remove"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -39,6 +40,15 @@
 				</td>
 				<td>
 					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Area"></div><span class="vertical-td">{{ this.status }}</span>
+				</td>
+				<td>
+				    <div class="vertical-header" data-i18n="Service-List.Table.Thead.Remove"></div><span class="vertical-td"><a href="#/service/cancel/{{ this.id }}"><span
+				      {{#if this.is_draft }}
+      				     data-i18n="Service-Remove-Change.Remove-Change"
+                      {{else}}
+      				     data-i18n="Service-Delete.Delete-Service"
+                      {{/if}}
+				     ></span></a></span>
 				</td>
 			</tr>
             {{/each}}

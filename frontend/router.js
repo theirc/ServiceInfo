@@ -8,10 +8,12 @@ var $ = require('jquery'),
 var views = {
     "register": require('./views/provider-form'),
     "register-confirm": require('./views/provider-form-confirm'),
+    "register-changed": require('./views/provider-form-changed'),
     "account-activate": require('./views/account-activate'),
     "service": require('./views/service-form'),
     "feedback": require('./views/feedback'),
     "map": require('./views/map'),
+    "service-cancel": require('./views/service-cancel'),
     "service-list": require('./views/service-list'),
     "login": require('./views/login'),
     "password-reset": require('./views/password-reset'),
@@ -39,7 +41,7 @@ function loadPage(name, params) {
             i18n.init(function(){
                 view.render.apply(view, viewArguments);
                 view.$el.i18n({
-                    lng: config.get('lang'),
+                    lng: config.get('forever.language'),
                 });
             });
             $('#menu-container').addClass("menu-closed");
@@ -58,18 +60,21 @@ module.exports = Backbone.Router.extend({
             }
         },
         "register": loadPage("register"),
+        "register/changed": loadPage("register-changed"),
         "register/confirm": loadPage("register-confirm"),
         "register/verify/:key": loadPage("account-activate", ['key']),
         "service": loadPage("service"),
         "service/:id": loadPage("service", ['id']),
         "feedback": loadPage("feedback"),
         "map": loadPage("map"),
+        "service/cancel/:id": loadPage("service-cancel", ['id']),
         "service-list": loadPage("service-list"),
         "login": loadPage("login"),
         "password-reset": loadPage("password-reset"),
         "password-reset-form": loadPage("password-reset-form"),
         "logout": function() {
             config.remove('forever.authToken');
+            config.remove('forever.email');
             window.location.hash = '';
             window.location.reload();
         },
