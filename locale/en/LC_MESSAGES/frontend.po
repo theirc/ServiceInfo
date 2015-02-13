@@ -12,17 +12,35 @@ msgstr "i18next"
 msgid "test##hello"
 msgstr "Hello, World"
 
-msgid "menu##Map"
+msgid "Menu##Menu-Toggle"
+msgstr "MENU"
+
+msgid "Menu##Login"
+msgstr "Login"
+
+msgid "Menu##Logout"
+msgstr "Logout"
+
+msgid "Menu##Services"
+msgstr "Services"
+
+msgid "Menu##Add-Services"
+msgstr "Add Services"
+
+msgid "Menu##Service-Map"
 msgstr "Service Map"
 
-msgid "menu##Registration"
+msgid "Menu##Provider-Registration"
 msgstr "Provider Registration"
 
-msgid "menu##Feedback"
+msgid "Menu##Feedback-Tool"
 msgstr "Feedback Tool"
 
-msgid "menu##Change-Language"
+msgid "Menu##Change-Language"
 msgstr "Change Language"
+
+msgid "Global##FormSubmissionError"
+msgstr "There was an unknown error submitting your form."
 
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "Log In"
@@ -41,6 +59,12 @@ msgstr "Login"
 
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "Register to be a Service Provider here"
+
+msgid "Service-Form##Page-Head##Page-Title##Title"
+msgstr "New Service Registration Form"
+
+msgid "Service-Form##Page-Head##Page-Description##Page-Description"
+msgstr "Fill out the form below to apply to have a new service approved."
 
 msgid "Service-Form##Legend"
 msgstr "Service Information"
@@ -108,11 +132,11 @@ msgstr "Password"
 msgid "Provider-Registration-Form##Form-Sections##Basic##PasswordConfirm"
 msgstr "Confirm Password"
 
-msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type"
-msgstr "Type of Service"
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type"
+msgstr "Provider Type"
 
-msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type-Choose"
-msgstr "Choose a Service Type"
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
+msgstr "Choose a Provider Type"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
 msgstr "Phone Number"

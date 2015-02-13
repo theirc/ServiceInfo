@@ -230,7 +230,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'api.auth.ServiceInfoTokenAuthentication',
     ),
-    'PAGINATE_BY': 10,
+    'PAGINATE_BY': None,
 }
 
 

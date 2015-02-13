@@ -115,9 +115,13 @@ class ServiceAdmin(admin.ModelAdmin):
     reject.short_description = _("Reject new or changed service")
 
 
+class ServiceAreaAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'parent', 'name_en', 'name_ar', 'name_fr')
+
+
 admin.site.register(Provider, ProviderAdmin)
 admin.site.register(ProviderType, ProviderTypeAdmin)
 admin.site.register(ServiceType, ServiceTypeAdmin)
 admin.site.register(Service, ServiceAdmin)
-admin.site.register(ServiceArea)
+admin.site.register(ServiceArea, ServiceAreaAdmin)
 admin.site.register(SelectionCriterion, SelectionCriterionAdmin)

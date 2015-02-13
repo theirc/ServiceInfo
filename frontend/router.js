@@ -8,6 +8,7 @@ var $ = require('jquery'),
 var views = {
     "register": require('./views/provider-form'),
     "register-confirm": require('./views/provider-form-confirm'),
+    "register-changed": require('./views/provider-form-changed'),
     "account-activate": require('./views/account-activate'),
     "service": require('./views/service-form'),
     "feedback": require('./views/feedback'),
@@ -20,6 +21,8 @@ var views = {
 
 function loadPage(name, params) {
     var params = params || [];
+    var view;
+
     return function() {
         var viewArguments = Array.prototype.slice.apply(arguments);
         config.ready(function(){
@@ -30,11 +33,14 @@ function loadPage(name, params) {
             for (var i=0; i < params.length; i++) {
                 opts[params[i]] = viewArguments[i];
             };
-            var view = new views[name](opts);
+            if (view) {
+                view.undelegateEvents();
+            }
+            view = new views[name](opts);
             i18n.init(function(){
                 view.render.apply(view, viewArguments);
                 view.$el.i18n({
-                    lng: config.get('lang'),
+                    lng: config.get('forever.language'),
                 });
             });
             $('#menu-container').addClass("menu-closed");
@@ -53,9 +59,11 @@ module.exports = Backbone.Router.extend({
             }
         },
         "register": loadPage("register"),
+        "register/changed": loadPage("register-changed"),
         "register/confirm": loadPage("register-confirm"),
         "register/verify/:key": loadPage("account-activate", ['key']),
         "service": loadPage("service"),
+        "service/:id": loadPage("service", ['id']),
         "feedback": loadPage("feedback"),
         "map": loadPage("map"),
         "service-list": loadPage("service-list"),
@@ -64,6 +72,7 @@ module.exports = Backbone.Router.extend({
         "password-reset-form": loadPage("password-reset-form"),
         "logout": function() {
             config.remove('forever.authToken');
+            config.remove('forever.email');
             window.location.hash = '';
             window.location.reload();
         },

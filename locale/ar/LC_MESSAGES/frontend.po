@@ -1,10 +1,17 @@
+# 
+# Translators:
+# Omar Meksassi <omar.meksassi@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: node-gettext\n"
+"Project-Id-Version: Service Info\n"
+"PO-Revision-Date: 2015-02-11 14:30+0000\n"
+"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
+"Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural= n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 msgid "app##name"
 msgstr "i18next"
@@ -12,16 +19,31 @@ msgstr "i18next"
 msgid "test##hello"
 msgstr "مرحبا بالعالم"
 
-msgid "menu##Map"
-msgstr "خريطة الخدمات "
+msgid "Menu##Menu-Toggle"
+msgstr "قائمة"
 
-msgid "menu##Registration"
-msgstr "تسجيل مزود الخدمات "
+msgid "Menu##Login"
+msgstr "تسجيل الدخول"
 
-msgid "menu##Feedback"
-msgstr "أداة تسجيل الملاحظات "
+msgid "Menu##Logout"
+msgstr "تسجيل الخروج"
 
-msgid "menu##Change-Language"
+msgid "Menu##Services"
+msgstr "الخدمات"
+
+msgid "Menu##Add-Services"
+msgstr "إضافة خدمات"
+
+msgid "Menu##Service-Map"
+msgstr "خدمة خريطة"
+
+msgid "Menu##Provider-Registration"
+msgstr "التسجيل مزود"
+
+msgid "Menu##Feedback-Tool"
+msgstr "ردود الفعل أداة"
+
+msgid "Menu##Change-Language"
 msgstr "تغيير اللغة"
 
 msgid "Login-Form##Page-Head##Page-Title##Title"
@@ -42,8 +64,14 @@ msgstr "تسجيل الدخول"
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "سجل لتكون مقدم خدمات هنا"
 
+msgid "Service-Form##Page-Head##Page-Title##Title"
+msgstr "استمارة التسجيل خدمة جديدة"
+
+msgid "Service-Form##Page-Head##Page-Description##Page-Description"
+msgstr "ملء النموذج أدناه لتطبيق لخدمة جديدة وافقت."
+
 msgid "Service-Form##Legend"
-msgstr "معلومات عن الخدمة "
+msgstr "معلومات عن الخدمة"
 
 msgid "Service-Form##Service-Name"
 msgstr "اسم الخدمة"
@@ -84,7 +112,8 @@ msgstr "إزالة الأجوبة"
 msgid "Provider-Registration-Form##Page-Head##Page-Title##Title"
 msgstr "إستمارة تسجيل مزود خدمات جديد "
 
-msgid "Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
+msgid ""
+"Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
 msgstr "إملء النموذج أدناه لتكون مزود خدمات."
 
 msgid "Provider-Registration-Form##Errors##Password-Blank"
@@ -108,11 +137,11 @@ msgstr "كلمة السر"
 msgid "Provider-Registration-Form##Form-Sections##Basic##PasswordConfirm"
 msgstr "تأكيد كلمة المرور"
 
-msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type"
-msgstr "نوع الخدمة"
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type"
+msgstr "نوع مزود"
 
-msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type-Choose"
-msgstr "اختيار نوع الخدمة"
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
+msgstr "اختر نوع مزود"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
 msgstr "رقم الهاتف"
@@ -120,8 +149,14 @@ msgstr "رقم الهاتف"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
 msgstr "البريد الإلكتروني"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##EmailPlaceholder"
+msgstr "أدخل البريد الإلكتروني الخاص بك"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
 msgstr "موقع (حقل اختياري)"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##WebsitePlaceholder"
+msgstr "أدخل URL موقع الويب الخاص بك"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
 msgstr "عدد المستفيدين شهرياَ"
@@ -132,28 +167,39 @@ msgstr "توصيف "
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Legend"
 msgstr "معلومات عن الخدمة"
 
-msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Name"
+msgid ""
+"Provider-Registration-Form##Form-Sections##Service-Information##Service-Name"
 msgstr "اسم الخدمة"
 
-msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Area"
+msgid ""
+"Provider-Registration-Form##Form-Sections##Service-Information##Service-Area"
 msgstr "منطقة الخدمة"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Type"
 msgstr "نوع الخدمة"
 
-msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Description"
+msgid ""
+"Provider-Registration-Form##Form-Sections##Service-Information##Service-"
+"Description"
 msgstr "توصيف "
 
-msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Hours"
+msgid ""
+"Provider-Registration-Form##Form-Sections##Service-Information##Service-"
+"Hours"
 msgstr "ساعات الخدمة"
 
-msgid "Provider-Registration-Form##Form-Sections##Service-Information##Additional-Information"
+msgid ""
+"Provider-Registration-Form##Form-Sections##Service-Information##Additional-"
+"Information"
 msgstr "معلومات إضافية (حقل اختياري)"
 
-msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Cost"
+msgid ""
+"Provider-Registration-Form##Form-Sections##Service-Information##Service-Cost"
 msgstr "تكلفة الخدمة (حقل اختياري)"
 
-msgid "Provider-Registration-Form##Form-Sections##Service-Information##Selection-Criteria"
+msgid ""
+"Provider-Registration-Form##Form-Sections##Service-Information##Selection-"
+"Criteria"
 msgstr "معايير الاختيار (حقل اختياري)"
 
 msgid "Provider-Registration-Form##Form-Sections##Form-Submit-Options##Submit"
@@ -222,7 +268,9 @@ msgstr "تسجيل الدخول إلى حساب مزود خدمة القائمة
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
 msgstr "قدم بياناتك بنجاح"
 
-msgid "Provider-Registration-Confirmation##Page-Head##Page-Description##Page-Description"
+msgid ""
+"Provider-Registration-Confirmation##Page-Head##Page-Description##Page-"
+"Description"
 msgstr "لقد قمنا بإرسال رسالة تأكيد بالبريد الإلكتروني إلى حساب البريد الإلكتروني الذي استخدمته أثناء التسجيل. انقر على رابط التأكيد في رسالة البريد الإلكتروني لاستكمال عملية التسجيل."
 
 msgid "Password-Reset##Page-Head##Page-Title##Title"

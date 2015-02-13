@@ -13,7 +13,7 @@ from rest_framework.test import APIClient
 
 from email_user.models import EmailUser
 from email_user.tests.factories import EmailUserFactory
-from services.models import Provider, Service, SelectionCriterion
+from services.models import Provider, Service, SelectionCriterion, ServiceArea
 from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory, \
     ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory
 
@@ -228,7 +228,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         rsp = self.get_with_token(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
-        for item in result['results']:
+        for item in result:
             provider = Provider.objects.get(id=item['id'])
             self.assertIn(provider.name_en, [p1.name_en, p2.name_en])
 
@@ -359,7 +359,7 @@ class ServiceAPITest(APITestMixin, TestCase):
         rsp = self.get_with_token(reverse('service-list'))
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
-        services = result['results']
+        services = result
         service_ids = [x['id'] for x in services]
         self.assertEqual(2, len(services))
         self.assertIn(s1.id, service_ids)
@@ -440,6 +440,26 @@ class ServiceAPITest(APITestMixin, TestCase):
         s3 = Service.objects.get(update_of=s1, status=Service.STATUS_DRAFT)
         self.assertNotEqual(s2.pk, s3.pk)
 
+    def test_create_update_to_top_draft(self):
+        # If we submit an update of a draft for a service that's never been
+        # approved (so the draft isn't an update of anything else), the new one
+        # should just replace the previous one
+        s1 = ServiceFactory(provider=self.provider, status=Service.STATUS_DRAFT)
+        rsp = self.get_with_token(s1.get_api_url())
+        data = json.loads(rsp.content.decode('utf-8'))
+        del data['url']
+        del data['id']
+        data['update_of'] = s1.get_api_url()
+        rsp = self.post_with_token(reverse('service-list'), data)
+        self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        # s1 should have been archived out of the way
+        s1 = Service.objects.get(pk=s1.pk)
+        self.assertEqual(Service.STATUS_ARCHIVED, s1.status)
+        # And now s2 is an update of nothing
+        s2 = Service.objects.get(status=Service.STATUS_DRAFT)
+        self.assertIsNone(s2.update_of)
+        self.assertEqual(Service.STATUS_DRAFT, s2.status)
+
 
 class SelectionCriterionAPITest(APITestMixin, TestCase):
     def test_create_selection_criterion(self):
@@ -471,7 +491,7 @@ class SelectionCriterionAPITest(APITestMixin, TestCase):
         rsp = self.get_with_token(reverse('selectioncriterion-list'))
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
-        criteria = result['results']
+        criteria = result
         criteria_ids = [x['id'] for x in criteria]
         self.assertEqual(2, len(criteria))
         self.assertIn(s1.id, criteria_ids)
@@ -482,6 +502,7 @@ class SelectionCriterionAPITest(APITestMixin, TestCase):
 class ServiceAreaAPITest(APITestMixin, TestCase):
     def setUp(self):
         super().setUp()
+        ServiceArea.objects.all().delete()
         self.area1 = ServiceAreaFactory()
         self.area2 = ServiceAreaFactory(parent=self.area1)
         self.area3 = ServiceAreaFactory(parent=self.area1)
@@ -490,7 +511,7 @@ class ServiceAreaAPITest(APITestMixin, TestCase):
         rsp = self.get_with_token(reverse('servicearea-list'))
         self.assertEqual(OK, rsp.status_code)
         result = json.loads(rsp.content.decode('utf-8'))
-        results = result['results']
+        results = result
         names = [area.name_en for area in [self.area1, self.area2, self.area3]]
         for item in results:
             self.assertIn(item['name_en'], names)
@@ -832,7 +853,7 @@ class UserAPITest(APITestMixin, TestCase):
         rsp = self.get_with_token(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         response = json.loads(rsp.content.decode('utf-8'))
-        pks = [item['id'] for item in response['results']]
+        pks = [item['id'] for item in response]
         self.assertIn(self.user.pk, pks)
 
     def test_get_user(self):

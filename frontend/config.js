@@ -1,7 +1,8 @@
 var config_data = {
     //api_location: "//localhost:8000/",
-    lang: 'en',
+    'forever.language': 'en',
 };
+var has_been_set = {};
 var _loaded = false;
 var _pending = [];
 
@@ -11,10 +12,19 @@ var config = module.exports = {
     },
     set: function(key, value) {
         config_data[key] = value;
+        has_been_set[key] = true;
         if (key.indexOf('forever.') === 0) {
             localStorage[key] = value;
         }
         this._triggerChange(key, 'set', value);
+    },
+    isset: function(key) {
+        // Whether 'key' has ever been .set, meaning either it
+        // was found in localStorage or .set has been called for
+        // it after the config was initialized.  Basically means
+        // we have a known preference and aren't just using a
+        // default value.
+        return has_been_set.hasOwnProperty(key);
     },
     remove: function(key) {
         localStorage.removeItem(key);

@@ -35,8 +35,9 @@ module.exports = Backbone.View.extend({
         "click button": function(ev) {
             var $el = this.$el;
             ev.preventDefault();
+            var email = $el.find('[name=email]').val();
             var data = {
-                email: $el.find('[name=email]').val(),
+                email: email,
                 password: $el.find('[name=password]').val(),
             };
 
@@ -54,9 +55,19 @@ module.exports = Backbone.View.extend({
                             $el.find('.error-' + k).text(e.responseJSON[k]);
                         }
                     }
+                    if (e.status >= 500) {
+                       $el.find('.error-submission').text(i18n.t('Global.FormSubmissionError'));
+                    }
                 },
                 success: function(data) {
                     config.set('forever.authToken', data.token);
+                    // Store the email to make it easier to pick out a user's
+                    // own records - this is really just for superusers, everybody
+                    // else will only get back their own records anyway.
+                    config.set('forever.email', email);
+                    if (data.language) {
+                        config.set('forever.language', data.language);
+                    }
                     window.location.hash = 'service';
                 },
             })

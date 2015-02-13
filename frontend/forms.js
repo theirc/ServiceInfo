@@ -1,6 +1,7 @@
 var config = require('./config');
+var i18n = require('i18next-client');
 
-module.exports = {
+var forms = module.exports = {
     collect: function($form) {
         var data = {};
 
@@ -11,7 +12,7 @@ module.exports = {
             var ml = typeof $field.data('i18n-field') !== "undefined";
 
             if (ml) {
-                var cur_lang = localStorage['lang'];
+                var cur_lang = config.get('forever.language');
                 name = name + '_' + cur_lang;
             }
 
@@ -21,10 +22,21 @@ module.exports = {
         return data;
     },
 
+    getField: function($form, name) {
+        var $field = $form.find('[name='+name+']');
+        return $field;
+    },
     getFieldLabel: function($form, name) {
-        var $field = $form.find('[name={}]'.replace('{}', name));
+        var $field = $form.find('[name='+name+']');
         var id = $field.attr('id');
         return $form.find('label[for='+ id +']');
+    },
+
+    initial: function($form, model) {
+        var data = model.data();
+        $.each(data, function(name, value) {
+            forms.getField($form, name).val(value);
+        })
     },
 
     submit: function($form, action, data, errors) {
@@ -40,13 +52,19 @@ module.exports = {
                 error: function(e) {
                     $submit.removeAttr('disabled');
                     $.extend(errors, e.responseJSON);
+                    var missing = {};
                     $.each(errors, function(k) {
                         var $error = self.getFieldLabel($form, k).find('.error');
                         if ($error) {
                             $error.text(this[0]);
+                        } else {
+                            missing[k] = this[0];
                         }
                     })
-                    error(errors);
+                    if (e.status >= 500) {
+                        $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
+                    }
+                    error(missing);
                 },
                 success: function() {
                     $submit.removeAttr('disabled');

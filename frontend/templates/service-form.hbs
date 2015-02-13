@@ -17,66 +17,79 @@
       <div class="main-content">
         <div class="container">
           <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
-
             <form>
               <input type=hidden name=provider></input>
+              <input type=hidden name=update_of></input>
 
               <fieldset>
                 <legend data-i18n="Service-Form.Legend"></legend>
-                <div class="form-group">
-                  <label for="name" class="control-label"><span data-i18n="Service-Form.Service-Name"></span><span class="error"></span></label>
-                    <div class="form-group">
-                      <input type="text" name="name" data-i18n-field class="form-control"  >
-                    </div>
-                </div>
-                <div class="form-group">
-                  <label for="area_of_service" class="control-label"><span data-i18n="Service-Form.Service-Area"></span><span class="error"></span></label>
-                    <div class="btn-group"  >
-                        <select name=area_of_service class="form-control">
-                            {{#each areas_of_services}}
-                                <option value="{{ this.url }}">{{ this.name }}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                  <label for="type" class="control-label"><span data-i18n="Service-Form.Type"></span><span class="error"></span></label>
-                    <div class="btn-group">
-                        <select name=type class="form-control">
-                            {{#each types}}
-                                <option value="{{ this.url }}">{{ this.name }}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                  <label for="id_description" class="control-label"><span  data-i18n="Service-Form.Service-Description"><span class="error"></span></label>
+                <div class="row">
                   <div class="form-group">
-                    <textarea rows="2" name="description" data-i18n-field class="form-control"  ></textarea>
+                    <label for="name" class="control-label"><span data-i18n="Service-Form.Service-Name"></span><span class="error"></span></label>
+                      <div class="form-group">
+                        <input type="text" name="name" data-i18n-field class="form-control"  >
+                      </div>
+                  </div>
+                </row>
+                <div class="row">
+                  <div class="half">
+                    <div class="form-group">
+                      <label for="area_of_service" class="control-label"><span data-i18n="Service-Form.Service-Area"></span><span class="error"></span></label>
+                      <div class="btn-group"  >
+                          <select name=area_of_service class="form-control">
+                              {{#each areas_of_services}}
+                                  <option value="{{ this.url }}">{{ this.name }}</option>
+                              {{/each}}
+                          </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="half">
+                    <div class="form-group">
+                      <label for="type" class="control-label"><span data-i18n="Service-Form.Type"></span><span class="error"></span></label>
+                        <div class="btn-group">
+                            <select name=type class="form-control">
+                                {{#each types}}
+                                    <option value="{{ this.url }}">{{ this.name }}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <label for="id_description" class="control-label"><span  data-i18n="Service-Form.Service-Description"><span class="error"></span></label>
+                    <div class="form-group">
+                      <textarea rows="4" name="description" data-i18n-field class="form-control"  ></textarea>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="time_of_service" class="control-label"><span data-i18n="Service-Form.Service-Hours"></span><span class="error"></span></label>
                   {{#each daysofweek}}
-                  <div class=row>
+                  <div id=service-hours>
+                    <div class=row>
+                      <div class="third">
+                          <label>&nbsp;</label>
+                          <div class="operating-hours-to">{{ this }}
+                          </div>
+                      </div>
+
                       <div class="third">
                           <div class="form-group">
                             <label for="id_{{toLowerCase this}}_open" class="operating-hours"><span data-i18n="Service-Form.Hours-Open"></span><span class=error></span></label>
                             <input type="time" id="id_{{toLowerCase this}}_open" name="{{toLowerCase this}}_open" class="form-control">
                           </div>
                       </div>
-                      <div class="third">
-                          <label>&nbsp;</label>
-                          <div class="operating-hours-to">{{ this }}
-                          </div>
-                      </div>
+
                       <div class="third">
                           <div class="form-group">
                             <label for="id_{{toLowerCase this}}_close" class="operating-hours"><span data-i18n="Service-Form.Hours-Close"></span><span class=error></span></label>
                             <input type="time" id="id_{{toLowerCase this}}_close" name="{{toLowerCase this}}_close" class="form-control">
                           </div>
                       </div>
+                    </div>
                   </div>
                   {{/each}}
 
@@ -129,6 +142,7 @@
             </form>
             <form>
               <div class="submit-form">
+                  <div class="row error error-submission"></div>
                   <div class="half">
                     <button class="form-btn-submit primary-button" data-i18n="Service-Form.Form-Submit-Options.Submit"></button>
                   </div>

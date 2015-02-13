@@ -228,7 +228,8 @@ class APILogin(APIView):
         token, created = Token.objects.get_or_create(user=user)
         user.last_login = now()
         user.save(update_fields=['last_login'])
-        return Response({'token': token.key})
+        return Response({'token': token.key,
+                         'language': user.language})
 
 
 class APIActivationView(APIView):

@@ -5,11 +5,16 @@
     "test": {
         "hello": "Bonjour Le Monde"
     },
-    "menu": {
-        "Map": "carte de service",
-        "Registration": "Inscription des fournisseurs",
-        "Feedback": "Outil de Commentaire",
-        "Change-Language": "Change de langue"
+    "Menu": {
+        "Menu-Toggle": "Menu",
+        "Login": "Login",
+        "Logout": "Logout",
+        "Services": "services",
+        "Add-Services": "Ajouter des services",
+        "Service-Map": "service Map",
+        "Provider-Registration": "Inscription des fournisseurs",
+        "Feedback-Tool": "Commentaires Outil",
+        "Change-Language": "Changer de langue"
     },
     "Login-Form": {
         "Page-Head": {
@@ -30,6 +35,14 @@
         }
     },
     "Service-Form": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "Formulaire d'inscription Nouveau service"
+            },
+            "Page-Description": {
+                "Page-Description": "Remplissez le formulaire ci-dessous pour demander qu'un nouveau service approuvé."
+            }
+        },
         "Legend": "Informations sur le service",
         "Service-Name": "Nom du service",
         "Service-Area": "Zone de service",
@@ -66,11 +79,13 @@
                 "Name": "plein nom",
                 "Password": "mot de passe",
                 "PasswordConfirm": "Confirmez Le Mot De Passe",
-                "Service-Type": "Type de service",
-                "Service-Type-Choose": "Choisissez un type de service",
+                "Provider-Type": "Type de prestataire",
+                "Provider-Type-Choose": "Choisissez un type de fournisseur",
                 "Phone-Number": "Numéro de téléphone",
                 "Email": "Email",
+                "EmailPlaceholder": "Entrez votre Email",
                 "Website": "Site Web (champ optionel)",
+                "WebsitePlaceholder": "Entrez votre URL de site web",
                 "MonthlyBeneficiaries": "Nombre de bénéficiaires mensuelles",
                 "Description": "description"
             },
