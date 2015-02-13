@@ -75,8 +75,8 @@
       "Hours-Open": "Opening Time:",
       "Hours-Close": "Closing Time:",
       "Selection-Criteria": "Selection Criteria",
-      "Add-Criteria": "Add New Criteria",
-      "Remove-Criteria": "Remove Criteria",
+      "Add-Criterion": "Add New Criterion",
+      "Remove-Criterion": "Remove Criterion",
       "Form-Submit-Options": {
           "Submit": "Submit Answers",
           "Clear": "Remove Answers"
