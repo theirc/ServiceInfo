@@ -11,7 +11,7 @@ var forms = module.exports = {
             var name = $field.attr('name');
             var ml = typeof $field.data('i18n-field') !== "undefined";
 
-            if (name.indexOf('.') > 0) {
+            if (!!value && name.indexOf('.') > 0) {
                 var parts = name.split('.');
                 var target = data;
                 var tval, fromarray;
@@ -42,7 +42,7 @@ var forms = module.exports = {
                 name = name + '_' + cur_lang;
             }
 
-            if (name.indexOf('.') < 0) {
+            if (!!value && name.indexOf('.') < 0) {
                 data[name] = value;
             }
         });
