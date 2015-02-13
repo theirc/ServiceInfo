@@ -16,6 +16,9 @@
         "Feedback-Tool": "Commentaires Outil",
         "Change-Language": "Changer de langue"
     },
+    "Global": {
+        "FormSubmissionError": "Il y avait une erreur inconnue soumettant votre formulaire."
+    },
     "Login-Form": {
         "Page-Head": {
             "Page-Title": {
@@ -33,6 +36,23 @@
             "Submit": "entrer",
             "Register": "Inscrivez-vous pour être un fournisseur de service ici"
         }
+    },
+    "Service-Remove-Change": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "Retirer Change"
+            }
+        },
+        "Update-Of": "Mise à jour de",
+        "Remove-Change": "Retirer le changement"
+    },
+    "Service-Delete": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "supprimer le service"
+            }
+        },
+        "Delete-Service": "supprimer le service"
     },
     "Service-Form": {
         "Page-Head": {
@@ -62,10 +82,10 @@
     "Provider-Registration-Form": {
         "Page-Head": {
             "Page-Title": {
-                "Title": "Nouveau fournisseur de service  formulaire d'inscription"
+                "Title": "Formulaire service fournisseur d'enregistrement"
             },
             "Page-Description": {
-                "Page-Description": "Remplissez le formulaire ci-dessous pour demander à être un fournisseur de services."
+                "Page-Description": "Remplissez le formulaire ci-dessous."
             }
         },
         "Errors": {
@@ -137,9 +157,12 @@
                 "Name": "nom:",
                 "Type": "type:",
                 "Area": "Emplacement:",
-                "Status": "Statu:"
+                "Status": "Statu:",
+                "Remove": "Retirer:"
             }
-        }
+        },
+        "Cancel": "annuler",
+        "Delete": "effacer"
     },
     "Home": {
         "Service-Map": {
@@ -162,6 +185,16 @@
             },
             "Page-Description": {
                 "Page-Description": "Nous avons envoyé un e-mail de confirmation sur le compte e-mail utilisée lors de votre inscription. Cliquez sur le lien de confirmation dans l'e-mail pour terminer le processus d'inscription."
+            }
+        }
+    },
+    "Provider-Registration-Changed": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "Votre information a été soumis avec succès"
+            },
+            "Page-Description": {
+                "Page-Description": "Vos informations ont été mis à jour."
             }
         }
     },

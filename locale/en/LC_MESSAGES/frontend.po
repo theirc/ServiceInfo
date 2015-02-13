@@ -114,6 +114,12 @@ msgstr "Opening Time:"
 msgid "Service-Form##Hours-Close"
 msgstr "Closing Time:"
 
+msgid "Service-Form##Add-Criterion"
+msgstr "Add New Criterion"
+
+msgid "Service-Form##Remove-Criterion"
+msgstr "Remove Criterion"
+
 msgid "Service-Form##Form-Submit-Options##Submit"
 msgstr "Submit Answers"
 
