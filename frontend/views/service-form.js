@@ -1,4 +1,5 @@
 var Backbone = require('backbone'),
+api = require('../api'),
 template = require("../templates/service-form.hbs"),
 i18n = require('i18next-client'),
 forms = require('../forms'),
@@ -7,6 +8,17 @@ provider = require('../models/provider'),
 servicearea = require('../models/servicearea'),
 servicetype = require('../models/servicetype')
 ;
+
+
+function remove_empty_fields(data) {
+    // Remove items from data that have empty values
+    var keys = Object.keys(data);
+    for (var i = 0; i < keys.length; i++) {
+        if (! data[keys[i]]) {
+            delete data[keys[i]];
+        }
+    }
+}
 
 module.exports = Backbone.View.extend({
     initialize: function(opts){
@@ -45,6 +57,13 @@ module.exports = Backbone.View.extend({
         if (this.servicetypes) {
             types = this.servicetypes.data();
         }
+        var criteria = [];
+        if (this.update_of) {
+            criteria = self.update_of.data()['selection_criteria'];
+        }
+        if (criteria.length === 0) {
+            criteria.push({text: ""});
+        }
         $el.html(template({
             daysofweek: [
                     'Sunday',
@@ -57,6 +76,7 @@ module.exports = Backbone.View.extend({
                 ],
             areas_of_services: serviceareas,
             types: types,
+            criteria: criteria
         }));
         if (this.provider) {
             $el.find('[name=provider]').val(this.provider.get('url'));
@@ -69,13 +89,54 @@ module.exports = Backbone.View.extend({
     },
 
     events: {
+        "click button.remove": function(ev) {
+            var $btn = $(ev.target);
+            var $row = $btn.closest('.criteria');
+            $row.remove();
+        },
+        "click button.add": function(ev) {
+            var $btn = $(ev.target);
+            var $row = $btn.closest('.criteria');
+            var $newRow = $row.clone();
+            var $newInput = $newRow.find('input');
+            var id = $newInput.attr('id');
+            var name = $newInput.attr('name');
+
+            function incr(v) {
+                var _ = v.split('.');
+                var n = parseInt(_[_.length-1]) + 1;
+                _[_.length-1] = n.toString();
+                return _.join('.');
+            }
+
+            id = incr(id);
+            name = incr(name);
+            $newInput.attr('id', id);
+            $newInput.attr('name', name);
+            $newInput.val("");
+
+            $btn.remove();
+            $row.parent().append($newRow);
+        },
         "click .form-btn-submit": function() {
             var $el = this.$el;
             var data = forms.collect($el);
+            // Like form fields, omit empty values from the data
+            remove_empty_fields(data);
+            // change criteria items from strings to dictionaries,
+            // omitting blank ones
+            var i, name, criteria = [];
+            for (i = 0; i < data.selection_criteria.length; i++) {
+                name = data.selection_criteria[i];
+                if (name) {
+                    criteria.push({text_en: name});
+                }
+            }
+            data.selection_criteria = criteria;
 
             $el.find('.error').text('');
 
-            forms.submit($el, 'api/services/', data).then(
+            api.request('POST', 'api/services/', data).then(
                 function success(data) {
                     window.location = '#/service-list';
                 },

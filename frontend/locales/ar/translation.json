@@ -16,6 +16,9 @@
         "Feedback-Tool": "ردود الفعل أداة",
         "Change-Language": "تغيير اللغة"
     },
+    "Global": {
+        "FormSubmissionError": "كان هناك خطأ غير معروف تقديم النموذج الخاص بك."
+    },
     "Login-Form": {
         "Page-Head": {
             "Page-Title": {
@@ -33,6 +36,23 @@
             "Submit": "تسجيل الدخول",
             "Register": "سجل لتكون مقدم خدمات هنا"
         }
+    },
+    "Service-Remove-Change": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "إزالة تغيير"
+            }
+        },
+        "Update-Of": "تحديث",
+        "Remove-Change": "إزالة التغيير"
+    },
+    "Service-Delete": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "حذف الخدمة"
+            }
+        },
+        "Delete-Service": "حذف الخدمة"
     },
     "Service-Form": {
         "Page-Head": {
@@ -62,10 +82,10 @@
     "Provider-Registration-Form": {
         "Page-Head": {
             "Page-Title": {
-                "Title": "إستمارة تسجيل مزود خدمات جديد "
+                "Title": "خدمة استمارة التسجيل مزود"
             },
             "Page-Description": {
-                "Page-Description": "إملء النموذج أدناه لتكون مزود خدمات."
+                "Page-Description": "ملء النموذج أدناه."
             }
         },
         "Errors": {
@@ -137,9 +157,12 @@
                 "Name": "الاسم:",
                 "Type": "النوع:",
                 "Area": "المنطقة:",
-                "Status": "الحالة:"
+                "Status": "الحالة:",
+                "Remove": "إزالة:"
             }
-        }
+        },
+        "Cancel": "إلغاء",
+        "Delete": "حذف"
     },
     "Home": {
         "Service-Map": {
@@ -162,6 +185,16 @@
             },
             "Page-Description": {
                 "Page-Description": "لقد قمنا بإرسال رسالة تأكيد بالبريد الإلكتروني إلى حساب البريد الإلكتروني الذي استخدمته أثناء التسجيل. انقر على رابط التأكيد في رسالة البريد الإلكتروني لاستكمال عملية التسجيل."
+            }
+        }
+    },
+    "Provider-Registration-Changed": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "قدم بياناتك بنجاح"
+            },
+            "Page-Description": {
+                "Page-Description": "تم تحديث المعلومات الخاصة بك."
             }
         }
     },

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-11 14:30+0000\n"
+"PO-Revision-Date: 2015-02-13 14:31+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -46,6 +46,9 @@ msgstr "ردود الفعل أداة"
 msgid "Menu##Change-Language"
 msgstr "تغيير اللغة"
 
+msgid "Global##FormSubmissionError"
+msgstr "كان هناك خطأ غير معروف تقديم النموذج الخاص بك."
+
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "تسجيل الدخول"
 
@@ -63,6 +66,21 @@ msgstr "تسجيل الدخول"
 
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "سجل لتكون مقدم خدمات هنا"
+
+msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
+msgstr "إزالة تغيير"
+
+msgid "Service-Remove-Change##Update-Of"
+msgstr "تحديث"
+
+msgid "Service-Remove-Change##Remove-Change"
+msgstr "إزالة التغيير"
+
+msgid "Service-Delete##Page-Head##Page-Title##Title"
+msgstr "حذف الخدمة"
+
+msgid "Service-Delete##Delete-Service"
+msgstr "حذف الخدمة"
 
 msgid "Service-Form##Page-Head##Page-Title##Title"
 msgstr "استمارة التسجيل خدمة جديدة"
@@ -110,11 +128,11 @@ msgid "Service-Form##Form-Submit-Options##Clear"
 msgstr "إزالة الأجوبة"
 
 msgid "Provider-Registration-Form##Page-Head##Page-Title##Title"
-msgstr "إستمارة تسجيل مزود خدمات جديد "
+msgstr "خدمة استمارة التسجيل مزود"
 
 msgid ""
 "Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
-msgstr "إملء النموذج أدناه لتكون مزود خدمات."
+msgstr "ملء النموذج أدناه."
 
 msgid "Provider-Registration-Form##Errors##Password-Blank"
 msgstr "لا يجب أن تكون كلمة المرور فارغة"
@@ -247,6 +265,15 @@ msgstr "المنطقة:"
 msgid "Service-List##Table##Thead##Status"
 msgstr "الحالة:"
 
+msgid "Service-List##Table##Thead##Remove"
+msgstr "إزالة:"
+
+msgid "Service-List##Cancel"
+msgstr "إلغاء"
+
+msgid "Service-List##Delete"
+msgstr "حذف"
+
 msgid "Home##Service-Map##Title"
 msgstr "عرض خريطة الخدمات "
 
@@ -272,6 +299,13 @@ msgid ""
 "Provider-Registration-Confirmation##Page-Head##Page-Description##Page-"
 "Description"
 msgstr "لقد قمنا بإرسال رسالة تأكيد بالبريد الإلكتروني إلى حساب البريد الإلكتروني الذي استخدمته أثناء التسجيل. انقر على رابط التأكيد في رسالة البريد الإلكتروني لاستكمال عملية التسجيل."
+
+msgid "Provider-Registration-Changed##Page-Head##Page-Title##Title"
+msgstr "قدم بياناتك بنجاح"
+
+msgid ""
+"Provider-Registration-Changed##Page-Head##Page-Description##Page-Description"
+msgstr "تم تحديث المعلومات الخاصة بك."
 
 msgid "Password-Reset##Page-Head##Page-Title##Title"
 msgstr "إعادة تعيين كلمة المرور"
