@@ -162,6 +162,9 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         self.assertTrue(self.test_service.provider.name_en in call_kwargs['summary'])
 
     def test_cancel_draft_new_service_comments_on_jira_issue(self, mock_JIRA):
+        # If we cancel a pending new service, it adds a comment to the
+        # existing JIRA issue.
+
         # First create a record from when the draft service was started
         issue_key = 'XXX-123'
         self.jira_record.jira_issue_key = issue_key
@@ -180,10 +183,15 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         # from what the "new service" case sets.
         self.assertEqual(issue_key, call_args[0])
         self.assertIn('change was canceled', call_args[1])
+        # We should NOT have created a new JIRA record
+        self.assertFalse(mock_JIRA.return_value.create_issue.called)
 
     def test_cancel_draft_service_change_comments_on_jira_issue(self, mock_JIRA):
+        # If we cancel a pending change to a current service, it adds a comment
+        # to the existing jira issue.
+
         # make the service we're canceling look like a change to an existing service
-        existing_service = ServiceFactory()
+        existing_service = ServiceFactory(status=Service.STATUS_CURRENT)
         draft_service = ServiceFactory(
             update_of=existing_service,
             status=Service.STATUS_DRAFT,
@@ -194,7 +202,8 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
 
         # Now cancel the draft
         draft_service.cancel()
-        # We should get a new jira update record
+
+        # We should get a new jira update record created
         cancel_record = \
             draft_service.jira_records.get(update_type=JiraUpdateRecord.CANCEL_DRAFT_SERVICE)
         # run it:
@@ -206,6 +215,27 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         self.assertIn('change was canceled', call_args[1])
         record = JiraUpdateRecord.objects.get(pk=cancel_record.pk)
         self.assertEqual(issue_key, record.jira_issue_key)
+        # We should NOT have created a new JIRA record
+        self.assertFalse(mock_JIRA.return_value.create_issue.called)
+
+    def test_replacing_a_draft_comments_on_jira_issue(self, mock_JIRA):
+        draft_service = ServiceFactory(status=Service.STATUS_DRAFT)
+        # Pretend we've created a JIRA issue when the draft was started.
+        issue_key = 'XXX-123'
+        draft_service.jira_records.update(jira_issue_key=issue_key)
+        mock_JIRA.return_value.create_issue.reset_mock()  # Forget we "created a jira record"
+        # Now edit the draft
+        new_draft = ServiceFactory(update_of=draft_service, status=Service.STATUS_DRAFT)
+        # We should have a new update record
+        jira_record = new_draft.jira_records.get(update_type=JiraUpdateRecord.SUPERSEDED_DRAFT)
+        jira_record.do_jira_work()
+        # We should NOT have created another JIRA record
+        self.assertFalse(mock_JIRA.return_value.create_issue.called)
+        # We add a comment with links to the old and new data
+        call_args, call_kwargs = mock_JIRA.return_value.add_comment.call_args
+        self.assertEqual(issue_key, call_args[0])
+        self.assertIn(draft_service.get_admin_edit_url(), call_args[1])
+        self.assertIn(new_draft.get_admin_edit_url(), call_args[1])
 
 
 # These settings are not used for real since we don't talk to JIRA

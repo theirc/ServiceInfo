@@ -158,6 +158,12 @@ class ProviderViewSet(viewsets.ModelViewSet):
             raise PermissionDenied
         return obj
 
+    def update(self, request, *args, **kwargs):
+        """On change to provider via the API, notify via JIRA"""
+        response = super().update(request, *args, **kwargs)
+        self.get_object().notify_jira_of_change()
+        return response
+
     @list_route(methods=['post'], permission_classes=[AllowAny])
     def create_provider(self, request, *args, **kwargs):
         """

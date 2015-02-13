@@ -179,12 +179,6 @@ class ServiceSerializer(RequireOneTranslationMixin,
                 raise exceptions.ValidationError(
                     {'update_of': _("You may only submit updates to current or draft services")}
                 )
-            # Find the topmost record in the possible chain of update_of's
-            topmost = parent
-            while topmost.update_of:
-                topmost = topmost.update_of
-            # Always point at the topmost record
-            attrs['update_of'] = topmost
         return attrs
 
     def create(self, validated_data):

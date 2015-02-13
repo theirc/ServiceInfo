@@ -1,3 +1,4 @@
+from textwrap import dedent
 from django.conf import settings
 from django.contrib.gis.db import models
 from django.contrib.sites.models import Site
@@ -118,6 +119,12 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
 
     def get_api_url(self):
         return reverse('provider-detail', args=[self.id])
+
+    def notify_jira_of_change(self):
+        JiraUpdateRecord.objects.create(
+            update_type=JiraUpdateRecord.PROVIDER_CHANGE,
+            provider=self
+        )
 
 
 class ServiceArea(NameInCurrentLanguageMixin, models.Model):
@@ -413,43 +420,38 @@ class Service(NameInCurrentLanguageMixin, models.Model):
 
     def save(self, *args, **kwargs):
         new_service = self.pk is None
+        superseded_draft = None
 
         with atomic():  # All or none of this
             if (new_service
                     and self.status == Service.STATUS_DRAFT
                     and self.update_of
-                    and self.update_of.status == Service.STATUS_DRAFT
-                    and not self.update_of.update_of):
-                # This is a new update of a top-level draft, just replace it
-                parent = self.update_of
-                parent.status = Service.STATUS_ARCHIVED
-                parent.save()
-                JiraUpdateRecord.objects.create(
-                    service=parent,
-                    update_type=JiraUpdateRecord.CANCEL_DRAFT_SERVICE)
-                self.update_of = None
+                    and self.update_of.status == Service.STATUS_DRAFT):
+                # Any edit of a record that's still in review means we're
+                # superseding one draft with another.
+                superseded_draft = self.update_of
+                # Bump this one up a level - we're replacing a pending change.
+                self.update_of = superseded_draft.update_of
 
             super().save(*args, **kwargs)
 
             if new_service:
                 # Now we've safely saved this new record.
-                # If this is a draft update, make sure there aren't any others
-                if self.status == Service.STATUS_DRAFT and self.update_of:
-                    other_services = Service.objects.filter(
-                        status=Service.STATUS_DRAFT,
-                        update_of=self.update_of)\
-                        .exclude(pk=self.pk)\
-                        .distinct()
-                    for other_service in other_services:
-                        JiraUpdateRecord.objects.create(
-                            service=other_service,
-                            update_type=JiraUpdateRecord.CANCEL_DRAFT_SERVICE)
-                    other_services.update(status=Service.STATUS_ARCHIVED)
-                if self.update_of:
+                # Did we replace an existing draft? Archive the previous one.
+                if superseded_draft:
+                    superseded_draft.status = Service.STATUS_ARCHIVED
+                    superseded_draft.save()
+                    JiraUpdateRecord.objects.create(
+                        service=self,
+                        superseded_draft=superseded_draft,
+                        update_type=JiraUpdateRecord.SUPERSEDED_DRAFT)
+                elif self.update_of:
+                    # Submitted a proposed change to an existing service
                     JiraUpdateRecord.objects.create(
                         service=self,
                         update_type=JiraUpdateRecord.CHANGE_SERVICE)
                 else:
+                    # Submitted a new service
                     JiraUpdateRecord.objects.create(
                         service=self,
                         update_type=JiraUpdateRecord.NEW_SERVICE)
@@ -479,19 +481,37 @@ class Service(NameInCurrentLanguageMixin, models.Model):
 
 class JiraUpdateRecord(models.Model):
     service = models.ForeignKey(Service, blank=True, null=True, related_name='jira_records')
+    superseded_draft = models.ForeignKey(Service, blank=True, null=True)
     provider = models.ForeignKey(Provider, blank=True, null=True, related_name='jira_records')
     PROVIDER_CHANGE = 'provider-change'
     NEW_SERVICE = 'new-service'
     CHANGE_SERVICE = 'change-service'
     CANCEL_DRAFT_SERVICE = 'cancel-draft-service'
     CANCEL_CURRENT_SERVICE = 'cancel-current-service'
+    SUPERSEDED_DRAFT = 'superseded-draft'
     UPDATE_CHOICES = (
         (PROVIDER_CHANGE, _('Provider updated their information')),
         (NEW_SERVICE, _('New service submitted by provider')),
         (CHANGE_SERVICE, _('Change to existing service submitted by provider')),
         (CANCEL_DRAFT_SERVICE, _('Provider canceled a draft service')),
         (CANCEL_CURRENT_SERVICE, _('Provider canceled a current service')),
+        (SUPERSEDED_DRAFT, _('Provider superseded a previous draft')),
     )
+    # Update types that indicate a new Service record was created
+    NEW_SERVICE_RECORD_UPDATE_TYPES = [
+        NEW_SERVICE, CHANGE_SERVICE, SUPERSEDED_DRAFT,
+    ]
+    # Update types that indicate a draft or service is being canceled/deleted
+    END_SERVICE_UPDATE_TYPES = [
+        CANCEL_DRAFT_SERVICE, CANCEL_CURRENT_SERVICE,
+    ]
+    SERVICE_CHANGE_UPDATE_TYPES = NEW_SERVICE_RECORD_UPDATE_TYPES + END_SERVICE_UPDATE_TYPES
+    PROVIDER_CHANGE_UPDATE_TYPES = [
+        PROVIDER_CHANGE,
+    ]
+    NEW_JIRA_RECORD_UPDATE_TYPES = [
+        NEW_SERVICE, CHANGE_SERVICE, CANCEL_CURRENT_SERVICE, PROVIDER_CHANGE
+    ]
     update_type = models.CharField(
         _('update type'),
         max_length=max([len(x[0]) for x in UPDATE_CHOICES]),
@@ -511,14 +531,12 @@ class JiraUpdateRecord(models.Model):
         errors = []
         if self.update_type == '':
             errors.append('must have a non-blank update_type')
-        elif self.update_type == self.PROVIDER_CHANGE:
+        elif self.update_type in self.PROVIDER_CHANGE_UPDATE_TYPES:
             if not self.provider:
                 errors.append('%s must specify provider' % self.update_type)
             if self.service:
                 errors.append('%s must not specify service' % self.update_type)
-        elif self.update_type in (
-                self.NEW_SERVICE, self.CANCEL_DRAFT_SERVICE, self.CANCEL_CURRENT_SERVICE,
-                self.CHANGE_SERVICE):
+        elif self.update_type in self.SERVICE_CHANGE_UPDATE_TYPES:
             if self.service:
                 if self.update_type == self.NEW_SERVICE and self.service.update_of:
                     errors.append('%s must not specify a service that is an update of another'
@@ -530,6 +548,8 @@ class JiraUpdateRecord(models.Model):
                 errors.append('%s must specify service' % self.update_type)
             if self.provider:
                 errors.append('%s must not specify provider' % self.update_type)
+            if self.update_type == self.SUPERSEDED_DRAFT and not self.superseded_draft:
+                errors.append('%s must specifiy superseded draft service')
         else:
             errors.append('unrecognized update_type: %s' % self.update_type)
         if errors:
@@ -549,25 +569,46 @@ class JiraUpdateRecord(models.Model):
             if not jira:
                 jira = jira_support.get_jira()
 
-            if self.update_type in [JiraUpdateRecord.NEW_SERVICE, JiraUpdateRecord.CHANGE_SERVICE,
-                                    JiraUpdateRecord.CANCEL_CURRENT_SERVICE]:
+            if self.update_type in JiraUpdateRecord.NEW_JIRA_RECORD_UPDATE_TYPES:
                 kwargs = jira_support.default_newissue_kwargs()
                 change_type = {
-                    JiraUpdateRecord.NEW_SERVICE: 'New',
-                    JiraUpdateRecord.CHANGE_SERVICE: 'Changed',
-                    JiraUpdateRecord.CANCEL_CURRENT_SERVICE: 'Canceled',
+                    JiraUpdateRecord.NEW_SERVICE: 'New service',
+                    JiraUpdateRecord.CHANGE_SERVICE: 'Changed service',
+                    JiraUpdateRecord.CANCEL_CURRENT_SERVICE: 'Canceled service',
+                    JiraUpdateRecord.PROVIDER_CHANGE: 'Changed provider',
                 }[self.update_type]
                 kwargs['summary'] = '%s service from %s' % (change_type, self.service.provider)
+                if self.update_type in JiraUpdateRecord.PROVIDER_CHANGE_UPDATE_TYPES:
+                    url = self.provider.get_admin_edit_url()
+                else:
+                    url = self.service.get_admin_edit_url()
                 kwargs['description'] = 'Details here:\nhttp://%s%s' % (
-                    Site.objects.get_current(), self.service.get_admin_edit_url())
+                    Site.objects.get_current(), url)
                 new_issue = jira.create_issue(**kwargs)
                 self.jira_issue_key = new_issue.key
+                self.save()
+            elif self.update_type == self.SUPERSEDED_DRAFT:
+                # Track down the issue that's already been created so we
+                # can comment on it.
+                previous_record = JiraUpdateRecord.objects.get(service=self.superseded_draft)
+                issue_key = previous_record.jira_issue_key
+                link1 = 'http://%s%s' % (Site.objects.get_current(),
+                                         self.superseded_draft.get_admin_edit_url())
+                link2 = 'http://%s%s' % (Site.objects.get_current(),
+                                         self.service.get_admin_edit_url())
+                comment = dedent("""
+                   The provider has updated a new service or a change that was still under review.
+                   The previous data was at %s.
+                   The new data is at %s.
+                """ % (link1, link2))
+                jira.add_comment(issue_key, comment)
+                self.jira_issue_key = issue_key
                 self.save()
             elif self.update_type == self.CANCEL_DRAFT_SERVICE:
                 # Track down the issue that's already been created so we
                 # can comment on it.
                 previous_record = JiraUpdateRecord.objects.get(
-                    update_type__in=[JiraUpdateRecord.NEW_SERVICE, JiraUpdateRecord.CHANGE_SERVICE],
+                    update_type__in=JiraUpdateRecord.NEW_SERVICE_RECORD_UPDATE_TYPES,
                     service=self.service
                 )
                 issue_key = previous_record.jira_issue_key
