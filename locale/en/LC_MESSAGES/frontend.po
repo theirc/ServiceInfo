@@ -60,6 +60,21 @@ msgstr "Login"
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "Register to be a Service Provider here"
 
+msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
+msgstr "Remove Change"
+
+msgid "Service-Remove-Change##Update-Of"
+msgstr "Update of"
+
+msgid "Service-Remove-Change##Remove-Change"
+msgstr "Remove change"
+
+msgid "Service-Delete##Page-Head##Page-Title##Title"
+msgstr "Delete Service"
+
+msgid "Service-Delete##Delete-Service"
+msgstr "Delete service"
+
 msgid "Service-Form##Page-Head##Page-Title##Title"
 msgstr "New Service Registration Form"
 
@@ -106,10 +121,10 @@ msgid "Service-Form##Form-Submit-Options##Clear"
 msgstr "Remove Answers"
 
 msgid "Provider-Registration-Form##Page-Head##Page-Title##Title"
-msgstr "New Service Provider Registration Form"
+msgstr "Service Provider Registration Form"
 
 msgid "Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
-msgstr "Fill out the form below to apply to be a service provider."
+msgstr "Fill out the form below."
 
 msgid "Provider-Registration-Form##Errors##Password-Blank"
 msgstr "Password must not be blank"
@@ -231,6 +246,15 @@ msgstr "Area:"
 msgid "Service-List##Table##Thead##Status"
 msgstr "Status:"
 
+msgid "Service-List##Table##Thead##Remove"
+msgstr "Remove:"
+
+msgid "Service-List##Cancel"
+msgstr "Cancel"
+
+msgid "Service-List##Delete"
+msgstr "Delete"
+
 msgid "Home##Service-Map##Title"
 msgstr "View The Service Map"
 
@@ -254,6 +278,12 @@ msgstr "Your Information was Submitted Successfully"
 
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Description##Page-Description"
 msgstr "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+
+msgid "Provider-Registration-Changed##Page-Head##Page-Title##Title"
+msgstr "Your Information was Submitted Successfully"
+
+msgid "Provider-Registration-Changed##Page-Head##Page-Description##Page-Description"
+msgstr "Your information has been updated."
 
 msgid "Password-Reset##Page-Head##Page-Title##Title"
 msgstr "Password Reset"

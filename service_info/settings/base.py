@@ -221,11 +221,11 @@ COMPRESS_PRECOMPILERS = (
 )
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    # FIXME: Will definitely need to change this
+    # Use Django's standard `django.contrib.auth` permissions
+    # by default.  (We'll alter this as needed on a few specific
+    # views.)
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.DjangoModelPermissions'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'api.auth.ServiceInfoTokenAuthentication',

@@ -37,6 +37,23 @@
       "Register": "Register to be a Service Provider here"
   	}
   },
+  "Service-Remove-Change": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Remove Change"
+      }
+    },
+    "Update-Of": "Update of",
+    "Remove-Change": "Remove change"
+  },
+  "Service-Delete": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Delete Service"
+      }
+    },
+    "Delete-Service": "Delete service"
+  },
   "Service-Form": {
       "Page-Head": {
         "Page-Title": {
@@ -158,9 +175,12 @@
         "Name": "Name:",
         "Type": "Type:",
         "Area": "Area:",
-        "Status": "Status:"
+        "Status": "Status:",
+        "Remove": "Remove:"
       }
-    }
+    },
+    "Cancel": "Cancel",
+    "Delete": "Delete"
   },
   "Home": {
     "Service-Map": {
