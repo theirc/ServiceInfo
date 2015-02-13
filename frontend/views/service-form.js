@@ -45,6 +45,13 @@ module.exports = Backbone.View.extend({
         if (this.servicetypes) {
             types = this.servicetypes.data();
         }
+        var criteria = [];
+        if (this.update_of) {
+            console.log(this.update_of);
+        }
+        if (criteria.length === 0) {
+            criteria.push({text: ""});
+        }
         $el.html(template({
             daysofweek: [
                     'Sunday',
@@ -57,6 +64,7 @@ module.exports = Backbone.View.extend({
                 ],
             areas_of_services: serviceareas,
             types: types,
+            criteria: criteria
         }));
         if (this.provider) {
             $el.find('[name=provider]').val(this.provider.get('url'));
@@ -69,6 +77,35 @@ module.exports = Backbone.View.extend({
     },
 
     events: {
+        "click button.remove": function(ev) {
+            var $btn = $(ev.target);
+            var $row = $btn.closest('.criteria');
+            $row.remove();
+        },
+        "click button.add": function(ev) {
+            var $btn = $(ev.target);
+            var $row = $btn.closest('.criteria');
+            var $newRow = $row.clone();
+            var $newInput = $newRow.find('input');
+            var id = $newInput.attr('id');
+            var name = $newInput.attr('name');
+
+            function incr(v) {
+                var _ = v.split('.');
+                var n = parseInt(_[_.length-1]) + 1;
+                _[_.length-1] = n.toString();
+                return _.join('.');
+            }
+
+            id = incr(id);
+            name = incr(name);
+            $newInput.attr('id', id);
+            $newInput.attr('name', name);
+            $newInput.val("");
+
+            $btn.remove();
+            $row.parent().append($newRow);
+        },
         "click .form-btn-submit": function() {
             var $el = this.$el;
             var data = forms.collect($el);
