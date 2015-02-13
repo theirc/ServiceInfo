@@ -55,14 +55,32 @@
     "Delete-Service": "Delete service"
   },
   "Service-Form": {
-    "Page-Head": {
-      "Page-Title": {
-        "Title": "New Service Registration Form"
+      "Page-Head": {
+        "Page-Title": {
+          "Title": "New Service Registration Form"
+        },
+        "Page-Description": {
+          "Page-Description": "Fill out the form below to apply to have a new service approved."
+        }
       },
-      "Page-Description": {
-        "Page-Description": "Fill out the form below to apply to have a new service approved."
-      }
-    },
+      "Legend": "Service Information",
+      "Service-Name": "Name of Service",
+      "Service-Area": "Area of Service",
+      "Type": "Service Type",
+      "Service-Description": "Description",
+      "Service-Hours": "Hours of Service",
+      "Additional-Information": "Additional Information (Optional Field)",
+      "Service-Cost": "Cost of Service (Optional Field)",
+      "Selection-Criteria": "Selection Criteria (Optional Field)",
+      "Hours-Open": "Opening Time:",
+      "Hours-Close": "Closing Time:",
+      "Selection-Criteria": "Selection Criteria",
+      "Add-Criterion": "Add New Criterion",
+      "Remove-Criterion": "Remove Criterion",
+      "Form-Submit-Options": {
+          "Submit": "Submit Answers",
+          "Clear": "Remove Answers"
+      },
     "Legend": "Service Information",
     "Service-Name": "Name of Service",
     "Service-Area": "Area of Service",

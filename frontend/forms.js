@@ -11,12 +11,40 @@ var forms = module.exports = {
             var name = $field.attr('name');
             var ml = typeof $field.data('i18n-field') !== "undefined";
 
+            if (name.indexOf('.') > 0) {
+                var parts = name.split('.');
+                var target = data;
+                var tval, fromarray;
+                while (parts.length) {
+                    if (parts.length > 1) {
+                        tval = target[parts[0]];
+                        if (typeof tval === 'undefined') {
+                            tval = [];
+
+                        } else if ($.isArray(tval) && !$.isNumeric(parts[1])) {
+                            fromarray = tval;
+                            tval = {};
+                            for (var i=0; i<fromarray.length; i++) {
+                                tval[i.toString()] = fromarray[i];
+                            }
+                        }
+
+                        tval[parts[1]] = value;
+                        target[parts[0]] = tval;
+                    }
+                    parts.splice(0, 1);
+                    target = tval;
+                }
+            }
+
             if (ml) {
                 var cur_lang = config.get('forever.language');
                 name = name + '_' + cur_lang;
             }
 
-            data[name] = value;
+            if (name.indexOf('.') < 0) {
+                data[name] = value;
+            }
         });
 
         return data;
