@@ -9,10 +9,11 @@ var forms = module.exports = {
         $form.find('[name]').each(function() {
             var $field = $(this);
             var value = $field.val();
+            var filled = value.length > 0;
             var name = $field.attr('name');
             var ml = typeof $field.data('i18n-field') !== "undefined";
 
-            if (!!value && name.indexOf('.') > 0) {
+            if (filled && name.indexOf('.') > 0) {
                 var parts = name.split('.');
                 var target = data;
                 var tval, fromarray;
@@ -43,7 +44,7 @@ var forms = module.exports = {
                 name = name + '_' + cur_lang;
             }
 
-            if (!!value && name.indexOf('.') < 0) {
+            if (name.indexOf('.') < 0) {
                 data[name] = value;
             }
         });
