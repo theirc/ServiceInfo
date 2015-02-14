@@ -1,4 +1,5 @@
 var config = require('./config');
+var api = require('./api');
 var i18n = require('i18next-client');
 
 var forms = module.exports = {
@@ -74,10 +75,12 @@ var forms = module.exports = {
         $submit.attr('disabled', 'disabled');
 
         return new Promise(function(resolve, error) {
-            $.ajax(config.get('api_location')+action, {
-                method: 'POST',
-                data: data,
-                error: function(e) {
+            api.request('POST', action, data).then(
+                function(data) {
+                    $submit.removeAttr('disabled');
+                    resolve.apply(this, arguments);
+                },
+                function(e) {
                     $submit.removeAttr('disabled');
                     $.extend(errors, e.responseJSON);
                     var missing = {};
@@ -93,12 +96,8 @@ var forms = module.exports = {
                         $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
                     }
                     error(missing);
-                },
-                success: function() {
-                    $submit.removeAttr('disabled');
-                    resolve.apply(this, arguments);
-                },
-            });
+                }
+            );
         });
     },
 };
