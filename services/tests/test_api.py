@@ -413,8 +413,8 @@ class ServiceAPITest(APITestMixin, TestCase):
                 {'text_fr': 'Crit 2'},
                 {'text_ar': 'Crit 3'},
             ],
+            'sunday_open': '10:03',
             'sunday_close': '8:02',
-            'sunday_open': '9:03',
         }
         rsp = self.post_with_token(reverse('service-list'), data=data)
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
