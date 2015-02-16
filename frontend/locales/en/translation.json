@@ -17,7 +17,14 @@
   	"Change-Language": "Change Language"
   },
   "Global": {
-    "FormSubmissionError": "There was an unknown error submitting your form."
+    "FormSubmissionError": "There was an unknown error submitting your form.",
+    "Sunday": "Sunday",
+    "Monday": "Monday",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Wednesday",
+    "Thursday": "Thursday",
+    "Friday": "Friday",
+    "Saturday": "Saturday"
   },
   "Login-Form": {
   	"Page-Head": {

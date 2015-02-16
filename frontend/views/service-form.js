@@ -66,14 +66,15 @@ module.exports = Backbone.View.extend({
         }
         $el.html(template({
             daysofweek: [
-                    'Sunday',
-                    'Monday',
-                    'Tuesday',
-                    'Wednesday',
-                    'Thursday',
-                    'Friday',
-                    'Saturday',
+                    i18n.t('Global.Sunday'),
+                    i18n.t('Global.Monday'),
+                    i18n.t('Global.Tuesday'),
+                    i18n.t('Global.Wednesday'),
+                    i18n.t('Global.Thursday'),
+                    i18n.t('Global.Friday'),
+                    i18n.t('Global.Saturday')
                 ],
+                
             areas_of_services: serviceareas,
             types: types,
             criteria: criteria
