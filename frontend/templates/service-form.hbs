@@ -37,6 +37,7 @@
                       <label for="id_area_of_service" class="control-label"><span data-i18n="Service-Form.Service-Area"></span><span class="error"></span></label>
                       <div class="btn-group"  >
                           <select id=id_area_of_service name=area_of_service class="form-control">
+                              <option value="" data-i18n="Service-Form.Service-Area.Service-Area-Choose"></option>
                               {{#each areas_of_services}}
                                   <option value="{{ this.url }}">{{ this.name }}</option>
                               {{/each}}
@@ -49,6 +50,7 @@
                       <label for="id_type" class="control-label"><span data-i18n="Service-Form.Type"></span><span class="error"></span></label>
                         <div class="btn-group">
                             <select id=id_type name=type class="form-control">
+                                <option value="" data-i18n="Service-Form.Service-Area.Type-Choose"></option>
                                 {{#each types}}
                                     <option value="{{ this.url }}">{{ this.name }}</option>
                                 {{/each}}

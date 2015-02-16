@@ -64,6 +64,8 @@
         }
       },
       "Legend": "Service Information",
+      "Type-Choose": "Choose a Service Type",
+      "Service-Area-Choose": "Choose a Service Area",
       "Service-Name": "Name of Service",
       "Service-Area": "Area of Service",
       "Type": "Service Type",
