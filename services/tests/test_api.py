@@ -162,12 +162,14 @@ class ProviderAPITest(APITestMixin, TestCase):
         self.assertIn(err, ['This field may not be blank.', 'This field is required.'])
         self.assertFalse(get_user_model().objects.filter(email='fred@example.com').exists())
 
-    def test_create_provider_no_description_or_phone(self):
-        # At least one description is needed, and if we leave out both that and
-        # a simpler field like phone, we get both errors back on the same call
+    def test_create_provider_no_description_or_phone_and_existing_email(self):
+        # At least one description is needed, and email can't be in use already,
+        # and if we're violating both of those and also leave out
+        # a simpler field like phone, we get all the errors back on the same call
         self.token = None
 
         url = '/api/providers/create_provider/'
+        EmailUserFactory(email='fred@example.com')
         data = {
             'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
@@ -183,7 +185,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         self.assertIn(err, ['This field may not be blank.', 'This field is required.'])
         err = result['phone_number'][0]
         self.assertIn(err, ['This field may not be blank.', 'This field is required.'])
-        self.assertFalse(get_user_model().objects.filter(email='fred@example.com').exists())
+        self.assertIn('email', result)
 
     def test_create_provider_no_number_of_beneficiaries(self):
         # Number of beneficiaries is a required field

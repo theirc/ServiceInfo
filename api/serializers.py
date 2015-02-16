@@ -104,6 +104,20 @@ class CreateProviderSerializer(ProviderSerializer):
                   if field not in ['user']]
         fields += ['email', 'password', 'base_activation_link']
 
+    def run_validation(self, data=serializers.empty):
+        # data is a dictionary
+        errs = defaultdict(list)
+        email = data.get('email', False)
+        if email and get_user_model().objects.filter(email__iexact=email).exists():
+            errs['email'].append(_("A user with that email already exists."))
+        try:
+            validated_data = super().run_validation(data)
+        except (exceptions.ValidationError, DjangoValidationError) as exc:
+            errs.update(serializers.get_validation_error_detail(exc))
+        if errs:
+            raise exceptions.ValidationError(errs)
+        return validated_data
+
     def validate(self, attrs):
         attrs = super().validate(attrs)
 
