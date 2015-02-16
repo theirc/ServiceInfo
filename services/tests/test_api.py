@@ -162,6 +162,29 @@ class ProviderAPITest(APITestMixin, TestCase):
         self.assertIn(err, ['This field may not be blank.', 'This field is required.'])
         self.assertFalse(get_user_model().objects.filter(email='fred@example.com').exists())
 
+    def test_create_provider_no_description_or_phone(self):
+        # At least one description is needed, and if we leave out both that and
+        # a simpler field like phone, we get both errors back on the same call
+        self.token = None
+
+        url = '/api/providers/create_provider/'
+        data = {
+            'name_en': 'Joe Provider',
+            'type': ProviderTypeFactory().get_api_url(),
+            'email': 'fred@example.com',
+            'password': 'foobar',
+            'number_of_monthly_beneficiaries': '37',
+            'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
+        }
+        rsp = self.api_client.post(url, data=data, format='json')
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        err = result['description'][0]
+        self.assertIn(err, ['This field may not be blank.', 'This field is required.'])
+        err = result['phone_number'][0]
+        self.assertIn(err, ['This field may not be blank.', 'This field is required.'])
+        self.assertFalse(get_user_model().objects.filter(email='fred@example.com').exists())
+
     def test_create_provider_no_number_of_beneficiaries(self):
         # Number of beneficiaries is a required field
         # if we leave it out, the request should fail
