@@ -25,9 +25,9 @@
                 <legend data-i18n="Service-Form.Legend"></legend>
                 <div class="row">
                   <div class="form-group">
-                    <label for="name" class="control-label"><span data-i18n="Service-Form.Service-Name"></span><span class="error"></span></label>
+                    <label for="id_name" class="control-label"><span data-i18n="Service-Form.Service-Name"></span><span class="error"></span></label>
                       <div class="form-group">
-                        <input type="text" name="name" data-i18n-field class="form-control"  >
+                        <input id="id_name" type="text" name="name" data-i18n-field class="form-control"  >
                       </div>
                   </div>
                 </row>
@@ -61,14 +61,14 @@
                 </div>
                 <div class="row">
                   <div class="form-group">
-                    <label for="id_description" class="control-label"><span  data-i18n="Service-Form.Service-Description"><span class="error"></span></label>
+                    <label for="id_description" class="control-label"><span  data-i18n="Service-Form.Service-Description"></span><span class="error"></span></label>
                     <div class="form-group">
-                      <textarea rows="4" name="description" data-i18n-field class="form-control"  ></textarea>
+                      <textarea id=id_description rows="4" name="description" data-i18n-field class="form-control"  ></textarea>
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="time_of_service" class="control-label"><span data-i18n="Service-Form.Service-Hours"></span><span class="error"></span></label>
+                  <label class="control-label"><span data-i18n="Service-Form.Service-Hours"></span><span class="error"></span></label>
                   {{#each daysofweek}}
                   <div id=service-hours>
                     <div class=row>
@@ -99,7 +99,7 @@
                 <div class="form-group row">
                   <label for="id_additional_information" class="control-label" data-i18n="Service-Form.Additional-Information"></label>
                   <div class="form-group">
-                    <textarea rows="4" data-i18n-field name="additional_information" class="form-control"></textarea>
+                    <textarea id="id_additional_information" rows="4" data-i18n-field name="additional_information" class="form-control"></textarea>
                   </div>
                 </div>
                 <div class="form-group">
@@ -108,37 +108,10 @@
                       <input id="id_cost_of_service" type="text" name="cost_of_service" class="form-control">
                     </div>
                 </div>
-
-                  <!-- selection criteria -->
-
-                  <label for="id_selection_criteria" class="control-label" data-i18n="Service-Form.Selection-Criteria"></label>
-
-                  {{#each criteria}}
-                    <div class="row criteria">
-                        <div class="half">
-                          <div class="form-group">
-                            <input id="id_selection_criteria.{{@index}}" type="text" name="selection_criteria.{{@index}}" class="form-control" value="{{this.text}}">
-                          </div>
-                        </div>
-                        <div class="half">
-                          <div class="form-options">
-                            <div class="half">
-                              <button class="primary-button remove" data-i18n="Service-Form.Remove-Criterion"></button>
-                            </div>
-                            <div class="half">
-                              {{#if @last}}
-                                <button class="primary-button add" data-i18n="Service-Form.Add-Criterion"></button>
-                              {{/if}}
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                  {{/each}}
               </fieldset>
             </form>
             <form>
               <div class="submit-form">
-                  <div class="row error error-submission"></div>
                   <div class="half">
                     <button class="form-btn-submit primary-button" data-i18n="Service-Form.Form-Submit-Options.Submit"></button>
                   </div>
