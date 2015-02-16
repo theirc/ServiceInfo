@@ -17,6 +17,7 @@ var Activation = Backbone.Model.extend({
             },
             success: function(resp) {
                 config.set('forever.authToken', resp.token);
+                config.set('forever.email', resp.email);
                 self.set('status', 'Success');
             },
             error: function(e) {
