@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-13 14:54+0000\n"
+"PO-Revision-Date: 2015-02-16 06:59+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -120,6 +120,12 @@ msgstr "Temps d'ouverture:"
 
 msgid "Service-Form##Hours-Close"
 msgstr "Temps de cloture:"
+
+msgid "Service-Form##Add-Criterion"
+msgstr "Ajouter un critère"
+
+msgid "Service-Form##Remove-Criterion"
+msgstr "Retirer Critère"
 
 msgid "Service-Form##Form-Submit-Options##Submit"
 msgstr "Valider les réponses"

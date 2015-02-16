@@ -74,6 +74,8 @@
         "Selection-Criteria": "معايير الاختيار (حقل اختياري)",
         "Hours-Open": "ساعات البدء:",
         "Hours-Close": "ساعات الإغلاق:",
+        "Add-Criterion": "اضافة معيار",
+        "Remove-Criterion": "ازالة المعيار",
         "Form-Submit-Options": {
             "Submit": "إرسال الأجوبة",
             "Clear": "إزالة الأجوبة"

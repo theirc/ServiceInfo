@@ -74,6 +74,8 @@
         "Selection-Criteria": "Critères de sélection (champ optionnel)",
         "Hours-Open": "Temps d'ouverture:",
         "Hours-Close": "Temps de cloture:",
+        "Add-Criterion": "Ajouter un critère",
+        "Remove-Criterion": "Retirer Critère",
         "Form-Submit-Options": {
             "Submit": "Valider les réponses",
             "Clear": "Retirer Réponses"

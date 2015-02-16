@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-13 14:31+0000\n"
+"PO-Revision-Date: 2015-02-16 06:09+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -120,6 +120,12 @@ msgstr "ساعات البدء:"
 
 msgid "Service-Form##Hours-Close"
 msgstr "ساعات الإغلاق:"
+
+msgid "Service-Form##Add-Criterion"
+msgstr "اضافة معيار"
+
+msgid "Service-Form##Remove-Criterion"
+msgstr "ازالة المعيار"
 
 msgid "Service-Form##Form-Submit-Options##Submit"
 msgstr "إرسال الأجوبة"
