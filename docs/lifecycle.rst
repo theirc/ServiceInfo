@@ -121,10 +121,49 @@ always add it later.
 The working spec says that even while a change is pending, the
 provider can edit the draft service record and an update will
 be sent to the JIRA ticket to let the staff know that the data
-has been updated again.  The record remains in "draft" status.
-No new record is created because the JIRA ticket still links
-to the first one.
+has been updated again.
 
-This is in contrast to the provider editing a current record,
-which results in a new draft record containing the edits, and
-a new JIRA ticket being created.
+Here's that scenario with a new service pending.  We start with:
+
+  pk: 1
+  status: draft
+  update_of: none
+
+Now the provider "edits" that draft, and we end up with:
+
+  pk: 1
+  status: archived
+
+  pk: 2
+  status: draft
+  update_of: none
+
+And we send a new comment to the JIRA ticket that was created when
+the first service record was submitted. The comment includes a link
+to the new record.
+
+Now suppose we have one current record, and another record with a
+draft change to it:
+
+  pk: 1
+  status: current
+
+  pk: 2
+  status: draft
+  update_of: 1
+
+Now someone submits an edit to pk 2. We archive 2 and create 3:
+
+  pk: 1
+  status: current
+
+  pk: 2
+  status: archived
+  update_of: don't care
+
+  pk: 3
+  status: draft
+  update_of: 1
+
+and we submit a comment to the JIRA issue from pk: 2 and include
+a link to pk: 3.
