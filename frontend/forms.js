@@ -77,11 +77,11 @@ var forms = module.exports = {
 
         return new Promise(function(resolve, error) {
             api.request('POST', action, data).then(
-                function success(data) {
+                function onsuccess(data) {
                     $submit.removeAttr('disabled');
                     resolve.apply(this, arguments);
                 },
-                function error(e) {
+                function onerror(e) {
                     $submit.removeAttr('disabled');
                     $.extend(errors, e.responseJSON);
                     var missing = {};
