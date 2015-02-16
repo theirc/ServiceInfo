@@ -397,6 +397,10 @@ class ServiceAPITest(APITestMixin, TestCase):
         self.assertIn('sunday_close', result)
 
     def test_create_service_no_name(self):
+        # Also check that errors are translated
+        user = self.provider.user
+        user.language = 'fr'
+        user.save()
         area = ServiceAreaFactory()
         criterion = SelectionCriterionFactory()
         data = {
@@ -409,6 +413,7 @@ class ServiceAPITest(APITestMixin, TestCase):
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertIn('name', result)
+        self.assertEqual(['Ce champ est obligatoire.'], result['name'])
 
     def test_get_service(self):
         service = ServiceFactory(provider=self.provider)

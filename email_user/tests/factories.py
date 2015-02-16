@@ -7,6 +7,7 @@ class EmailUserFactory(factory.DjangoModelFactory):
         model = EmailUser
 
     email = factory.Sequence(lambda n: "user%d@example.com" % n)
+    language = 'en'
 
     @classmethod
     def _create(cls, model_class, *args, **kwargs):

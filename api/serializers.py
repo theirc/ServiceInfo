@@ -25,7 +25,7 @@ class RequireOneTranslationMixin(object):
             if not (attrs.get('%s_en' % field, False)
                     or attrs.get('%s_ar' % field, False)
                     or attrs.get('%s_fr' % field, False)):
-                errs[field] = 'This field is required.'
+                errs[field] = _('This field is required.')
         if errs:
             raise ValidationError(errs)
         return attrs
@@ -49,9 +49,11 @@ class LanguageSerializer(serializers.Serializer):
         # See if it's a valid language code
         language_dict = dict(settings.LANGUAGES)
         if value not in language_dict:
+            valid_codes = ', '.join(language_dict.keys())
             raise ValidationError(
-                "Invalid language code %r. The valid codes are %s."
-                % (value, ', '.join(language_dict.keys())))
+                _("Invalid language code {code}. The valid codes are {valid_codes}.").format(
+                    code=value, valid_codes=valid_codes
+                ))
         return value
 
 
@@ -180,11 +182,11 @@ class ServiceSerializer(RequireOneTranslationMixin,
             open_value = data.get(open_field, False)
             close_value = data.get(close_field, False)
             if open_value and not close_value:
-                errs[close_field].append('Close time missing.')
+                errs[close_field].append(_('Close time is missing.'))
             elif close_value and not open_value:
-                errs[open_field].append('Open time missing.')
+                errs[open_field].append(_('Open time is missing.'))
             elif open_value and close_value and open_value >= close_value:
-                errs[close_field].append('Close time is not later than open time.')
+                errs[close_field].append(_('Close time is not later than open time.'))
         try:
             validated_data = super().run_validation(data)
         except (exceptions.ValidationError, DjangoValidationError) as exc:
