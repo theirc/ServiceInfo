@@ -42,6 +42,27 @@ msgstr "Change Language"
 msgid "Global##FormSubmissionError"
 msgstr "There was an unknown error submitting your form."
 
+msgid "Global##Sunday"
+msgstr "Sunday"
+
+msgid "Global##Monday"
+msgstr "Monday"
+
+msgid "Global##Tuesday"
+msgstr "Tuesday"
+
+msgid "Global##Wednesday"
+msgstr "Wednesday"
+
+msgid "Global##Thursday"
+msgstr "Thursday"
+
+msgid "Global##Friday"
+msgstr "Friday"
+
+msgid "Global##Saturday"
+msgstr "Saturday"
+
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "Log In"
 
@@ -83,6 +104,12 @@ msgstr "Fill out the form below to apply to have a new service approved."
 
 msgid "Service-Form##Legend"
 msgstr "Service Information"
+
+msgid "Service-Form##Type-Choose"
+msgstr "Choose a Service Type"
+
+msgid "Service-Form##Service-Area-Choose"
+msgstr "Choose a Service Area"
 
 msgid "Service-Form##Service-Name"
 msgstr "Name of Service"
