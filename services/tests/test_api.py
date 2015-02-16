@@ -329,6 +329,73 @@ class ServiceAPITest(APITestMixin, TestCase):
         rsp = self.put_with_token(reverse('service-list'), data=data)
         self.assertEqual(METHOD_NOT_ALLOWED, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
+    def test_create_service_missing_close_time(self):
+        area = ServiceAreaFactory()
+        wrong_provider = ProviderFactory(name_en="Wrong provider")
+        data = {
+            'provider': wrong_provider.get_api_url(),  # should just be ignored
+            'name_en': 'Some service',
+            'area_of_service': area.get_api_url(),
+            'description_en': "Awesome\nService",
+            'selection_criteria': [],  # none required
+            'type': ServiceTypeFactory().get_api_url(),
+            'selection_criteria': [
+                {'text_en': 'Crit 1'},
+                {'text_fr': 'Crit 2'},
+                {'text_ar': 'Crit 3'},
+            ],
+            'sunday_open': '8:02',
+        }
+        rsp = self.post_with_token(reverse('service-list'), data=data)
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertIn('sunday_close', result)
+
+    def test_create_service_missing_open_time(self):
+        area = ServiceAreaFactory()
+        wrong_provider = ProviderFactory(name_en="Wrong provider")
+        data = {
+            'provider': wrong_provider.get_api_url(),  # should just be ignored
+            'name_en': 'Some service',
+            'area_of_service': area.get_api_url(),
+            'description_en': "Awesome\nService",
+            'selection_criteria': [],  # none required
+            'type': ServiceTypeFactory().get_api_url(),
+            'selection_criteria': [
+                {'text_en': 'Crit 1'},
+                {'text_fr': 'Crit 2'},
+                {'text_ar': 'Crit 3'},
+            ],
+            'sunday_close': '8:02',
+        }
+        rsp = self.post_with_token(reverse('service-list'), data=data)
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertIn('sunday_open', result)
+
+    def test_create_service_open_close_reversed(self):
+        area = ServiceAreaFactory()
+        wrong_provider = ProviderFactory(name_en="Wrong provider")
+        data = {
+            'provider': wrong_provider.get_api_url(),  # should just be ignored
+            'name_en': 'Some service',
+            'area_of_service': area.get_api_url(),
+            'description_en': "Awesome\nService",
+            'selection_criteria': [],  # none required
+            'type': ServiceTypeFactory().get_api_url(),
+            'selection_criteria': [
+                {'text_en': 'Crit 1'},
+                {'text_fr': 'Crit 2'},
+                {'text_ar': 'Crit 3'},
+            ],
+            'sunday_close': '8:02',
+            'sunday_open': '9:03',
+        }
+        rsp = self.post_with_token(reverse('service-list'), data=data)
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertIn('sunday_close', result)
+
     def test_create_service_no_name(self):
         area = ServiceAreaFactory()
         criterion = SelectionCriterionFactory()

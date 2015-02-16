@@ -1,6 +1,8 @@
+from collections import defaultdict
 from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import Group
+from django.core.exceptions import ValidationError as DjangoValidationError
 from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import exceptions, serializers
@@ -165,6 +167,31 @@ class ServiceSerializer(RequireOneTranslationMixin,
             'type',
         )
         required_translated_fields = ['name', 'description']
+
+    def run_validation(self, data=serializers.empty):
+        """
+        Make sure open/close times are sensical
+        """
+        # data is a dictionary
+        errs = defaultdict(list)
+        for day in ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday',
+                    'friday', 'saturday']:
+            open_field, close_field = '%s_open' % day, '%s_close' % day
+            open_value = data.get(open_field, False)
+            close_value = data.get(close_field, False)
+            if open_value and not close_value:
+                errs[close_field].append('Close time missing.')
+            elif close_value and not open_value:
+                errs[open_field].append('Open time missing.')
+            elif open_value and close_value and open_value >= close_value:
+                errs[close_field].append('Close time is not later than open time.')
+        try:
+            validated_data = super().run_validation(data)
+        except (exceptions.ValidationError, DjangoValidationError) as exc:
+            errs.update(serializers.get_validation_error_detail(exc))
+        if errs:
+            raise exceptions.ValidationError(errs)
+        return validated_data
 
     def validate(self, attrs):
         # Look for "new" services that are updates of existing ones
