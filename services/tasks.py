@@ -15,11 +15,15 @@ logger = logging.getLogger(__name__)
 def email_provider_about_service_approval_task(service_pk):
     from .models import Service
     service = Service.objects.get(pk=service_pk)
+    # FIXME: Temporarily just give link to provider editing page
+    site = Site.objects.get_current()
+    service_link = 'http://%s/app/#/service/%d' % (site, service_pk)
     context = {
-        'site': Site.objects.get_current(),
+        'site': site,
         'service': service,
         'provider': service.provider,
         'user': service.provider.user,
+        'service_link': service_link,
     }
     service.provider.user.send_email_to_user(
         context,

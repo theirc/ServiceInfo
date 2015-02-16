@@ -92,7 +92,13 @@ module.exports = Backbone.View.extend({
         "click button.remove": function(ev) {
             var $btn = $(ev.target);
             var $row = $btn.closest('.criteria');
-            $row.remove();
+            var criteriaCount = $('.criteria').length;
+            if (criteriaCount > 1) {
+                $row.remove();
+            } else {
+                $row.find('input').val("");
+            }
+            return false;
         },
         "click button.add": function(ev) {
             var $btn = $(ev.target);
@@ -117,6 +123,8 @@ module.exports = Backbone.View.extend({
 
             $btn.remove();
             $row.parent().append($newRow);
+
+            return false;
         },
         "click .form-btn-submit": function() {
             var $el = this.$el;
@@ -126,7 +134,8 @@ module.exports = Backbone.View.extend({
             // change criteria items from strings to dictionaries,
             // omitting blank ones
             var i, name, criteria = [];
-            for (i = 0; i < data.selection_criteria.length; i++) {
+            var criteria_length = !!data.selection_criteria ? data.selection_criteria.length : 0;
+            for (i = 0; i < criteria_length; i++) {
                 name = data.selection_criteria[i];
                 if (name) {
                     criteria.push({text_en: name});
@@ -136,7 +145,7 @@ module.exports = Backbone.View.extend({
 
             $el.find('.error').text('');
 
-            api.request('POST', 'api/services/', data).then(
+            forms.submit($el, 'api/services/', data).then(
                 function success(data) {
                     window.location = '#/service-list';
                 },

@@ -101,7 +101,6 @@ LOCALE_PATHS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -157,7 +156,6 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     # External apps
     'corsheaders',
-    'compressor',
     'rest_framework',
     'rest_framework.authtoken',
     # Our apps
@@ -216,10 +214,6 @@ LOGGING = {
 }
 
 # Application settings
-COMPRESS_PRECOMPILERS = (
-    ('text/less', 'lessc {infile} {outfile}'),
-)
-
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions
     # by default.  (We'll alter this as needed on a few specific

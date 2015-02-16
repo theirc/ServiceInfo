@@ -86,8 +86,12 @@ module.exports = Backbone.View.extend({
                 }
                 if (!errors['password1'] && !errors['password2']) {
                     data['password'] = data['password1'];
-                    delete data.password1;
-                    delete data.password2;
+                    if ('password1' in data) {
+                        delete data.password1;
+                    }
+                    if ('password2' in data) {
+                        delete data.password2;
+                    }
                 }
             }
 
@@ -103,6 +107,7 @@ module.exports = Backbone.View.extend({
                         console.error(errors);
                     }
                 );
+
             } else {
                 var user_save = this.user.save({email: data.email});
                 delete data.email;

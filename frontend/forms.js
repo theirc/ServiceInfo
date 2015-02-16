@@ -1,4 +1,5 @@
 var config = require('./config');
+var api = require('./api');
 var i18n = require('i18next-client');
 
 var forms = module.exports = {
@@ -8,10 +9,11 @@ var forms = module.exports = {
         $form.find('[name]').each(function() {
             var $field = $(this);
             var value = $field.val();
+            var filled = value.length > 0;
             var name = $field.attr('name');
             var ml = typeof $field.data('i18n-field') !== "undefined";
 
-            if (name.indexOf('.') > 0) {
+            if (filled && name.indexOf('.') > 0) {
                 var parts = name.split('.');
                 var target = data;
                 var tval, fromarray;
@@ -74,10 +76,12 @@ var forms = module.exports = {
         $submit.attr('disabled', 'disabled');
 
         return new Promise(function(resolve, error) {
-            $.ajax(config.get('api_location')+action, {
-                method: 'POST',
-                data: data,
-                error: function(e) {
+            api.request('POST', action, data).then(
+                function success(data) {
+                    $submit.removeAttr('disabled');
+                    resolve.apply(this, arguments);
+                },
+                function error(e) {
                     $submit.removeAttr('disabled');
                     $.extend(errors, e.responseJSON);
                     var missing = {};
@@ -93,12 +97,8 @@ var forms = module.exports = {
                         $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
                     }
                     error(missing);
-                },
-                success: function() {
-                    $submit.removeAttr('disabled');
-                    resolve.apply(this, arguments);
-                },
-            });
+                }
+            );
         });
     },
 };
