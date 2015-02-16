@@ -22,11 +22,7 @@ class JiraUpdateRecordModelTest(TestCase):
         self.assertTrue('unrecognized update_type' in str(cm.exception))
 
     def test_types_require_service(self):
-        require_service_types = [
-            JiraUpdateRecord.NEW_SERVICE,
-            JiraUpdateRecord.CANCEL_DRAFT_SERVICE,
-            JiraUpdateRecord.CANCEL_CURRENT_SERVICE,
-        ]
+        require_service_types = JiraUpdateRecord.SERVICE_CHANGE_UPDATE_TYPES
         for update_type in require_service_types:
             with self.assertRaises(Exception) as cm:
                 JiraUpdateRecord.objects.create(update_type=update_type)
@@ -36,11 +32,7 @@ class JiraUpdateRecordModelTest(TestCase):
 
     def test_types_require_no_provider(self):
         provider = ProviderFactory()
-        disallow_provider_types = [
-            JiraUpdateRecord.NEW_SERVICE,
-            JiraUpdateRecord.CANCEL_DRAFT_SERVICE,
-            JiraUpdateRecord.CANCEL_CURRENT_SERVICE,
-        ]
+        disallow_provider_types = JiraUpdateRecord.SERVICE_CHANGE_UPDATE_TYPES
         for update_type in disallow_provider_types:
             with self.assertRaises(Exception) as cm:
                 JiraUpdateRecord.objects.create(update_type=update_type, provider=provider)
@@ -49,7 +41,7 @@ class JiraUpdateRecordModelTest(TestCase):
                 msg='Unexpected exception message (%s) for %s' % (str(cm.exception), update_type))
 
     def test_types_require_provider(self):
-        require_provider_types = [JiraUpdateRecord.PROVIDER_CHANGE]
+        require_provider_types = JiraUpdateRecord.PROVIDER_CHANGE_UPDATE_TYPES
         for update_type in require_provider_types:
             with self.assertRaises(Exception) as cm:
                 JiraUpdateRecord.objects.create(update_type=update_type)
@@ -59,7 +51,7 @@ class JiraUpdateRecordModelTest(TestCase):
 
     def test_types_require_no_service(self):
         service = ServiceFactory()
-        disallow_service_types = [JiraUpdateRecord.PROVIDER_CHANGE]
+        disallow_service_types = JiraUpdateRecord.PROVIDER_CHANGE_UPDATE_TYPES
         for update_type in disallow_service_types:
             with self.assertRaises(Exception) as cm:
                 JiraUpdateRecord.objects.create(update_type=update_type, service=service)
@@ -74,6 +66,43 @@ class MockJiraTestMixin(object):
         attrs = {'return_value.create_issue.return_value.key': issue_key}
         mock_JIRA.configure_mock(**attrs)
         return issue_key
+
+
+@mock.patch('services.jira_support.JIRA', autospec=True)
+class JiraProviderChangeTest(MockJiraTestMixin, TestCase):
+    def setUp(self):
+        self.test_provider = ProviderFactory()
+
+    def test_creating_provider_doesnt_create_jira_record(self, mock_JIRA):
+        with self.assertRaises(JiraUpdateRecord.DoesNotExist):
+            self.jira_record = self.test_provider.jira_records.get(
+                update_type=JiraUpdateRecord.PROVIDER_CHANGE)
+
+    def test_provider_notify_jira_of_change_creates_record(self, mock_JIRA):
+        self.test_provider.notify_jira_of_change()
+        jira_record = self.test_provider.jira_records.get(
+            update_type=JiraUpdateRecord.PROVIDER_CHANGE)
+        self.assertEqual(self.test_provider, jira_record.provider)
+
+    def test_provider_change_jira_work(self, mock_JIRA):
+        self.test_provider.notify_jira_of_change()
+        jira_record = self.test_provider.jira_records.get(
+            update_type=JiraUpdateRecord.PROVIDER_CHANGE)
+        self.assertEqual('', jira_record.jira_issue_key)
+        issue_key = self.setup_issue_key(mock_JIRA)
+        jira_record.do_jira_work()
+        site = Site.objects.get_current()
+        expected_duedate = datetime.date.today() + datetime.timedelta(days=settings.JIRA_DUEIN_DAYS)
+        mock_JIRA.return_value.create_issue.assert_called_with(
+            description="Details here:\nhttp://%s%s" %
+                        (site, self.test_provider.get_admin_edit_url()),
+            project={'key': settings.JIRA_PROJECT_KEY},
+            issuetype={'name': 'Task'},
+            duedate=str(expected_duedate),
+            summary="Changed provider from %s" % str(self.test_provider),
+        )
+        jira_record = JiraUpdateRecord.objects.get(pk=jira_record.pk)
+        self.assertEqual(issue_key, jira_record.jira_issue_key)
 
 
 @mock.patch('services.jira_support.JIRA', autospec=True)

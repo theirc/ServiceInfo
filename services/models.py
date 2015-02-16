@@ -126,6 +126,9 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
             provider=self
         )
 
+    def get_admin_edit_url(self):
+        return reverse('admin:services_provider_change', args=[self.id])
+
 
 class ServiceArea(NameInCurrentLanguageMixin, models.Model):
     name_en = models.CharField(
@@ -577,11 +580,13 @@ class JiraUpdateRecord(models.Model):
                     JiraUpdateRecord.CANCEL_CURRENT_SERVICE: 'Canceled service',
                     JiraUpdateRecord.PROVIDER_CHANGE: 'Changed provider',
                 }[self.update_type]
-                kwargs['summary'] = '%s service from %s' % (change_type, self.service.provider)
-                if self.update_type in JiraUpdateRecord.PROVIDER_CHANGE_UPDATE_TYPES:
-                    url = self.provider.get_admin_edit_url()
-                else:
+                if self.update_type in JiraUpdateRecord.SERVICE_CHANGE_UPDATE_TYPES:
                     url = self.service.get_admin_edit_url()
+                    provider = self.service.provider
+                elif self.update_type in self.PROVIDER_CHANGE_UPDATE_TYPES:
+                    url = self.provider.get_admin_edit_url()
+                    provider = self.provider
+                kwargs['summary'] = '%s from %s' % (change_type, provider)
                 kwargs['description'] = 'Details here:\nhttp://%s%s' % (
                     Site.objects.get_current(), url)
                 new_issue = jira.create_issue(**kwargs)
@@ -616,7 +621,6 @@ class JiraUpdateRecord(models.Model):
                 jira.add_comment(issue_key, comment)
                 self.jira_issue_key = issue_key
                 self.save()
-            # TODO other types of updates
         finally:
             # If we've not managed to save a valid JIRA issue key, reset value to
             # empty string so it'll be tried again later.
