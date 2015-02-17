@@ -74,7 +74,7 @@ module.exports = Backbone.View.extend({
                     i18n.t('Global.Friday'),
                     i18n.t('Global.Saturday')
                 ],
-                
+
             areas_of_services: serviceareas,
             types: types,
             criteria: criteria
@@ -122,7 +122,7 @@ module.exports = Backbone.View.extend({
             $newInput.attr('name', name);
             $newInput.val("");
 
-            $btn.remove();
+            //$btn.remove();
             $row.parent().append($newRow);
 
             return false;
