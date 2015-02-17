@@ -17,12 +17,19 @@
     <div class="main-content">
         <div class="container">
             {{#if failed }}
+            <form id=resend-form>
+                <div class="row">
+                    <div class="form-group third">
+                        <input id="id_email" type="email" name="email" class="form-control" placeholder="Enter your Email" >
+                    </div>
+                </div>
                 <div class="row">
                     <div class="third">
                         <button class="form-btn-submit primary-button" data-i18n="Account-Activation.Buttons.Resend-Email"></button>
                     </div>
                     <div class="half"></div>
                 </div>
+            </form>
             {{/if}}
         </div>
     </div>
