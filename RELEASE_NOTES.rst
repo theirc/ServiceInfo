@@ -2,6 +2,11 @@ Service Info
 
 Release Notes
 
+0.0.6 - Feb. 18, 2015
+---------------------
+
+* Fix double-submission of services
+
 0.0.5 - Feb. 17, 2015
 ---------------------
 
