@@ -2,7 +2,12 @@ Service Info
 
 Release Notes
 
-0.0.6 - Feb. 18, 2015
+0.0.7 - Feb. 17, 2015
+---------------------
+
+* Fix regression on selection criteria controls
+
+0.0.6 - Feb. 17, 2015
 ---------------------
 
 * Fix double-submission of services
