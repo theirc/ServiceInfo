@@ -17,7 +17,14 @@
         "Change-Language": "تغيير اللغة"
     },
     "Global": {
-        "FormSubmissionError": "كان هناك خطأ غير معروف تقديم النموذج الخاص بك."
+        "FormSubmissionError": "كان هناك خطأ غير معروف تقديم النموذج الخاص بك.",
+        "Sunday": "الأحد",
+        "Monday": "الإثنين",
+        "Tuesday": "الثلاثاء",
+        "Wednesday": "الأربعاء",
+        "Thursday": "الخميس",
+        "Friday": "الجمعة",
+        "Saturday": "السبت"
     },
     "Login-Form": {
         "Page-Head": {
@@ -64,6 +71,8 @@
             }
         },
         "Legend": "معلومات عن الخدمة",
+        "Type-Choose": "اختيار نوع الخدمة",
+        "Service-Area-Choose": "إختار منطقة الخدمة",
         "Service-Name": "اسم الخدمة",
         "Service-Area": "منطقة الخدمة",
         "Type": "نوع الخدمة",

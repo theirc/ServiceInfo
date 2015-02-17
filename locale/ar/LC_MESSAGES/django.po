@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-13 17:39+0200\n"
-"PO-Revision-Date: 2015-02-10 14:05+0000\n"
+"POT-Creation-Date: 2015-02-16 22:18+0200\n"
+"PO-Revision-Date: 2015-02-17 06:23+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -19,33 +19,37 @@ msgstr ""
 "Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: api/serializers.py:180
+#: api/serializers.py:112 email_user/forms.py:17
+msgid "A user with that email already exists."
+msgstr "البريد الإلكتروني موجود من قبل."
+
+#: api/serializers.py:202
 msgid "You may only submit updates to current or draft services"
 msgstr "يمكنك تقديم التحديثات فقط على الخدمات الحالية أو مشروع"
 
-#: api/serializers.py:249
+#: api/serializers.py:265
 msgid "User account is disabled."
 msgstr "تم تعطيل حساب المستخدم."
 
-#: api/serializers.py:252
+#: api/serializers.py:268
 msgid "Unable to log in with provided credentials."
 msgstr "غير قادر على الدخول مع المعلومات المتوفرة."
 
-#: api/serializers.py:274
+#: api/serializers.py:290
 msgid ""
 "Activation key is invalid. Check that it was copied correctly and has not "
 "already been used."
 msgstr "مفتاح تنشيط غير صالح. تحقق من الذي تم نسخه بشكل صحيح وأنه لم يتم بالفعل استخدامه."
 
-#: api/serializers.py:295 api/serializers.py:347
+#: api/serializers.py:311 api/serializers.py:363
 msgid "No user with that email"
 msgstr "لا مستخدم بهذا البريد الإلكتروني "
 
-#: api/serializers.py:313 api/serializers.py:331
+#: api/serializers.py:329 api/serializers.py:347
 msgid "Password reset key is not valid"
 msgstr "مفتاح إعادة تعيين كلمة المرور غير صالح"
 
-#: api/serializers.py:350
+#: api/serializers.py:366
 msgid "User is not pending activation"
 msgstr "المستخدم ليس في حالة إنتظار التفعيل "
 
@@ -56,10 +60,6 @@ msgstr "ضوابط"
 #: email_user/admin.py:27
 msgid "Important dates"
 msgstr "التواريخ الهامة"
-
-#: email_user/forms.py:17
-msgid "A user with that email already exists."
-msgstr "البريد الإلكتروني موجود من قبل."
 
 #: email_user/forms.py:18
 msgid "The two password fields didn't match."
@@ -134,7 +134,7 @@ msgstr "لغة"
 msgid "User's preferred language."
 msgstr "اللغة المفضلة للمستخدم."
 
-#: email_user/models.py:147 services/models.py:109
+#: email_user/models.py:147 services/models.py:110
 msgid "user"
 msgstr "المستخدم"
 
@@ -337,170 +337,174 @@ msgstr "رفض الخدمة الجديدة أو تغييرها"
 
 #. Translators: Provider name
 #. Translators: Service name
-#: services/models.py:29 services/models.py:57 services/models.py:125
-#: services/models.py:195 services/models.py:254
+#: services/models.py:30 services/models.py:58 services/models.py:135
+#: services/models.py:205 services/models.py:264
 msgid "name in English"
 msgstr "الاسم في اللغة الإنجليزية"
 
 #. Translators: Provider name
 #. Translators: Service name
-#: services/models.py:35 services/models.py:64 services/models.py:131
-#: services/models.py:201 services/models.py:261
+#: services/models.py:36 services/models.py:65 services/models.py:141
+#: services/models.py:211 services/models.py:271
 msgid "name in Arabic"
 msgstr "الإسم في اللغة العربية "
 
 #. Translators: Provider name
 #. Translators: Service name
-#: services/models.py:41 services/models.py:71 services/models.py:137
-#: services/models.py:207 services/models.py:268
+#: services/models.py:42 services/models.py:72 services/models.py:147
+#: services/models.py:217 services/models.py:278
 msgid "name in French"
 msgstr "الإسم في اللغة الفرنسية "
 
-#: services/models.py:78 services/models.py:378
+#: services/models.py:79 services/models.py:388
 msgid "type"
 msgstr "نوع "
 
-#: services/models.py:81
+#: services/models.py:82
 msgid "phone number"
 msgstr "رقم الهاتف "
 
-#: services/models.py:85
+#: services/models.py:86
 msgid "website"
 msgstr "الموقع"
 
 #. Translators: Provider description
 #. Translators: Service description
-#: services/models.py:91 services/models.py:279
+#: services/models.py:92 services/models.py:289
 msgid "description in English"
 msgstr "الوصف في اللغة الإنكليزية "
 
 #. Translators: Provider description
 #. Translators: Service description
-#: services/models.py:97 services/models.py:285
+#: services/models.py:98 services/models.py:295
 msgid "description in Arabic"
 msgstr "الوصف في اللغة العربية "
 
 #. Translators: Provider description
 #. Translators: Service description
-#: services/models.py:103 services/models.py:291
+#: services/models.py:104 services/models.py:301
 msgid "description in French"
 msgstr "الوصف في اللغة الفرنسية "
 
-#: services/models.py:110
+#: services/models.py:111
 msgid "user account for this provider"
 msgstr "حساب المستخدم لهذا المزود"
 
-#: services/models.py:113
+#: services/models.py:114
 msgid "number of targeted beneficiaries monthly"
 msgstr "عدد المستفيدين شهريا"
 
-#: services/models.py:144
+#: services/models.py:154
 msgid "parent area"
 msgstr "المنطقة الأم "
 
-#: services/models.py:145
+#: services/models.py:155
 msgid "the area that contains this area"
 msgstr "المنطقة تابعة لمنطقة أخرى "
 
-#: services/models.py:183
+#: services/models.py:193
 msgid "selection criteria"
 msgstr "معايير الاختيار"
 
-#: services/models.py:214
+#: services/models.py:224
 msgid "comments in English"
 msgstr "تعليقات باللغة الإنجليزية"
 
-#: services/models.py:220
+#: services/models.py:230
 msgid "comments in Arabic"
 msgstr "تعليقات باللغة العربية"
 
-#: services/models.py:226
+#: services/models.py:236
 msgid "comments in French"
 msgstr "تعليقات باللغة الفرنسية"
 
-#: services/models.py:250
+#: services/models.py:260
 msgid "provider"
 msgstr "مزود "
 
-#: services/models.py:275
+#: services/models.py:285
 msgid "area of service"
 msgstr "منطقة الخدمة"
 
-#: services/models.py:296
+#: services/models.py:306
 msgid "additional information in English"
 msgstr "معلومات إضافية في اللغة الإنجليزية"
 
-#: services/models.py:301
+#: services/models.py:311
 msgid "additional information in Arabic"
 msgstr "معلومات إضافية باللغة العربية"
 
-#: services/models.py:306
+#: services/models.py:316
 msgid "additional information in French"
 msgstr "معلومات إضافية باللغة الفرنسية"
 
-#: services/models.py:311
+#: services/models.py:321
 msgid "cost of service"
 msgstr "كلفة الخدمة"
 
-#: services/models.py:326
+#: services/models.py:336
 msgid "draft"
 msgstr "مسودة"
 
-#: services/models.py:329
+#: services/models.py:339
 msgid "current"
 msgstr "الحالي "
 
-#: services/models.py:331
+#: services/models.py:341
 msgid "rejected"
 msgstr "مرفوض"
 
-#: services/models.py:334
+#: services/models.py:344
 msgid "canceled"
 msgstr "ألغيت"
 
-#: services/models.py:336
+#: services/models.py:346
 msgid "archived"
 msgstr "أرشفة"
 
-#: services/models.py:339
+#: services/models.py:349
 msgid "status"
 msgstr "الوضع "
 
-#: services/models.py:346
+#: services/models.py:356
 msgid ""
 "If a service record represents a modification of an existing service record "
 "that is still pending approval, this field links to the existing service "
 "record."
 msgstr "إذا يمثل رقما قياسيا خدمة تعديل لسجل الخدمة الحالية التي لا تزال في انتظار الموافقة، وهذا الروابط ميدانية إلى سجل الخدمة الحالية. للتغيرر"
 
-#: services/models.py:355
+#: services/models.py:365
 msgid "location"
 msgstr "المكان "
 
-#: services/models.py:489
+#: services/models.py:496
 msgid "Provider updated their information"
 msgstr "تحديث معلوماتهم مزود"
 
-#: services/models.py:490
+#: services/models.py:497
 msgid "New service submitted by provider"
 msgstr "الخدمة الجديدة المقدمة من قبل مزود"
 
-#: services/models.py:491
+#: services/models.py:498
 msgid "Change to existing service submitted by provider"
 msgstr "تغير إلى الخدمة الحالية للمزود "
 
-#: services/models.py:492
+#: services/models.py:499
 msgid "Provider canceled a draft service"
 msgstr "إلغاء مزود مشروع الخدمة"
 
-#: services/models.py:493
+#: services/models.py:500
 msgid "Provider canceled a current service"
 msgstr "إلغاء مزود خدمة الحالية"
 
-#: services/models.py:496
+#: services/models.py:501
+msgid "Provider superseded a previous draft"
+msgstr "مزود ألغى مسودة قديمة "
+
+#: services/models.py:519
 msgid "update type"
 msgstr "نوع آخر التطورات"
 
-#: services/models.py:501
+#: services/models.py:524
 msgid "JIRA issue"
 msgstr "قضية جيرة"

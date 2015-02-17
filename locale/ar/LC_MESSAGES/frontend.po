@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-16 06:09+0000\n"
+"PO-Revision-Date: 2015-02-17 06:26+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -49,6 +49,27 @@ msgstr "تغيير اللغة"
 msgid "Global##FormSubmissionError"
 msgstr "كان هناك خطأ غير معروف تقديم النموذج الخاص بك."
 
+msgid "Global##Sunday"
+msgstr "الأحد"
+
+msgid "Global##Monday"
+msgstr "الإثنين"
+
+msgid "Global##Tuesday"
+msgstr "الثلاثاء"
+
+msgid "Global##Wednesday"
+msgstr "الأربعاء"
+
+msgid "Global##Thursday"
+msgstr "الخميس"
+
+msgid "Global##Friday"
+msgstr "الجمعة"
+
+msgid "Global##Saturday"
+msgstr "السبت"
+
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "تسجيل الدخول"
 
@@ -90,6 +111,12 @@ msgstr "ملء النموذج أدناه لتطبيق لخدمة جديدة وا
 
 msgid "Service-Form##Legend"
 msgstr "معلومات عن الخدمة"
+
+msgid "Service-Form##Type-Choose"
+msgstr "اختيار نوع الخدمة"
+
+msgid "Service-Form##Service-Area-Choose"
+msgstr "إختار منطقة الخدمة"
 
 msgid "Service-Form##Service-Name"
 msgstr "اسم الخدمة"
