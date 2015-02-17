@@ -2,6 +2,12 @@ Service Info
 
 Release Notes
 
+0.0.8 - Feb. 17, 2015
+---------------------
+
+* Remove 'delete' option for services in a state where
+  we don't allow deleting anyway.
+
 0.0.7 - Feb. 17, 2015
 ---------------------
 
