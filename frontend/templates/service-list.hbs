@@ -46,7 +46,9 @@
 				      {{#if this.is_draft }}
       				     data-i18n="Service-Remove-Change.Remove-Change"
                       {{else}}
-      				     data-i18n="Service-Delete.Delete-Service"
+                        {{#if this.is_current }}
+      				      data-i18n="Service-Delete.Delete-Service"
+                        {{/if}}
                       {{/if}}
 				     ></span></a></span>
 				</td>
