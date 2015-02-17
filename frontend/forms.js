@@ -1,4 +1,6 @@
 var config = require('./config');
+var api = require('./api');
+var i18n = require('i18next-client');
 
 var forms = module.exports = {
     collect: function($form) {
@@ -7,15 +9,44 @@ var forms = module.exports = {
         $form.find('[name]').each(function() {
             var $field = $(this);
             var value = $field.val();
+            var filled = value.length > 0;
             var name = $field.attr('name');
             var ml = typeof $field.data('i18n-field') !== "undefined";
 
+            if (filled && name.indexOf('.') > 0) {
+                var parts = name.split('.');
+                var target = data;
+                var tval, fromarray;
+                while (parts.length) {
+                    if (parts.length > 1) {
+                        tval = target[parts[0]];
+                        if (typeof tval === 'undefined') {
+                            tval = [];
+
+                        } else if ($.isArray(tval) && !$.isNumeric(parts[1])) {
+                            fromarray = tval;
+                            tval = {};
+                            for (var i=0; i<fromarray.length; i++) {
+                                tval[i.toString()] = fromarray[i];
+                            }
+                        }
+
+                        tval[parts[1]] = value;
+                        target[parts[0]] = tval;
+                    }
+                    parts.splice(0, 1);
+                    target = tval;
+                }
+            }
+
             if (ml) {
-                var cur_lang = localStorage['lang'];
+                var cur_lang = config.get('forever.language');
                 name = name + '_' + cur_lang;
             }
 
-            data[name] = value;
+            if (name.indexOf('.') < 0) {
+                data[name] = value;
+            }
         });
 
         return data;
@@ -45,25 +76,29 @@ var forms = module.exports = {
         $submit.attr('disabled', 'disabled');
 
         return new Promise(function(resolve, error) {
-            $.ajax(config.get('api_location')+action, {
-                method: 'POST',
-                data: data,
-                error: function(e) {
+            api.request('POST', action, data).then(
+                function onsuccess(data) {
+                    $submit.removeAttr('disabled');
+                    resolve.apply(this, arguments);
+                },
+                function onerror(e) {
                     $submit.removeAttr('disabled');
                     $.extend(errors, e.responseJSON);
+                    var missing = {};
                     $.each(errors, function(k) {
                         var $error = self.getFieldLabel($form, k).find('.error');
                         if ($error) {
                             $error.text(this[0]);
+                        } else {
+                            missing[k] = this[0];
                         }
                     })
-                    error(errors);
-                },
-                success: function() {
-                    $submit.removeAttr('disabled');
-                    resolve.apply(this, arguments);
-                },
-            });
+                    if (e.status >= 500) {
+                        $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
+                    }
+                    error(missing);
+                }
+            );
         });
     },
 };

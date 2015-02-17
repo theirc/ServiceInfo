@@ -25,18 +25,19 @@
                 <legend data-i18n="Service-Form.Legend"></legend>
                 <div class="row">
                   <div class="form-group">
-                    <label for="name" class="control-label"><span data-i18n="Service-Form.Service-Name"></span><span class="error"></span></label>
+                    <label for="id_name" class="control-label"><span data-i18n="Service-Form.Service-Name"></span><span class="error"></span></label>
                       <div class="form-group">
-                        <input type="text" name="name" data-i18n-field class="form-control"  >
+                        <input id="id_name" type="text" name="name" data-i18n-field class="form-control"  >
                       </div>
                   </div>
                 </row>
                 <div class="row">
                   <div class="half">
                     <div class="form-group">
-                      <label for="area_of_service" class="control-label"><span data-i18n="Service-Form.Service-Area"></span><span class="error"></span></label>
+                      <label for="id_area_of_service" class="control-label"><span data-i18n="Service-Form.Service-Area"></span><span class="error"></span></label>
                       <div class="btn-group"  >
-                          <select name=area_of_service class="form-control">
+                          <select id=id_area_of_service name=area_of_service class="form-control">
+                              <option value="" data-i18n="Service-Form.Service-Area.Service-Area-Choose"></option>
                               {{#each areas_of_services}}
                                   <option value="{{ this.url }}">{{ this.name }}</option>
                               {{/each}}
@@ -46,9 +47,10 @@
                   </div>
                   <div class="half">
                     <div class="form-group">
-                      <label for="type" class="control-label"><span data-i18n="Service-Form.Type"></span><span class="error"></span></label>
+                      <label for="id_type" class="control-label"><span data-i18n="Service-Form.Type"></span><span class="error"></span></label>
                         <div class="btn-group">
-                            <select name=type class="form-control">
+                            <select id=id_type name=type class="form-control">
+                                <option value="" data-i18n="Service-Form.Service-Area.Type-Choose"></option>
                                 {{#each types}}
                                     <option value="{{ this.url }}">{{ this.name }}</option>
                                 {{/each}}
@@ -59,14 +61,14 @@
                 </div>
                 <div class="row">
                   <div class="form-group">
-                    <label for="id_description" class="control-label"><span  data-i18n="Service-Form.Service-Description"><span class="error"></span></label>
+                    <label for="id_description" class="control-label"><span  data-i18n="Service-Form.Service-Description"></span><span class="error"></span></label>
                     <div class="form-group">
-                      <textarea rows="4" name="description" data-i18n-field class="form-control"  ></textarea>
+                      <textarea id=id_description rows="4" name="description" data-i18n-field class="form-control"  ></textarea>
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="time_of_service" class="control-label"><span data-i18n="Service-Form.Service-Hours"></span><span class="error"></span></label>
+                  <label class="control-label"><span data-i18n="Service-Form.Service-Hours"></span><span class="error"></span></label>
                   {{#each daysofweek}}
                   <div id=service-hours>
                     <div class=row>
@@ -97,7 +99,7 @@
                 <div class="form-group row">
                   <label for="id_additional_information" class="control-label" data-i18n="Service-Form.Additional-Information"></label>
                   <div class="form-group">
-                    <textarea rows="4" data-i18n-field name="additional_information" class="form-control"></textarea>
+                    <textarea id="id_additional_information" rows="4" data-i18n-field name="additional_information" class="form-control"></textarea>
                   </div>
                 </div>
                 <div class="form-group">

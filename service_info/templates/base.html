@@ -1,4 +1,3 @@
-{% load compress %}
 {% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -14,9 +13,7 @@
     <link rel="stylesheet/less" type="text/css" media="all" href="{% static 'less/site.less' %}">
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.5.1/less.min.js"></script>
     {% else %}
-    {% compress css %}
     <link rel="stylesheet" type="text/less" media="all" href="{% static 'less/site.less' %}">
-    {% endcompress %}
     {% endif %}
     {% block extra-css %}{% endblock %}
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.dev.js"></script>
@@ -26,9 +23,7 @@
         {% block content %}{% endblock %}
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    {% compress js %}
     <script src="{% static 'js/site.js' %}"></script>
-    {% endcompress %}
     {% block extra-js %}{% endblock %}
 </body>
 </html>

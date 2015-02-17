@@ -1,10 +1,11 @@
+from collections import defaultdict
 from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import Group
+from django.core.exceptions import ValidationError as DjangoValidationError
 from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import exceptions, serializers
-from rest_framework.exceptions import ValidationError
 
 from email_user.forms import EmailUserCreationForm
 from email_user.models import EmailUser
@@ -16,17 +17,24 @@ class RequireOneTranslationMixin(object):
     """Validate that for each set of fields with prefix
     in `Meta.required_translated_fields` and ending in _en, _ar, _fr,
     that at least one value is provided."""
-    def validate(self, attrs):
-        attrs = super().validate(attrs)
-        errs = {}
+    # Override run_validation so we can get in at the beginning
+    # of validation for a call and add our own errors to those
+    # the other validations find.
+    def run_validation(self, data=serializers.empty):
+        # data is a dictionary
+        errs = defaultdict(list)
         for field in self.Meta.required_translated_fields:
-            if not (attrs.get('%s_en' % field, False)
-                    or attrs.get('%s_ar' % field, False)
-                    or attrs.get('%s_fr' % field, False)):
-                errs[field] = 'This field is required.'
+            if not (data.get('%s_en' % field, False)
+                    or data.get('%s_ar' % field, False)
+                    or data.get('%s_fr' % field, False)):
+                errs[field].append(_('This field is required.'))
+        try:
+            validated_data = super().run_validation(data)
+        except (exceptions.ValidationError, DjangoValidationError) as exc:
+            errs.update(serializers.get_validation_error_detail(exc))
         if errs:
-            raise ValidationError(errs)
-        return attrs
+            raise exceptions.ValidationError(errs)
+        return validated_data
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -47,9 +55,11 @@ class LanguageSerializer(serializers.Serializer):
         # See if it's a valid language code
         language_dict = dict(settings.LANGUAGES)
         if value not in language_dict:
-            raise ValidationError(
-                "Invalid language code %r. The valid codes are %s."
-                % (value, ', '.join(language_dict.keys())))
+            valid_codes = ', '.join(language_dict.keys())
+            raise exceptions.ValidationError(
+                _("Invalid language code {code}. The valid codes are {valid_codes}.").format(
+                    code=value, valid_codes=valid_codes
+                ))
         return value
 
 
@@ -95,6 +105,20 @@ class CreateProviderSerializer(ProviderSerializer):
         fields = [field for field in ProviderSerializer.Meta.fields
                   if field not in ['user']]
         fields += ['email', 'password', 'base_activation_link']
+
+    def run_validation(self, data=serializers.empty):
+        # data is a dictionary
+        errs = defaultdict(list)
+        email = data.get('email', False)
+        if email and get_user_model().objects.filter(email__iexact=email).exists():
+            errs['email'].append(_("A user with that email already exists."))
+        try:
+            validated_data = super().run_validation(data)
+        except (exceptions.ValidationError, DjangoValidationError) as exc:
+            errs.update(serializers.get_validation_error_detail(exc))
+        if errs:
+            raise exceptions.ValidationError(errs)
+        return validated_data
 
     def validate(self, attrs):
         attrs = super().validate(attrs)
@@ -179,12 +203,21 @@ class ServiceSerializer(RequireOneTranslationMixin,
                 raise exceptions.ValidationError(
                     {'update_of': _("You may only submit updates to current or draft services")}
                 )
-            # Find the topmost record in the possible chain of update_of's
-            topmost = parent
-            while topmost.update_of:
-                topmost = topmost.update_of
-            # Always point at the topmost record
-            attrs['update_of'] = topmost
+
+        errs = defaultdict(list)
+        for day in ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday',
+                    'friday', 'saturday']:
+            open_field, close_field = '%s_open' % day, '%s_close' % day
+            open_value = attrs.get(open_field, False)
+            close_value = attrs.get(close_field, False)
+            if open_value and not close_value:
+                errs[close_field].append(_('Close time is missing.'))
+            elif close_value and not open_value:
+                errs[open_field].append(_('Open time is missing.'))
+            elif open_value and close_value and open_value >= close_value:
+                errs[close_field].append(_('Close time is not later than open time.'))
+        if errs:
+            raise exceptions.ValidationError(errs)
         return attrs
 
     def create(self, validated_data):

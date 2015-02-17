@@ -18,12 +18,15 @@ class ServiceApprovalEmailTaskTest(TestCase):
     def test_email_task_calls_email_send(self):
         with patch('email_user.models.EmailUser.send_email_to_user') as mock_send:
             email_provider_about_service_approval_task(self.service.pk)
+        site = Site.objects.get_current()
+        expected_link = 'http://%s/app/#/service/%d' % (site, self.service.pk)
         mock_send.assert_called_with(
             {
-                'site': Site.objects.get_current(),
+                'site': site,
                 'service': self.service,
                 'provider': self.provider,
                 'user': self.user,
+                'service_link': expected_link,
             },
             'email/service_approved_subject.txt',
             'email/service_approved_body.txt',

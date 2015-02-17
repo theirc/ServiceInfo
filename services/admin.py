@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib import admin, messages
 from django.utils.translation import ugettext_lazy as _
 from services.models import Provider, Service, ServiceArea, SelectionCriterion, ProviderType, \
-    ServiceType
+    ServiceType, JiraUpdateRecord
 
 
 class ProviderAdmin(admin.ModelAdmin):
@@ -115,9 +115,18 @@ class ServiceAdmin(admin.ModelAdmin):
     reject.short_description = _("Reject new or changed service")
 
 
+class ServiceAreaAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'parent', 'name_en', 'name_ar', 'name_fr')
+
+
+class JiraUpdateRecordAdmin(admin.ModelAdmin):
+    list_display = ('update_type', 'service', 'provider', 'jira_issue_key')
+
+
 admin.site.register(Provider, ProviderAdmin)
 admin.site.register(ProviderType, ProviderTypeAdmin)
 admin.site.register(ServiceType, ServiceTypeAdmin)
 admin.site.register(Service, ServiceAdmin)
-admin.site.register(ServiceArea)
+admin.site.register(ServiceArea, ServiceAreaAdmin)
 admin.site.register(SelectionCriterion, SelectionCriterionAdmin)
+admin.site.register(JiraUpdateRecord, JiraUpdateRecordAdmin)

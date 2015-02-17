@@ -5,11 +5,26 @@
     "test": {
         "hello": "مرحبا بالعالم"
     },
-    "menu": {
-        "Map": "خريطة الخدمات ",
-        "Registration": "تسجيل مزود الخدمات ",
-        "Feedback": "أداة تسجيل الملاحظات ",
+    "Menu": {
+        "Menu-Toggle": "قائمة",
+        "Login": "تسجيل الدخول",
+        "Logout": "تسجيل الخروج",
+        "Services": "الخدمات",
+        "Add-Services": "إضافة خدمات",
+        "Service-Map": "خدمة خريطة",
+        "Provider-Registration": "التسجيل مزود",
+        "Feedback-Tool": "ردود الفعل أداة",
         "Change-Language": "تغيير اللغة"
+    },
+    "Global": {
+        "FormSubmissionError": "كان هناك خطأ غير معروف تقديم النموذج الخاص بك.",
+        "Sunday": "الأحد",
+        "Monday": "الإثنين",
+        "Tuesday": "الثلاثاء",
+        "Wednesday": "الأربعاء",
+        "Thursday": "الخميس",
+        "Friday": "الجمعة",
+        "Saturday": "السبت"
     },
     "Login-Form": {
         "Page-Head": {
@@ -29,8 +44,35 @@
             "Register": "سجل لتكون مقدم خدمات هنا"
         }
     },
+    "Service-Remove-Change": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "إزالة تغيير"
+            }
+        },
+        "Update-Of": "تحديث",
+        "Remove-Change": "إزالة التغيير"
+    },
+    "Service-Delete": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "حذف الخدمة"
+            }
+        },
+        "Delete-Service": "حذف الخدمة"
+    },
     "Service-Form": {
-        "Legend": "معلومات عن الخدمة ",
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "استمارة التسجيل خدمة جديدة"
+            },
+            "Page-Description": {
+                "Page-Description": "ملء النموذج أدناه لتطبيق لخدمة جديدة وافقت."
+            }
+        },
+        "Legend": "معلومات عن الخدمة",
+        "Type-Choose": "اختيار نوع الخدمة",
+        "Service-Area-Choose": "إختار منطقة الخدمة",
         "Service-Name": "اسم الخدمة",
         "Service-Area": "منطقة الخدمة",
         "Type": "نوع الخدمة",
@@ -41,6 +83,8 @@
         "Selection-Criteria": "معايير الاختيار (حقل اختياري)",
         "Hours-Open": "ساعات البدء:",
         "Hours-Close": "ساعات الإغلاق:",
+        "Add-Criterion": "اضافة معيار",
+        "Remove-Criterion": "ازالة المعيار",
         "Form-Submit-Options": {
             "Submit": "إرسال الأجوبة",
             "Clear": "إزالة الأجوبة"
@@ -49,10 +93,10 @@
     "Provider-Registration-Form": {
         "Page-Head": {
             "Page-Title": {
-                "Title": "إستمارة تسجيل مزود خدمات جديد "
+                "Title": "خدمة استمارة التسجيل مزود"
             },
             "Page-Description": {
-                "Page-Description": "إملء النموذج أدناه لتكون مزود خدمات."
+                "Page-Description": "ملء النموذج أدناه."
             }
         },
         "Errors": {
@@ -66,11 +110,13 @@
                 "Name": "الاسم الكامل",
                 "Password": "كلمة السر",
                 "PasswordConfirm": "تأكيد كلمة المرور",
-                "Service-Type": "نوع الخدمة",
-                "Service-Type-Choose": "اختيار نوع الخدمة",
+                "Provider-Type": "نوع مزود",
+                "Provider-Type-Choose": "اختر نوع مزود",
                 "Phone-Number": "رقم الهاتف",
                 "Email": "البريد الإلكتروني",
+                "EmailPlaceholder": "أدخل البريد الإلكتروني الخاص بك",
                 "Website": "موقع (حقل اختياري)",
+                "WebsitePlaceholder": "أدخل URL موقع الويب الخاص بك",
                 "MonthlyBeneficiaries": "عدد المستفيدين شهرياَ",
                 "Description": "توصيف "
             },
@@ -122,9 +168,12 @@
                 "Name": "الاسم:",
                 "Type": "النوع:",
                 "Area": "المنطقة:",
-                "Status": "الحالة:"
+                "Status": "الحالة:",
+                "Remove": "إزالة:"
             }
-        }
+        },
+        "Cancel": "إلغاء",
+        "Delete": "حذف"
     },
     "Home": {
         "Service-Map": {
@@ -147,6 +196,16 @@
             },
             "Page-Description": {
                 "Page-Description": "لقد قمنا بإرسال رسالة تأكيد بالبريد الإلكتروني إلى حساب البريد الإلكتروني الذي استخدمته أثناء التسجيل. انقر على رابط التأكيد في رسالة البريد الإلكتروني لاستكمال عملية التسجيل."
+            }
+        }
+    },
+    "Provider-Registration-Changed": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "قدم بياناتك بنجاح"
+            },
+            "Page-Description": {
+                "Page-Description": "تم تحديث المعلومات الخاصة بك."
             }
         }
     },

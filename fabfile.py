@@ -268,6 +268,7 @@ def makemessages():
     """
     local("python manage.py makemessages --ignore 'conf/*' --ignore 'docs/*' "
           "--ignore 'requirements/*' --ignore 'frontend/*' --ignore 'vagrant/*' "
+          "--ignore 'node_modules/*'"
           "--no-location --no-obsolete "
           "-l en")
     local("i18next-conv -s frontend/locales/en/translation.json -t "
@@ -287,11 +288,17 @@ def pullmessages():
     """
     Pull the latest locale/ar/LC_MESSAGES/django.po and
     locale/fr/LC_MESSAGES/django.po from Transifex.
+
+    Then take the updated frontend.po files and update the
+    french and arabic translation.json files.
     """
     local("tx pull -af")
-    for lang in ('en', 'fr', 'ar'):
-        local("i18next-conv -s frontend/locales/%(lang)s/translation.json -t "
-              "locale/%(lang)s/LC_MESSAGES/frontend.po -l %(lang)s" % locals())
+    for lang in ('fr', 'ar'):
+        local("i18next-conv "
+              " -t frontend/locales/%(lang)s/translation.json"
+              " -s locale/%(lang)s/LC_MESSAGES/frontend.po"
+              " -l %(lang)s" % locals())
+    execute(compilemessages)
 
 
 @task

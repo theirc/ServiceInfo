@@ -16,6 +16,16 @@
   	"Feedback-Tool": "Feedback Tool",
   	"Change-Language": "Change Language"
   },
+  "Global": {
+    "FormSubmissionError": "There was an unknown error submitting your form.",
+    "Sunday": "Sunday",
+    "Monday": "Monday",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Wednesday",
+    "Thursday": "Thursday",
+    "Friday": "Friday",
+    "Saturday": "Saturday"
+  },
   "Login-Form": {
   	"Page-Head": {
   		"Page-Title": {
@@ -34,15 +44,52 @@
       "Register": "Register to be a Service Provider here"
   	}
   },
-  "Service-Form": {
+  "Service-Remove-Change": {
     "Page-Head": {
       "Page-Title": {
-        "Title": "New Service Registration Form"
-      },
-      "Page-Description": {
-        "Page-Description": "Fill out the form below to apply to have a new service approved."
+        "Title": "Remove Change"
       }
     },
+    "Update-Of": "Update of",
+    "Remove-Change": "Remove change"
+  },
+  "Service-Delete": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Delete Service"
+      }
+    },
+    "Delete-Service": "Delete service"
+  },
+  "Service-Form": {
+      "Page-Head": {
+        "Page-Title": {
+          "Title": "New Service Registration Form"
+        },
+        "Page-Description": {
+          "Page-Description": "Fill out the form below to apply to have a new service approved."
+        }
+      },
+      "Legend": "Service Information",
+      "Type-Choose": "Choose a Service Type",
+      "Service-Area-Choose": "Choose a Service Area",
+      "Service-Name": "Name of Service",
+      "Service-Area": "Area of Service",
+      "Type": "Service Type",
+      "Service-Description": "Description",
+      "Service-Hours": "Hours of Service",
+      "Additional-Information": "Additional Information (Optional Field)",
+      "Service-Cost": "Cost of Service (Optional Field)",
+      "Selection-Criteria": "Selection Criteria (Optional Field)",
+      "Hours-Open": "Opening Time:",
+      "Hours-Close": "Closing Time:",
+      "Selection-Criteria": "Selection Criteria",
+      "Add-Criterion": "Add New Criterion",
+      "Remove-Criterion": "Remove Criterion",
+      "Form-Submit-Options": {
+          "Submit": "Submit Answers",
+          "Clear": "Remove Answers"
+      },
     "Legend": "Service Information",
     "Service-Name": "Name of Service",
     "Service-Area": "Area of Service",
@@ -62,10 +109,10 @@
   "Provider-Registration-Form": {
   	"Page-Head": {
   		"Page-Title": {
-  			"Title": "New Service Provider Registration Form"
+            "Title": "Service Provider Registration Form"
   		},
   		"Page-Description": {
-  			"Page-Description": "Fill out the form below to apply to be a service provider."
+            "Page-Description": "Fill out the form below."
   		}
   	},
     "Errors": {
@@ -137,9 +184,12 @@
         "Name": "Name:",
         "Type": "Type:",
         "Area": "Area:",
-        "Status": "Status:"
+        "Status": "Status:",
+        "Remove": "Remove:"
       }
-    }
+    },
+    "Cancel": "Cancel",
+    "Delete": "Delete"
   },
   "Home": {
     "Service-Map": {
@@ -162,6 +212,16 @@
       },
       "Page-Description": {
         "Page-Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+      }
+    }
+  },
+  "Provider-Registration-Changed": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Your Information was Submitted Successfully"
+      },
+      "Page-Description": {
+        "Page-Description": "Your information has been updated."
       }
     }
   },

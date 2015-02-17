@@ -5,6 +5,7 @@ var handlebars = require('handlebars');
 var underscore = require('underscore');
 var config = require('./config');
 var api = require('./api');
+var i18n = require('i18next-client');
 var _ = underscore;
 
 var models = require('./models/models');
