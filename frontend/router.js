@@ -20,9 +20,10 @@ var views = {
     "password-reset-form": require('./views/password-reset-form'),
 };
 
+var view;
+
 function loadPage(name, params) {
     var params = params || [];
-    var view;
 
     return function() {
         var viewArguments = Array.prototype.slice.apply(arguments);
