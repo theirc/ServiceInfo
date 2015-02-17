@@ -20,6 +20,8 @@ module.exports = Backbone.View.extend({
                 var records = services.data();
                 for (var i = 0; i < records.length; i++) {
                     records[i].is_draft = records[i].status === 'draft';
+                    records[i].is_rejected = records[i].status === 'rejected';
+                    records[i].is_current = records[i].status === 'current';
                 }
                 $el.html(template({
                     services: records
