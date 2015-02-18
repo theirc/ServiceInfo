@@ -18,6 +18,7 @@
   },
   "Global": {
     "FormSubmissionError": "There was an unknown error submitting your form.",
+    "UnknownError": "There was an unknown error.",
     "Sunday": "Sunday",
     "Monday": "Monday",
     "Tuesday": "Tuesday",

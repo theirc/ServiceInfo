@@ -2,6 +2,7 @@ var Backbone = require('backbone'),
 template = require("../templates/provider-form.hbs"),
 i18n = require('i18next-client'),
 config = require('../config'),
+messages = require('../messages'),
 provider = require('../models/provider'),
 providertype = require('../models/providertype'),
 user = require('../models/user'),
@@ -36,6 +37,8 @@ module.exports = Backbone.View.extend({
                 self.provider = providers.where({'user': self.user.get('url')})[0];
             }
             self.render();
+        }, function onerror(error) {
+            messages.error(error);
         });
     },
 
@@ -104,7 +107,7 @@ module.exports = Backbone.View.extend({
                         window.location = '#/register/confirm';
                     },
                     function error(errors) {
-                        console.error(errors);
+                        messages.error(error);
                     }
                 );
 
@@ -117,7 +120,7 @@ module.exports = Backbone.View.extend({
                         window.location = '#/register/changed';
                     },
                     function error(errors) {
-                        console.error(errors);
+                        messages.error(error);
                     }
                 );
             }
