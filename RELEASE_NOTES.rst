@@ -2,6 +2,13 @@ Service Info
 
 Release Notes
 
+0.0.9 - Feb. 18, 2015
+---------------------
+
+* Fix map widget in admin
+* Display which service records are pending edits of which other ones
+* Better messages when unexpected errors happen from the backend
+
 0.0.8 - Feb. 17, 2015
 ---------------------
 
