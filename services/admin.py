@@ -36,10 +36,7 @@ class SelectionCriterionInlineAdmin(admin.TabularInline):
 
 
 class ServiceAdmin(GeoModelAdmin):
-    # These are just copied from the defaults, but with 'http:' stripped off
-    # so they'll load on both http and https sites
-    openlayers_url = '//openlayers.org/api/2.13/OpenLayers.js'
-    wms_url = '//vmap0.tiles.osgeo.org/wms/vmap0'
+    openlayers_url = 'js/OpenLayers-2.13.js'
 
     class Media:
         css = {
