@@ -73,21 +73,31 @@ var forms = module.exports = {
         var $field = this.getField($form, name);
         var empty_label_key = $field.attr('data-empty-label-key');
         var empty_label = i18n.t(empty_label_key);
-        var data = collection.data();
 
-        var empty_option = $('<option/>');
-        empty_option.text(empty_label);
+        function resetOptions() {
+            var value = $field.val();
+            var data = collection.data();
+            var empty_option = $('<option/>');
+            empty_option.text(empty_label);
 
-        $field.html("");
-        $field.append(empty_option)
+            $field.html("");
+            $field.append(empty_option)
 
-        var $option;
-        for (var i=0; i < data.length; i++) {
-            $option = $('<option/>');
-            $option.attr('value', data[i].url);
-            $option.text(data[i].name);
-            $field.append($option);
+            var $option;
+            for (var i=0; i < data.length; i++) {
+                $option = $('<option/>');
+                $option.attr('value', data[i].url);
+                $option.text(data[i].name);
+                $field.append($option);
+            }
+
+            $field.val(value);
         }
+
+        resetOptions();
+        config.change("forever.language", function() {
+            resetOptions();
+        });
     },
 
     submit: function($form, action, data, errors) {
