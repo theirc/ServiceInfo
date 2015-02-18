@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-02 08:23+0000\n"
+"PO-Revision-Date: 2015-02-16 06:09+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -19,17 +19,35 @@ msgstr "i18next"
 msgid "test##hello"
 msgstr "مرحبا بالعالم"
 
-msgid "menu##Map"
-msgstr "خريطة الخدمات "
+msgid "Menu##Menu-Toggle"
+msgstr "قائمة"
 
-msgid "menu##Registration"
-msgstr "تسجيل مزود الخدمات "
+msgid "Menu##Login"
+msgstr "تسجيل الدخول"
 
-msgid "menu##Feedback"
-msgstr "أداة تسجيل الملاحظات "
+msgid "Menu##Logout"
+msgstr "تسجيل الخروج"
 
-msgid "menu##Change-Language"
+msgid "Menu##Services"
+msgstr "الخدمات"
+
+msgid "Menu##Add-Services"
+msgstr "إضافة خدمات"
+
+msgid "Menu##Service-Map"
+msgstr "خدمة خريطة"
+
+msgid "Menu##Provider-Registration"
+msgstr "التسجيل مزود"
+
+msgid "Menu##Feedback-Tool"
+msgstr "ردود الفعل أداة"
+
+msgid "Menu##Change-Language"
 msgstr "تغيير اللغة"
+
+msgid "Global##FormSubmissionError"
+msgstr "كان هناك خطأ غير معروف تقديم النموذج الخاص بك."
 
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "تسجيل الدخول"
@@ -49,12 +67,87 @@ msgstr "تسجيل الدخول"
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "سجل لتكون مقدم خدمات هنا"
 
+msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
+msgstr "إزالة تغيير"
+
+msgid "Service-Remove-Change##Update-Of"
+msgstr "تحديث"
+
+msgid "Service-Remove-Change##Remove-Change"
+msgstr "إزالة التغيير"
+
+msgid "Service-Delete##Page-Head##Page-Title##Title"
+msgstr "حذف الخدمة"
+
+msgid "Service-Delete##Delete-Service"
+msgstr "حذف الخدمة"
+
+msgid "Service-Form##Page-Head##Page-Title##Title"
+msgstr "استمارة التسجيل خدمة جديدة"
+
+msgid "Service-Form##Page-Head##Page-Description##Page-Description"
+msgstr "ملء النموذج أدناه لتطبيق لخدمة جديدة وافقت."
+
+msgid "Service-Form##Legend"
+msgstr "معلومات عن الخدمة"
+
+msgid "Service-Form##Service-Name"
+msgstr "اسم الخدمة"
+
+msgid "Service-Form##Service-Area"
+msgstr "منطقة الخدمة"
+
+msgid "Service-Form##Type"
+msgstr "نوع الخدمة"
+
+msgid "Service-Form##Service-Description"
+msgstr "تفصيل"
+
+msgid "Service-Form##Service-Hours"
+msgstr "ساعات الخدمة"
+
+msgid "Service-Form##Additional-Information"
+msgstr "معلومات إضافية (حقل اختياري)"
+
+msgid "Service-Form##Service-Cost"
+msgstr "تكلفة الخدمة (حقل اختياري)"
+
+msgid "Service-Form##Selection-Criteria"
+msgstr "معايير الاختيار (حقل اختياري)"
+
+msgid "Service-Form##Hours-Open"
+msgstr "ساعات البدء:"
+
+msgid "Service-Form##Hours-Close"
+msgstr "ساعات الإغلاق:"
+
+msgid "Service-Form##Add-Criterion"
+msgstr "اضافة معيار"
+
+msgid "Service-Form##Remove-Criterion"
+msgstr "ازالة المعيار"
+
+msgid "Service-Form##Form-Submit-Options##Submit"
+msgstr "إرسال الأجوبة"
+
+msgid "Service-Form##Form-Submit-Options##Clear"
+msgstr "إزالة الأجوبة"
+
 msgid "Provider-Registration-Form##Page-Head##Page-Title##Title"
-msgstr "إستمارة تسجيل مزود خدمات جديد "
+msgstr "خدمة استمارة التسجيل مزود"
 
 msgid ""
 "Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
-msgstr "إملء النموذج أدناه لتكون مزود خدمات."
+msgstr "ملء النموذج أدناه."
+
+msgid "Provider-Registration-Form##Errors##Password-Blank"
+msgstr "لا يجب أن تكون كلمة المرور فارغة"
+
+msgid "Provider-Registration-Form##Errors##Password-Repeat"
+msgstr "يجب تكرار كلمة المرور"
+
+msgid "Provider-Registration-Form##Errors##Password-Match"
+msgstr "يجب أن تتطابق كلمات المرور"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Legend"
 msgstr "التفاصيل الأساسية لتسجيل مزود خدمات:"
@@ -62,17 +155,35 @@ msgstr "التفاصيل الأساسية لتسجيل مزود خدمات:"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Name"
 msgstr "الاسم الكامل"
 
-msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type"
-msgstr "نوع الخدمة"
+msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
+msgstr "كلمة السر"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##PasswordConfirm"
+msgstr "تأكيد كلمة المرور"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type"
+msgstr "نوع مزود"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
+msgstr "اختر نوع مزود"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
 msgstr "رقم الهاتف"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
-msgstr "البريد الإلكتروني (حقل اختياري)"
+msgstr "البريد الإلكتروني"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##EmailPlaceholder"
+msgstr "أدخل البريد الإلكتروني الخاص بك"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
 msgstr "موقع (حقل اختياري)"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##WebsitePlaceholder"
+msgstr "أدخل URL موقع الويب الخاص بك"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
+msgstr "عدد المستفيدين شهرياَ"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Description"
 msgstr "توصيف "
@@ -87,6 +198,9 @@ msgstr "اسم الخدمة"
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Service-Area"
 msgstr "منطقة الخدمة"
+
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Type"
+msgstr "نوع الخدمة"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Service-"
@@ -117,3 +231,108 @@ msgstr "إرسال الأجوبة"
 
 msgid "Provider-Registration-Form##Form-Sections##Form-Submit-Options##Clear"
 msgstr "إزالة الأجوبة"
+
+msgid "Account-Activation##Pending##Title"
+msgstr "تفعيل حسابك معلقة ..."
+
+msgid "Account-Activation##Pending##Description"
+msgstr "حساب التنشيط ## قيد الانتظار ## الوصف"
+
+msgid "Account-Activation##Success##Title"
+msgstr "تم تفعيل حسابك."
+
+msgid "Account-Activation##Success##Description"
+msgstr "حساب التنشيط ## النجاح ## الوصف"
+
+msgid "Account-Activation##Failed##Title"
+msgstr "فشل تفعيل حسابك."
+
+msgid "Account-Activation##Failed##Description"
+msgstr "كانت هناك مشكلة إنشاء حساب مزود الخدمة الخاص بك. يرجى النقر على زر تأكيد بالبريد الإلكتروني إعادة إرسال أدناه لديك بريد إلكتروني آخر تأكيدا إرسالها إلى حساب البريد الإلكتروني الخاص بك."
+
+msgid "Account-Activation##Buttons##Resend-Email"
+msgstr "إعادة إرسال التحقق من البريد الإلكتروني"
+
+msgid "Service-List##Page-Head##Page-Title##Title"
+msgstr "قائمة الخدمات"
+
+msgid "Service-List##Page-Head##Page-Description##Page-Description"
+msgstr "وفيما يلي قائمة من الخدمات التي تطبق على توفير. وتتميز الخدمات وافق باللون الأخضر. وتتميز خدمات لم يفوافق عليها في الحمراء. خدمات بانتظار الموافقة هي لا تحمل علامات مميزة."
+
+msgid "Service-List##Table##Thead##Name"
+msgstr "الاسم:"
+
+msgid "Service-List##Table##Thead##Type"
+msgstr "النوع:"
+
+msgid "Service-List##Table##Thead##Area"
+msgstr "المنطقة:"
+
+msgid "Service-List##Table##Thead##Status"
+msgstr "الحالة:"
+
+msgid "Service-List##Table##Thead##Remove"
+msgstr "إزالة:"
+
+msgid "Service-List##Cancel"
+msgstr "إلغاء"
+
+msgid "Service-List##Delete"
+msgstr "حذف"
+
+msgid "Home##Service-Map##Title"
+msgstr "عرض خريطة الخدمات "
+
+msgid "Home##Service-Map##Body"
+msgstr "استخدام خدمة خرائط لتحديد مقدمي الخدمات."
+
+msgid "Home##Feedback##Title"
+msgstr "شاركنا رأيك"
+
+msgid "Home##Feedback##Body"
+msgstr "أخبرنا عن تجربتك العمل مع مزود الخدمة الخاص بك."
+
+msgid "Home##Log-in##Title"
+msgstr "مقدم الخدمة تسجيل الدخول"
+
+msgid "Home##Log-in##Body"
+msgstr "تسجيل الدخول إلى حساب مزود خدمة القائمة، أو إنشاء حساب جديد."
+
+msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
+msgstr "قدم بياناتك بنجاح"
+
+msgid ""
+"Provider-Registration-Confirmation##Page-Head##Page-Description##Page-"
+"Description"
+msgstr "لقد قمنا بإرسال رسالة تأكيد بالبريد الإلكتروني إلى حساب البريد الإلكتروني الذي استخدمته أثناء التسجيل. انقر على رابط التأكيد في رسالة البريد الإلكتروني لاستكمال عملية التسجيل."
+
+msgid "Provider-Registration-Changed##Page-Head##Page-Title##Title"
+msgstr "قدم بياناتك بنجاح"
+
+msgid ""
+"Provider-Registration-Changed##Page-Head##Page-Description##Page-Description"
+msgstr "تم تحديث المعلومات الخاصة بك."
+
+msgid "Password-Reset##Page-Head##Page-Title##Title"
+msgstr "إعادة تعيين كلمة المرور"
+
+msgid "Password-Reset##Page-Head##Page-Description##Page-Description"
+msgstr "لإعادة تعيين كلمة المرور الخاصة بك أدخل عنوان بريدك الإلكتروني في الحقل أدناه ثم انقر فوق تقديم. سوف النقر تقديم إرسال ارتباط لحساب البريد الإلكتروني الخاص بك من شأنها أن توجهك إلى صفحة إعادة تعيين كلمة المرور."
+
+msgid "Password-Reset##Input-Label##User-Email"
+msgstr "أدخل بريدك الإلكتروني:"
+
+msgid "Password-Reset##Submit-Options##Submit"
+msgstr "عرض"
+
+msgid "Password-Reset-Form##Page-Head##Page-Title##Title"
+msgstr "كلمة نموذج إعادة تعيين"
+
+msgid "Password-Reset-Form##Page-Head##Page-Description##Page-Description"
+msgstr "أدخل كلمة المرور الجديدة في حقل النص أدناه، ثم انقر فوق تقديم لتحديث كلمة السر الخاصة بك."
+
+msgid "Password-Reset-Form##Input-Label##New-Password"
+msgstr "أدخل كلمة المرور الجديدة:"
+
+msgid "Password-Reset-Form##Submit-Options##Submit"
+msgstr "إرسال الأجوبة"

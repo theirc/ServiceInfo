@@ -1,5 +1,8 @@
+from collections import defaultdict
+from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import Group
+from django.core.exceptions import ValidationError as DjangoValidationError
 from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import exceptions, serializers
@@ -10,10 +13,52 @@ from services.models import Service, Provider, ProviderType, ServiceType, Servic
     SelectionCriterion
 
 
+class RequireOneTranslationMixin(object):
+    """Validate that for each set of fields with prefix
+    in `Meta.required_translated_fields` and ending in _en, _ar, _fr,
+    that at least one value is provided."""
+    # Override run_validation so we can get in at the beginning
+    # of validation for a call and add our own errors to those
+    # the other validations find.
+    def run_validation(self, data=serializers.empty):
+        # data is a dictionary
+        errs = defaultdict(list)
+        for field in self.Meta.required_translated_fields:
+            if not (data.get('%s_en' % field, False)
+                    or data.get('%s_ar' % field, False)
+                    or data.get('%s_fr' % field, False)):
+                errs[field].append('This field is required.')
+        try:
+            validated_data = super().run_validation(data)
+        except (exceptions.ValidationError, DjangoValidationError) as exc:
+            errs.update(serializers.get_validation_error_detail(exc))
+        if errs:
+            raise exceptions.ValidationError(errs)
+        return validated_data
+
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name='user-detail',
+        lookup_field='pk'
+    )
+
     class Meta:
         model = EmailUser
         fields = ('url', 'id', 'email', 'groups')
+
+
+class LanguageSerializer(serializers.Serializer):
+    language = serializers.CharField(max_length=10)
+
+    def validate_language(self, value):
+        # See if it's a valid language code
+        language_dict = dict(settings.LANGUAGES)
+        if value not in language_dict:
+            raise exceptions.ValidationError(
+                "Invalid language code %r. The valid codes are %s."
+                % (value, ', '.join(language_dict.keys())))
+        return value
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
@@ -31,13 +76,14 @@ class ProviderTypeSerializer(serializers.HyperlinkedModelSerializer):
         )
 
 
-class ProviderSerializer(serializers.HyperlinkedModelSerializer):
+class ProviderSerializer(RequireOneTranslationMixin, serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Provider
         fields = ('url', 'id', 'name_en', 'name_ar', 'name_fr',
                   'type', 'phone_number', 'website',
                   'description_en', 'description_ar', 'description_fr',
                   'user', 'number_of_monthly_beneficiaries')
+        required_translated_fields = ['name', 'description']
         extra_kwargs = {
             # Override how serializer comes up with the view name (URL name) for users,
             # because by default it'll base it on the model name from the user field,
@@ -52,13 +98,29 @@ class CreateProviderSerializer(ProviderSerializer):
     password = serializers.CharField()
     base_activation_link = serializers.URLField()
 
-    class Meta:
+    class Meta(ProviderSerializer.Meta):
         model = Provider
         fields = [field for field in ProviderSerializer.Meta.fields
                   if field not in ['user']]
         fields += ['email', 'password', 'base_activation_link']
 
+    def run_validation(self, data=serializers.empty):
+        # data is a dictionary
+        errs = defaultdict(list)
+        email = data.get('email', False)
+        if email and get_user_model().objects.filter(email__iexact=email).exists():
+            errs['email'].append(_("A user with that email already exists."))
+        try:
+            validated_data = super().run_validation(data)
+        except (exceptions.ValidationError, DjangoValidationError) as exc:
+            errs.update(serializers.get_validation_error_detail(exc))
+        if errs:
+            raise exceptions.ValidationError(errs)
+        return validated_data
+
     def validate(self, attrs):
+        attrs = super().validate(attrs)
+
         email = attrs.get('email')
         password = attrs.get('password')
 
@@ -72,7 +134,7 @@ class CreateProviderSerializer(ProviderSerializer):
         return attrs
 
 
-class ServiceTypeSerializer(serializers.HyperlinkedModelSerializer):
+class ServiceTypeSerializer(RequireOneTranslationMixin, serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ServiceType
         fields = (
@@ -81,24 +143,38 @@ class ServiceTypeSerializer(serializers.HyperlinkedModelSerializer):
             'name_en', 'name_fr', 'name_ar',
             'comments_en', 'comments_fr', 'comments_ar',
         )
+        required_translated_fields = ['name']
 
 
-class SelectionCriterionSerializer(serializers.HyperlinkedModelSerializer):
+class SelectionCriterionSerializer(RequireOneTranslationMixin,
+                                   serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SelectionCriterion
-        fields = ('url', 'id', 'text_en', 'text_ar', 'text_fr')
+        fields = ('url', 'id', 'text_en', 'text_ar', 'text_fr', 'service')
+        required_translated_fields = ['text']
 
 
-class ServiceSerializer(serializers.HyperlinkedModelSerializer):
+class SelectionCriterionSerializerForService(SelectionCriterionSerializer):
+    # Serializer to use when nesting criteria data in a service
+    # Remove 'service' from the required fields
+    class Meta(SelectionCriterionSerializer.Meta):
+        fields = [name for name in SelectionCriterionSerializer.Meta.fields if name != 'service']
+
+
+class ServiceSerializer(RequireOneTranslationMixin,
+                        serializers.HyperlinkedModelSerializer):
+    selection_criteria = SelectionCriterionSerializerForService(many=True, required=False)
+
     class Meta:
         model = Service
         fields = (
-            'url', 'id', 'provider',
+            'url', 'id',
             'name_en', 'name_ar', 'name_fr',
             'area_of_service',
             'description_en', 'description_ar', 'description_fr',
             'additional_info_en', 'additional_info_ar', 'additional_info_fr',
-            'cost_of_service', 'selection_criteria',
+            'cost_of_service',
+            'selection_criteria',
             'status', 'update_of',
             'location',
             'sunday_open', 'sunday_close',
@@ -110,6 +186,37 @@ class ServiceSerializer(serializers.HyperlinkedModelSerializer):
             'saturday_open', 'saturday_close',
             'type',
         )
+        required_translated_fields = ['name', 'description']
+
+    def validate(self, attrs):
+        # Look for "new" services that are updates of existing ones
+        # and do special things with them.
+        attrs = super().validate(attrs)
+        # We don't allow service updates via the API, and all new services should
+        # start with draft status, so just force it.
+        attrs['status'] = Service.STATUS_DRAFT
+        if attrs.get('update_of', False):
+            parent = attrs['update_of']
+            if parent.status not in [Service.STATUS_DRAFT, Service.STATUS_CURRENT]:
+                raise exceptions.ValidationError(
+                    {'update_of': _("You may only submit updates to current or draft services")}
+                )
+        return attrs
+
+    def create(self, validated_data):
+        # Force the value of the provider to be that of the user who's
+        # creating or modifying the record
+        user = self.context['request'].user
+        validated_data['provider'] = Provider.objects.get(user=user)
+
+        # Create selection criteria to go with the service
+        criteria = validated_data.pop('selection_criteria')
+        service = Service.objects.create(**validated_data)
+        for kwargs in criteria:
+            # Force criterion to link to the new service
+            kwargs['service'] = service
+            SelectionCriterion.objects.create(**kwargs)
+        return service
 
     def save(self, **kwargs):
         # Force the value of the provider to be that of the user who's
@@ -119,7 +226,8 @@ class ServiceSerializer(serializers.HyperlinkedModelSerializer):
         super().save(**kwargs)
 
 
-class ServiceAreaSerializer(serializers.HyperlinkedModelSerializer):
+class ServiceAreaSerializer(RequireOneTranslationMixin,
+                            serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ServiceArea
         fields = (
@@ -131,6 +239,7 @@ class ServiceAreaSerializer(serializers.HyperlinkedModelSerializer):
             'parent',
             'children',
         )
+        required_translated_fields = ['name']
 
 
 class APILoginSerializer(serializers.Serializer):
@@ -146,6 +255,7 @@ class APILoginSerializer(serializers.Serializer):
     password = serializers.CharField()
 
     def validate(self, attrs):
+        attrs = super().validate(attrs)
         email = attrs.get('email')
         password = attrs.get('password')
         user = authenticate(email=email, password=password)
@@ -171,6 +281,7 @@ class APIActivationSerializer(serializers.Serializer):
     activation_key = serializers.CharField()
 
     def validate(self, attrs):
+        attrs = super().validate(attrs)
         activation_key = attrs.get('activation_key')
         User = get_user_model()
         try:
@@ -192,6 +303,7 @@ class PasswordResetRequestSerializer(serializers.Serializer):
     base_reset_link = serializers.URLField()
 
     def validate(self, attrs):
+        attrs = super().validate(attrs)
         User = get_user_model()
         try:
             attrs['user'] = User.objects.get(email__iexact=attrs.get('email'))
@@ -210,6 +322,7 @@ class PasswordResetCheckSerializer(serializers.Serializer):
     key = serializers.CharField()
 
     def validate(self, attrs):
+        attrs = super().validate(attrs)
         key = attrs.get('key')
         user = get_user_model().objects.validate_password_reset_key(key)
         if not user:
@@ -227,6 +340,7 @@ class PasswordResetSerializer(serializers.Serializer):
     key = serializers.CharField()
 
     def validate(self, attrs):
+        attrs = super().validate(attrs)
         key = attrs.get('key')
         user = get_user_model().objects.validate_password_reset_key(key)
         if not user:
@@ -241,6 +355,7 @@ class ResendActivationLinkSerializer(serializers.Serializer):
     base_activation_link = serializers.URLField()
 
     def validate(self, attrs):
+        attrs = super().validate(attrs)
         email = attrs.get('email')
         try:
             user = get_user_model().objects.get(email__iexact=email)

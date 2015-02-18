@@ -8,7 +8,7 @@ from rest_framework import parsers, renderers, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import list_route, detail_route
 from rest_framework.exceptions import ValidationError as DRFValidationError, PermissionDenied
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -16,11 +16,24 @@ from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, 
     ProviderTypeSerializer, ServiceAreaSerializer, APILoginSerializer, APIActivationSerializer, \
     PasswordResetRequestSerializer, PasswordResetCheckSerializer, PasswordResetSerializer, \
     ResendActivationLinkSerializer, CreateProviderSerializer, ServiceTypeSerializer, \
-    SelectionCriterionSerializer
+    SelectionCriterionSerializer, LanguageSerializer
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
     SelectionCriterion
-from services.utils import permission_names_to_objects, USER_PERMISSION_NAMES
+
+
+class LanguageView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, format=None):
+        return Response({'language': request.user.language})
+
+    def post(self, request):
+        serializer = LanguageSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        request.user.language = serializer.data['language']
+        request.user.save()
+        return Response()
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -58,7 +71,10 @@ class ServiceViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         # Only make visible the Services owned by the current provider
-        return self.queryset.filter(provider__user=self.request.user)
+        # and not archived
+        return self.queryset.filter(provider__user=self.request.user)\
+            .exclude(status=Service.STATUS_ARCHIVED)\
+            .exclude(status=Service.STATUS_CANCELED)
 
     def get_object(self):
         # Users can only access their own records
@@ -86,7 +102,7 @@ class SelectionCriterionViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         # Only make visible the SelectionCriteria owned by the current provider
         # (attached to services of the current provider)
-        return self.queryset.filter(services__provider__user=self.request.user)
+        return self.queryset.filter(service__provider__user=self.request.user)
 
     def get_object(self):
         # Users can only access their own records
@@ -98,6 +114,9 @@ class SelectionCriterionViewSet(viewsets.ModelViewSet):
 
 
 class ProviderTypeViewSet(viewsets.ModelViewSet):
+    # Unauth'ed users need to be able to read the provider types so
+    # they can register as providers.
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ProviderType.objects.all()
     serializer_class = ProviderTypeSerializer
 
@@ -143,6 +162,12 @@ class ProviderViewSet(viewsets.ModelViewSet):
             raise PermissionDenied
         return obj
 
+    def update(self, request, *args, **kwargs):
+        """On change to provider via the API, notify via JIRA"""
+        response = super().update(request, *args, **kwargs)
+        self.get_object().notify_jira_of_change()
+        return response
+
     @list_route(methods=['post'], permission_classes=[AllowAny])
     def create_provider(self, request, *args, **kwargs):
         """
@@ -167,9 +192,7 @@ class ProviderViewSet(viewsets.ModelViewSet):
                 password=request.data['password'],
                 is_active=False
             )
-            # Give them the typical permissions
-            # FIXME: we should just do a group
-            user.user_permissions.add(*permission_names_to_objects(USER_PERMISSION_NAMES))
+            user.groups.add(Group.objects.get(name='Providers'))
 
             # Now we have a user, let's just call the built-in create
             # method to create the provider for us. We just need to
@@ -215,7 +238,8 @@ class APILogin(APIView):
         token, created = Token.objects.get_or_create(user=user)
         user.last_login = now()
         user.save(update_fields=['last_login'])
-        return Response({'token': token.key})
+        return Response({'token': token.key,
+                         'language': user.language})
 
 
 class APIActivationView(APIView):

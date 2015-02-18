@@ -1,9 +1,6 @@
 psycopg2==2.5.4
 Pillow==2.5.3
 Django==1.7.3
-django_compressor==1.4
-# Required by django-compressor
-django-appconf==0.6
 six==1.6.1
 celery==3.1.17
 
@@ -14,3 +11,10 @@ djangorestframework==3.0.2
 markdown==2.5.2
 django-filter==0.9.1
 django-cors-headers==1.0.0
+
+# JIRA support
+jira==0.35
+tlslite==0.4.8
+requests==2.5.1
+requests-oauthlib==0.4.2
+oauthlib==0.7.2

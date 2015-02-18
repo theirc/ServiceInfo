@@ -8,27 +8,45 @@ var $ = require('jquery'),
 var views = {
     "register": require('./views/provider-form'),
     "register-confirm": require('./views/provider-form-confirm'),
+    "register-changed": require('./views/provider-form-changed'),
+    "account-activate": require('./views/account-activate'),
     "service": require('./views/service-form'),
     "feedback": require('./views/feedback'),
     "map": require('./views/map'),
+    "service-cancel": require('./views/service-cancel'),
     "service-list": require('./views/service-list'),
     "login": require('./views/login'),
     "password-reset": require('./views/password-reset'),
     "password-reset-form": require('./views/password-reset-form'),
 };
 
-function loadPage(name) {
+function loadPage(name, params) {
+    var params = params || [];
+    var view;
+
     return function() {
-        var $el = $(document.querySelector('#page'));
-        var view = new views[name]({el: $el});
-        view.render();
-        i18n.init(function(){
-            view.$el.i18n({
-                lng: config.get('lang'),
+        var viewArguments = Array.prototype.slice.apply(arguments);
+        config.ready(function(){
+            var $el = $(document.querySelector('#page'));
+            var opts = {
+                el: $el
+            };
+            for (var i=0; i < params.length; i++) {
+                opts[params[i]] = viewArguments[i];
+            };
+            if (view) {
+                view.undelegateEvents();
+            }
+            view = new views[name](opts);
+            i18n.init(function(){
+                view.render.apply(view, viewArguments);
+                view.$el.i18n({
+                    lng: config.get('forever.language'),
+                });
             });
-        });
-        $('#menu-container').addClass("menu-closed");
-        $('#menu-container').removeClass("menu-open");
+            $('#menu-container').addClass("menu-closed");
+            $('#menu-container').removeClass("menu-open");
+        })
     }
 }
 
@@ -42,16 +60,21 @@ module.exports = Backbone.Router.extend({
             }
         },
         "register": loadPage("register"),
+        "register/changed": loadPage("register-changed"),
         "register/confirm": loadPage("register-confirm"),
+        "register/verify/:key": loadPage("account-activate", ['key']),
         "service": loadPage("service"),
+        "service/:id": loadPage("service", ['id']),
         "feedback": loadPage("feedback"),
         "map": loadPage("map"),
+        "service/cancel/:id": loadPage("service-cancel", ['id']),
         "service-list": loadPage("service-list"),
         "login": loadPage("login"),
         "password-reset": loadPage("password-reset"),
         "password-reset-form": loadPage("password-reset-form"),
         "logout": function() {
             config.remove('forever.authToken');
+            config.remove('forever.email');
             window.location.hash = '';
             window.location.reload();
         },

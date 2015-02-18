@@ -12,17 +12,56 @@ msgstr "i18next"
 msgid "test##hello"
 msgstr "Hello, World"
 
-msgid "menu##Map"
+msgid "Menu##Menu-Toggle"
+msgstr "MENU"
+
+msgid "Menu##Login"
+msgstr "Login"
+
+msgid "Menu##Logout"
+msgstr "Logout"
+
+msgid "Menu##Services"
+msgstr "Services"
+
+msgid "Menu##Add-Services"
+msgstr "Add Services"
+
+msgid "Menu##Service-Map"
 msgstr "Service Map"
 
-msgid "menu##Registration"
+msgid "Menu##Provider-Registration"
 msgstr "Provider Registration"
 
-msgid "menu##Feedback"
+msgid "Menu##Feedback-Tool"
 msgstr "Feedback Tool"
 
-msgid "menu##Change-Language"
+msgid "Menu##Change-Language"
 msgstr "Change Language"
+
+msgid "Global##FormSubmissionError"
+msgstr "There was an unknown error submitting your form."
+
+msgid "Global##Sunday"
+msgstr "Sunday"
+
+msgid "Global##Monday"
+msgstr "Monday"
+
+msgid "Global##Tuesday"
+msgstr "Tuesday"
+
+msgid "Global##Wednesday"
+msgstr "Wednesday"
+
+msgid "Global##Thursday"
+msgstr "Thursday"
+
+msgid "Global##Friday"
+msgstr "Friday"
+
+msgid "Global##Saturday"
+msgstr "Saturday"
 
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "Log In"
@@ -42,11 +81,83 @@ msgstr "Login"
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "Register to be a Service Provider here"
 
+msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
+msgstr "Remove Change"
+
+msgid "Service-Remove-Change##Update-Of"
+msgstr "Update of"
+
+msgid "Service-Remove-Change##Remove-Change"
+msgstr "Remove change"
+
+msgid "Service-Delete##Page-Head##Page-Title##Title"
+msgstr "Delete Service"
+
+msgid "Service-Delete##Delete-Service"
+msgstr "Delete service"
+
+msgid "Service-Form##Page-Head##Page-Title##Title"
+msgstr "New Service Registration Form"
+
+msgid "Service-Form##Page-Head##Page-Description##Page-Description"
+msgstr "Fill out the form below to apply to have a new service approved."
+
+msgid "Service-Form##Legend"
+msgstr "Service Information"
+
+msgid "Service-Form##Type-Choose"
+msgstr "Choose a Service Type"
+
+msgid "Service-Form##Service-Area-Choose"
+msgstr "Choose a Service Area"
+
+msgid "Service-Form##Service-Name"
+msgstr "Name of Service"
+
+msgid "Service-Form##Service-Area"
+msgstr "Area of Service"
+
+msgid "Service-Form##Type"
+msgstr "Service Type"
+
+msgid "Service-Form##Service-Description"
+msgstr "Description"
+
+msgid "Service-Form##Service-Hours"
+msgstr "Hours of Service"
+
+msgid "Service-Form##Additional-Information"
+msgstr "Additional Information (Optional Field)"
+
+msgid "Service-Form##Service-Cost"
+msgstr "Cost of Service (Optional Field)"
+
+msgid "Service-Form##Selection-Criteria"
+msgstr "Selection Criteria (Optional Field)"
+
+msgid "Service-Form##Hours-Open"
+msgstr "Opening Time:"
+
+msgid "Service-Form##Hours-Close"
+msgstr "Closing Time:"
+
+msgid "Service-Form##Add-Criterion"
+msgstr "Add New Criterion"
+
+msgid "Service-Form##Remove-Criterion"
+msgstr "Remove Criterion"
+
+msgid "Service-Form##Form-Submit-Options##Submit"
+msgstr "Submit Answers"
+
+msgid "Service-Form##Form-Submit-Options##Clear"
+msgstr "Remove Answers"
+
 msgid "Provider-Registration-Form##Page-Head##Page-Title##Title"
-msgstr "New Service Provider Registration Form"
+msgstr "Service Provider Registration Form"
 
 msgid "Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
-msgstr "Fill out the form below to apply to be a service provider."
+msgstr "Fill out the form below."
 
 msgid "Provider-Registration-Form##Errors##Password-Blank"
 msgstr "Password must not be blank"
@@ -69,11 +180,11 @@ msgstr "Password"
 msgid "Provider-Registration-Form##Form-Sections##Basic##PasswordConfirm"
 msgstr "Confirm Password"
 
-msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type"
-msgstr "Type of Service"
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type"
+msgstr "Provider Type"
 
-msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type-Choose"
-msgstr "Choose a Service Type"
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
+msgstr "Choose a Provider Type"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
 msgstr "Phone Number"
@@ -81,8 +192,14 @@ msgstr "Phone Number"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
 msgstr "Email"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##EmailPlaceholder"
+msgstr "Enter your Email"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
 msgstr "Website (Optional Field)"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##WebsitePlaceholder"
+msgstr "Enter your Website URL"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
 msgstr "Number of Monthly Beneficiaries"
@@ -98,6 +215,9 @@ msgstr "Name of Service"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Area"
 msgstr "Area of Service"
+
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Type"
+msgstr "Service Type"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Description"
 msgstr "Description"
@@ -119,3 +239,105 @@ msgstr "Submit Answers"
 
 msgid "Provider-Registration-Form##Form-Sections##Form-Submit-Options##Clear"
 msgstr "Remove Answers"
+
+msgid "Account-Activation##Pending##Title"
+msgstr "Your account activation is pending..."
+
+msgid "Account-Activation##Pending##Description"
+msgstr ""
+
+msgid "Account-Activation##Success##Title"
+msgstr "Your account has been activated."
+
+msgid "Account-Activation##Success##Description"
+msgstr ""
+
+msgid "Account-Activation##Failed##Title"
+msgstr "Your account activation Failed."
+
+msgid "Account-Activation##Failed##Description"
+msgstr "There was a problem setting up your service provider account. Please click the resend confirmation email button below to have another confirmation email sent to your email account."
+
+msgid "Account-Activation##Buttons##Resend-Email"
+msgstr "Resend Verification Email"
+
+msgid "Service-List##Page-Head##Page-Title##Title"
+msgstr "Services List"
+
+msgid "Service-List##Page-Head##Page-Description##Page-Description"
+msgstr "Below is a list of services you have applied to provide. Approved services are marked in green. Un-approved services are marked in red. Services pending approval are unmarked."
+
+msgid "Service-List##Table##Thead##Name"
+msgstr "Name:"
+
+msgid "Service-List##Table##Thead##Type"
+msgstr "Type:"
+
+msgid "Service-List##Table##Thead##Area"
+msgstr "Area:"
+
+msgid "Service-List##Table##Thead##Status"
+msgstr "Status:"
+
+msgid "Service-List##Table##Thead##Remove"
+msgstr "Remove:"
+
+msgid "Service-List##Cancel"
+msgstr "Cancel"
+
+msgid "Service-List##Delete"
+msgstr "Delete"
+
+msgid "Home##Service-Map##Title"
+msgstr "View The Service Map"
+
+msgid "Home##Service-Map##Body"
+msgstr "Use the service map to locate service providers."
+
+msgid "Home##Feedback##Title"
+msgstr "Provide Feedback"
+
+msgid "Home##Feedback##Body"
+msgstr "Tell us about your experience working with your service provider."
+
+msgid "Home##Log-in##Title"
+msgstr "Service Provider Login"
+
+msgid "Home##Log-in##Body"
+msgstr "Log in to an existing service provider account, or create a new account."
+
+msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
+msgstr "Your Information was Submitted Successfully"
+
+msgid "Provider-Registration-Confirmation##Page-Head##Page-Description##Page-Description"
+msgstr "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+
+msgid "Provider-Registration-Changed##Page-Head##Page-Title##Title"
+msgstr "Your Information was Submitted Successfully"
+
+msgid "Provider-Registration-Changed##Page-Head##Page-Description##Page-Description"
+msgstr "Your information has been updated."
+
+msgid "Password-Reset##Page-Head##Page-Title##Title"
+msgstr "Password Reset"
+
+msgid "Password-Reset##Page-Head##Page-Description##Page-Description"
+msgstr "To reset your password enter your email address in the field below then click submit. Clicking submit will send a link to your email account that will direct you to the password reset page."
+
+msgid "Password-Reset##Input-Label##User-Email"
+msgstr "Enter your email:"
+
+msgid "Password-Reset##Submit-Options##Submit"
+msgstr "Submit"
+
+msgid "Password-Reset-Form##Page-Head##Page-Title##Title"
+msgstr "Password Reset Form"
+
+msgid "Password-Reset-Form##Page-Head##Page-Description##Page-Description"
+msgstr "Enter your new password in the text field below, then click submit to update your password."
+
+msgid "Password-Reset-Form##Input-Label##New-Password"
+msgstr "Enter your new password:"
+
+msgid "Password-Reset-Form##Submit-Options##Submit"
+msgstr "Submit"

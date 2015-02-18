@@ -21,23 +21,37 @@
 				<th data-i18n="Service-List.Table.Thead.Type"></th>
 				<th data-i18n="Service-List.Table.Thead.Area"></th>
 				<th data-i18n="Service-List.Table.Thead.Status"></th>
+				<th data-i18n="Service-List.Table.Thead.Remove"></th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr class="approved">
+            {{#each services}}
+			<tr class="{{#if this.isApproved }}approved{{/if}} {{#if this.isRejected}}denied{{/if}}">
 				<td>
-					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td">1</span>
+					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td">
+                        <a href="#/service/{{ this.id }}">{{ this.name }}</a>
+                    </span>
 				</td>
 				<td>
-					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Name"></div><span class="vertical-td">2</span>
+					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Name"></div><span class="vertical-td">{{ this.servicetype.name }}</span>
 				</td>
 				<td>
-					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Type"></div><span class="vertical-td">3</span>
+					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Type"></div><span class="vertical-td">{{ this.servicearea.name }}</span>
 				</td>
 				<td>
-					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Area"></div><span class="vertical-td">4</span>
+					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Area"></div><span class="vertical-td">{{ this.status }}</span>
+				</td>
+				<td>
+				    <div class="vertical-header" data-i18n="Service-List.Table.Thead.Remove"></div><span class="vertical-td"><a href="#/service/cancel/{{ this.id }}"><span
+				      {{#if this.is_draft }}
+      				     data-i18n="Service-Remove-Change.Remove-Change"
+                      {{else}}
+      				     data-i18n="Service-Delete.Delete-Service"
+                      {{/if}}
+				     ></span></a></span>
 				</td>
 			</tr>
+            {{/each}}
 		</tbody>
 	</table>
 </div>

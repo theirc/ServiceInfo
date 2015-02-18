@@ -131,7 +131,10 @@ POST to '/api/login/'::
 If successful, response status will be 200 and the response
 content will include::
 
-   { 'token': 'a long string'}
+   { 'token': 'a long string',
+     'language': 'xx'  # User's preferred language code, e.g. 'en' or 'ar',
+                       # or '' if we don't know
+   }
 
 If failed, response status will be 400 and the response might look like
 one of these::
@@ -143,19 +146,31 @@ one of these::
 Using token-based auth
 ----------------------
 
-Once the client has the token, it should pass it on subsequent requests per
-http://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication
-which says::
+Once the client has the token, it should pass it on subsequent requests,
+including it in the ServiceInfoAuthorization HTTP header, prefixed by the
+string literal "Token" with whitespace between::
 
-    For clients to authenticate, the token key should be included in the
-    Authorization HTTP header. The key should be prefixed by the string
-    literal "Token", with whitespace separating the two strings. For example::
-
-        Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
+        ServiceInfoAuthorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
 
 As you might expect, requests will be permitted or denied based on the
 permissions of the user whose token is passed.
 
+User language
+-------------
+
+The client can store and retrieve a short string containing the
+code for the current user's preferred language::
+
+     GET /api/language/
+       --> {'language': 'en'}
+
+     POST {'language': 'en'} to /api/language/
+
+At present, the language code should be one of
+
+* "en": English
+* "ar": Arabic
+* "fr": French
 
 Password reset
 --------------
@@ -207,6 +222,22 @@ associated email address in the response::
     {'email': 'user@example.com'},
 
 Otherwise,it'll get a 400 but no other data.
+
+Editing a Service
+-----------------
+
+Users of the API may NOT modify existing service records. They need
+to create a new Service and set update_of to the previous record, which
+will kick off a backend process where a human will review the changes
+and switch the new service to being the active one if they approve.
+
+Clients may submit an edit of a record that is a pending change to
+a current record. Just create yet another new record and set update_of
+to the draft record they're updating.
+
+When that happens, though, the previous draft record will be archived,
+essentially making it go away, and only the most recent submitted
+update record will be visible in most places.
 
 Cancel a Service
 ----------------

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-02 10:20+0000\n"
+"PO-Revision-Date: 2015-02-16 06:59+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -19,17 +19,35 @@ msgstr "i18next"
 msgid "test##hello"
 msgstr "Bonjour Le Monde"
 
-msgid "menu##Map"
-msgstr "carte de service"
+msgid "Menu##Menu-Toggle"
+msgstr "Menu"
 
-msgid "menu##Registration"
+msgid "Menu##Login"
+msgstr "Login"
+
+msgid "Menu##Logout"
+msgstr "Logout"
+
+msgid "Menu##Services"
+msgstr "services"
+
+msgid "Menu##Add-Services"
+msgstr "Ajouter des services"
+
+msgid "Menu##Service-Map"
+msgstr "service Map"
+
+msgid "Menu##Provider-Registration"
 msgstr "Inscription des fournisseurs"
 
-msgid "menu##Feedback"
-msgstr "Outil de Commentaire"
+msgid "Menu##Feedback-Tool"
+msgstr "Commentaires Outil"
 
-msgid "menu##Change-Language"
-msgstr "Change de langue"
+msgid "Menu##Change-Language"
+msgstr "Changer de langue"
+
+msgid "Global##FormSubmissionError"
+msgstr "Il y avait une erreur inconnue soumettant votre formulaire."
 
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "entrer"
@@ -49,12 +67,87 @@ msgstr "entrer"
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "Inscrivez-vous pour être un fournisseur de service ici"
 
+msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
+msgstr "Retirer Change"
+
+msgid "Service-Remove-Change##Update-Of"
+msgstr "Mise à jour de"
+
+msgid "Service-Remove-Change##Remove-Change"
+msgstr "Retirer le changement"
+
+msgid "Service-Delete##Page-Head##Page-Title##Title"
+msgstr "supprimer le service"
+
+msgid "Service-Delete##Delete-Service"
+msgstr "supprimer le service"
+
+msgid "Service-Form##Page-Head##Page-Title##Title"
+msgstr "Formulaire d'inscription Nouveau service"
+
+msgid "Service-Form##Page-Head##Page-Description##Page-Description"
+msgstr "Remplissez le formulaire ci-dessous pour demander qu'un nouveau service approuvé."
+
+msgid "Service-Form##Legend"
+msgstr "Informations sur le service"
+
+msgid "Service-Form##Service-Name"
+msgstr "Nom du service"
+
+msgid "Service-Form##Service-Area"
+msgstr "Zone de service"
+
+msgid "Service-Form##Type"
+msgstr "type de service"
+
+msgid "Service-Form##Service-Description"
+msgstr "description"
+
+msgid "Service-Form##Service-Hours"
+msgstr "Heures de service"
+
+msgid "Service-Form##Additional-Information"
+msgstr "Informations supplémentaires (champ facultatif)"
+
+msgid "Service-Form##Service-Cost"
+msgstr "Coût du service (champ facultatif)"
+
+msgid "Service-Form##Selection-Criteria"
+msgstr "Critères de sélection (champ optionnel)"
+
+msgid "Service-Form##Hours-Open"
+msgstr "Temps d'ouverture:"
+
+msgid "Service-Form##Hours-Close"
+msgstr "Temps de cloture:"
+
+msgid "Service-Form##Add-Criterion"
+msgstr "Ajouter un critère"
+
+msgid "Service-Form##Remove-Criterion"
+msgstr "Retirer Critère"
+
+msgid "Service-Form##Form-Submit-Options##Submit"
+msgstr "Valider les réponses"
+
+msgid "Service-Form##Form-Submit-Options##Clear"
+msgstr "Retirer Réponses"
+
 msgid "Provider-Registration-Form##Page-Head##Page-Title##Title"
-msgstr "Nouveau fournisseur de service  formulaire d'inscription"
+msgstr "Formulaire service fournisseur d'enregistrement"
 
 msgid ""
 "Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
-msgstr "Remplissez le formulaire ci-dessous pour demander à être un fournisseur de services."
+msgstr "Remplissez le formulaire ci-dessous."
+
+msgid "Provider-Registration-Form##Errors##Password-Blank"
+msgstr "Mot de passe ne doit pas être vide"
+
+msgid "Provider-Registration-Form##Errors##Password-Repeat"
+msgstr "Mot de passe doit être répété"
+
+msgid "Provider-Registration-Form##Errors##Password-Match"
+msgstr "Les mots de passe doivent correspondre"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Legend"
 msgstr "Détails de base d'enregistrement d'un fournisseur de service:"
@@ -62,17 +155,35 @@ msgstr "Détails de base d'enregistrement d'un fournisseur de service:"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Name"
 msgstr "plein nom"
 
-msgid "Provider-Registration-Form##Form-Sections##Basic##Service-Type"
-msgstr "Type de service"
+msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
+msgstr "mot de passe"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##PasswordConfirm"
+msgstr "Confirmez Le Mot De Passe"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type"
+msgstr "Type de prestataire"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
+msgstr "Choisissez un type de fournisseur"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
 msgstr "Numéro de téléphone"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
-msgstr "Email (champ optionel)"
+msgstr "Email"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##EmailPlaceholder"
+msgstr "Entrez votre Email"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
 msgstr "Site Web (champ optionel)"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##WebsitePlaceholder"
+msgstr "Entrez votre URL de site web"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
+msgstr "Nombre de bénéficiaires mensuelles"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Description"
 msgstr "description"
@@ -87,6 +198,9 @@ msgstr "Nom du service"
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Service-Area"
 msgstr "Zone de service"
+
+msgid "Provider-Registration-Form##Form-Sections##Service-Information##Type"
+msgstr "type de service"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Service-"
@@ -117,3 +231,108 @@ msgstr "Valider les réponses"
 
 msgid "Provider-Registration-Form##Form-Sections##Form-Submit-Options##Clear"
 msgstr "Retirer Réponses"
+
+msgid "Account-Activation##Pending##Title"
+msgstr "L'activation de votre compte est en attente ..."
+
+msgid "Account-Activation##Pending##Description"
+msgstr "Compte-activation ## en attente ## Description"
+
+msgid "Account-Activation##Success##Title"
+msgstr "Votre compte a été activé."
+
+msgid "Account-Activation##Success##Description"
+msgstr "Compte-Activation ##  réussite ## Description "
+
+msgid "Account-Activation##Failed##Title"
+msgstr "L'activation de votre compte a échoué."
+
+msgid "Account-Activation##Failed##Description"
+msgstr "Il y avait un problème configuration de votre compte de fournisseur de services. Se il vous plaît cliquez sur le bouton e-mail de confirmation de réexpédition ci-dessous pour avoir un autre email de confirmation envoyé à votre compte de messagerie."
+
+msgid "Account-Activation##Buttons##Resend-Email"
+msgstr "Vérification Renvoyer Email"
+
+msgid "Service-List##Page-Head##Page-Title##Title"
+msgstr "Liste des services"
+
+msgid "Service-List##Page-Head##Page-Description##Page-Description"
+msgstr "Voici une liste des services que vous avez appliqués à fournir. Services approuvés sont marqués en vert. Les services non approuvés sont marqués en rouge. Les services sont en attente d'approbation banalisée."
+
+msgid "Service-List##Table##Thead##Name"
+msgstr "nom:"
+
+msgid "Service-List##Table##Thead##Type"
+msgstr "type:"
+
+msgid "Service-List##Table##Thead##Area"
+msgstr "Emplacement:"
+
+msgid "Service-List##Table##Thead##Status"
+msgstr "Statu:"
+
+msgid "Service-List##Table##Thead##Remove"
+msgstr "Retirer:"
+
+msgid "Service-List##Cancel"
+msgstr "annuler"
+
+msgid "Service-List##Delete"
+msgstr "effacer"
+
+msgid "Home##Service-Map##Title"
+msgstr "Voir la carte service"
+
+msgid "Home##Service-Map##Body"
+msgstr "Utilisez la carte de services de localiser les fournisseurs de services."
+
+msgid "Home##Feedback##Title"
+msgstr "Faire un commentaire"
+
+msgid "Home##Feedback##Body"
+msgstr "Parlez-nous de votre expérience de travail avec votre fournisseur de services."
+
+msgid "Home##Log-in##Title"
+msgstr "Prestataire de services Connexion"
+
+msgid "Home##Log-in##Body"
+msgstr "Connectez-vous à un compte de fournisseur de services existant ou en créer un nouveau compte."
+
+msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
+msgstr "Votre information a été soumis avec succès"
+
+msgid ""
+"Provider-Registration-Confirmation##Page-Head##Page-Description##Page-"
+"Description"
+msgstr "Nous avons envoyé un e-mail de confirmation sur le compte e-mail utilisée lors de votre inscription. Cliquez sur le lien de confirmation dans l'e-mail pour terminer le processus d'inscription."
+
+msgid "Provider-Registration-Changed##Page-Head##Page-Title##Title"
+msgstr "Votre information a été soumis avec succès"
+
+msgid ""
+"Provider-Registration-Changed##Page-Head##Page-Description##Page-Description"
+msgstr "Vos informations ont été mis à jour."
+
+msgid "Password-Reset##Page-Head##Page-Title##Title"
+msgstr "Password Reset"
+
+msgid "Password-Reset##Page-Head##Page-Description##Page-Description"
+msgstr "Pour réinitialiser votre mot de passe, entrez votre adresse email dans le champ ci-dessous puis cliquez sur soumettre. Cliquant soumettre enverra un lien vers votre compte de messagerie qui vous dirigera vers la page de réinitialisation de mot."
+
+msgid "Password-Reset##Input-Label##User-Email"
+msgstr "Entrez votre email:"
+
+msgid "Password-Reset##Submit-Options##Submit"
+msgstr "soumettre"
+
+msgid "Password-Reset-Form##Page-Head##Page-Title##Title"
+msgstr "Mot de passe Reset Form"
+
+msgid "Password-Reset-Form##Page-Head##Page-Description##Page-Description"
+msgstr "Entrez votre nouveau mot de passe dans le champ de texte ci-dessous, puis cliquez sur soumettre à mettre à jour votre mot de passe."
+
+msgid "Password-Reset-Form##Input-Label##New-Password"
+msgstr "Entrez votre nouveau mot de passe:"
+
+msgid "Password-Reset-Form##Submit-Options##Submit"
+msgstr "soumettre"

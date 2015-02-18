@@ -1,7 +1,8 @@
 var config_data = {
-    api_location: "//localhost:8000/",
-    lang: 'en',
+    //api_location: "//localhost:8000/",
+    'forever.language': 'en',
 };
+var has_been_set = {};
 var _loaded = false;
 var _pending = [];
 
@@ -11,32 +12,65 @@ var config = module.exports = {
     },
     set: function(key, value) {
         config_data[key] = value;
+        has_been_set[key] = true;
         if (key.indexOf('forever.') === 0) {
-            console.log(key, value);
             localStorage[key] = value;
         }
+        this._triggerChange(key, 'set', value);
+    },
+    isset: function(key) {
+        // Whether 'key' has ever been .set, meaning either it
+        // was found in localStorage or .set has been called for
+        // it after the config was initialized.  Basically means
+        // we have a known preference and aren't just using a
+        // default value.
+        return has_been_set.hasOwnProperty(key);
     },
     remove: function(key) {
         localStorage.removeItem(key);
+        this._triggerChange(key, 'remove');
+    },
+
+    change: function(key, cb) {
+        if (typeof this._changeHandlers[key] === 'undefined') {
+            this._changeHandlers[key] = [];
+        }
+        this._changeHandlers[key].push(cb);
+    },
+    _changeHandlers: {},
+    _triggerChange: function(key) {
+
+        if (key in this._changeHandlers) {
+            for (var i=0; i < this._changeHandlers[key].length; i++) {
+                this._changeHandlers[key][i].apply(this, arguments)
+            }
+        }
     },
 
     load: function(type, cb) {
+        this.ready(function(){
+            $.ajax(config.get('api_location')+'api/'+type+'/', {
+                method: 'GET',
+                success: function(data) {
+                    config_data[type] = data.results;
+                    cb(null, data.results);
+                },
+                error: function(e) {
+                    cb(e);
+                },
+            });
+        })
+    },
+
+    ready: function(cb) {
+        var $this = this;
         if (!_loaded) {
             _pending.push(function() {
-                config.load(type, cb);
+                cb.call($this);
             })
-            return;
+        } else {
+            cb.call(this);
         }
-        $.ajax(config.get('api_location')+'api/'+type+'/', {
-            method: 'GET',
-            success: function(data) {
-                config_data[type] = data.results;
-                cb(null, data.results);
-            },
-            error: function(e) {
-                cb(e);
-            },
-        });
     },
 }
 
@@ -47,7 +81,7 @@ $(function($){
         $.extend(config_data, data);
         for (var key in localStorage) {
             if (localStorage.hasOwnProperty(key)) {
-                config_data[key] = localStorage[key];
+                config.set(key, localStorage[key]);
             }
         }
         _loaded = true;

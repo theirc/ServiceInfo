@@ -6,6 +6,8 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
         <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <link rel="shortcut icon" href="images/irc_logo.jpg">
+        <title>IRC Service Info</title>
 
 <!--
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
@@ -22,14 +24,16 @@
                     <div id="logo"></div>
                 </div>
                 <div id=menu-container class="menu-closed">
-                    <button id=menu-toggle class="btn menu">MENU</button>
+                    <button id=menu-toggle class="btn menu" data-i18n="Menu.Menu-Toggle"></button>
                     <ul id="menu">
-                        <li class="menu-item-login"><a href="#/login">Login</a></li>
-                        <li class="menu-item-logout"><a href="#/logout">Logout</a></li>
-                        <li><a href="#/map">Service Map</a></li>
-                        <li><a href="#/register">Provider Registration</a></li>
-                        <li><a href="#/feedback">Feedback Tool</a></li>
-                        <li class="menu-item-language"><a>Change Language</a></li>
+                        <li class="menu-item-login"><a href="#/login" data-i18n="Menu.Login"></a></li>
+                        <li class="menu-item-logout"><a href="#/logout" data-i18n="Menu.Logout"></a></li>
+                        <li class="menu-item-logout"><a href="#/service-list" data-i18n="Menu.Services"></a></li>
+                        <li class="menu-item-logout"><a href="#/service" data-i18n="Menu.Add-Services"></a></li>
+                        <!-- (hide until implemented) <li><a href="#/map" data-i18n="Menu.Service-Map"></a></li> -->
+                        <li><a href="#/register" data-i18n="Menu.Provider-Registration"></a></li>
+                        <!-- (hide until implemented) <li><a href="#/feedback" data-i18n="Menu.Feedback-Tool"></a></li> -->
+                        <li class="menu-item-language"><a data-i18n="Menu.Change-Language"></a></li>
                     </ul>
                 </div>
             </header>

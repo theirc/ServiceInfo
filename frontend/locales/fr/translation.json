@@ -1,8 +1,235 @@
 {
-  "app": {
-    "name": "i18next"
-  },
-  "test": {
-    "hello": "bonjour le monde"
-  }
+    "app": {
+        "name": "i18next"
+    },
+    "test": {
+        "hello": "Bonjour Le Monde"
+    },
+    "Menu": {
+        "Menu-Toggle": "Menu",
+        "Login": "Login",
+        "Logout": "Logout",
+        "Services": "services",
+        "Add-Services": "Ajouter des services",
+        "Service-Map": "service Map",
+        "Provider-Registration": "Inscription des fournisseurs",
+        "Feedback-Tool": "Commentaires Outil",
+        "Change-Language": "Changer de langue"
+    },
+    "Global": {
+        "FormSubmissionError": "Il y avait une erreur inconnue soumettant votre formulaire."
+    },
+    "Login-Form": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "entrer"
+            },
+            "Page-Description": {
+                "Page-Description": "Si vous êtes un fournisseur de services et d'avoir un signe de compte existant signe dans votre compte ci-dessous."
+            }
+        },
+        "Form": {
+            "Email": "Email",
+            "Password": "mot de passe"
+        },
+        "Form-Submit-Options": {
+            "Submit": "entrer",
+            "Register": "Inscrivez-vous pour être un fournisseur de service ici"
+        }
+    },
+    "Service-Remove-Change": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "Retirer Change"
+            }
+        },
+        "Update-Of": "Mise à jour de",
+        "Remove-Change": "Retirer le changement"
+    },
+    "Service-Delete": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "supprimer le service"
+            }
+        },
+        "Delete-Service": "supprimer le service"
+    },
+    "Service-Form": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "Formulaire d'inscription Nouveau service"
+            },
+            "Page-Description": {
+                "Page-Description": "Remplissez le formulaire ci-dessous pour demander qu'un nouveau service approuvé."
+            }
+        },
+        "Legend": "Informations sur le service",
+        "Service-Name": "Nom du service",
+        "Service-Area": "Zone de service",
+        "Type": "type de service",
+        "Service-Description": "description",
+        "Service-Hours": "Heures de service",
+        "Additional-Information": "Informations supplémentaires (champ facultatif)",
+        "Service-Cost": "Coût du service (champ facultatif)",
+        "Selection-Criteria": "Critères de sélection (champ optionnel)",
+        "Hours-Open": "Temps d'ouverture:",
+        "Hours-Close": "Temps de cloture:",
+        "Add-Criterion": "Ajouter un critère",
+        "Remove-Criterion": "Retirer Critère",
+        "Form-Submit-Options": {
+            "Submit": "Valider les réponses",
+            "Clear": "Retirer Réponses"
+        }
+    },
+    "Provider-Registration-Form": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "Formulaire service fournisseur d'enregistrement"
+            },
+            "Page-Description": {
+                "Page-Description": "Remplissez le formulaire ci-dessous."
+            }
+        },
+        "Errors": {
+            "Password-Blank": "Mot de passe ne doit pas être vide",
+            "Password-Repeat": "Mot de passe doit être répété",
+            "Password-Match": "Les mots de passe doivent correspondre"
+        },
+        "Form-Sections": {
+            "Basic": {
+                "Legend": "Détails de base d'enregistrement d'un fournisseur de service:",
+                "Name": "plein nom",
+                "Password": "mot de passe",
+                "PasswordConfirm": "Confirmez Le Mot De Passe",
+                "Provider-Type": "Type de prestataire",
+                "Provider-Type-Choose": "Choisissez un type de fournisseur",
+                "Phone-Number": "Numéro de téléphone",
+                "Email": "Email",
+                "EmailPlaceholder": "Entrez votre Email",
+                "Website": "Site Web (champ optionel)",
+                "WebsitePlaceholder": "Entrez votre URL de site web",
+                "MonthlyBeneficiaries": "Nombre de bénéficiaires mensuelles",
+                "Description": "description"
+            },
+            "Service-Information": {
+                "Legend": "Informations sur le service",
+                "Service-Name": "Nom du service",
+                "Service-Area": "Zone de service",
+                "Type": "type de service",
+                "Service-Description": "Description",
+                "Service-Hours": "Heures de service",
+                "Additional-Information": "Informations supplémentaires (champ facultatif)",
+                "Service-Cost": "Coût du service (champ facultatif)",
+                "Selection-Criteria": "Critères de sélection (champ optionnel)"
+            },
+            "Form-Submit-Options": {
+                "Submit": "Valider les réponses",
+                "Clear": "Retirer Réponses"
+            }
+        }
+    },
+    "Account-Activation": {
+        "Pending": {
+            "Title": "L'activation de votre compte est en attente ...",
+            "Description": "Compte-activation ## en attente ## Description"
+        },
+        "Success": {
+            "Title": "Votre compte a été activé.",
+            "Description": "Compte-Activation ##  réussite ## Description "
+        },
+        "Failed": {
+            "Title": "L'activation de votre compte a échoué.",
+            "Description": "Il y avait un problème configuration de votre compte de fournisseur de services. Se il vous plaît cliquez sur le bouton e-mail de confirmation de réexpédition ci-dessous pour avoir un autre email de confirmation envoyé à votre compte de messagerie."
+        },
+        "Buttons": {
+            "Resend-Email": "Vérification Renvoyer Email"
+        }
+    },
+    "Service-List": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "Liste des services"
+            },
+            "Page-Description": {
+                "Page-Description": "Voici une liste des services que vous avez appliqués à fournir. Services approuvés sont marqués en vert. Les services non approuvés sont marqués en rouge. Les services sont en attente d'approbation banalisée."
+            }
+        },
+        "Table": {
+            "Thead": {
+                "Name": "nom:",
+                "Type": "type:",
+                "Area": "Emplacement:",
+                "Status": "Statu:",
+                "Remove": "Retirer:"
+            }
+        },
+        "Cancel": "annuler",
+        "Delete": "effacer"
+    },
+    "Home": {
+        "Service-Map": {
+            "Title": "Voir la carte service",
+            "Body": "Utilisez la carte de services de localiser les fournisseurs de services."
+        },
+        "Feedback": {
+            "Title": "Faire un commentaire",
+            "Body": "Parlez-nous de votre expérience de travail avec votre fournisseur de services."
+        },
+        "Log-in": {
+            "Title": "Prestataire de services Connexion",
+            "Body": "Connectez-vous à un compte de fournisseur de services existant ou en créer un nouveau compte."
+        }
+    },
+    "Provider-Registration-Confirmation": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "Votre information a été soumis avec succès"
+            },
+            "Page-Description": {
+                "Page-Description": "Nous avons envoyé un e-mail de confirmation sur le compte e-mail utilisée lors de votre inscription. Cliquez sur le lien de confirmation dans l'e-mail pour terminer le processus d'inscription."
+            }
+        }
+    },
+    "Provider-Registration-Changed": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "Votre information a été soumis avec succès"
+            },
+            "Page-Description": {
+                "Page-Description": "Vos informations ont été mis à jour."
+            }
+        }
+    },
+    "Password-Reset": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "Password Reset"
+            },
+            "Page-Description": {
+                "Page-Description": "Pour réinitialiser votre mot de passe, entrez votre adresse email dans le champ ci-dessous puis cliquez sur soumettre. Cliquant soumettre enverra un lien vers votre compte de messagerie qui vous dirigera vers la page de réinitialisation de mot."
+            }
+        },
+        "Input-Label": {
+            "User-Email": "Entrez votre email:"
+        },
+        "Submit-Options": {
+            "Submit": "soumettre"
+        }
+    },
+    "Password-Reset-Form": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "Mot de passe Reset Form"
+            },
+            "Page-Description": {
+                "Page-Description": "Entrez votre nouveau mot de passe dans le champ de texte ci-dessous, puis cliquez sur soumettre à mettre à jour votre mot de passe."
+            }
+        },
+        "Input-Label": {
+            "New-Password": "Entrez votre nouveau mot de passe:"
+        },
+        "Submit-Options": {
+            "Submit": "soumettre"
+        }
+    }
 }

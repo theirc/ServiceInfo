@@ -1,5 +1,7 @@
 # Django settings for service_info project.
 import os
+from django.utils.translation import ugettext_lazy as _
+from celery.schedules import crontab
 
 # BASE_DIR = path/to/source/service_info
 # E.g. this file is BASE_DIR/settings/base.py
@@ -37,11 +39,17 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/New_York'
+TIME_ZONE = 'Asia/Beirut'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
+
+LANGUAGES = [
+    ('ar', _('Arabic')),
+    ('en', _('English')),
+    ('fr', _('French')),
+]
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -49,7 +57,12 @@ USE_I18N = True
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
-USE_L10N = True
+# And that's what we want, otherwise we have no control.
+USE_L10N = False
+# Time display format:
+TIME_FORMAT = "G:i"  # 24-hour time without leading zero; minutes
+# Time input format(s):
+TIME_INPUT_FORMATS = ('%H:%M',)  # 24-hour time, with leading zero; minutes
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
@@ -88,7 +101,6 @@ LOCALE_PATHS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -144,7 +156,6 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     # External apps
     'corsheaders',
-    'compressor',
     'rest_framework',
     'rest_framework.authtoken',
     # Our apps
@@ -203,22 +214,17 @@ LOGGING = {
 }
 
 # Application settings
-COMPRESS_PRECOMPILERS = (
-    ('text/less', 'lessc {infile} {outfile}'),
-)
-
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    # FIXME: Will definitely need to change this
+    # Use Django's standard `django.contrib.auth` permissions
+    # by default.  (We'll alter this as needed on a few specific
+    # views.)
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.DjangoModelPermissions'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        'api.auth.ServiceInfoTokenAuthentication',
     ),
-    'PAGINATE_BY': 10,
+    'PAGINATE_BY': None,
 }
 
 
@@ -237,7 +243,31 @@ ACCOUNT_ACTIVATION_DAYS = 3
 ACCOUNT_ACTIVATION_REDIRECT_URL = '/nosuchurl'
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_HEADERS = (
+    'x-requested-with',
+    'content-type',
+    'accept',
+    'origin',
+    'authorization',
+    'x-csrftoken',
+    'serviceinfoauthorization',
+)
 
 STAGING_SITE_ID = 2
 PRODUCTION_SITE_ID = 3
 DEV_SITE_ID = 4
+
+# Periodic celery tasks
+CELERYBEAT_SCHEDULE = {
+    'jira-work': {
+        'task': 'services.tasks.process_jira_work',
+        'schedule': crontab(minute='*/5'),
+    },
+}
+
+# JIRA settings
+JIRA_SERVER = 'http://54.154.50.144:8080/'
+JIRA_USER = os.environ.get('JIRA_USER', '')
+JIRA_PASSWORD = os.environ.get('JIRA_PASSWORD', '')
+JIRA_PROJECT_KEY = 'SM'
+JIRA_DUEIN_DAYS = 2

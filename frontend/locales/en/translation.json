@@ -5,11 +5,26 @@
   "test": {
     "hello": "Hello, World"
   },
-  "menu": {
-  	"Map": "Service Map",
-  	"Registration": "Provider Registration",
-  	"Feedback": "Feedback Tool",
+  "Menu": {
+    "Menu-Toggle": "MENU",
+    "Login": "Login",
+    "Logout": "Logout",
+    "Services": "Services",
+    "Add-Services": "Add Services",
+  	"Service-Map": "Service Map",
+  	"Provider-Registration": "Provider Registration",
+  	"Feedback-Tool": "Feedback Tool",
   	"Change-Language": "Change Language"
+  },
+  "Global": {
+    "FormSubmissionError": "There was an unknown error submitting your form.",
+    "Sunday": "Sunday",
+    "Monday": "Monday",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Wednesday",
+    "Thursday": "Thursday",
+    "Friday": "Friday",
+    "Saturday": "Saturday"
   },
   "Login-Form": {
     "Page-Head": {
@@ -43,13 +58,75 @@
       "Search": "Search"
     }
   },
+  "Service-Remove-Change": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Remove Change"
+      }
+    },
+    "Update-Of": "Update of",
+    "Remove-Change": "Remove change"
+  },
+  "Service-Delete": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Delete Service"
+      }
+    },
+    "Delete-Service": "Delete service"
+  },
+  "Service-Form": {
+      "Page-Head": {
+        "Page-Title": {
+          "Title": "New Service Registration Form"
+        },
+        "Page-Description": {
+          "Page-Description": "Fill out the form below to apply to have a new service approved."
+        }
+      },
+      "Legend": "Service Information",
+      "Type-Choose": "Choose a Service Type",
+      "Service-Area-Choose": "Choose a Service Area",
+      "Service-Name": "Name of Service",
+      "Service-Area": "Area of Service",
+      "Type": "Service Type",
+      "Service-Description": "Description",
+      "Service-Hours": "Hours of Service",
+      "Additional-Information": "Additional Information (Optional Field)",
+      "Service-Cost": "Cost of Service (Optional Field)",
+      "Selection-Criteria": "Selection Criteria (Optional Field)",
+      "Hours-Open": "Opening Time:",
+      "Hours-Close": "Closing Time:",
+      "Selection-Criteria": "Selection Criteria",
+      "Add-Criterion": "Add New Criterion",
+      "Remove-Criterion": "Remove Criterion",
+      "Form-Submit-Options": {
+          "Submit": "Submit Answers",
+          "Clear": "Remove Answers"
+      },
+    "Legend": "Service Information",
+    "Service-Name": "Name of Service",
+    "Service-Area": "Area of Service",
+    "Type": "Service Type",
+    "Service-Description": "Description",
+    "Service-Hours": "Hours of Service",
+    "Additional-Information": "Additional Information (Optional Field)",
+    "Service-Cost": "Cost of Service (Optional Field)",
+    "Selection-Criteria": "Selection Criteria (Optional Field)",
+    "Hours-Open": "Opening Time:",
+    "Hours-Close": "Closing Time:",
+    "Form-Submit-Options": {
+        "Submit": "Submit Answers",
+        "Clear": "Remove Answers"
+    }
+  },
   "Provider-Registration-Form": {
   	"Page-Head": {
   		"Page-Title": {
-  			"Title": "New Service Provider Registration Form"
+            "Title": "Service Provider Registration Form"
   		},
   		"Page-Description": {
-  			"Page-Description": "Fill out the form below to apply to be a service provider."
+            "Page-Description": "Fill out the form below."
   		}
   	},
     "Errors": {
@@ -63,11 +140,13 @@
   			"Name": "Full Name",
             "Password": "Password",
             "PasswordConfirm": "Confirm Password",
-  			"Service-Type": "Type of Service",
-            "Service-Type-Choose": "Choose a Service Type",
+  			"Provider-Type": "Provider Type",
+            "Provider-Type-Choose": "Choose a Provider Type",
   			"Phone-Number": "Phone Number",
   			"Email": "Email",
+            "EmailPlaceholder": "Enter your Email",
   			"Website": "Website (Optional Field)",
+            "WebsitePlaceholder": "Enter your Website URL",
             "MonthlyBeneficiaries": "Number of Monthly Beneficiaries",
   			"Description": "Description"
   		},
@@ -75,6 +154,7 @@
   			"Legend": "Service Information",
   			"Service-Name": "Name of Service",
   			"Service-Area": "Area of Service",
+            "Type": "Service Type",
   			"Service-Description": "Description",
   			"Service-Hours": "Hours of Service",
   			"Additional-Information": "Additional Information (Optional Field)",
@@ -86,6 +166,23 @@
   			"Clear": "Remove Answers"
   		}
   	}
+  },
+  "Account-Activation": {
+    "Pending": {
+        "Title": "Your account activation is pending...",
+        "Description": ""
+    },
+    "Success": {
+        "Title": "Your account has been activated.",
+        "Description": ""
+    },
+    "Failed": {
+        "Title": "Your account activation Failed.",
+        "Description": "There was a problem setting up your service provider account. Please click the resend confirmation email button below to have another confirmation email sent to your email account."
+    },
+    "Buttons": {
+      "Resend-Email": "Resend Verification Email"
+    }
   },
   "Service-List": {
     "Page-Head": {
@@ -101,9 +198,12 @@
         "Name": "Name:",
         "Type": "Type:",
         "Area": "Area:",
-        "Status": "Status:"
+        "Status": "Status:",
+        "Remove": "Remove:"
       }
-    }
+    },
+    "Cancel": "Cancel",
+    "Delete": "Delete"
   },
   "Home": {
     "Service-Map": {
@@ -127,7 +227,17 @@
       "Page-Description": {
         "Page-Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
       }
-    } 
+    }
+  },
+  "Provider-Registration-Changed": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Your Information was Submitted Successfully"
+      },
+      "Page-Description": {
+        "Page-Description": "Your information has been updated."
+      }
+    }
   },
   "Password-Reset": {
     "Page-Head": {
