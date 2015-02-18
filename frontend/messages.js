@@ -8,13 +8,13 @@ module.exports = {
     },
     add: function (s) {
         /* Add string 's' to the messages in the message area */
-        $('#messages').html($('#messages').html() + template({message: s}));
+        $('#messages').append(template({message: s}));
     },
     error: function (e) {
         /* Given the argument to a promise error function, report
            the problem in the message area.
         */
-        console.log(e);
+        console.error(e);
         if (e.status >= 500) {
             this.add(e.statusText);
         } else if (e.status >= 400) {
