@@ -1,5 +1,6 @@
 var Backbone = require('backbone');
 var config = require('../config');
+var messages = require('../messages');
 var _base = require('./_base');
 var servicearea = require('./servicearea');
 var servicetype = require('./servicetype');
@@ -22,6 +23,8 @@ var Service = _base.BaseModel.extend({
                 self._data.servicetype = type.data();
 
                 resolve(self);
+            }, function onerror(error) {
+                messages.error(error);
             });
         });
 
