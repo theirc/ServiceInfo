@@ -42,6 +42,11 @@ module.exports = Backbone.View.extend({
         });
     },
 
+    populateDropdowns: function() {
+        var $form = this.$el.find('form');
+        forms.populateDropdown($form, "type", this.providertypes);
+    },
+
     render: function() {
         var $el = this.$el;
         var providertypes = [];
@@ -60,6 +65,9 @@ module.exports = Backbone.View.extend({
         }
         $el.html(template(context));
         $el.i18n();
+        if (self.providertypes) {
+            this.populateDropdowns();
+        }
         if (self.provider) {
             forms.initial($el, self.provider);
             forms.initial($el, self.user);
