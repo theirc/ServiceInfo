@@ -149,7 +149,8 @@
   		},
   		"Form-Submit-Options": {
   			"Submit": "Submit Answers",
-  			"Clear": "Remove Answers"
+  			"Clear": "Remove Answers",
+            "ResendVerify": "Resend Verification Email"
   		}
   	}
   },
