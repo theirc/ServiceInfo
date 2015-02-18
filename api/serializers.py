@@ -27,7 +27,7 @@ class RequireOneTranslationMixin(object):
             if not (data.get('%s_en' % field, False)
                     or data.get('%s_ar' % field, False)
                     or data.get('%s_fr' % field, False)):
-                errs[field].append('This field is required.')
+                errs[field].append(_('This field is required.'))
         try:
             validated_data = super().run_validation(data)
         except (exceptions.ValidationError, DjangoValidationError) as exc:
@@ -55,9 +55,11 @@ class LanguageSerializer(serializers.Serializer):
         # See if it's a valid language code
         language_dict = dict(settings.LANGUAGES)
         if value not in language_dict:
+            valid_codes = ', '.join(language_dict.keys())
             raise exceptions.ValidationError(
-                "Invalid language code %r. The valid codes are %s."
-                % (value, ', '.join(language_dict.keys())))
+                _("Invalid language code {code}. The valid codes are {valid_codes}.").format(
+                    code=value, valid_codes=valid_codes
+                ))
         return value
 
 
@@ -201,6 +203,21 @@ class ServiceSerializer(RequireOneTranslationMixin,
                 raise exceptions.ValidationError(
                     {'update_of': _("You may only submit updates to current or draft services")}
                 )
+
+        errs = defaultdict(list)
+        for day in ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday',
+                    'friday', 'saturday']:
+            open_field, close_field = '%s_open' % day, '%s_close' % day
+            open_value = attrs.get(open_field, False)
+            close_value = attrs.get(close_field, False)
+            if open_value and not close_value:
+                errs[close_field].append(_('Close time is missing.'))
+            elif close_value and not open_value:
+                errs[open_field].append(_('Open time is missing.'))
+            elif open_value and close_value and open_value >= close_value:
+                errs[close_field].append(_('Close time is not later than open time.'))
+        if errs:
+            raise exceptions.ValidationError(errs)
         return attrs
 
     def create(self, validated_data):

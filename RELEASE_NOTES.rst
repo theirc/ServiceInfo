@@ -2,6 +2,34 @@ Service Info
 
 Release Notes
 
+0.0.8 - Feb. 17, 2015
+---------------------
+
+* Remove 'delete' option for services in a state where
+  we don't allow deleting anyway.
+
+0.0.7 - Feb. 17, 2015
+---------------------
+
+* Fix regression on selection criteria controls
+
+0.0.6 - Feb. 17, 2015
+---------------------
+
+* Fix double-submission of services
+
+0.0.5 - Feb. 17, 2015
+---------------------
+
+* Finish applying translation to the UI
+* Add selection criteria editing to service form
+* Improvements to form validation
+* Create or update JIRA issues on new service, change
+  to service, canceling service or service change, and
+  provider changes
+* Remember user's language in backend so we use their
+  language when they login on a new browser
+
 0.0.4 - Feb. 11, 2015
 ---------------------
 

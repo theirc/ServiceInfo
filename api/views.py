@@ -3,6 +3,7 @@ from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.db.transaction import atomic
 from django.utils.timezone import now
+from django.utils.translation import ugettext_lazy as _, activate, deactivate_all
 
 from rest_framework import parsers, renderers, viewsets
 from rest_framework.authtoken.models import Token
@@ -22,7 +23,26 @@ from services.models import Service, Provider, ProviderType, ServiceArea, Servic
     SelectionCriterion
 
 
-class LanguageView(APIView):
+class TranslatedViewMixin(object):
+    def perform_authentication(self, request):
+        super().perform_authentication(request)
+        # Change current langugage if authentication is successful
+        # and we know the user's preference
+        if getattr(request.user, 'language', False):
+            activate(request.user.language)
+        else:
+            deactivate_all()
+
+
+class ServiceInfoAPIView(TranslatedViewMixin, APIView):
+    pass
+
+
+class ServiceInfoModelViewSet(TranslatedViewMixin, viewsets.ModelViewSet):
+    pass
+
+
+class LanguageView(ServiceInfoAPIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
@@ -36,7 +56,7 @@ class LanguageView(APIView):
         return Response()
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(ServiceInfoModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
@@ -44,7 +64,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
-class GroupViewSet(viewsets.ModelViewSet):
+class GroupViewSet(ServiceInfoModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
@@ -52,12 +72,12 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
 
-class ServiceAreaViewSet(viewsets.ModelViewSet):
+class ServiceAreaViewSet(ServiceInfoModelViewSet):
     queryset = ServiceArea.objects.all()
     serializer_class = ServiceAreaSerializer
 
 
-class ServiceViewSet(viewsets.ModelViewSet):
+class ServiceViewSet(ServiceInfoModelViewSet):
     # This docstring shows up when browsing the API in a web browser:
     """
     Service view
@@ -90,12 +110,12 @@ class ServiceViewSet(viewsets.ModelViewSet):
         obj = self.get_object()
         if obj.status not in [Service.STATUS_DRAFT, Service.STATUS_CURRENT]:
             raise DRFValidationError(
-                {'status': 'Service record must be current or pending changes to be canceled'})
+                {'status': _('Service record must be current or pending changes to be canceled')})
         obj.cancel()
         return Response()
 
 
-class SelectionCriterionViewSet(viewsets.ModelViewSet):
+class SelectionCriterionViewSet(ServiceInfoModelViewSet):
     queryset = SelectionCriterion.objects.all()
     serializer_class = SelectionCriterionSerializer
 
@@ -113,7 +133,7 @@ class SelectionCriterionViewSet(viewsets.ModelViewSet):
         return obj
 
 
-class ProviderTypeViewSet(viewsets.ModelViewSet):
+class ProviderTypeViewSet(ServiceInfoModelViewSet):
     # Unauth'ed users need to be able to read the provider types so
     # they can register as providers.
     permission_classes = (IsAuthenticatedOrReadOnly,)
@@ -121,12 +141,12 @@ class ProviderTypeViewSet(viewsets.ModelViewSet):
     serializer_class = ProviderTypeSerializer
 
 
-class ServiceTypeViewSet(viewsets.ModelViewSet):
+class ServiceTypeViewSet(ServiceInfoModelViewSet):
     queryset = ServiceType.objects.all()
     serializer_class = ServiceTypeSerializer
 
 
-class ProviderViewSet(viewsets.ModelViewSet):
+class ProviderViewSet(ServiceInfoModelViewSet):
     # This docstring shows up when browsing the API in a web browser:
     """
     Provider view
@@ -218,7 +238,7 @@ class ProviderViewSet(viewsets.ModelViewSet):
 # UNAUTHENTICATED views
 #
 
-class APILogin(APIView):
+class APILogin(ServiceInfoAPIView):
     """
     Allow front-end to pass us an email and a password and get
     back an auth token for the user.
@@ -242,7 +262,7 @@ class APILogin(APIView):
                          'language': user.language})
 
 
-class APIActivationView(APIView):
+class APIActivationView(ServiceInfoAPIView):
     """
     Given a user activation key, activate the user and
     return an auth token.
@@ -272,7 +292,7 @@ class APIActivationView(APIView):
         return Response({'token': token.key, 'email': user.email})
 
 
-class PasswordResetRequest(APIView):
+class PasswordResetRequest(ServiceInfoAPIView):
     """
     View to tell the API that a user wants to reset their password.
     If the provided email is for a valid user, it sends them an
@@ -293,7 +313,7 @@ class PasswordResetRequest(APIView):
         return Response()
 
 
-class PasswordResetCheck(APIView):
+class PasswordResetCheck(ServiceInfoAPIView):
     """
     View to check if a password reset key appears to
     be valid (at the moment).
@@ -310,7 +330,7 @@ class PasswordResetCheck(APIView):
         return Response({'email': serializer.validated_data['user'].email})
 
 
-class PasswordReset(APIView):
+class PasswordReset(ServiceInfoAPIView):
     """
     View to reset a user's password, given a reset key
     and a new password.
@@ -333,7 +353,7 @@ class PasswordReset(APIView):
         return Response({'token': token.key, 'email': user.email})
 
 
-class ResendActivationLinkView(APIView):
+class ResendActivationLinkView(ServiceInfoAPIView):
     """
     View to resend the activation link for the user
     """

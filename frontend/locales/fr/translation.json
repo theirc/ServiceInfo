@@ -17,7 +17,14 @@
         "Change-Language": "Changer de langue"
     },
     "Global": {
-        "FormSubmissionError": "Il y avait une erreur inconnue soumettant votre formulaire."
+        "FormSubmissionError": "Il y avait une erreur inconnue soumettant votre formulaire.",
+        "Sunday": "dimanche",
+        "Monday": "lundi",
+        "Tuesday": "Mardi",
+        "Wednesday": "Mercredi",
+        "Thursday": "Jeudi",
+        "Friday": "Vendredi",
+        "Saturday": "Samedi"
     },
     "Login-Form": {
         "Page-Head": {
@@ -64,6 +71,8 @@
             }
         },
         "Legend": "Informations sur le service",
+        "Type-Choose": "Choisissez un type de service",
+        "Service-Area-Choose": "Choisissez une zone de service",
         "Service-Name": "Nom du service",
         "Service-Area": "Zone de service",
         "Type": "type de service",

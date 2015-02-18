@@ -108,10 +108,36 @@
                       <input id="id_cost_of_service" type="text" name="cost_of_service" class="form-control">
                     </div>
                 </div>
+
+                <!-- selection criteria -->
+                <label for="id_selection_criteria" class="control-label" data-i18n="Service-Form.Selection-Criteria"></label>
+                {{#each criteria}}
+                  <div class="row criteria">
+                      <div class="half">
+                        <div class="form-group">
+                          <input id="id_selection_criteria.{{@index}}" type="text" name="selection_criteria.{{@index}}" class="form-control" value="{{this.text}}">
+                        </div>
+                      </div>
+                      <div class="half">
+                        <div class="form-options">
+                          <div class="half">
+                            <button class="remove" data-i18n="Service-Form.Remove-Criterion"></button>
+                          </div>
+                          <div class="half">
+                            {{#if @last}}
+                              <button class="primary-button add" data-i18n="Service-Form.Add-Criterion"></button>
+                            {{/if}}
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                {{/each}}
+
               </fieldset>
             </form>
             <form>
               <div class="submit-form">
+                  <div class="row error error-submission"></div>
                   <div class="half">
                     <button class="form-btn-submit primary-button" data-i18n="Service-Form.Form-Submit-Options.Submit"></button>
                   </div>
