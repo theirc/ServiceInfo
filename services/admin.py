@@ -36,7 +36,10 @@ class SelectionCriterionInlineAdmin(admin.TabularInline):
 
 
 class ServiceAdmin(GeoModelAdmin):
-    openlayers_url = 'js/OpenLayers-2.13.js'
+    # Use CDN-hosted OpenLayers so that (1) we can use https, and (2) all the
+    # images that are loaded relative to the js file will also load without
+    # our having to track them all down and host them ourselves.
+    openlayers_url = '//cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js'
 
     class Media:
         css = {
