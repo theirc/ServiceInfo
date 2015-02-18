@@ -2,7 +2,8 @@
 var $ = require('jquery'),
     config = require('./config'),
     i18n = require('i18next-client'),
-    Backbone = require('backbone')
+    Backbone = require('backbone'),
+    messages = require('./messages')
 ;
 
 var views = {
@@ -26,6 +27,7 @@ function loadPage(name, params) {
     var params = params || [];
 
     return function() {
+        messages.clear();
         var viewArguments = Array.prototype.slice.apply(arguments);
         config.ready(function(){
             var $el = $(document.querySelector('#page'));
