@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib import admin, messages
+from django.contrib.gis.admin import GeoModelAdmin
 from django.utils.translation import ugettext_lazy as _
 from services.models import Provider, Service, ServiceArea, SelectionCriterion, ProviderType, \
     ServiceType, JiraUpdateRecord
@@ -34,7 +35,9 @@ class SelectionCriterionInlineAdmin(admin.TabularInline):
     # and create or edit one there that links to the service.)
 
 
-class ServiceAdmin(admin.ModelAdmin):
+class ServiceAdmin(GeoModelAdmin):
+    openlayers_url = 'js/OpenLayers-2.13.js'
+
     class Media:
         css = {
             "all": ("css/admin_styles.css",)
