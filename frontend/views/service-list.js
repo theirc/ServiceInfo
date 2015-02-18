@@ -1,6 +1,7 @@
 var Backbone = require('backbone'),
     template = require("../templates/service-list.hbs"),
     i18n = require('i18next-client'),
+    messages = require('../messages'),
     models = require('../models/service')
 ;
 
@@ -11,6 +12,7 @@ module.exports = Backbone.View.extend({
     },
 
     render: function() {
+        messages.clear();
         var $el = this.$el;
         var services = this.services;
         this.services.fetch().then(function(r){
@@ -33,7 +35,11 @@ module.exports = Backbone.View.extend({
                     services: records,
                 }));
                 $el.i18n();
+            }, function onerror(e) {
+                messages.error(e);
             });
+        }, function onerror(e) {
+            messages.error(e);
         });
     },
 

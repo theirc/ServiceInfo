@@ -3,6 +3,7 @@ api = require('../api'),
 template = require("../templates/service-form.hbs"),
 i18n = require('i18next-client'),
 forms = require('../forms'),
+messages = require('../messages'),
 service = require('../models/service'),
 servicearea = require('../models/servicearea'),
 servicetype = require('../models/servicetype')
@@ -32,8 +33,8 @@ module.exports = Backbone.View.extend({
             current_service = new service.Service({id: opts.id});
             waiting.push(current_service.fetch());
         }
-
-        Promise.all(waiting).then(function(){
+        messages.clear();
+        Promise.all(waiting).then(function onsuccess(){
             self.serviceareas = serviceareas;
             self.servicetypes = servicetypes;
             if (opts.id) {
@@ -41,6 +42,8 @@ module.exports = Backbone.View.extend({
             }
 
             self.render();
+        }, function onerror(e) {
+            messages.error(e);
         });
     },
 
@@ -122,6 +125,7 @@ module.exports = Backbone.View.extend({
             return false;
         },
         "click .form-btn-submit": function() {
+            messages.clear();
             var $el = this.$el;
             var data = forms.collect($el);
             // Like form fields, omit empty values from the data
@@ -145,7 +149,7 @@ module.exports = Backbone.View.extend({
                     window.location = '#/service-list';
                 },
                 function error(errors) {
-                    console.error(errors);
+                    messages.error(errors);
                 }
             );
 

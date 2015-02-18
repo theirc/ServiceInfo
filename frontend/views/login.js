@@ -2,6 +2,7 @@ var Backbone = require('backbone'),
     template = require("../templates/login.hbs"),
     i18n = require('i18next-client'),
     config = require('../config'),
+    messages = require('../messages'),
     $ = require('jquery')
 ;
 
@@ -33,6 +34,7 @@ module.exports = Backbone.View.extend({
 
     events: {
         "click button": function(ev) {
+            messages.clear();
             var $el = this.$el;
             ev.preventDefault();
             var email = $el.find('[name=email]').val();

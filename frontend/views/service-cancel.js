@@ -4,6 +4,7 @@ config = require('../config'),
 template = require("../templates/service-cancel.hbs"),
 i18n = require('i18next-client'),
 forms = require('../forms'),
+messages = require('../messages'),
 service = require('../models/service')
 ;
 
@@ -12,6 +13,7 @@ module.exports = Backbone.View.extend({
         var self = this;
         var current_service = new service.Service({id: opts.id});
 
+        messages.clear();
         Promise.all([current_service.fetch()]).then(function(){
             self.service = current_service;
             self.update_of = undefined;
@@ -24,6 +26,8 @@ module.exports = Backbone.View.extend({
             } else {
                 self.render();
             }
+        }, function onerror(e) {
+            messages.error(e);
         });
     },
 
@@ -42,6 +46,7 @@ module.exports = Backbone.View.extend({
 
     events: {
         "click .form-btn-submit": function() {
+            messages.clear();
             var data = forms.collect(this.$el);
             var path = 'api/services/' + data.id + '/cancel/';
             api.request('POST', path).then(
@@ -49,7 +54,7 @@ module.exports = Backbone.View.extend({
                     window.location = "#/service-list";
                 },
                 function error(e) {
-                    console.error(e);
+                    messages.error(e);
                 }
             );
 
