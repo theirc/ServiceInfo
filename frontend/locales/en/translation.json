@@ -55,8 +55,9 @@
       }
     },
     "Filtered-Search": {
-      "Label": "Search by name, location, service, or other search term",
-      "Search": "Search"
+      "Label": "Search term",
+      "Search": "Search",
+      "Service-Type": "Filter by service type"
     }
   },
   "Service-Remove-Change": {
