@@ -47,6 +47,13 @@ module.exports = Backbone.View.extend({
         });
     },
 
+    populateDropdowns: function() {
+        var $form = this.$el.find('#service-form');
+        console.log($form);
+        forms.populateDropdown($form, "area_of_service", this.serviceareas);
+        forms.populateDropdown($form, "type", this.servicetypes);
+    },
+
     render: function() {
         var $el = this.$el;
         var serviceareas = [];
@@ -79,6 +86,9 @@ module.exports = Backbone.View.extend({
             types: types,
             criteria: criteria
         }));
+        if (this.serviceareas && this.servicetypes) {
+            this.populateDropdowns();
+        }
         if (this.update_of) {
             forms.initial($el, this.update_of);
             forms.getField($el, 'update_of').val(this.update_of.get('url'));
