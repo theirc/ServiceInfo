@@ -49,7 +49,6 @@ module.exports = Backbone.View.extend({
 
     populateDropdowns: function() {
         var $form = this.$el.find('#service-form');
-        console.log($form);
         forms.populateDropdown($form, "area_of_service", this.serviceareas);
         forms.populateDropdown($form, "type", this.servicetypes);
     },
