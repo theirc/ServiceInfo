@@ -37,6 +37,16 @@ var config = module.exports = {
         }
         this._changeHandlers[key].push(cb);
     },
+    unbind: function(key, cb) {
+        if (typeof this._changeHandlers[key] !== 'undefined') {
+            for (var i=0; i < this._changeHandlers[key].length; i++) {
+                if (cb === this._changeHandlers[key][i]) {
+                    this._changeHandlers[key].splice(i, 1);
+                    break;
+                }
+            }
+        }
+    },
     _changeHandlers: {},
     _triggerChange: function(key) {
 
