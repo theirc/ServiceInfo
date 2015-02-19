@@ -63,9 +63,10 @@ var forms = module.exports = {
     },
 
     initial: function($form, model) {
+        var self = this;
         var data = model.data();
         $.each(data, function(name, value) {
-            this.getField($form, name).val(value);
+            self.getField($form, name).val(value);
         })
     },
 
@@ -96,7 +97,12 @@ var forms = module.exports = {
 
         resetOptions();
         config.change("forever.language", function() {
-            resetOptions();
+            var detached = $form.closest('html').length === 0;
+            if (detached) {
+                config.unbind("forever.language", arguments.callee);
+            } else {
+                resetOptions();
+            }
         });
     },
 
