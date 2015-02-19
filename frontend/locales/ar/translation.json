@@ -18,6 +18,7 @@
     },
     "Global": {
         "FormSubmissionError": "كان هناك خطأ غير معروف تقديم النموذج الخاص بك.",
+        "UnknownError": "كان هناك خطأ غير معروف.",
         "Sunday": "الأحد",
         "Monday": "الإثنين",
         "Tuesday": "الثلاثاء",

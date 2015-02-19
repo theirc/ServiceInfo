@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-17 06:26+0000\n"
+"PO-Revision-Date: 2015-02-19 06:23+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -48,6 +48,9 @@ msgstr "تغيير اللغة"
 
 msgid "Global##FormSubmissionError"
 msgstr "كان هناك خطأ غير معروف تقديم النموذج الخاص بك."
+
+msgid "Global##UnknownError"
+msgstr "كان هناك خطأ غير معروف."
 
 msgid "Global##Sunday"
 msgstr "الأحد"
