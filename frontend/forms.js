@@ -70,7 +70,6 @@ var forms = module.exports = {
     },
 
     populateDropdown: function($form, name, collection) {
-        console.log($form, name);
         var $field = this.getField($form, name);
         var empty_label_key = $field.attr('data-empty-label-key');
         var empty_label = i18n.t(empty_label_key);
