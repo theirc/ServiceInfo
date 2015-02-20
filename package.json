@@ -8,6 +8,7 @@
   "dependencies": {
     "backbone": "^1.1.2",
     "browserify": "^8.0.2",
+    "es6-promise": "^2.0.1",
     "handlebars": "^2.0.0",
     "hbsfy": "^2.2.1",
     "i18next-client": "^1.7.7",
@@ -27,10 +28,8 @@
     "tiny-lr": "^0.1.4",
     "i18next-conv": "^0.1.4"
   },
-  "config": {
-  },
-  "scripts": {
-  },
+  "config": {},
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/theirc/Service-Mapper.git"
