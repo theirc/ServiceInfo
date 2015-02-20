@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-16 22:18+0200\n"
+"POT-Creation-Date: 2015-02-20 17:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,38 +17,63 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: api/serializers.py:112 email_user/forms.py:17
+#: api/serializers.py:30
+msgid "This field is required."
+msgstr ""
+
+#: api/serializers.py:60
+#, python-brace-format
+msgid "Invalid language code {code}. The valid codes are {valid_codes}."
+msgstr ""
+
+#: api/serializers.py:114 email_user/forms.py:17
 msgid "A user with that email already exists."
 msgstr ""
 
-#: api/serializers.py:202
+#: api/serializers.py:204
 msgid "You may only submit updates to current or draft services"
 msgstr ""
 
-#: api/serializers.py:265
+#: api/serializers.py:214
+msgid "Close time is missing."
+msgstr ""
+
+#: api/serializers.py:216
+msgid "Open time is missing."
+msgstr ""
+
+#: api/serializers.py:218
+msgid "Close time is not later than open time."
+msgstr ""
+
+#: api/serializers.py:282
 msgid "User account is disabled."
 msgstr ""
 
-#: api/serializers.py:268
+#: api/serializers.py:285
 msgid "Unable to log in with provided credentials."
 msgstr ""
 
-#: api/serializers.py:290
+#: api/serializers.py:307
 msgid ""
 "Activation key is invalid. Check that it was copied correctly and has not "
 "already been used."
 msgstr ""
 
-#: api/serializers.py:311 api/serializers.py:363
+#: api/serializers.py:328 api/serializers.py:380
 msgid "No user with that email"
 msgstr ""
 
-#: api/serializers.py:329 api/serializers.py:347
+#: api/serializers.py:346 api/serializers.py:364
 msgid "Password reset key is not valid"
 msgstr ""
 
-#: api/serializers.py:366
+#: api/serializers.py:383
 msgid "User is not pending activation"
+msgstr ""
+
+#: api/views.py:113
+msgid "Service record must be current or pending changes to be canceled"
 msgstr ""
 
 #: email_user/admin.py:25
@@ -253,6 +278,34 @@ msgstr ""
 msgid "French"
 msgstr ""
 
+#: service_info/templates/admin/submit_line.html:4
+msgid "Save"
+msgstr ""
+
+#: service_info/templates/admin/submit_line.html:7
+msgid "Delete"
+msgstr ""
+
+#: service_info/templates/admin/submit_line.html:9
+msgid "Save as new"
+msgstr ""
+
+#: service_info/templates/admin/submit_line.html:10
+msgid "Save and add another"
+msgstr ""
+
+#: service_info/templates/admin/submit_line.html:11
+msgid "Save and continue editing"
+msgstr ""
+
+#: service_info/templates/admin/submit_line.html:12
+msgid "Save and reject"
+msgstr ""
+
+#: service_info/templates/admin/submit_line.html:13
+msgid "Save and approve"
+msgstr ""
+
 #: service_info/templates/email/service_approved_body.html:3
 #: service_info/templates/email/service_approved_body.txt:2
 #, python-format
@@ -299,41 +352,49 @@ msgstr ""
 msgid "Service has been approved"
 msgstr ""
 
-#: services/admin.py:54
+#: services/admin.py:60
 msgid "Description and Additional Information"
 msgstr ""
 
-#: services/admin.py:65
+#: services/admin.py:71
 #, python-brace-format
 msgid "Hours (all times in time zone {timezone})"
 msgstr ""
 
-#: services/admin.py:77
+#: services/admin.py:83
 msgid "Location"
 msgstr ""
 
-#: services/admin.py:97
+#: services/admin.py:103
 msgid "Only services in draft status may be approved"
 msgstr ""
 
-#: services/admin.py:102
+#: services/admin.py:108
 msgid "Services have been approved"
 msgstr ""
 
-#: services/admin.py:103
+#: services/admin.py:109
 msgid "Approve new or changed service"
 msgstr ""
 
-#: services/admin.py:109
+#: services/admin.py:115
 msgid "Only services in draft status may be rejected"
 msgstr ""
 
-#: services/admin.py:114
+#: services/admin.py:120
 msgid "Services have been rejected"
 msgstr ""
 
-#: services/admin.py:115
+#: services/admin.py:121
 msgid "Reject new or changed service"
+msgstr ""
+
+#: services/admin.py:129
+msgid "The service was approved successfully."
+msgstr ""
+
+#: services/admin.py:133
+msgid "The service was rejected successfully."
 msgstr ""
 
 #. Translators: Provider name
@@ -478,34 +539,34 @@ msgstr ""
 msgid "location"
 msgstr ""
 
-#: services/models.py:496
+#: services/models.py:502
 msgid "Provider updated their information"
 msgstr ""
 
-#: services/models.py:497
+#: services/models.py:503
 msgid "New service submitted by provider"
 msgstr ""
 
-#: services/models.py:498
+#: services/models.py:504
 msgid "Change to existing service submitted by provider"
 msgstr ""
 
-#: services/models.py:499
+#: services/models.py:505
 msgid "Provider canceled a draft service"
 msgstr ""
 
-#: services/models.py:500
+#: services/models.py:506
 msgid "Provider canceled a current service"
 msgstr ""
 
-#: services/models.py:501
+#: services/models.py:507
 msgid "Provider superseded a previous draft"
 msgstr ""
 
-#: services/models.py:519
+#: services/models.py:525
 msgid "update type"
 msgstr ""
 
-#: services/models.py:524
+#: services/models.py:530
 msgid "JIRA issue"
 msgstr ""

@@ -8,6 +8,8 @@ var api = require('./api');
 var i18n = require('i18next-client');
 var _ = underscore;
 
+require('es6-promise').polyfill();
+
 var models = require('./models/models');
 
 window.$ = $;

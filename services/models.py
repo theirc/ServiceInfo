@@ -403,6 +403,12 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         """Schedule a task to send an email to the provider"""
         email_provider_about_service_approval_task.delay(self.pk)
 
+    def may_approve(self):
+        return self.status == self.STATUS_DRAFT
+
+    def may_reject(self):
+        return self.status == self.STATUS_DRAFT
+
     def cancel(self):
         """
         Cancel a pending service update, or withdraw a current service
