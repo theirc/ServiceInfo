@@ -120,6 +120,20 @@ class ServiceAdmin(GeoModelAdmin):
         self.message_user(request, _("Services have been rejected"))
     reject.short_description = _("Reject new or changed service")
 
+    def response_change(self, request, obj):
+        """
+        Determines the HttpResponse for the change_view stage.
+        """
+        if '_approve' in request.POST:
+            obj.staff_approve()
+            msg = _('The service was approved successfully.')
+            self.message_user(request, msg, messages.SUCCESS)
+        elif '_reject' in request.POST:
+            obj.staff_reject()
+            msg = _('The service was rejected successfully.')
+            self.message_user(request, msg, messages.INFO)
+        return super().response_change(request, obj)
+
 
 class ServiceAreaAdmin(admin.ModelAdmin):
     list_display = ('pk', 'parent', 'name_en', 'name_ar', 'name_fr')

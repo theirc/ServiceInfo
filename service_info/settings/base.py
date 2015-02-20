@@ -143,7 +143,9 @@ FIXTURE_DIRS = (
 )
 
 INSTALLED_APPS = (
-    'email_user',   # Must precede django.contrib.auth so templates override Django's.
+    # Our apps - Must precede django.contrib.auth so templates override Django's.
+    'services',
+    'email_user',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -158,8 +160,6 @@ INSTALLED_APPS = (
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    # Our apps
-    'services',
 )
 
 # A sample logging configuration. The only tangible logging
