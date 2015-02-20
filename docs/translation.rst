@@ -61,6 +61,10 @@ Transifex as follows:
        git commit -m "Updated messages" locale/en/LC_MESSAGES/django.po
        git push
 
+   (Commiting the .po file isn't strictly necessary since we can recreate
+   it, but we can tell what's the latest version we pushed to Transifex
+   by committing each version when we push it.)
+
 #. push the updated source file to Transifex (http://support.transifex.com/customer/portal/articles/996211-pushing-new-translations)::
 
     fab pushmessages

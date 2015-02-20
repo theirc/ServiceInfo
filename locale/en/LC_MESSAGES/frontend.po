@@ -42,6 +42,9 @@ msgstr "Change Language"
 msgid "Global##FormSubmissionError"
 msgstr "There was an unknown error submitting your form."
 
+msgid "Global##UnknownError"
+msgstr "There was an unknown error."
+
 msgid "Global##Sunday"
 msgstr "Sunday"
 
@@ -240,6 +243,9 @@ msgstr "Submit Answers"
 msgid "Provider-Registration-Form##Form-Sections##Form-Submit-Options##Clear"
 msgstr "Remove Answers"
 
+msgid "Provider-Registration-Form##Form-Sections##Form-Submit-Options##ResendVerify"
+msgstr "Resend Verification Email"
+
 msgid "Account-Activation##Pending##Title"
 msgstr "Your account activation is pending..."
 
@@ -257,6 +263,12 @@ msgstr "Your account activation Failed."
 
 msgid "Account-Activation##Failed##Description"
 msgstr "There was a problem setting up your service provider account. Please click the resend confirmation email button below to have another confirmation email sent to your email account."
+
+msgid "Account-Activation##Resent##Title"
+msgstr "Your activation e-mail has been resent."
+
+msgid "Account-Activation##Resent##Description"
+msgstr "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
 
 msgid "Account-Activation##Buttons##Resend-Email"
 msgstr "Resend Verification Email"
