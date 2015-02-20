@@ -4,7 +4,16 @@ var gulp = require('gulp')
 ,   less = require('gulp-less')
 ,   bg = require('gulp-bg')
 ,   browserify = require('gulp-browserify')
+,   minimist = require('minimist')
 ;
+
+var knownOptions = {
+    default: {
+        config: "base",
+    }
+}
+
+var options = minimist(process.argv.slice(2), knownOptions);
 
 var API_PORT = 4005;
 var EXPRESS_PORT = 8000;
@@ -28,23 +37,11 @@ function startLiveReload() {
     lr.listen(LIVERELOAD_PORT);
 }
 
-function writeString(filename, string) {
-    // create a fake file read stream from a string, so that config writing can be piped into gulp
-
-    var src = require('stream').Readable({ objectMode: true })
-    src._read = function () {
-        this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }))
-        this.push(null)
-    }
-    return src
-}
-
 function injectEnvConfig() {
-    var config = {
-        api_location: "//localhost:"+API_PORT+"/",
-    };
-    return writeString("config.json", JSON.stringify(config))
-        .pipe(gulp.dest('frontend/'))
+    gulp.src("frontend/config." + options.config + ".json")
+        .pipe(rename("config.json"))
+        .pipe(gulp.dest("frontend"))
+    ;
 }
 
 function build() {
