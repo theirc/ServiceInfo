@@ -109,7 +109,7 @@ module.exports = Backbone.View.extend({
         $el.css('visibility', 'visible');
         $el.animate(anim, {duration: 0.5, complete: function() {
             $el.css({
-                top: 'auto',
+                top: '70px',
                 left: 'auto',
             })
         }});
