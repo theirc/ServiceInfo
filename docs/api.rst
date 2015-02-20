@@ -132,8 +132,9 @@ If successful, response status will be 200 and the response
 content will include::
 
    { 'token': 'a long string',
-     'language': 'xx'  # User's preferred language code, e.g. 'en' or 'ar',
+     'language': 'xx', # User's preferred language code, e.g. 'en' or 'ar',
                        # or '' if we don't know
+     'is_staff': true or false    # whether this is a staff user (allowed to use Django admin)
    }
 
 If failed, response status will be 400 and the response might look like

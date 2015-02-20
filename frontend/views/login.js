@@ -7,13 +7,15 @@ var Backbone = require('backbone'),
 ;
 
 function toggleLoginMenuItem() {
-    $('.menu-item-login, .menu-item-logout').hide();
+    $('.menu-item-login, .menu-item-logout, .menu-item-staff').hide();
     if (config.get('forever.authToken')) {
         $('.menu-item-login').hide();
         $('.menu-item-logout').show();
+        $('.menu-item-staff').toggle(config.get('forever.isStaff'));
     } else {
         $('.menu-item-login').show();
         $('.menu-item-logout').hide();
+        $('.menu-item-staff').hide();
     }
 };
 config.change('forever.authToken', toggleLoginMenuItem);
@@ -63,6 +65,7 @@ module.exports = Backbone.View.extend({
                 },
                 success: function(data) {
                     config.set('forever.authToken', data.token);
+                    config.set('forever.isStaff', data.is_staff);
                     // Store the email to make it easier to pick out a user's
                     // own records - this is really just for superusers, everybody
                     // else will only get back their own records anyway.
@@ -70,6 +73,7 @@ module.exports = Backbone.View.extend({
                     if (data.language) {
                         config.set('forever.language', data.language);
                     }
+                    toggleLoginMenuItem();
                     window.location.hash = 'service';
                 },
             })

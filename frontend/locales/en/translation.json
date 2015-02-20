@@ -17,6 +17,7 @@
   	"Change-Language": "Change Language"
   },
   "Global": {
+    "Admin": "Admin",
     "FormSubmissionError": "There was an unknown error submitting your form.",
     "UnknownError": "There was an unknown error.",
     "Sunday": "Sunday",
