@@ -1,5 +1,4 @@
 var gulp = require('gulp')
-,   gutil = require('gulp-util')
 ,   rename = require('gulp-rename')
 ,   less = require('gulp-less')
 ,   bg = require('gulp-bg')
