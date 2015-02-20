@@ -1,1 +1,1 @@
-{"api_location": "//serviceinfo.rescue.org/"}
+{"api_host": "serviceinfo.rescue.org", "api_port": 80}

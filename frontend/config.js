@@ -57,21 +57,6 @@ var config = module.exports = {
         }
     },
 
-    load: function(type, cb) {
-        this.ready(function(){
-            $.ajax(config.get('api_location')+'api/'+type+'/', {
-                method: 'GET',
-                success: function(data) {
-                    config_data[type] = data.results;
-                    cb(null, data.results);
-                },
-                error: function(e) {
-                    cb(e);
-                },
-            });
-        })
-    },
-
     ready: function(cb) {
         var $this = this;
         if (!_loaded) {
