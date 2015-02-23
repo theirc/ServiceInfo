@@ -21,16 +21,18 @@ html,body,#application {
     padding: 5px;
 }
 .language-toggle {
-    background-color: #3cb879;
+    background-color: none;
 }
 
 .language-toggle button {
     border: 1px solid #3cb879;
     height: 100px;
-    width: 100%;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
+	width: 400px;
+	display: block;
+
 }
 
 .lang-btn-ar {
@@ -762,8 +764,7 @@ input[type=range] {
 
 #language-toggle {
     width: 100%;
-    height: auto;
-    background: gray;
+    height: 100%;
     position: fixed;
     transition: all 1s;
     -webkit-box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
@@ -773,8 +774,8 @@ input[type=range] {
 }
 
 #language-toggle.hidden {
-    -webkit-transform: translateX(-50%) scale(0.1);
-    transform: translateX(-50%) scale(0.1);
+    -webkit-transform: translateX(-50%) scale(0);
+    transform: translateX(-50%) scale(0);
     opacity: 0;
     transition: all 1s;
 }
@@ -853,13 +854,7 @@ input[type=range] {
     #menu-toggle {
         display: none;
     }
-    #language-toggle {
-    	width: 400px;
-    	top: 50px;
-    	-webkit-transform: translate(-50%,0);
-    	transform: translate(-50%,0);
-    	margin-left: 50%;
-    }
+
 	.modal-bg {
 		background-color: rgba(0, 0, 0, 0.65);
 		width: 100%;
@@ -914,7 +909,7 @@ input[type=range] {
         font-size: .75em;
     }
     .modal-bg {
-    	background-color: rgba(0, 0, 0, 0);
+    	background-color: rgba(0, 0, 0, .65);
     	div#language-toggle > .language-toggle {
     		background-color: rgba(0, 0, 0, 1.0);
     	}

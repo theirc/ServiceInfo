@@ -78,7 +78,7 @@ module.exports = Backbone.View.extend({
             target = $('#menu-container').find('.menu-item-language').position();
         }
         var anim = {
-            top: target.top,
+            top: target.top - $('.language-toggle').height()/2,
             left: target.left,
         };
         this.$el.css(this.$el.position());
@@ -110,7 +110,7 @@ module.exports = Backbone.View.extend({
         $el.css('visibility', 'visible');
         $el.animate(anim, {duration: 0.5, complete: function() {
             $el.css({
-                top: '70px',
+                top: '0px',
                 left: 'auto',
             })
         }});
