@@ -64,8 +64,10 @@ module.exports = Backbone.View.extend({
                     }
                 },
                 success: function(data) {
-                    config.set('forever.authToken', data.token);
+                    // save isStaff before authToken because when authToken is saved,
+                    // we'll update the menus which will look at isStaff
                     config.set('forever.isStaff', data.is_staff);
+                    config.set('forever.authToken', data.token);
                     // Store the email to make it easier to pick out a user's
                     // own records - this is really just for superusers, everybody
                     // else will only get back their own records anyway.
@@ -73,7 +75,6 @@ module.exports = Backbone.View.extend({
                     if (data.language) {
                         config.set('forever.language', data.language);
                     }
-                    toggleLoginMenuItem();
                     window.location.hash = 'service';
                 },
             })
