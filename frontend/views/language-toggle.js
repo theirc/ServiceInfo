@@ -1,5 +1,6 @@
 var Backbone = require('backbone'),
 config = require("../config"),
+api = require("../api"),
 template = require("../templates/language-toggle.hbs"),
 i18n = require('i18next-client');
 
@@ -35,7 +36,7 @@ module.exports = Backbone.View.extend({
                     // user is logged in
                     // remember user's preference in the backend
                     headers.ServiceInfoAuthorization = 'Token ' + token;
-                    $.ajax(config.get('api_location') + 'api/language/', {
+                    $.ajax(api.getAPIPrefix() + 'api/language/', {
                         type: 'POST',
                         headers: headers,
                         data: {

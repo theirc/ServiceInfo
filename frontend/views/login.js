@@ -3,6 +3,7 @@ var Backbone = require('backbone'),
     i18n = require('i18next-client'),
     config = require('../config'),
     messages = require('../messages'),
+    api = require('../api'),
     $ = require('jquery')
 ;
 
@@ -45,7 +46,7 @@ module.exports = Backbone.View.extend({
                 password: $el.find('[name=password]').val(),
             };
 
-            $.ajax(config.get('api_location') + 'api/login/', {
+            $.ajax(api.getAPIPrefix() + 'api/login/', {
                 method: 'POST',
                 type: 'JSON',
                 data: data,

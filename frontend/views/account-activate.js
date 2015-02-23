@@ -3,6 +3,7 @@ var Backbone = require('backbone'),
     i18n = require('i18next-client'),
     config = require('../config'),
     forms = require('../forms')
+    api = require('../api')
 ;
 
 var Activation = Backbone.Model.extend({
@@ -10,7 +11,7 @@ var Activation = Backbone.Model.extend({
         var self = this;
         self.set('status', "Pending");
 
-        $.ajax(config.get('api_location') + 'api/activate/', {
+        $.ajax(api.getAPIPrefix() + 'api/activate/', {
             type: 'POST',
             // contentType: 'JSON',
             data: {
