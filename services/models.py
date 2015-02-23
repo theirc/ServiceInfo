@@ -550,10 +550,8 @@ class JiraUpdateRecord(models.Model):
                 if self.update_type == self.NEW_SERVICE and self.service.update_of:
                     errors.append('%s must not specify a service that is an update of another'
                                   % self.update_type)
-                # When a service change is approved, we clear the service's update_of
-                # field, so we should only check that a changing service has an update_of
-                # on a new JiraUpdateRecord, and not again later after it might have been
-                # approved.
+                # If we're not creating a new record, be more tolerant; the service might
+                # have been updated one way or another.
                 if (is_new and self.update_type == self.CHANGE_SERVICE
                         and not self.service.update_of):
                     errors.append('%s must specify a service that is an update of another'

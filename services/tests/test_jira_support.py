@@ -158,7 +158,7 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
 
     def test_new_service_then_approve_before_task(self, mock_JIRA):
         # If a service is approved before we try to do the JIRA work,
-        # the JIRA work gracefully no-ops
+        # the JIRA work gracefully works
         self.jira_record.update_type = JiraUpdateRecord.NEW_SERVICE
         self.jira_record.save()
         self.test_service.staff_approve()
@@ -167,7 +167,7 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
 
     def test_change_service_then_approve_before_task(self, mock_JIRA):
         # If a service is approved before we try to do the JIRA work,
-        # the JIRA work gracefully no-ops
+        # the JIRA work gracefully works
         self.test_service.update_of = ServiceFactory()
         self.jira_record.update_type = JiraUpdateRecord.CHANGE_SERVICE
         self.jira_record.save()
