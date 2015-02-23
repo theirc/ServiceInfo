@@ -5,7 +5,7 @@ from django.db.transaction import atomic
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _, activate, deactivate_all
 
-from rest_framework import parsers, renderers, viewsets
+from rest_framework import parsers, renderers, status, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import list_route, detail_route
 from rest_framework.exceptions import ValidationError as DRFValidationError, PermissionDenied
@@ -207,6 +207,7 @@ class ProviderViewSet(ServiceInfoModelViewSet):
             serializer = CreateProviderSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
 
+            # Create User
             user = get_user_model().objects.create_user(
                 email=request.data['email'],
                 password=request.data['password'],
@@ -214,24 +215,16 @@ class ProviderViewSet(ServiceInfoModelViewSet):
             )
             user.groups.add(Group.objects.get(name='Providers'))
 
-            # Now we have a user, let's just call the built-in create
-            # method to create the provider for us. We just need to
-            # add the 'user' field to the request data.
-            if hasattr(request.data, 'dicts'):
-                # This is gross but seems to be necessary for now,
-                # becausing just setting an item on the MergeDict
-                # appears to be a no-op.
-                request.data.dicts[0]._mutable = True
-                request.data.dicts[0]['user'] = user.get_api_url()
-            else:   # pragma: no cover
-                # Maybe we have Django 1.9 and MergeDict is gone :-)
-                request.data['user'] = user.get_api_url()
-                # Make sure this works though
-                assert 'user' in request.data
-            response = super().create(request, *args, **kwargs)
+            # Create Provider
+            data = dict(request.data, user=user.get_api_url())
+            serializer = ProviderSerializer(data=data, context={'request': request})
+            serializer.is_valid(raise_exception=True)
+            serializer.save()  # returns provider if we need it
+            headers = self.get_success_headers(serializer.data)
+
             # If we got here without blowing up, send the user's activation email
-            user.send_activation_email(request.site, request, request.data['base_activation_link'])
-            return response
+            user.send_activation_email(request.site, request, data['base_activation_link'])
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
 #
