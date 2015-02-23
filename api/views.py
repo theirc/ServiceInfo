@@ -252,7 +252,8 @@ class APILogin(ServiceInfoAPIView):
         user.last_login = now()
         user.save(update_fields=['last_login'])
         return Response({'token': token.key,
-                         'language': user.language})
+                         'language': user.language,
+                         'is_staff': user.is_staff})
 
 
 class APIActivationView(ServiceInfoAPIView):

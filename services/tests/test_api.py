@@ -663,6 +663,20 @@ class LoginTest(APITestMixin, TestCase):
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(self.token, result['token'])
+        # This was not a staff user
+        self.assertFalse(result['is_staff'])
+
+    def test_success_staff(self):
+        # Login with is_staff user
+        self.user.is_staff = True
+        self.user.save()
+        rsp = self.client.post(reverse('api-login'),
+                               data={'email': self.user.email, 'password': 'password'})
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(self.token, result['token'])
+        # This was a staff user
+        self.assertTrue(result['is_staff'])
 
     def test_disabled_account(self):
         self.user.is_active = False

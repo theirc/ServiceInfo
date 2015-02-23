@@ -1,6 +1,7 @@
 var config_data = {
     //api_location: "//localhost:8000/",
     'forever.language': 'en',
+    'forever.isStaff': false
 };
 var has_been_set = {};
 var _loaded = false;

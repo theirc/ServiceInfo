@@ -19,6 +19,7 @@ var views = {
     "login": require('./views/login'),
     "password-reset": require('./views/password-reset'),
     "password-reset-form": require('./views/password-reset-form'),
+    "admin": require('./views/admin')
 };
 
 var view;
@@ -62,6 +63,7 @@ module.exports = Backbone.Router.extend({
 
             }
         },
+        "admin": loadPage("admin"),
         "register": loadPage("register"),
         "register/changed": loadPage("register-changed"),
         "register/confirm": loadPage("register-confirm"),
@@ -78,6 +80,8 @@ module.exports = Backbone.Router.extend({
         "logout": function() {
             config.remove('forever.authToken');
             config.remove('forever.email');
+            config.set('forever.isStaff', false);
+            $('.menu-item-staff').hide();
             window.location.hash = '';
             window.location.reload();
         },
