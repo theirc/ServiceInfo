@@ -473,7 +473,6 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         if self.update_of and self.update_of.status == Service.STATUS_CURRENT:
             self.update_of.status = Service.STATUS_ARCHIVED
             self.update_of.save()
-        self.update_of = None
         self.status = Service.STATUS_CURRENT
         self.save()
         self.email_provider_about_approval()
@@ -538,6 +537,7 @@ class JiraUpdateRecord(models.Model):
 
     def save(self, *args, **kwargs):
         errors = []
+        is_new = self.pk is None
         if self.update_type == '':
             errors.append('must have a non-blank update_type')
         elif self.update_type in self.PROVIDER_CHANGE_UPDATE_TYPES:
@@ -550,7 +550,10 @@ class JiraUpdateRecord(models.Model):
                 if self.update_type == self.NEW_SERVICE and self.service.update_of:
                     errors.append('%s must not specify a service that is an update of another'
                                   % self.update_type)
-                if self.update_type == self.CHANGE_SERVICE and not self.service.update_of:
+                # If we're not creating a new record, be more tolerant; the service might
+                # have been updated one way or another.
+                if (is_new and self.update_type == self.CHANGE_SERVICE
+                        and not self.service.update_of):
                     errors.append('%s must specify a service that is an update of another'
                                   % self.update_type)
             else:
