@@ -162,6 +162,7 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         self.jira_record.update_type = JiraUpdateRecord.NEW_SERVICE
         self.jira_record.save()
         self.test_service.staff_approve()
+        self.setup_issue_key(mock_JIRA)
         self.jira_record.do_jira_work()
 
     def test_change_service_then_approve_before_task(self, mock_JIRA):
@@ -171,6 +172,7 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         self.jira_record.update_type = JiraUpdateRecord.CHANGE_SERVICE
         self.jira_record.save()
         self.test_service.staff_approve()
+        self.setup_issue_key(mock_JIRA)
         self.jira_record.do_jira_work()
 
     def test_create_jira_issue_noop_if_already_created(self, mock_JIRA):

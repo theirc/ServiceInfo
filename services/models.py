@@ -1,4 +1,3 @@
-import logging
 from textwrap import dedent
 from django.conf import settings
 from django.contrib.gis.db import models
@@ -9,9 +8,6 @@ from django.utils.translation import ugettext_lazy as _, get_language
 
 from . import jira_support
 from .tasks import email_provider_about_service_approval_task
-
-
-logger = logging.getLogger(__name__)
 
 
 class NameInCurrentLanguageMixin(object):
@@ -576,7 +572,6 @@ class JiraUpdateRecord(models.Model):
 
     def do_jira_work(self, jira=None):
         sentinel_value = 'PENDING'
-        done_value = 'DONE'
         # Bail out early if we don't yet have a pk, if we already have a JIRA
         # issue key set, or if some other thread is already working on getting
         # an issue created/updated.
@@ -596,18 +591,6 @@ class JiraUpdateRecord(models.Model):
                     JiraUpdateRecord.CANCEL_CURRENT_SERVICE: 'Canceled service',
                     JiraUpdateRecord.PROVIDER_CHANGE: 'Changed provider',
                 }[self.update_type]
-
-                # See if things changed before we could run this task
-                if self.update_type in [JiraUpdateRecord.NEW_SERVICE,
-                                        JiraUpdateRecord.CHANGE_SERVICE] \
-                        and self.service.status != Service.STATUS_DRAFT:
-                    # Nothing to do
-                    logger.info("In do_jira_work for %s, service status is %s, doing nothing"
-                                % (self.update_type, self.service.status))
-                    self.jira_issue_key = done_value
-                    self.save()
-                    return
-
                 if self.update_type in JiraUpdateRecord.SERVICE_CHANGE_UPDATE_TYPES:
                     url = self.service.get_admin_edit_url()
                     provider = self.service.provider
