@@ -477,7 +477,6 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         if self.update_of and self.update_of.status == Service.STATUS_CURRENT:
             self.update_of.status = Service.STATUS_ARCHIVED
             self.update_of.save()
-        self.update_of = None
         self.status = Service.STATUS_CURRENT
         self.save()
         self.email_provider_about_approval()
@@ -577,6 +576,7 @@ class JiraUpdateRecord(models.Model):
 
     def do_jira_work(self, jira=None):
         sentinel_value = 'PENDING'
+        done_value = 'DONE'
         # Bail out early if we don't yet have a pk, if we already have a JIRA
         # issue key set, or if some other thread is already working on getting
         # an issue created/updated.
@@ -604,7 +604,7 @@ class JiraUpdateRecord(models.Model):
                     # Nothing to do
                     logger.info("In do_jira_work for %s, service status is %s, doing nothing"
                                 % (self.update_type, self.service.status))
-                    self.jira_issue_key = ''
+                    self.jira_issue_key = done_value
                     self.save()
                     return
 

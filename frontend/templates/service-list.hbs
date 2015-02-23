@@ -29,7 +29,7 @@
 			<tr class="{{#if this.isApproved }}approved{{/if}} {{#if this.isRejected}}denied{{/if}} {{#if this.update_of}}update{{/if}}">
 				<td>
 					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td">
-                        <a href="#/service/{{ this.id }}">{{#if this.update_of}}&#x2937; {{/if}}{{ this.name }}</a>
+                        <a href="#/service/{{ this.id }}">{{#if this.is_update}}&#x2937; {{/if}}{{ this.name }}</a>
                     </span>
 				</td>
 				<td>

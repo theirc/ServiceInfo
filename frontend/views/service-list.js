@@ -24,6 +24,7 @@ module.exports = Backbone.View.extend({
                     records[i].is_draft = records[i].status === 'draft';
                     records[i].is_rejected = records[i].status === 'rejected';
                     records[i].is_current = records[i].status === 'current';
+                    records[i].is_update = ! records[i].is_current;
                     if (records[i].update_of) {
                         records[i]._sort = parseInt(records[i].update_of.match(/(\d+)\/$/)[1]) + 0.5;
                     } else {
