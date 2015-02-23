@@ -1,3 +1,4 @@
+import logging
 from textwrap import dedent
 from django.conf import settings
 from django.contrib.gis.db import models
@@ -8,6 +9,9 @@ from django.utils.translation import ugettext_lazy as _, get_language
 
 from . import jira_support
 from .tasks import email_provider_about_service_approval_task
+
+
+logger = logging.getLogger(__name__)
 
 
 class NameInCurrentLanguageMixin(object):
@@ -538,6 +542,7 @@ class JiraUpdateRecord(models.Model):
 
     def save(self, *args, **kwargs):
         errors = []
+        is_new = self.pk is None
         if self.update_type == '':
             errors.append('must have a non-blank update_type')
         elif self.update_type in self.PROVIDER_CHANGE_UPDATE_TYPES:
@@ -550,7 +555,12 @@ class JiraUpdateRecord(models.Model):
                 if self.update_type == self.NEW_SERVICE and self.service.update_of:
                     errors.append('%s must not specify a service that is an update of another'
                                   % self.update_type)
-                if self.update_type == self.CHANGE_SERVICE and not self.service.update_of:
+                # When a service change is approved, we clear the service's update_of
+                # field, so we should only check that a changing service has an update_of
+                # on a new JiraUpdateRecord, and not again later after it might have been
+                # approved.
+                if (is_new and self.update_type == self.CHANGE_SERVICE
+                        and not self.service.update_of):
                     errors.append('%s must specify a service that is an update of another'
                                   % self.update_type)
             else:
@@ -586,6 +596,18 @@ class JiraUpdateRecord(models.Model):
                     JiraUpdateRecord.CANCEL_CURRENT_SERVICE: 'Canceled service',
                     JiraUpdateRecord.PROVIDER_CHANGE: 'Changed provider',
                 }[self.update_type]
+
+                # See if things changed before we could run this task
+                if self.update_type in [JiraUpdateRecord.NEW_SERVICE,
+                                        JiraUpdateRecord.CHANGE_SERVICE] \
+                        and self.service.status != Service.STATUS_DRAFT:
+                    # Nothing to do
+                    logger.info("In do_jira_work for %s, service status is %s, doing nothing"
+                                % (self.update_type, self.service.status))
+                    self.jira_issue_key = ''
+                    self.save()
+                    return
+
                 if self.update_type in JiraUpdateRecord.SERVICE_CHANGE_UPDATE_TYPES:
                     url = self.service.get_admin_edit_url()
                     provider = self.service.provider
