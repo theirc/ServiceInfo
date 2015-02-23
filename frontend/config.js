@@ -25,7 +25,8 @@ var config = module.exports = {
         // it after the config was initialized.  Basically means
         // we have a known preference and aren't just using a
         // default value.
-        return has_been_set.hasOwnProperty(key);
+        // return has_been_set.hasOwnProperty(key);
+        return config.get(key) !== undefined;
     },
     remove: function(key) {
         localStorage.removeItem(key);
