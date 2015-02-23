@@ -1,6 +1,7 @@
 var config_data = {
     //api_location: "//localhost:8000/",
     'forever.language': 'en',
+    'forever.isStaff': false
 };
 var has_been_set = {};
 var _loaded = false;
@@ -55,21 +56,6 @@ var config = module.exports = {
                 this._changeHandlers[key][i].apply(this, arguments)
             }
         }
-    },
-
-    load: function(type, cb) {
-        this.ready(function(){
-            $.ajax(config.get('api_location')+'api/'+type+'/', {
-                method: 'GET',
-                success: function(data) {
-                    config_data[type] = data.results;
-                    cb(null, data.results);
-                },
-                error: function(e) {
-                    cb(e);
-                },
-            });
-        })
     },
 
     ready: function(cb) {
