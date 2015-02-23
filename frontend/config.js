@@ -1,6 +1,7 @@
 var config_data = {
     //api_location: "//localhost:8000/",
     'forever.language': 'en',
+    'forever.isStaff': false
 };
 var has_been_set = {};
 var _loaded = false;
@@ -37,6 +38,16 @@ var config = module.exports = {
         }
         this._changeHandlers[key].push(cb);
     },
+    unbind: function(key, cb) {
+        if (typeof this._changeHandlers[key] !== 'undefined') {
+            for (var i=0; i < this._changeHandlers[key].length; i++) {
+                if (cb === this._changeHandlers[key][i]) {
+                    this._changeHandlers[key].splice(i, 1);
+                    break;
+                }
+            }
+        }
+    },
     _changeHandlers: {},
     _triggerChange: function(key) {
 
@@ -45,21 +56,6 @@ var config = module.exports = {
                 this._changeHandlers[key][i].apply(this, arguments)
             }
         }
-    },
-
-    load: function(type, cb) {
-        this.ready(function(){
-            $.ajax(config.get('api_location')+'api/'+type+'/', {
-                method: 'GET',
-                success: function(data) {
-                    config_data[type] = data.results;
-                    cb(null, data.results);
-                },
-                error: function(e) {
-                    cb(e);
-                },
-            });
-        })
     },
 
     ready: function(cb) {

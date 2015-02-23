@@ -1,7 +1,9 @@
 var Backbone = require('backbone'),
     template = require("../templates/account-activate.hbs"),
     i18n = require('i18next-client'),
-    config = require('../config')
+    config = require('../config'),
+    forms = require('../forms')
+    api = require('../api')
 ;
 
 var Activation = Backbone.Model.extend({
@@ -9,7 +11,7 @@ var Activation = Backbone.Model.extend({
         var self = this;
         self.set('status', "Pending");
 
-        $.ajax(config.get('api_location') + 'api/activate/', {
+        $.ajax(api.getAPIPrefix() + 'api/activate/', {
             type: 'POST',
             // contentType: 'JSON',
             data: {
@@ -44,5 +46,27 @@ module.exports = Backbone.View.extend({
             failed: status == 'Failed',
         }));
         $el.i18n();
+    },
+
+    events: {
+        "click #resend-form": function() {
+            var self = this;
+            var $form = $('#resend-form');
+            var data = forms.collect($form);
+            var action = 'api/resend_activation_link/';
+
+            data["base_activation_link"] = location.protocol + '//' + location.host + location.pathname + '?#/register/verify/';
+
+            forms.submit($form, action, data).then(
+                function onsuccess() {
+                    self.activation.set('status', 'Resent');
+                },
+                function onerror(e) {
+                    console.error(e);
+                }
+            )
+
+            return false;
+        },
     },
 })

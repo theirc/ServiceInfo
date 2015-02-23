@@ -18,6 +18,7 @@
     },
     "Global": {
         "FormSubmissionError": "Il y avait une erreur inconnue soumettant votre formulaire.",
+        "UnknownError": "Il y avait une erreur inconnue.",
         "Sunday": "dimanche",
         "Monday": "lundi",
         "Tuesday": "Mardi",

@@ -17,6 +17,7 @@
   	"Change-Language": "Change Language"
   },
   "Global": {
+    "Admin": "Admin",
     "FormSubmissionError": "There was an unknown error submitting your form.",
     "UnknownError": "There was an unknown error.",
     "Sunday": "Sunday",
@@ -165,7 +166,8 @@
   		},
   		"Form-Submit-Options": {
   			"Submit": "Submit Answers",
-  			"Clear": "Remove Answers"
+  			"Clear": "Remove Answers",
+            "ResendVerify": "Resend Verification Email"
   		}
   	}
   },
@@ -181,6 +183,10 @@
     "Failed": {
         "Title": "Your account activation Failed.",
         "Description": "There was a problem setting up your service provider account. Please click the resend confirmation email button below to have another confirmation email sent to your email account."
+    },
+    "Resent": {
+        "Title": "Your activation e-mail has been resent.",
+        "Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
     },
     "Buttons": {
       "Resend-Email": "Resend Verification Email"

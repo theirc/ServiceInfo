@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-16 22:18+0200\n"
-"PO-Revision-Date: 2015-02-17 06:26+0000\n"
+"POT-Creation-Date: 2015-02-18 19:58+0200\n"
+"PO-Revision-Date: 2015-02-19 06:32+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -18,39 +18,64 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: api/serializers.py:112 email_user/forms.py:17
+#: api/serializers.py:30
+msgid "This field is required."
+msgstr "Ce champ est obligatoire."
+
+#: api/serializers.py:60
+#, python-brace-format
+msgid "Invalid language code {code}. The valid codes are {valid_codes}."
+msgstr "Code de langue valide {code}. Les codes valides sont {valid_codes}."
+
+#: api/serializers.py:114 email_user/forms.py:17
 msgid "A user with that email already exists."
 msgstr "Un utilisateur avec cet email existe déjà."
 
-#: api/serializers.py:202
+#: api/serializers.py:204
 msgid "You may only submit updates to current or draft services"
 msgstr "Vous ne pouvez soumettre mises à jour de services actuels ou projets"
 
-#: api/serializers.py:265
+#: api/serializers.py:214
+msgid "Close time is missing."
+msgstr "Temps de fermer est manquant."
+
+#: api/serializers.py:216
+msgid "Open time is missing."
+msgstr "Temps ouvert est manquant."
+
+#: api/serializers.py:218
+msgid "Close time is not later than open time."
+msgstr "Fermer temps ne est pas plus tard que le temps ouvert."
+
+#: api/serializers.py:282
 msgid "User account is disabled."
 msgstr "Le compte d'utilisateur est désactivé."
 
-#: api/serializers.py:268
+#: api/serializers.py:285
 msgid "Unable to log in with provided credentials."
 msgstr "Impossible de se connecter avec les informations d'identification fournies."
 
-#: api/serializers.py:290
+#: api/serializers.py:307
 msgid ""
 "Activation key is invalid. Check that it was copied correctly and has not "
 "already been used."
 msgstr "Clé d'activation ne est pas valide. Vérifiez qu'il a été copié correctement et n'a pas déjà été utilisé."
 
-#: api/serializers.py:311 api/serializers.py:363
+#: api/serializers.py:328 api/serializers.py:380
 msgid "No user with that email"
 msgstr "Aucun utilisateur avec cet email"
 
-#: api/serializers.py:329 api/serializers.py:347
+#: api/serializers.py:346 api/serializers.py:364
 msgid "Password reset key is not valid"
 msgstr "Touche de réinitialisation de mot ne est pas valable"
 
-#: api/serializers.py:366
+#: api/serializers.py:383
 msgid "User is not pending activation"
 msgstr "L'utilisateur ne est pas en attente d'activation"
+
+#: api/views.py:113
+msgid "Service record must be current or pending changes to be canceled"
+msgstr "Livret de service doit être à jour ou en attente d'être annulée changements"
 
 #: email_user/admin.py:25
 msgid "Permissions"
@@ -297,40 +322,40 @@ msgstr "Support:"
 msgid "Service has been approved"
 msgstr "Service a été approuvé"
 
-#: services/admin.py:54
+#: services/admin.py:57
 msgid "Description and Additional Information"
 msgstr "Description et Informations supplémentaires"
 
-#: services/admin.py:65
+#: services/admin.py:68
 #, python-brace-format
 msgid "Hours (all times in time zone {timezone})"
 msgstr "Heures (all times in time zone {timezone})"
 
-#: services/admin.py:77
+#: services/admin.py:80
 msgid "Location"
 msgstr "emplacement"
 
-#: services/admin.py:97
+#: services/admin.py:100
 msgid "Only services in draft status may be approved"
 msgstr "Seuls les services dans le projet de statut peuvent être approuvés"
 
-#: services/admin.py:102
+#: services/admin.py:105
 msgid "Services have been approved"
 msgstr "Les services ont été approuvés"
 
-#: services/admin.py:103
+#: services/admin.py:106
 msgid "Approve new or changed service"
 msgstr "Approuver service nouveau ou changé"
 
-#: services/admin.py:109
+#: services/admin.py:112
 msgid "Only services in draft status may be rejected"
 msgstr "Seuls les services dans le projet de statut peuvent être rejetées"
 
-#: services/admin.py:114
+#: services/admin.py:117
 msgid "Services have been rejected"
 msgstr "Les services ont été rejetées"
 
-#: services/admin.py:115
+#: services/admin.py:118
 msgid "Reject new or changed service"
 msgstr "Rejeter service nouveau ou changé"
 

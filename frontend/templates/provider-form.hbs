@@ -95,10 +95,10 @@
                         <label for="id_type" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Provider-Type"></span><span class=error></label>
                         <div class="form-group">
                           <select id="id_type" name="type" class=form-control>
-                              <option value="" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Provider-Type-Choose"></option>
+                              <!-- <option value="" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Provider-Type-Choose"></option>
                               {{#each providertypes}}
                                 <option value="{{ this.url }}">{{ this.name }}</option>
-                              {{/each}}
+                              {{/each}} -->
                           </select>
                         </div>
                       </div>
@@ -151,6 +151,9 @@
                   {{# if is_new }}
                   <button class="form-btn-clear primary-button" tabindex="18" data-i18n="Provider-Registration-Form.Form-Sections.Form-Submit-Options.Clear"></button>
                   {{/if}}
+                </div>
+                <div class=row>
+                    <a href="#/register/verify/resend" data-i18n="Provider-Registration-Form.Form-Sections.Form-Submit-Options.ResendVerify"></a>
                 </div>
               </div>
             </form>
