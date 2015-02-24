@@ -1,4 +1,5 @@
 var Backbone = require('backbone'),
+    config = require('../config'),
     template = require("../templates/service-list.hbs"),
     i18n = require('i18next-client'),
     messages = require('../messages'),
@@ -9,6 +10,18 @@ module.exports = Backbone.View.extend({
     initialize: function(){
         this.services = new models.Services();
         this.render();
+
+        /* Render again if language changes */
+        var $el = this.$el,
+            self = this;
+        config.change("forever.language", function() {
+            var detached = $('table#service-status').length === 0;
+            if (detached) {
+                config.unbind("forever.language", arguments.callee);
+            } else {
+                self.render();
+            }
+        });
     },
 
     render: function() {
