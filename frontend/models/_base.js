@@ -102,7 +102,6 @@ var BaseCollection = Backbone.Collection.extend({
 
     url: function() {
         var url = api.getAPIPrefix() + 'api/'+ this.model.prototype.apiname +'/';
-        console.log(url);
         return url;
     },
 
