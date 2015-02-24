@@ -1,5 +1,4 @@
 var config_data = {
-    //api_location: "//localhost:8000/",
     'forever.language': 'en',
     'forever.isStaff': false
 };
@@ -25,8 +24,7 @@ var config = module.exports = {
         // it after the config was initialized.  Basically means
         // we have a known preference and aren't just using a
         // default value.
-        // return has_been_set.hasOwnProperty(key);
-        return config.get(key) !== undefined;
+        return has_been_set.hasOwnProperty(key);
     },
     remove: function(key) {
         localStorage.removeItem(key);
@@ -69,6 +67,13 @@ var config = module.exports = {
             cb.call(this);
         }
     },
+}
+
+// Immediately treat saved values as set
+for (var key in localStorage) {
+    if (localStorage.hasOwnProperty(key)) {
+        has_been_set[key] = true;
+    }
 }
 
 var $ = require('jquery');
