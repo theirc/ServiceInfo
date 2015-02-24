@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.gis.db import models
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.transaction import atomic
 from django.utils.translation import ugettext_lazy as _, get_language
 
@@ -112,6 +113,11 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
     )
     number_of_monthly_beneficiaries = models.IntegerField(
         _("number of targeted beneficiaries monthly"),
+        blank=True, null=True,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(1000000)
+        ]
     )
 
     def __str__(self):

@@ -125,7 +125,8 @@
                     <div class=half>
                       <label for="id_number_of_monthly_beneficiaries" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.MonthlyBeneficiaries"></span><span class=error></label>
                       <div class="form-group">
-                          <input id="id_number_of_monthly_beneficiaries" required type="number" name="number_of_monthly_beneficiaries" class="form-control">
+                          <input id="id_number_of_monthly_beneficiaries" type="number" name="number_of_monthly_beneficiaries"
+                              min="0" max="1000000" class="form-control">
                       </div>
                     </div>
                   </div>
