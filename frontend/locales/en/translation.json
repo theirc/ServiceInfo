@@ -130,7 +130,7 @@
             "PasswordConfirm": "Confirm Password",
   			"Provider-Type": "Provider Type",
             "Provider-Type-Choose": "Choose a Provider Type",
-  			"Phone-Number": "Phone Number",
+  			"Phone-Number": "Phone Number (NN-NNNNNN)",
   			"Email": "Email",
             "EmailPlaceholder": "Enter your Email",
   			"Website": "Website (Optional Field)",

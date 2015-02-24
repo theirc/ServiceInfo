@@ -1,6 +1,7 @@
 from unittest.mock import patch
 
-from django.test import TestCase
+from django.core.exceptions import ValidationError
+from django.test import TestCase, override_settings
 from django.utils import translation
 
 from email_user.tests.factories import EmailUserFactory
@@ -21,6 +22,18 @@ class ProviderTest(TestCase):
         # str returns name_en
         provider = Provider(name_en="Frederick")
         self.assertEqual("Frederick", str(provider))
+
+    @override_settings(PHONE_NUMBER_REGEX=r'^\d{2}-\d{6}$')
+    def test_phone_number_validation(self):
+        with self.assertRaises(ValidationError):
+            ProviderFactory(phone_number='9').full_clean()
+        with self.assertRaises(ValidationError):
+            ProviderFactory(phone_number='ab-cdefgh').full_clean()
+        with self.assertRaises(ValidationError):
+            ProviderFactory(phone_number='12-3456789').full_clean()
+        with self.assertRaises(ValidationError):
+            ProviderFactory(phone_number='12345678').full_clean()
+        ProviderFactory(phone_number='12-345678').full_clean()
 
 
 class ProviderTypeTest(TestCase):

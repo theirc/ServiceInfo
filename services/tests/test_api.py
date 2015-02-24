@@ -88,7 +88,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         data = {
             'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
-            'phone_number': '12345',
+            'phone_number': '12-345678',
             'description_en': 'Test provider',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
@@ -109,7 +109,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         data = {
             'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
-            'phone_number': '12345',
+            'phone_number': '12-345678',
             'description_en': 'Test provider',
             'email': existing_user.email,
             'password': 'foobar',
@@ -129,7 +129,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         data = {
             'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
-            'phone_number': '12345',
+            'phone_number': '12-345678',
             'description_en': 'Test provider',
             'email': 'this_is_not_an_email',
             'password': 'foobar',
@@ -149,7 +149,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         data = {
             'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
-            'phone_number': '12345',
+            'phone_number': '12-345678',
             'description_en': 'Test provider',
             'email': 'fred@example.com',
             'number_of_monthly_beneficiaries': '37',
@@ -197,7 +197,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         data = {
             'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
-            'phone_number': '12345',
+            'phone_number': '12-345678',
             'description_en': 'Test provider',
             'email': 'fred@example.com',
             'password': 'foobar',
@@ -208,7 +208,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         self.assertFalse(get_user_model().objects.filter(email='fred@example.com').exists())
 
-    def test_create_provider_and_user(self):
+    def test_create_provider_bad_phone(self):
         # Create provider call is made when user is NOT logged in.
         self.token = None
 
@@ -217,6 +217,26 @@ class ProviderAPITest(APITestMixin, TestCase):
             'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12345',
+            'description_en': 'Test provider',
+            'email': 'fred@example.com',
+            'password': 'foobar',
+            'number_of_monthly_beneficiaries': '37',
+            'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
+        }
+        rsp = self.api_client.post(url, data=data, format='json')
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertIn('phone_number', result)
+
+    def test_create_provider_and_user(self):
+        # Create provider call is made when user is NOT logged in.
+        self.token = None
+
+        url = '/api/providers/create_provider/'
+        data = {
+            'name_en': 'Joe Provider',
+            'type': ProviderTypeFactory().get_api_url(),
+            'phone_number': '12-345678',
             'description_en': 'Test provider',
             'email': 'fred@example.com',
             'password': 'foobar',
@@ -295,7 +315,7 @@ class TokenAuthTest(APITestMixin, TestCase):
         data = {
             'name_fr': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
-            'phone_number': '12345',
+            'phone_number': '12-345678',
             'description_en': 'Test provider',
             'user': self.user_url,
             'number_of_monthly_beneficiaries': '37',
