@@ -68,6 +68,18 @@ module.exports = Backbone.View.extend({
         }, function(t){
             $("body").i18n();
         });
+        if (lang === 'ar') {
+            /* RIGHT to LEFT */
+            $('body').attr('dir', 'rtl');
+            $('body').removeClass('left-to-right');
+            $('body').addClass('right-to-left');
+            $('link.load-style').attr('href', "styles/site-rtl.css");
+        } else {
+            $('body').attr('dir', 'ltr');
+            $('body').removeClass('right-to-left');
+            $('body').addClass('left-to-right');
+            $('link.load-style').attr('href', "styles/site-ltr.css");
+        }
     },
 
     hide: function(immediate) {

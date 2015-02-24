@@ -1,5 +1,4 @@
 body {
-  font-family: 'Source Sans Pro', Arial,sans-serif;
   font-size: 14px;
   line-height: 1.4em;
   font-weight: 400;
@@ -8,6 +7,12 @@ body {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   margin: 0;
+}
+body when (@direction = rtl) {
+  font-family: 'GE SS Two Light', 'Source Sans Pro', Arial, sans-serif;
+}
+body when (@direction = ltr) {
+  font-family: 'Source Sans Pro', Arial,sans-serif;
 }
 html,body,#application {
     height: 100%;
@@ -34,9 +39,9 @@ html,body,#application {
 }
 
 .language-toggle button:not(:first-child) {
-    border-left-width: 2px;
-    border-left-style: solid;
-    border-left-color: #33A069;
+    border-@{start}-width: 2px;
+    border-@{start}-style: solid;
+    border-@{start}-color: #33A069;
 }
 
 .lang-btn-ar {
@@ -117,14 +122,14 @@ li {
 
 	@media (min-width: 1000px) {
 		width: 48%;
-		float: left;
+		float: @start;
 	}
 }
 
 .half:first-child {
 float: none;
 	@media (min-width: 1000px) {
-		float: left;
+		float: @start;
 	}
 }
 
@@ -132,27 +137,27 @@ float: none;
     float: none;
 
 	@media (min-width: 1000px) {
-		float: right;
+		float: @end;
 	}
 }
 
 .form-options > .half {
 	width: 48%;
-	float: left;
+	float: @start;
 
 	&:first-child {
-		float: left;
+		float: @start;
 	}
 
 	&:last-child {
-	    float: right;
+	    float: @end;
 	}
 
 	&:only-child {
-		float: left;
+		float: @start;
 
 		@media (max-width:1000px) {
-			float: left;
+			float: @start;
 		}
 	}
 }
@@ -168,7 +173,7 @@ float: none;
 
 	@media (min-width: 1000px) {
 		width: 31.3333%;
-		float: left;
+		float: @start;
         margin-top: 1em;
 	}
 }
@@ -186,7 +191,7 @@ float: none;
 
     @media (min-width: 1000px) {
         width: 19.0%;
-        float: left;
+        float: @start;
 
         &:first-child{
             margin-top: 0;
@@ -268,7 +273,7 @@ float: none;
 */
 
 .dropdown {
-	text-align: left;
+	text-align: @start;
 	font-size: 14px;
 	width: 100%;
 	padding: 6px 12px;
@@ -296,12 +301,12 @@ float: none;
 	left: 0;
 	z-index: 1000;
 	display: none;
-	float: left;
+	float: @start;
 	min-width: 160px;
 	padding: 0;
 	margin: 0;
 	font-size: 14px;
-	text-align: left;
+	text-align: @start;
 	list-style: none;
 	background-color: #fff;
 	-webkit-background-clip: padding-box;
@@ -505,7 +510,7 @@ float: none;
     box-shadow: inset 1 1px 1px rgba(0,0,0,.2);}
 
 .btn-group>.btn {
-	text-align: left;
+	text-align: @start;
 	font-size: inherit;
 	width: 85%;
 	background-color: #FFF;
@@ -513,7 +518,7 @@ float: none;
 	border-style: solid;
 	border-color: #ccc;
     position: relative;
-    float: left;
+    float: @start;
 }
 
 .btn-group>.btn+.dropdown-toggle {
@@ -671,7 +676,7 @@ label {
     margin-bottom: 5px;
 
     .error {
-        float: right;
+        float: @end;
     }
 }
 .error {
@@ -679,7 +684,7 @@ label {
 }
 
 .control-label {
-	text-align: left;
+	text-align: @start;
 	padding-top: 6px;
 	font-weight: 600;
 	display: block;
@@ -720,6 +725,7 @@ label {
 input.form-control {
     -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
     box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
+    text-align: @start;
 }
 
 select.form-control {
@@ -740,7 +746,7 @@ select.form-control {
 }
 
 .radio > label {
-	margin-right: 24px;
+	margin-@{end}: 24px;
 }
 
 /*
@@ -835,7 +841,7 @@ input[type=range] {
         max-width: 200px;
         display: inline-block;
         position: fixed;
-        float: left;
+        float: @start;
         overflow: auto;
     }
     #application-header .brand {
@@ -854,7 +860,7 @@ input[type=range] {
     #page-container {
         display: inline-block;
         width: 80%;
-        margin-left: 20%;
+        margin-@{start}: 20%;
     }
     #menu-toggle {
         display: none;
@@ -875,7 +881,7 @@ input[type=range] {
     }
     #menu {
         position: absolute;
-        right: 0px;
+        @{end}: 0px;
         top: 68px;
         width: 100%;
         overflow: hidden;
@@ -895,7 +901,7 @@ input[type=range] {
     }
     #menu-toggle {
         position: absolute;
-        right: 16px;
+        @{end}: 16px;
         top: 16px;
         padding: 8px 10px;
         background-color: inherit;
@@ -908,7 +914,7 @@ input[type=range] {
 @media only screen and (min-width: 1000px) {
 	#page-container {
 	    display: inline-block;
-	    margin-left: 200px;
+	    margin-@{start}: 200px;
 	}
 }
 
@@ -953,45 +959,58 @@ Login page
 Table
 */
 
+table when (@direction = ltr) {
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+table when (@direction = rtl) {
+  -webkit-transform: translate(50%, 0);
+  transform: translate(50%, 0);
+}
+table#service-status a.update::before when (@direction = ltr) {
+  content: "\2937";  // ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS
+}
+table#service-status a.update::before when (@direction = rtl) {
+  content: "\2936"; // ARROW POINTING DOWNWARDS THEN CURVING LEFTWARDS
+}
 table {
  	width: 97.25%;
-	text-align: left;
+	text-align: @start;
 	background-color: #fff;
 	border-collapse: collapse;
-	margin: 0 0 0 50%;
-	-webkit-transform: translate(-50%, 0);
-	transform: translate(-50%, 0);
+    margin: 0;
+    margin-@{start}: 50%;
 	tr {
-        border-right-width: 5px;
-        border-right-style: solid;
+        border-@{end}-width: 5px;
+        border-@{end}-style: solid;
 
 		&:nth-child(even) {
 	    	background-color: #e8e8e8;
-	    	border-right-color: #e8e8e8;
+	    	border-@{end}-color: #e8e8e8;
 		}
 		&:nth-child(odd) {
 	   		background-color: #fff;
-	   		border-right-color: #fff;
+	   		border-@{end}-color: #fff;
 		}
 		&.approved {
-			border-right-color: #3cb879;
+			border-@{end}-color: #3cb879;
 		}
 		&.denied {
-			border-right-color: #E04733;
+			border-@{end}-color: #E04733;
 		}
         &.update td:first-child span {
-            margin-left: 0.5em;
+            margin-@{start}: 0.5em;
         }
 	}
 	th {
 		background-color: #fdc82f !important;
 		padding: 16px 24px 16px 8px !important;
-		border-right: 1px dotted #EBAF00;
+		border-@{end}: 1px dotted #EBAF00;
 		border-bottom: none;
 		font-size: 110%;
 		font-weight: bold;
 		&:last-child {
-			border-right: 5px solid #fdc82f;
+			border-@{end}: 5px solid #fdc82f;
 		}
 	}
 
@@ -1030,10 +1049,10 @@ table {
 		tr {
 			border-top: 1px solid #c8c8c8;
 			&.approved {
-				border-right: 5px solid #3cb879
+				border-@{end}: 5px solid #3cb879
 			}
 			&.denied {
-				border-right: 5px solid #E04733;
+				border-@{end}: 5px solid #E04733;
 			}
 			&:last-child {
 				border-bottom: 1px solid #c8c8c8;
@@ -1044,19 +1063,19 @@ table {
 			border: none;
 			position: relative;
 			border-bottom: 1px solid #DDD;
-            padding-left: 1em;
+            padding-@{start}: 1em;
 		}
 
 		.vertical-td {
 			position: absolute;
 			top: 0;
-			left: 0;
+			@{start}: 0;
 			padding: 8px;
-			padding-left: 37%;
-			padding-right: 10px;
+			padding-@{start}: 37%;
+			padding-@{end}: 10px;
 			font-weight: bold;
 			white-space: nowrap;
-			border-left: 5px solid #fdc82f !important;
+			border-@{start}: 5px solid #fdc82f !important;
 		}
 
     .vertical-header {

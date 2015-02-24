@@ -44,7 +44,7 @@ function injectEnvConfig() {
 }
 
 function build() {
-    gulp.src('frontend/styles/*.less')
+    gulp.src('frontend/styles/site-*.less')
         .pipe(less())
         .pipe(gulp.dest('frontend/styles'))
     ;
