@@ -52,6 +52,10 @@ class ProviderType(NameInCurrentLanguageMixin, models.Model):
         return reverse('providertype-detail', args=[self.id])
 
 
+def blank_or_at_least_one_letter(s):
+    return s == '' or any([c.isalpha() for c in s])
+
+
 class Provider(NameInCurrentLanguageMixin, models.Model):
     name_en = models.CharField(
         # Translators: Provider name
@@ -59,6 +63,7 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
         max_length=256,  # Length is a guess
         default='',
         blank=True,
+        validators=[blank_or_at_least_one_letter]
     )
     name_ar = models.CharField(
         # Translators: Provider name
@@ -66,6 +71,7 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
         max_length=256,  # Length is a guess
         default='',
         blank=True,
+        validators=[blank_or_at_least_one_letter]
     )
     name_fr = models.CharField(
         # Translators: Provider name
@@ -73,6 +79,7 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
         max_length=256,  # Length is a guess
         default='',
         blank=True,
+        validators=[blank_or_at_least_one_letter]
     )
     type = models.ForeignKey(
         ProviderType,
