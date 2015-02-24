@@ -506,8 +506,15 @@ float: none;
     position: relative;
     display: inline-block;
     vertical-align: middle;
-    -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
-    box-shadow: inset 1 1px 1px rgba(0,0,0,.2);}
+}
+.btn-group when (@direction=ltr) {
+  -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
+  box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
+}
+.btn-group when (@direction=rtl) {
+  -webkit-box-shadow: inset -1 1px 1px rgba(0,0,0,.2);
+  box-shadow: inset -1 1px 1px rgba(0,0,0,.2);
+}
 
 .btn-group>.btn {
 	text-align: @start;
@@ -635,9 +642,14 @@ fieldset > legend {
 	font-size: 16px;
 	font-weight: 600;
 	padding: 6px 10px;
-	margin: 0 0 5px -10px;
 	color: #3cb879;
 	border-bottom: none;
+}
+fieldset > legend when (@direction = ltr) {
+	margin: 0 0 5px -10px;
+}
+fieldset > legend when (@direction = rtl) {
+	margin: 0 -10px 5px 0;
 }
 
 /*
@@ -705,14 +717,20 @@ label {
     background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
-    -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
-    box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
     -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+.form-control when (@direction = ltr) {
+    -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
+    box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
+}
+.form-control when (@direction = rtl) {
+    -webkit-box-shadow: inset -1 1px 1px rgba(0,0,0,.2);
+    box-shadow: inset -1 1px 1px rgba(0,0,0,.2);
 }
 
 .form-control:focus {
@@ -723,9 +741,15 @@ label {
 }
 
 input.form-control {
-    -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
-    box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
     text-align: @start;
+}
+input.form-control when (@direction = ltr) {
+  -webkit-box-shadow: inset 1 1px 1px rgba(0, 0, 0, .2);
+  box-shadow: inset 1 1px 1px rgba(0, 0, 0, .2);
+}
+input.form-control when (@direction = rtl) {
+  -webkit-box-shadow: inset -1 1px 1px rgba(0, 0, 0, .2);
+  box-shadow: inset -1 1px 1px rgba(0, 0, 0, .2);
 }
 
 select.form-control {
@@ -763,9 +787,16 @@ input[type=range] {
     width: 100%;
     height: 70px;
     background-color: #343538;
+}
+#application-header when (@direction = ltr) {
     -webkit-box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
     -moz-box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
     box-shadow: 4px 0px 6px rgba(200, 200, 200, 1)
+}
+#application-header when (@direction = rtl) {
+    -webkit-box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
+    -moz-box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
+    box-shadow: -4px 0px 6px rgba(200, 200, 200, 1)
 }
 
 #application-header .brand #logo {
@@ -779,16 +810,28 @@ input[type=range] {
     position: fixed;
     bottom: 0px;
     transition: all 1s;
-    -webkit-box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
-    -moz-box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
-    box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
+}
+#language-toggle when (@direction = ltr) {
+  -webkit-box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
+  -moz-box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
+  box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
+}
+#language-toggle when (@direction = rtl) {
+  -webkit-box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
+  -moz-box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
+  box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
 }
 
 #language-toggle.hidden {
-    -webkit-transform: translateX(-50%) scale(0.1);
-    transform: translateX(-50%) scale(0.1);
     opacity: 0;
     transition: all 1s;
+}
+#language-toggle.hidden  when (@direction = ltr) {
+  -webkit-transform: translateX(-50%) scale(0.1);
+  transform: translateX(-50%) scale(0.1);
+}#language-toggle.hidden  when (@direction = rtl) {
+  -webkit-transform: translateX(50%) scale(0.1);
+  transform: translateX(50%) scale(0.1);
 }
 
 #menu {
@@ -1004,7 +1047,6 @@ table {
 	}
 	th {
 		background-color: #fdc82f !important;
-		padding: 16px 24px 16px 8px !important;
 		border-@{end}: 1px dotted #EBAF00;
 		border-bottom: none;
 		font-size: 110%;
@@ -1013,6 +1055,12 @@ table {
 			border-@{end}: 5px solid #fdc82f;
 		}
 	}
+    th when (@direction = ltr) {
+		padding: 16px 24px 16px 8px !important;
+    }
+    th when (@direction = rtl) {
+		padding: 16px 8px 16px 24px !important;
+    }
 
 	td {
 	    vertical-align: middle;
