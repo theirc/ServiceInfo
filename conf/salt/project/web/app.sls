@@ -93,7 +93,7 @@ npm_installs:
 
 make_bundle:
   cmd.run:
-    - name: "{{ vars.source_dir }}/node_modules/.bin/gulp build"
+    - name: "{{ vars.source_dir }}/node_modules/.bin/gulp build --config={{ pillar['environment'] }}"
     - cwd: "{{ vars.source_dir }}"
     - user: {{ pillar['project_name'] }}
     - require:
