@@ -257,6 +257,8 @@ STAGING_SITE_ID = 2
 PRODUCTION_SITE_ID = 3
 DEV_SITE_ID = 4
 
+MINIMUM_PASSWORD_LENGTH = 6
+
 # Periodic celery tasks
 CELERYBEAT_SCHEDULE = {
     'jira-work': {

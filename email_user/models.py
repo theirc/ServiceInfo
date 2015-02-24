@@ -174,6 +174,13 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
     def has_valid_activation_key(self):
         return not self.is_active and self.activation_key and self.activation_key != self.ACTIVATED
 
+    def set_password(self, raw_password):
+        min_length = getattr(settings, 'MINIMUM_PASSWORD_LENGTH', None)
+        if min_length and len(raw_password) < min_length:
+            msg = _("Password is too short. It must have at least {min_length} characters.")
+            raise ValidationError(msg.format(min_length=min_length))
+        super().set_password(raw_password)
+
     def send_activation_email(self, site, request, base_activation_link):
         """
         Send an activation email to the user.
