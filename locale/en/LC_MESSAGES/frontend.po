@@ -39,6 +39,9 @@ msgstr "Feedback Tool"
 msgid "Menu##Change-Language"
 msgstr "Change Language"
 
+msgid "Global##Admin"
+msgstr "Admin"
+
 msgid "Global##FormSubmissionError"
 msgstr "There was an unknown error submitting your form."
 
@@ -103,7 +106,7 @@ msgid "Service-Form##Page-Head##Page-Title##Title"
 msgstr "New Service Registration Form"
 
 msgid "Service-Form##Page-Head##Page-Description##Page-Description"
-msgstr "Fill out the form below to apply to have a new service approved."
+msgstr "Fill out the form below and apply to have a new approved service."
 
 msgid "Service-Form##Legend"
 msgstr "Service Information"
