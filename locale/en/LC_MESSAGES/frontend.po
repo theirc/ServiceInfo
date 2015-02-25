@@ -130,7 +130,7 @@ msgid "Service-Form##Service-Description"
 msgstr "Description"
 
 msgid "Service-Form##Service-Hours"
-msgstr "Hours of Service"
+msgstr "Working Hours"
 
 msgid "Service-Form##Additional-Information"
 msgstr "Additional Information (Optional Field)"
@@ -193,7 +193,7 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
 msgstr "Choose a Provider Type"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
-msgstr "Phone Number"
+msgstr "Phone Number (NN-NNNNNN)"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
 msgstr "Email"
@@ -235,7 +235,7 @@ msgid "Provider-Registration-Form##Form-Sections##Service-Information##Additiona
 msgstr "Additional Information (Optional Field)"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Cost"
-msgstr "Cost of Service (Optional Field)"
+msgstr "Cost of Service (Optional Field, in USD)"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Selection-Criteria"
 msgstr "Selection Criteria (Optional Field)"
