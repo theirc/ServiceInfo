@@ -4,7 +4,8 @@ from django.test import TestCase
 from django.utils import translation
 
 from email_user.tests.factories import EmailUserFactory
-from services.models import ServiceType, ProviderType, Provider, Service
+from services.models import ServiceType, ProviderType, Provider, Service, \
+    blank_or_at_least_one_letter
 from services.tests.factories import ProviderFactory, ServiceFactory
 
 
@@ -21,6 +22,19 @@ class ProviderTest(TestCase):
         # str returns name_en
         provider = Provider(name_en="Frederick")
         self.assertEqual("Frederick", str(provider))
+
+    def test_blank_or_at_least_one_letter(self):
+        data = [
+            ('', True),
+            ('1', False),
+            ('1111', False),
+            ('11111a', True),
+            (' ', False),
+            ('&', False),
+            ('2 Men & a Truck', True),
+        ]
+        for input, expected_result in data:
+            self.assertEqual(expected_result, blank_or_at_least_one_letter(input))
 
 
 class ProviderTypeTest(TestCase):

@@ -49,8 +49,9 @@
                   <div class="form-group">
                     <div class="half">
                       <div class="form-group">
-                        <label for="id_name" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Name"></span><span class=error></label>
-                        <input id="id_name" type="text" name="name" data-i18n-field class="form-control" ></input>
+                        <label for="id_name" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Name"></span><span class=error></span></label>
+                        <input id="id_name" type="text" name="name" data-i18n-field class="form-control"
+                            pattern=".*[^\d\s\.`~!@#$%^&*\(\)-_=\+\[\]{};:',\<\>/\?]|[A-Z].*"><!-- at least one alphabetic? -->
                       </div>
                     </div>
 
