@@ -95,7 +95,7 @@
                   <div class=form-group>
                     <div class="half">
                       <div class="form-group">
-                        <label for="id_type" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Provider-Type"></span><span class=error></label>
+                        <label for="id_type" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Provider-Type"></span><span class=error></span></label>
                         <div class="form-group">
                           <select id="id_type" name="type" class=form-control>
                               <!-- <option value="" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Provider-Type-Choose"></option>
@@ -109,24 +109,25 @@
 
                     <div class="half">
                       <div class="form-group">
-                        <label for="id_phone_number" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Phone-Number"></span><span class=error></label>
+                        <label for="id_phone_number" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Phone-Number"></span><span class=error></span></label>
                         <div class="form-group">
-                          <input id="id_phone_number" type="tel" name="phone_number" class="form-control" >
+                          <input id="id_phone_number" type="tel" name="phone_number" class="form-control" pattern="\d{2}-\d{6}">
                         </div>
                     </div>
                   </div>
                 </div>
+              </div>
 
                 <div class="row">
                   <div class="form-group">
                     <div class=half>
-                        <label for="id_website" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Website"></span><span class=error></label>
+                        <label for="id_website" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Website"></span><span class=error></span></label>
                         <div class="form-group">
                           <input id="id_website" type="url" name="website" class="form-control" placeholder="Enter your website url" >
                         </div>
                     </div>
                     <div class=half>
-                      <label for="id_number_of_monthly_beneficiaries" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.MonthlyBeneficiaries"></span><span class=error></label>
+                      <label for="id_number_of_monthly_beneficiaries" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.MonthlyBeneficiaries"></span><span class=error></span></label>
                       <div class="form-group">
                           <input id="id_number_of_monthly_beneficiaries" required type="number" name="number_of_monthly_beneficiaries" class="form-control">
                       </div>
@@ -136,7 +137,7 @@
 
                 <div class="row">
                   <div class="form-group">
-                    <label for="id_description" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Description"></span><span class=error></label>
+                    <label for="id_description" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Description"></span><span class=error></span></label>
                     <div class="form-group">
                       <textarea id="id_description" rows="4" name="description" data-i18n-field class="form-control"></textarea>
                     </div>
@@ -164,6 +165,7 @@
             </div>
           </div>
         </div>
+      </div>
 
 <!-- End Forms -->
 

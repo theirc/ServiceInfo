@@ -106,6 +106,24 @@ var forms = module.exports = {
         });
     },
 
+    show_errors_on_form: function($form, e) {
+        // returns missing...
+        var self = this,
+            missing = {},
+            errors = e.responseJSON;
+        $.each(errors, function(k) {
+            var $error = self.getFieldLabel($form, k).find('.error');
+            if ($error) {
+                $error.text(this[0]);
+            } else {
+                missing[k] = this[0];
+            }
+        })
+        if (e.status >= 500) {
+            $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
+        }
+    },
+
     submit: function($form, action, data, errors) {
         var errors = errors || {};
         var self = this;
@@ -121,18 +139,7 @@ var forms = module.exports = {
                 function onerror(e) {
                     $submit.removeAttr('disabled');
                     $.extend(errors, e.responseJSON);
-                    var missing = {};
-                    $.each(errors, function(k) {
-                        var $error = self.getFieldLabel($form, k).find('.error');
-                        if ($error) {
-                            $error.text(this[0]);
-                        } else {
-                            missing[k] = this[0];
-                        }
-                    })
-                    if (e.status >= 500) {
-                        $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
-                    }
+                    var missing = this.show_errors_on_form($form, e);
                     error(missing);
                 }
             );

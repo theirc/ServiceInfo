@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.gis.db import models
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
+from django.core.validators import RegexValidator
 from django.db.transaction import atomic
 from django.utils.translation import ugettext_lazy as _, get_language
 
@@ -88,6 +89,9 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
     phone_number = models.CharField(
         _("phone number"),
         max_length=20,
+        validators=[
+            RegexValidator(settings.PHONE_NUMBER_REGEX)
+        ]
     )
     website = models.URLField(
         _("website"),

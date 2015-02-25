@@ -1,3 +1,4 @@
+import random
 import string
 
 import factory
@@ -18,6 +19,14 @@ class ProviderTypeFactory(factory.DjangoModelFactory):
     name_fr = factory.fuzzy.FuzzyText()
 
 
+def create_valid_phone_number(stub):
+    # Valid Lebanon phone number, ##-######
+    chars = string.digits
+    prefix = ''.join([random.choice(chars) for _i in range(2)])
+    suffix = ''.join([random.choice(chars) for _i in range(6)])
+    return "%s-%s" % (prefix, suffix)
+
+
 class ProviderFactory(factory.DjangoModelFactory):
     class Meta:
         model = Provider
@@ -31,7 +40,7 @@ class ProviderFactory(factory.DjangoModelFactory):
     description_fr = factory.fuzzy.FuzzyText()
     user = factory.SubFactory(EmailUserFactory)
     number_of_monthly_beneficiaries = 0
-    phone_number = factory.fuzzy.FuzzyText(chars=string.digits)
+    phone_number = factory.LazyAttribute(create_valid_phone_number)
 
 
 class ServiceTypeFactory(factory.DjangoModelFactory):
