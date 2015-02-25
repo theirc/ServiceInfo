@@ -29,7 +29,10 @@ module.exports = Backbone.View.extend({
         var $el = this.$el;
         var services = this.services;
         this.services.fetch().then(function(r){
-            window.services = services;
+            if (services.length === 0) {
+                window.location = "#/service";
+                return;
+            }
             var p = services.loadSubModels();
             p.then(function(){
                 var records = services.data();
