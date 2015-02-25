@@ -17,6 +17,7 @@
         "Change-Language": "Changer de langue"
     },
     "Global": {
+        "Admin": "Admin",
         "FormSubmissionError": "Il y avait une erreur inconnue soumettant votre formulaire.",
         "UnknownError": "Il y avait une erreur inconnue.",
         "Sunday": "dimanche",
@@ -68,7 +69,7 @@
                 "Title": "Formulaire d'inscription Nouveau service"
             },
             "Page-Description": {
-                "Page-Description": "Remplissez le formulaire ci-dessous pour demander qu'un nouveau service approuvé."
+                "Page-Description": "Remplissez le formulaire ci-dessous et demander qu'un nouveau service agréé."
             }
         },
         "Legend": "Informations sur le service",
@@ -134,7 +135,8 @@
             },
             "Form-Submit-Options": {
                 "Submit": "Valider les réponses",
-                "Clear": "Retirer Réponses"
+                "Clear": "Retirer Réponses",
+                "ResendVerify": "Vérification Renvoyer Email"
             }
         }
     },
@@ -150,6 +152,10 @@
         "Failed": {
             "Title": "L'activation de votre compte a échoué.",
             "Description": "Il y avait un problème configuration de votre compte de fournisseur de services. Se il vous plaît cliquez sur le bouton e-mail de confirmation de réexpédition ci-dessous pour avoir un autre email de confirmation envoyé à votre compte de messagerie."
+        },
+        "Resent": {
+            "Title": "Votre e-mail d'activation a été renvoyé.",
+            "Description": "Nous avons envoyé un e-mail de confirmation sur le compte e-mail utilisée lors de votre inscription. Cliquez sur le lien de confirmation dans l'e-mail pour terminer le processus d'inscription."
         },
         "Buttons": {
             "Resend-Email": "Vérification Renvoyer Email"

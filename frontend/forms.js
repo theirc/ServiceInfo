@@ -81,6 +81,11 @@ var forms = module.exports = {
             var empty_option = $('<option/>');
             empty_option.text(empty_label);
 
+            data.sort(function(a, b){
+                var prop = "name";
+                return ((a[prop] < b[prop]) ? -1 : ((a[prop] > b[prop]) ? 1 : 0));
+            })
+
             $field.html("");
             $field.append(empty_option)
 
