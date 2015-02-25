@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 19:58+0200\n"
-"PO-Revision-Date: 2015-02-19 06:26+0000\n"
+"POT-Creation-Date: 2015-02-24 16:49+0200\n"
+"PO-Revision-Date: 2015-02-23 08:10+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -279,6 +279,34 @@ msgstr "الإنجليزية"
 msgid "French"
 msgstr "الفرنسية"
 
+#: service_info/templates/admin/submit_line.html:4
+msgid "Save"
+msgstr "حفظ"
+
+#: service_info/templates/admin/submit_line.html:7
+msgid "Delete"
+msgstr "حذف"
+
+#: service_info/templates/admin/submit_line.html:9
+msgid "Save as new"
+msgstr "حفظ كسجل جديد "
+
+#: service_info/templates/admin/submit_line.html:10
+msgid "Save and add another"
+msgstr "حفظ وإضافة أخرى"
+
+#: service_info/templates/admin/submit_line.html:11
+msgid "Save and continue editing"
+msgstr "حفظ ومتابعة التحرير"
+
+#: service_info/templates/admin/submit_line.html:12
+msgid "Save and reject"
+msgstr "حفظ ورفض"
+
+#: service_info/templates/admin/submit_line.html:13
+msgid "Save and approve"
+msgstr "حفظ والموافقة عليها"
+
 #: service_info/templates/email/service_approved_body.html:3
 #: service_info/templates/email/service_approved_body.txt:2
 #, python-format
@@ -323,42 +351,50 @@ msgstr "الدعم:"
 msgid "Service has been approved"
 msgstr "تمت الموافقة على الخدمة"
 
-#: services/admin.py:57
+#: services/admin.py:60
 msgid "Description and Additional Information"
 msgstr "معلومات إضافية"
 
-#: services/admin.py:68
+#: services/admin.py:71
 #, python-brace-format
 msgid "Hours (all times in time zone {timezone})"
 msgstr "ساعات (all times in time zone {timezone})"
 
-#: services/admin.py:80
+#: services/admin.py:83
 msgid "Location"
 msgstr "المكان "
 
-#: services/admin.py:100
+#: services/admin.py:103
 msgid "Only services in draft status may be approved"
 msgstr "يجوز الموافقة على الخدمات الوحيدة في مشروع وضع"
 
-#: services/admin.py:105
+#: services/admin.py:108
 msgid "Services have been approved"
 msgstr "تمت الموافقة على الخدمات"
 
-#: services/admin.py:106
+#: services/admin.py:109
 msgid "Approve new or changed service"
 msgstr "الموافقة على الخدمة الجديدة أو تغييرها"
 
-#: services/admin.py:112
+#: services/admin.py:115
 msgid "Only services in draft status may be rejected"
 msgstr "قد يتم رفض خدمات الوحيدة في مشروع وضع"
 
-#: services/admin.py:117
+#: services/admin.py:120
 msgid "Services have been rejected"
 msgstr "رفضت الخدمات"
 
-#: services/admin.py:118
+#: services/admin.py:121
 msgid "Reject new or changed service"
 msgstr "رفض الخدمة الجديدة أو تغييرها"
+
+#: services/admin.py:129
+msgid "The service was approved successfully."
+msgstr "وتمت الموافقة على الخدمة بنجاح."
+
+#: services/admin.py:133
+msgid "The service was rejected successfully."
+msgstr "وقد رفض الخدمة بنجاح."
 
 #. Translators: Provider name
 #. Translators: Service name
@@ -502,34 +538,34 @@ msgstr "إذا يمثل رقما قياسيا خدمة تعديل لسجل ال�
 msgid "location"
 msgstr "المكان "
 
-#: services/models.py:496
+#: services/models.py:501
 msgid "Provider updated their information"
 msgstr "تحديث معلوماتهم مزود"
 
-#: services/models.py:497
+#: services/models.py:502
 msgid "New service submitted by provider"
 msgstr "الخدمة الجديدة المقدمة من قبل مزود"
 
-#: services/models.py:498
+#: services/models.py:503
 msgid "Change to existing service submitted by provider"
 msgstr "تغير إلى الخدمة الحالية للمزود "
 
-#: services/models.py:499
+#: services/models.py:504
 msgid "Provider canceled a draft service"
 msgstr "إلغاء مزود مشروع الخدمة"
 
-#: services/models.py:500
+#: services/models.py:505
 msgid "Provider canceled a current service"
 msgstr "إلغاء مزود خدمة الحالية"
 
-#: services/models.py:501
+#: services/models.py:506
 msgid "Provider superseded a previous draft"
 msgstr "مزود ألغى مسودة قديمة "
 
-#: services/models.py:519
+#: services/models.py:524
 msgid "update type"
 msgstr "نوع آخر التطورات"
 
-#: services/models.py:524
+#: services/models.py:529
 msgid "JIRA issue"
 msgstr "قضية جيرة"
