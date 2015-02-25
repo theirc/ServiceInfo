@@ -184,10 +184,6 @@ class ProviderViewSet(ServiceInfoModelViewSet):
 
     def update(self, request, *args, **kwargs):
         """On change to provider via the API, notify via JIRA"""
-        data = dict(request.data)
-        if data.get('number_of_monthly_beneficiaries', '') == '':
-            data['number_of_monthly_beneficiaries'] = None
-        request._full_data = data
         response = super().update(request, *args, **kwargs)
         self.get_object().notify_jira_of_change()
         return response
@@ -208,10 +204,7 @@ class ProviderViewSet(ServiceInfoModelViewSet):
         that user.
         """
         with atomic():  # If we throw an exception anywhere in here, rollback all changes
-            data = dict(request.data)
-            if data.get('number_of_monthly_beneficiaries', '') == '':
-                data['number_of_monthly_beneficiaries'] = None
-            serializer = CreateProviderSerializer(data=data)
+            serializer = CreateProviderSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
 
             # Create User
@@ -223,7 +216,7 @@ class ProviderViewSet(ServiceInfoModelViewSet):
             user.groups.add(Group.objects.get(name='Providers'))
 
             # Create Provider
-            data['user'] = user.get_api_url()
+            data = dict(request.data, user=user.get_api_url())
             serializer = ProviderSerializer(data=data, context={'request': request})
             serializer.is_valid(raise_exception=True)
             serializer.save()  # returns provider if we need it
