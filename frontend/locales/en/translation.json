@@ -133,8 +133,7 @@
   			"Phone-Number": "Phone Number (NN-NNNNNN)",
   			"Email": "Email",
             "EmailPlaceholder": "Enter your Email",
-  			"Website": "Website (Optional Field)",
-            "WebsitePlaceholder": "Enter your Website URL",
+  			"Website": "Website URL (Optional Field)",
             "MonthlyBeneficiaries": "Number of Monthly Beneficiaries",
   			"Description": "Description"
   		},
