@@ -257,6 +257,8 @@ STAGING_SITE_ID = 2
 PRODUCTION_SITE_ID = 3
 DEV_SITE_ID = 4
 
+# If this changes here, also change the password fields'
+# minlength attribute in frontend/templates/provider-form.hbs
 MINIMUM_PASSWORD_LENGTH = 6
 
 # Periodic celery tasks
