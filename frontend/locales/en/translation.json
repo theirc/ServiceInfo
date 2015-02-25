@@ -125,7 +125,7 @@
   	"Form-Sections": {
   		"Basic": {
   			"Legend": "Basic details to register a service provider:",
-  			"Name": "Full Name",
+  			"Name": "Name of Service Provider",
             "Password": "Password",
             "PasswordConfirm": "Confirm Password",
   			"Provider-Type": "Provider Type",
