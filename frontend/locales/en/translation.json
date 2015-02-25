@@ -79,7 +79,7 @@
       "Service-Area": "Area of Service",
       "Type": "Service Type",
       "Service-Description": "Description",
-      "Service-Hours": "Hours of Service",
+      "Service-Hours": "Working Hours",
       "Additional-Information": "Additional Information (Optional Field)",
       "Service-Cost": "Cost of Service (Optional Field)",
       "Selection-Criteria": "Selection Criteria (Optional Field)",
@@ -97,7 +97,7 @@
     "Service-Area": "Area of Service",
     "Type": "Service Type",
     "Service-Description": "Description",
-    "Service-Hours": "Hours of Service",
+    "Service-Hours": "Working Hours",
     "Additional-Information": "Additional Information (Optional Field)",
     "Service-Cost": "Cost of Service (Optional Field)",
     "Selection-Criteria": "Selection Criteria (Optional Field)",
@@ -146,7 +146,7 @@
   			"Service-Description": "Description",
   			"Service-Hours": "Hours of Service",
   			"Additional-Information": "Additional Information (Optional Field)",
-  			"Service-Cost": "Cost of Service (Optional Field)",
+  			"Service-Cost": "Cost of Service (Optional Field, in USD)",
   			"Selection-Criteria": "Selection Criteria (Optional Field)"
   		},
   		"Form-Submit-Options": {
