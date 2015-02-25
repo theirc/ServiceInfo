@@ -257,6 +257,10 @@ STAGING_SITE_ID = 2
 PRODUCTION_SITE_ID = 3
 DEV_SITE_ID = 4
 
+# If this changes here, also change the password fields'
+# minlength attribute in frontend/templates/provider-form.hbs
+MINIMUM_PASSWORD_LENGTH = 6
+
 # Periodic celery tasks
 CELERYBEAT_SCHEDULE = {
     'jira-work': {
@@ -271,3 +275,10 @@ JIRA_USER = os.environ.get('JIRA_USER', '')
 JIRA_PASSWORD = os.environ.get('JIRA_PASSWORD', '')
 JIRA_PROJECT_KEY = 'SM'
 JIRA_DUEIN_DAYS = 2
+
+# Regex string that will only match valid phone numbers
+# 12-123456
+# ##-######
+# Note: A few tests assume this regex; if you change it, re-run the
+# tests and fix them.
+PHONE_NUMBER_REGEX = r'^\d{2}-\d{6}$'
