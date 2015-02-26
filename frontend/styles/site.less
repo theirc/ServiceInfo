@@ -66,7 +66,6 @@ a {
 a:hover {
 	color: #3cb879;
 	text-decoration: none;
-	padding-bottom: 3px;
 	border-bottom: 1px solid #3cb879;
 }
 
@@ -197,6 +196,18 @@ float: none;
 
 .center-text {
 	text-align: center;
+}
+.start-text {
+    text-align: @start;
+}
+.end-text {
+    text-align: @end;
+}
+.float-end {
+    float: @end;
+}
+.float-start {
+    float: @start;
 }
 
 .main-content {
@@ -421,6 +432,7 @@ float: none;
     background-color: #33A069;
     border: 1px solid #33A069;
     cursor: pointer;
+    color: #fff;
 }
 
 .primary-button:focus {

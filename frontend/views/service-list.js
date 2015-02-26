@@ -29,7 +29,7 @@ module.exports = Backbone.View.extend({
         var $el = this.$el;
         var services = this.services;
         this.services.fetch().then(function(r){
-            window.services = services;
+            var no_services = services.length === 0;
             var p = services.loadSubModels();
             p.then(function(){
                 var records = services.data();
@@ -49,6 +49,7 @@ module.exports = Backbone.View.extend({
                 records.sort(function(a, b){ return a._sort > b._sort; });
                 $el.html(template({
                     services: records,
+                    no_services: no_services,
                 }));
                 $el.i18n();
             }, function onerror(e) {
