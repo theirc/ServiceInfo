@@ -24,6 +24,21 @@ class ProviderTest(TestCase):
         provider = Provider(name_en="Frederick")
         self.assertEqual("Frederick", str(provider))
 
+    def test_num_beneficiaries_validation(self):
+        data = [
+            (None, True),  # No value is okay
+            (-1, False),  # Range 0-1,000,000
+            (0, True),
+            (1000000, True),
+            (1000001, False),
+        ]
+        for value, expect_valid in data:
+            if expect_valid:
+                ProviderFactory(number_of_monthly_beneficiaries=value).full_clean()
+            else:
+                with self.assertRaises(ValidationError):
+                    ProviderFactory(number_of_monthly_beneficiaries=value).full_clean()
+
     def test_blank_or_at_least_one_letter(self):
         data = [
             ('', True),

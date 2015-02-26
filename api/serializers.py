@@ -79,6 +79,12 @@ class ProviderTypeSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ProviderSerializer(RequireOneTranslationMixin, serializers.HyperlinkedModelSerializer):
+    number_of_monthly_beneficiaries = serializers.IntegerField(
+        min_value=0, max_value=1000000,
+        required=False,
+        allow_null=True
+    )
+
     class Meta:
         model = Provider
         fields = ('url', 'id', 'name_en', 'name_ar', 'name_fr',
@@ -99,6 +105,11 @@ class CreateProviderSerializer(ProviderSerializer):
     email = serializers.EmailField()
     password = serializers.CharField()
     base_activation_link = serializers.URLField()
+    number_of_monthly_beneficiaries = serializers.IntegerField(
+        min_value=0, max_value=1000000,
+        required=False,
+        allow_null=True
+    )
 
     class Meta(ProviderSerializer.Meta):
         model = Provider
