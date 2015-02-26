@@ -178,7 +178,7 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##Legend"
 msgstr "Basic details to register a service provider:"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Name"
-msgstr "Full Name"
+msgstr "Name of Service Provider"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
 msgstr "Password"
@@ -202,10 +202,7 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##EmailPlaceholder"
 msgstr "Enter your Email"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
-msgstr "Website (Optional Field)"
-
-msgid "Provider-Registration-Form##Form-Sections##Basic##WebsitePlaceholder"
-msgstr "Enter your Website URL"
+msgstr "Website URL (Optional Field)"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
 msgstr "Number of Monthly Beneficiaries"
@@ -281,6 +278,12 @@ msgstr "Services List"
 
 msgid "Service-List##Page-Head##Page-Description##Page-Description"
 msgstr "Below is a list of services you have applied to provide. Approved services are marked in green. Un-approved services are marked in red. Services pending approval are unmarked."
+
+msgid "Service-List##Empty-Message"
+msgstr "You have not submitted any services yet. You may submit your first service for review by tapping the New Service button."
+
+msgid "Service-List##Add-Service"
+msgstr "New Service"
 
 msgid "Service-List##Table##Thead##Name"
 msgstr "Name:"
