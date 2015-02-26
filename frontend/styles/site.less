@@ -1,19 +1,14 @@
 body {
-  font-size: 14px;
+  font-size: 1em;  // Do not change to e.g. 14px,  it makes some of our text not renderable in our Arabic font
   line-height: 1.4em;
-  font-weight: 400;
+  font-weight: normal;  // Do not change to e.g. 400, it makes some of our text not renderable in our Arabic font
   color: #333;
   background-color: #F3F3F4;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   margin: 0;
 }
-body when (@direction = rtl) {
-  font-family: 'GE SS Two Light', 'Source Sans Pro', Arial, sans-serif;
-}
-body when (@direction = ltr) {
-  font-family: 'Source Sans Pro', Arial,sans-serif;
-}
+
 html,body,#application {
     height: 100%;
 }

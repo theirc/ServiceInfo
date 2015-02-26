@@ -1,4 +1,16 @@
 @direction: rtl;
 @start: right;
 @end: left;
+
+@font-face {
+  font-family: 'GE SS Two Light';
+  src: url("../fonts/ge-ss-two-light.otf");
+}
+
+// Apparently we need to override the browser styles for input and button
+// elements to make sure we use our Arabic font.
+body, input, button {
+  font-family: 'GE SS Two Light', 'Source Sans Pro', Arial, sans-serif;
+}
+
 @import "site.less";
