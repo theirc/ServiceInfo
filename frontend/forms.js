@@ -144,7 +144,7 @@ var forms = module.exports = {
                 function onerror(e) {
                     $submit.removeAttr('disabled');
                     $.extend(errors, e.responseJSON);
-                    var missing = this.show_errors_on_form($form, e);
+                    var missing = self.show_errors_on_form($form, e);
                     error(missing);
                 }
             );
