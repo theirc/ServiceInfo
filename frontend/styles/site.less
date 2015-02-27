@@ -101,6 +101,8 @@ li {
 .row {
 	padding: 10px 30px;
     clear: both;
+    display: block;
+    box-sizing: border-box;
 }
 
 @media (min-width: 1px) and (max-width: 1000px) {
@@ -113,26 +115,35 @@ li {
 	width: 100%;
 	margin: 0;
 	float: none;
-    // clear: both;
+	box-sizing: border-box;
 
 	@media (min-width: 1000px) {
 		width: 48%;
 		float: left;
 	}
-}
 
-.half:first-child {
-float: none;
-	@media (min-width: 1000px) {
-		float: left;
+	&:first-child {
+		float: none;
+		@media (min-width: 1000px) {
+			margin-right: 2%;
+			float: left;
+		}
 	}
-}
 
-.half:last-child {
-    float: none;
+	&:last-child {
+	    float: none;
+		@media (min-width: 1000px) {
+			margin-left: 2%;
+			float: left;
+		}
+	}
 
-	@media (min-width: 1000px) {
-		float: right;
+	&:only-child {
+		float: none;
+
+		@media (min-width: 1000px) {
+			float: left;
+		}
 	}
 }
 
@@ -162,14 +173,17 @@ float: none;
 	margin: 0;
 	padding: 0;
 	float: none;
+	box-sizing: border-box;
 	&:first-child {
 		margin-top: 1em;
 	}
 
 	@media (min-width: 1000px) {
-		width: 31.3333%;
+		width: 33.333%;
 		float: left;
         margin-top: 1em;
+        padding: 0 5px;
+        box-sizing: border-box;
 	}
 }
 
@@ -210,12 +224,28 @@ float: none;
 .submit-form {
     height: 60px;
     margin-bottom: 10px;
+    width: 100%;
 
-    .primary-button {
-        @media (min-width:1px) and (max-width:1000px){
-            margin-bottom: 18px;
-        }
-    }
+	.half {
+		&:nth-child(2),
+		&:nth-child(3) {
+			float: left;
+		}    
+
+	    &:nth-child(2) {
+	    	margin-right: 2%;
+	    }
+
+	    &:nth-child(3) {
+	    	margin-left: 2%;
+	    }
+
+	    .primary-button {
+	        @media (min-width:1px) and (max-width:1000px){
+	            margin-bottom: 18px;
+	        }
+	    }
+	}
 }
 
 .operating-hours {
@@ -252,8 +282,8 @@ float: none;
 		margin-top: 0;
 
 		@media (min-width: 1000px){
-			width: 30.75%;
-			padding: 0 1.292%;
+			width: 33.333%;
+			padding: 0 1%;
 
 		}
 
@@ -368,7 +398,7 @@ float: none;
 
 .btn {
     display: inline-block;
-    padding: 12px;
+    padding: 13px 12px;
     margin-bottom: 0;
     font-size: 14px;
     font-weight: 400;
@@ -397,7 +427,7 @@ float: none;
 
 .primary-button {
 	margin: 0 auto;
-	padding: 10px 12px;
+	padding: 13px 12px;
 	background-color: #3cb879;
 	border-width: 1px;
 	border-style: solid;
@@ -432,6 +462,22 @@ float: none;
 .primary-button[disabled] {
     opacity: 0.5;
     background-color: #3cb879;
+}
+
+.secondary-button {
+	color: #3cb879;
+	background-color: white;
+	border: 1px solid #3cb879;
+	width: 100%;
+    -webkit-transition: background-color .2s ease-out;
+    -moz-transition: background-color .2s ease-out;
+    -o-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+
+    &:hover, &:visited {
+    	color: white;
+    	background-color: #3cb879;
+    }
 }
 
 /* Button Types */
@@ -624,15 +670,19 @@ fieldset {
 	margin: 0 0 30px;
 	border: 1px solid #E2E2E2;
     min-width: 0;
-}
 
-fieldset > legend {
-	font-size: 16px;
-	font-weight: 600;
-	padding: 6px 10px;
-	margin: 0 0 5px -10px;
-	color: #3cb879;
-	border-bottom: none;
+	legend {
+		font-size: 16px;
+		font-weight: 600;
+		padding: 6px 10px;
+		margin: 0 0 5px -10px;
+		color: #3cb879;
+		border-bottom: none;
+	}
+
+	.row {
+		padding: 10px 0;
+	}
 }
 
 /*
@@ -759,7 +809,8 @@ input[type=range] {
     background-color: #343538;
     -webkit-box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
     -moz-box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
-    box-shadow: 4px 0px 6px rgba(200, 200, 200, 1)
+    box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
+    z-index: 99;
 }
 
 #application-header .brand #logo {
@@ -851,10 +902,15 @@ input[type=range] {
         height: 150px;
         margin: 0 auto;
     }
+    #page {
+    	height: 100%;
+    	box-sizing: border-box;
+    }
     #page-container {
         display: inline-block;
         width: 80%;
         margin-left: 20%;
+        height: 100%;
     }
     #menu-toggle {
         display: none;
@@ -920,10 +976,6 @@ input[type=range] {
 }
 
 /*
-Service Map
-*/
-
-/*
 *   Button Group - Search
 */
 
@@ -974,91 +1026,197 @@ Service Map
     }
 }
 
-.search {
-    padding: 0;
+/*
+Service Map
+*/
+
+.side-section {
+	background-color: #fff9e7;
+	width: 33.333%;
+	min-width: 260px;
+	position: relative;
+	height: 100%;
+	margin-left: -40px;
+	float: left;
+	padding: 39px 25px 0 40px;
+	overflow: auto;
+	box-sizing: border-box;
 }
 
-#service-map .map {
-    position: relative;
-    background: white;
-    width: 100%;
-    min-height: 20em;
-    margin: 0;
-    padding: 0;
-    -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.1);
-    -moz-box-shadow: inset 1 1px 1px rgba(0,0,0,.1);
-    box-shadow: inset 2px 2px 8px rgba(0,0,0,.1);
-
-    @media only screen and (min-width: 1000px) {
-        min-height: 30em;
-    }
+div#search {
+	padding: 10px 0;
+	height: 100%;
+	.container,
+	.row {
+		height: 100%;
+	}
+	form {
+		margin: 0 0 1em;
+	}
+	button.primary-button.group-submit.search {
+	    margin: 1em 0 2em;
+	}
+	select#id_type.form-control {
+		height: 46px;
+	}
 }
 
-.map {
-	.tool-tip {
-	    position: absolute;
-	    width: 2em;
-	    line-height: 2em;
-	    margin-left: 2px;
-	    margin-top: -1em;
-	    background-image: url(/images/POI-Marker-Green.png);
-	    background-image: url(/images/POI-Marker.svg);
-	    background-size: 100%;
-	    background-repeat: none;
-	    width: 32px;
-	    height: 44px;
-	    margin: 0;
-	    padding: 0;
-
-		&:hover {
-			.tip {
-		    	opacity: 1;
-		    }
+div#search-filter {
+	padding: 0;
+	.options {
+		.half {
+			margin-bottom: 1em;
+			&:first-child{
+				padding-right: 2%;
+			}
+			&:last-child{
+				padding-left: 2%;
+			}
 		}
+	}
+	select#id_area.form-control {
+		height: 46px;
+	}
+}
 
-		.tip {
-		    background: #333;
-		    background: #262525;
-		    border-radius: 5px;
-		    bottom: 26px;
-		    color: #fff;
-		    padding: 12px 15px;
-		    bottom: 3.6em;
+#service-map,
+#service-list {
+	display: inline-block;
+	float: left;
+	width: 66.666%;
+	height: 100%;
+	box-sizing: border-box;
+	position: relative;
+	background-color: white;
+}
+
+#service-map {
+	.map {
+		width: 100%;
+		height: 100%;
+		 min-height: 20em; 
+		margin: 0;
+		padding: 0;
+		display: inline-block;
+		-webkit-box-shadow: inset 1 1px 1px rgba(0, 0, 0, 0.1);
+		-moz-box-shadow: inset 1 1px 1px rgba(0, 0, 0, 0.1);
+		box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.1);
+
+	    @media only screen and (min-width: 1000px) {
+	        min-height: 30em;
+	    }
+
+		.tool-tip {
 		    position: absolute;
-		    z-index: 98;
-		    opacity: 0;
-		    font-weight: normal;
-		    -webkit-transition: opacity 0.5s;
-		    -moz-transition:  opacity 0.5s;
-		    -ms-transition: opacity 0.5s;
-		    -o-transition:  opacity 0.5s;
-		    transition:  opacity 0.5s;
-		    min-width: 10em;
-		    transform: translate(50%,0);
-		    margin-left: 50%;
-		    right:50%;
+		    width: 2em;
+		    line-height: 2em;
+		    margin-left: 2px;
+		    margin-top: -1em;
+		    background-image: url(/images/POI-Marker-Green.png);
+		    background-image: url(/images/POI-Marker.svg);
+		    background-size: 100%;
+		    background-repeat: none;
+		    width: 32px;
+		    height: 44px;
+		    margin: 0;
+		    padding: 0;
 
-		    &:before {
-		        border: solid;
-		        border-color: #262525 transparent;
-		        transform: translate(50%,0);
-		        margin-left: 50%;
-		        right:50%;
-		        border-width: 20px 20px 0px;
-		        bottom: -10px;
-		        content: "";
-		        position: absolute;
-		        z-index: 99;
-		        opacity: 1;
-		    }
+			&:hover {
+				.tip {
+			    	opacity: 1;
+			    }
+			}
 
-		    .poi-name,
-		    .poi-descr {
-		        display: block;
-		    }
+			.tip {
+			    background: #333;
+			    background: #262525;
+			    border-radius: 5px;
+			    bottom: 26px;
+			    color: #fff;
+			    padding: 12px 15px;
+			    bottom: 3.6em;
+			    position: absolute;
+			    z-index: 98;
+			    opacity: 0;
+			    font-weight: normal;
+			    -webkit-transition: opacity 0.5s;
+			    -moz-transition:  opacity 0.5s;
+			    -ms-transition: opacity 0.5s;
+			    -o-transition:  opacity 0.5s;
+			    transition:  opacity 0.5s;
+			    min-width: 10em;
+			    transform: translate(50%,0);
+			    margin-left: 50%;
+			    right:50%;
 
+			    &:before {
+			        border: solid;
+			        border-color: #262525 transparent;
+			        transform: translate(50%,0);
+			        margin-left: 50%;
+			        right:50%;
+			        border-width: 20px 20px 0px;
+			        bottom: -10px;
+			        content: "";
+			        position: absolute;
+			        z-index: 99;
+			        opacity: 1;
+			    }
+
+			    .poi-name,
+			    .poi-descr {
+			        display: block;
+			    }
+			}
 		}
+	}
+}
 
+#servie-map,
+#service-list {
+	.map-toggle {
+		button.primary-button{
+			width: auto;
+			float: right;
+			position: absolute;
+			right: 1em;
+			top: 1em;
+		}
+	}
+}
+
+#service-list {
+	.list {
+		padding: 2em;
+		li {
+			padding: 1em 0;
+			border-bottom: 1px solid #CCCCCC;
+			box-sizing: content-box;
+			overflow: auto;
+		}
+		ul > li {
+
+			line-height: 1.8em;
+			.name > a {
+				font-size: 1.4em;
+				font-weight: 600;
+			}
+			.area {
+
+			}
+			.hours {
+
+			}
+			.contact {
+				.third {
+					margin-top: 0;
+					.control-label {
+						font-size: 0.85em;
+						float: none;
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -1212,7 +1370,6 @@ table {
     .vertical-header {
         display: inline-block;
     }
-
 
 	}
 }

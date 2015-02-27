@@ -57,8 +57,21 @@
     },
     "Filtered-Search": {
       "Label": "Search term",
-      "Search": "Search",
-      "Service-Type": "Filter by service type"
+      "Submit": "Submit",
+      "Service-Type": "Filter by service type",
+      "Distance": "Distance",
+      "Area": "Area",
+      "Filter-Area": "Filter-Area",
+      "Filter-By-Area": "Filter your search by area"
+    },
+    "Map": {"Toggle": "List View"},
+    "List": {
+      "Toggle": "Map View",
+      "Area": "Service Area:",
+      "Hours": "Todays Service Hours:",
+      "Phone": "Phone-Number:",
+      "Email": "Email-Address:",
+      "Website": "Website:"
     }
   },
   "Service-Remove-Change": {
