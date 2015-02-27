@@ -73,6 +73,7 @@ class GroupViewSet(ServiceInfoModelViewSet):
 
 
 class ServiceAreaViewSet(ServiceInfoModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ServiceArea.objects.all()
     serializer_class = ServiceAreaSerializer
 
@@ -142,6 +143,7 @@ class ProviderTypeViewSet(ServiceInfoModelViewSet):
 
 
 class ServiceTypeViewSet(ServiceInfoModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ServiceType.objects.all()
     serializer_class = ServiceTypeSerializer
 
