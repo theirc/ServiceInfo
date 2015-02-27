@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.gis.db import models
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
+from django.core.validators import MinValueValidator, MaxValueValidator, RegexValidator
 from django.db.transaction import atomic
 from django.utils.translation import ugettext_lazy as _, get_language
 
@@ -52,6 +53,10 @@ class ProviderType(NameInCurrentLanguageMixin, models.Model):
         return reverse('providertype-detail', args=[self.id])
 
 
+def blank_or_at_least_one_letter(s):
+    return s == '' or any([c.isalpha() for c in s])
+
+
 class Provider(NameInCurrentLanguageMixin, models.Model):
     name_en = models.CharField(
         # Translators: Provider name
@@ -59,6 +64,7 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
         max_length=256,  # Length is a guess
         default='',
         blank=True,
+        validators=[blank_or_at_least_one_letter]
     )
     name_ar = models.CharField(
         # Translators: Provider name
@@ -66,6 +72,7 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
         max_length=256,  # Length is a guess
         default='',
         blank=True,
+        validators=[blank_or_at_least_one_letter]
     )
     name_fr = models.CharField(
         # Translators: Provider name
@@ -73,6 +80,7 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
         max_length=256,  # Length is a guess
         default='',
         blank=True,
+        validators=[blank_or_at_least_one_letter]
     )
     type = models.ForeignKey(
         ProviderType,
@@ -81,6 +89,9 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
     phone_number = models.CharField(
         _("phone number"),
         max_length=20,
+        validators=[
+            RegexValidator(settings.PHONE_NUMBER_REGEX)
+        ]
     )
     website = models.URLField(
         _("website"),
@@ -112,6 +123,11 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
     )
     number_of_monthly_beneficiaries = models.IntegerField(
         _("number of targeted beneficiaries monthly"),
+        blank=True, null=True,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(1000000)
+        ]
     )
 
     def __str__(self):
@@ -473,7 +489,6 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         if self.update_of and self.update_of.status == Service.STATUS_CURRENT:
             self.update_of.status = Service.STATUS_ARCHIVED
             self.update_of.save()
-        self.update_of = None
         self.status = Service.STATUS_CURRENT
         self.save()
         self.email_provider_about_approval()
@@ -538,6 +553,7 @@ class JiraUpdateRecord(models.Model):
 
     def save(self, *args, **kwargs):
         errors = []
+        is_new = self.pk is None
         if self.update_type == '':
             errors.append('must have a non-blank update_type')
         elif self.update_type in self.PROVIDER_CHANGE_UPDATE_TYPES:
@@ -550,7 +566,10 @@ class JiraUpdateRecord(models.Model):
                 if self.update_type == self.NEW_SERVICE and self.service.update_of:
                     errors.append('%s must not specify a service that is an update of another'
                                   % self.update_type)
-                if self.update_type == self.CHANGE_SERVICE and not self.service.update_of:
+                # If we're not creating a new record, be more tolerant; the service might
+                # have been updated one way or another.
+                if (is_new and self.update_type == self.CHANGE_SERVICE
+                        and not self.service.update_of):
                     errors.append('%s must specify a service that is an update of another'
                                   % self.update_type)
             else:

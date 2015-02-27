@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-18 19:58+0200\n"
-"PO-Revision-Date: 2015-02-19 06:32+0000\n"
+"POT-Creation-Date: 2015-02-24 16:49+0200\n"
+"PO-Revision-Date: 2015-02-23 08:18+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -278,6 +278,34 @@ msgstr "Englais"
 msgid "French"
 msgstr "français"
 
+#: service_info/templates/admin/submit_line.html:4
+msgid "Save"
+msgstr "Enregistrer"
+
+#: service_info/templates/admin/submit_line.html:7
+msgid "Delete"
+msgstr "Effacer"
+
+#: service_info/templates/admin/submit_line.html:9
+msgid "Save as new"
+msgstr "Enregistrer en tant que nouvelle"
+
+#: service_info/templates/admin/submit_line.html:10
+msgid "Save and add another"
+msgstr "Enregistrer et ajouter un autre"
+
+#: service_info/templates/admin/submit_line.html:11
+msgid "Save and continue editing"
+msgstr "Enregistrer et continuer l'édition"
+
+#: service_info/templates/admin/submit_line.html:12
+msgid "Save and reject"
+msgstr "Enregistrer et rejeter"
+
+#: service_info/templates/admin/submit_line.html:13
+msgid "Save and approve"
+msgstr "Enregistrer et approuver"
+
 #: service_info/templates/email/service_approved_body.html:3
 #: service_info/templates/email/service_approved_body.txt:2
 #, python-format
@@ -322,42 +350,50 @@ msgstr "Support:"
 msgid "Service has been approved"
 msgstr "Service a été approuvé"
 
-#: services/admin.py:57
+#: services/admin.py:60
 msgid "Description and Additional Information"
 msgstr "Description et Informations supplémentaires"
 
-#: services/admin.py:68
+#: services/admin.py:71
 #, python-brace-format
 msgid "Hours (all times in time zone {timezone})"
 msgstr "Heures (all times in time zone {timezone})"
 
-#: services/admin.py:80
+#: services/admin.py:83
 msgid "Location"
 msgstr "emplacement"
 
-#: services/admin.py:100
+#: services/admin.py:103
 msgid "Only services in draft status may be approved"
 msgstr "Seuls les services dans le projet de statut peuvent être approuvés"
 
-#: services/admin.py:105
+#: services/admin.py:108
 msgid "Services have been approved"
 msgstr "Les services ont été approuvés"
 
-#: services/admin.py:106
+#: services/admin.py:109
 msgid "Approve new or changed service"
 msgstr "Approuver service nouveau ou changé"
 
-#: services/admin.py:112
+#: services/admin.py:115
 msgid "Only services in draft status may be rejected"
 msgstr "Seuls les services dans le projet de statut peuvent être rejetées"
 
-#: services/admin.py:117
+#: services/admin.py:120
 msgid "Services have been rejected"
 msgstr "Les services ont été rejetées"
 
-#: services/admin.py:118
+#: services/admin.py:121
 msgid "Reject new or changed service"
 msgstr "Rejeter service nouveau ou changé"
+
+#: services/admin.py:129
+msgid "The service was approved successfully."
+msgstr "Le service a été approuvé avec succès."
+
+#: services/admin.py:133
+msgid "The service was rejected successfully."
+msgstr "Le service a été rejetée avec succès."
 
 #. Translators: Provider name
 #. Translators: Service name
@@ -501,34 +537,34 @@ msgstr "Si un enregistrement de service représente une modification d'un dossie
 msgid "location"
 msgstr "local"
 
-#: services/models.py:496
+#: services/models.py:501
 msgid "Provider updated their information"
 msgstr "Fournisseur mis à jour leurs informations"
 
-#: services/models.py:497
+#: services/models.py:502
 msgid "New service submitted by provider"
 msgstr "Nouveau service soumis par le fournisseur"
 
-#: services/models.py:498
+#: services/models.py:503
 msgid "Change to existing service submitted by provider"
 msgstr "Changez au service existants soumis par le fournisseur"
 
-#: services/models.py:499
+#: services/models.py:504
 msgid "Provider canceled a draft service"
 msgstr "Fournisseur annulé un projet de services"
 
-#: services/models.py:500
+#: services/models.py:505
 msgid "Provider canceled a current service"
 msgstr "Fournisseur annulé un service courant"
 
-#: services/models.py:501
+#: services/models.py:506
 msgid "Provider superseded a previous draft"
 msgstr "Fournisseur remplace une version précédente"
 
-#: services/models.py:519
+#: services/models.py:524
 msgid "update type"
 msgstr "Type de mise à jour"
 
-#: services/models.py:524
+#: services/models.py:529
 msgid "JIRA issue"
 msgstr "question JIRA"

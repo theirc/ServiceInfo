@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-19 06:28+0000\n"
+"PO-Revision-Date: 2015-02-24 15:18+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -45,6 +45,9 @@ msgstr "Commentaires Outil"
 
 msgid "Menu##Change-Language"
 msgstr "Changer de langue"
+
+msgid "Global##Admin"
+msgstr "Admin"
 
 msgid "Global##FormSubmissionError"
 msgstr "Il y avait une erreur inconnue soumettant votre formulaire."
@@ -110,7 +113,7 @@ msgid "Service-Form##Page-Head##Page-Title##Title"
 msgstr "Formulaire d'inscription Nouveau service"
 
 msgid "Service-Form##Page-Head##Page-Description##Page-Description"
-msgstr "Remplissez le formulaire ci-dessous pour demander qu'un nouveau service approuvé."
+msgstr "Remplissez le formulaire ci-dessous et demander qu'un nouveau service agréé."
 
 msgid "Service-Form##Legend"
 msgstr "Informations sur le service"
@@ -262,6 +265,10 @@ msgstr "Valider les réponses"
 msgid "Provider-Registration-Form##Form-Sections##Form-Submit-Options##Clear"
 msgstr "Retirer Réponses"
 
+msgid ""
+"Provider-Registration-Form##Form-Sections##Form-Submit-Options##ResendVerify"
+msgstr "Vérification Renvoyer Email"
+
 msgid "Account-Activation##Pending##Title"
 msgstr "L'activation de votre compte est en attente ..."
 
@@ -279,6 +286,12 @@ msgstr "L'activation de votre compte a échoué."
 
 msgid "Account-Activation##Failed##Description"
 msgstr "Il y avait un problème configuration de votre compte de fournisseur de services. Se il vous plaît cliquez sur le bouton e-mail de confirmation de réexpédition ci-dessous pour avoir un autre email de confirmation envoyé à votre compte de messagerie."
+
+msgid "Account-Activation##Resent##Title"
+msgstr "Votre e-mail d'activation a été renvoyé."
+
+msgid "Account-Activation##Resent##Description"
+msgstr "Nous avons envoyé un e-mail de confirmation sur le compte e-mail utilisée lors de votre inscription. Cliquez sur le lien de confirmation dans l'e-mail pour terminer le processus d'inscription."
 
 msgid "Account-Activation##Buttons##Resend-Email"
 msgstr "Vérification Renvoyer Email"

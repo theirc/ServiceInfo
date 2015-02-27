@@ -22,7 +22,14 @@ module.exports = Backbone.View.extend({
                 Promise.all([update_of.fetch()]).then(function() {
                     self.update_of = update_of.data();
                     self.render();
-                })
+                }, function onerror(e) {
+                    if (e.status < 500) {
+                        // 404 on the parent record - still allow deleting this record
+                        self.render();
+                    } else {
+                        messages.error(e);
+                    }
+                });
             } else {
                 self.render();
             }

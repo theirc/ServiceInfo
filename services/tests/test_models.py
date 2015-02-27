@@ -1,10 +1,12 @@
 from unittest.mock import patch
 
-from django.test import TestCase
+from django.core.exceptions import ValidationError
+from django.test import TestCase, override_settings
 from django.utils import translation
 
 from email_user.tests.factories import EmailUserFactory
-from services.models import ServiceType, ProviderType, Provider, Service
+from services.models import ServiceType, ProviderType, Provider, Service, \
+    blank_or_at_least_one_letter
 from services.tests.factories import ProviderFactory, ServiceFactory
 
 
@@ -21,6 +23,46 @@ class ProviderTest(TestCase):
         # str returns name_en
         provider = Provider(name_en="Frederick")
         self.assertEqual("Frederick", str(provider))
+
+    def test_num_beneficiaries_validation(self):
+        data = [
+            (None, True),  # No value is okay
+            (-1, False),  # Range 0-1,000,000
+            (0, True),
+            (1000000, True),
+            (1000001, False),
+        ]
+        for value, expect_valid in data:
+            if expect_valid:
+                ProviderFactory(number_of_monthly_beneficiaries=value).full_clean()
+            else:
+                with self.assertRaises(ValidationError):
+                    ProviderFactory(number_of_monthly_beneficiaries=value).full_clean()
+
+    def test_blank_or_at_least_one_letter(self):
+        data = [
+            ('', True),
+            ('1', False),
+            ('1111', False),
+            ('11111a', True),
+            (' ', False),
+            ('&', False),
+            ('2 Men & a Truck', True),
+        ]
+        for input, expected_result in data:
+            self.assertEqual(expected_result, blank_or_at_least_one_letter(input))
+
+    @override_settings(PHONE_NUMBER_REGEX=r'^\d{2}-\d{6}$')
+    def test_phone_number_validation(self):
+        with self.assertRaises(ValidationError):
+            ProviderFactory(phone_number='9').full_clean()
+        with self.assertRaises(ValidationError):
+            ProviderFactory(phone_number='ab-cdefgh').full_clean()
+        with self.assertRaises(ValidationError):
+            ProviderFactory(phone_number='12-3456789').full_clean()
+        with self.assertRaises(ValidationError):
+            ProviderFactory(phone_number='12345678').full_clean()
+        ProviderFactory(phone_number='12-345678').full_clean()
 
 
 class ProviderTypeTest(TestCase):

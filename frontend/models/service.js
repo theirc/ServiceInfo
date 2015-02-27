@@ -17,10 +17,8 @@ var Service = _base.BaseModel.extend({
 
         return new Promise(function(resolve, error) {
             Promise.all(wait).then(function(){
-                self.servicearea = area;
-                self._data.servicearea = area.data();
-                self.type = type;
-                self._data.servicetype = type.data();
+                self.attributes.servicearea = area;
+                self.attributes.servicetype = type;
 
                 resolve(self);
             }, function onerror(error) {

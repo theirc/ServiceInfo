@@ -1,5 +1,4 @@
 var config_data = {
-    //api_location: "//localhost:8000/",
     'forever.language': 'en',
     'forever.isStaff': false
 };
@@ -68,6 +67,13 @@ var config = module.exports = {
             cb.call(this);
         }
     },
+}
+
+// Immediately treat saved values as set
+for (var key in localStorage) {
+    if (localStorage.hasOwnProperty(key)) {
+        has_been_set[key] = true;
+    }
 }
 
 var $ = require('jquery');

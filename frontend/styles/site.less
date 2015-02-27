@@ -1,14 +1,14 @@
 body {
-  font-family: 'Source Sans Pro', Arial,sans-serif;
-  font-size: 14px;
+  font-size: 0.85em;  // Do not change to e.g. 14px,  it makes some of our text not renderable in our Arabic font
   line-height: 1.4em;
-  font-weight: 400;
+  font-weight: normal;  // Do not change to e.g. 400, it makes some of our text not renderable in our Arabic font
   color: #333;
   background-color: #F3F3F4;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   margin: 0;
 }
+
 html,body,#application {
     height: 100%;
 }
@@ -21,22 +21,18 @@ html,body,#application {
     padding: 5px;
 }
 .language-toggle {
-    background-color: #3cb879;
+    background-color: none;
 }
 
 .language-toggle button {
     border: 1px solid #3cb879;
-    height: 64px;
-    width: 33.33%;
+    height: 100px;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
-}
+	width: 400px;
+	display: block;
 
-.language-toggle button:not(:first-child) {
-    border-left-width: 2px;
-    border-left-style: solid;
-    border-left-color: #33A069;
 }
 
 .lang-btn-ar {
@@ -70,7 +66,6 @@ a {
 a:hover {
 	color: #3cb879;
 	text-decoration: none;
-	padding-bottom: 3px;
 	border-bottom: 1px solid #3cb879;
 }
 
@@ -92,6 +87,11 @@ li {
     overflow: hidden;
     clip: rect(0,0,0,0);
     border: 0;
+}
+
+.big {
+  font-size: 150%;
+  font-weight: bolder;
 }
 
 /*
@@ -119,7 +119,7 @@ li {
 
 	@media (min-width: 1000px) {
 		width: 48%;
-		float: left;
+		float: @start;
 	}
 
 	&:first-child {
@@ -137,33 +137,28 @@ li {
 			float: left;
 		}
 	}
-
-	&:only-child {
-		float: none;
-
-		@media (min-width: 1000px) {
-			float: left;
-		}
+	@media (min-width: 1000px) {
+		float: @end;
 	}
 }
 
 .form-options > .half {
 	width: 48%;
-	float: left;
+	float: @start;
 
 	&:first-child {
-		float: left;
+		float: @start;
 	}
 
 	&:last-child {
-	    float: right;
+	    float: @end;
 	}
 
 	&:only-child {
-		float: left;
+		float: @start;
 
 		@media (max-width:1000px) {
-			float: left;
+			float: @start;
 		}
 	}
 }
@@ -180,7 +175,7 @@ li {
 
 	@media (min-width: 1000px) {
 		width: 33.333%;
-		float: left;
+		float: @start;
         margin-top: 1em;
         padding: 0 5px;
         box-sizing: border-box;
@@ -200,7 +195,7 @@ li {
 
     @media (min-width: 1000px) {
         width: 19.0%;
-        float: left;
+        float: @start;
 
         &:first-child{
             margin-top: 0;
@@ -210,6 +205,18 @@ li {
 
 .center-text {
 	text-align: center;
+}
+.start-text {
+    text-align: @start;
+}
+.end-text {
+    text-align: @end;
+}
+.float-end {
+    float: @end;
+}
+.float-start {
+    float: @start;
 }
 
 .main-content {
@@ -298,7 +305,7 @@ li {
 */
 
 .dropdown {
-	text-align: left;
+	text-align: @start;
 	font-size: 14px;
 	width: 100%;
 	padding: 6px 12px;
@@ -326,12 +333,12 @@ li {
 	left: 0;
 	z-index: 1000;
 	display: none;
-	float: left;
+	float: @start;
 	min-width: 160px;
 	padding: 0;
 	margin: 0;
 	font-size: 14px;
-	text-align: left;
+	text-align: @start;
 	list-style: none;
 	background-color: #fff;
 	-webkit-background-clip: padding-box;
@@ -434,7 +441,7 @@ li {
 	border-color: #3CB879;
 	width: 100%;
 	text-align: center;
-    font-size: inherit;
+    font-size: .85em;
 	font-weight: 600;
 	color: #fff;
 	-webkit-border-radius: 4px;
@@ -450,6 +457,7 @@ li {
     background-color: #33A069;
     border: 1px solid #33A069;
     cursor: pointer;
+    color: #fff;
 }
 
 .primary-button:focus {
@@ -487,9 +495,9 @@ li {
 	margin: 0 auto;
 	width: 100%;
 	text-align: center;
+	font-size: .85em;
 	font-weight: 600;
 	color: #fff;
-	font-size: .75em;
 	padding: 16px 12px;
 	position: relative;
 	top: -15px;
@@ -547,11 +555,18 @@ li {
     position: relative;
     display: inline-block;
     vertical-align: middle;
-    -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
-    box-shadow: inset 1 1px 1px rgba(0,0,0,.2);}
+}
+.btn-group when (@direction=ltr) {
+  -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
+  box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
+}
+.btn-group when (@direction=rtl) {
+  -webkit-box-shadow: inset -1 1px 1px rgba(0,0,0,.2);
+  box-shadow: inset -1 1px 1px rgba(0,0,0,.2);
+}
 
 .btn-group>.btn {
-	text-align: left;
+	text-align: @start;
 	font-size: inherit;
 	width: 85%;
 	background-color: #FFF;
@@ -559,7 +574,7 @@ li {
 	border-style: solid;
 	border-color: #ccc;
     position: relative;
-    float: left;
+    float: @start;
 }
 
 .btn-group>.btn+.dropdown-toggle {
@@ -684,6 +699,12 @@ fieldset {
 		padding: 10px 0;
 	}
 }
+fieldset > legend when (@direction = ltr) {
+	margin: 0 0 5px -10px;
+}
+fieldset > legend when (@direction = rtl) {
+	margin: 0 -10px 5px 0;
+}
 
 /*
 *   Form Group
@@ -721,7 +742,7 @@ label {
     margin-bottom: 5px;
 
     .error {
-        float: right;
+        float: @end;
     }
 }
 .error {
@@ -729,7 +750,7 @@ label {
 }
 
 .control-label {
-	text-align: left;
+	text-align: @start;
 	padding-top: 6px;
 	font-weight: 600;
 	display: block;
@@ -750,14 +771,20 @@ label {
     background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
-    -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
-    box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
     -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+.form-control when (@direction = ltr) {
+    -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
+    box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
+}
+.form-control when (@direction = rtl) {
+    -webkit-box-shadow: inset -1 1px 1px rgba(0,0,0,.2);
+    box-shadow: inset -1 1px 1px rgba(0,0,0,.2);
 }
 
 .form-control:focus {
@@ -767,9 +794,21 @@ label {
 	box-shadow: none;
 }
 
+.form-control:invalid {
+  font-weight: bolder;
+  background-color: pink;
+}
+
 input.form-control {
-    -webkit-box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
-    box-shadow: inset 1 1px 1px rgba(0,0,0,.2);
+    text-align: @start;
+}
+input.form-control when (@direction = ltr) {
+  -webkit-box-shadow: inset 1 1px 1px rgba(0, 0, 0, .2);
+  box-shadow: inset 1 1px 1px rgba(0, 0, 0, .2);
+}
+input.form-control when (@direction = rtl) {
+  -webkit-box-shadow: inset -1 1px 1px rgba(0, 0, 0, .2);
+  box-shadow: inset -1 1px 1px rgba(0, 0, 0, .2);
 }
 
 select.form-control {
@@ -790,7 +829,7 @@ select.form-control {
 }
 
 .radio > label {
-	margin-right: 24px;
+	margin-@{end}: 24px;
 }
 
 /*
@@ -807,10 +846,17 @@ input[type=range] {
     width: 100%;
     height: 70px;
     background-color: #343538;
+}
+#application-header when (@direction = ltr) {
     -webkit-box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
     -moz-box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
     box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
     z-index: 99;
+}
+#application-header when (@direction = rtl) {
+    -webkit-box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
+    -moz-box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
+    box-shadow: -4px 0px 6px rgba(200, 200, 200, 1)
 }
 
 #application-header .brand #logo {
@@ -819,21 +865,32 @@ input[type=range] {
 
 #language-toggle {
     width: 100%;
-    height: 64px;
-    background: gray;
+    height: 100%;
     position: fixed;
-    bottom: 0px;
     transition: all 1s;
-    -webkit-box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
-    -moz-box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
-    box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
+    -webkit-box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+    z-index: 4;
+    &.no-animate {
+    	transition: none;
+    }
 }
 
 #language-toggle.hidden {
-    -webkit-transform: translateX(-50%) scale(0.1);
-    transform: translateX(-50%) scale(0.1);
     opacity: 0;
     transition: all 1s;
+    &.no-animate {
+    	transition: none;
+    }
+}
+#language-toggle.hidden  when (@direction = ltr) {
+  -webkit-transform: translateX(-50%) scale(0);
+  transform: translateX(-50%) scale(0);
+}
+#language-toggle.hidden  when (@direction = rtl) {
+  -webkit-transform: translateX(50%) scale(0);
+  transform: translateX(50%) scale(0);
 }
 
 #menu {
@@ -886,7 +943,7 @@ input[type=range] {
         max-width: 200px;
         display: inline-block;
         position: fixed;
-        float: left;
+        float: @start;
         overflow: auto;
     }
     #application-header .brand {
@@ -909,12 +966,21 @@ input[type=range] {
     #page-container {
         display: inline-block;
         width: 80%;
-        margin-left: 20%;
         height: 100%;
+        margin-@{start}: 20%;
     }
     #menu-toggle {
         display: none;
     }
+
+	.modal-bg {
+		background-color: rgba(0, 0, 0, 0.65);
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
 }
 
 @media only screen and (max-width: 767px) {
@@ -938,7 +1004,7 @@ input[type=range] {
     }
     #menu {
         position: absolute;
-        right: 0px;
+        @{end}: 0px;
         top: 68px;
         width: 100%;
         overflow: hidden;
@@ -952,13 +1018,14 @@ input[type=range] {
     }
     .menu-open #menu {
         max-height: 500px;
+        z-index: 3;
         li {
             text-align: center;
         }
     }
     #menu-toggle {
         position: absolute;
-        right: 16px;
+        @{end}: 16px;
         top: 16px;
         padding: 8px 10px;
         background-color: inherit;
@@ -966,12 +1033,18 @@ input[type=range] {
         border-color: white;
         font-size: .75em;
     }
+    .modal-bg {
+    	background-color: rgba(0, 0, 0, .65);
+    	div#language-toggle > .language-toggle {
+    		background-color: rgba(0, 0, 0, 1.0);
+    	}
+    }
 }
 
 @media only screen and (min-width: 1000px) {
 	#page-container {
 	    display: inline-block;
-	    margin-left: 200px;
+	    margin-@{start}: 200px;
 	}
 }
 
@@ -1261,47 +1334,66 @@ Home page
 Table
 */
 
+table when (@direction = ltr) {
+  margin: 0 0 0 50%;
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+table when (@direction = rtl) {
+  margin: 0 50% 0 0;
+  -webkit-transform: translate(50%, 0);
+  transform: translate(50%, 0);
+}
+table#service-status a.update::before when (@direction = ltr) {
+  content: "\2937";  // ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS
+}
+table#service-status a.update::before when (@direction = rtl) {
+  content: "\2936"; // ARROW POINTING DOWNWARDS THEN CURVING LEFTWARDS
+}
 table {
  	width: 97.25%;
-	text-align: left;
+	text-align: @start;
 	background-color: #fff;
 	border-collapse: collapse;
-	margin: 0 0 0 50%;
-	-webkit-transform: translate(-50%, 0);
-	transform: translate(-50%, 0);
+	z-index: 2;
 	tr {
-        border-right-width: 5px;
-        border-right-style: solid;
+        border-@{end}-width: 5px;
+        border-@{end}-style: solid;
 
 		&:nth-child(even) {
 	    	background-color: #e8e8e8;
-	    	border-right-color: #e8e8e8;
+	    	border-@{end}-color: #e8e8e8;
 		}
 		&:nth-child(odd) {
 	   		background-color: #fff;
-	   		border-right-color: #fff;
+	   		border-@{end}-color: #fff;
 		}
 		&.approved {
-			border-right-color: #3cb879;
+			border-@{end}-color: #3cb879;
 		}
 		&.denied {
-			border-right-color: #E04733;
+			border-@{end}-color: #E04733;
 		}
         &.update td:first-child span {
-            margin-left: 0.5em;
+            margin-@{start}: 0.5em;
         }
 	}
 	th {
 		background-color: #fdc82f !important;
-		padding: 16px 24px 16px 8px !important;
-		border-right: 1px dotted #EBAF00;
+		border-@{end}: 1px dotted #EBAF00;
 		border-bottom: none;
 		font-size: 110%;
 		font-weight: bold;
 		&:last-child {
-			border-right: 5px solid #fdc82f;
+			border-@{end}: 5px solid #fdc82f;
 		}
 	}
+    th when (@direction = ltr) {
+		padding: 16px 24px 16px 8px !important;
+    }
+    th when (@direction = rtl) {
+		padding: 16px 8px 16px 24px !important;
+    }
 
 	td {
 	    vertical-align: middle;
@@ -1338,10 +1430,10 @@ table {
 		tr {
 			border-top: 1px solid #c8c8c8;
 			&.approved {
-				border-right: 5px solid #3cb879
+				border-@{end}: 5px solid #3cb879
 			}
 			&.denied {
-				border-right: 5px solid #E04733;
+				border-@{end}: 5px solid #E04733;
 			}
 			&:last-child {
 				border-bottom: 1px solid #c8c8c8;
@@ -1352,19 +1444,19 @@ table {
 			border: none;
 			position: relative;
 			border-bottom: 1px solid #DDD;
-            padding-left: 1em;
+            padding-@{start}: 1em;
 		}
 
 		.vertical-td {
 			position: absolute;
 			top: 0;
-			left: 0;
+			@{start}: 0;
 			padding: 8px;
-			padding-left: 37%;
-			padding-right: 10px;
+			padding-@{start}: 37%;
+			padding-@{end}: 10px;
 			font-weight: bold;
 			white-space: nowrap;
-			border-left: 5px solid #fdc82f !important;
+			border-@{start}: 5px solid #fdc82f !important;
 		}
 
     .vertical-header {

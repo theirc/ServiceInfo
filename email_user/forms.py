@@ -4,6 +4,7 @@ https://docs.djangoproject.com/en/1.7/topics/auth/customizing/#a-full-example
 """
 from __future__ import absolute_import
 from django import forms
+from django.conf import settings
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.utils.translation import ugettext_lazy as _
 
@@ -25,8 +26,10 @@ class EmailUserCreationForm(forms.ModelForm):
         error_messages={
             'invalid': _("This value may contain only letters, numbers and "
                          "@/./+/-/_ characters.")})
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput,
+                                min_length=getattr(settings, 'MINIMUM_PASSWORD_LENGTH', None))
+    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput,
+                                min_length=getattr(settings, 'MINIMUM_PASSWORD_LENGTH', None))
 
     class Meta:
         model = EmailUser

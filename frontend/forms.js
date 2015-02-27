@@ -81,6 +81,11 @@ var forms = module.exports = {
             var empty_option = $('<option/>');
             empty_option.text(empty_label);
 
+            data.sort(function(a, b){
+                var prop = "name";
+                return ((a[prop] < b[prop]) ? -1 : ((a[prop] > b[prop]) ? 1 : 0));
+            })
+
             $field.html("");
             $field.append(empty_option)
 
@@ -106,6 +111,24 @@ var forms = module.exports = {
         });
     },
 
+    show_errors_on_form: function($form, e) {
+        // returns missing...
+        var self = this,
+            missing = {},
+            errors = e.responseJSON;
+        $.each(errors, function(k) {
+            var $error = self.getFieldLabel($form, k).find('.error');
+            if ($error) {
+                $error.text(this[0]);
+            } else {
+                missing[k] = this[0];
+            }
+        })
+        if (e.status >= 500) {
+            $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
+        }
+    },
+
     submit: function($form, action, data, errors) {
         var errors = errors || {};
         var self = this;
@@ -121,18 +144,7 @@ var forms = module.exports = {
                 function onerror(e) {
                     $submit.removeAttr('disabled');
                     $.extend(errors, e.responseJSON);
-                    var missing = {};
-                    $.each(errors, function(k) {
-                        var $error = self.getFieldLabel($form, k).find('.error');
-                        if ($error) {
-                            $error.text(this[0]);
-                        } else {
-                            missing[k] = this[0];
-                        }
-                    })
-                    if (e.status >= 500) {
-                        $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
-                    }
+                    var missing = self.show_errors_on_form($form, e);
                     error(missing);
                 }
             );
