@@ -11,6 +11,8 @@ var ServiceAreas = _base.BaseCollection.extend({
     model: ServiceArea,
 })
 
+_base.preload("servicearea", ServiceAreas);
+
 module.exports = {
     ServiceArea: ServiceArea,
     ServiceAreas: ServiceAreas,

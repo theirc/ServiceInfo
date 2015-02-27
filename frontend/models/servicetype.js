@@ -11,6 +11,8 @@ var ServiceTypes = _base.BaseCollection.extend({
     model: ServiceType,
 })
 
+_base.preload("servicetype", ServiceTypes);
+
 module.exports = {
     ServiceType: ServiceType,
     ServiceTypes: ServiceTypes,
