@@ -2,10 +2,8 @@
 @start: left;
 @end: right;
 
-@import "../fonts/akzidenz-grotesk.css";
-
 body {
-  font-family: "akzidenz-grotesk", 'Source Sans Pro', Arial, sans-serif;
+  font-family: @latin_font, @fallback_fonts;
 }
 
 @import "site.less";
