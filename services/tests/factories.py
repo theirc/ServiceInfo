@@ -76,6 +76,9 @@ class ServiceFactory(factory.DjangoModelFactory):
     description_en = factory.fuzzy.FuzzyText()
     description_ar = factory.fuzzy.FuzzyText()
     description_fr = factory.fuzzy.FuzzyText()
+    additional_info_en = factory.fuzzy.FuzzyText()
+    additional_info_ar = factory.fuzzy.FuzzyText()
+    additional_info_fr = factory.fuzzy.FuzzyText()
     area_of_service = factory.SubFactory(ServiceAreaFactory)
     type = factory.SubFactory(ServiceTypeFactory)
 

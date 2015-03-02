@@ -215,6 +215,9 @@ LOGGING = {
 
 # Application settings
 REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'rest_framework.filters.DjangoFilterBackend',
+    ],
     # Use Django's standard `django.contrib.auth` permissions
     # by default.  (We'll alter this as needed on a few specific
     # views.)
