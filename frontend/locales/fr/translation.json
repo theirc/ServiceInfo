@@ -79,7 +79,7 @@
         "Service-Area": "Zone de service",
         "Type": "type de service",
         "Service-Description": "description",
-        "Service-Hours": "Heures de service",
+        "Service-Hours": "journée de travail",
         "Additional-Information": "Informations supplémentaires (champ facultatif)",
         "Service-Cost": "Coût du service (champ facultatif)",
         "Selection-Criteria": "Critères de sélection (champ optionnel)",
@@ -109,16 +109,15 @@
         "Form-Sections": {
             "Basic": {
                 "Legend": "Détails de base d'enregistrement d'un fournisseur de service:",
-                "Name": "plein nom",
+                "Name": "Nom du fournisseur de service",
                 "Password": "mot de passe",
                 "PasswordConfirm": "Confirmez Le Mot De Passe",
                 "Provider-Type": "Type de prestataire",
                 "Provider-Type-Choose": "Choisissez un type de fournisseur",
-                "Phone-Number": "Numéro de téléphone",
+                "Phone-Number": "Numéro de téléphone (NN-NNNNNN)",
                 "Email": "Email",
                 "EmailPlaceholder": "Entrez votre Email",
-                "Website": "Site Web (champ optionel)",
-                "WebsitePlaceholder": "Entrez votre URL de site web",
+                "Website": "URL du site Web (champ facultatif)",
                 "MonthlyBeneficiaries": "Nombre de bénéficiaires mensuelles",
                 "Description": "description"
             },
@@ -130,7 +129,7 @@
                 "Service-Description": "Description",
                 "Service-Hours": "Heures de service",
                 "Additional-Information": "Informations supplémentaires (champ facultatif)",
-                "Service-Cost": "Coût du service (champ facultatif)",
+                "Service-Cost": "Coût du service (champ facultatif, en USD)",
                 "Selection-Criteria": "Critères de sélection (champ optionnel)"
             },
             "Form-Submit-Options": {
@@ -170,6 +169,8 @@
                 "Page-Description": "Voici une liste des services que vous avez appliqués à fournir. Services approuvés sont marqués en vert. Les services non approuvés sont marqués en rouge. Les services sont en attente d'approbation banalisée."
             }
         },
+        "Empty-Message": "Vous ne avez pas encore présenté de services. Vous pouvez soumettre votre premier service pour examen en appuyant sur le bouton Nouveau service.",
+        "Add-Service": "Nouveau service",
         "Table": {
             "Thead": {
                 "Name": "nom:",

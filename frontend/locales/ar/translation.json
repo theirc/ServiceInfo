@@ -79,7 +79,7 @@
         "Service-Area": "منطقة الخدمة",
         "Type": "نوع الخدمة",
         "Service-Description": "تفصيل",
-        "Service-Hours": "ساعات الخدمة",
+        "Service-Hours": "ساعات العمل",
         "Additional-Information": "معلومات إضافية (حقل اختياري)",
         "Service-Cost": "تكلفة الخدمة (حقل اختياري)",
         "Selection-Criteria": "معايير الاختيار (حقل اختياري)",
@@ -109,16 +109,15 @@
         "Form-Sections": {
             "Basic": {
                 "Legend": "التفاصيل الأساسية لتسجيل مزود خدمات:",
-                "Name": "الاسم الكامل",
+                "Name": "اسم مقدم الخدمة",
                 "Password": "كلمة السر",
                 "PasswordConfirm": "تأكيد كلمة المرور",
                 "Provider-Type": "نوع مزود",
                 "Provider-Type-Choose": "اختر نوع مزود",
-                "Phone-Number": "رقم الهاتف",
+                "Phone-Number": "رقم الهاتف (رر-رررررر)",
                 "Email": "البريد الإلكتروني",
                 "EmailPlaceholder": "أدخل البريد الإلكتروني الخاص بك",
-                "Website": "موقع (حقل اختياري)",
-                "WebsitePlaceholder": "أدخل URL موقع الويب الخاص بك",
+                "Website": "رابط الموقع (حقل اختياري)",
                 "MonthlyBeneficiaries": "عدد المستفيدين شهرياَ",
                 "Description": "توصيف "
             },
@@ -130,7 +129,7 @@
                 "Service-Description": "توصيف ",
                 "Service-Hours": "ساعات الخدمة",
                 "Additional-Information": "معلومات إضافية (حقل اختياري)",
-                "Service-Cost": "تكلفة الخدمة (حقل اختياري)",
+                "Service-Cost": "تكلفة الخدمة (حقل الاختياري، في USD)",
                 "Selection-Criteria": "معايير الاختيار (حقل اختياري)"
             },
             "Form-Submit-Options": {
@@ -170,6 +169,8 @@
                 "Page-Description": "وفيما يلي قائمة من الخدمات التي تطبق على توفير. وتتميز الخدمات وافق باللون الأخضر. وتتميز خدمات لم يفوافق عليها في الحمراء. خدمات بانتظار الموافقة هي لا تحمل علامات مميزة."
             }
         },
+        "Empty-Message": "لم تدخل أي خدمة للأن. يمكنك إدخال أول خدمة لك بالضغط على مفتاح أضف خدمة جديدة .",
+        "Add-Service": "خدمة جديدة",
         "Table": {
             "Thead": {
                 "Name": "الاسم:",
