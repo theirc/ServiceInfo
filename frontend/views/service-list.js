@@ -43,8 +43,8 @@ module.exports = Backbone.View.extend({
                     } else {
                         records[i]._sort = parseInt(records[i].url.match(/(\d+)\/$/)[1]);
                     }
-                    records[i].servicearea = records[i].servicearea.data();
-                    records[i].servicetype = records[i].servicetype.data();
+                    records[i].servicearea = records[i].servicearea;
+                    records[i].servicetype = records[i].servicetype;
                 }
                 records.sort(function(a, b){ return a._sort > b._sort; });
                 $el.html(template({
