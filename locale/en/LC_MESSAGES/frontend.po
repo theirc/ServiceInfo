@@ -285,6 +285,21 @@ msgstr "You have not submitted any services yet. You may submit your first servi
 msgid "Service-List##Add-Service"
 msgstr "New Service"
 
+msgid "Service-List##Status##draft"
+msgstr "draft"
+
+msgid "Service-List##Status##current"
+msgstr "current"
+
+msgid "Service-List##Status##rejected"
+msgstr "rejected"
+
+msgid "Service-List##Status##canceled"
+msgstr "canceled"
+
+msgid "Service-List##Status##archived"
+msgstr "archived"
+
 msgid "Service-List##Table##Thead##Name"
 msgstr "Name:"
 

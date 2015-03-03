@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-24 15:18+0000\n"
+"PO-Revision-Date: 2015-02-27 06:45+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -137,7 +137,7 @@ msgid "Service-Form##Service-Description"
 msgstr "description"
 
 msgid "Service-Form##Service-Hours"
-msgstr "Heures de service"
+msgstr "journée de travail"
 
 msgid "Service-Form##Additional-Information"
 msgstr "Informations supplémentaires (champ facultatif)"
@@ -186,7 +186,7 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##Legend"
 msgstr "Détails de base d'enregistrement d'un fournisseur de service:"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Name"
-msgstr "plein nom"
+msgstr "Nom du fournisseur de service"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
 msgstr "mot de passe"
@@ -201,7 +201,7 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
 msgstr "Choisissez un type de fournisseur"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
-msgstr "Numéro de téléphone"
+msgstr "Numéro de téléphone (NN-NNNNNN)"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
 msgstr "Email"
@@ -210,10 +210,7 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##EmailPlaceholder"
 msgstr "Entrez votre Email"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
-msgstr "Site Web (champ optionel)"
-
-msgid "Provider-Registration-Form##Form-Sections##Basic##WebsitePlaceholder"
-msgstr "Entrez votre URL de site web"
+msgstr "URL du site Web (champ facultatif)"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
 msgstr "Nombre de bénéficiaires mensuelles"
@@ -252,7 +249,7 @@ msgstr "Informations supplémentaires (champ facultatif)"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Service-Cost"
-msgstr "Coût du service (champ facultatif)"
+msgstr "Coût du service (champ facultatif, en USD)"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Selection-"
@@ -301,6 +298,12 @@ msgstr "Liste des services"
 
 msgid "Service-List##Page-Head##Page-Description##Page-Description"
 msgstr "Voici une liste des services que vous avez appliqués à fournir. Services approuvés sont marqués en vert. Les services non approuvés sont marqués en rouge. Les services sont en attente d'approbation banalisée."
+
+msgid "Service-List##Empty-Message"
+msgstr "Vous ne avez pas encore présenté de services. Vous pouvez soumettre votre premier service pour examen en appuyant sur le bouton Nouveau service."
+
+msgid "Service-List##Add-Service"
+msgstr "Nouveau service"
 
 msgid "Service-List##Table##Thead##Name"
 msgstr "nom:"
