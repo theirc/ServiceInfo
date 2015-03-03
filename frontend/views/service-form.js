@@ -55,7 +55,6 @@ module.exports = Backbone.View.extend({
     },
 
     render: function() {
-        console.log("render", new Date());
         var $el = this.$el;
         var criteria = [];
         if (this.update_of) {
