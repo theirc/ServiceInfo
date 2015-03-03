@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-26 23:36+0200\n"
+"POT-Creation-Date: 2015-03-03 15:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,49 +30,49 @@ msgstr ""
 msgid "A user with that email already exists."
 msgstr ""
 
-#: api/serializers.py:215
+#: api/serializers.py:216
 msgid "You may only submit updates to current or draft services"
 msgstr ""
 
-#: api/serializers.py:225
+#: api/serializers.py:226
 msgid "Close time is missing."
 msgstr ""
 
-#: api/serializers.py:227
+#: api/serializers.py:228
 msgid "Open time is missing."
 msgstr ""
 
-#: api/serializers.py:229
+#: api/serializers.py:230
 msgid "Close time is not later than open time."
 msgstr ""
 
-#: api/serializers.py:293
+#: api/serializers.py:302
 msgid "User account is disabled."
 msgstr ""
 
-#: api/serializers.py:296
+#: api/serializers.py:305
 msgid "Unable to log in with provided credentials."
 msgstr ""
 
-#: api/serializers.py:318
+#: api/serializers.py:327
 msgid ""
 "Activation key is invalid. Check that it was copied correctly and has not "
 "already been used."
 msgstr ""
 
-#: api/serializers.py:339 api/serializers.py:391
+#: api/serializers.py:348 api/serializers.py:400
 msgid "No user with that email"
 msgstr ""
 
-#: api/serializers.py:357 api/serializers.py:375
+#: api/serializers.py:366 api/serializers.py:384
 msgid "Password reset key is not valid"
 msgstr ""
 
-#: api/serializers.py:394
+#: api/serializers.py:403
 msgid "User is not pending activation"
 msgstr ""
 
-#: api/views.py:113
+#: api/views.py:174
 msgid "Service record must be current or pending changes to be canceled"
 msgstr ""
 
