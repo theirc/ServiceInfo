@@ -197,8 +197,7 @@ class ServiceSerializer(RequireOneTranslationMixin,
             'thursday_open', 'thursday_close',
             'friday_open', 'friday_close',
             'saturday_open', 'saturday_close',
-            'type',
-            'provider'
+            'type'
         )
         required_translated_fields = ['name', 'description']
 
