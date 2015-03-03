@@ -19,7 +19,8 @@ var views = {
     "login": require('./views/login'),
     "password-reset": require('./views/password-reset'),
     "password-reset-form": require('./views/password-reset-form'),
-    "admin": require('./views/admin')
+    "admin": require('./views/admin'),
+    "service-detail": require('./views/service-detail'),
 };
 
 var view;
@@ -68,12 +69,16 @@ module.exports = Backbone.Router.extend({
         "register/changed": loadPage("register-changed"),
         "register/confirm": loadPage("register-confirm"),
         "register/verify/:key": loadPage("account-activate", ['key']),
-        "service": loadPage("service"),
-        "service/:id": loadPage("service", ['id']),
+        "manage/service": loadPage("service"),
+        "manage/service/:id": loadPage("service", ['id']),
+        "manage/service/cancel/:id": loadPage("service-cancel", ['id']),
+        "manage/service-list": loadPage("service-list"),
+
+        "service/:id": loadPage("service-detail", ['id']),
+
         "feedback": loadPage("feedback"),
         "map": loadPage("map"),
-        "service/cancel/:id": loadPage("service-cancel", ['id']),
-        "service-list": loadPage("service-list"),
+
         "login": loadPage("login"),
         "password-reset": loadPage("password-reset"),
         "password-reset-form": loadPage("password-reset-form"),

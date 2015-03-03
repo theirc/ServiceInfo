@@ -58,7 +58,7 @@ module.exports = Backbone.View.extend({
             var path = 'api/services/' + data.id + '/cancel/';
             api.request('POST', path).then(
                 function success(resp) {
-                    window.location = "#/service-list";
+                    window.location = "#/manage/service-list";
                 },
                 function error(e) {
                     messages.error(e);

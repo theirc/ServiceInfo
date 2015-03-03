@@ -33,7 +33,7 @@
 			<tr class="{{#if this.isApproved }}approved{{/if}} {{#if this.isRejected}}denied{{/if}} {{#if this.update_of}}update{{/if}}">
 				<td>
 					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td">
-                        <a href="#/service/{{ this.id }}"{{#if this.is_update}} class="update"{{/if}}>{{ this.name }}</a>
+                        <a href="#/manage/service/{{ this.id }}"{{#if this.is_update}} class="update"{{/if}}>{{ this.name }}</a>
                     </span>
 				</td>
 				<td>
@@ -46,7 +46,7 @@
 					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Area"></div><span class="vertical-td" data-i18n="Service-List.Status.{{ this.status }}">{{ this.status }}</span>
 				</td>
 				<td>
-				    <div class="vertical-header" data-i18n="Service-List.Table.Thead.Remove"></div><span class="vertical-td"><a href="#/service/cancel/{{ this.id }}"><span
+				    <div class="vertical-header" data-i18n="Service-List.Table.Thead.Remove"></div><span class="vertical-td"><a href="#/manage/service/cancel/{{ this.id }}"><span
 				      {{#if this.is_draft }}
       				     data-i18n="Service-Remove-Change.Remove-Change"
                       {{else}}
@@ -63,7 +63,7 @@
 {{/unless}}
 <div class="main-content">
     <div class="third float-start">
-        <a class="btn primary-button" href="#/service" data-i18n="Service-List.Add-Service"></a>
+        <a class="btn primary-button" href="#/manage/service" data-i18n="Service-List.Add-Service"></a>
     </div>
 </div>
 <!-- End Main Content -->
