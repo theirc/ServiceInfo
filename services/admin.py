@@ -107,17 +107,17 @@ class ServiceAdmin(GeoModelAdmin):
                               _("Only services in draft status may be approved"),
                               messages.ERROR)
             return
-        any = False
+        any_approved = False
         for service in queryset:
             try:
                 service.staff_approve()
             except ValidationError as e:
-                msg = _("Unable to approve service '{name}'.").format(name=service.name)
-                msg += " %s" % validation_error_as_text(e)
+                msg = _("Unable to approve service '{name}': {error}.")
+                msg = msg.format(name=service.name, error=validation_error_as_text(e))
                 messages.error(request, msg)
             else:
-                any = True
-        if any:
+                any_approved = True
+        if any_approved:
             self.message_user(request, _("Services have been approved"))
     approve.short_description = _("Approve new or changed service")
 
@@ -141,8 +141,8 @@ class ServiceAdmin(GeoModelAdmin):
             try:
                 obj.staff_approve()
             except ValidationError as e:
-                msg = _("Unable to approve service '{name}'.").format(name=obj.name)
-                msg += " %s" % validation_error_as_text(e)
+                msg = _("Unable to approve service '{name}': {error}.").format(name=obj.name)
+                msg = msg.format(name=obj.name, error=validation_error_as_text(e))
                 self.message_user(request, msg, messages.ERROR)
                 redirect_url = add_preserved_filters(
                     {'preserved_filters': self.get_preserved_filters(request),
