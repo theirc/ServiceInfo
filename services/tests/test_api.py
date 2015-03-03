@@ -332,9 +332,7 @@ class ServiceAPITest(APITestMixin, TestCase):
 
     def test_create_service(self):
         area = ServiceAreaFactory()
-        wrong_provider = ProviderFactory(name_en="Wrong provider")
         data = {
-            'provider': wrong_provider.get_api_url(),  # should just be ignored
             'name_en': 'Some service',
             'area_of_service': area.get_api_url(),
             'description_en': "Awesome\nService",
@@ -365,7 +363,6 @@ class ServiceAPITest(APITestMixin, TestCase):
         data = model_to_dict(service)
         data['url'] = service.get_api_url()
         data['type'] = service.type.get_api_url()
-        data['provider'] = service.provider.get_api_url()
         data['area_of_service'] = service.area_of_service.get_api_url()
         data['selection_criteria'] = [
             {'text_en': 'Crit en'},
@@ -376,9 +373,7 @@ class ServiceAPITest(APITestMixin, TestCase):
 
     def test_create_service_missing_close_time(self):
         area = ServiceAreaFactory()
-        wrong_provider = ProviderFactory(name_en="Wrong provider")
         data = {
-            'provider': wrong_provider.get_api_url(),  # should just be ignored
             'name_en': 'Some service',
             'area_of_service': area.get_api_url(),
             'description_en': "Awesome\nService",
@@ -398,9 +393,7 @@ class ServiceAPITest(APITestMixin, TestCase):
 
     def test_create_service_missing_open_time(self):
         area = ServiceAreaFactory()
-        wrong_provider = ProviderFactory(name_en="Wrong provider")
         data = {
-            'provider': wrong_provider.get_api_url(),  # should just be ignored
             'name_en': 'Some service',
             'area_of_service': area.get_api_url(),
             'description_en': "Awesome\nService",
@@ -420,9 +413,7 @@ class ServiceAPITest(APITestMixin, TestCase):
 
     def test_create_service_open_close_reversed(self):
         area = ServiceAreaFactory()
-        wrong_provider = ProviderFactory(name_en="Wrong provider")
         data = {
-            'provider': wrong_provider.get_api_url(),  # should just be ignored
             'name_en': 'Some service',
             'area_of_service': area.get_api_url(),
             'description_en': "Awesome\nService",
