@@ -32,6 +32,12 @@ var Service = _base.BaseModel.extend({
         var data = _base.BaseModel.prototype.data.apply(this, arguments);
         data.isApproved = this.isApproved();
         data.isRejected = this.isRejected();
+        if (this.attributes.servicearea) {
+            data.servicearea = this.attributes.servicearea.data();
+        }
+        if (this.attributes.servicetype) {
+            data.servicetype = this.attributes.servicetype.data();
+        }
         return data;
     },
 
