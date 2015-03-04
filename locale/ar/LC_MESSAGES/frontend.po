@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-27 06:39+0000\n"
+"PO-Revision-Date: 2015-03-04 06:42+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -304,6 +304,21 @@ msgstr "لم تدخل أي خدمة للأن. يمكنك إدخال أول خد�
 
 msgid "Service-List##Add-Service"
 msgstr "خدمة جديدة"
+
+msgid "Service-List##Status##draft"
+msgstr "مسودة"
+
+msgid "Service-List##Status##current"
+msgstr "جاري"
+
+msgid "Service-List##Status##rejected"
+msgstr "مرفوض"
+
+msgid "Service-List##Status##canceled"
+msgstr "ألغيت"
+
+msgid "Service-List##Status##archived"
+msgstr "أرشفة"
 
 msgid "Service-List##Table##Thead##Name"
 msgstr "الاسم:"

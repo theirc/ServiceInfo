@@ -1,3 +1,9 @@
+@import "../fonts/ge-ss-two-light.css";
+@import "../fonts/akzidenz-grotesk.css";
+
+@arabic_font: 'GE SS Two Light';
+@latin_font: "akzidenz-grotesk";
+
 body {
   font-size: 0.85em;  // Do not change to e.g. 14px,  it makes some of our text not renderable in our Arabic font
   line-height: 1.4em;
@@ -38,6 +44,7 @@ html,body,#application {
 .lang-btn-ar {
     position: relative;
     top: -1px;
+    font-family: @arabic_font, @latin_font;
 }
 
 /*
@@ -307,7 +314,7 @@ li {
 		}
 
 		.form-group{
-			margin-bottom: 18px,
+			margin-bottom: 18px;
 		}
 	}
 }
@@ -1503,13 +1510,13 @@ table {
 		&:last-child {
 			border-@{end}: 5px solid #fdc82f;
 		}
+        & when (@direction = ltr) {
+          padding: 16px 24px 16px 8px;
+        }
+        & when (@direction = rtl) {
+          padding: 16px 8px 16px 24px;
+        }
 	}
-    th when (@direction = ltr) {
-		padding: 16px 24px 16px 8px !important;
-    }
-    th when (@direction = rtl) {
-		padding: 16px 8px 16px 24px !important;
-    }
 
 	td {
 	    vertical-align: middle;
