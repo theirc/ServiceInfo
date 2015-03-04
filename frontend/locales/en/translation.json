@@ -52,17 +52,18 @@
         "Title": "Service Provider Map"
       },
       "Page-Description": {
-        "Page-Description": "Use the filtered search below to find a service provider who meets your needs."
+        "Page-Description": "Use the filtered search below to find the service that meets your needs."
       }
     },
     "Filtered-Search": {
       "Label": "Search term",
-      "Submit": "Submit",
-      "Service-Type": "Filter by service type",
-      "Distance": "Distance",
+      "Submit": "Search",
+      "Service-Type": "Service type",
+      "Distance": "Filter by distance",
       "Area": "Area",
-      "Filter-Area": "Filter-Area",
-      "Filter-By-Area": "Filter your search by area"
+      "Filter-Area": "Filter by area",
+      "Filter-By-Area": "Filter your search by area",
+      "Search-Placeholder": "I am searching for..."
     },
     "Map": {"Toggle": "List View"},
     "List": {

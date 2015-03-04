@@ -17,54 +17,64 @@
 			<!-- Main Search -->
 			<div class="side-section">
 				<!-- Main Search -->
-				<form>
-					<label for="filtered-search" class="control-label"><span data-i18n="Service-Map.Filtered-Search.Label"></span></label>
-					<input name="filtered-search" type="text" class="form-control group-input"></input>
-				</form>
-				<div class="form-group">
-		            <label for="id_service_type" class="control-label"><span data-i18n="Service-Map.Filtered-Search.Service-Type"></span><span class=error></label>
-		            <div class="form-group">
-		              <select id="id_type" name="type" class=form-control>
-						<ul>
-							<li>1</li>
-							<li>2</li>
-							<li>3</li>
-						</ul>
+				<div class="primary-search">	
+					<form>
+						<input name="filtered-search" type="text" class="form-control group-input" data-i18n="[placeholder]Service-Map.Filtered-Search.Search-Placeholder"></input>
+					</form>
+					<div class="form-group">
+			            <div class="form-group"><span class=error></label>
+			              <select id="id_type" name="type" class=form-control>
+							<ul>
+								<li>1</li>
+								<li>2</li>
+								<li>3</li>
+							</ul>
 
-		              </select>
-		            </div>
+			              </select>
+			            </div>
+					</div>
+					<button name="search" type="submit" class="primary-button group-submit search"></button>
 				</div>
 
 				<!-- Filter Area -->
 				<div id="search-filter">
-					<label for="id_service_type" class="control-label"><span data-i18n="Service-Map.Filtered-Search.Filter-By-Area"></span><span class=error></label>
 					<div class="options">
-						<div class="half">
-							<button class="btn secondary-button" data-i18n="Service-Map.Filtered-Search.Distance"></button>
+						<div class="third">
+							<a data-i18n="Service-Map.Filtered-Search.Distance"></a>
 						</div>
-						<div class="half">
-							<button class="btn secondary-button" data-i18n="Service-Map.Filtered-Search.Area"></button>
+						<div class="two-third">
+							<div class="form-group">
+					            <label for="id_service_type" class="control-label"><span data-i18n="Service-Map.Filtered-Search.Filter-Area"></span><span class=error></label>
+					            <div class="form-group">
+					              <select id="id_area" name="type" class=form-control>
+									<ul>
+										<li>Filter by area</li>
+										<li>area 1</li>
+										<li>area 2</li>
+										<li>area 3</li>
+									</ul>
+					              </select>
+					            </div>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-			            <label for="id_service_type" class="control-label"><span data-i18n="Service-Map.Filtered-Search.Filter-Area"></span><span class=error></label>
-			            <div class="form-group">
-			              <select id="id_area" name="type" class=form-control>
-							<ul>
-								<li>area 1</li>
-								<li>area 2</li>
-								<li>area 3</li>
-							</ul>
-			              </select>
-			            </div>
 					</div>
 				</div>
-
-				<button name="search" type="submit" class="primary-button group-submit search" data-i18n="Service-Map.Filtered-Search.Submit"></button>
-
 			</div>
+		</div>
 
-<!--			<div id="service-map">
+		<div class="row">
+			<div class="map-toggle">
+				<div class="half">
+					<button name="map-toggle" type="toggle" class="primary-button" data-i18n="Service-Map.Map.Toggle"></button>
+				</div>
+				<div class="half">
+					<button name="map-toggle" type="toggle" class="primary-button" data-i18n="Service-Map.List.Toggle"></button>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+<!--		<div id="service-map">
 				<div class="map">
 					<p>Service map goes here</p>
 	                <span class="tool-tip"></span>
@@ -76,25 +86,37 @@
 			<div id="service-list">
 				<div class="list">
 	                <div class="map-toggle">
-		                <button name="map-toggle" type="toggle" class="primary-button" data-i18n="Service-Map.List.Toggle"></button>
 		            </div>
 		            <ul>
 		            	<li>
 		            		<div class="name"><a href="#">Really Long Service Provider Name</a></div>
-		            		<div class="area" data-i18n="Service-Map.List.Area">Provider Selected Service Area Goes Here</div>
-		            		<div class="hours" data-i18n="Service-Map.List.Hours">Todays Service Hours Go Here</div>
+		            		<div class="area control-label" data-i18n="Service-Map.List.Area">Provider Selected Service Area Goes Here</div>
+		            		<div class="hours control-label" data-i18n="Service-Map.List.Hours">Todays Service Hours Go Here</div>
 		            		<div class="contact">
-		            			<div class="third">
+		            			<div class="half">
 		            				<span class="control-label" data-i18n="Service-Map.List.Phone"></span>
 		            			</div>
-		            			<div class="third">
-		            				<span class="control-label" data-i18n="Service-Map.List.Email"></span>
-		            			</div>
-		            			<div class="third">
+		            			<div class="half">
 		            				<span class="control-label" data-i18n="Service-Map.List.Website"></span>
 		            			</div>
 		            			<div class="description">
-		            				<p>Limit the length of the description text to 100 characters for the list view of services.</p>
+		            				<p>Description goes here. Limit the length of the description text to 100 characters for the list view of services...</p>
+		            			</div>
+		            		</div>
+		            	</li>
+		            	<li>
+		            		<div class="name"><a href="#">Really Long Service Provider Name</a></div>
+		            		<div class="area control-label" data-i18n="Service-Map.List.Area">Provider Selected Service Area Goes Here</div>
+		            		<div class="hours control-label" data-i18n="Service-Map.List.Hours">Todays Service Hours Go Here</div>
+		            		<div class="contact">
+		            			<div class="half">
+		            				<span class="control-label" data-i18n="Service-Map.List.Phone"></span>
+		            			</div>
+		            			<div class="half">
+		            				<span class="control-label" data-i18n="Service-Map.List.Website"></span>
+		            			</div>
+		            			<div class="description">
+		            				<p>Description goes here. Limit the length of the description text to 100 characters for the list view of services...</p>
 		            			</div>
 		            		</div>
 		            	</li>
