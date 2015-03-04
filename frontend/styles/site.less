@@ -1383,34 +1383,41 @@ div#search-filter {
 	    @media only screen and (min-width: 1000px) {
 	        padding: 2em;
 	    }
-		ul > li {
-			padding: 1em 0 2em;
-			margin-top: 1em;
-			border-bottom: 1px solid #E0E0E0;
-			box-sizing: content-box;
-			overflow: auto;
-			line-height: 1.8em;
-			.name > a {
-				font-size: 1.4em;
-				font-weight: 600;
-			}
-			.area {
-
-			}
-			.hours {
-
-			}
-			.contact {
-				.third {
+		ul {
+			-webkit-margin-before: 0;
+			-webkit-margin-after: 0;
+			li {
+				padding: 1em 0 2em;
+				margin-top: 1em;
+				border-bottom: 1px solid #E0E0E0;
+				box-sizing: content-box;
+				overflow: auto;
+				line-height: 1.8em;
+				&:first-child {
 					margin-top: 0;
-					.control-label {
-						font-size: 0.85em;
-						float: none;
+				}
+				.name > a {
+					font-size: 1.2em;
+					font-weight: 600;
+				}
+				.area {
+
+				}
+				.hours {
+
+				}
+				.contact {
+					.third {
+						margin-top: 0;
+						.control-label {
+							font-size: 0.85em;
+							float: none;
+						}
 					}
 				}
-			}
-			.description > p {
-				margin: 1em 0 0;
+				.description > p {
+					margin: 1em 0 0;
+				}
 			}
 		}
 	}

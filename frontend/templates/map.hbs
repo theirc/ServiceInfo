@@ -24,12 +24,11 @@
 					<div class="form-group">
 			            <div class="form-group"><span class=error></label>
 			              <select id="id_type" name="type" class=form-control>
-							<ul>
-								<li>1</li>
-								<li>2</li>
-								<li>3</li>
-							</ul>
-
+			                <option value='0' selected="selected" style='display:none;'><span data-i18n="Service-Map.Filtered-Search.Service-Type"></option>
+							<option value="1" disabled="" selected=""><span data-i18n="Service-Map.Filtered-Search.Filter-Service"></option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
 			              </select>
 			            </div>
 					</div>
@@ -44,15 +43,13 @@
 						</div>
 						<div class="two-third">
 							<div class="form-group">
-					            <label for="id_service_type" class="control-label"><span data-i18n="Service-Map.Filtered-Search.Filter-Area"></span><span class=error></label>
+					            <label for="id_service_type" class="control-label"></span><span class=error></label>
 					            <div class="form-group">
 					              <select id="id_area" name="type" class=form-control>
-									<ul>
-										<li>Filter by area</li>
-										<li>area 1</li>
-										<li>area 2</li>
-										<li>area 3</li>
-									</ul>
+									<option value="" disabled=""><span data-i18n="Service-Map.Filtered-Search.Filter-Area"></option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
 					              </select>
 					            </div>
 							</div>
