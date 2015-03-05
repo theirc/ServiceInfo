@@ -30,7 +30,7 @@
 			</div>
 		</div>
 		<div class="area control-label" data-i18n="Service-Map.List.Area">{{ service.servicearea.name }}</div>
-		<div class="area control-label" data-i18n="Service-Map.List.Area">{{ service.servicearea.name }}</div>
+		<div class="area control-label" data-i18n="Service-Map.List.Type">{{ service.servicetype.name }}</div>
 		<div class="hours">	
 			<div class="form-group">
 				<label class="control-label" data-i18n="Service-Map.List.All-Hours"></label>
@@ -45,18 +45,38 @@
 					<tbody>
 						<tr>
 							<td class="third"><span data-i18n="Global.Sunday"></span></td>
-							<td class="third">09:00</td>
-							<td class="third">20:00</td>
+							<td class="third">{{ service.sunday_open }}</td>
+							<td class="third">{{ service.sunday_close }}</td>
 						</tr>
 						<tr>
 							<td class="third"><span data-i18n="Global.Monday"></span></td>
-							<td class="third">09:00</td>
-							<td class="third">20:00</td>
+							<td class="third">{{ service.monday_open }}</td>
+							<td class="third">{{ service.monday_close }}</td>
 						</tr>
 						<tr>
 							<td class="third"><span data-i18n="Global.Tuesday"></span></td>
-							<td class="third">09:00</td>
-							<td class="third">20:00</td>
+							<td class="third">{{ service.tuesday_open }}</td>
+							<td class="third">{{ service.tuesday_close }}</td>
+						</tr>
+						<tr>
+							<td class="third"><span data-i18n="Global.Wednesday"></span></td>
+							<td class="third">{{ service.wednesday_open }}</td>
+							<td class="third">{{ service.wednesday_close }}</td>
+						</tr>
+						<tr>
+							<td class="third"><span data-i18n="Global.Thursday"></span></td>
+							<td class="third">{{ service.thursday_open }}</td>
+							<td class="third">{{ service.thursday_close }}</td>
+						</tr>
+						<tr>
+							<td class="third"><span data-i18n="Global.Friday"></span></td>
+							<td class="third">{{ service.friday_open }}</td>
+							<td class="third">{{ service.friday_close }}</td>
+						</tr>
+						<tr>
+							<td class="third"><span data-i18n="Global.Saturday"></span></td>
+							<td class="third">{{ service.saturday_open }}</td>
+							<td class="third">{{ service.saturday_close }}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -74,7 +94,8 @@
 		</div>
 		<div class="description">
 			<div class="row">	
-				<p>Full service Description goes here.</p>
+				<span class="control-label" data-i18n="Service-Map.List.Additional-Info"></span>
+				<p>{{ service.additional }}</p>
 			</div>
 		</div>
 	</div> <!-- End Row -->

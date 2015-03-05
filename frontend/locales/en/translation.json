@@ -69,6 +69,8 @@
     "List": {
       "Toggle": "Map View",
       "Area": "Service Area:",
+      "Type": "Service Type:",
+      "Additional-Info": "Additional Provider Information:",
       "Todays-Hours": "Todays Service Hours:",
       "All-Hours": "Service Hours:",
       "Phone": "Phone-Number:",
