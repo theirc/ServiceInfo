@@ -132,8 +132,9 @@ If successful, response status will be 200 and the response
 content will include::
 
    { 'token': 'a long string',
-     'language': 'xx'  # User's preferred language code, e.g. 'en' or 'ar',
+     'language': 'xx', # User's preferred language code, e.g. 'en' or 'ar',
                        # or '' if we don't know
+     'is_staff': true or false    # whether this is a staff user (allowed to use Django admin)
    }
 
 If failed, response status will be 400 and the response might look like
@@ -212,7 +213,7 @@ already been used, has expired, etc::
 
 If the front end wants to check if the password reset key looks
 like it's probably valid before prompting the user for a new
-password, it can optionally POST to``/api/password_reset_check/``::
+password, it can optionally POST to ``/api/password_reset_check/``::
 
     {'key': 'the password reset key'}
 
@@ -253,3 +254,29 @@ On success it'll return a 200.  If the service isn't in a valid
 state to be canceled, it'll return 400. If the service doesn't
 belong to the provider making the call, it'll return a 404 (because
 only services belonging to a provider are visible to the provider).
+
+Searching services
+------------------
+
+There's a separate call for searching public information about services
+without regard to the user's login status or permissions. The URL
+is ``/api/services/search/``.
+
+Service filtering
+-----------------
+
+On both the normal list API and the search API for service,
+filtering is available.
+
+For example, appending ``?name=foo`` will return services whose name in any language,
+case insensitively, contains "foo".
+
+List of filter queries for services:
+
+* name = service name in any language
+* area_of_service_name = name of area of service in any language
+* description = description (in any language)
+* additional_info = additional info (in any language)
+* type_name = the name of the service type desired (in any language)
+* type_numbers = a comma-separated list of the numbers of the service types to include
+* id = a specific service's id (primary key)

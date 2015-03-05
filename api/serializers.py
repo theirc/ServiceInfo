@@ -79,6 +79,12 @@ class ProviderTypeSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ProviderSerializer(RequireOneTranslationMixin, serializers.HyperlinkedModelSerializer):
+    number_of_monthly_beneficiaries = serializers.IntegerField(
+        min_value=0, max_value=1000000,
+        required=False,
+        allow_null=True
+    )
+
     class Meta:
         model = Provider
         fields = ('url', 'id', 'name_en', 'name_ar', 'name_fr',
@@ -99,6 +105,11 @@ class CreateProviderSerializer(ProviderSerializer):
     email = serializers.EmailField()
     password = serializers.CharField()
     base_activation_link = serializers.URLField()
+    number_of_monthly_beneficiaries = serializers.IntegerField(
+        min_value=0, max_value=1000000,
+        required=False,
+        allow_null=True
+    )
 
     class Meta(ProviderSerializer.Meta):
         model = Provider
@@ -186,7 +197,7 @@ class ServiceSerializer(RequireOneTranslationMixin,
             'thursday_open', 'thursday_close',
             'friday_open', 'friday_close',
             'saturday_open', 'saturday_close',
-            'type',
+            'type'
         )
         required_translated_fields = ['name', 'description']
 
@@ -241,6 +252,14 @@ class ServiceSerializer(RequireOneTranslationMixin,
         user = self.context['request'].user
         kwargs['provider'] = Provider.objects.get(user=user)
         super().save(**kwargs)
+
+
+class ServiceSearchSerializer(ServiceSerializer):
+    """Serializer for service searches"""
+    class Meta(ServiceSerializer.Meta):
+        # Include all fields except a few
+        fields = tuple([field for field in ServiceSerializer.Meta.fields
+                        if field not in ['status', 'update_of']])
 
 
 class ServiceAreaSerializer(RequireOneTranslationMixin,

@@ -42,6 +42,11 @@ module.exports = Backbone.View.extend({
         });
     },
 
+    populateDropdowns: function() {
+        var $form = this.$el.find('form');
+        forms.populateDropdown($form, "type", this.providertypes);
+    },
+
     render: function() {
         var $el = this.$el;
         var providertypes = [];
@@ -60,6 +65,9 @@ module.exports = Backbone.View.extend({
         }
         $el.html(template(context));
         $el.i18n();
+        if (self.providertypes) {
+            this.populateDropdowns();
+        }
         if (self.provider) {
             forms.initial($el, self.provider);
             forms.initial($el, self.user);
@@ -71,6 +79,9 @@ module.exports = Backbone.View.extend({
             var $el = this.$el;
             var data = forms.collect($el);
             var is_new = this.provider === undefined;
+
+            var $submit = $el.find('.form-btn-submit');
+            $submit.attr('disabled', 'disabled');
 
             $el.find('.error').text('');
             var errors = {};
@@ -104,10 +115,12 @@ module.exports = Backbone.View.extend({
 
                 forms.submit($el, 'api/providers/create_provider/', data, errors).then(
                     function success(data) {
+                        $submit.removeAttr('disabled');
                         window.location = '#/register/confirm';
                     },
                     function error(errors) {
-                        messages.error(error);
+                        $submit.removeAttr('disabled');
+                        messages.error(errors);
                     }
                 );
 
@@ -117,10 +130,13 @@ module.exports = Backbone.View.extend({
                 var provider_save = this.provider.save(data);
                 Promise.all([user_save, provider_save]).then(
                     function success(data) {
+                        $submit.removeAttr('disabled');
                         window.location = '#/register/changed';
                     },
                     function error(errors) {
-                        messages.error(error);
+                        $submit.removeAttr('disabled');
+                        var missing = forms.show_errors_on_form($el, errors);
+                        messages.error(missing);
                     }
                 );
             }

@@ -63,10 +63,70 @@ var forms = module.exports = {
     },
 
     initial: function($form, model) {
+        var self = this;
         var data = model.data();
         $.each(data, function(name, value) {
-            forms.getField($form, name).val(value);
+            self.getField($form, name).val(value);
         })
+    },
+
+    populateDropdown: function($form, name, collection) {
+        var $field = this.getField($form, name);
+        var empty_label_key = $field.attr('data-empty-label-key');
+        var empty_label = i18n.t(empty_label_key);
+
+        function resetOptions() {
+            var value = $field.val();
+            var data = collection.data();
+            var empty_option = $('<option/>');
+            empty_option.text(empty_label);
+
+            data.sort(function(a, b){
+                var prop = "name";
+                return ((a[prop] < b[prop]) ? -1 : ((a[prop] > b[prop]) ? 1 : 0));
+            })
+
+            $field.html("");
+            $field.append(empty_option)
+
+            var $option;
+            for (var i=0; i < data.length; i++) {
+                $option = $('<option/>');
+                $option.attr('value', data[i].url);
+                $option.text(data[i].name);
+                $field.append($option);
+            }
+
+            $field.val(value);
+        }
+
+        resetOptions();
+        config.change("forever.language", function() {
+            var detached = $form.closest('html').length === 0;
+            if (detached) {
+                config.unbind("forever.language", arguments.callee);
+            } else {
+                resetOptions();
+            }
+        });
+    },
+
+    show_errors_on_form: function($form, e) {
+        // returns missing...
+        var self = this,
+            missing = {},
+            errors = e.responseJSON;
+        $.each(errors, function(k) {
+            var $error = self.getFieldLabel($form, k).find('.error');
+            if ($error) {
+                $error.text(this[0]);
+            } else {
+                missing[k] = this[0];
+            }
+        })
+        if (e.status >= 500) {
+            $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
+        }
     },
 
     submit: function($form, action, data, errors) {
@@ -84,18 +144,7 @@ var forms = module.exports = {
                 function onerror(e) {
                     $submit.removeAttr('disabled');
                     $.extend(errors, e.responseJSON);
-                    var missing = {};
-                    $.each(errors, function(k) {
-                        var $error = self.getFieldLabel($form, k).find('.error');
-                        if ($error) {
-                            $error.text(this[0]);
-                        } else {
-                            missing[k] = this[0];
-                        }
-                    })
-                    if (e.status >= 500) {
-                        $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
-                    }
+                    var missing = self.show_errors_on_form($form, e);
                     error(missing);
                 }
             );

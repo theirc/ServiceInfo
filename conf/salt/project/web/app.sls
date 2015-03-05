@@ -93,27 +93,11 @@ npm_installs:
 
 make_bundle:
   cmd.run:
-    - name: "{{ vars.source_dir }}/node_modules/.bin/gulp build"
+    - name: "{{ vars.source_dir }}/node_modules/.bin/gulp build --config={{ pillar['environment'] }}"
     - cwd: "{{ vars.source_dir }}"
     - user: {{ pillar['project_name'] }}
     - require:
       - cmd: npm_installs
-
-# MAJOR HACK!
-# For now, this needs to run after make_bundle because it writes out
-# an incorrect config.json
-config_json:
-  file.managed:
-    - name: "{{ vars.source_dir }}/frontend/config.json"
-    - source: salt://project/web/config.json
-    - user: {{ pillar['project_name'] }}
-    - mode: 644
-    - template: jinja
-    - context:
-        # code will append "api/stuff" to this to call the API:
-        api_location: "//{{ pillar['domain'] }}/"
-    - require:
-      - cmd: make_bundle
 
 static_dir:
   file.directory:

@@ -39,8 +39,14 @@ msgstr "Feedback Tool"
 msgid "Menu##Change-Language"
 msgstr "Change Language"
 
+msgid "Global##Admin"
+msgstr "Admin"
+
 msgid "Global##FormSubmissionError"
 msgstr "There was an unknown error submitting your form."
+
+msgid "Global##UnknownError"
+msgstr "There was an unknown error."
 
 msgid "Global##Sunday"
 msgstr "Sunday"
@@ -100,7 +106,7 @@ msgid "Service-Form##Page-Head##Page-Title##Title"
 msgstr "New Service Registration Form"
 
 msgid "Service-Form##Page-Head##Page-Description##Page-Description"
-msgstr "Fill out the form below to apply to have a new service approved."
+msgstr "Fill out the form below and apply to have a new approved service."
 
 msgid "Service-Form##Legend"
 msgstr "Service Information"
@@ -124,7 +130,7 @@ msgid "Service-Form##Service-Description"
 msgstr "Description"
 
 msgid "Service-Form##Service-Hours"
-msgstr "Hours of Service"
+msgstr "Working Hours"
 
 msgid "Service-Form##Additional-Information"
 msgstr "Additional Information (Optional Field)"
@@ -172,7 +178,7 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##Legend"
 msgstr "Basic details to register a service provider:"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Name"
-msgstr "Full Name"
+msgstr "Name of Service Provider"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
 msgstr "Password"
@@ -187,7 +193,7 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
 msgstr "Choose a Provider Type"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
-msgstr "Phone Number"
+msgstr "Phone Number (NN-NNNNNN)"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
 msgstr "Email"
@@ -196,10 +202,7 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##EmailPlaceholder"
 msgstr "Enter your Email"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
-msgstr "Website (Optional Field)"
-
-msgid "Provider-Registration-Form##Form-Sections##Basic##WebsitePlaceholder"
-msgstr "Enter your Website URL"
+msgstr "Website URL (Optional Field)"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
 msgstr "Number of Monthly Beneficiaries"
@@ -229,7 +232,7 @@ msgid "Provider-Registration-Form##Form-Sections##Service-Information##Additiona
 msgstr "Additional Information (Optional Field)"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Service-Cost"
-msgstr "Cost of Service (Optional Field)"
+msgstr "Cost of Service (Optional Field, in USD)"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Selection-Criteria"
 msgstr "Selection Criteria (Optional Field)"
@@ -239,6 +242,9 @@ msgstr "Submit Answers"
 
 msgid "Provider-Registration-Form##Form-Sections##Form-Submit-Options##Clear"
 msgstr "Remove Answers"
+
+msgid "Provider-Registration-Form##Form-Sections##Form-Submit-Options##ResendVerify"
+msgstr "Resend Verification Email"
 
 msgid "Account-Activation##Pending##Title"
 msgstr "Your account activation is pending..."
@@ -258,6 +264,12 @@ msgstr "Your account activation Failed."
 msgid "Account-Activation##Failed##Description"
 msgstr "There was a problem setting up your service provider account. Please click the resend confirmation email button below to have another confirmation email sent to your email account."
 
+msgid "Account-Activation##Resent##Title"
+msgstr "Your activation e-mail has been resent."
+
+msgid "Account-Activation##Resent##Description"
+msgstr "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+
 msgid "Account-Activation##Buttons##Resend-Email"
 msgstr "Resend Verification Email"
 
@@ -266,6 +278,27 @@ msgstr "Services List"
 
 msgid "Service-List##Page-Head##Page-Description##Page-Description"
 msgstr "Below is a list of services you have applied to provide. Approved services are marked in green. Un-approved services are marked in red. Services pending approval are unmarked."
+
+msgid "Service-List##Empty-Message"
+msgstr "You have not submitted any services yet. You may submit your first service for review by tapping the New Service button."
+
+msgid "Service-List##Add-Service"
+msgstr "New Service"
+
+msgid "Service-List##Status##draft"
+msgstr "draft"
+
+msgid "Service-List##Status##current"
+msgstr "current"
+
+msgid "Service-List##Status##rejected"
+msgstr "rejected"
+
+msgid "Service-List##Status##canceled"
+msgstr "canceled"
+
+msgid "Service-List##Status##archived"
+msgstr "archived"
 
 msgid "Service-List##Table##Thead##Name"
 msgstr "Name:"

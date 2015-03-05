@@ -88,7 +88,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         data = {
             'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
-            'phone_number': '12345',
+            'phone_number': '12-345678',
             'description_en': 'Test provider',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
@@ -109,7 +109,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         data = {
             'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
-            'phone_number': '12345',
+            'phone_number': '12-345678',
             'description_en': 'Test provider',
             'email': existing_user.email,
             'password': 'foobar',
@@ -129,7 +129,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         data = {
             'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
-            'phone_number': '12345',
+            'phone_number': '12-345678',
             'description_en': 'Test provider',
             'email': 'this_is_not_an_email',
             'password': 'foobar',
@@ -149,7 +149,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         data = {
             'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
-            'phone_number': '12345',
+            'phone_number': '12-345678',
             'description_en': 'Test provider',
             'email': 'fred@example.com',
             'number_of_monthly_beneficiaries': '37',
@@ -197,7 +197,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         data = {
             'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
-            'phone_number': '12345',
+            'phone_number': '12-345678',
             'description_en': 'Test provider',
             'email': 'fred@example.com',
             'password': 'foobar',
@@ -208,7 +208,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         self.assertFalse(get_user_model().objects.filter(email='fred@example.com').exists())
 
-    def test_create_provider_and_user(self):
+    def test_create_provider_bad_phone(self):
         # Create provider call is made when user is NOT logged in.
         self.token = None
 
@@ -217,6 +217,26 @@ class ProviderAPITest(APITestMixin, TestCase):
             'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12345',
+            'description_en': 'Test provider',
+            'email': 'fred@example.com',
+            'password': 'foobar',
+            'number_of_monthly_beneficiaries': '37',
+            'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
+        }
+        rsp = self.api_client.post(url, data=data, format='json')
+        self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertIn('phone_number', result)
+
+    def test_create_provider_and_user(self):
+        # Create provider call is made when user is NOT logged in.
+        self.token = None
+
+        url = '/api/providers/create_provider/'
+        data = {
+            'name_en': 'Joe Provider',
+            'type': ProviderTypeFactory().get_api_url(),
+            'phone_number': '12-345678',
             'description_en': 'Test provider',
             'email': 'fred@example.com',
             'password': 'foobar',
@@ -295,7 +315,7 @@ class TokenAuthTest(APITestMixin, TestCase):
         data = {
             'name_fr': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
-            'phone_number': '12345',
+            'phone_number': '12-345678',
             'description_en': 'Test provider',
             'user': self.user_url,
             'number_of_monthly_beneficiaries': '37',
@@ -312,9 +332,7 @@ class ServiceAPITest(APITestMixin, TestCase):
 
     def test_create_service(self):
         area = ServiceAreaFactory()
-        wrong_provider = ProviderFactory(name_en="Wrong provider")
         data = {
-            'provider': wrong_provider.get_api_url(),  # should just be ignored
             'name_en': 'Some service',
             'area_of_service': area.get_api_url(),
             'description_en': "Awesome\nService",
@@ -345,7 +363,6 @@ class ServiceAPITest(APITestMixin, TestCase):
         data = model_to_dict(service)
         data['url'] = service.get_api_url()
         data['type'] = service.type.get_api_url()
-        data['provider'] = service.provider.get_api_url()
         data['area_of_service'] = service.area_of_service.get_api_url()
         data['selection_criteria'] = [
             {'text_en': 'Crit en'},
@@ -356,9 +373,7 @@ class ServiceAPITest(APITestMixin, TestCase):
 
     def test_create_service_missing_close_time(self):
         area = ServiceAreaFactory()
-        wrong_provider = ProviderFactory(name_en="Wrong provider")
         data = {
-            'provider': wrong_provider.get_api_url(),  # should just be ignored
             'name_en': 'Some service',
             'area_of_service': area.get_api_url(),
             'description_en': "Awesome\nService",
@@ -378,9 +393,7 @@ class ServiceAPITest(APITestMixin, TestCase):
 
     def test_create_service_missing_open_time(self):
         area = ServiceAreaFactory()
-        wrong_provider = ProviderFactory(name_en="Wrong provider")
         data = {
-            'provider': wrong_provider.get_api_url(),  # should just be ignored
             'name_en': 'Some service',
             'area_of_service': area.get_api_url(),
             'description_en': "Awesome\nService",
@@ -400,9 +413,7 @@ class ServiceAPITest(APITestMixin, TestCase):
 
     def test_create_service_open_close_reversed(self):
         area = ServiceAreaFactory()
-        wrong_provider = ProviderFactory(name_en="Wrong provider")
         data = {
-            'provider': wrong_provider.get_api_url(),  # should just be ignored
             'name_en': 'Some service',
             'area_of_service': area.get_api_url(),
             'description_en': "Awesome\nService",
@@ -446,7 +457,7 @@ class ServiceAPITest(APITestMixin, TestCase):
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(service.pk, result['id'])
 
-    def test_get_services(self):
+    def test_list_services(self):
         # Should only get user's own services
         provider = self.provider
         s1 = ServiceFactory(provider=provider)
@@ -461,6 +472,23 @@ class ServiceAPITest(APITestMixin, TestCase):
         self.assertEqual(2, len(services))
         self.assertIn(s1.id, service_ids)
         self.assertIn(s2.id, service_ids)
+        self.assertNotIn(s3.id, service_ids)
+
+    def test_list_services_filtering(self):
+        # Can filter when listing services
+        provider = self.provider
+        s1 = ServiceFactory(provider=provider, name_en='service1')
+        s2 = ServiceFactory(provider=provider)
+        other_provider = ProviderFactory()
+        s3 = ServiceFactory(provider=other_provider)
+        rsp = self.get_with_token(reverse('service-list') + "?name=vice1")
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        services = result
+        service_ids = [x['id'] for x in services]
+        self.assertEqual(1, len(services))
+        self.assertIn(s1.id, service_ids)
+        self.assertNotIn(s2.id, service_ids)
         self.assertNotIn(s3.id, service_ids)
 
     def test_cancel_current_service(self):
@@ -663,6 +691,20 @@ class LoginTest(APITestMixin, TestCase):
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(self.token, result['token'])
+        # This was not a staff user
+        self.assertFalse(result['is_staff'])
+
+    def test_success_staff(self):
+        # Login with is_staff user
+        self.user.is_staff = True
+        self.user.save()
+        rsp = self.client.post(reverse('api-login'),
+                               data={'email': self.user.email, 'password': 'password'})
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(self.token, result['token'])
+        # This was a staff user
+        self.assertTrue(result['is_staff'])
 
     def test_disabled_account(self):
         self.user.is_active = False
@@ -959,3 +1001,112 @@ class UserAPITest(APITestMixin, TestCase):
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         response = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(self.user.pk, response['id'])
+
+
+class ServiceSearchTest(APITestMixin, TestCase):
+    def setUp(self):
+        super().setUp()
+        self.url = '/api/services/search/'
+        # We don't specify a provider/user for the test service, so
+        # that the factory will create a new one and therefore the user
+        # doing the request cannot be the owner of the service.
+        self.service1 = ServiceFactory(status=Service.STATUS_CURRENT)
+        self.service2 = ServiceFactory(status=Service.STATUS_CURRENT)
+        self.service3 = ServiceFactory(status=Service.STATUS_DRAFT)
+
+    def test_list(self):
+        rsp = self.client.get(self.url)  # not authed
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(Service.objects.filter(status=Service.STATUS_CURRENT).count(),
+                         len(response))
+        s1 = response[0]
+        # Should not include unwanted fields
+        self.assertNotIn('status', s1)
+        self.assertNotIn('update_of', s1)
+
+
+class ServiceSearchFilterTest(APITestMixin, TestCase):
+    def setUp(self):
+        super().setUp()
+        self.url = '/api/services/search/'
+        # We don't specify a provider/user for the test service, so
+        # that the factory will create a new one and therefore the user
+        # doing the request cannot be the owner of the service.
+        self.service1 = ServiceFactory(
+            status=Service.STATUS_CURRENT,
+            name_en='service1',
+            name_fr='sérvïče1',
+            name_ar='sseerrvviiccee11',
+            description_en='description1',
+            description_fr='déßcriptiön1',
+            description_ar='ddeessccrriippttiioonn11',
+        )
+        self.service2 = ServiceFactory(status=Service.STATUS_CURRENT)
+
+    def translated_field_search_test(self, query_name, get_value=None):
+        # Tests for search filtering on service's translated fields
+        # Note we're not using the API client, so we're not passing the auth token
+        # and we're doing the call unauthed
+        if get_value is None:
+            get_value = lambda obj, lang: getattr(obj, '%s_%s' % (query_name, lang))
+        url = self.url
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(Service.objects.filter(status=Service.STATUS_CURRENT).count(),
+                         len(response))
+
+        for lang in ['en', 'ar', 'fr']:
+            value1 = get_value(self.service1, lang)
+            url = self.url + '?%s=%s' % (query_name, value1)
+            rsp = self.client.get(url)
+            self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+            response = json.loads(rsp.content.decode('utf-8'))
+            self.assertEqual(1, len(response))
+            self.assertTrue(response[0]['url'].endswith(self.service1.get_api_url()))
+
+        url = self.url + '?%s=nonesuch' % query_name
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(0, len(response))
+
+    def test_name_filtering(self):
+        self.translated_field_search_test('name')
+        self.translated_field_search_test('description')
+        self.translated_field_search_test('additional_info')
+        self.translated_field_search_test(
+            'area_of_service_name',
+            lambda obj, lang: getattr(obj.area_of_service, 'name_%s' % lang))
+        self.translated_field_search_test(
+            'type_name',
+            lambda obj, lang: getattr(obj.type, 'name_%s' % lang))
+
+    def test_type_number_filtering(self):
+        url = self.url + "?type_numbers=%d" % self.service1.type.number
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(1, len(response))
+        url = (self.url
+               + "?type_numbers=%d,%d" % (self.service1.type.number, self.service2.type.number))
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(2, len(response))
+        another_type = ServiceTypeFactory()
+        url = self.url + "?type_numbers=%d" % another_type.number
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(0, len(response))
+
+    def test_pk_filtering(self):
+        # Can "search" for a specific record
+        url = self.url + "?id=%d" % self.service1.id
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(1, len(response))
+        self.assertEqual(self.service1.id, response[0]['id'])

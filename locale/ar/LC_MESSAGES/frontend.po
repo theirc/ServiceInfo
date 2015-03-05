@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-17 06:26+0000\n"
+"PO-Revision-Date: 2015-03-04 06:42+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -46,8 +46,14 @@ msgstr "ردود الفعل أداة"
 msgid "Menu##Change-Language"
 msgstr "تغيير اللغة"
 
+msgid "Global##Admin"
+msgstr "المشرف"
+
 msgid "Global##FormSubmissionError"
 msgstr "كان هناك خطأ غير معروف تقديم النموذج الخاص بك."
+
+msgid "Global##UnknownError"
+msgstr "كان هناك خطأ غير معروف."
 
 msgid "Global##Sunday"
 msgstr "الأحد"
@@ -107,7 +113,7 @@ msgid "Service-Form##Page-Head##Page-Title##Title"
 msgstr "استمارة التسجيل خدمة جديدة"
 
 msgid "Service-Form##Page-Head##Page-Description##Page-Description"
-msgstr "ملء النموذج أدناه لتطبيق لخدمة جديدة وافقت."
+msgstr "إملأ النموذج أدناه وأكد للحصول على خدمة مقبولة ."
 
 msgid "Service-Form##Legend"
 msgstr "معلومات عن الخدمة"
@@ -131,7 +137,7 @@ msgid "Service-Form##Service-Description"
 msgstr "تفصيل"
 
 msgid "Service-Form##Service-Hours"
-msgstr "ساعات الخدمة"
+msgstr "ساعات العمل"
 
 msgid "Service-Form##Additional-Information"
 msgstr "معلومات إضافية (حقل اختياري)"
@@ -180,7 +186,7 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##Legend"
 msgstr "التفاصيل الأساسية لتسجيل مزود خدمات:"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Name"
-msgstr "الاسم الكامل"
+msgstr "اسم مقدم الخدمة"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
 msgstr "كلمة السر"
@@ -195,7 +201,7 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
 msgstr "اختر نوع مزود"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
-msgstr "رقم الهاتف"
+msgstr "رقم الهاتف (رر-رررررر)"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
 msgstr "البريد الإلكتروني"
@@ -204,10 +210,7 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##EmailPlaceholder"
 msgstr "أدخل البريد الإلكتروني الخاص بك"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
-msgstr "موقع (حقل اختياري)"
-
-msgid "Provider-Registration-Form##Form-Sections##Basic##WebsitePlaceholder"
-msgstr "أدخل URL موقع الويب الخاص بك"
+msgstr "رابط الموقع (حقل اختياري)"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
 msgstr "عدد المستفيدين شهرياَ"
@@ -246,7 +249,7 @@ msgstr "معلومات إضافية (حقل اختياري)"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Service-Cost"
-msgstr "تكلفة الخدمة (حقل اختياري)"
+msgstr "تكلفة الخدمة (حقل الاختياري، في USD)"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Selection-"
@@ -258,6 +261,10 @@ msgstr "إرسال الأجوبة"
 
 msgid "Provider-Registration-Form##Form-Sections##Form-Submit-Options##Clear"
 msgstr "إزالة الأجوبة"
+
+msgid ""
+"Provider-Registration-Form##Form-Sections##Form-Submit-Options##ResendVerify"
+msgstr "إعادة إرسال التحقق من البريد الإلكتروني"
 
 msgid "Account-Activation##Pending##Title"
 msgstr "تفعيل حسابك معلقة ..."
@@ -277,6 +284,12 @@ msgstr "فشل تفعيل حسابك."
 msgid "Account-Activation##Failed##Description"
 msgstr "كانت هناك مشكلة إنشاء حساب مزود الخدمة الخاص بك. يرجى النقر على زر تأكيد بالبريد الإلكتروني إعادة إرسال أدناه لديك بريد إلكتروني آخر تأكيدا إرسالها إلى حساب البريد الإلكتروني الخاص بك."
 
+msgid "Account-Activation##Resent##Title"
+msgstr "لقد تم إرسال رابط التفعيل لك مجدداً"
+
+msgid "Account-Activation##Resent##Description"
+msgstr "لقد قمنا بإرسال رسالة تأكيد بالبريد الإلكتروني إلى حساب البريد الإلكتروني الذي استخدمته أثناء التسجيل. انقر على رابط التأكيد في رسالة البريد الإلكتروني لاستكمال عملية التسجيل."
+
 msgid "Account-Activation##Buttons##Resend-Email"
 msgstr "إعادة إرسال التحقق من البريد الإلكتروني"
 
@@ -285,6 +298,27 @@ msgstr "قائمة الخدمات"
 
 msgid "Service-List##Page-Head##Page-Description##Page-Description"
 msgstr "وفيما يلي قائمة من الخدمات التي تطبق على توفير. وتتميز الخدمات وافق باللون الأخضر. وتتميز خدمات لم يفوافق عليها في الحمراء. خدمات بانتظار الموافقة هي لا تحمل علامات مميزة."
+
+msgid "Service-List##Empty-Message"
+msgstr "لم تدخل أي خدمة للأن. يمكنك إدخال أول خدمة لك بالضغط على مفتاح أضف خدمة جديدة ."
+
+msgid "Service-List##Add-Service"
+msgstr "خدمة جديدة"
+
+msgid "Service-List##Status##draft"
+msgstr "مسودة"
+
+msgid "Service-List##Status##current"
+msgstr "جاري"
+
+msgid "Service-List##Status##rejected"
+msgstr "مرفوض"
+
+msgid "Service-List##Status##canceled"
+msgstr "ألغيت"
+
+msgid "Service-List##Status##archived"
+msgstr "أرشفة"
 
 msgid "Service-List##Table##Thead##Name"
 msgstr "الاسم:"

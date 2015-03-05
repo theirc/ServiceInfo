@@ -47,6 +47,12 @@ module.exports = Backbone.View.extend({
         });
     },
 
+    populateDropdowns: function() {
+        var $form = this.$el.find('#service-form');
+        forms.populateDropdown($form, "area_of_service", this.serviceareas);
+        forms.populateDropdown($form, "type", this.servicetypes);
+    },
+
     render: function() {
         var $el = this.$el;
         var serviceareas = [];
@@ -65,20 +71,25 @@ module.exports = Backbone.View.extend({
             criteria.push({text: ""});
         }
         $el.html(template({
+            // These are not translated because they're used internally
+            // and never displayed directly.
             daysofweek: [
-                    i18n.t('Global.Sunday'),
-                    i18n.t('Global.Monday'),
-                    i18n.t('Global.Tuesday'),
-                    i18n.t('Global.Wednesday'),
-                    i18n.t('Global.Thursday'),
-                    i18n.t('Global.Friday'),
-                    i18n.t('Global.Saturday')
+                    'Sunday',
+                    'Monday',
+                    'Tuesday',
+                    'Wednesday',
+                    'Thursday',
+                    'Friday',
+                    'Saturday'
                 ],
 
             areas_of_services: serviceareas,
             types: types,
             criteria: criteria
         }));
+        if (this.serviceareas && this.servicetypes) {
+            this.populateDropdowns();
+        }
         if (this.update_of) {
             forms.initial($el, this.update_of);
             forms.getField($el, 'update_of').val(this.update_of.get('url'));

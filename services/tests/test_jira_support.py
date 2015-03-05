@@ -108,7 +108,7 @@ class JiraProviderChangeTest(MockJiraTestMixin, TestCase):
 @mock.patch('services.jira_support.JIRA', autospec=True)
 class JiraNewServiceTest(MockJiraTestMixin, TestCase):
     def setUp(self):
-        self.test_service = ServiceFactory()
+        self.test_service = ServiceFactory(location='POINT(5 23)')
         self.jira_record = self.test_service.jira_records.get(
             update_type=JiraUpdateRecord.NEW_SERVICE)
 
@@ -155,6 +155,25 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         self.assertTrue('summary' in call_kwargs)
         self.assertTrue('changed service' in call_kwargs['summary'].lower())
         self.assertTrue(self.test_service.provider.name_en in call_kwargs['summary'])
+
+    def test_new_service_then_approve_before_task(self, mock_JIRA):
+        # If a service is approved before we try to do the JIRA work,
+        # the JIRA work gracefully works
+        self.jira_record.update_type = JiraUpdateRecord.NEW_SERVICE
+        self.jira_record.save()
+        self.test_service.staff_approve()
+        self.setup_issue_key(mock_JIRA)
+        self.jira_record.do_jira_work()
+
+    def test_change_service_then_approve_before_task(self, mock_JIRA):
+        # If a service is approved before we try to do the JIRA work,
+        # the JIRA work gracefully works
+        self.test_service.update_of = ServiceFactory()
+        self.jira_record.update_type = JiraUpdateRecord.CHANGE_SERVICE
+        self.jira_record.save()
+        self.test_service.staff_approve()
+        self.setup_issue_key(mock_JIRA)
+        self.jira_record.do_jira_work()
 
     def test_create_jira_issue_noop_if_already_created(self, mock_JIRA):
         test_key_val = 'ALREADY-SET'

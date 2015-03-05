@@ -4,7 +4,11 @@
         	<div class="half">
 	            <div class="row">
 	                <div class="page-title" data-i18n="Service-List.Page-Head.Page-Title.Title"></div>
-	                <div class="page-descr" data-i18n="Service-List.Page-Head.Page-Description.Page-Description"></div>
+                    {{#if no_services}}
+                        <div class="page-descr" data-i18n="Service-List.Empty-Message"></div>
+                    {{else}}
+	                   <div class="page-descr" data-i18n="Service-List.Page-Head.Page-Description.Page-Description"></div>
+                    {{/if}}
 	            </div>
 	        </div>
             <div class="half"></div>
@@ -13,7 +17,7 @@
 <!-- End Page Head -->
 
 <!-- Main Content -->
-<div class="row">
+{{#unless no_services}}
 	<table id="service-status" class="table">
 		<thead>
 			<tr>
@@ -29,7 +33,7 @@
 			<tr class="{{#if this.isApproved }}approved{{/if}} {{#if this.isRejected}}denied{{/if}} {{#if this.update_of}}update{{/if}}">
 				<td>
 					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td">
-                        <a href="#/service/{{ this.id }}">{{#if this.update_of}}&#x2937; {{/if}}{{ this.name }}</a>
+                        <a href="#/service/{{ this.id }}"{{#if this.is_update}} class="update"{{/if}}>{{ this.name }}</a>
                     </span>
 				</td>
 				<td>
@@ -39,7 +43,7 @@
 					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Type"></div><span class="vertical-td">{{ this.servicearea.name }}</span>
 				</td>
 				<td>
-					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Area"></div><span class="vertical-td">{{ this.status }}</span>
+					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Area"></div><span class="vertical-td" data-i18n="Service-List.Status.{{ this.status }}">{{ this.status }}</span>
 				</td>
 				<td>
 				    <div class="vertical-header" data-i18n="Service-List.Table.Thead.Remove"></div><span class="vertical-td"><a href="#/service/cancel/{{ this.id }}"><span
@@ -56,5 +60,10 @@
             {{/each}}
 		</tbody>
 	</table>
+{{/unless}}
+<div class="main-content">
+    <div class="third float-start">
+        <a class="btn primary-button" href="#/service" data-i18n="Service-List.Add-Service"></a>
+    </div>
 </div>
 <!-- End Main Content -->

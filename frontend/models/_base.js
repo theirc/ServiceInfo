@@ -1,5 +1,6 @@
 var Backbone = require('backbone');
 var config = require('../config');
+var api = require('../api');
 
 
 var debabelize = function debabelize(data, lang1, lang2, lang3) {
@@ -37,7 +38,7 @@ var BaseModel = Backbone.Model.extend({
     url: function() {
         var url = this.get('url');
         if (!url) {
-            var url = config.get('api_location') + 'api/'+ this.__proto__.apiname +'/';
+            var url = api.getAPIPrefix() + 'api/'+ this.__proto__.apiname +'/';
             var id = this.get('id');
             if (id) {
                 url = url + id + '/';
@@ -100,7 +101,7 @@ var BaseCollection = Backbone.Collection.extend({
     },
 
     url: function() {
-        var url = config.get('api_location') + 'api/'+ this.model.prototype.apiname +'/';
+        var url = api.getAPIPrefix() + 'api/'+ this.model.prototype.apiname +'/';
         return url;
     },
 

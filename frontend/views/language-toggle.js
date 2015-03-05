@@ -1,5 +1,6 @@
 var Backbone = require('backbone'),
 config = require("../config"),
+api = require("../api"),
 template = require("../templates/language-toggle.hbs"),
 i18n = require('i18next-client');
 
@@ -13,8 +14,8 @@ module.exports = Backbone.View.extend({
             lt = this;
         this.render();
         this.setLanguage(language);
-        if (config.isset('forever.language')) {
-            this.hide(true);
+        if (!config.isset('forever.language')) {
+            this.show(true);
         };
         // Get called when forever.language is changed in the config.
         // This will (1) update the app and (2) if the user is logged in,
@@ -35,7 +36,7 @@ module.exports = Backbone.View.extend({
                     // user is logged in
                     // remember user's preference in the backend
                     headers.ServiceInfoAuthorization = 'Token ' + token;
-                    $.ajax(config.get('api_location') + 'api/language/', {
+                    $.ajax(api.getAPIPrefix() + 'api/language/', {
                         type: 'POST',
                         headers: headers,
                         data: {
@@ -67,6 +68,18 @@ module.exports = Backbone.View.extend({
         }, function(t){
             $("body").i18n();
         });
+        if (lang === 'ar') {
+            /* RIGHT to LEFT */
+            $('body').attr('dir', 'rtl');
+            $('body').removeClass('left-to-right');
+            $('body').addClass('right-to-left');
+            $('link.load-style').attr('href', "styles/site-rtl.css");
+        } else {
+            $('body').attr('dir', 'ltr');
+            $('body').removeClass('right-to-left');
+            $('body').addClass('left-to-right');
+            $('link.load-style').attr('href', "styles/site-ltr.css");
+        }
     },
 
     hide: function(immediate) {
@@ -77,7 +90,7 @@ module.exports = Backbone.View.extend({
             target = $('#menu-container').find('.menu-item-language').position();
         }
         var anim = {
-            top: target.top,
+            top: target.top - $('.language-toggle').height()/2,
             left: target.left,
         };
         this.$el.css(this.$el.position());
@@ -91,7 +104,7 @@ module.exports = Backbone.View.extend({
         this._hiddenPos = anim;
     },
 
-    show: function() {
+    show: function(immediate) {
         var curPos = this.$el.position();
         var $el = this.$el;
 
@@ -107,13 +120,24 @@ module.exports = Backbone.View.extend({
         $el.addClass('hidden');
         $el.css(curPos);
         $el.css('visibility', 'visible');
-        $el.animate(anim, {duration: 0.5, complete: function() {
+        if (immediate) {
+            $el.addClass('no-animate');
             $el.css({
-                top: 'auto',
+                top: '0px',
                 left: 'auto',
             })
-        }});
+        } else {
+            $el.animate(anim, {duration: 0.5, complete: function() {
+                $el.css({
+                    top: '0px',
+                    left: 'auto',
+                })
+            }});
+        }
         $el.removeClass('hidden');
+        setTimeout(function() {
+            $el.removeClass('no-animate');
+        }, 0);
     },
 
     events: {

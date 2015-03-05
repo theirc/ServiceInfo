@@ -1,9 +1,13 @@
 from django.conf import settings
 from django.contrib import admin, messages
+from django.contrib.admin.templatetags.admin_urls import add_preserved_filters
 from django.contrib.gis.admin import GeoModelAdmin
+from django.core.exceptions import ValidationError
+from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from services.models import Provider, Service, ServiceArea, SelectionCriterion, ProviderType, \
     ServiceType, JiraUpdateRecord
+from services.utils import validation_error_as_text
 
 
 class ProviderAdmin(admin.ModelAdmin):
@@ -103,9 +107,18 @@ class ServiceAdmin(GeoModelAdmin):
                               _("Only services in draft status may be approved"),
                               messages.ERROR)
             return
+        any_approved = False
         for service in queryset:
-            service.staff_approve()
-        self.message_user(request, _("Services have been approved"))
+            try:
+                service.staff_approve()
+            except ValidationError as e:
+                msg = _("Unable to approve service '{name}': {error}.")
+                msg = msg.format(name=service.name, error=validation_error_as_text(e))
+                messages.error(request, msg)
+            else:
+                any_approved = True
+        if any_approved:
+            self.message_user(request, _("Services have been approved"))
     approve.short_description = _("Approve new or changed service")
 
     def reject(self, request, queryset):
@@ -119,6 +132,31 @@ class ServiceAdmin(GeoModelAdmin):
             service.staff_reject()
         self.message_user(request, _("Services have been rejected"))
     reject.short_description = _("Reject new or changed service")
+
+    def response_change(self, request, obj):
+        """
+        Determines the HttpResponse for the change_view stage.
+        """
+        if '_approve' in request.POST:
+            try:
+                obj.staff_approve()
+            except ValidationError as e:
+                msg = _("Unable to approve service '{name}': {error}.").format(name=obj.name)
+                msg = msg.format(name=obj.name, error=validation_error_as_text(e))
+                self.message_user(request, msg, messages.ERROR)
+                redirect_url = add_preserved_filters(
+                    {'preserved_filters': self.get_preserved_filters(request),
+                     'opts': self.model._meta},
+                    request.path)
+                return HttpResponseRedirect(redirect_url)
+            else:
+                msg = _('The service was approved successfully.')
+                self.message_user(request, msg, messages.SUCCESS)
+        elif '_reject' in request.POST:
+            obj.staff_reject()
+            msg = _('The service was rejected successfully.')
+            self.message_user(request, msg, messages.INFO)
+        return super().response_change(request, obj)
 
 
 class ServiceAreaAdmin(admin.ModelAdmin):
