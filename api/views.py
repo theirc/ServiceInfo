@@ -155,6 +155,26 @@ class ServiceViewSet(ServiceInfoModelViewSet):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
 
+    # All the text fields that are used for full-text searches (?search=XXXXX)
+    search_fields = [
+        'additional_info_en', 'additional_info_ar', 'additional_info_fr',
+        'cost_of_service',
+        'description_en', 'description_ar', 'description_fr',
+        'name_en', 'name_ar', 'name_fr',
+
+        'area_of_service__name_en', 'area_of_service__name_ar', 'area_of_service__name_fr',
+
+        'type__comments_en', 'type__comments_ar', 'type__comments_fr',
+        'type__name_en', 'type__name_ar', 'type__name_fr',
+
+        'provider__description_en', 'provider__description_ar', 'provider__description_fr',
+        'provider__name_en', 'provider__name_ar', 'provider__name_fr',
+        'provider__type__name_en', 'provider__type__name_ar', 'provider__type__name_fr',
+        'provider__phone_number',
+        'provider__website',
+        'provider__user__email',
+    ]
+
     def get_queryset(self):
         # Only make visible the Services owned by the current provider
         # and not archived
