@@ -217,6 +217,7 @@ LOGGING = {
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
         'rest_framework.filters.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
     ],
     # Use Django's standard `django.contrib.auth` permissions
     # by default.  (We'll alter this as needed on a few specific
