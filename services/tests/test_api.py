@@ -1029,6 +1029,7 @@ class ServiceSearchTest(APITestMixin, TestCase):
         service = self.service1
         provider = service.provider
         type = service.type
+        criterion = SelectionCriterionFactory(service=service)
         # A bunch of strings, any of which ought to match service1
         queries = [
             service.name_ar, service.name_fr, service.name_en,
@@ -1039,6 +1040,7 @@ class ServiceSearchTest(APITestMixin, TestCase):
             provider.phone_number,
             service.area_of_service.name_fr,
             service.description_ar,
+            criterion.text_en, criterion.text_ar,
         ]
         for s in queries:
             rsp = self.client.get(self.url + '?search=%s' % s)
