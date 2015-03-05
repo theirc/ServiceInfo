@@ -280,3 +280,16 @@ List of filter queries for services:
 * type_name = the name of the service type desired (in any language)
 * type_numbers = a comma-separated list of the numbers of the service types to include
 * id = a specific service's id (primary key)
+
+Full-text search
+----------------
+
+Additionally full-text search is available.  Append ``?search=XYZ`` to either
+the list or search URLs to search for services with XYZ in pretty much any
+of the text fields associated with the service, its provider, its type,
+or its service area.
+
+Searches will use case-insensitive partial matches. The search parameter may
+contain multiple search terms, which should be whitespace and/or comma
+separated. If multiple search terms are used then objects will be returned
+in the list only if all the provided terms are matched.

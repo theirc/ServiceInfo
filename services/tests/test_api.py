@@ -1025,6 +1025,29 @@ class ServiceSearchTest(APITestMixin, TestCase):
         self.assertNotIn('status', s1)
         self.assertNotIn('update_of', s1)
 
+    def test_full_text_service_search(self):
+        service = self.service1
+        provider = service.provider
+        type = service.type
+        criterion = SelectionCriterionFactory(service=service)
+        # A bunch of strings, any of which ought to match service1
+        queries = [
+            service.name_ar, service.name_fr, service.name_en,
+            type.name_en, type.comments_en,
+            provider.name_fr, provider.name_ar,
+            provider.type.name_en,
+            provider.website,
+            provider.phone_number,
+            service.area_of_service.name_fr,
+            service.description_ar,
+            criterion.text_en, criterion.text_ar,
+        ]
+        for s in queries:
+            rsp = self.client.get(self.url + '?search=%s' % s)
+            response = json.loads(rsp.content.decode('utf-8'))
+            self.assertEqual(1, len(response))
+            self.assertEqual(self.service1.pk, response[0]['id'])
+
 
 class ServiceSearchFilterTest(APITestMixin, TestCase):
     def setUp(self):
