@@ -2,6 +2,37 @@ Service Info
 
 Release Notes
 
+0.1.0 - Mar. 5, 2015
+--------------------
+
+* Use preferred fonts
+* Updates to translations
+* Remove text in service approval email to provider about the URL of
+  the published service until we have a page to link to
+* Translate days of the week
+* Translate service statuses
+* Require a location before approving a service
+* Add API for anonymous searching of services
+* Fixes for showing errors from the API
+* Change the service list page when the list is empty
+* Put "URL" in label and example in placeholder of website field
+* Add +/- before Add/Remove Criterion button labels
+* Change label on provider name
+* Label hours as "working hours"
+* Sort dropdown values before populating them
+* Require one letter in provider name
+* Minimum 6 character password
+* Re-render the services list if the language is changed
+* Phone number validation
+* Fix service area, type not appearing in service list
+* Right-to-left when in Arabic
+* Fixed language toggle layout and positioning and added black background.
+* Create JIRA record even if service already approved (or rejected, whatever)
+* Service records can change between creating and running JiraUpdate
+* Display link to Django admin in menu for staff users
+* Add approve and reject buttons to the service admin change page
+* Include an ES6 Promise polyfill for browsers that do not support it.
+
 0.0.9 - Feb. 18, 2015
 ---------------------
 
