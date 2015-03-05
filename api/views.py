@@ -174,7 +174,7 @@ class ServiceViewSet(ServiceInfoModelViewSet):
         'provider__website',
         'provider__user__email',
 
-        'selection_criteria__text_en','selection_criteria__text_ar', 'selection_criteria__text_fr',
+        'selection_criteria__text_en', 'selection_criteria__text_ar', 'selection_criteria__text_fr',
     ]
 
     def get_queryset(self):
