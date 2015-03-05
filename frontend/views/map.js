@@ -1,13 +1,22 @@
 var Backbone = require('backbone'),
     template = require("../templates/map.hbs"),
     models = require('../models/service'),
+    hashtrack = require('hashtrack'),
     i18n = require('i18next-client');
+
+
+var query = "";
+hashtrack.onhashvarchange('q', function(_, value) {
+    query = value;
+    $('#page').trigger('search', value)
+})
 
 module.exports = Backbone.View.extend({
     initialize: function(){
         var self = this;
+        this.query = query;
         this.services = new models.PublicServices();
-        this.services.fetch().then(function(){
+        this.services.fetch({data: {name: query}}).then(function(){
             self.render();
         })
     },
@@ -51,4 +60,14 @@ module.exports = Backbone.View.extend({
 
         initialize();
     },
+
+    events: {
+        "search": function(_, query) {
+            this.query = query;
+            var self = this;
+            this.services.fetch({data: {name: query}}).then(function(){
+                self.render();
+            })
+        }
+    }
 })
