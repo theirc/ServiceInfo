@@ -16,7 +16,7 @@ module.exports = Backbone.View.extend({
         var self = this;
         this.query = query;
         this.services = new models.PublicServices();
-        this.services.fetch({data: {name: query}}).then(function(){
+        this.services.fetch({data: {search: query}}).then(function(){
             self.render();
         })
     },
