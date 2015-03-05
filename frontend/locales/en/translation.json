@@ -69,7 +69,8 @@
     "List": {
       "Toggle": "Map View",
       "Area": "Service Area:",
-      "Hours": "Todays Service Hours:",
+      "Todays-Hours": "Todays Service Hours:",
+      "All-Hours": "Service Hours:",
       "Phone": "Phone-Number:",
       "Email": "Email-Address:",
       "Website": "Website:"
