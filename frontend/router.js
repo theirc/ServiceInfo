@@ -16,11 +16,11 @@ var views = {
     "map": require('./views/map'),
     "service-cancel": require('./views/service-cancel'),
     "service-list": require('./views/service-list'),
+    "service-detail": require('./views/service-detail'),
     "login": require('./views/login'),
     "password-reset": require('./views/password-reset'),
     "password-reset-form": require('./views/password-reset-form'),
     "admin": require('./views/admin'),
-    "service-detail": require('./views/service-detail'),
 };
 
 var view;
@@ -78,7 +78,6 @@ module.exports = Backbone.Router.extend({
 
         "feedback": loadPage("feedback"),
         "map": loadPage("map"),
-
         "login": loadPage("login"),
         "password-reset": loadPage("password-reset"),
         "password-reset-form": loadPage("password-reset-form"),

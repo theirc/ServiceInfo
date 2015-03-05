@@ -29,22 +29,52 @@
     "Saturday": "Saturday"
   },
   "Login-Form": {
-  	"Page-Head": {
-  		"Page-Title": {
-  			"Title": "Log In"
-  		},
-  		"Page-Description": {
-  			"Page-Description": "If you are a service provider and have an existing account sign into your account below."
-  		}
-  	},
-  	"Form": {
-	  	"Email": "Email",
-	  	"Password": "Password"
-  	},
-  	"Form-Submit-Options": {
-  		"Submit": "Login",
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Log In"
+      },
+      "Page-Description": {
+        "Page-Description": "If you are a service provider and have an existing account sign into your account below."
+      }
+    },
+    "Form": {
+      "Email": "Email",
+      "Password": "Password"
+    },
+    "Form-Submit-Options": {
+      "Submit": "Login",
       "Register": "Register to be a Service Provider here"
-  	}
+    }
+  },
+  "Service-Map": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Service Provider Map"
+      },
+      "Page-Description": {
+        "Page-Description": "Use the filtered search below to find the service that meets your needs."
+      }
+    },
+    "Filtered-Search": {
+      "Label": "Search term",
+      "Submit": "Search",
+      "Service-Type": "Service type",
+      "Distance": "Filter by distance",
+      "Area": "Area",
+      "Filter-Area": "Filter by area",
+      "Filter-By-Area": "Filter your search by area",
+      "Search-Placeholder": "I am searching for..."
+    },
+    "Map": {"Toggle": "List View"},
+    "List": {
+      "Toggle": "Map View",
+      "Area": "Service Area:",
+      "Todays-Hours": "Todays Service Hours:",
+      "All-Hours": "Service Hours:",
+      "Phone": "Phone-Number:",
+      "Email": "Email-Address:",
+      "Website": "Website:"
+    }
   },
   "Service-Remove-Change": {
     "Page-Head": {

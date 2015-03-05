@@ -108,7 +108,7 @@ class JiraProviderChangeTest(MockJiraTestMixin, TestCase):
 @mock.patch('services.jira_support.JIRA', autospec=True)
 class JiraNewServiceTest(MockJiraTestMixin, TestCase):
     def setUp(self):
-        self.test_service = ServiceFactory()
+        self.test_service = ServiceFactory(location='POINT(5 23)')
         self.jira_record = self.test_service.jira_records.get(
             update_type=JiraUpdateRecord.NEW_SERVICE)
 

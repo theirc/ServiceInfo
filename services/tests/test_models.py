@@ -67,7 +67,7 @@ class ProviderTest(TestCase):
 
 class ProviderTypeTest(TestCase):
     def test_str(self):
-        # str() returns name in current language
+        # str() returns name in current language, or English
         obj = ProviderType(name_en="English", name_ar="Arabic", name_fr="French")
         translation.activate('fr')
         self.assertEqual("French", str(obj))
@@ -104,3 +104,24 @@ class ServiceTest(TestCase):
         with patch('services.models.email_provider_about_service_approval_task') as mock_task:
             service.email_provider_about_approval()
         mock_task.delay.assert_called_with(service.pk)
+
+    def test_approval_validation(self):
+        service = ServiceFactory()
+        # No location - should not allow approval
+        try:
+            service.validate_for_approval()
+        except ValidationError as e:
+            self.assertIn('location', e.error_dict)
+        else:
+            self.fail("Should have gotten ValidationError")
+        # Add location, should be okay
+        service.location = 'POINT(5 23)'
+        service.validate_for_approval()
+        # No name, should fail
+        service.name_en = service.name_ar = service.name_fr = ''
+        try:
+            service.validate_for_approval()
+        except ValidationError as e:
+            self.assertIn('name', e.error_dict)
+        else:
+            self.fail("Should have gotten ValidationError")

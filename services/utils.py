@@ -2,6 +2,7 @@ import logging
 
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
+from django.forms.utils import ErrorDict, ErrorList
 
 
 logger = logging.getLogger(__name__)
@@ -35,3 +36,15 @@ def permission_names_to_objects(names, permission_model=None, contenttype_model=
                 content_type=content_type,
                 ))
     return result
+
+
+def validation_error_as_text(error):
+    """
+    Given a ValidationError object, return a string representing the errors.
+    """
+    try:
+        ed = ErrorDict(error.message_dict)
+        return ed.as_text()
+    except AttributeError:
+        el = ErrorList(error.messages)
+        return el.as_text()
