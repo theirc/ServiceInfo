@@ -1,6 +1,7 @@
 var Backbone = require('backbone'),
     template = require("../templates/map.hbs"),
-    models = require('../models/service'),
+    service = require('../models/service'),
+    servicetype = require('../models/servicetype'),
     hashtrack = require('hashtrack'),
     i18n = require('i18next-client');
 
@@ -10,12 +11,17 @@ hashtrack.onhashvarchange('q', function(_, value) {
     query = value;
     $('#page').trigger('search', value)
 })
+hashtrack.onhashvarchange('t', function(_, value) {
+    query = value;
+    $('#page').trigger('search', value)
+})
 
 module.exports = Backbone.View.extend({
     initialize: function(){
         var self = this;
         this.query = query;
-        this.services = new models.PublicServices();
+        this.services = new service.PublicServices();
+        this.servicetypes = new servicetype.ServiceTypes();
         this.render();
     },
 
@@ -26,6 +32,18 @@ module.exports = Backbone.View.extend({
             services: this.services,
             query: this.query,
         }));
+
+        this.servicetypes.fetch().then(function() {
+            var $select = $('.query-service-type');
+            $.each(self.servicetypes.models, function() {
+                var d = this.data();
+                $select.append('<option value="'+d.number +'">'+d.name+'</option>')
+            })
+            var t = hashtrack.getVar('t');
+            if (t) {
+                $select.val(t);
+            }
+        });
 
         function initialize() {
             var mapOptions = {
@@ -63,22 +81,30 @@ module.exports = Backbone.View.extend({
         self.map.fitBounds(bounds);
     },
 
-    refetchServices: function(query) {
+    refetchServices: function() {
         var self = this;
-        this.query = query;
-        this.services.fetch({data: {name: self.query}}).then(function(){
+        this.query = hashtrack.getVar('q');
+        this.type = hashtrack.getVar('t');
+        var params = {
+            search: self.query,
+            type_numbers: this.type,
+        };
+        this.services.fetch({data: params}).then(function(){
             self.updateMarkers();
         })
     },
 
     events: {
         "search": function(_, query) {
-            this.refetchServices(query);
+            this.refetchServices();
         },
         "input input.query": function(e) {
             var query = $(e.target).val();
             // this.refetchServices(query);
             hashtrack.setVar('q', query);
+        },
+        "change .query-service-type": function(e) {
+            hashtrack.setVar('t', $(e.target).val());
         },
     }
 })
