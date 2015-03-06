@@ -293,3 +293,24 @@ Searches will use case-insensitive partial matches. The search parameter may
 contain multiple search terms, which should be whitespace and/or comma
 separated. If multiple search terms are used then objects will be returned
 in the list only if all the provided terms are matched.
+
+Sort by distance
+----------------
+
+When listing or searching services, if a ``closest`` query param is
+provided containing a comma-separated latitude and longitude (in
+that order), then the results will be sorted with the items closest
+to the specified point first.  E.g. ``?closest=35.5,-80``.
+
+If results are sorted by distance, then each result will have
+a ``distance`` field set to the number of meters the result is from
+the given point. Otherwise, the distance will just be zero and
+should be ignored.
+
+Latitude is north-south position, positive meaning north of the equator.
+Longitude is east-west position, positive meaning east of Greenwich
+and negative meaning west.  Units are degrees, expressed in decimal.
+
+North Carolina is at 35.5000° N, 80.0000° W, which we would pass to
+this API as "35.5,-80" meaning 35.5 degrees north latitude and
+80 degrees west longitude.
