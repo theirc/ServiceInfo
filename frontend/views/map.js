@@ -3,23 +3,15 @@ var Backbone = require('backbone'),
     service = require('../models/service'),
     servicetype = require('../models/servicetype'),
     hashtrack = require('hashtrack'),
-    i18n = require('i18next-client');
+    i18n = require('i18next-client'),
+    search = require('../search')
+;
 
-
-var query = "";
-hashtrack.onhashvarchange('q', function(_, value) {
-    query = value;
-    $('#page').trigger('search', value)
-})
-hashtrack.onhashvarchange('t', function(_, value) {
-    query = value;
-    $('#page').trigger('search', value)
-})
 
 module.exports = Backbone.View.extend({
     initialize: function(){
         var self = this;
-        this.query = query;
+        this.query = "";
         this.services = new service.PublicServices();
         this.servicetypes = new servicetype.ServiceTypes();
         this.render();
@@ -30,20 +22,10 @@ module.exports = Backbone.View.extend({
         var self=this;
         this.$el.html(template({
             services: this.services,
-            query: this.query,
+            query: hashtrack.getVar('q'),
         }));
 
-        this.servicetypes.fetch().then(function() {
-            var $select = $('.query-service-type');
-            $.each(self.servicetypes.models, function() {
-                var d = this.data();
-                $select.append('<option value="'+d.number +'">'+d.name+'</option>')
-            })
-            var t = hashtrack.getVar('t');
-            if (t) {
-                $select.val(t);
-            }
-        });
+        search.populateServiceTypeDropdown();
 
         function initialize() {
             var mapOptions = {
@@ -52,7 +34,9 @@ module.exports = Backbone.View.extend({
             };
             self.map = new google.maps.Map(document.getElementById('map_canvas'),
                 mapOptions);
-            self.refetchServices(self.query);
+            search.refetchServices(self.query).then(function(){
+                self.updateMarkers();
+            });
         }
 
         initialize();
@@ -61,7 +45,7 @@ module.exports = Backbone.View.extend({
     updateMarkers: function() {
         var self = this;
         var bounds = new google.maps.LatLngBounds();
-        var services = this.services.data();
+        var services = search.services.data();
         $.each(services, function() {
             var service = this;
             var latlng_string = /(\d+\.\d+) (\d+\.\d+)/.exec(this.location);
@@ -81,22 +65,12 @@ module.exports = Backbone.View.extend({
         self.map.fitBounds(bounds);
     },
 
-    refetchServices: function() {
-        var self = this;
-        this.query = hashtrack.getVar('q');
-        this.type = hashtrack.getVar('t');
-        var params = {
-            search: self.query,
-            type_numbers: this.type,
-        };
-        this.services.fetch({data: params}).then(function(){
-            self.updateMarkers();
-        })
-    },
-
     events: {
         "search": function(_, query) {
-            this.refetchServices();
+            var self = this;
+            search.refetchServices().then(function(){
+                self.updateMarkers();
+            })
         },
         "input input.query": function(e) {
             var query = $(e.target).val();
