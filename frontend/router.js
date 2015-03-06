@@ -22,7 +22,7 @@ var views = {
     "admin": require('./views/admin')
 };
 
-var view;
+var view, viewName;
 
 function loadPage(name, params) {
     var params = params || [];
@@ -35,21 +35,25 @@ function loadPage(name, params) {
             var opts = {
                 el: $el
             };
-            for (var i=0; i < params.length; i++) {
-                opts[params[i]] = viewArguments[i];
-            };
-            if (view) {
-                view.undelegateEvents();
-            }
-            view = new views[name](opts);
-            i18n.init(function(){
-                view.render.apply(view, viewArguments);
-                view.$el.i18n({
-                    lng: config.get('forever.language'),
+            if (viewName && viewName === name) {
+            } else {
+                for (var i=0; i < params.length; i++) {
+                    opts[params[i]] = viewArguments[i];
+                };
+                if (view) {
+                    view.undelegateEvents();
+                }
+                view = new views[name](opts);
+                viewName = name;
+                i18n.init(function(){
+                    view.render.apply(view, viewArguments);
+                    view.$el.i18n({
+                        lng: config.get('forever.language'),
+                    });
                 });
-            });
-            $('#menu-container').addClass("menu-closed");
-            $('#menu-container').removeClass("menu-open");
+                $('#menu-container').addClass("menu-closed");
+                $('#menu-container').removeClass("menu-open");
+            }
         })
     }
 }

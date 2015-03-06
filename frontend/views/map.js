@@ -16,9 +16,7 @@ module.exports = Backbone.View.extend({
         var self = this;
         this.query = query;
         this.services = new models.PublicServices();
-        this.services.fetch({data: {search: query}}).then(function(){
-            self.render();
-        })
+        this.render();
     },
 
     render: function() {
@@ -26,8 +24,8 @@ module.exports = Backbone.View.extend({
         var self=this;
         this.$el.html(template({
             services: this.services,
+            query: this.query,
         }));
-
 
         function initialize() {
             var mapOptions = {
@@ -36,7 +34,7 @@ module.exports = Backbone.View.extend({
             };
             self.map = new google.maps.Map(document.getElementById('map_canvas'),
                 mapOptions);
-            self.updateMarkers();
+            self.refetchServices(self.query);
         }
 
         initialize();
@@ -65,21 +63,22 @@ module.exports = Backbone.View.extend({
         self.map.fitBounds(bounds);
     },
 
+    refetchServices: function(query) {
+        var self = this;
+        this.query = query;
+        this.services.fetch({data: {name: self.query}}).then(function(){
+            self.updateMarkers();
+        })
+    },
+
     events: {
         "search": function(_, query) {
-            this.query = query;
-            var self = this;
-            this.services.fetch({data: {name: self.query}}).then(function(){
-                self.updateMarkers();
-            })
+            this.refetchServices(query);
         },
         "input input.query": function(e) {
-            var v = $(e.target).val();
-            this.query = v;
-            var self = this;
-            this.services.fetch({data: {name: self.query}}).then(function(){
-                self.updateMarkers();
-            })
+            var query = $(e.target).val();
+            // this.refetchServices(query);
+            hashtrack.setVar('q', query);
         },
     }
 })
