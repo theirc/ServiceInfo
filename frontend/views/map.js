@@ -29,7 +29,7 @@ module.exports = Backbone.View.extend({
 
         function initialize() {
             var mapOptions = {
-                center: { lat: -34.397, lng: 150.644},
+                center: { lat: 33.8869, lng: 35.5131},
                 zoom: 8
             };
             self.map = new google.maps.Map(document.getElementById('map_canvas'),
@@ -48,7 +48,7 @@ module.exports = Backbone.View.extend({
         var services = search.services.data();
         $.each(services, function() {
             var service = this;
-            var latlng_string = /(\d+\.\d+) (\d+\.\d+)/.exec(this.location);
+            var latlng_string = /(-?\d+\.\d+) (-?\d+\.\d+)/.exec(this.location);
             if (latlng_string) {
                 var myLatlng = new google.maps.LatLng(latlng_string[1], latlng_string[2]);
                 bounds.extend(myLatlng);
