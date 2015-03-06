@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
+from django.contrib.gis.geos import Point
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.db.models import Q
 from django.db.transaction import atomic
@@ -124,6 +125,21 @@ class ServiceTypeNumbersFilter(django_filters.CharFilter):
         return qset.filter(type__number__in=[int(s) for s in value.split(',')])
 
 
+class SortByDistanceFilter(django_filters.CharFilter):
+    """Order the results by their distance from a specified lat,long"""
+    def filter(self, qset, value):
+        if not len(value):
+            return qset
+        lat, long = [float(x) for x in value.split(',', 1)]
+        search_point = Point(long, lat)
+        return qset.distance(search_point).order_by('distance')
+
+        # We take the coords as lat, long because that's most common
+        # (NS position, then EW).  But Point takes (x, y) which means
+        # (long, lat) because x is distance east or west, or longitude,
+        # and y is distance north or south, or latitude.
+
+
 class ServiceFilter(django_filters.FilterSet):
     additional_info = CharAnyLanguageFilter('additional_info')
     area_of_service_name = CharAnyLanguageFilter('area_of_service__name')
@@ -132,6 +148,7 @@ class ServiceFilter(django_filters.FilterSet):
     type_name = CharAnyLanguageFilter('type__name')
     type_numbers = ServiceTypeNumbersFilter()
     id = django_filters.NumberFilter()
+    closest = SortByDistanceFilter()
 
     class Meta:
         model = Service
