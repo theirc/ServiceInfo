@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib import admin, messages
 from django.contrib.admin.templatetags.admin_urls import add_preserved_filters
 from django.contrib.gis.admin import GeoModelAdmin
+from django.contrib.gis.forms import OSMWidget
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
@@ -39,11 +40,46 @@ class SelectionCriterionInlineAdmin(admin.TabularInline):
     # and create or edit one there that links to the service.)
 
 
+class OurOSMWidget(OSMWidget):
+    # Use our own template that actually respects 'default_zoom'
+    template_name = 'admin/osm-map.html'
+
+    # The GeoModelAdmin.get_map_widget will subclass this widget class
+    # and put a lot of config into an attribute 'params'. But the render
+    # method of OSMWidget never looks at 'params'... Sigh.
+    def render(self, name, value, attrs=None):
+        if attrs:
+            self.params.update(attrs)
+        return super().render(name, value, attrs=self.params)
+
+    # The __init__ of OSMWidget does some messing around with
+    # its attrs and args for default_lon and default_lat. I don't
+    # feel like trying to figure that out, so just bypass it.
+    def __init__(self, attrs=None):
+        # Yes, we are deliberately NOT invoking OSMWidget's own __init__
+        super(OSMWidget, self).__init__(attrs)
+
+
 class ServiceAdmin(GeoModelAdmin):
+    # https://docs.djangoproject.com/en/1.7/ref/contrib/gis/admin/#geomodeladmin
+
     # Use CDN-hosted OpenLayers so that (1) we can use https, and (2) all the
     # images that are loaded relative to the js file will also load without
     # our having to track them all down and host them ourselves.
     openlayers_url = '//cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js'
+
+    # layers
+    # basic: base map
+    # clabel: country names
+    # Others?   who knows but they seem like a good idea
+    wms_layer = 'basic,clabel,ctylabel,statelabel,stateboundary'
+
+    widget = OurOSMWidget  # Our subclassed OpenStreetMaps widget
+
+    # Beirut: lat 33.8869, long 35.5131.
+    default_lat = 33.8869
+    default_lon = 35.5131
+    default_zoom = 12
 
     class Media:
         css = {
