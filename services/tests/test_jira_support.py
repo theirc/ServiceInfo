@@ -4,6 +4,7 @@ from unittest import mock
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.test import TestCase, override_settings
+from email_user.tests.factories import EmailUserFactory
 
 from ..models import JiraUpdateRecord, Service
 from ..tasks import process_jira_work
@@ -106,11 +107,59 @@ class JiraProviderChangeTest(MockJiraTestMixin, TestCase):
 
 
 @mock.patch('services.jira_support.JIRA', autospec=True)
+class JiraApproveServiceTest(MockJiraTestMixin, TestCase):
+    def setUp(self):
+        self.test_service = ServiceFactory(location='POINT(5 23)')
+        self.jira_record = self.test_service.jira_records.get(
+            update_type=JiraUpdateRecord.NEW_SERVICE)
+        self.staff_user = EmailUserFactory(is_staff=True)
+
+    def test_approving_service_creates_record(self, mock_JIRA):
+        self.test_service.staff_approve(self.staff_user)
+        self.assertTrue(self.test_service.jira_records.filter(
+            update_type=JiraUpdateRecord.APPROVE_SERVICE).exists())
+
+    def test_rejecting_service_creates_record(self, mock_JIRA):
+        self.test_service.staff_reject(self.staff_user)
+        self.assertTrue(self.test_service.jira_records.filter(
+            update_type=JiraUpdateRecord.REJECT_SERVICE).exists())
+
+    def test_approval_comments_on_issue(self, mock_JIRA):
+        self.test_service.staff_approve(self.staff_user)
+        issue_key = self.setup_issue_key(mock_JIRA)
+        self.jira_record.do_jira_work()
+        record2 = self.test_service.jira_records.get(
+            update_type=JiraUpdateRecord.APPROVE_SERVICE)
+        record2.do_jira_work()
+        self.assertEqual(self.jira_record.jira_issue_key, record2.jira_issue_key)
+        call_args, call_kwargs = mock_JIRA.return_value.add_comment.call_args
+        self.assertEqual(
+            (issue_key, "The service change was approved by %s." % self.staff_user.email),
+            call_args)
+        self.assertEqual({}, call_kwargs)
+
+    def test_rejecting_comments_on_issue(self, mock_JIRA):
+        self.test_service.staff_reject(self.staff_user)
+        issue_key = self.setup_issue_key(mock_JIRA)
+        self.jira_record.do_jira_work()
+        record2 = self.test_service.jira_records.get(
+            update_type=JiraUpdateRecord.REJECT_SERVICE)
+        record2.do_jira_work()
+        self.assertEqual(self.jira_record.jira_issue_key, record2.jira_issue_key)
+        call_args, call_kwargs = mock_JIRA.return_value.add_comment.call_args
+        self.assertEqual(
+            (issue_key, "The service change was rejected by %s." % self.staff_user.email),
+            call_args)
+        self.assertEqual({}, call_kwargs)
+
+
+@mock.patch('services.jira_support.JIRA', autospec=True)
 class JiraNewServiceTest(MockJiraTestMixin, TestCase):
     def setUp(self):
         self.test_service = ServiceFactory(location='POINT(5 23)')
         self.jira_record = self.test_service.jira_records.get(
             update_type=JiraUpdateRecord.NEW_SERVICE)
+        self.staff_user = EmailUserFactory(is_staff=True)
 
     def test_create_issue_sets_keyval(self, mock_JIRA):
         self.assertEqual('', self.jira_record.jira_issue_key)
@@ -161,7 +210,7 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         # the JIRA work gracefully works
         self.jira_record.update_type = JiraUpdateRecord.NEW_SERVICE
         self.jira_record.save()
-        self.test_service.staff_approve()
+        self.test_service.staff_approve(self.staff_user)
         self.setup_issue_key(mock_JIRA)
         self.jira_record.do_jira_work()
 
@@ -171,7 +220,7 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         self.test_service.update_of = ServiceFactory()
         self.jira_record.update_type = JiraUpdateRecord.CHANGE_SERVICE
         self.jira_record.save()
-        self.test_service.staff_approve()
+        self.test_service.staff_approve(self.staff_user)
         self.setup_issue_key(mock_JIRA)
         self.jira_record.do_jira_work()
 

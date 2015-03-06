@@ -507,10 +507,11 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         if errs:
             raise ValidationError(errs)
 
-    def staff_approve(self):
+    def staff_approve(self, staff_user):
         """
         Staff approving the service (new or changed).
 
+        :param staff_user: The user who approved
         :raises: ValidationErrror
         """
         # Make sure it's ready
@@ -522,15 +523,25 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         self.status = Service.STATUS_CURRENT
         self.save()
         self.email_provider_about_approval()
-        # FIXME: Trigger JIRA ticket update?
+        JiraUpdateRecord.objects.create(
+            service=self,
+            update_type=JiraUpdateRecord.APPROVE_SERVICE,
+            by=staff_user
+        )
 
-    def staff_reject(self):
+    def staff_reject(self, staff_user):
         """
         Staff rejecting the service (new or changed)
+
+        :param staff_user: The user who rejected
         """
         self.status = Service.STATUS_REJECTED
         self.save()
-        # FIXME: Trigger JIRA ticket update?
+        JiraUpdateRecord.objects.create(
+            service=self,
+            update_type=JiraUpdateRecord.REJECT_SERVICE,
+            by=staff_user
+        )
 
 
 class JiraUpdateRecord(models.Model):
@@ -543,6 +554,8 @@ class JiraUpdateRecord(models.Model):
     CANCEL_DRAFT_SERVICE = 'cancel-draft-service'
     CANCEL_CURRENT_SERVICE = 'cancel-current-service'
     SUPERSEDED_DRAFT = 'superseded-draft'
+    APPROVE_SERVICE = 'approve-service'
+    REJECT_SERVICE = 'rejected-service'
     UPDATE_CHOICES = (
         (PROVIDER_CHANGE, _('Provider updated their information')),
         (NEW_SERVICE, _('New service submitted by provider')),
@@ -550,6 +563,8 @@ class JiraUpdateRecord(models.Model):
         (CANCEL_DRAFT_SERVICE, _('Provider canceled a draft service')),
         (CANCEL_CURRENT_SERVICE, _('Provider canceled a current service')),
         (SUPERSEDED_DRAFT, _('Provider superseded a previous draft')),
+        (APPROVE_SERVICE, _('Staff approved a new or changed service')),
+        (REJECT_SERVICE, _('Staff rejected a new or changed service')),
     )
     # Update types that indicate a new Service record was created
     NEW_SERVICE_RECORD_UPDATE_TYPES = [
@@ -559,7 +574,13 @@ class JiraUpdateRecord(models.Model):
     END_SERVICE_UPDATE_TYPES = [
         CANCEL_DRAFT_SERVICE, CANCEL_CURRENT_SERVICE,
     ]
-    SERVICE_CHANGE_UPDATE_TYPES = NEW_SERVICE_RECORD_UPDATE_TYPES + END_SERVICE_UPDATE_TYPES
+    STAFF_ACTION_SERVICE_UPDATE_TYPES = [
+        APPROVE_SERVICE, REJECT_SERVICE
+    ]
+    SERVICE_CHANGE_UPDATE_TYPES = (
+        NEW_SERVICE_RECORD_UPDATE_TYPES + END_SERVICE_UPDATE_TYPES
+        + STAFF_ACTION_SERVICE_UPDATE_TYPES
+    )
     PROVIDER_CHANGE_UPDATE_TYPES = [
         PROVIDER_CHANGE,
     ]
@@ -576,6 +597,11 @@ class JiraUpdateRecord(models.Model):
         max_length=256,
         blank=True,
         default='')
+    by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        null=True,
+        blank=True,
+    )
 
     class Meta(object):
         # The service udpate types can each only happen once per service
@@ -610,6 +636,10 @@ class JiraUpdateRecord(models.Model):
                 errors.append('%s must specifiy superseded draft service')
         else:
             errors.append('unrecognized update_type: %s' % self.update_type)
+        if self.update_type in self.STAFF_ACTION_SERVICE_UPDATE_TYPES:
+            if not self.by:
+                errors.append('%s must specify user in "by" field')
+
         if errors:
             raise Exception('%s cannot be saved: %s' % (str(self), ', '.join(e for e in errors)))
         super().save(*args, **kwargs)
@@ -672,10 +702,26 @@ class JiraUpdateRecord(models.Model):
                     service=self.service
                 )
                 issue_key = previous_record.jira_issue_key
-                comment = 'Pending draft change was canceled by the provider'
+                comment = 'Pending draft change was canceled by the provider.'
                 jira.add_comment(issue_key, comment)
                 self.jira_issue_key = issue_key
                 self.save()
+            elif self.update_type in self.STAFF_ACTION_SERVICE_UPDATE_TYPES:
+                # Track down the issue that's already been created so we
+                # can comment on it.
+                previous_record = JiraUpdateRecord.objects.get(
+                    update_type__in=JiraUpdateRecord.NEW_SERVICE_RECORD_UPDATE_TYPES,
+                    service=self.service
+                )
+                issue_key = previous_record.jira_issue_key
+                if self.update_type == self.APPROVE_SERVICE:
+                    comment = 'The service change was approved by %s.' % self.by.email
+                else:
+                    comment = 'The service change was rejected by %s.' % self.by.email
+                jira.add_comment(issue_key, comment)
+                self.jira_issue_key = issue_key
+                self.save()
+
         finally:
             # If we've not managed to save a valid JIRA issue key, reset value to
             # empty string so it'll be tried again later.

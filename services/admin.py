@@ -110,7 +110,7 @@ class ServiceAdmin(GeoModelAdmin):
         any_approved = False
         for service in queryset:
             try:
-                service.staff_approve()
+                service.staff_approve(request.user)
             except ValidationError as e:
                 msg = _("Unable to approve service '{name}': {error}.")
                 msg = msg.format(name=service.name, error=validation_error_as_text(e))
@@ -129,7 +129,7 @@ class ServiceAdmin(GeoModelAdmin):
                               messages.ERROR)
             return
         for service in queryset:
-            service.staff_reject()
+            service.staff_reject(request.user)
         self.message_user(request, _("Services have been rejected"))
     reject.short_description = _("Reject new or changed service")
 
