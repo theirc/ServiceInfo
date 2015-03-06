@@ -74,7 +74,6 @@ module.exports = Backbone.View.extend({
         },
         "input input.query": function(e) {
             var query = $(e.target).val();
-            // this.refetchServices(query);
             hashtrack.setVar('q', query);
         },
         "change .query-service-type": function(e) {
