@@ -56,7 +56,15 @@ var Services = _base.BaseCollection.extend({
     },
 })
 
+var PublicServices = Services.extend({
+    url: function() {
+        var url = api.getAPIPrefix() + 'api/'+ this.model.prototype.apiname +'/search/';
+        return url;
+    },
+})
+
 module.exports = {
     Service: Service,
     Services: Services,
+    PublicServices: PublicServices,
 };

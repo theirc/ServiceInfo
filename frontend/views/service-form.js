@@ -23,7 +23,7 @@ function remove_empty_fields(data) {
 
 module.exports = Backbone.View.extend({
     initialize: function(opts){
-        self = this;
+        var self = this;
         self.serviceareas = [];
         self.servicetypes = [];
 
