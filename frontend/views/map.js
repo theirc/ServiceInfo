@@ -48,9 +48,12 @@ module.exports = Backbone.View.extend({
         var services = search.services.data();
         $.each(services, function() {
             var service = this;
-            var latlng_string = /(-?\d+\.\d+) (-?\d+\.\d+)/.exec(this.location);
-            if (latlng_string) {
-                var myLatlng = new google.maps.LatLng(latlng_string[1], latlng_string[2]);
+
+            // this.location, from PostGIS, is in the form POINT(LONG LAT)
+            // Google Maps API's LatLng() constructor expects LAT, LONG parameters
+            var long_lat_str = /(-?\d+\.\d+) (-?\d+\.\d+)/.exec(this.location);
+            if (long_lat_str) {
+                var myLatlng = new google.maps.LatLng(long_lat_str[2], long_lat_str[1]);
                 bounds.extend(myLatlng);
                 var marker = new google.maps.Marker({
                     position: myLatlng,
