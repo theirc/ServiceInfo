@@ -49,7 +49,7 @@ function build() {
         .pipe(gulp.dest('frontend/styles'))
     ;
 
-    gulp.src('frontend/index.js')
+    var bundle = gulp.src('frontend/index.js')
         .pipe(browserify({
             insertGlobals : true,
             debug : !gulp.env.production,
