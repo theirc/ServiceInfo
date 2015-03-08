@@ -2,6 +2,7 @@ from textwrap import dedent
 from django.conf import settings
 from django.contrib.gis.db import models
 from django.contrib.sites.models import Site
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.core.validators import MinValueValidator, MaxValueValidator, RegexValidator
 from django.db.transaction import atomic
@@ -481,10 +482,39 @@ class Service(NameInCurrentLanguageMixin, models.Model):
                         service=self,
                         update_type=JiraUpdateRecord.NEW_SERVICE)
 
+    def validate_for_approval(self):
+        """
+        Raise a ValidationError if this service's data doesn't look valid to
+        be a current, approved service.
+
+        Current checks:
+
+        * self.full_clean()
+        * .location must be set
+        * at least one language field for each of several translated fields must be set
+        """
+        try:
+            self.full_clean()
+        except ValidationError as e:
+            errs = e.error_dict
+        else:
+            errs = {}
+        if not self.location:
+            errs['location'] = [_('This field is required.')]
+        for field in ['name', 'description']:
+            if not any([getattr(self, '%s_%s' % (field, lang)) for lang in ['en', 'ar', 'fr']]):
+                errs[field] = [_('This field is required.')]
+        if errs:
+            raise ValidationError(errs)
+
     def staff_approve(self):
         """
-        Staff approving the service (new or changed)
+        Staff approving the service (new or changed).
+
+        :raises: ValidationErrror
         """
+        # Make sure it's ready
+        self.validate_for_approval()
         # if there's already a current record, archive it
         if self.update_of and self.update_of.status == Service.STATUS_CURRENT:
             self.update_of.status = Service.STATUS_ARCHIVED

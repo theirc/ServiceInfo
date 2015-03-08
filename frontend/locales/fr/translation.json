@@ -9,9 +9,9 @@
         "Menu-Toggle": "Menu",
         "Login": "Login",
         "Logout": "Logout",
-        "Services": "services",
+        "Services": "Services",
         "Add-Services": "Ajouter des services",
-        "Service-Map": "service Map",
+        "Service-Map": "Service Map",
         "Provider-Registration": "Inscription des fournisseurs",
         "Feedback-Tool": "Commentaires Outil",
         "Change-Language": "Changer de langue"
@@ -20,8 +20,8 @@
         "Admin": "Admin",
         "FormSubmissionError": "Il y avait une erreur inconnue soumettant votre formulaire.",
         "UnknownError": "Il y avait une erreur inconnue.",
-        "Sunday": "dimanche",
-        "Monday": "lundi",
+        "Sunday": "Dimanche",
+        "Monday": "Lundi",
         "Tuesday": "Mardi",
         "Wednesday": "Mercredi",
         "Thursday": "Jeudi",
@@ -31,7 +31,7 @@
     "Login-Form": {
         "Page-Head": {
             "Page-Title": {
-                "Title": "entrer"
+                "Title": "Entrer"
             },
             "Page-Description": {
                 "Page-Description": "Si vous êtes un fournisseur de services et d'avoir un signe de compte existant signe dans votre compte ci-dessous."
@@ -39,10 +39,10 @@
         },
         "Form": {
             "Email": "Email",
-            "Password": "mot de passe"
+            "Password": "Mot de passe"
         },
         "Form-Submit-Options": {
-            "Submit": "entrer",
+            "Submit": "Entrer",
             "Register": "Inscrivez-vous pour être un fournisseur de service ici"
         }
     },
@@ -58,10 +58,10 @@
     "Service-Delete": {
         "Page-Head": {
             "Page-Title": {
-                "Title": "supprimer le service"
+                "Title": "Supprimer le service"
             }
         },
-        "Delete-Service": "supprimer le service"
+        "Delete-Service": "Supprimer le service"
     },
     "Service-Form": {
         "Page-Head": {
@@ -77,9 +77,9 @@
         "Service-Area-Choose": "Choisissez une zone de service",
         "Service-Name": "Nom du service",
         "Service-Area": "Zone de service",
-        "Type": "type de service",
-        "Service-Description": "description",
-        "Service-Hours": "Heures de service",
+        "Type": "Type de service",
+        "Service-Description": "Description",
+        "Service-Hours": "Journée de travail",
         "Additional-Information": "Informations supplémentaires (champ facultatif)",
         "Service-Cost": "Coût du service (champ facultatif)",
         "Selection-Criteria": "Critères de sélection (champ optionnel)",
@@ -109,28 +109,27 @@
         "Form-Sections": {
             "Basic": {
                 "Legend": "Détails de base d'enregistrement d'un fournisseur de service:",
-                "Name": "plein nom",
-                "Password": "mot de passe",
+                "Name": "Nom du fournisseur de service",
+                "Password": "Mot de passe",
                 "PasswordConfirm": "Confirmez Le Mot De Passe",
                 "Provider-Type": "Type de prestataire",
                 "Provider-Type-Choose": "Choisissez un type de fournisseur",
-                "Phone-Number": "Numéro de téléphone",
+                "Phone-Number": "Numéro de téléphone (NN-NNNNNN)",
                 "Email": "Email",
                 "EmailPlaceholder": "Entrez votre Email",
-                "Website": "Site Web (champ optionel)",
-                "WebsitePlaceholder": "Entrez votre URL de site web",
+                "Website": "URL du site Web (champ facultatif)",
                 "MonthlyBeneficiaries": "Nombre de bénéficiaires mensuelles",
-                "Description": "description"
+                "Description": "Description"
             },
             "Service-Information": {
                 "Legend": "Informations sur le service",
                 "Service-Name": "Nom du service",
                 "Service-Area": "Zone de service",
-                "Type": "type de service",
+                "Type": "Type de service",
                 "Service-Description": "Description",
                 "Service-Hours": "Heures de service",
                 "Additional-Information": "Informations supplémentaires (champ facultatif)",
-                "Service-Cost": "Coût du service (champ facultatif)",
+                "Service-Cost": "Coût du service (champ facultatif, en USD)",
                 "Selection-Criteria": "Critères de sélection (champ optionnel)"
             },
             "Form-Submit-Options": {
@@ -170,17 +169,26 @@
                 "Page-Description": "Voici une liste des services que vous avez appliqués à fournir. Services approuvés sont marqués en vert. Les services non approuvés sont marqués en rouge. Les services sont en attente d'approbation banalisée."
             }
         },
+        "Empty-Message": "Vous ne avez pas encore présenté de services. Vous pouvez soumettre votre premier service pour examen en appuyant sur le bouton Nouveau service.",
+        "Add-Service": "Nouveau service",
+        "Status": {
+            "draft": "Ebauche",
+            "current": "Courant",
+            "rejected": "Rejeté",
+            "canceled": "Annulé",
+            "archived": "Archivé"
+        },
         "Table": {
             "Thead": {
-                "Name": "nom:",
-                "Type": "type:",
+                "Name": "Nom:",
+                "Type": "Type:",
                 "Area": "Emplacement:",
                 "Status": "Statu:",
                 "Remove": "Retirer:"
             }
         },
-        "Cancel": "annuler",
-        "Delete": "effacer"
+        "Cancel": "Annuler",
+        "Delete": "Effacer"
     },
     "Home": {
         "Service-Map": {
@@ -229,7 +237,7 @@
             "User-Email": "Entrez votre email:"
         },
         "Submit-Options": {
-            "Submit": "soumettre"
+            "Submit": "Soumettre"
         }
     },
     "Password-Reset-Form": {
@@ -245,7 +253,7 @@
             "New-Password": "Entrez votre nouveau mot de passe:"
         },
         "Submit-Options": {
-            "Submit": "soumettre"
+            "Submit": "Soumettre"
         }
     }
 }

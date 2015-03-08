@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-02-24 15:17+0000\n"
+"PO-Revision-Date: 2015-03-04 06:42+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -137,7 +137,7 @@ msgid "Service-Form##Service-Description"
 msgstr "تفصيل"
 
 msgid "Service-Form##Service-Hours"
-msgstr "ساعات الخدمة"
+msgstr "ساعات العمل"
 
 msgid "Service-Form##Additional-Information"
 msgstr "معلومات إضافية (حقل اختياري)"
@@ -186,7 +186,7 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##Legend"
 msgstr "التفاصيل الأساسية لتسجيل مزود خدمات:"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Name"
-msgstr "الاسم الكامل"
+msgstr "اسم مقدم الخدمة"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
 msgstr "كلمة السر"
@@ -201,7 +201,7 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
 msgstr "اختر نوع مزود"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
-msgstr "رقم الهاتف"
+msgstr "رقم الهاتف (رر-رررررر)"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
 msgstr "البريد الإلكتروني"
@@ -210,10 +210,7 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##EmailPlaceholder"
 msgstr "أدخل البريد الإلكتروني الخاص بك"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
-msgstr "موقع (حقل اختياري)"
-
-msgid "Provider-Registration-Form##Form-Sections##Basic##WebsitePlaceholder"
-msgstr "أدخل URL موقع الويب الخاص بك"
+msgstr "رابط الموقع (حقل اختياري)"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
 msgstr "عدد المستفيدين شهرياَ"
@@ -252,7 +249,7 @@ msgstr "معلومات إضافية (حقل اختياري)"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Service-Cost"
-msgstr "تكلفة الخدمة (حقل اختياري)"
+msgstr "تكلفة الخدمة (حقل الاختياري، في USD)"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Selection-"
@@ -301,6 +298,27 @@ msgstr "قائمة الخدمات"
 
 msgid "Service-List##Page-Head##Page-Description##Page-Description"
 msgstr "وفيما يلي قائمة من الخدمات التي تطبق على توفير. وتتميز الخدمات وافق باللون الأخضر. وتتميز خدمات لم يفوافق عليها في الحمراء. خدمات بانتظار الموافقة هي لا تحمل علامات مميزة."
+
+msgid "Service-List##Empty-Message"
+msgstr "لم تدخل أي خدمة للأن. يمكنك إدخال أول خدمة لك بالضغط على مفتاح أضف خدمة جديدة ."
+
+msgid "Service-List##Add-Service"
+msgstr "خدمة جديدة"
+
+msgid "Service-List##Status##draft"
+msgstr "مسودة"
+
+msgid "Service-List##Status##current"
+msgstr "جاري"
+
+msgid "Service-List##Status##rejected"
+msgstr "مرفوض"
+
+msgid "Service-List##Status##canceled"
+msgstr "ألغيت"
+
+msgid "Service-List##Status##archived"
+msgstr "أرشفة"
 
 msgid "Service-List##Table##Thead##Name"
 msgstr "الاسم:"

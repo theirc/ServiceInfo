@@ -2,8 +2,10 @@
 {% blocktrans with provider_name=provider.name %}Dear {{ provider_name }}{% endblocktrans %}
 {% blocktrans with service_name=service.name service_link=service.public_link %}
 Your service {{ service_name }} has been vetted and approved by International Rescue Committee staff.
-It has been published on the following link: <a href="{{ service_link }}">{{ service_link }}</a>
 {% endblocktrans %}
+{% comment %}
+Commenting out this line until we have a page to link to:
+It has been published on the following link: <a href="{{ service_link }}">{{ service_link }}</a>{% endcomment %}
 
 {% trans "For more information please contact support at serviceinfo@rescue.org" %}
 {% trans "Thanks for your submission." %}

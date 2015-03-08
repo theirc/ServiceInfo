@@ -1,15 +1,17 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError as DjangoValidationError
+from django.db.models import Q
 from django.db.transaction import atomic
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _, activate, deactivate_all
 
-from rest_framework import parsers, renderers, status, viewsets
+import django_filters
+from rest_framework import mixins, parsers, renderers, status, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import list_route, detail_route
 from rest_framework.exceptions import ValidationError as DRFValidationError, PermissionDenied
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -17,7 +19,7 @@ from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, 
     ProviderTypeSerializer, ServiceAreaSerializer, APILoginSerializer, APIActivationSerializer, \
     PasswordResetRequestSerializer, PasswordResetCheckSerializer, PasswordResetSerializer, \
     ResendActivationLinkSerializer, CreateProviderSerializer, ServiceTypeSerializer, \
-    SelectionCriterionSerializer, LanguageSerializer
+    SelectionCriterionSerializer, LanguageSerializer, ServiceSearchSerializer
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
     SelectionCriterion
@@ -34,6 +36,12 @@ class TranslatedViewMixin(object):
             deactivate_all()
 
 
+class ServiceInfoGenericViewSet(TranslatedViewMixin, viewsets.GenericViewSet):
+    """A view set that allows for translated fields, but doesn't provide any
+    specific view methods (like list or detail) by default."""
+    pass
+
+
 class ServiceInfoAPIView(TranslatedViewMixin, APIView):
     pass
 
@@ -43,6 +51,9 @@ class ServiceInfoModelViewSet(TranslatedViewMixin, viewsets.ModelViewSet):
 
 
 class LanguageView(ServiceInfoAPIView):
+    """
+    Lookup the authenticated user's preferred language.
+    """
     permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
@@ -72,10 +83,60 @@ class GroupViewSet(ServiceInfoModelViewSet):
     serializer_class = GroupSerializer
 
 
-class ServiceAreaViewSet(ServiceInfoModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+class ServiceAreaViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
+                         ServiceInfoGenericViewSet):
+    permission_classes = [AllowAny]
     queryset = ServiceArea.objects.all()
     serializer_class = ServiceAreaSerializer
+
+
+class CharAnyLanguageFilter(django_filters.CharFilter):
+    """
+    Given the base name of a field that has multiple language versions,
+    filter allowing for any of the language versions to contain the
+    given value, case-insensitively.
+
+    E.g. if field_name is 'name' and the value given in the query is 'foo',
+    then any record where 'name_en', 'name_ar', or 'name_fr' contains 'foo'
+    will match.
+    """
+    def __init__(self, field_name):
+        self.field_name = field_name
+        super().__init__()
+
+    def filter(self, qset, value):
+        if not len(value):
+            return qset
+        query = Q()
+        for lang in ['en', 'ar', 'fr']:
+            query |= Q(**{'%s_%s__icontains' % (self.field_name, lang): value})
+        return qset.filter(query)
+
+
+class ServiceTypeNumbersFilter(django_filters.CharFilter):
+    """
+    Filter service records where their service type has any of the
+    numbers given in a comma-separated string.
+    """
+    def filter(self, qset, value):
+        if not len(value):
+            return qset
+        return qset.filter(type__number__in=[int(s) for s in value.split(',')])
+
+
+class ServiceFilter(django_filters.FilterSet):
+    additional_info = CharAnyLanguageFilter('additional_info')
+    area_of_service_name = CharAnyLanguageFilter('area_of_service__name')
+    description = CharAnyLanguageFilter('description')
+    name = CharAnyLanguageFilter('name')
+    type_name = CharAnyLanguageFilter('type__name')
+    type_numbers = ServiceTypeNumbersFilter()
+    id = django_filters.NumberFilter()
+
+    class Meta:
+        model = Service
+        fields = ['area_of_service_name', 'name', 'description', 'additional_info', 'type_name',
+                  'type_numbers', 'id']
 
 
 class ServiceViewSet(ServiceInfoModelViewSet):
@@ -87,23 +148,22 @@ class ServiceViewSet(ServiceInfoModelViewSet):
     the service's URL and POST to cancel a service that's in
     draft or current state.  (User must be the provider or superuser).
     """
+    filter_class = ServiceFilter
+    is_search = False
+    # The queryset is only here so DRF knows the base model for this View.
+    # We override it below in all cases.
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
 
     def get_queryset(self):
         # Only make visible the Services owned by the current provider
         # and not archived
-        return self.queryset.filter(provider__user=self.request.user)\
-            .exclude(status=Service.STATUS_ARCHIVED)\
-            .exclude(status=Service.STATUS_CANCELED)
-
-    def get_object(self):
-        # Users can only access their own records
-        # Overriding get_queryset() should be enough, but just in case...
-        obj = super().get_object()
-        if not obj.provider.user == self.request.user:
-            raise PermissionDenied
-        return obj
+        if self.is_search:
+            return Service.objects.filter(status=Service.STATUS_CURRENT)
+        else:
+            return self.queryset.filter(provider__user=self.request.user)\
+                .exclude(status=Service.STATUS_ARCHIVED)\
+                .exclude(status=Service.STATUS_CANCELED)
 
     @detail_route(methods=['post'])
     def cancel(self, request, *args, **kwargs):
@@ -114,6 +174,15 @@ class ServiceViewSet(ServiceInfoModelViewSet):
                 {'status': _('Service record must be current or pending changes to be canceled')})
         obj.cancel()
         return Response()
+
+    @list_route(methods=['get'], permission_classes=[AllowAny])
+    def search(self, request, *args, **kwargs):
+        """
+        Public API for searching public information about the current services
+        """
+        self.is_search = True
+        self.serializer_class = ServiceSearchSerializer
+        return super().list(request, *args, **kwargs)
 
 
 class SelectionCriterionViewSet(ServiceInfoModelViewSet):
@@ -134,16 +203,28 @@ class SelectionCriterionViewSet(ServiceInfoModelViewSet):
         return obj
 
 
-class ProviderTypeViewSet(ServiceInfoModelViewSet):
+class ProviderTypeViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
+                          ServiceInfoGenericViewSet):
+    """
+    Look up provider types.
+
+    (Read-only - no create, update, or delete provided)
+    """
     # Unauth'ed users need to be able to read the provider types so
     # they can register as providers.
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = [AllowAny]
     queryset = ProviderType.objects.all()
     serializer_class = ProviderTypeSerializer
 
 
-class ServiceTypeViewSet(ServiceInfoModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+class ServiceTypeViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
+                         ServiceInfoGenericViewSet):
+    """
+    Look up service types.
+
+    (Read-only - no create, update, or delete provided)
+    """
+    permission_classes = [AllowAny]
     queryset = ServiceType.objects.all()
     serializer_class = ServiceTypeSerializer
 
@@ -152,6 +233,8 @@ class ProviderViewSet(ServiceInfoModelViewSet):
     # This docstring shows up when browsing the API in a web browser:
     """
     Provider view
+
+    For providers to create/update their own data.
 
     In addition to the usual URLs, you can append 'create_provider/' to
     the provider URL and POST to create a new user and provider.

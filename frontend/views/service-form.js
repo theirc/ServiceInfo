@@ -64,14 +64,16 @@ module.exports = Backbone.View.extend({
             criteria.push({text: ""});
         }
         $el.html(template({
+            // These are not translated because they're used internally
+            // and never displayed directly.
             daysofweek: [
-                    i18n.t('Global.Sunday'),
-                    i18n.t('Global.Monday'),
-                    i18n.t('Global.Tuesday'),
-                    i18n.t('Global.Wednesday'),
-                    i18n.t('Global.Thursday'),
-                    i18n.t('Global.Friday'),
-                    i18n.t('Global.Saturday')
+                    'Sunday',
+                    'Monday',
+                    'Tuesday',
+                    'Wednesday',
+                    'Thursday',
+                    'Friday',
+                    'Saturday'
                 ],
 
             areas_of_services: this.serviceareas,

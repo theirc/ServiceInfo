@@ -187,6 +187,13 @@
     },
     "Empty-Message": "You have not submitted any services yet. You may submit your first service for review by tapping the New Service button.",
     "Add-Service": "New Service",
+    "Status": {
+      "draft": "draft",
+      "current": "current",
+      "rejected": "rejected",
+      "canceled": "canceled",
+      "archived": "archived"
+    },
     "Table": {
       "Thead": {
         "Name": "Name:",

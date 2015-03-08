@@ -197,7 +197,7 @@ class ServiceSerializer(RequireOneTranslationMixin,
             'thursday_open', 'thursday_close',
             'friday_open', 'friday_close',
             'saturday_open', 'saturday_close',
-            'type',
+            'type'
         )
         required_translated_fields = ['name', 'description']
 
@@ -252,6 +252,14 @@ class ServiceSerializer(RequireOneTranslationMixin,
         user = self.context['request'].user
         kwargs['provider'] = Provider.objects.get(user=user)
         super().save(**kwargs)
+
+
+class ServiceSearchSerializer(ServiceSerializer):
+    """Serializer for service searches"""
+    class Meta(ServiceSerializer.Meta):
+        # Include all fields except a few
+        fields = tuple([field for field in ServiceSerializer.Meta.fields
+                        if field not in ['status', 'update_of']])
 
 
 class ServiceAreaSerializer(RequireOneTranslationMixin,
