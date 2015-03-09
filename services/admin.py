@@ -44,6 +44,15 @@ class OurOSMWidget(OSMWidget):
     # Use our own template that actually respects 'default_zoom'
     template_name = 'admin/osm-map.html'
 
+    # Use CDN for openlayers, and http or https as appropriate.
+    class Media:
+        extend = False  # We want to replace OSMWidget's media, not add to it
+        js = (
+            '//cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js',
+            '//www.openstreetmap.org/openlayers/OpenStreetMap.js',
+            'gis/js/OLMapWidget.js',
+        )
+
     # The GeoModelAdmin.get_map_widget will subclass this widget class
     # and put a lot of config into an attribute 'params'. But the render
     # method of OSMWidget never looks at 'params'... Sigh.
