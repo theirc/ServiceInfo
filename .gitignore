@@ -19,3 +19,4 @@ frontend/styles/site.css
 frontend/styles/site-ltr.css
 frontend/styles/site-rtl.css
 node_modules
+bundle_min.js
