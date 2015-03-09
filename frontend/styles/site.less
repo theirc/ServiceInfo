@@ -110,7 +110,7 @@ li {
     clear: both;
 }
 
-@media (min-width: 1px) and (max-width: 1000px) {
+@media (min-width: 0px) and (max-width: 1000px) {
 	.row {
 		padding: 0;
 	}
@@ -896,7 +896,7 @@ input[type=range] {
     border-bottom: none;
 }
 
-@media only screen and (orientation: landscape) {
+@media only screen and (min-width: 640px) {
     #application-header {
         width: 20%;
         height: 100%;
@@ -938,7 +938,7 @@ input[type=range] {
 	}
 }
 
-@media only screen and (orientation: portrait) {
+@media only screen and (min-width: 0) and (max-width: 639px) {
     #application-header .brand {
         height: 100%;
     }
