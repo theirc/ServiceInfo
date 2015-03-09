@@ -53,7 +53,6 @@ class OurOSMWidget(OSMWidget):
             'gis/js/OLMapWidget.js',
         )
 
-
     # The GeoModelAdmin.get_map_widget will subclass this widget class
     # and put a lot of config into an attribute 'params'. But the render
     # method of OSMWidget never looks at 'params'... Sigh.
