@@ -76,8 +76,14 @@ var forms = module.exports = {
         var empty_label = i18n.t(empty_label_key);
 
         function resetOptions() {
+            var data;
+            window.collection = collection;
+            if (typeof collection.data === "function") {
+                data = collection.data();
+            } else {
+                data = Array.prototype.slice.apply(collection);
+            }
             var value = $field.val();
-            var data = collection.data();
             var empty_option = $('<option/>');
             empty_option.text(empty_label);
 
