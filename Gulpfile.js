@@ -60,15 +60,8 @@ function build() {
         .pipe(gulp.dest('frontend'))
     ;
 
-    child_process.execFile(
-        'java',
-        [
-            '-jar', 'node_modules/closurecompiler/compiler/compiler.jar',
-            '--language_in', 'ECMASCRIPT5',
-            '--js_output_file', 'frontend/bundle_min.js',
-            '--create_source_map', '%outname%.map',
-            'frontend/bundle.js'
-        ]
+    child_process.exec(
+        'ccjs frontend/bundle.js --language_in=ECMASCRIPT5 >frontend/bundle_min.js'
     );
 
     injectEnvConfig();
