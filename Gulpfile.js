@@ -4,6 +4,7 @@ var gulp = require('gulp')
 ,   bg = require('gulp-bg')
 ,   browserify = require('gulp-browserify')
 ,   minimist = require('minimist')
+,   child_process = require('child_process')
 ;
 
 var knownOptions = {
@@ -52,12 +53,23 @@ function build() {
     var bundle = gulp.src('frontend/index.js')
         .pipe(browserify({
             insertGlobals : true,
-            debug : !gulp.env.production,
-            transform: ['hbsfy'],
+            debug : options.config !== 'production',
+            transform: ['hbsfy']
         }))
         .pipe(rename('bundle.js'))
         .pipe(gulp.dest('frontend'))
     ;
+
+    child_process.execFile(
+        'java',
+        [
+            '-jar', 'node_modules/closurecompiler/compiler/compiler.jar',
+            '--language_in', 'ECMASCRIPT5',
+            '--js_output_file', 'frontend/bundle_min.js',
+            '--create_source_map', '%outname%.map',
+            'frontend/bundle.js'
+        ]
+    );
 
     injectEnvConfig();
 }
