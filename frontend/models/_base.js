@@ -118,7 +118,30 @@ var BaseCollection = Backbone.Collection.extend({
     },
 });
 
+var resolve_preload;
+var preloaded = new Promise(function (resolve, error) {
+    resolve_preload = resolve;
+});
+var _preloaded = {};
+var preload_types = [];
+config.ready(function(){
+    var promises = [];
+    for (var i=0; i < preload_types.length; i++) {
+        var name = preload_types[i].name;
+        var collection = preload_types[i].collection;
+        _preloaded[name] = new collection();
+        promises.push(_preloaded[name].fetch());
+    }
+    Promise.all(promises).then(function(){
+        resolve_preload(_preloaded);
+    });
+});
+
 module.exports = {
     BaseModel: BaseModel,
     BaseCollection: BaseCollection,
+    preload: function(name, collection) {
+        preload_types.push({name: name, collection: collection});
+    },
+    preloaded: preloaded,
 };

@@ -1,0 +1,5 @@
+{% extends 'gis/openlayers-osm.html' %}
+{% block options %}
+  {{ block.super }}
+  options['default_zoom'] = {{ default_zoom }};
+{% endblock %}

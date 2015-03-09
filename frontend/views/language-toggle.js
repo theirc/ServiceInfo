@@ -56,14 +56,21 @@ module.exports = Backbone.View.extend({
         this.$el.html(template({
 
         }));
-        i18n.init(function(t){
-
-        })
+         /* We have to be firm with i18next to stop it trying to load all sorts
+           of non-existent language files like 'en-US' and 'dev' */
+        i18n.init(
+            {
+                fallbackLng: ['en', 'ar', 'fr'],
+                lngWhitelist: ['en', 'ar', 'fr'],
+                preload: ['en', 'ar', 'fr'],
+                useCookie: false
+            },
+            function () {}
+        );
     },
 
     setLanguage: function(lang) {
         i18n.init({
-            fallbackLng: 'en',
             lng: lang
         }, function(t){
             $("body").i18n();

@@ -11,6 +11,8 @@ var ProviderTypes = _base.BaseCollection.extend({
     model: ProviderType,
 })
 
+_base.preload("providertype", ProviderTypes);
+
 module.exports = {
     ProviderType: ProviderType,
     ProviderTypes: ProviderTypes,
