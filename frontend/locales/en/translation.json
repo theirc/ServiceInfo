@@ -63,7 +63,10 @@
       "Area": "Area",
       "Filter-Area": "Filter by area",
       "Filter-By-Area": "Filter your search by area",
-      "Search-Placeholder": "I am searching for..."
+      "Search-Placeholder": "I am searching for...",
+      "Loading": "Loading Service Type Filters...",
+      "TypeHeader": "Filter by a Service Type",
+      "Any": "Any"
     },
     "Map": {"Toggle": "List View"},
     "List": {
@@ -303,9 +306,5 @@
     "Submit-Options": {
       "Submit": "Submit"
     }
-  },
-  "Map": {
-    "Loading": "Loading Service Type Filters...",
-    "TypeHeader": "Filter by a Service Type"
   }
 }

@@ -17,20 +17,16 @@
 			<!-- Main Search -->
 			<div class="side-section">
 				<!-- Main Search -->
-				<div class="primary-search">	
+				<div class="primary-search">
 					<form>
-						<input name="filtered-search" type="text" class="form-control group-input" data-i18n="[placeholder]Service-Map.Filtered-Search.Search-Placeholder"></input>
+						<input name="filtered-search" type="text" class="query form-control group-input" data-i18n="[placeholder]Service-Map.Filtered-Search.Search-Placeholder" value="{{ query }}"></input>
 					</form>
 					<div class="form-group">
 			            <div class="form-group"><span class=error></label>
-			              <select id="id_type" name="type" class=form-control>
-			              	<optgroup label="Service type">
-				                <option><span data-i18n="Service-Map.Filtered-Search.Service-Type"></span></option>
-								<option><span data-i18n="Service-Map.Filtered-Search.Filter-Service"></span></option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-							</optgroup>
+			              <select id="id_type" name="type" class="query-service-type form-control">
+                                <option value="" data-i18n="Service-Map.Filtered-Search.Any"></option>
+                                <optgroup class="loading" data-i18n="[label]Service-Map.Filtered-Search.Loading"></optgroup>
+                                <optgroup class="type-header" style="display:none" data-i18n="[label]Service-Map.Filtered-Search.TypeHeader"><optgroup>
 			              </select>
 			            </div>
 					</div>
@@ -38,7 +34,7 @@
 				</div>
 
 				<!-- Filter Area -->
-				<div id="search-filter">
+				<!-- <div id="search-filter">
 					<div class="options">
 						<div class="third">
 							<a data-i18n="Service-Map.Filtered-Search.Distance"></a>
@@ -57,11 +53,12 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 
-		<div class="row">
+        <!-- Commenting out until the list view is functional -->
+		<!-- <div class="row">
 			<div class="map-toggle">
 				<div class="half">
 					<button name="map-toggle" type="toggle" class="primary-button" data-i18n="Service-Map.Map.Toggle"></button>
@@ -70,78 +67,12 @@
 					<button name="map-toggle" type="toggle" class="primary-button" data-i18n="Service-Map.List.Toggle"></button>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<div class="row">
-<!--		<div id="service-map">
-				<div class="map">
-					<p>Service map goes here</p>
-	                <span class="tool-tip"></span>
-	                <div class="map-toggle">
-		                <button name="map-toggle" type="toggle" class="primary-button" data-i18n="Service-Map.Map.Toggle"></button>
-		            </div>
-	            </div>
-			</div> -->
-			<div id="service-list">
-				<div class="list">
-	                <div class="map-toggle">
-		            </div>
-		            <ul>
-		            	<li>
-		            		<div class="name"><a href="#">Really Long Service Provider Name</a></div>
-		            		<div class="area control-label" data-i18n="Service-Map.List.Area">Provider Selected Service Area Goes Here</div>
-		            		<div class="hours control-label" data-i18n="Service-Map.List.Hours">Todays Service Hours Go Here</div>
-		            		<div class="contact">
-		            			<div class="row">
-			            			<div class="half">
-			            				<span class="control-label" data-i18n="Service-Map.List.Phone"></span>
-			            			</div>
-			            			<div class="half">
-			            				<span class="control-label" data-i18n="Service-Map.List.Website"></span>
-			            			</div>
-			            		</div>
-			            	</div>
-		            		<div class="description">
-		            			<div class="row">
-		            				<p>Description goes here. Limit the length of the description text to 100 characters for the list view of services...</p>
-		            			</div>
-		            		</div>
-		            	</li>
-		            	<li>
-		            		<div class="name"><a href="#">Really Long Service Provider Name</a></div>
-		            		<div class="area control-label" data-i18n="Service-Map.List.Area">Provider Selected Service Area Goes Here</div>
-		            		<div class="hours control-label" data-i18n="Service-Map.List.Hours">Todays Service Hours Go Here</div>
-		            		<div class="contact">
-		            			<div class="row">
-			            			<div class="half">
-			            				<span class="control-label" data-i18n="Service-Map.List.Phone"></span>
-			            			</div>
-			            			<div class="half">
-			            				<span class="control-label" data-i18n="Service-Map.List.Website"></span>
-			            			</div>
-			            		</div>
-			            	</div>
-		            		<div class="description">
-		            			<div class="row">
-		            				<p>Description goes here. Limit the length of the description text to 100 characters for the list view of services...</p>
-		            			</div>
-		            		</div>
-		            	</li>
-		            </ul>
-	            </div>
-			</div>
-
+            <div id="map_container">
+                <div id="map_canvas"></div>
+            </div>
 		</div> <!-- End Row -->
 	</div> <!-- End Main Content -->
-
-</div>
-<p>Map</p>
-<div id="map_container">
-    <input class="query" value="{{ query }}"></input>
-    <select class="query-service-type">
-        <option value="">Any</option>
-        <optgroup class="loading" data-i18n="[label]Map.Loading"></optgroup>
-        <optgroup class="type-header" style="display:none" data-i18n="[label]Map.TypeHeader"></optgroup>
-    </select>
-    <div id="map_canvas"></div>
 </div>
