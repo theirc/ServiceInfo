@@ -79,6 +79,11 @@ function build() {
         string_src("bundle_min.js", res.stdout)
             .pipe(gulp.dest('frontend'))
         ;
+    } else {
+        throw new gutil.PluginError({
+          plugin: "Closure",
+          message: 'Failed to compile JS.'
+        });
     }
 
     injectEnvConfig();
