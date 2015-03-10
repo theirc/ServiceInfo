@@ -139,7 +139,7 @@ class ServiceAdmin(GeoModelAdmin):
         """
         if '_approve' in request.POST:
             try:
-                obj.staff_approve()
+                obj.staff_approve(request.user)
             except ValidationError as e:
                 msg = _("Unable to approve service '{name}': {error}.").format(name=obj.name)
                 msg = msg.format(name=obj.name, error=validation_error_as_text(e))
@@ -153,7 +153,7 @@ class ServiceAdmin(GeoModelAdmin):
                 msg = _('The service was approved successfully.')
                 self.message_user(request, msg, messages.SUCCESS)
         elif '_reject' in request.POST:
-            obj.staff_reject()
+            obj.staff_reject(request.user)
             msg = _('The service was rejected successfully.')
             self.message_user(request, msg, messages.INFO)
         return super().response_change(request, obj)
