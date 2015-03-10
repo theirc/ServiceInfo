@@ -18,6 +18,7 @@
     "underscore": "^1.7.0"
   },
   "devDependencies": {
+    "closurecompiler": "^1.5.1",
     "connect-livereload": "^0.5.2",
     "express": "^4.10.7",
     "gulp": "^3.8.10",
