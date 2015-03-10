@@ -185,6 +185,10 @@ class ServiceViewSet(ServiceInfoModelViewSet):
         'type__name_en', 'type__name_ar', 'type__name_fr',
 
         'provider__description_en', 'provider__description_ar', 'provider__description_fr',
+        'provider__focal_point_name_en', 'provider__focal_point_name_ar',
+        'provider__focal_point_name_fr',
+        'provider__focal_point_phone_number',
+        'provider__address_en', 'provider__address_ar', 'provider__address_fr',
         'provider__name_en', 'provider__name_ar', 'provider__name_fr',
         'provider__type__name_en', 'provider__type__name_ar', 'provider__type__name_fr',
         'provider__phone_number',

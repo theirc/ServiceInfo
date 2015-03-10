@@ -69,6 +69,13 @@ response from creating a provider, for example::
      'type': 'http://testserver/api/providertypes/2/',
      'url': 'http://testserver/api/providers/2/',
      'user': 'http://testserver/api/users/16/',
+     'focal_point_name_en': 'John Doe',
+     'focal_point_name_ar': '',
+     'focal_point_name_fr': '',
+     'focal_point_phone_number': '87-654321',
+     'address_fr': '1 Rue Madeleine, Paris',
+     'address_en': '',
+     'address_ar': '',
      'website': ''}
 
 If there's a problem, 400 is returned and the response body might
