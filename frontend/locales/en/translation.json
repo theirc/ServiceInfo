@@ -271,5 +271,9 @@
     "Submit-Options": {
       "Submit": "Submit"
     }
+  },
+  "Map": {
+    "Loading": "Loading Service Type Filters...",
+    "TypeHeader": "Filter by a Service Type"
   }
 }
