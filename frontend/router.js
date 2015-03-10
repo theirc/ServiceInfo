@@ -76,6 +76,7 @@ module.exports = Backbone.Router.extend({
         "service": loadPage("service"),
         "service/:id": loadPage("service", ['id']),
         "feedback": loadPage("feedback"),
+
         "search": loadPage("search-list"),
         "search/map": loadPage("map"),
         "service/cancel/:id": loadPage("service-cancel", ['id']),

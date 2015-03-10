@@ -3,6 +3,7 @@ api = require('../api'),
 template = require("../templates/service-form.hbs"),
 i18n = require('i18next-client'),
 forms = require('../forms'),
+models = require('../models/models'),
 messages = require('../messages'),
 service = require('../models/service'),
 servicearea = require('../models/servicearea'),
@@ -23,20 +24,20 @@ function remove_empty_fields(data) {
 module.exports = Backbone.View.extend({
     initialize: function(opts){
         var self = this;
+        self.serviceareas = [];
+        self.servicetypes = [];
 
-        var serviceareas = new servicearea.ServiceAreas();
-        var servicetypes = new servicetype.ServiceTypes();
-
-        var waiting = [serviceareas.fetch(), servicetypes.fetch()];
+        var waiting = [models.preloaded];
         var current_service;
         if (opts.id) {
             current_service = new service.Service({id: opts.id});
             waiting.push(current_service.fetch());
         }
         messages.clear();
-        Promise.all(waiting).then(function onsuccess(){
-            self.serviceareas = serviceareas;
-            self.servicetypes = servicetypes;
+
+        Promise.all(waiting).then(function onsuccess(results){
+            self.serviceareas = results[0].servicearea.data();
+            self.servicetypes = results[0].servicetype.data();
             if (opts.id) {
                 self.update_of = current_service;
             }
@@ -55,14 +56,6 @@ module.exports = Backbone.View.extend({
 
     render: function() {
         var $el = this.$el;
-        var serviceareas = [];
-        if (this.serviceareas) {
-            serviceareas = this.serviceareas.data();
-        }
-        var types = [];
-        if (this.servicetypes) {
-            types = this.servicetypes.data();
-        }
         var criteria = [];
         if (this.update_of) {
             criteria = self.update_of.data()['selection_criteria'];
@@ -83,8 +76,8 @@ module.exports = Backbone.View.extend({
                     'Saturday'
                 ],
 
-            areas_of_services: serviceareas,
-            types: types,
+            areas_of_services: this.serviceareas,
+            types: this.servicetypes,
             criteria: criteria
         }));
         if (this.serviceareas && this.servicetypes) {
