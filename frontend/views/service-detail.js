@@ -8,7 +8,7 @@ messages = require('../messages')
 
 module.exports = Backbone.View.extend({
     initialize: function(opts){
-        self = this;
+        var self = this;
         messages.clear();
         var service = new models.service.Service({id: opts.id});
 

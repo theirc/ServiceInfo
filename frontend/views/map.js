@@ -62,7 +62,7 @@ module.exports = Backbone.View.extend({
                 });
                 marker.setMap(self.map);
                 google.maps.event.addListener(marker, 'click', function() {
-                    location.hash = '#/services/' + service.id + '/';
+                    location.hash = '#/service/' + service.id + '/';
                 })
             }
         });

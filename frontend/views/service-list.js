@@ -12,8 +12,8 @@ module.exports = Backbone.View.extend({
         this.render();
 
         /* Render again if language changes */
-        var $el = this.$el,
-            self = this;
+        var $el = this.$el;
+        var self = this;
         config.change("forever.language", function() {
             var detached = $('table#service-status').length === 0;
             if (detached) {
