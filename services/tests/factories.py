@@ -49,6 +49,13 @@ class ProviderFactory(factory.DjangoModelFactory):
     number_of_monthly_beneficiaries = 0
     phone_number = factory.LazyAttribute(create_valid_phone_number)
     website = FuzzyURL()
+    focal_point_name_en = factory.fuzzy.FuzzyText()
+    focal_point_name_ar = factory.fuzzy.FuzzyText()
+    focal_point_name_fr = factory.fuzzy.FuzzyText()
+    focal_point_phone_number = factory.LazyAttribute(create_valid_phone_number)
+    address_en = factory.fuzzy.FuzzyText()
+    address_ar = factory.fuzzy.FuzzyText()
+    address_fr = factory.fuzzy.FuzzyText()
 
 
 class ServiceTypeFactory(factory.DjangoModelFactory):

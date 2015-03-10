@@ -126,16 +126,19 @@
   		"Basic": {
   			"Legend": "Basic details to register a service provider:",
   			"Name": "Name of Service Provider",
+            "Focal-Point-Name": "Name of Focal Point",
             "Password": "Password",
             "PasswordConfirm": "Confirm Password",
   			"Provider-Type": "Provider Type",
             "Provider-Type-Choose": "Choose a Provider Type",
   			"Phone-Number": "Phone Number (NN-NNNNNN)",
+  			"Focal-Point-Phone-Number": "Phone Number (NN-NNNNNN) of Focal Point",
   			"Email": "Email",
             "EmailPlaceholder": "Enter your Email",
   			"Website": "Website URL (Optional Field)",
             "MonthlyBeneficiaries": "Number of Monthly Beneficiaries",
-  			"Description": "Description"
+  			"Description": "Description",
+            "Address": "Address"
   		},
   		"Service-Information": {
   			"Legend": "Service Information",
