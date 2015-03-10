@@ -714,10 +714,17 @@ class JiraUpdateRecord(models.Model):
                     service=self.service
                 )
                 issue_key = previous_record.jira_issue_key
-                if self.update_type == self.APPROVE_SERVICE:
-                    comment = 'The service change was approved by %s.' % self.by.email
-                else:
-                    comment = 'The service change was rejected by %s.' % self.by.email
+                messages = {
+                    (self.NEW_SERVICE, self.APPROVE_SERVICE):
+                        "The new service was approved by %s.",
+                    (self.NEW_SERVICE, self.REJECT_SERVICE):
+                        "The new service was rejected by %s.",
+                    (self.CHANGE_SERVICE, self.APPROVE_SERVICE):
+                        "The service change was approved by %s.",
+                    (self.CHANGE_SERVICE, self.REJECT_SERVICE):
+                        "The service change was rejected by %s.",
+                }
+                comment = messages[(previous_record.update_type, self.update_type)] % self.by.email
                 jira.add_comment(issue_key, comment)
                 self.jira_issue_key = issue_key
                 self.save()

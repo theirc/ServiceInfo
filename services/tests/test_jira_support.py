@@ -134,7 +134,7 @@ class JiraApproveServiceTest(MockJiraTestMixin, TestCase):
         self.assertEqual(self.jira_record.jira_issue_key, record2.jira_issue_key)
         call_args, call_kwargs = mock_JIRA.return_value.add_comment.call_args
         self.assertEqual(
-            (issue_key, "The service change was approved by %s." % self.staff_user.email),
+            (issue_key, "The new service was approved by %s." % self.staff_user.email),
             call_args)
         self.assertEqual({}, call_kwargs)
 
@@ -148,7 +148,7 @@ class JiraApproveServiceTest(MockJiraTestMixin, TestCase):
         self.assertEqual(self.jira_record.jira_issue_key, record2.jira_issue_key)
         call_args, call_kwargs = mock_JIRA.return_value.add_comment.call_args
         self.assertEqual(
-            (issue_key, "The service change was rejected by %s." % self.staff_user.email),
+            (issue_key, "The new service was rejected by %s." % self.staff_user.email),
             call_args)
         self.assertEqual({}, call_kwargs)
 
