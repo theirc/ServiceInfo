@@ -792,7 +792,9 @@ class JiraUpdateRecord(models.Model):
                     (self.CHANGE_SERVICE, self.REJECT_SERVICE):
                         "The service change was rejected by %s.",
                 }
-                comment = messages[(previous_record.update_type, self.update_type)] % self.by.email
+                comment = messages.get((previous_record.update_type, self.update_type),
+                                       "The service's state was updated by %s.")
+                comment = comment % self.by.email
                 jira.add_comment(issue_key, comment)
                 self.jira_issue_key = issue_key
                 self.save()
