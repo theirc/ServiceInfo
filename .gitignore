@@ -15,6 +15,7 @@ secrets.sls*
 *.log
 frontend/node_modules
 frontend/bundle.js
+frontend/bundle_min.js
 frontend/styles/site.css
 frontend/styles/site-ltr.css
 frontend/styles/site-rtl.css

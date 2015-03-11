@@ -58,7 +58,7 @@ module.exports = Backbone.View.extend({
         var $el = this.$el;
         var criteria = [];
         if (this.update_of) {
-            criteria = self.update_of.data()['selection_criteria'];
+            criteria = this.update_of.data()['selection_criteria'];
         }
         if (criteria.length === 0) {
             criteria.push({text: ""});
