@@ -60,6 +60,9 @@ function loadPage(name, params) {
 }
 
 module.exports = Backbone.Router.extend({
+    initialize: function() {
+        this.route(/search\/?/, loadPage("search-list"));
+    },
     routes: {
         "": function() {
             if (config.get('forever.authToken')) {
@@ -77,7 +80,7 @@ module.exports = Backbone.Router.extend({
         "service/:id": loadPage("service", ['id']),
         "feedback": loadPage("feedback"),
 
-        "search": loadPage("search-list"),
+        // "search/?": loadPage("search-list"),
         "search/map": loadPage("map"),
         "service/cancel/:id": loadPage("service-cancel", ['id']),
         "service-list": loadPage("service-list"),

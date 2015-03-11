@@ -15,13 +15,13 @@ var SearchResultList = Backbone.View.extend({
         var $el = this.$el;
         search.services.fetch().then(function(){
             console.log("R3");
-            console.log(result_template({
-                services: search.services.models,
-            }));
+            console.log("services:", search.services.models);
+            var html = result_template({
+                services: search.services.data(),
+            })
+            console.log(html);
             console.log($el);
-            $('.search-result-list').html(result_template({
-                services: search.services.models,
-            }))
+            $('.search-result-list').html(html)
         })
     },
 });
