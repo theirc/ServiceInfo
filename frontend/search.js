@@ -22,6 +22,8 @@ module.exports = {
         var $select = $('select.query-service-type');
 
         servicetypes.fetch().then(function() {
+            $select.find('.loading').hide();
+            $select.find('.type-header').show();
             $.each(servicetypes.models, function() {
                 var d = this.data();
                 $select.append('<option value="'+d.number +'">'+d.name+'</option>')

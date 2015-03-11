@@ -2,8 +2,10 @@ var gulp = require('gulp')
 ,   rename = require('gulp-rename')
 ,   less = require('gulp-less')
 ,   bg = require('gulp-bg')
+,   gutil = require('gulp-util')
 ,   browserify = require('gulp-browserify')
 ,   minimist = require('minimist')
+,   sync_exec = require('sync-exec')
 ;
 
 var knownOptions = {
@@ -52,12 +54,37 @@ function build() {
     var bundle = gulp.src('frontend/index.js')
         .pipe(browserify({
             insertGlobals : true,
-            debug : !gulp.env.production,
-            transform: ['hbsfy'],
+            debug : options.config !== 'production',
+            transform: ['hbsfy']
         }))
         .pipe(rename('bundle.js'))
         .pipe(gulp.dest('frontend'))
     ;
+
+    var res = sync_exec(
+        'ccjs frontend/bundle.js --language_in=ECMASCRIPT5'
+    );
+    if (res.stderr) {
+        console.error(res.stderr);
+    }
+    if (res.stdout) {
+        function string_src(filename, string) {
+          var src = require('stream').Readable({ objectMode: true })
+          src._read = function () {
+            this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }))
+            this.push(null)
+          }
+          return src
+        }
+        string_src("bundle_min.js", res.stdout)
+            .pipe(gulp.dest('frontend'))
+        ;
+    } else {
+        throw new gutil.PluginError({
+          plugin: "Closure",
+          message: 'Failed to compile JS.'
+        });
+    }
 
     injectEnvConfig();
 }

@@ -90,8 +90,11 @@ class ProviderSerializer(RequireOneTranslationMixin, serializers.HyperlinkedMode
         fields = ('url', 'id', 'name_en', 'name_ar', 'name_fr',
                   'type', 'phone_number', 'website',
                   'description_en', 'description_ar', 'description_fr',
+                  'focal_point_name_en', 'focal_point_name_ar', 'focal_point_name_fr',
+                  'focal_point_phone_number',
+                  'address_en', 'address_ar', 'address_fr',
                   'user', 'number_of_monthly_beneficiaries')
-        required_translated_fields = ['name', 'description']
+        required_translated_fields = ['name', 'description', 'focal_point_name', 'address']
         extra_kwargs = {
             # Override how serializer comes up with the view name (URL name) for users,
             # because by default it'll base it on the model name from the user field,
