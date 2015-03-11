@@ -1,3 +1,5 @@
+var _base = require('./_base');
+
 module.exports = {
     service: require('./service'),
     servicearea: require('./servicearea'),
@@ -5,4 +7,6 @@ module.exports = {
     provider: require('./provider'),
     providertype: require('./providertype'),
     user: require('./user'),
+    preload: _base.preload,
+    preloaded: _base.preloaded,
 };

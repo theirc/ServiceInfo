@@ -130,6 +130,49 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
             MaxValueValidator(1000000)
         ]
     )
+    focal_point_name_en = models.CharField(
+        _("focal point name in English"),
+        max_length=256,  # Length is a guess
+        default='',
+        blank=True,
+        validators=[blank_or_at_least_one_letter]
+    )
+    focal_point_name_ar = models.CharField(
+        _("focal point name in Arabic"),
+        max_length=256,  # Length is a guess
+        default='',
+        blank=True,
+        validators=[blank_or_at_least_one_letter]
+    )
+    focal_point_name_fr = models.CharField(
+        _("focal point name in French"),
+        max_length=256,  # Length is a guess
+        default='',
+        blank=True,
+        validators=[blank_or_at_least_one_letter]
+    )
+    focal_point_phone_number = models.CharField(
+        _("focal point phone number"),
+        max_length=20,
+        validators=[
+            RegexValidator(settings.PHONE_NUMBER_REGEX)
+        ]
+    )
+    address_en = models.TextField(
+        _("provider address in English"),
+        default='',
+        blank=True,
+    )
+    address_ar = models.TextField(
+        _("provider address in Arabic"),
+        default='',
+        blank=True,
+    )
+    address_fr = models.TextField(
+        _("provider address in French"),
+        default='',
+        blank=True,
+    )
 
     def __str__(self):
         return self.name_en

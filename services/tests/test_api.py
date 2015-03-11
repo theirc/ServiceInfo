@@ -3,6 +3,7 @@ import json
 
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.models import Group
+from django.contrib.gis.geos import Point
 from django.core import mail
 from django.core.urlresolvers import reverse
 from django.forms import model_to_dict
@@ -90,6 +91,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
@@ -111,6 +115,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': existing_user.email,
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
@@ -131,6 +138,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': 'this_is_not_an_email',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
@@ -151,6 +161,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': 'fred@example.com',
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
@@ -174,6 +187,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
             'email': 'fred@example.com',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
@@ -199,6 +215,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': 'fred@example.com',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '',
@@ -218,6 +237,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12345',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': 'fred@example.com',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
@@ -238,6 +260,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': 'fred@example.com',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
@@ -317,6 +342,9 @@ class TokenAuthTest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'user': self.user_url,
             'number_of_monthly_beneficiaries': '37',
         }
@@ -1148,3 +1176,19 @@ class ServiceSearchFilterTest(APITestMixin, TestCase):
         response = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(1, len(response))
         self.assertEqual(self.service1.id, response[0]['id'])
+
+    def test_distance_ordering(self):
+        Service.objects.all().delete()
+        our_location = "35.5,-80"  # North Carolina
+        atlanta = ServiceFactory(location=Point(-84.39, 33.755))  # 33.7550° N, 84.3900° W
+        chicago = ServiceFactory(location=Point(-87.6847, 41.8369))  # 41.8369° N, 87.6847° W
+        beirut = ServiceFactory(location=Point(35.5131, 33.8869))  # 33.8869° N, 35.5131° E
+        Service.objects.update(status=Service.STATUS_CURRENT)
+        url = self.url + "?closest=%s" % our_location
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(3, len(response))
+        self.assertEqual(atlanta.id, response[0]['id'])
+        self.assertEqual(chicago.id, response[1]['id'])
+        self.assertEqual(beirut.id, response[2]['id'])

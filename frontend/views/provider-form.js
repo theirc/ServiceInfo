@@ -6,7 +6,8 @@ messages = require('../messages'),
 provider = require('../models/provider'),
 providertype = require('../models/providertype'),
 user = require('../models/user'),
-forms = require('../forms')
+forms = require('../forms'),
+models = require('../models/models')
 ;
 
 module.exports = Backbone.View.extend({
@@ -14,9 +15,9 @@ module.exports = Backbone.View.extend({
         var self = this,
             providers,
             users;
+        this.providertypes = [];
 
-        var providertypes = new providertype.ProviderTypes();
-        var waiting = [providertypes.fetch()];
+        var waiting = [models.preloaded];
 
         self.provider = undefined;
         self.user = undefined;
@@ -29,8 +30,8 @@ module.exports = Backbone.View.extend({
             waiting.push(users.fetch());
         }
 
-        Promise.all(waiting).then(function(){
-            self.providertypes = providertypes;
+        Promise.all(waiting).then(function(results){
+            self.providertypes = results[0].providertype.data();
             if (providers) {
                 // Find this user's user and provider record, in case they're superuser
                 self.user = users.where({'email': config.get('forever.email')})[0];
@@ -49,14 +50,10 @@ module.exports = Backbone.View.extend({
 
     render: function() {
         var $el = this.$el;
-        var providertypes = [];
         var self = this;
-        if (self.providertypes) {
-            providertypes = self.providertypes.data();
-        }
         var is_new = self.provider === undefined;
         var context = {
-            "providertypes": providertypes,
+            "providertypes": this.providertypes,
             "is_new": is_new
         };
         if (self.provider) {

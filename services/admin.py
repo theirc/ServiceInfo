@@ -1,7 +1,8 @@
+from django import forms
 from django.conf import settings
 from django.contrib import admin, messages
 from django.contrib.admin.templatetags.admin_urls import add_preserved_filters
-from django.contrib.gis.admin import GeoModelAdmin
+from django.contrib.gis.forms import BaseGeometryWidget, PointField
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
@@ -39,11 +40,29 @@ class SelectionCriterionInlineAdmin(admin.TabularInline):
     # and create or edit one there that links to the service.)
 
 
-class ServiceAdmin(GeoModelAdmin):
-    # Use CDN-hosted OpenLayers so that (1) we can use https, and (2) all the
-    # images that are loaded relative to the js file will also load without
-    # our having to track them all down and host them ourselves.
-    openlayers_url = '//cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js'
+class LocationWidget(BaseGeometryWidget):
+    template_name = 'gis/googlemaps.html'
+
+    class Media:
+        js = (
+            "//maps.googleapis.com/maps/api/js?v=3.exp&libraries=places",
+            "js/duckling-map-widget.js"
+        )
+        css = {
+            'all': ("css/duckling-map-widget.css",),
+        }
+
+
+class ServiceAdminForm(forms.ModelForm):
+    location = PointField(widget=LocationWidget())
+
+    class Meta:
+        exclude = []
+        model = Service
+
+
+class ServiceAdmin(admin.ModelAdmin):
+    form = ServiceAdminForm
 
     class Media:
         css = {
@@ -85,7 +104,6 @@ class ServiceAdmin(GeoModelAdmin):
             ]
         }),
         (_('Location'), {
-            'classes': ('collapse',),
             'fields': ['location'],
         }),
     )
