@@ -370,12 +370,11 @@ class Service(NameInCurrentLanguageMixin, models.Model):
     )
     update_of = models.ForeignKey(
         'self',
-        help_text=_('If a service record represents a modification of an existing service '
-                    'record that is still pending approval, this field links to the '
-                    'existing service record.'),
+        help_text=_('If a service record represents a modification of another service '
+                    'record, this field links to that other record.'),
         null=True,
         blank=True,
-        related_name='pending_update',
+        related_name='updates',
     )
 
     location = models.PointField(
@@ -492,6 +491,7 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         * self.full_clean()
         * .location must be set
         * at least one language field for each of several translated fields must be set
+        * status must be DRAFT
         """
         try:
             self.full_clean()
@@ -504,6 +504,8 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         for field in ['name', 'description']:
             if not any([getattr(self, '%s_%s' % (field, lang)) for lang in ['en', 'ar', 'fr']]):
                 errs[field] = [_('This field is required.')]
+        if self.status != Service.STATUS_DRAFT:
+            errs['status'] = [_('Only services in draft status may be approved.')]
         if errs:
             raise ValidationError(errs)
 
@@ -529,12 +531,35 @@ class Service(NameInCurrentLanguageMixin, models.Model):
             by=staff_user
         )
 
+    def validate_for_rejecting(self):
+        """
+        Raise a ValidationError if this service's data doesn't look valid to
+        be rejected.
+
+        Current checks:
+
+        * self.full_clean()
+        * status must be DRAFT
+        """
+        try:
+            self.full_clean()
+        except ValidationError as e:
+            errs = e.error_dict
+        else:
+            errs = {}
+        if self.status != Service.STATUS_DRAFT:
+            errs['status'] = [_('Only services in draft status may be rejected.')]
+        if errs:
+            raise ValidationError(errs)
+
     def staff_reject(self, staff_user):
         """
         Staff rejecting the service (new or changed)
 
         :param staff_user: The user who rejected
         """
+        # Make sure it's ready
+        self.validate_for_rejecting()
         self.status = Service.STATUS_REJECTED
         self.save()
         JiraUpdateRecord.objects.create(

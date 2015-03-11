@@ -128,9 +128,18 @@ class ServiceAdmin(GeoModelAdmin):
                               _("Only services in draft status may be rejected"),
                               messages.ERROR)
             return
+        any_rejected = False
         for service in queryset:
-            service.staff_reject(request.user)
-        self.message_user(request, _("Services have been rejected"))
+            try:
+                service.staff_reject(request.user)
+            except ValidationError as e:
+                msg = _("Unable to reject service '{name}': {error}.")
+                msg = msg.format(name=service.name, error=validation_error_as_text(e))
+                messages.error(request, msg)
+            else:
+                any_rejected = True
+        if any_rejected:
+            self.message_user(request, _("Services have been rejected"))
     reject.short_description = _("Reject new or changed service")
 
     def response_change(self, request, obj):
@@ -153,9 +162,20 @@ class ServiceAdmin(GeoModelAdmin):
                 msg = _('The service was approved successfully.')
                 self.message_user(request, msg, messages.SUCCESS)
         elif '_reject' in request.POST:
-            obj.staff_reject(request.user)
-            msg = _('The service was rejected successfully.')
-            self.message_user(request, msg, messages.INFO)
+            try:
+                obj.staff_reject(request.user)
+            except ValidationError as e:
+                msg = _("Unable to reject service '{name}': {error}.").format(name=obj.name)
+                msg = msg.format(name=obj.name, error=validation_error_as_text(e))
+                self.message_user(request, msg, messages.ERROR)
+                redirect_url = add_preserved_filters(
+                    {'preserved_filters': self.get_preserved_filters(request),
+                     'opts': self.model._meta},
+                    request.path)
+                return HttpResponseRedirect(redirect_url)
+            else:
+                msg = _('The service was rejected successfully.')
+                self.message_user(request, msg, messages.INFO)
         return super().response_change(request, obj)
 
 

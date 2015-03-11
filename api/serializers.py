@@ -214,6 +214,12 @@ class ServiceSerializer(RequireOneTranslationMixin,
                 raise exceptions.ValidationError(
                     {'update_of': _("You may only submit updates to current or draft services")}
                 )
+            if parent.status == Service.STATUS_CURRENT:
+                drafts = parent.updates.filter(status=Service.STATUS_DRAFT)
+                if drafts.exists():
+                    raise exceptions.ValidationError(
+                        {'update_of': _("There is already a pending draft update to this service.")}
+                    )
 
         errs = defaultdict(list)
         for day in ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday',

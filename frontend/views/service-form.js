@@ -159,8 +159,9 @@ module.exports = Backbone.View.extend({
                 function success(data) {
                     window.location = '#/service-list';
                 },
-                function error(errors) {
-                    messages.error(errors);
+                function error(missing) {
+                    // Missing is a dictionary of errors not already logged on the form
+                    messages.log_messages(missing);
                 }
             );
 

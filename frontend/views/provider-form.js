@@ -136,7 +136,7 @@ module.exports = Backbone.View.extend({
                     function error(errors) {
                         $submit.removeAttr('disabled');
                         var missing = forms.show_errors_on_form($el, errors);
-                        messages.error(missing);
+                        messages.log_messages(missing);
                     }
                 );
             }
