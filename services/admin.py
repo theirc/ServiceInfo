@@ -168,7 +168,7 @@ class ServiceAdmin(admin.ModelAdmin):
             try:
                 obj.staff_approve(request.user)
             except ValidationError as e:
-                msg = _("Unable to approve service '{name}': {error}.").format(name=obj.name)
+                msg = _("Unable to approve service '{name}': {error}.")
                 msg = msg.format(name=obj.name, error=validation_error_as_text(e))
                 self.message_user(request, msg, messages.ERROR)
                 redirect_url = add_preserved_filters(
@@ -183,7 +183,7 @@ class ServiceAdmin(admin.ModelAdmin):
             try:
                 obj.staff_reject(request.user)
             except ValidationError as e:
-                msg = _("Unable to reject service '{name}': {error}.").format(name=obj.name)
+                msg = _("Unable to reject service '{name}': {error}.")
                 msg = msg.format(name=obj.name, error=validation_error_as_text(e))
                 self.message_user(request, msg, messages.ERROR)
                 redirect_url = add_preserved_filters(
