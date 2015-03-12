@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-03-04 06:54+0000\n"
+"PO-Revision-Date: 2015-03-11 14:54+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -397,3 +397,9 @@ msgstr "Entrez votre nouveau mot de passe:"
 
 msgid "Password-Reset-Form##Submit-Options##Submit"
 msgstr "Soumettre"
+
+msgid "Map##Loading"
+msgstr "Chargement Type de service Filtres ..."
+
+msgid "Map##TypeHeader"
+msgstr "Filtrer par un type de service"

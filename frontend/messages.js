@@ -22,5 +22,14 @@ module.exports = {
         } else {
             this.add(i18n.t('Global.UnknownError'));
         }
+    },
+    log_messages: function (d) {
+        /* Given a dictionary of field names and errors, log them
+        all
+         */
+        var self = this;
+        $.each(d, function(k) {
+            self.add(k + ": " + d[k]);
+        });
     }
 };
