@@ -613,6 +613,21 @@ class ServiceAPITest(APITestMixin, TestCase):
         self.assertIsNone(s2.update_of)
         self.assertEqual(Service.STATUS_DRAFT, s2.status)
 
+    def test_create_second_update(self):
+        # If an update is already pending for a current record, and we try
+        # to submit another one, it should fail
+        top = ServiceFactory(provider=self.provider, status=Service.STATUS_CURRENT)
+        draft1 = ServiceFactory(provider=self.provider, status=Service.STATUS_DRAFT,
+                                update_of=top)
+        # Get draft1's data and use it to come up with data for a second draft update
+        data = json.loads(self.get_with_token(draft1.get_api_url()).content.decode('utf-8'))
+        del data['url']
+        del data['id']
+        rsp = self.post_with_token(reverse('service-list'), data)
+        self.assertEqual(BAD_REQUEST, rsp.status_code)
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertIn('update_of', result)
+
 
 class SelectionCriterionAPITest(APITestMixin, TestCase):
     def test_create_selection_criterion(self):

@@ -255,5 +255,9 @@
         "Submit-Options": {
             "Submit": "Soumettre"
         }
+    },
+    "Map": {
+        "Loading": "Chargement Type de service Filtres ...",
+        "TypeHeader": "Filtrer par un type de service"
     }
 }

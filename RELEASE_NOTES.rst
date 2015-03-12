@@ -2,6 +2,23 @@ Service Info
 
 Release Notes
 
+0.1.1 - Mar. 12, 2015
+---------------------
+
+* Add JIRA comment when a service is approved or rejected
+* Updates to translations
+* Speed up page load by compiling javascript with Closure
+* Add three new provider fields: address, focal point name,
+  focal point phone number
+* Fix layout switching to landscape-style when keyboard invoked
+  in Chrome Android
+* Use google maps in admin, allowing staff to set service location
+  with display of street-level data and providing search by address,
+  place, and latitude-longitude
+* Enable "Service Maps" page in public interface and provide
+  initial implementation. Still a work in progress.
+
+
 0.1.0 - Mar. 5, 2015
 --------------------
 

@@ -124,7 +124,7 @@ var forms = module.exports = {
             errors = e.responseJSON;
         $.each(errors, function(k) {
             var $error = self.getFieldLabel($form, k).find('.error');
-            if ($error) {
+            if ($error.length) {
                 $error.text(this[0]);
             } else {
                 missing[k] = this[0];
@@ -133,6 +133,7 @@ var forms = module.exports = {
         if (e.status >= 500) {
             $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
         }
+        return missing;
     },
 
     submit: function($form, action, data, errors) {
