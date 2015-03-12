@@ -484,6 +484,7 @@ class ServiceAPITest(APITestMixin, TestCase):
         rsp = self.get_with_token(service.get_api_url())
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(service.pk, result['id'])
+        self.assertEqual('http://testserver' + self.provider.get_api_url(), result['provider'])
 
     def test_list_services(self):
         # Should only get user's own services
