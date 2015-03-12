@@ -22,7 +22,7 @@ class ProviderTypeAdmin(admin.ModelAdmin):
 class ServiceTypeAdmin(admin.ModelAdmin):
     list_display = ['number',
                     'name_en', 'name_ar', 'name_fr',
-                    'comments_en', 'comments_ar', 'comments_ar']
+                    'comments_en', 'comments_ar', 'comments_fr']
 
 
 class SelectionCriterionAdmin(admin.ModelAdmin):
@@ -78,7 +78,7 @@ class ServiceAdmin(admin.ModelAdmin):
                 'area_of_service',
                 'cost_of_service',
                 'update_of',
-                ],
+            ],
         }),
         (_('Description and Additional Information'), {
             'classes': ('collapse',),
