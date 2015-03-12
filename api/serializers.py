@@ -193,6 +193,7 @@ class ServiceSerializer(RequireOneTranslationMixin,
             'selection_criteria',
             'status', 'update_of',
             'location',
+            'provider',
             'sunday_open', 'sunday_close',
             'monday_open', 'monday_close',
             'tuesday_open', 'tuesday_close',
@@ -202,6 +203,7 @@ class ServiceSerializer(RequireOneTranslationMixin,
             'saturday_open', 'saturday_close',
             'type'
         )
+        read_only_fields = ('provider',)
         required_translated_fields = ['name', 'description']
 
     def validate(self, attrs):
