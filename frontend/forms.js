@@ -125,13 +125,6 @@ var forms = module.exports = {
             missing = {},
             errors = e.responseJSON;
         $.each(errors, function(k) {
-            // our password field names aren't quite the same as the API's
-            if (k === 'password'
-                && !self.getFieldLabel($form, 'password').length
-                && self.getFieldLabel($form, 'password1').length
-                ) {
-                k = 'password1';
-            }
             var $error = self.getFieldLabel($form, k).find('.error');
             if ($error.length) {
                 $error.text(this[0]);
@@ -161,7 +154,8 @@ var forms = module.exports = {
                 },
                 function onerror(e) {
                     $submit.removeAttr('disabled');
-                    $.extend(errors, e.responseJSON);
+                    $.extend(e.responseJSON, errors);  // merge errors into e.responseJSON
+                    messages.clear();
                     var missing = self.show_errors_on_form($form, e);
                     error(missing);
                 }

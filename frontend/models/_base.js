@@ -16,7 +16,7 @@ var debabelize = function debabelize(data, lang1, lang2, lang3) {
     for (i = 0; i < keys.length; i += 1) {
         name = keys[i];
         if (name.indexOf('_en') > 0 || name.indexOf('_ar') > 0 || name.indexOf('_fr') > 0) {
-            key = name.split('_')[0];
+            key = name.substr(0, name.length - 3);
             if (!out[key]) {
                 name1 = key + '_' + lang1;
                 name2 = key + '_' + lang2;
