@@ -2,7 +2,7 @@ Service Info
 
 Release Notes
 
-0.1.0 - Mar. 12, 2015
+0.1.1 - Mar. 12, 2015
 ---------------------
 
 * Add JIRA comment when a service is approved or rejected
