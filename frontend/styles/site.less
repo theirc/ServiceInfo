@@ -772,7 +772,7 @@ label {
 	text-align: @start;
 	padding-top: 6px;
 	font-weight: 600;
-	display: block;
+	// display: block;
 	clear: left;
 	clear: right;
 }
@@ -1004,7 +1004,7 @@ input[type=range] {
 }
 
 @media only screen and (max-width: 639px) {
-    #application-header { 
+    #application-header {
     	background-color: white;
     	.brand {
         	height: 100%;
@@ -1628,12 +1628,20 @@ Service-Detail
 		margin-bottom: .5em;
 	}
 	#static-map .map {
-		width: 100%;
-		height: 10em;
+		max-width: 640px;
+		height: 150px;
+        overflow: hidden;
+        margin: auto;
 		margin-bottom: 1em;
 		background-color: gray;
-		p {
-			color: white;
+        .map-image-ctn {
+            display: inline-block;
+            position: relative;
+            right: -50%;
+            img {
+                position: relative;
+                left: -50%;
+            }
 		}
 	}
 	.form-group span.control-label {

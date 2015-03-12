@@ -1,37 +1,26 @@
-{{!-- <h1>{{ service.name }}</h1>
-
-<div>Area: {{ service.servicearea.name }}</div>
-<div>Type: {{ service.servicetype.name }}</div>
-
-<div>Description: {{ service.description }}</div>
-
-<div>Monday: {{ service.monday_open }} - {{ service.monday_close }}</div>
-<div>Tuesday: {{ service.tuesday_open }} - {{ service.tuesday_close }}</div>
-<div>Wednesday: {{ service.wednesday_open }} - {{ service.wednesday_close }}</div>
-<div>Thursday: {{ service.thursday_open }} - {{ service.thursday_close }}</div>
-<div>Friday: {{ service.friday_open }} - {{ service.friday_close }}</div>
-<div>Saturday: {{ service.saturday_open }} - {{ service.saturday_close }}</div>
-<div>Sunday: {{ service.sunday_open }} - {{ service.sunday_close }}</div>
-
-<div>Additional Info: {{ service.additional }}</div> --}}
-<!-- Page Head -->
-
-<!-- End Page Head -->
-
 <div id="service-detail">
 
 <!-- Main Content -->
 <div class="container">
 	<div class="row">
 		<div class="name">{{ service.name }}</div>
+		<div class="description">{{ service.description }}</div>
 		<div id="static-map">
 			<div class="map">
-				<p>Static map image goes here.</p>
+				<div class="map-image-ctn">
+					<img src="{{ mapURL }}" />
+				</div>
 			</div>
 		</div>
-		<div class="area control-label" data-i18n="Service-Map.List.Area">{{ service.servicearea.name }}</div>
-		<div class="area control-label" data-i18n="Service-Map.List.Type">{{ service.servicetype.name }}</div>
-		<div class="hours">	
+		<div >
+			<span class="area control-label" data-i18n="Service-Map.List.Area"></span>
+			{{ service.servicearea.name }}
+		</div>
+		<div >
+			<span class="area control-label" data-i18n="Service-Map.List.Type"></span>
+			{{ service.servicetype.name }}
+		</div>
+		<div class="hours">
 			<div class="form-group">
 				<label class="control-label" data-i18n="Service-Map.List.All-Hours"></label>
 				<table>
@@ -86,6 +75,7 @@
 			<div class="row">
 				<div class="half">
 					<span class="control-label" data-i18n="Service-Map.List.Phone"></span>
+					{{ service}}
 				</div>
 				<div class="half">
 					<span class="control-label" data-i18n="Service-Map.List.Website"></span>
@@ -93,7 +83,7 @@
 			</div>
 		</div>
 		<div class="description">
-			<div class="row">	
+			<div class="row">
 				<span class="control-label" data-i18n="Service-Map.List.Additional-Info"></span>
 				<p>{{ service.additional }}</p>
 			</div>
