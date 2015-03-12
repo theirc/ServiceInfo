@@ -21,9 +21,7 @@ var EXPRESS_PORT = 8000;
 var EXPRESS_ROOT = __dirname + "/frontend";
 var LIVERELOAD_PORT = 3572;
 
-function startExpress() {
-    build();
-
+gulp.task('startExpress', ['build'], function() {
     var express = require('express');
     var app = express();
     app.use(require('connect-livereload')());
@@ -31,27 +29,32 @@ function startExpress() {
     app.listen(EXPRESS_PORT);
 
     bg("python", "manage.py", "runserver", API_PORT)();
-}
+});
 
-function startLiveReload() {
+gulp.task('startLiveReload', ['startExpress'], function() {
     lr = require('tiny-lr')();
     lr.listen(LIVERELOAD_PORT);
-}
+});
 
-function injectEnvConfig() {
+gulp.task('injectEnvConfig', function(cb) {
     gulp.src("frontend/config." + options.config + ".json")
         .pipe(rename("config.json"))
         .pipe(gulp.dest("frontend"))
+        .on('end', function(){cb();})
     ;
 }
+);
 
-function build() {
+gulp.task('compile_less', function (cb) {
     gulp.src('frontend/styles/site-*.less')
         .pipe(less())
         .pipe(gulp.dest('frontend/styles'))
+        .on('end', function(){cb();})
     ;
+});
 
-    var bundle = gulp.src('frontend/index.js')
+gulp.task('browserify', function(cb) {
+    gulp.src('frontend/index.js')
         .pipe(browserify({
             insertGlobals : true,
             debug : options.config !== 'production',
@@ -59,8 +62,10 @@ function build() {
         }))
         .pipe(rename('bundle.js'))
         .pipe(gulp.dest('frontend'))
-    ;
+        .on('end', function(){cb();})
+});
 
+gulp.task('closure', ['browserify'], function(cb) {
     var res = sync_exec(
         'ccjs frontend/bundle.js --language_in=ECMASCRIPT5'
     );
@@ -85,19 +90,22 @@ function build() {
           message: 'Failed to compile JS.'
         });
     }
+    cb();
+});
 
-    injectEnvConfig();
-}
+gulp.task('build', ['closure', 'compile_less', 'injectEnvConfig'], function(){});
 
 // Notifies livereload of changes detected
 // by `gulp.watch()`
+// FIXME: This is still a function because I can't figure out how
+// to get the event object if I change this to a task.
 function notifyLivereload(event) {
 
     // `gulp.watch()` events provide an absolute path
     // so we need to make it relative to the server root
     var fileName = require('path').relative(EXPRESS_ROOT, event.path);
 
-    build();
+    gulp.run('build');
 
     setTimeout(function(){
         lr.changed({
@@ -108,10 +116,9 @@ function notifyLivereload(event) {
     }, 500); // For some reason, triggering live reload too early serves the old version
 }
 
-gulp.task('default', function() {
-    startExpress();
-    startLiveReload();
-    gulp.watch(['frontend/index.html', 'frontend/index.js', 'frontend/router.js', 'frontend/styles/site.less', 'frontend/templates/*.hbs', 'frontend/views/*.js'], notifyLivereload);
+gulp.task('default', ['startLiveReload'], function() {
+    gulp.watch(['frontend/index.html', 'frontend/index.js', 'frontend/router.js',
+                'frontend/styles/site.less', 'frontend/templates/*.hbs', 'frontend/views/*.js'],
+                notifyLivereload);
 });
 
-gulp.task('build', build);
