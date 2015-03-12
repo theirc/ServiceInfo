@@ -908,16 +908,17 @@ input[type=range] {
         overflow: auto;
     }
     #application-header .brand {
-        background: #fec325;
+        background: white;
         padding: .25em .25em 0.1em;
         text-align: center
     }
     #application-header .brand #logo {
-        background-image: url(../images/service-info-logo.png);
+        background-image: url(../images/logo-large.png);
+        background-image: url(../images/logo-large.svg);
         background-size: 100%;
-        width: 120px;
-        height: 120px;
-        margin: 1.5em auto;
+        width: 140px;
+        height: 140px;
+        margin: 1.25em auto;
     }
     #page-container {
         display: inline-block;
@@ -939,16 +940,20 @@ input[type=range] {
 }
 
 @media only screen and (max-width: 639px) {
-    #application-header .brand {
-        height: 100%;
+    #application-header { 
+    	background-color: white;
+    	.brand {
+        	height: 100%;
+        }
     }
     #application-header .brand #logo {
-        background-image: url(../images/service-info-logo.png);
+        background-image: url(../images/logo-small.png);
+        background-image: url(../images/logo-small.svg);
         background-size: 100%;
-        background-position: 0 15px;
-        width: 60px;
-        height: 70px;
-        margin: 0;
+        background-position: 0 10px;
+        width: 140px;
+        height: 60px;
+        margin-left: 10px;
     }
     #menu {
         position: absolute;
@@ -977,8 +982,8 @@ input[type=range] {
         top: 16px;
         padding: 8px 10px;
         background-color: inherit;
-        color: white;
-        border-color: white;
+        color: #343538;
+        border-color: #343538;
         font-size: .75em;
     }
     .modal-bg {
