@@ -30,11 +30,17 @@
 		</thead>
 		<tbody>
             {{#each services}}
-			<tr class="{{#if this.isApproved }}approved{{/if}} {{#if this.isRejected}}denied{{/if}} {{#if this.update_of}}update{{/if}}">
+			<tr class="{{#if this.isApproved }}approved{{/if}}{{#if this.isRejected}}denied{{/if}}">
 				<td>
-					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td">
-                        <a href="#/manage/service/{{ this.id }}"{{#if this.is_update}} class="update"{{/if}}>{{ this.name }}</a>
-                    </span>
+
+                  <div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td {{#if this.parent }}update{{/if}}">
+                    {{#if this.can_update }}
+                      <a href="#/service/{{ this.id }}">{{ this.name }}</a>
+                    {{ else }}
+                      {{ this.name }} (FIXME: link to a detail page)
+                    {{/if}}
+                  </span>
+
 				</td>
 				<td>
 					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Name"></div><span class="vertical-td">{{ this.servicetype.name }}</span>
@@ -44,7 +50,7 @@
 				</td>
 				<td>
 					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Area"></div><span class="vertical-td" data-i18n="Service-List.Status.{{ this.status }}">{{ this.status }}</span>
-				</td>
+                </td>
 				<td>
 				    <div class="vertical-header" data-i18n="Service-List.Table.Thead.Remove"></div><span class="vertical-td"><a href="#/manage/service/cancel/{{ this.id }}"><span
 				      {{#if this.is_draft }}
