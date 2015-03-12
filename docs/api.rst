@@ -69,6 +69,13 @@ response from creating a provider, for example::
      'type': 'http://testserver/api/providertypes/2/',
      'url': 'http://testserver/api/providers/2/',
      'user': 'http://testserver/api/users/16/',
+     'focal_point_name_en': 'John Doe',
+     'focal_point_name_ar': '',
+     'focal_point_name_fr': '',
+     'focal_point_phone_number': '87-654321',
+     'address_fr': '1 Rue Madeleine, Paris',
+     'address_en': '',
+     'address_ar': '',
      'website': ''}
 
 If there's a problem, 400 is returned and the response body might
@@ -280,3 +287,37 @@ List of filter queries for services:
 * type_name = the name of the service type desired (in any language)
 * type_numbers = a comma-separated list of the numbers of the service types to include
 * id = a specific service's id (primary key)
+
+Full-text search
+----------------
+
+Additionally full-text search is available.  Append ``?search=XYZ`` to either
+the list or search URLs to search for services with XYZ in pretty much any
+of the text fields associated with the service, its provider, its type,
+or its service area.
+
+Searches will use case-insensitive partial matches. The search parameter may
+contain multiple search terms, which should be whitespace and/or comma
+separated. If multiple search terms are used then objects will be returned
+in the list only if all the provided terms are matched.
+
+Sort by distance
+----------------
+
+When listing or searching services, if a ``closest`` query param is
+provided containing a comma-separated latitude and longitude (in
+that order), then the results will be sorted with the items closest
+to the specified point first.  E.g. ``?closest=35.5,-80``.
+
+If results are sorted by distance, then each result will have
+a ``distance`` field set to the number of meters the result is from
+the given point. Otherwise, the distance will just be zero and
+should be ignored.
+
+Latitude is north-south position, positive meaning north of the equator.
+Longitude is east-west position, positive meaning east of Greenwich
+and negative meaning west.  Units are degrees, expressed in decimal.
+
+North Carolina is at 35.5000° N, 80.0000° W, which we would pass to
+this API as "35.5,-80" meaning 35.5 degrees north latitude and
+80 degrees west longitude.

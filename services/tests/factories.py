@@ -9,6 +9,13 @@ from services.models import Provider, ProviderType, SelectionCriterion, Service,
     ServiceType
 
 
+class FuzzyURL(factory.fuzzy.BaseFuzzyAttribute):
+    """Random URL"""
+    def fuzz(self):
+        chars = ''.join([random.choice(string.ascii_lowercase) for _i in range(10)])
+        return 'http://www.%s.com' % chars
+
+
 class ProviderTypeFactory(factory.DjangoModelFactory):
     class Meta:
         model = ProviderType
@@ -41,6 +48,14 @@ class ProviderFactory(factory.DjangoModelFactory):
     user = factory.SubFactory(EmailUserFactory)
     number_of_monthly_beneficiaries = 0
     phone_number = factory.LazyAttribute(create_valid_phone_number)
+    website = FuzzyURL()
+    focal_point_name_en = factory.fuzzy.FuzzyText()
+    focal_point_name_ar = factory.fuzzy.FuzzyText()
+    focal_point_name_fr = factory.fuzzy.FuzzyText()
+    focal_point_phone_number = factory.LazyAttribute(create_valid_phone_number)
+    address_en = factory.fuzzy.FuzzyText()
+    address_ar = factory.fuzzy.FuzzyText()
+    address_fr = factory.fuzzy.FuzzyText()
 
 
 class ServiceTypeFactory(factory.DjangoModelFactory):

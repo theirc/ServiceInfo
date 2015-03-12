@@ -6,8 +6,10 @@ var underscore = require('underscore');
 var config = require('./config');
 var api = require('./api');
 var i18n = require('i18next-client');
+var hashtrack = require('hashtrack');
 var _ = underscore;
 
+hashtrack.init();
 require('es6-promise').polyfill();
 
 var models = require('./models/models');

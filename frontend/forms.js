@@ -76,8 +76,14 @@ var forms = module.exports = {
         var empty_label = i18n.t(empty_label_key);
 
         function resetOptions() {
+            var data;
+            window.collection = collection;
+            if (typeof collection.data === "function") {
+                data = collection.data();
+            } else {
+                data = Array.prototype.slice.apply(collection);
+            }
             var value = $field.val();
-            var data = collection.data();
             var empty_option = $('<option/>');
             empty_option.text(empty_label);
 
@@ -118,7 +124,7 @@ var forms = module.exports = {
             errors = e.responseJSON;
         $.each(errors, function(k) {
             var $error = self.getFieldLabel($form, k).find('.error');
-            if ($error) {
+            if ($error.length) {
                 $error.text(this[0]);
             } else {
                 missing[k] = this[0];
@@ -127,6 +133,7 @@ var forms = module.exports = {
         if (e.status >= 500) {
             $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
         }
+        return missing;
     },
 
     submit: function($form, action, data, errors) {

@@ -1,7 +1,8 @@
+from django import forms
 from django.conf import settings
 from django.contrib import admin, messages
 from django.contrib.admin.templatetags.admin_urls import add_preserved_filters
-from django.contrib.gis.admin import GeoModelAdmin
+from django.contrib.gis.forms import BaseGeometryWidget, PointField
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
@@ -39,11 +40,29 @@ class SelectionCriterionInlineAdmin(admin.TabularInline):
     # and create or edit one there that links to the service.)
 
 
-class ServiceAdmin(GeoModelAdmin):
-    # Use CDN-hosted OpenLayers so that (1) we can use https, and (2) all the
-    # images that are loaded relative to the js file will also load without
-    # our having to track them all down and host them ourselves.
-    openlayers_url = '//cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js'
+class LocationWidget(BaseGeometryWidget):
+    template_name = 'gis/googlemaps.html'
+
+    class Media:
+        js = (
+            "//maps.googleapis.com/maps/api/js?v=3.exp&libraries=places",
+            "js/duckling-map-widget.js"
+        )
+        css = {
+            'all': ("css/duckling-map-widget.css",),
+        }
+
+
+class ServiceAdminForm(forms.ModelForm):
+    location = PointField(widget=LocationWidget())
+
+    class Meta:
+        exclude = []
+        model = Service
+
+
+class ServiceAdmin(admin.ModelAdmin):
+    form = ServiceAdminForm
 
     class Media:
         css = {
@@ -85,7 +104,6 @@ class ServiceAdmin(GeoModelAdmin):
             ]
         }),
         (_('Location'), {
-            'classes': ('collapse',),
             'fields': ['location'],
         }),
     )
@@ -110,7 +128,7 @@ class ServiceAdmin(GeoModelAdmin):
         any_approved = False
         for service in queryset:
             try:
-                service.staff_approve()
+                service.staff_approve(request.user)
             except ValidationError as e:
                 msg = _("Unable to approve service '{name}': {error}.")
                 msg = msg.format(name=service.name, error=validation_error_as_text(e))
@@ -128,9 +146,18 @@ class ServiceAdmin(GeoModelAdmin):
                               _("Only services in draft status may be rejected"),
                               messages.ERROR)
             return
+        any_rejected = False
         for service in queryset:
-            service.staff_reject()
-        self.message_user(request, _("Services have been rejected"))
+            try:
+                service.staff_reject(request.user)
+            except ValidationError as e:
+                msg = _("Unable to reject service '{name}': {error}.")
+                msg = msg.format(name=service.name, error=validation_error_as_text(e))
+                messages.error(request, msg)
+            else:
+                any_rejected = True
+        if any_rejected:
+            self.message_user(request, _("Services have been rejected"))
     reject.short_description = _("Reject new or changed service")
 
     def response_change(self, request, obj):
@@ -139,9 +166,9 @@ class ServiceAdmin(GeoModelAdmin):
         """
         if '_approve' in request.POST:
             try:
-                obj.staff_approve()
+                obj.staff_approve(request.user)
             except ValidationError as e:
-                msg = _("Unable to approve service '{name}': {error}.").format(name=obj.name)
+                msg = _("Unable to approve service '{name}': {error}.")
                 msg = msg.format(name=obj.name, error=validation_error_as_text(e))
                 self.message_user(request, msg, messages.ERROR)
                 redirect_url = add_preserved_filters(
@@ -153,9 +180,20 @@ class ServiceAdmin(GeoModelAdmin):
                 msg = _('The service was approved successfully.')
                 self.message_user(request, msg, messages.SUCCESS)
         elif '_reject' in request.POST:
-            obj.staff_reject()
-            msg = _('The service was rejected successfully.')
-            self.message_user(request, msg, messages.INFO)
+            try:
+                obj.staff_reject(request.user)
+            except ValidationError as e:
+                msg = _("Unable to reject service '{name}': {error}.")
+                msg = msg.format(name=obj.name, error=validation_error_as_text(e))
+                self.message_user(request, msg, messages.ERROR)
+                redirect_url = add_preserved_filters(
+                    {'preserved_filters': self.get_preserved_filters(request),
+                     'opts': self.model._meta},
+                    request.path)
+                return HttpResponseRedirect(redirect_url)
+            else:
+                msg = _('The service was rejected successfully.')
+                self.message_user(request, msg, messages.INFO)
         return super().response_change(request, obj)
 
 
