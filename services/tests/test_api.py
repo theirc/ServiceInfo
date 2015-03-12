@@ -14,7 +14,7 @@ from rest_framework.test import APIClient
 
 from email_user.models import EmailUser
 from email_user.tests.factories import EmailUserFactory
-from services.models import Provider, Service, SelectionCriterion, ServiceArea
+from services.models import Provider, Service, SelectionCriterion, ServiceArea, ServiceType
 from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory, \
     ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory
 
@@ -498,6 +498,8 @@ class ServiceAPITest(APITestMixin, TestCase):
         self.assertEqual(service.pk, result['id'])
         self.assertEqual('http://testserver' + self.provider.get_api_url(), result['provider'])
         self.assertEqual(self.provider.get_fetch_url(), result['provider_fetch_url'])
+        service_type = json.loads(self.client.get(result['type']).content.decode('utf-8'))
+        self.assertIn('icon_url', service_type)
 
     def test_list_services(self):
         # Should only get user's own services
@@ -707,6 +709,30 @@ class ServiceAreaAPITest(APITestMixin, TestCase):
         rsp = self.get_with_token(self.area2.get_api_url())
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual('http://testserver%s' % self.area1.get_api_url(), result['parent'])
+
+
+class ServiceTypeAPITest(APITestMixin, TestCase):
+    def test_get_types(self):
+        rsp = self.get_with_token(reverse('servicetype-list'))
+        self.assertEqual(OK, rsp.status_code)
+        results = json.loads(rsp.content.decode('utf-8'))
+        result = results[0]
+        self.assertIn('icon_url', result)
+        rsp = self.client.get(result['icon_url'])
+        self.assertEqual(OK, rsp.status_code)
+        self.assertEqual('image/png', rsp['Content-Type'])
+
+    def test_get_type(self):
+        # Try it unauthenticated
+        a_type = ServiceType.objects.first()
+        url = a_type.get_api_url()
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code)
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertIn('icon_url', result)
+        rsp = self.client.get(result['icon_url'])
+        self.assertEqual(OK, rsp.status_code)
+        self.assertEqual('image/png', rsp['Content-Type'])
 
 
 class LanguageTest(APITestMixin, TestCase):

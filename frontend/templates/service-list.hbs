@@ -41,7 +41,10 @@
                   </span>
 				</td>
 				<td>
-					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Name"></div><span class="vertical-td">{{ this.servicetype.name }}</span>
+					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Name"></div><span class="vertical-td">
+                    {{# if this.servicetype.icon_url }}<img src="{{ this.servicetype.icon_url }}" width=32 height=32/>{{/if}}
+                    {{ this.servicetype.name }}
+                    </span>
 				</td>
 				<td>
 					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Type"></div><span class="vertical-td">{{ this.servicearea.name }}</span>

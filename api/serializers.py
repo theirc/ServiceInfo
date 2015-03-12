@@ -166,10 +166,13 @@ class CreateProviderSerializer(ProviderSerializer):
 
 
 class ServiceTypeSerializer(RequireOneTranslationMixin, serializers.HyperlinkedModelSerializer):
+    icon_url = serializers.CharField(source='get_icon_url', read_only=True)
+
     class Meta:
         model = ServiceType
         fields = (
             'url',
+            'icon_url',
             'number',
             'name_en', 'name_fr', 'name_ar',
             'comments_en', 'comments_fr', 'comments_ar',

@@ -24,6 +24,7 @@ var LIVERELOAD_PORT = 3572;
 gulp.task('startExpress', ['build'], function() {
     var express = require('express');
     var app = express();
+    app.use('/media', express.static(__dirname + "/public/media"));
     app.use(require('connect-livereload')());
     app.use(express.static(EXPRESS_ROOT));
     app.listen(EXPRESS_PORT);
