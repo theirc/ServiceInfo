@@ -91,6 +91,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
@@ -112,6 +115,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': existing_user.email,
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
@@ -132,6 +138,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': 'this_is_not_an_email',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
@@ -152,6 +161,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': 'fred@example.com',
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
@@ -175,6 +187,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
             'email': 'fred@example.com',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
@@ -200,6 +215,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': 'fred@example.com',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '',
@@ -219,6 +237,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12345',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': 'fred@example.com',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
@@ -239,6 +260,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': 'fred@example.com',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
@@ -318,6 +342,9 @@ class TokenAuthTest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'user': self.user_url,
             'number_of_monthly_beneficiaries': '37',
         }
@@ -585,6 +612,21 @@ class ServiceAPITest(APITestMixin, TestCase):
         s2 = Service.objects.get(status=Service.STATUS_DRAFT)
         self.assertIsNone(s2.update_of)
         self.assertEqual(Service.STATUS_DRAFT, s2.status)
+
+    def test_create_second_update(self):
+        # If an update is already pending for a current record, and we try
+        # to submit another one, it should fail
+        top = ServiceFactory(provider=self.provider, status=Service.STATUS_CURRENT)
+        draft1 = ServiceFactory(provider=self.provider, status=Service.STATUS_DRAFT,
+                                update_of=top)
+        # Get draft1's data and use it to come up with data for a second draft update
+        data = json.loads(self.get_with_token(draft1.get_api_url()).content.decode('utf-8'))
+        del data['url']
+        del data['id']
+        rsp = self.post_with_token(reverse('service-list'), data)
+        self.assertEqual(BAD_REQUEST, rsp.status_code)
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertIn('update_of', result)
 
 
 class SelectionCriterionAPITest(APITestMixin, TestCase):

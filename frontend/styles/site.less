@@ -112,7 +112,7 @@ li {
     box-sizing: border-box;
 }
 
-@media (min-width: 1px) and (max-width: 1000px) {
+@media (max-width: 1000px) {
 	.row {
 		padding: 10px 15px;
 	}
@@ -880,6 +880,7 @@ input[type=range] {
 
 #application-header .brand #logo {
     height: 100%;
+    background-repeat: no-repeat;
 }
 
 #language-toggle {
@@ -955,7 +956,7 @@ input[type=range] {
     border-bottom: none;
 }
 
-@media only screen and (orientation: landscape) {
+@media only screen and (min-width: 640px) {
     #application-header {
         width: 20%;
         height: 100%;
@@ -966,17 +967,17 @@ input[type=range] {
         overflow: auto;
     }
     #application-header .brand {
-        background: #fec325;
+        background: white;
         padding: .25em .25em 0.1em;
         text-align: center
     }
     #application-header .brand #logo {
-        background-image: url(../images/irc_logo.jpg);
-        background-image: url(../images/irc_logo.svg);
+        background-image: url(../images/logo-large.png);
+        background-image: url(../images/logo-large.svg);
         background-size: 100%;
-        width: 120px;
-        height: 150px;
-        margin: 0 auto;
+        width: 140px;
+        height: 140px;
+        margin: 1.25em auto;
     }
     #page {
     	height: 100%;
@@ -1002,24 +1003,21 @@ input[type=range] {
 	}
 }
 
-@media only screen and (max-width: 767px) {
-    #application-header .brand #logo{
-        width: 90px;
-        height: 120px;
-    }
-}
-
-@media only screen and (orientation: portrait) {
-    #application-header .brand {
-        height: 100%;
+@media only screen and (max-width: 639px) {
+    #application-header { 
+    	background-color: white;
+    	.brand {
+        	height: 100%;
+        }
     }
     #application-header .brand #logo {
-        background-image: url(../images/irc_logo.jpg);
-        background-image: url(../images/irc_logo.svg);
+        background-image: url(../images/logo-small.png);
+        background-image: url(../images/logo-small.svg);
         background-size: 100%;
-        width: 54px;
-        height: 70px;
-        margin: 0;
+        background-position: 0 10px;
+        width: 140px;
+        height: 60px;
+        margin-left: 10px;
     }
     #menu {
         position: absolute;
@@ -1048,8 +1046,8 @@ input[type=range] {
         top: 16px;
         padding: 8px 10px;
         background-color: inherit;
-        color: white;
-        border-color: white;
+        color: #343538;
+        border-color: #343538;
         font-size: .75em;
     }
     .modal-bg {

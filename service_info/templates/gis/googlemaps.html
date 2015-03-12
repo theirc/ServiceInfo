@@ -1,0 +1,12 @@
+{% load i18n %}
+<div id="duckling-map-widget">
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map_canvas"></div>
+    <input type="hidden" id="{{ id }}" name="{{ name }}" value="{{ serialized }}">
+  <p class="help">
+    {% blocktrans trimmed %}
+      You can type an address, a place name, or even a latitude and longitude
+      into the search box (e.g. "33.8869, 35.5131").
+    {% endblocktrans %}
+  </p>
+</div>
