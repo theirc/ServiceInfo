@@ -1,6 +1,8 @@
-var config = require('./config');
-var api = require('./api');
-var i18n = require('i18next-client');
+var config = require('./config')
+,   api = require('./api')
+,   i18n = require('i18next-client')
+,   messages = require('./messages')
+;
 
 var forms = module.exports = {
     collect: function($form) {
@@ -123,6 +125,13 @@ var forms = module.exports = {
             missing = {},
             errors = e.responseJSON;
         $.each(errors, function(k) {
+            // our password field names aren't quite the same as the API's
+            if (k === 'password'
+                && !self.getFieldLabel($form, 'password').length
+                && self.getFieldLabel($form, 'password1').length
+                ) {
+                k = 'password1';
+            }
             var $error = self.getFieldLabel($form, k).find('.error');
             if ($error.length) {
                 $error.text(this[0]);
@@ -132,6 +141,8 @@ var forms = module.exports = {
         })
         if (e.status >= 500) {
             $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
+        } else if (e.status === 400) {
+            messages.add(i18n.t('Global.FormValidationError'));
         }
         return missing;
     },
