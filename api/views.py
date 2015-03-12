@@ -72,8 +72,19 @@ class UserViewSet(ServiceInfoModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
+    permission_classes = [IsAuthenticated]
     queryset = EmailUser.objects.all()
     serializer_class = UserSerializer
+
+    def get_queryset(self):
+        # Limit to user's own user object
+        return self.queryset.filter(pk=self.request.user.pk)
+
+    def update(self, request, *args, **kwargs):
+        # Don't allow users to change their email
+        instance = self.get_object()
+        request.data['email'] = instance.email
+        return super().update(request, *args, **kwargs)
 
 
 class GroupViewSet(ServiceInfoModelViewSet):

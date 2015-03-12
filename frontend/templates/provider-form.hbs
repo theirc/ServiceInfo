@@ -66,7 +66,11 @@
                       <div class="form-group">
                         <label for="id_email" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Email"></span><span class="error"></span></label>
                         <div class="form-group">
-                            <input id="id_email" type="email" name="email" class="form-control" data-i18n="[placeholder]Provider-Registration-Form.Form-Sections.Basic.EmailPlaceholder" >
+                            {{# if is_new }}
+                              <input id="id_email" type="email" name="email" class="form-control" data-i18n="[placeholder]Provider-Registration-Form.Form-Sections.Basic.EmailPlaceholder" >
+                            {{ else }}
+                              <span class="read-only-input">{{ provider.email }}</span>
+                            {{/if}}
                         </div>
                       </div>
                     </div>
