@@ -75,17 +75,22 @@
 			<div class="row">
 				<div class="half">
 					<span class="control-label" data-i18n="Service-Map.List.Phone"></span>
-					{{ service}}
+					{{ service.provider.phone_number }}
 				</div>
 				<div class="half">
-					<span class="control-label" data-i18n="Service-Map.List.Website"></span>
+					{{#if service.provider.website }}
+						<span class="control-label" data-i18n="Service-Map.List.Website"></span>
+						{{ service.provider.website }}
+					{{/if}}
 				</div>
 			</div>
 		</div>
 		<div class="description">
 			<div class="row">
-				<span class="control-label" data-i18n="Service-Map.List.Additional-Info"></span>
-				<p>{{ service.additional }}</p>
+				{{#if service.additional_info }}
+					<span class="control-label" data-i18n="Service-Map.List.Additional-Info"></span>
+					<p>{{ service.additional_info }}</p>
+				{{/if}}
 			</div>
 		</div>
 	</div> <!-- End Row -->

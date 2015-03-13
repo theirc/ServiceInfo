@@ -33,6 +33,7 @@ module.exports = Backbone.View.extend({
         url = url + "center=" + long_lat_str[2] + "," + long_lat_str[1];
         url = url + "&zoom=8";
         url = url + "&size=640x150";
+        url = url + "&markers=color:red%7C" + long_lat_str[2] + "," + long_lat_str[1];
 
         return url;
     },
