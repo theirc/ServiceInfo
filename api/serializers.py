@@ -104,6 +104,21 @@ class ProviderSerializer(RequireOneTranslationMixin, serializers.HyperlinkedMode
         }
 
 
+class ProviderFetchSerializer(RequireOneTranslationMixin, serializers.HyperlinkedModelSerializer):
+    """
+    Returns public data only
+    """
+
+    class Meta:
+        model = Provider
+        fields = ('url', 'id',
+                  'name_en', 'name_ar', 'name_fr',
+                  'type', 'phone_number', 'website',
+                  'description_en', 'description_ar', 'description_fr',
+                  'address_en', 'address_ar', 'address_fr')
+        required_translated_fields = ['name', 'description', 'address']
+
+
 class CreateProviderSerializer(ProviderSerializer):
     email = serializers.EmailField()
     password = serializers.CharField()
@@ -179,6 +194,7 @@ class SelectionCriterionSerializerForService(SelectionCriterionSerializer):
 
 class ServiceSerializer(RequireOneTranslationMixin,
                         serializers.HyperlinkedModelSerializer):
+    provider_fetch_url = serializers.CharField(source='get_provider_fetch_url', read_only=True)
     selection_criteria = SelectionCriterionSerializerForService(many=True, required=False)
 
     class Meta:
@@ -194,6 +210,7 @@ class ServiceSerializer(RequireOneTranslationMixin,
             'status', 'update_of',
             'location',
             'provider',
+            'provider_fetch_url',
             'sunday_open', 'sunday_close',
             'monday_open', 'monday_close',
             'tuesday_open', 'tuesday_close',
