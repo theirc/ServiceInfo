@@ -67,6 +67,10 @@ module.exports = Backbone.View.extend({
             }
         });
         self.map.fitBounds(bounds);
+        var zoom = self.map.getZoom();
+        if (zoom > 10) {
+            self.map.setZoom(10);
+        }
     },
 
     events: {
