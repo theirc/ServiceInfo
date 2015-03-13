@@ -1,4 +1,4 @@
-from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND, METHOD_NOT_ALLOWED
+from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND, METHOD_NOT_ALLOWED, UNAUTHORIZED
 import json
 
 from django.contrib.auth import get_user_model, authenticate
@@ -302,6 +302,12 @@ class ProviderAPITest(APITestMixin, TestCase):
             provider = Provider.objects.get(id=item['id'])
             self.assertIn(provider.name_en, [p1.name_en, p2.name_en])
 
+    def test_get_provider_list_not_authenticated(self):
+        ProviderFactory()
+        url = reverse('provider-list')
+        rsp = self.client.get(url)
+        self.assertEqual(UNAUTHORIZED, rsp.status_code, msg=rsp.content.decode('utf-8'))
+
     def test_get_one_provider(self):
         p1 = ProviderFactory(user=self.user)
         url = reverse('provider-detail', args=[p1.id])
@@ -309,6 +315,12 @@ class ProviderAPITest(APITestMixin, TestCase):
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(p1.name_en, result['name_en'])
+
+    def test_get_one_provider_not_authenticated(self):
+        p1 = ProviderFactory(user=self.user)
+        url = reverse('provider-detail', args=[p1.id])
+        rsp = self.client.get(url)
+        self.assertEqual(UNAUTHORIZED, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
     def test_update_provider(self):
         p1 = ProviderFactory(user=self.user)
@@ -485,6 +497,7 @@ class ServiceAPITest(APITestMixin, TestCase):
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(service.pk, result['id'])
         self.assertEqual('http://testserver' + self.provider.get_api_url(), result['provider'])
+        self.assertEqual(self.provider.get_fetch_url(), result['provider_fetch_url'])
 
     def test_list_services(self):
         # Should only get user's own services
@@ -1193,3 +1206,19 @@ class ServiceSearchFilterTest(APITestMixin, TestCase):
         self.assertEqual(atlanta.id, response[0]['id'])
         self.assertEqual(chicago.id, response[1]['id'])
         self.assertEqual(beirut.id, response[2]['id'])
+
+
+class ProviderFetchTest(APITestMixin, TestCase):
+    def test_provider_fetch(self):
+        # Provider fetch works and only returns the fields we expect
+        self.service = ServiceFactory(status=Service.STATUS_CURRENT)
+        url = self.service.get_provider_fetch_url()
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertIn('name_en', response)
+        self.assertIn('description_fr', response)
+        self.assertNotIn('number_of_beneficiaries', response)
+        self.assertNotIn('focal_point_name_en', response)
+        self.assertNotIn('focal_point_phone_number', response)
+        self.assertNotIn('user', response)
