@@ -21,9 +21,9 @@ var Service = _base.BaseModel.extend({
 
         return new Promise(function(resolve, error) {
             Promise.all(wait).then(function(){
-                self.attributes.servicearea = area.data();
-                self.attributes.servicetype = type.data();
-                self.attributes.provider = provider_fetch.data();
+                self.attributes.servicearea = area;
+                self.attributes.servicetype = type;
+                self.attributes.provider = provider_fetch;
 
                 resolve(self);
             }, function onerror(error) {
@@ -37,7 +37,22 @@ var Service = _base.BaseModel.extend({
         var data = _base.BaseModel.prototype.data.apply(this, arguments);
         data.isApproved = this.isApproved();
         data.isRejected = this.isRejected();
-        console.log('service', data);
+        window.service = this;
+        if (typeof this.attributes.servicearea !== 'undefined') {
+            if (typeof this.attributes.servicearea.data === 'function') {
+                data.servicearea = this.attributes.servicearea.data();
+            }
+        }
+        if (typeof this.attributes.servicetype !== 'undefined') {
+            if (typeof this.attributes.servicetype.data === 'function') {
+                data.servicetype = this.attributes.servicetype.data();
+            }
+        }
+        if (typeof this.attributes.provider !== 'undefined') {
+            if (typeof this.attributes.provider.data === 'function') {
+                data.provider = this.attributes.provider.data();
+            }
+        }
         return data;
     },
 

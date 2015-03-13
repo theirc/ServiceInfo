@@ -75,9 +75,6 @@ module.exports = Backbone.View.extend({
 
                     // our sorts will order by status, then name
                     records[i].order = self.sort_order_by_status[records[i].status] + records[i].name;
-
-                    records[i].servicearea = records[i].servicearea.data();
-                    records[i].servicetype = records[i].servicetype.data();
                 }
 
                 // sort top-level records by status then name
