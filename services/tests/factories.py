@@ -108,6 +108,9 @@ class SelectionCriterionFactory(factory.DjangoModelFactory):
     service = factory.SubFactory(ServiceFactory)
 
 
+# I'm a bit surprised at having to write all this boilerplate code,
+# but I didn't see anything in FactoryBoy that would do it for us.
+# Somebody clue me in if I'm missing something, please.
 def random_boolean():
     return random.choice([False, True])
 

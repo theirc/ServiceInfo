@@ -10,7 +10,7 @@ from rest_framework import exceptions, serializers
 from email_user.forms import EmailUserCreationForm
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceType, ServiceArea, \
-    SelectionCriterion
+    SelectionCriterion, Feedback, Nationality
 
 
 class RequireOneTranslationMixin(object):
@@ -46,6 +46,16 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = EmailUser
         fields = ('url', 'id', 'email', 'groups')
+
+
+class FeedbackSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Feedback
+        fields = ('name', 'phone_number', 'nationality', 'area_of_residence',
+                  'service', 'delivered', 'quality', 'non_delivery_explained',
+                  'wait_time', 'wait_time_satisfaction', 'difficulty_contacting',
+                  'other_difficulties', 'staff_satisfaction', 'extra_comments',
+                  'anonymous')
 
 
 class LanguageSerializer(serializers.Serializer):
@@ -320,6 +330,18 @@ class ServiceAreaSerializer(RequireOneTranslationMixin,
             'children',
         )
         required_translated_fields = ['name']
+
+
+class NationalitySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Nationality
+        fields = (
+            'url',
+            'id',
+            'name_en',
+            'name_ar',
+            'name_fr',
+        )
 
 
 class APILoginSerializer(serializers.Serializer):
