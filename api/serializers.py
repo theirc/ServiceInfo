@@ -232,9 +232,9 @@ class ServiceSerializer(RequireOneTranslationMixin,
         attrs['status'] = Service.STATUS_DRAFT
         if attrs.get('update_of', False):
             parent = attrs['update_of']
-            if parent.status not in [Service.STATUS_DRAFT, Service.STATUS_CURRENT]:
+            if parent.status not in [Service.STATUS_DRAFT, Service.STATUS_CURRENT, Service.STATUS_REJECTED]:
                 raise exceptions.ValidationError(
-                    {'update_of': _("You may only submit updates to current or draft services")}
+                    {'update_of': _("You may only submit updates to current, draft or rejected services")}
                 )
             if parent.status == Service.STATUS_CURRENT:
                 drafts = parent.updates.filter(status=Service.STATUS_DRAFT)

@@ -37,7 +37,11 @@
                     {{#if this.can_update }}
                       <a href="#/manage/service/{{ this.id }}">{{ this.name }}</a>
                     {{ else }}
-                      <a href="#/service/{{ this.id }}">{{ this.name }}</a>
+                      {{#if this.isRejected}}
+                        {{this.name}}
+                      {{else}}
+                        <a href="#/service/{{ this.id }}">{{ this.name }}</a>
+                      {{/if}}
                     {{/if}}
                   </span>
 

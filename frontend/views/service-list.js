@@ -87,7 +87,7 @@ module.exports = Backbone.View.extend({
                     var top = top_level[i], children = top.children;
                     records.push(top);
                     children.sort(sort_func);
-                    top.can_update = (top.status === 'current');
+                    top.can_update = (top.status === 'current' || top.status === 'rejected');
                     for (j = 0; j < children.length; j++) {
                         var child = children[j];
                         // if a child is a draft, then we can update it, not its parent
