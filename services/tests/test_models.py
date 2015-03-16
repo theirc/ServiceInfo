@@ -7,7 +7,7 @@ from django.utils import translation
 from email_user.tests.factories import EmailUserFactory
 from services.models import ServiceType, ProviderType, Provider, Service, \
     blank_or_at_least_one_letter
-from services.tests.factories import ProviderFactory, ServiceFactory
+from services.tests.factories import ProviderFactory, ServiceFactory, FeedbackFactory
 
 
 class ProviderTest(TestCase):
@@ -137,3 +137,34 @@ class ServiceTest(TestCase):
             self.assertIn('name', e.error_dict)
         else:
             self.fail("Should have gotten ValidationError")
+
+
+class FeedbackTest(TestCase):
+    def test_good_validation(self):
+        # Factory ought to create a valid instance
+        feedback = FeedbackFactory()
+        feedback.full_clean()
+
+    def test_delivered_but_no_wait_time(self):
+        feedback = FeedbackFactory(delivered=True, wait_time=None)
+        with self.assertRaises(ValidationError) as e:
+            feedback.full_clean()
+        self.assertIn('wait_time', e.exception.message_dict)
+
+    def test_delivered_but_no_wait_satisfaction(self):
+        feedback = FeedbackFactory(delivered=True, wait_time_satisfaction=None)
+        with self.assertRaises(ValidationError) as e:
+            feedback.full_clean()
+        self.assertIn('wait_time_satisfaction', e.exception.message_dict)
+
+    def test_other_difficulties(self):
+        feedback = FeedbackFactory(difficulty_contacting='other', other_difficulties='')
+        with self.assertRaises(ValidationError) as e:
+            feedback.full_clean()
+        self.assertIn('other_difficulties', e.exception.message_dict)
+
+    def test_non_delivery_explanation(self):
+        feedback = FeedbackFactory(delivered=False, non_delivery_explained=None)
+        with self.assertRaises(ValidationError) as e:
+            feedback.full_clean()
+        self.assertIn('non_delivery_explained', e.exception.message_dict)

@@ -1,3 +1,4 @@
+from collections import defaultdict
 from textwrap import dedent
 from django.conf import settings
 from django.contrib.gis.db import models
@@ -825,3 +826,195 @@ class JiraUpdateRecord(models.Model):
             # empty string so it'll be tried again later.
             JiraUpdateRecord.objects.filter(pk=self.pk, jira_issue_key=sentinel_value).update(
                 jira_issue_key='')
+
+
+#
+# FEEDBACK
+#
+class Nationality(NameInCurrentLanguageMixin, models.Model):
+    number = models.IntegerField(unique=True)
+    name_en = models.CharField(
+        _("name in English"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    name_ar = models.CharField(
+        _("name in Arabic"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    name_fr = models.CharField(
+        _("name in French"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+
+
+class Feedback(models.Model):
+    # About the user
+    name = models.CharField(
+        _("name"),
+        max_length=256
+    )
+    phone_number = models.CharField(
+        _("phone number"),
+        max_length=20,
+        validators=[
+            RegexValidator(settings.PHONE_NUMBER_REGEX)
+        ]
+    )
+    nationality = models.ForeignKey(
+        verbose_name=_("nationality"),
+        to=Nationality,
+    )
+    area_of_residence = models.ForeignKey(
+        ServiceArea,
+        verbose_name=_("area of residence"),
+    )
+
+    # The service getting feedback
+    service = models.ForeignKey(
+        verbose_name=_("service"),
+        to=Service,
+    )
+
+    # Questions about delivery of service
+    delivered = models.BooleanField(
+        help_text=_("Was the service you sought delivered to you?"),
+        default=False,  # Don't really want a default here, but Django screams at you
+    )
+    quality = models.SmallIntegerField(
+        help_text=_("How would you rate the quality of the service you received (from 1 to 5, "
+                    "where 5 is the highest rating possible)?"),
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(5)
+        ],
+        default=None,
+        blank=True,
+        null=True,
+    )
+    non_delivery_explained = models.CharField(
+        # This is required only if 'delivered' is false; so needs to be optional here
+        # and we'll validate that elsewhere
+        help_text=_("Did you receive a clear explanation for why the service you "
+                    "sought was not delivered to you?"),
+        blank=True,
+        default=None,
+        null=True,
+        max_length=8,
+        choices=[
+            ('no', _("No explanation")),
+            ('unclear', _("Explanation was not clear")),
+            ('unfair', _("Explanation was not fair")),
+            ('yes', _("Clear and appropriate explanation")),
+        ]
+    )
+    wait_time = models.CharField(
+        # Presumably, only required if 'delivered' is true
+        help_text=_("How long did you wait for the service to be delivered, after "
+                    "contacting the service provider?"),
+        blank=True,
+        null=True,
+        default=None,
+        max_length=12,
+        choices=[
+            ('lesshour', _("Less than 1 hour")),
+            ('uptotwodays', _("1-48 hours")),
+            ('3-7days', _("3-7 days")),
+            ('1-2weeks', _("1-2 weeks")),
+            ('more', _("More than 2 weeks")),
+        ]
+    )
+    wait_time_satisfaction = models.SmallIntegerField(
+        help_text=_("How do you rate your satisfaction with the time that you waited for "
+                    "the service to be delivered (from 1 to 5, where 5 is the highest "
+                    "rating possible)?"),
+        default=None,
+        null=True,
+        blank=True,
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(5)
+        ]
+    )
+
+    difficulty_contacting = models.CharField(
+        help_text=_("Did you experience difficulties contacting the provider of "
+                    "the service you needed?"),
+        max_length=20,
+        choices=[
+            ('didntknow', _("Did not know how to contact them")),
+            ('nophoneresponse', _("Tried to contact them by phone but received no response")),
+            ('noresponse', _("Tried to contact them in person but received no response or "
+                             "did not find their office")),
+            ('unhelpful', _("Contacted them but response was unhelpful")),
+            ('other', _("Other")),
+        ]
+    )
+    other_difficulties = models.TextField(
+        # Only if 'other' selected above
+        help_text=_("Other difficulties contacting the service provider"),
+        blank=True,
+        default='',
+    )
+    staff_satisfaction = models.SmallIntegerField(
+        help_text=_("How would you rate your satisfaction with the staff of the organization "
+                    "that provided services to you, (from 1 to 5, where 5 is the highest "
+                    "rating possible)?"),
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(5)
+        ]
+    )
+    extra_comments = models.TextField(
+        help_text=_("Other comments"),
+        default='',
+        blank=True,
+    )
+    anonymous = models.BooleanField(
+        help_text=_("I want my feedback to be anonymous to the service provider"),
+        default=False,
+    )
+
+    def clean(self):
+        errs = defaultdict(list)
+        if self.delivered:
+            if self.quality is None:
+                errs['quality'].append(
+                    _("Quality field is required if you answered 'Yes' to "
+                      "'Was the service you sought delivered to you?'."))
+            if self.wait_time is None:
+                errs['wait_time'].append(
+                    _("An answer is required to 'How long did you wait for the service to "
+                      "be delivered, after contacting the service provider?' "
+                      "if you answered 'Yes' to "
+                      "'Was the service you sought delivered to you?'."))
+            if self.wait_time_satisfaction is None:
+                errs['wait_time_satisfaction'].append(
+                    _("An answer is required to 'How do you rate your satisfaction with the "
+                      "time that you waited for the service to be delivered?' "
+                      "if you answered 'Yes' to "
+                      "'Was the service you sought delivered to you?'.")
+                )
+        else:
+            if self.non_delivery_explained is None:
+                errs['non_delivery_explained'].append(
+                    _("An answer is required to 'Did you receive a clear explanation for "
+                      "why the service you sought was not delivered to you?' "
+                      "if you answered 'No' to "
+                      "'Was the service you sought delivered to you?'."))
+        if self.difficulty_contacting == 'other':
+            if not self.other_difficulties:
+                errs['other_difficulties'].append(
+                    _("An answer is required to 'Other difficulties contacting the service "
+                      "provider' "
+                      "if you answered 'Other' to 'Did you experience difficulties contacting "
+                      "the provider of the service you needed?'")
+                )
+
+        if errs:
+            raise ValidationError(errs)
