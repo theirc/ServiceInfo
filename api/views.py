@@ -20,7 +20,8 @@ from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, 
     ProviderTypeSerializer, ServiceAreaSerializer, APILoginSerializer, APIActivationSerializer, \
     PasswordResetRequestSerializer, PasswordResetCheckSerializer, PasswordResetSerializer, \
     ResendActivationLinkSerializer, CreateProviderSerializer, ServiceTypeSerializer, \
-    SelectionCriterionSerializer, LanguageSerializer, ServiceSearchSerializer
+    SelectionCriterionSerializer, LanguageSerializer, ServiceSearchSerializer, \
+    ProviderFetchSerializer
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
     SelectionCriterion
@@ -305,6 +306,13 @@ class ProviderViewSet(ServiceInfoModelViewSet):
 
     queryset = Provider.objects.all()
     serializer_class = ProviderSerializer
+
+    @detail_route(methods=['get'], permission_classes=[AllowAny])
+    def fetch(self, request, pk=None):
+        # Get a provider anonymously using /api/providers/<id>/fetch/
+        instance = Provider.objects.get(pk=int(pk))
+        serializer = ProviderFetchSerializer(instance, context={'request': request})
+        return Response(serializer.data)
 
     def get_queryset(self):
         # If user is authenticated, it's not a create_provider call.

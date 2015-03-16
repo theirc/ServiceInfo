@@ -180,6 +180,9 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
     def get_api_url(self):
         return reverse('provider-detail', args=[self.id])
 
+    def get_fetch_url(self):
+        return reverse('provider-fetch', args=[self.id])
+
     def notify_jira_of_change(self):
         JiraUpdateRecord.objects.create(
             update_type=JiraUpdateRecord.PROVIDER_CHANGE,
@@ -261,6 +264,11 @@ class SelectionCriterion(models.Model):
 
 class ServiceType(NameInCurrentLanguageMixin, models.Model):
     number = models.IntegerField(unique=True)
+    icon = models.ImageField(
+        upload_to='service-type-icons',
+        verbose_name=_("icon"),
+        blank=True,
+    )
     name_en = models.CharField(
         _("name in English"),
         max_length=256,
@@ -312,6 +320,11 @@ class ServiceType(NameInCurrentLanguageMixin, models.Model):
 
     def get_api_url(self):
         return reverse('servicetype-detail', args=[self.id])
+
+    def get_icon_url(self):
+        # For convenience of serializers
+        if self.icon:
+            return self.icon.url
 
 
 class Service(NameInCurrentLanguageMixin, models.Model):
@@ -454,6 +467,10 @@ class Service(NameInCurrentLanguageMixin, models.Model):
 
     def get_api_url(self):
         return reverse('service-detail', args=[self.id])
+
+    def get_provider_fetch_url(self):
+        # For convenience of the serializer
+        return self.provider.get_fetch_url()
 
     def get_admin_edit_url(self):
         return reverse('admin:services_service_change', args=[self.id])

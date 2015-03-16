@@ -85,6 +85,19 @@ be something like one of these::
     {'email': ['This field may not be blank.']}
     {'password': ['This field may not be blank.']}
 
+Fetch a Provider anonymously
+----------------------------
+
+The ordinary API for getting providers requires an authenticated user, and
+only returns the provider owned by that user, but includes all information and
+allows updates.
+
+For use in the search and display of services, there's a an alternate API
+to fetch the public data for a specific provider without requiring authentication.
+To use it, ``GET /api/providers/NNN/fetch/`` where NNN is the ID of the provider.
+Service results have also been augmented with a ``provider_fetch_url`` field that will
+provide that URL for use in this API.
+
 Resend activation link
 ----------------------
 
