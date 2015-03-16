@@ -35,9 +35,9 @@
 
                   <div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td {{#if this.parent }}update{{/if}}">
                     {{#if this.can_update }}
-                      <a href="#/service/{{ this.id }}">{{ this.name }}</a>
+                      <a href="#/manage/service/{{ this.id }}">{{ this.name }}</a>
                     {{ else }}
-                      {{ this.name }} (FIXME: link to a detail page)
+                      <a href="#/service/{{ this.id }}">{{ this.name }}</a>
                     {{/if}}
                   </span>
 

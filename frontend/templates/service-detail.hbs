@@ -5,13 +5,15 @@
 	<div class="row">
 		<div class="name">{{ service.name }}</div>
 		<div class="description">{{ service.description }}</div>
-		<div id="static-map">
-			<div class="map">
-				<div class="map-image-ctn">
-					<img src="{{ mapURL }}" />
+		{{#if mapURL}}
+			<div id="static-map">
+				<div class="map">
+					<div class="map-image-ctn">
+						<img src="{{ mapURL }}" />
+					</div>
 				</div>
 			</div>
-		</div>
+		{{/if}}
 		<div >
 			<span class="area control-label" data-i18n="Service-Map.List.Area"></span>
 			{{ service.servicearea.name }}
