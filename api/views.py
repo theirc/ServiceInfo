@@ -20,7 +20,8 @@ from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, 
     ProviderTypeSerializer, ServiceAreaSerializer, APILoginSerializer, APIActivationSerializer, \
     PasswordResetRequestSerializer, PasswordResetCheckSerializer, PasswordResetSerializer, \
     ResendActivationLinkSerializer, CreateProviderSerializer, ServiceTypeSerializer, \
-    SelectionCriterionSerializer, LanguageSerializer, ServiceSearchSerializer
+    SelectionCriterionSerializer, LanguageSerializer, ServiceSearchSerializer, \
+    ProviderFetchSerializer
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
     SelectionCriterion
@@ -72,8 +73,19 @@ class UserViewSet(ServiceInfoModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
+    permission_classes = [IsAuthenticated]
     queryset = EmailUser.objects.all()
     serializer_class = UserSerializer
+
+    def get_queryset(self):
+        # Limit to user's own user object
+        return self.queryset.filter(pk=self.request.user.pk)
+
+    def update(self, request, *args, **kwargs):
+        # Don't allow users to change their email
+        instance = self.get_object()
+        request.data['email'] = instance.email
+        return super().update(request, *args, **kwargs)
 
 
 class GroupViewSet(ServiceInfoModelViewSet):
@@ -185,6 +197,10 @@ class ServiceViewSet(ServiceInfoModelViewSet):
         'type__name_en', 'type__name_ar', 'type__name_fr',
 
         'provider__description_en', 'provider__description_ar', 'provider__description_fr',
+        'provider__focal_point_name_en', 'provider__focal_point_name_ar',
+        'provider__focal_point_name_fr',
+        'provider__focal_point_phone_number',
+        'provider__address_en', 'provider__address_ar', 'provider__address_fr',
         'provider__name_en', 'provider__name_ar', 'provider__name_fr',
         'provider__type__name_en', 'provider__type__name_ar', 'provider__type__name_fr',
         'provider__phone_number',
@@ -290,6 +306,13 @@ class ProviderViewSet(ServiceInfoModelViewSet):
 
     queryset = Provider.objects.all()
     serializer_class = ProviderSerializer
+
+    @detail_route(methods=['get'], permission_classes=[AllowAny])
+    def fetch(self, request, pk=None):
+        # Get a provider anonymously using /api/providers/<id>/fetch/
+        instance = Provider.objects.get(pk=int(pk))
+        serializer = ProviderFetchSerializer(instance, context={'request': request})
+        return Response(serializer.data)
 
     def get_queryset(self):
         # If user is authenticated, it's not a create_provider call.

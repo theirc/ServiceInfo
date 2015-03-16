@@ -58,7 +58,7 @@ module.exports = Backbone.View.extend({
         var $el = this.$el;
         var criteria = [];
         if (this.update_of) {
-            criteria = self.update_of.data()['selection_criteria'];
+            criteria = this.update_of.data()['selection_criteria'];
         }
         if (criteria.length === 0) {
             criteria.push({text: ""});
@@ -150,10 +150,11 @@ module.exports = Backbone.View.extend({
 
             forms.submit($el, 'api/services/', data).then(
                 function success(data) {
-                    window.location = '#/service-list';
+                    window.location = '#/manage/service-list';
                 },
-                function error(errors) {
-                    messages.error(errors);
+                function error(missing) {
+                    // Missing is a dictionary of errors not already logged on the form
+                    messages.log_messages(missing);
                 }
             );
 

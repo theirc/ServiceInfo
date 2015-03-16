@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-03 16:53+0200\n"
-"PO-Revision-Date: 2015-03-04 06:41+0000\n"
+"POT-Creation-Date: 2015-03-10 14:14+0200\n"
+"PO-Revision-Date: 2015-03-10 13:43+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -32,49 +32,49 @@ msgstr "رمز اللغة غير صالح  {code} رموز الصحيحة هي  
 msgid "A user with that email already exists."
 msgstr "البريد الإلكتروني موجود من قبل."
 
-#: api/serializers.py:216
+#: api/serializers.py:215
 msgid "You may only submit updates to current or draft services"
 msgstr "يمكنك تقديم التحديثات فقط على الخدمات الحالية أو مشروع"
 
-#: api/serializers.py:226
+#: api/serializers.py:225
 msgid "Close time is missing."
 msgstr "وثيق الوقت مفقود."
 
-#: api/serializers.py:228
+#: api/serializers.py:227
 msgid "Open time is missing."
 msgstr "الوقت مفتوح مفقود."
 
-#: api/serializers.py:230
+#: api/serializers.py:229
 msgid "Close time is not later than open time."
 msgstr "وثيق الوقت ليس في وقت لاحق من الوقت المفتوح."
 
-#: api/serializers.py:302
+#: api/serializers.py:314
 msgid "User account is disabled."
 msgstr "تم تعطيل حساب المستخدم."
 
-#: api/serializers.py:305
+#: api/serializers.py:317
 msgid "Unable to log in with provided credentials."
 msgstr "غير قادر على الدخول مع المعلومات المتوفرة."
 
-#: api/serializers.py:327
+#: api/serializers.py:339
 msgid ""
 "Activation key is invalid. Check that it was copied correctly and has not "
 "already been used."
 msgstr "مفتاح تنشيط غير صالح. تحقق من الذي تم نسخه بشكل صحيح وأنه لم يتم بالفعل استخدامه."
 
-#: api/serializers.py:348 api/serializers.py:400
+#: api/serializers.py:360 api/serializers.py:412
 msgid "No user with that email"
 msgstr "لا مستخدم بهذا البريد الإلكتروني "
 
-#: api/serializers.py:366 api/serializers.py:384
+#: api/serializers.py:378 api/serializers.py:396
 msgid "Password reset key is not valid"
 msgstr "مفتاح إعادة تعيين كلمة المرور غير صالح"
 
-#: api/serializers.py:403
+#: api/serializers.py:415
 msgid "User is not pending activation"
 msgstr "المستخدم ليس في حالة إنتظار التفعيل "
 
-#: api/views.py:174
+#: api/views.py:213
 msgid "Service record must be current or pending changes to be canceled"
 msgstr "يجب أن يكون سجل الخدمة الحالية أو التغييرات المعلقة ليتم إلغاء"
 
@@ -355,53 +355,59 @@ msgstr "الدعم:"
 msgid "Service has been approved"
 msgstr "تمت الموافقة على الخدمة"
 
-#: services/admin.py:64
+#: service_info/templates/gis/googlemaps.html:7
+msgid ""
+"You can type an address, a place name, or even a latitude and longitude into"
+" the search box (e.g. \"33.8869, 35.5131\")."
+msgstr "يمكنك كتابة عنوان، اسم مكان، أو حتى خطوط الطول والعرض في البحث (مثلاً: \"33.8869, 35.5131\")"
+
+#: services/admin.py:83
 msgid "Description and Additional Information"
 msgstr "معلومات إضافية"
 
-#: services/admin.py:75
+#: services/admin.py:94
 #, python-brace-format
 msgid "Hours (all times in time zone {timezone})"
 msgstr "ساعات (all times in time zone {timezone})"
 
-#: services/admin.py:87
+#: services/admin.py:106
 msgid "Location"
 msgstr "المكان "
 
-#: services/admin.py:107
+#: services/admin.py:125
 msgid "Only services in draft status may be approved"
 msgstr "يجوز الموافقة على الخدمات الوحيدة في مشروع وضع"
 
-#: services/admin.py:115 services/admin.py:144
+#: services/admin.py:133 services/admin.py:162
 #, python-brace-format
 msgid "Unable to approve service '{name}': {error}."
 msgstr "غير قادر على الموافقة على الخدمة {name}': {error}'."
 
-#: services/admin.py:121
+#: services/admin.py:139
 msgid "Services have been approved"
 msgstr "تمت الموافقة على الخدمات"
 
-#: services/admin.py:122
+#: services/admin.py:140
 msgid "Approve new or changed service"
 msgstr "الموافقة على الخدمة الجديدة أو تغييرها"
 
-#: services/admin.py:128
+#: services/admin.py:146
 msgid "Only services in draft status may be rejected"
 msgstr "قد يتم رفض خدمات الوحيدة في مشروع وضع"
 
-#: services/admin.py:133
+#: services/admin.py:151
 msgid "Services have been rejected"
 msgstr "رفضت الخدمات"
 
-#: services/admin.py:134
+#: services/admin.py:152
 msgid "Reject new or changed service"
 msgstr "رفض الخدمة الجديدة أو تغييرها"
 
-#: services/admin.py:153
+#: services/admin.py:171
 msgid "The service was approved successfully."
 msgstr "وتمت الموافقة على الخدمة بنجاح."
 
-#: services/admin.py:157
+#: services/admin.py:175
 msgid "The service was rejected successfully."
 msgstr "وقد رفض الخدمة بنجاح."
 

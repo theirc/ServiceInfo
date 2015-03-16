@@ -374,3 +374,9 @@ msgstr "Enter your new password:"
 
 msgid "Password-Reset-Form##Submit-Options##Submit"
 msgstr "Submit"
+
+msgid "Map##Loading"
+msgstr "Loading Service Type Filters..."
+
+msgid "Map##TypeHeader"
+msgstr "Filter by a Service Type"

@@ -1,6 +1,8 @@
-var config = require('./config');
-var api = require('./api');
-var i18n = require('i18next-client');
+var config = require('./config')
+,   api = require('./api')
+,   i18n = require('i18next-client')
+,   messages = require('./messages')
+;
 
 var forms = module.exports = {
     collect: function($form) {
@@ -124,7 +126,7 @@ var forms = module.exports = {
             errors = e.responseJSON;
         $.each(errors, function(k) {
             var $error = self.getFieldLabel($form, k).find('.error');
-            if ($error) {
+            if ($error.length) {
                 $error.text(this[0]);
             } else {
                 missing[k] = this[0];
@@ -132,7 +134,10 @@ var forms = module.exports = {
         })
         if (e.status >= 500) {
             $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
+        } else if (e.status === 400) {
+            messages.add(i18n.t('Global.FormValidationError'));
         }
+        return missing;
     },
 
     submit: function($form, action, data, errors) {
@@ -149,7 +154,8 @@ var forms = module.exports = {
                 },
                 function onerror(e) {
                     $submit.removeAttr('disabled');
-                    $.extend(errors, e.responseJSON);
+                    $.extend(e.responseJSON, errors);  // merge errors into e.responseJSON
+                    messages.clear();
                     var missing = self.show_errors_on_form($form, e);
                     error(missing);
                 }

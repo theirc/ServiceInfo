@@ -286,3 +286,5 @@ JIRA_DUEIN_DAYS = 2
 # Note: A few tests assume this regex; if you change it, re-run the
 # tests and fix them.
 PHONE_NUMBER_REGEX = r'^\d{2}-\d{6}$'
+
+TEST_RUNNER = 'service_info.runner.CustomTestSuiteRunner'

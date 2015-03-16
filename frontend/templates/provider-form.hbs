@@ -15,6 +15,13 @@
         description_en
         description_ar
         description_fr
+        focal_point_name_en
+        focal_point_name_ar
+        focal_point_name_fr
+        focal_point_phone_number
+        address_en
+        address_ar
+        address_fr
         number_of_monthly_beneficiaries
 
         'user',
@@ -39,8 +46,6 @@
       <div class="main-content">
         <div class="container">
           <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
-
             <form>
               <fieldset>
                 <legend data-i18n="Provider-Registration-Form.Form-Sections.Basic.Legend"></legend>
@@ -59,7 +64,11 @@
                       <div class="form-group">
                         <label for="id_email" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Email"></span><span class="error"></span></label>
                         <div class="form-group">
-                            <input id="id_email" type="email" name="email" class="form-control" data-i18n="[placeholder]Provider-Registration-Form.Form-Sections.Basic.EmailPlaceholder" >
+                            {{# if is_new }}
+                              <input id="id_email" type="email" name="email" class="form-control" data-i18n="[placeholder]Provider-Registration-Form.Form-Sections.Basic.EmailPlaceholder" >
+                            {{ else }}
+                              <span class="read-only-input">{{ provider.email }}</span>
+                            {{/if}}
                         </div>
                       </div>
                     </div>
@@ -118,6 +127,28 @@
                 </div>
               </div>
 
+              <div class="row">
+                  <div class="form-group">
+                    <div class="half">
+                      <div class="form-group">
+                        <label for="id_focal_point_name" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Focal-Point-Name"></span><span class=error></span></label>
+                        <input id="id_focal_point_name" type="text" name="focal_point_name" data-i18n-field class="form-control"
+                            pattern=".*[^\d\s\.`~!@#$%^&*\(\)-_=\+\[\]{};:',\<\>/\?]|[A-Z].*"><!-- at least one alphabetic? -->
+                      </div>
+                    </div>
+
+                    <div class="half">
+                      <div class="form-group">
+                        <label for="id_focal_point_phone_number" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Focal-Point-Phone-Number"></span><span class=error></span></label>
+                        <div class="form-group">
+                          <input id="id_focal_point_phone_number" type="tel" name="focal_point_phone_number" class="form-control" pattern="\d{2}-\d{6}">
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
                 <div class="row">
                   <div class="form-group">
                     <div class=half>
@@ -145,6 +176,15 @@
                   </div>
                 </div>
 
+                <div class="row">
+                  <div class="form-group">
+                    <label for="id_address" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Address"></span><span class=error></span></label>
+                    <div class="form-group">
+                      <textarea id="id_address" rows="4" name="address" data-i18n-field class="form-control"></textarea>
+                    </div>
+                  </div>
+                </div>
+
               </fieldset>
 
               <div class="submit-form">
@@ -157,13 +197,12 @@
                   <button class="form-btn-clear primary-button" tabindex="18" data-i18n="Provider-Registration-Form.Form-Sections.Form-Submit-Options.Clear"></button>
                   {{/if}}
                 </div>
-                <div class=row>
-                    <a href="#/register/verify/resend" data-i18n="Provider-Registration-Form.Form-Sections.Form-Submit-Options.ResendVerify"></a>
-                </div>
               </div>
             </form>
 
-            </div>
+          </div>
+          <div class=row>
+              <a href="#/register/verify/resend" data-i18n="Provider-Registration-Form.Form-Sections.Form-Submit-Options.ResendVerify"></a>
           </div>
         </div>
       </div>

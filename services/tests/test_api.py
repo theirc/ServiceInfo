@@ -1,4 +1,4 @@
-from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND, METHOD_NOT_ALLOWED
+from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND, METHOD_NOT_ALLOWED, UNAUTHORIZED
 import json
 
 from django.contrib.auth import get_user_model, authenticate
@@ -14,7 +14,7 @@ from rest_framework.test import APIClient
 
 from email_user.models import EmailUser
 from email_user.tests.factories import EmailUserFactory
-from services.models import Provider, Service, SelectionCriterion, ServiceArea
+from services.models import Provider, Service, SelectionCriterion, ServiceArea, ServiceType
 from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory, \
     ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory
 
@@ -91,6 +91,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
@@ -112,6 +115,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': existing_user.email,
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
@@ -132,6 +138,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': 'this_is_not_an_email',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
@@ -152,6 +161,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': 'fred@example.com',
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
@@ -175,6 +187,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'name_en': 'Joe Provider',
             'type': ProviderTypeFactory().get_api_url(),
             'email': 'fred@example.com',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
             'base_activation_link': 'https://somewhere.example.com/activate/me/?key='
@@ -200,6 +215,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': 'fred@example.com',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '',
@@ -219,6 +237,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12345',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': 'fred@example.com',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
@@ -239,6 +260,9 @@ class ProviderAPITest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'email': 'fred@example.com',
             'password': 'foobar',
             'number_of_monthly_beneficiaries': '37',
@@ -278,6 +302,12 @@ class ProviderAPITest(APITestMixin, TestCase):
             provider = Provider.objects.get(id=item['id'])
             self.assertIn(provider.name_en, [p1.name_en, p2.name_en])
 
+    def test_get_provider_list_not_authenticated(self):
+        ProviderFactory()
+        url = reverse('provider-list')
+        rsp = self.client.get(url)
+        self.assertEqual(UNAUTHORIZED, rsp.status_code, msg=rsp.content.decode('utf-8'))
+
     def test_get_one_provider(self):
         p1 = ProviderFactory(user=self.user)
         url = reverse('provider-detail', args=[p1.id])
@@ -285,6 +315,12 @@ class ProviderAPITest(APITestMixin, TestCase):
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(p1.name_en, result['name_en'])
+
+    def test_get_one_provider_not_authenticated(self):
+        p1 = ProviderFactory(user=self.user)
+        url = reverse('provider-detail', args=[p1.id])
+        rsp = self.client.get(url)
+        self.assertEqual(UNAUTHORIZED, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
     def test_update_provider(self):
         p1 = ProviderFactory(user=self.user)
@@ -318,6 +354,9 @@ class TokenAuthTest(APITestMixin, TestCase):
             'type': ProviderTypeFactory().get_api_url(),
             'phone_number': '12-345678',
             'description_en': 'Test provider',
+            'focal_point_name_en': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address_en': '1313 Mockingbird Lane, Beirut, Lebanon',
             'user': self.user_url,
             'number_of_monthly_beneficiaries': '37',
         }
@@ -457,6 +496,10 @@ class ServiceAPITest(APITestMixin, TestCase):
         rsp = self.get_with_token(service.get_api_url())
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(service.pk, result['id'])
+        self.assertEqual('http://testserver' + self.provider.get_api_url(), result['provider'])
+        self.assertEqual(self.provider.get_fetch_url(), result['provider_fetch_url'])
+        service_type = json.loads(self.client.get(result['type']).content.decode('utf-8'))
+        self.assertIn('icon_url', service_type)
 
     def test_list_services(self):
         # Should only get user's own services
@@ -586,6 +629,21 @@ class ServiceAPITest(APITestMixin, TestCase):
         self.assertIsNone(s2.update_of)
         self.assertEqual(Service.STATUS_DRAFT, s2.status)
 
+    def test_create_second_update(self):
+        # If an update is already pending for a current record, and we try
+        # to submit another one, it should fail
+        top = ServiceFactory(provider=self.provider, status=Service.STATUS_CURRENT)
+        draft1 = ServiceFactory(provider=self.provider, status=Service.STATUS_DRAFT,
+                                update_of=top)
+        # Get draft1's data and use it to come up with data for a second draft update
+        data = json.loads(self.get_with_token(draft1.get_api_url()).content.decode('utf-8'))
+        del data['url']
+        del data['id']
+        rsp = self.post_with_token(reverse('service-list'), data)
+        self.assertEqual(BAD_REQUEST, rsp.status_code)
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertIn('update_of', result)
+
 
 class SelectionCriterionAPITest(APITestMixin, TestCase):
     def test_create_selection_criterion(self):
@@ -651,6 +709,30 @@ class ServiceAreaAPITest(APITestMixin, TestCase):
         rsp = self.get_with_token(self.area2.get_api_url())
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual('http://testserver%s' % self.area1.get_api_url(), result['parent'])
+
+
+class ServiceTypeAPITest(APITestMixin, TestCase):
+    def test_get_types(self):
+        rsp = self.get_with_token(reverse('servicetype-list'))
+        self.assertEqual(OK, rsp.status_code)
+        results = json.loads(rsp.content.decode('utf-8'))
+        result = results[0]
+        self.assertIn('icon_url', result)
+        rsp = self.client.get(result['icon_url'])
+        self.assertEqual(OK, rsp.status_code)
+        self.assertEqual('image/png', rsp['Content-Type'])
+
+    def test_get_type(self):
+        # Try it unauthenticated
+        a_type = ServiceType.objects.first()
+        url = a_type.get_api_url()
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code)
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertIn('icon_url', result)
+        rsp = self.client.get(result['icon_url'])
+        self.assertEqual(OK, rsp.status_code)
+        self.assertEqual('image/png', rsp['Content-Type'])
 
 
 class LanguageTest(APITestMixin, TestCase):
@@ -1150,3 +1232,19 @@ class ServiceSearchFilterTest(APITestMixin, TestCase):
         self.assertEqual(atlanta.id, response[0]['id'])
         self.assertEqual(chicago.id, response[1]['id'])
         self.assertEqual(beirut.id, response[2]['id'])
+
+
+class ProviderFetchTest(APITestMixin, TestCase):
+    def test_provider_fetch(self):
+        # Provider fetch works and only returns the fields we expect
+        self.service = ServiceFactory(status=Service.STATUS_CURRENT)
+        url = self.service.get_provider_fetch_url()
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertIn('name_en', response)
+        self.assertIn('description_fr', response)
+        self.assertNotIn('number_of_beneficiaries', response)
+        self.assertNotIn('focal_point_name_en', response)
+        self.assertNotIn('focal_point_phone_number', response)
+        self.assertNotIn('user', response)
