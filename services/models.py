@@ -490,6 +490,10 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         Cancel a pending service update, or withdraw a current service
         from the directory.
         """
+        # First cancel any pending changes to this service
+        for pending_change in self.updates.filter(status=Service.STATUS_DRAFT):
+            pending_change.cancel()
+
         previous_status = self.status
         self.status = Service.STATUS_CANCELED
         self.save()
