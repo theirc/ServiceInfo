@@ -2,12 +2,12 @@ import datetime
 from unittest import mock
 
 from django.conf import settings
-from django.contrib.sites.models import Site
 from django.test import TestCase, override_settings
 from email_user.tests.factories import EmailUserFactory
 
 from ..models import JiraUpdateRecord, Service
 from ..tasks import process_jira_work
+from ..utils import absolute_url
 from .factories import ServiceFactory, ProviderFactory
 
 
@@ -92,16 +92,17 @@ class JiraProviderChangeTest(MockJiraTestMixin, TestCase):
         self.assertEqual('', jira_record.jira_issue_key)
         issue_key = self.setup_issue_key(mock_JIRA)
         jira_record.do_jira_work()
-        site = Site.objects.get_current()
         expected_duedate = datetime.date.today() + datetime.timedelta(days=settings.JIRA_DUEIN_DAYS)
         mock_JIRA.return_value.create_issue.assert_called_with(
-            description="Details here:\nhttp://%s%s" %
-                        (site, self.test_provider.get_admin_edit_url()),
+            description=mock.ANY,
             project={'key': settings.JIRA_PROJECT_KEY},
             issuetype={'name': 'Task'},
             duedate=str(expected_duedate),
             summary="Changed provider from %s" % str(self.test_provider),
         )
+        description = mock_JIRA.return_value.create_issue.call_args[1]['description']
+        self.assertIn(absolute_url(self.test_provider.get_admin_edit_url()), description)
+        self.assertIn(self.test_provider.name_en, description)
         jira_record = JiraUpdateRecord.objects.get(pk=jira_record.pk)
         self.assertEqual(issue_key, jira_record.jira_issue_key)
 
@@ -180,8 +181,7 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         self.assertTrue('issuetype' in call_kwargs)
         self.assertEqual({'name': 'Task'}, call_kwargs['issuetype'])
         self.assertTrue('description' in call_kwargs)
-        admin_url = 'http://%s%s' % (
-            Site.objects.get_current().domain, self.test_service.get_admin_edit_url())
+        admin_url = absolute_url(self.test_service.get_admin_edit_url())
         self.assertTrue(
             admin_url in call_kwargs['description'],
             msg='%s not found in %s' % (admin_url, call_kwargs['description']))
@@ -331,7 +331,6 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         # We add a comment with links to the old and new data
         call_args, call_kwargs = mock_JIRA.return_value.add_comment.call_args
         self.assertEqual(issue_key, call_args[0])
-        self.assertIn(draft_service.get_admin_edit_url(), call_args[1])
         self.assertIn(new_draft.get_admin_edit_url(), call_args[1])
 
 

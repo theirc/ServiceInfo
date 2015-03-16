@@ -1,0 +1,33 @@
+Administer: {{ service_url }}
+
+Status:     {{ service.get_status_display }}{% if service.update_of %}
+Update of:  {{ service_parent_url }}{% endif %}
+Provider:   {{ service.provider.name_en|default:service.provider.name_ar|default:service.provider.name_fr }}
+            {{ provider_url }}
+
+Name (en):  {{ service.name_en }}
+Name (ar):  {{ service.name_ar }}
+Name (fr):  {{ service.name_fr }}
+Area:       {{ service.area_of_service.name_en|default:service.area_of_service.name_ar|default:service.area_of_service.name_fr }}
+
+Description (en):
+{{ service.description_en }}
+
+Description (ar):
+{{ service.description_ar }}
+
+Description (fr):
+{{ service.description_fr }}
+
+Additional information (en):
+{{ service.additional_info_en }}
+
+Additional information (ar):
+{{ service.additional_info_ar }}
+
+Additional information (fr):
+{{ service.additional_info_fr }}
+
+Cost of service:
+{{ service.cost_of_service }}
+
