@@ -19,6 +19,7 @@ module.exports = Backbone.View.extend({
 
     render: function() {
         var $el = this.$el;
+
         var self=this;
         this.$el.html(template({
             services: this.services,
@@ -61,11 +62,15 @@ module.exports = Backbone.View.extend({
                 });
                 marker.setMap(self.map);
                 google.maps.event.addListener(marker, 'click', function() {
-                    location.hash = '#/services/' + service.id + '/';
+                    location.hash = '#/service/' + service.id;
                 })
             }
         });
         self.map.fitBounds(bounds);
+        var zoom = self.map.getZoom();
+        if (zoom > 10) {
+            self.map.setZoom(10);
+        }
     },
 
     events: {

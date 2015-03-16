@@ -32,13 +32,19 @@
             {{#each services}}
 			<tr class="{{#if this.isApproved }}approved{{/if}}{{#if this.isRejected}}denied{{/if}}">
 				<td>
+
                   <div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td {{#if this.parent }}update{{/if}}">
                     {{#if this.can_update }}
-                      <a href="#/service/{{ this.id }}">{{ this.name }}</a>
+                      <a href="#/manage/service/{{ this.id }}">{{ this.name }}</a>
                     {{ else }}
-                      {{ this.name }} (FIXME: link to a detail page)
+                      {{#if this.isRejected}}
+                        {{this.name}}
+                      {{else}}
+                        <a href="#/service/{{ this.id }}">{{ this.name }}</a>
+                      {{/if}}
                     {{/if}}
                   </span>
+
 				</td>
 				<td>
 					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Name"></div><span class="vertical-td">
@@ -53,7 +59,7 @@
 					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Area"></div><span class="vertical-td" data-i18n="Service-List.Status.{{ this.status }}">{{ this.status }}</span>
                 </td>
 				<td>
-				    <div class="vertical-header" data-i18n="Service-List.Table.Thead.Remove"></div><span class="vertical-td"><a href="#/service/cancel/{{ this.id }}"><span
+				    <div class="vertical-header" data-i18n="Service-List.Table.Thead.Remove"></div><span class="vertical-td"><a href="#/manage/service/cancel/{{ this.id }}"><span
 				      {{#if this.is_draft }}
       				     data-i18n="Service-Remove-Change.Remove-Change"
                       {{else}}
@@ -70,7 +76,7 @@
 {{/unless}}
 <div class="main-content">
     <div class="third float-start">
-        <a class="btn primary-button" href="#/service" data-i18n="Service-List.Add-Service"></a>
+        <a class="btn primary-button" href="#/manage/service" data-i18n="Service-List.Add-Service"></a>
     </div>
 </div>
 <!-- End Main Content -->
