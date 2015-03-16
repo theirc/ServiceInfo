@@ -237,7 +237,7 @@ class ServiceSerializer(RequireOneTranslationMixin,
             parent = attrs['update_of']
             if parent.status not in CAN_EDIT_STATUSES:
                 raise exceptions.ValidationError(
-                    {'update_of': _("You may only submit updates to current, draft or rejected"\
+                    {'update_of': _("You may only submit updates to current, draft or rejected"
                                     "services")}
                 )
             if parent.status == Service.STATUS_CURRENT:
