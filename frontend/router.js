@@ -63,6 +63,7 @@ function loadPage(name, params) {
 module.exports = Backbone.Router.extend({
     initialize: function() {
         this.route(/search\/?/, loadPage("search-list"));
+        this.route(/search\/map/, loadPage("map"));
     },
     routes: {
         "": function() {
@@ -87,7 +88,7 @@ module.exports = Backbone.Router.extend({
         "feedback": loadPage("feedback"),
 
         // "search/?": loadPage("search-list"),
-        "search/map": loadPage("map"),
+
         "service/cancel/:id": loadPage("service-cancel", ['id']),
         "service-list": loadPage("service-list"),
         "login": loadPage("login"),
