@@ -12,7 +12,7 @@ var Backbone = require('backbone'),
 var SearchResultList = Backbone.View.extend({
     render: function() {
         var $el = this.$el;
-        search.services.fetch().then(function(){
+        search.refetchServices().then(function(){
             var html = result_template({
                 services: search.services.data(),
             })
@@ -54,7 +54,6 @@ module.exports = Backbone.View.extend({
 
         $.each(services, function() {
             var service = this;
-
         });
     },
 

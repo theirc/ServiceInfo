@@ -42,7 +42,35 @@ module.exports = {
             search: query,
             type_numbers: type,
         };
+        var services = this.services;
 
-        return this.services.fetch({data: params});
+        return new Promise(function(onresolve, onerror) {
+            var fetchp = services.fetch({data: params});
+            fetchp.then(
+                function() {
+                    var days = [
+                        "Sunday",
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday",
+                    ];
+                    var today = days[new Date().getDay()];
+                    var todaylc = today.toLowerCase();
+                    services.models.forEach(function(service) {
+                        var open = service.get(todaylc + '_open');
+                        var close = service.get(todaylc + '_close');
+                        if (open && close) {
+                            service.set("today_open", open);
+                            service.set("today_close", close);
+                        }
+                    });
+                    onresolve(fetchp);
+                },
+                onerror
+            );
+        });
     },
 };
