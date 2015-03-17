@@ -11,16 +11,11 @@ var Backbone = require('backbone'),
 
 var SearchResultList = Backbone.View.extend({
     render: function() {
-        console.log("R2");
         var $el = this.$el;
         search.services.fetch().then(function(){
-            console.log("R3");
-            console.log("services:", search.services.models);
             var html = result_template({
                 services: search.services.data(),
             })
-            console.log(html);
-            console.log($el);
             $('.search-result-list').html(html)
         })
     },
@@ -35,7 +30,6 @@ module.exports = Backbone.View.extend({
     },
 
     render: function() {
-        console.log("R1");
         var $el = this.$el;
         var self = this;
 
