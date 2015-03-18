@@ -26,7 +26,7 @@ Address (en):
 {{ provider.address_en }}
 
 Address (ar):
-{{ provider.address_en }}
+{{ provider.address_ar }}
 
 Address (fr):
 {{ provider.address_fr }}
