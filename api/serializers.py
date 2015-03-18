@@ -13,6 +13,9 @@ from services.models import Service, Provider, ProviderType, ServiceType, Servic
     SelectionCriterion
 
 
+CAN_EDIT_STATUSES = [Service.STATUS_DRAFT, Service.STATUS_CURRENT, Service.STATUS_REJECTED]
+
+
 class RequireOneTranslationMixin(object):
     """Validate that for each set of fields with prefix
     in `Meta.required_translated_fields` and ending in _en, _ar, _fr,
@@ -235,9 +238,10 @@ class ServiceSerializer(RequireOneTranslationMixin,
         attrs['status'] = Service.STATUS_DRAFT
         if attrs.get('update_of', False):
             parent = attrs['update_of']
-            if parent.status not in [Service.STATUS_DRAFT, Service.STATUS_CURRENT]:
+            if parent.status not in CAN_EDIT_STATUSES:
                 raise exceptions.ValidationError(
-                    {'update_of': _("You may only submit updates to current or draft services")}
+                    {'update_of': _("You may only submit updates to current, draft or rejected"
+                                    " services")}
                 )
             if parent.status == Service.STATUS_CURRENT:
                 drafts = parent.updates.filter(status=Service.STATUS_DRAFT)
@@ -250,13 +254,13 @@ class ServiceSerializer(RequireOneTranslationMixin,
         for day in ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday',
                     'friday', 'saturday']:
             open_field, close_field = '%s_open' % day, '%s_close' % day
-            open_value = attrs.get(open_field, False)
-            close_value = attrs.get(close_field, False)
-            if open_value and not close_value:
+            open_value = attrs.get(open_field, None)
+            close_value = attrs.get(close_field, None)
+            if open_value is not None and close_value is None:
                 errs[close_field].append(_('Close time is missing.'))
-            elif close_value and not open_value:
+            elif close_value is not None and open_value is None:
                 errs[open_field].append(_('Open time is missing.'))
-            elif open_value and close_value and open_value >= close_value:
+            elif open_value is not None and close_value is not None and open_value >= close_value:
                 errs[close_field].append(_('Close time is not later than open time.'))
         if errs:
             raise exceptions.ValidationError(errs)
