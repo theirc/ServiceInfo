@@ -871,6 +871,12 @@ class Nationality(NameInCurrentLanguageMixin, models.Model):
         blank=True,
     )
 
+    class Meta:
+        verbose_name_plural = _("nationalities")
+
+    def __str__(self):
+        return self.name
+
     def get_api_url(self):
         return reverse('nationality-detail', args=[self.id])
 
@@ -969,6 +975,7 @@ class Feedback(models.Model):
                     "the service you needed?"),
         max_length=20,
         choices=[
+            ('no', _("No")),
             ('didntknow', _("Did not know how to contact them")),
             ('nophoneresponse', _("Tried to contact them by phone but received no response")),
             ('noresponse', _("Tried to contact them in person but received no response or "

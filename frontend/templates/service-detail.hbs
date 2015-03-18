@@ -4,6 +4,11 @@
 <div class="container">
 	<div class="row">
 		<div class="name">{{ service.name }}</div>
+        <div class="feedback-link">
+          <a href="#/feedback/{{ service.id }}">
+            <button class="primary-button" data-i18n="Service-Detail.Give-Feedback"></button>
+          </a>
+        </div>
 		<div class="description">{{multiline service.description }}</div>
 		{{#if mapURL}}
 			<div id="static-map">
