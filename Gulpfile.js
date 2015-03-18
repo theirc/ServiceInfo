@@ -11,6 +11,7 @@ var gulp = require('gulp')
 var knownOptions = {
     default: {
         config: "base",
+        fast: false,
     }
 }
 
@@ -67,29 +68,33 @@ gulp.task('browserify', function(cb) {
 });
 
 gulp.task('closure', ['browserify'], function(cb) {
-    var res = sync_exec(
-        'ccjs frontend/bundle.js --language_in=ECMASCRIPT5'
-    );
-    if (res.stderr) {
-        console.error(res.stderr);
-    }
-    if (res.stdout) {
-        function string_src(filename, string) {
-          var src = require('stream').Readable({ objectMode: true })
-          src._read = function () {
-            this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }))
-            this.push(null)
-          }
-          return src
-        }
-        string_src("bundle_min.js", res.stdout)
-            .pipe(gulp.dest('frontend'))
-        ;
+    if (options.fast) {
+        sync_exec('cp frontend/bundle.js frontend/bundle_min.js');
     } else {
-        throw new gutil.PluginError({
-          plugin: "Closure",
-          message: 'Failed to compile JS.'
-        });
+        var res = sync_exec(
+            'ccjs frontend/bundle.js --language_in=ECMASCRIPT5'
+        );
+        if (res.stderr) {
+            console.error(res.stderr);
+        }
+        if (res.stdout) {
+            function string_src(filename, string) {
+              var src = require('stream').Readable({ objectMode: true })
+              src._read = function () {
+                this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }))
+                this.push(null)
+              }
+              return src
+            }
+            string_src("bundle_min.js", res.stdout)
+                .pipe(gulp.dest('frontend'))
+            ;
+        } else {
+            throw new gutil.PluginError({
+              plugin: "Closure",
+              message: 'Failed to compile JS.'
+            });
+        }
     }
     cb();
 });
