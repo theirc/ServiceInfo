@@ -105,6 +105,18 @@ class ServiceTest(TestCase):
             service.email_provider_about_approval()
         mock_task.delay.assert_called_with(service.pk)
 
+    def test_cancel_cleans_up_pending_changes(self):
+        service1 = ServiceFactory(status=Service.STATUS_CURRENT)
+        # Make copy of service1 as an update
+        service2 = Service.objects.get(pk=service1.pk)
+        service2.pk = None
+        service2.update_of = service1
+        service2.status = Service.STATUS_DRAFT
+        service2.save()
+        service1.cancel()
+        service2 = Service.objects.get(pk=service2.pk)
+        self.assertEqual(Service.STATUS_CANCELED, service2.status)
+
     def test_approval_validation(self):
         service = ServiceFactory()
         # No location - should not allow approval

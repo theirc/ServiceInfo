@@ -12,8 +12,8 @@ module.exports = Backbone.View.extend({
         this.render();
 
         /* Render again if language changes */
-        var $el = this.$el,
-            self = this;
+        var $el = this.$el;
+        var self = this;
         config.change("forever.language", function() {
             var detached = $('table#service-status').length === 0;
             if (detached) {
@@ -75,9 +75,6 @@ module.exports = Backbone.View.extend({
 
                     // our sorts will order by status, then name
                     records[i].order = self.sort_order_by_status[records[i].status] + records[i].name;
-
-                    records[i].servicearea = records[i].servicearea.data();
-                    records[i].servicetype = records[i].servicetype.data();
                 }
 
                 // sort top-level records by status then name
@@ -90,7 +87,7 @@ module.exports = Backbone.View.extend({
                     var top = top_level[i], children = top.children;
                     records.push(top);
                     children.sort(sort_func);
-                    top.can_update = (top.status === 'current');
+                    top.can_update = (top.status === 'current' || top.status === 'rejected');
                     for (j = 0; j < children.length; j++) {
                         var child = children[j];
                         // if a child is a draft, then we can update it, not its parent
