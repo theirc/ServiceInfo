@@ -48,6 +48,12 @@
       "Register": "Register to be a Service Provider here"
     }
   },
+  "Search-List": {
+    "Page-Head": {
+      "Title": "Service Provider Search",
+      "Description": "Use the filtered search below to find the service that meets your needs."
+    }
+  },
   "Service-Map": {
     "Page-Head": {
       "Page-Title": {

@@ -1,6 +1,8 @@
 var hashtrack = require('hashtrack');
 var service = require('./models/service');
 var servicetype = require('./models/servicetype');
+var search_control_template = require('./templates/_search_controls.hbs');
+var Backbone = require('backbone');
 
 
 var query = "";
@@ -13,9 +15,35 @@ hashtrack.onhashvarchange('t', function(_, value) {
     $('#page').trigger('search', value)
 })
 
+var SearchControls = Backbone.View.extend({
+    initialize: function(opts) {
+        this.$el = opts.$el;
+    },
+    render: function() {
+        var $el = this.$el;
+        var html = search_control_template({
+            query: hashtrack.getVar('q'),
+        });
+        $el.html(html);
+        $el.i18n();
+
+        search.populateServiceTypeDropdown();
+    },
+
+    events: {
+        "click [name=map-toggle-list]": function() {
+            hashtrack.setPath('/search');
+        },
+        "click [name=map-toggle-map]": function() {
+            hashtrack.setPath('/search/map');
+        },
+    },
+});
+
 module.exports = {
     services: new service.PublicServices(),
     servicetypes: new servicetype.ServiceTypes(),
+    SearchControls: SearchControls,
 
     populateServiceTypeDropdown: function() {
         var servicetypes = this.servicetypes;

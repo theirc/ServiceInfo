@@ -36,6 +36,13 @@ module.exports = Backbone.View.extend({
         this.$el.html(template({
             query: hashtrack.getVar('q'),
         }));
+        this.$el.i18n();
+
+        var $scv = this.$el.find('#search_controls');
+        var SearchControlView = new search.SearchControls({
+            $el: $scv,
+        });
+        SearchControlView.render();
 
         var $results = $('.search-result-list');
         this.resultView = new SearchResultList({
@@ -49,27 +56,23 @@ module.exports = Backbone.View.extend({
 
     updateResults: function() {
         var self = this;
-        var bounds = new google.maps.LatLngBounds();
         var services = search.services.data();
 
         $.each(services, function() {
             var service = this;
         });
+
+        self.render();
     },
 
     events: {
-        "search": function(_, query) {
+        "click button[name=search]": function(e) {
             var self = this;
+            hashtrack.setVar('q', self.$el.find('.query').val());
+            hashtrack.setVar('t', self.$el.find('.query-service-type').val());
             search.refetchServices().then(function(){
                 self.updateResults();
             })
-        },
-        "input input.query": function(e) {
-            var query = $(e.target).val();
-            hashtrack.setVar('q', query);
-        },
-        "change .query-service-type": function(e) {
-            hashtrack.setVar('t', $(e.target).val());
         },
     }
 })

@@ -14,7 +14,7 @@ module.exports = Backbone.View.extend({
         this.query = "";
         this.services = new service.PublicServices();
         this.servicetypes = new servicetype.ServiceTypes();
-        this.render();
+        //this.render();
     },
 
     render: function() {
@@ -26,7 +26,11 @@ module.exports = Backbone.View.extend({
             query: hashtrack.getVar('q'),
         }));
 
-        search.populateServiceTypeDropdown();
+        var $scv = this.$el.find('#search_controls');
+        var SearchControlView = new search.SearchControls({
+            $el: $scv,
+        });
+        SearchControlView.render();
 
         function initialize() {
             var mapOptions = {
