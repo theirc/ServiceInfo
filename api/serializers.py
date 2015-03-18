@@ -254,13 +254,13 @@ class ServiceSerializer(RequireOneTranslationMixin,
         for day in ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday',
                     'friday', 'saturday']:
             open_field, close_field = '%s_open' % day, '%s_close' % day
-            open_value = attrs.get(open_field, False)
-            close_value = attrs.get(close_field, False)
-            if open_value and not close_value:
+            open_value = attrs.get(open_field, None)
+            close_value = attrs.get(close_field, None)
+            if open_value is not None and close_value is None:
                 errs[close_field].append(_('Close time is missing.'))
-            elif close_value and not open_value:
+            elif close_value is not None and open_value is None:
                 errs[open_field].append(_('Open time is missing.'))
-            elif open_value and close_value and open_value >= close_value:
+            elif open_value is not None and close_value is not None and open_value >= close_value:
                 errs[close_field].append(_('Close time is not later than open time.'))
         if errs:
             raise exceptions.ValidationError(errs)
