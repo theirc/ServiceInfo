@@ -76,7 +76,7 @@ module.exports = Backbone.View.extend({
                     if (data.language) {
                         config.set('forever.language', data.language);
                     }
-                    window.location.hash = 'service-list';
+                    window.location.hash = '/manage/service-list';
                 },
             })
         }
