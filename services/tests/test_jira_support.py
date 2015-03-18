@@ -8,7 +8,7 @@ from email_user.tests.factories import EmailUserFactory
 from ..models import JiraUpdateRecord, Service
 from ..tasks import process_jira_work
 from ..utils import absolute_url
-from .factories import ServiceFactory, ProviderFactory
+from .factories import ServiceFactory, ProviderFactory, SelectionCriterionFactory
 
 
 class JiraUpdateRecordModelTest(TestCase):
@@ -169,7 +169,26 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         self.assertEqual(issue_key, self.jira_record.jira_issue_key)
 
     def test_create_issue_kwargs(self, mock_JIRA):
+        self.test_service.sunday_open = datetime.time(11, 10)
+        self.test_service.saturday_close = datetime.time(17, 18)
+        self.test_service.save()
+        self.test_service.provider.focal_point_phone_number = '12-345678'
+        self.test_service.provider.number_of_monthly_beneficiaries = '31415'
+        self.test_service.provider.save()
+        SelectionCriterionFactory(
+            service=self.test_service,
+            text_en="Must be 18",
+            text_ar="Must have passport",
+            text_fr="Must have transportation"
+        )
+        SelectionCriterionFactory(
+            service=self.test_service,
+            text_en="Must be 21",
+            text_ar="Must have shoes",
+            text_fr="Must be citizen"
+        )
         self.setup_issue_key(mock_JIRA)
+        self.jira_record = JiraUpdateRecord.objects.get(pk=self.jira_record.pk)
         self.jira_record.do_jira_work()
         call_args, call_kwargs = mock_JIRA.return_value.create_issue.call_args
         # Expecting: summary, project, issuetype, description, duedate
@@ -185,6 +204,12 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         self.assertTrue(
             admin_url in call_kwargs['description'],
             msg='%s not found in %s' % (admin_url, call_kwargs['description']))
+        self.assertIn('11:10', call_kwargs['description'])
+        self.assertIn('17:18', call_kwargs['description'])
+        self.assertIn('Must be 18', call_kwargs['description'])
+        self.assertIn('Must have shoes', call_kwargs['description'])
+        self.assertIn('12-345678', call_kwargs['description'])
+        self.assertIn('31415', call_kwargs['description'])
         self.assertTrue('duedate' in call_kwargs)
         expected_duedate = datetime.date.today() + datetime.timedelta(days=settings.JIRA_DUEIN_DAYS)
         self.assertEqual(str(expected_duedate), call_kwargs['duedate'])

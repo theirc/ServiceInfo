@@ -11,7 +11,7 @@ Monthly beneficiaries: {{ provider.number_of_monthly_beneficiaries }}
 Focal point (en):      {{ provider.focal_point_name_en }}
 Focal point (ar):      {{ provider.focal_point_name_ar }}
 Focal point (fr):      {{ provider.focal_point_name_fr }}
-Focal point phone:     {{ provider.focal_point_phone }}
+Focal point phone:     {{ provider.focal_point_phone_number }}
 
 Description (en):
 {{ provider.description_en }}
