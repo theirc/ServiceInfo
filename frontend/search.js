@@ -95,7 +95,9 @@ module.exports = {
                             service.set("today_close", close);
                         }
                     });
-                    onresolve(fetchp);
+                    services.loadSubModels().then(function(){
+                        onresolve(fetchp);
+                    });
                 },
                 onerror
             );
