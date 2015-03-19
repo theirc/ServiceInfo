@@ -1,0 +1,10 @@
+{# The earlier data will still be above this comment in the ticket. #}
+The provider has submitted a change to a service or earlier change
+that was still waiting for approval.
+
+You can view and update the latest change here: {{ service_url }}
+
+Updated service
+---------------
+
+{% include 'jira/service_data.txt' with service=service %}

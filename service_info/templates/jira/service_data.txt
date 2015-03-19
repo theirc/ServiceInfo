@@ -1,0 +1,49 @@
+Administer: {{ service_url }}
+
+Status:     {{ service.get_status_display }}{% if service.update_of %}
+Update of:  {{ service_parent_url }}{% endif %}
+Provider:   {{ service.provider.name_en|default:service.provider.name_ar|default:service.provider.name_fr }}
+            {{ provider_url }}
+
+Name (en):  {{ service.name_en }}
+Name (ar):  {{ service.name_ar }}
+Name (fr):  {{ service.name_fr }}
+Area:       {{ service.area_of_service.name_en|default:service.area_of_service.name_ar|default:service.area_of_service.name_fr }}
+
+Description (en):
+{{ service.description_en }}
+
+Description (ar):
+{{ service.description_ar }}
+
+Description (fr):
+{{ service.description_fr }}
+
+Additional information (en):
+{{ service.additional_info_en }}
+
+Additional information (ar):
+{{ service.additional_info_ar }}
+
+Additional information (fr):
+{{ service.additional_info_fr }}
+
+Cost of service:
+{{ service.cost_of_service }}
+
+Hours of service:
+
+Sunday    {% if None == service.sunday_open %}Closed{% else %}{{ service.sunday_open }} -- {{ service.sunday_close }}{% endif %}
+Monday    {% if None == service.monday_open %}Closed{% else %}{{ service.monday_open }} -- {{ service.monday_close }}{% endif %}
+Tuesday   {% if None == service.tuesday_open %}Closed{% else %}{{ service.tuesday_open }} -- {{ service.tuesday_close }}{% endif %}
+Wednesday {% if None == service.wednesday_open %}Closed{% else %}{{ service.wednesday_open }} -- {{ service.wednesday_close }}{% endif %}
+Thursday  {% if None == service.thursday_open %}Closed{% else %}{{ service.thursday_open }} -- {{ service.thursday_close }}{% endif %}
+Friday    {% if None == service.friday_open %}Closed{% else %}{{ service.friday_open }} -- {{ service.friday_close }}{% endif %}
+Saturday  {% if None == service.saturday_open %}Closed{% else %}{{ service.saturday_open }} -- {{ service.saturday_close }}{% endif %}
+
+Selection criteria:
+{% for criterion in service.selection_criteria.all %}
+* English: {{ criterion.text_en }}
+  Arabic:  {{ criterion.text_ar }}
+  French:  {{ criterion.text_fr }}
+{% endfor %}

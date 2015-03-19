@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.db import models, migrations
+from services.utils import update_postgres_sequence_generator
 
 
 def no_op(apps, schema_editor):
@@ -32,6 +33,7 @@ def define_sites(apps, schema_editor):
             domain='serviceinfo-staging.rescue.org',
         )
     )
+    update_postgres_sequence_generator(Site, 'default')
 
 
 class Migration(migrations.Migration):
