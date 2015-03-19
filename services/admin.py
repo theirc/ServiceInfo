@@ -52,6 +52,11 @@ class LocationWidget(BaseGeometryWidget):
             'all': ("css/duckling-map-widget.css",),
         }
 
+    def deserialize(self, value):
+        if not value:
+            return None
+        return super(LocationWidget, self).deserialize(value)
+
 
 class ServiceAdminForm(forms.ModelForm):
     location = PointField(widget=LocationWidget())
