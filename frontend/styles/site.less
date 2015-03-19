@@ -1126,13 +1126,9 @@ Service Map
 
 .side-section {
 	background-color: #fff9e7;
-	width: 33.333%;
 	min-width: 260px;
-	position: relative;
 	height: 100%;
-	margin-left: -40px;
 	float: left;
-	padding: 39px 25px 0 40px;
 	overflow: auto;
 	box-sizing: border-box;
 
@@ -1144,14 +1140,28 @@ Service Map
         padding: 10px 0 0;
         background-color: whitesmoke;
     }
+
+    @media only screen and (min-width: 1000px) {
+        width: 100%;
+        background-color: inherit;
+    }
 }
 
 div#search {
 	padding: 10px 0;
 	height: 100%;
+	max-width: 800px;
 	.container,
 	.row {
 		// height: 100%;
+	}
+	.half {
+		&:first-child {
+			margin-right: 0;
+		}
+		&:last-child {
+			margin-left: 0;
+		}
 	}
 	.primary-search {
 		.form-group {
