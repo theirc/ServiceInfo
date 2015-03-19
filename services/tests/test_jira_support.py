@@ -170,7 +170,9 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
 
     def test_create_issue_kwargs(self, mock_JIRA):
         self.test_service.sunday_open = datetime.time(11, 10)
-        self.test_service.saturday_close = datetime.time(17, 18)
+        self.test_service.sunday_close = datetime.time(12, 10)
+        self.test_service.saturday_open = datetime.time(17, 18)
+        self.test_service.saturday_close = datetime.time(19, 18)
         self.test_service.save()
         self.test_service.provider.focal_point_phone_number = '12-345678'
         self.test_service.provider.number_of_monthly_beneficiaries = '31415'

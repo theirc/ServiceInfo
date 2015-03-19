@@ -33,13 +33,13 @@ Cost of service:
 
 Hours of service:
 
-Sunday    {{ service.sunday_open }} -- {{ service.sunday_close }}
-Monday    {{ service.monday_open }} -- {{ service.monday_close }}
-Tuesday   {{ service.tuesday_open }} -- {{ service.tuesday_close }}
-Wednesday {{ service.wednesday_open }} -- {{ service.wednesday_close }}
-Thursday  {{ service.thursday_open }} -- {{ service.thursday_close }}
-Friday    {{ service.friday_open }} -- {{ service.friday_close }}
-Saturday  {{ service.saturday_open }} -- {{ service.saturday_close }}
+Sunday    {% if "None" == service.sunday_open|default_if_none:"None" %}Closed{% else %}{{ service.sunday_open }} -- {{ service.sunday_close }}{% endif %}
+Monday    {% if "None" == service.monday_open|default_if_none:"None" %}Closed{% else %}{{ service.monday_open }} -- {{ service.monday_close }}{% endif %}
+Tuesday   {% if "None" == service.tuesday_open|default_if_none:"None" %}Closed{% else %}{{ service.tuesday_open }} -- {{ service.tuesday_close }}{% endif %}
+Wednesday {% if "None" == service.wednesday_open|default_if_none:"None" %}Closed{% else %}{{ service.wednesday_open }} -- {{ service.wednesday_close }}{% endif %}
+Thursday  {% if "None" == service.thursday_open|default_if_none:"None" %}Closed{% else %}{{ service.thursday_open }} -- {{ service.thursday_close }}{% endif %}
+Friday    {% if "None" == service.friday_open|default_if_none:"None" %}Closed{% else %}{{ service.friday_open }} -- {{ service.friday_close }}{% endif %}
+Saturday  {% if "None" == service.saturday_open|default_if_none:"None" %}Closed{% else %}{{ service.saturday_open }} -- {{ service.saturday_close }}{% endif %}
 
 Selection criteria:
 {% for criterion in service.selection_criteria.all %}
