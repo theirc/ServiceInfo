@@ -1126,13 +1126,9 @@ Service Map
 
 .side-section {
 	background-color: #fff9e7;
-	width: 33.333%;
 	min-width: 260px;
-	position: relative;
 	height: 100%;
-	margin-left: -40px;
 	float: left;
-	padding: 39px 25px 0 40px;
 	overflow: auto;
 	box-sizing: border-box;
 
@@ -1144,18 +1140,47 @@ Service Map
         padding: 10px 0 0;
         background-color: whitesmoke;
     }
+
+    @media only screen and (min-width: 1000px) {
+        width: 100%;
+        background-color: inherit;
+    }
 }
 
 div#search {
 	padding: 10px 0;
 	height: 100%;
+	max-width: 800px;
 	.container,
 	.row {
 		// height: 100%;
 	}
-    .search-result-list li .row {
-        padding-left: 0px;
+    .search-result-list li {
+        padding: 10px;
+
+        &:nth-child(odd) {
+            background-color: white;
+        }
+        &:nth-child(even) {
+            background-color: #F9F9FA;
+        }
+        .row {
+            padding-left: 0px;
+        }
+
+        .name {
+            font-size: 1.2em;
+            font-weight: 600;
+        }
     }
+	.half {
+		&:first-child {
+			margin-right: 0;
+		}
+		&:last-child {
+			margin-left: 0;
+		}
+	}
 	.primary-search {
 		.form-group {
 			margin-bottom: 0;
@@ -1380,6 +1405,18 @@ div#search-filter {
 			border-bottom-left-radius: 0;
 		}
 	}
+}
+.search-map {
+    .map-toggle .half:first-child button {
+        background-color: #33A069;
+        border: 1px solid #33A069;
+    }
+}
+.search-list {
+    .map-toggle .half:last-child button {
+        background-color: #33A069;
+        border: 1px solid #33A069;
+    }
 }
 
 #service-list {
