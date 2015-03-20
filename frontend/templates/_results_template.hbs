@@ -1,6 +1,16 @@
 {{#each services }}
     <li>
-        <div class="name"><a href="#/service/{{ this.id }}">{{ this.name }}</a></div>
+        <div class="name">
+            <div class=row>
+                <div class=half>
+                    <a href="#/service/{{ this.id }}">{{ this.name }}</a>
+                </div>
+                <div class="half servicetype">
+                    {{# if this.servicetype.icon_url }}<img class="servicetype-icon" src="{{ this.servicetype.icon_url }}"/>{{/if}}
+                    {{ this.servicetype.name }}
+                </div>
+            </div>
+        </div>
         <div class="area">
             <span class="control-label" data-i18n="Service-Map.List.Area"></span>
             {{ this.servicearea.name }}
@@ -10,7 +20,7 @@
             {{#if this.today_open}}
                 {{ this.today_open }} - {{ this.today_close }}
             {{else}}
-                <span class="control-label" data-i18n="Service-Map.List.Unknown"></span>
+                <span data-i18n="Service-Map.List.Unknown"></span>
             {{/if}}
         </div>
         <div class="contact">
@@ -20,7 +30,7 @@
                     {{#if this.provider.phone_number }}
                         {{ this.provider.phone_number }}
                     {{else}}
-                        <span class="control-label" data-i18n="Service-Map.List.Unknown"></span>
+                        <span data-i18n="Service-Map.List.Unknown"></span>
                     {{/if}}
                 </div>
                 <div class="half">
@@ -28,7 +38,7 @@
                     {{#if this.provider.website }}
                         {{ this.provider.website }}
                     {{else}}
-                        <span class="control-label" data-i18n="Service-Map.List.Unknown"></span>
+                        <span data-i18n="Service-Map.List.Unknown"></span>
                     {{/if}}
                 </div>
             </div>

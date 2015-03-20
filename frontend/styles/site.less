@@ -1203,6 +1203,15 @@ div#search {
 	            font-weight: 600;
 	        }
 
+            .servicetype {
+                text-align: @end;
+
+                .servicetype-icon {
+                    float: @end;
+                    margin-@{start}: 1em;
+                }
+            }
+
 	        .contact,
 	        .description {
 	        	.row {
@@ -1214,7 +1223,7 @@ div#search {
 	        }
 	    }
 
-        .description { 
+        .description {
         	.row {
         		p {
         			margin: 0;
@@ -1252,7 +1261,7 @@ div#search {
 			    background-image: url(../images/search-icon.png);
 			    background-image: url(../images/search-icon.svg);
 			    background-repeat: no-repeat;
-			    background-position: 95% 50%;
+                background-position: 95% 50%;
 			    background-size: 1.5em;
 			}
 		}
@@ -1283,6 +1292,12 @@ div#search {
 		    }
 		}
 	}
+}
+
+[dir=rtl] #search .primary-search .query-field-container {
+    input {
+        background-position: 5% 50%;
+    }
 }
 
 div#search-filter {
