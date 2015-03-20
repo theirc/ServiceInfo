@@ -52,7 +52,6 @@ module.exports = Backbone.View.extend({
         });
         this.resultView.render();
 
-        search.populateServiceTypeDropdown();
         $el.i18n();
     },
 
