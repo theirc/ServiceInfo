@@ -3,6 +3,7 @@ var service = require('./models/service');
 var servicetype = require('./models/servicetype');
 var search_control_template = require('./templates/_search_controls.hbs');
 var Backbone = require('backbone');
+var config = require('./config');
 
 
 var query = "";
@@ -27,6 +28,16 @@ hashtrack.onhashvarchange('t', function(_, value) {
 var SearchControls = Backbone.View.extend({
     initialize: function(opts) {
         this.$el = opts.$el;
+        var self=this;
+
+        config.change("forever.language", function() {
+            var detached = opts.$el.closest('body').length === 0;
+            if (detached) {
+                config.unbind("forever.language", arguments.callee);
+            } else {
+                self.render();
+            }
+        });
     },
     render: function() {
         var $el = this.$el;
