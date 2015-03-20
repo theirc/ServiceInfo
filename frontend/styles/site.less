@@ -973,7 +973,7 @@ input[type=range] {
     #application-header .brand {
         background: white;
         padding: .25em .25em 0.1em;
-        text-align: center
+        text-align: center;
     }
     #application-header .brand #logo {
         background-image: url(../images/logo-large.png);
@@ -1012,6 +1012,7 @@ input[type=range] {
     	background-color: white;
     	.brand {
         	height: 100%;
+        	margin: 0 10px;
         }
     }
     #application-header .brand #logo {
@@ -1021,7 +1022,6 @@ input[type=range] {
         background-position: 0 10px;
         width: 140px;
         height: 60px;
-        margin-left: 10px;
     }
     #menu {
         position: absolute;
@@ -1165,13 +1165,36 @@ div#search {
             background-color: #F9F9FA;
         }
         .row {
-            padding-left: 0px;
+            padding: 10px 0px;
+        }
+
+        .control-label {
+        	display: block;
         }
 
         .name {
             font-size: 1.2em;
             font-weight: 600;
         }
+
+        .contact,
+        .description {
+        	.row {
+        		padding: 10px 0;
+        		.half {
+        			width: 50%;
+        		}
+        	}
+        }
+
+        .description { 
+        	.row {
+        		p {
+        			margin: 0;
+        		}
+        	}
+        }
+
     }
 	.half {
 		&:first-child {
@@ -1210,12 +1233,23 @@ div#search {
 		select#id_type.form-control {
 			height: 46px;
 			width: 36%;
+			padding-right: 6%;
 			-webkit-appearance: none;
-			border-radius: 0;
+			-webkit-border-top-right-radius: 0;
+			border-top-right-radius: 0;
+			-webkit-border-bottom-right-radius: 0;
+			border-bottom-right-radius: 0;
+			-webkit-border-top-left-radius: 0px;
+			border-top-left-radius: 0px;
+			-webkit-border-bottom-left-radius: 0px;
+			border-bottom-left-radius: 0px;
 			background-image: url(../images/down-arrow.png);
 			background-repeat: no-repeat;
-			background-position: 90% 50%;
+			background-position: 94% 50%;
 			background-size: 1em;
+		    @media only screen and (max-width: 600px) {
+		        padding-right: 7%;
+		    }
 		}
 		button.primary-button {
 			font-size: .95em;
