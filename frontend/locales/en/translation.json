@@ -84,9 +84,10 @@
       "Additional-Info": "Additional Provider Information:",
       "Todays-Hours": "Todays Service Hours:",
       "All-Hours": "Service Hours:",
-      "Phone": "Phone-Number:",
-      "Email": "Email-Address:",
-      "Website": "Website:"
+      "Phone": "Phone Number:",
+      "Email": "Email Address:",
+      "Website": "Website:",
+      "Unknown": "Unkown"
     }
   },
   "Service-Remove-Change": {

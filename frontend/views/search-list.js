@@ -13,10 +13,12 @@ var SearchResultList = Backbone.View.extend({
     render: function() {
         var $el = this.$el;
         search.refetchServices().then(function(){
+            var $el = $('.search-result-list');
             var html = result_template({
                 services: search.services.data(),
             })
-            $('.search-result-list').html(html)
+            $el.html(html);
+            $el.i18n();
         })
     },
 });
@@ -36,7 +38,6 @@ module.exports = Backbone.View.extend({
         this.$el.html(template({
             query: hashtrack.getVar('q'),
         }));
-        this.$el.i18n();
 
         var $scv = this.$el.find('#search_controls');
         var SearchControlView = new search.SearchControls({
@@ -52,6 +53,7 @@ module.exports = Backbone.View.extend({
         this.resultView.render();
 
         search.populateServiceTypeDropdown();
+        $el.i18n();
     },
 
     updateResults: function() {

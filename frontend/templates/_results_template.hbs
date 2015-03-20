@@ -1,17 +1,35 @@
 {{#each services }}
     <li>
         <div class="name"><a href="#/service/{{ this.id }}">{{ this.name }}</a></div>
-        <div class="area control-label">{{ this.servicearea.name }}</div>
-        <div class="hours control-label">{{#if this.today_open}}{{ this.today_open }} - {{ this.today_close }}{{/if}}</div>
+        <div class="area">
+            <span class="control-label" data-i18n="Service-Map.List.Area"></span>
+            {{ this.servicearea.name }}
+        </div>
+        <div class="hours control-label">
+            <span class="control-label" data-i18n="Service-Map.List.Todays-Hours"></span>
+            {{#if this.today_open}}
+                {{ this.today_open }} - {{ this.today_close }}
+            {{else}}
+                <span class="control-label" data-i18n="Service-Map.List.Unknown"></span>
+            {{/if}}
+        </div>
         <div class="contact">
             <div class="row">
                 <div class="half">
                     <span class="control-label" data-i18n="Service-Map.List.Phone"></span>
-                    {{ this.provider.phone_number }}
+                    {{#if this.provider.phone_number }}
+                        {{ this.provider.phone_number }}
+                    {{else}}
+                        <span class="control-label" data-i18n="Service-Map.List.Unknown"></span>
+                    {{/if}}
                 </div>
                 <div class="half">
                     <span class="control-label" data-i18n="Service-Map.List.Website"></span>
-                    {{ this.provider.website }}
+                    {{#if this.provider.website }}
+                        {{ this.provider.website }}
+                    {{else}}
+                        <span class="control-label" data-i18n="Service-Map.List.Unknown"></span>
+                    {{/if}}
                 </div>
             </div>
         </div>
