@@ -1179,37 +1179,40 @@ div#search {
 	.row {
 		// height: 100%;
 	}
-    .search-result-list li {
-        padding: 10px;
+    .search-result-list {
+    	margin-top: 0;
+    	li {
+        	padding: 10px;
 
-        &:nth-child(odd) {
-            background-color: white;
-        }
-        &:nth-child(even) {
-            background-color: #F9F9FA;
-        }
-        .row {
-            padding: 10px 0px;
-        }
+	        &:nth-child(odd) {
+	            background-color: white;
+	        }
+	        &:nth-child(even) {
+	            background-color: #F9F9FA;
+	        }
+	        .row {
+	            padding: 10px 0px;
+	        }
 
-        .control-label {
-        	display: block;
-        }
+	        .control-label {
+	        	display: block;
+	        }
 
-        .name {
-            font-size: 1.2em;
-            font-weight: 600;
-        }
+	        .name {
+	            font-size: 1.2em;
+	            font-weight: 600;
+	        }
 
-        .contact,
-        .description {
-        	.row {
-        		padding: 10px 0;
-        		.half {
-        			width: 50%;
-        		}
-        	}
-        }
+	        .contact,
+	        .description {
+	        	.row {
+	        		padding: 10px 0;
+	        		.half {
+	        			width: 50%;
+	        		}
+	        	}
+	        }
+	    }
 
         .description { 
         	.row {
@@ -1246,11 +1249,16 @@ div#search {
                 .round-start;
                 .square-end;
 				margin: 0;
+			    background-image: url(../images/search-icon.png);
+			    background-image: url(../images/search-icon.svg);
+			    background-repeat: no-repeat;
+			    background-position: 95% 50%;
+			    background-size: 1.5em;
 			}
 		}
 		select#id_type.form-control {
 			height: 46px;
-			width: 36%;
+			width: 50%;
 			padding-@{end}: 6%;
 			-webkit-appearance: none;
 			-webkit-border-top-right-radius: 0;
@@ -1273,22 +1281,6 @@ div#search {
 		    @media only screen and (max-width: 600px) {
 		        padding-@{end}: 7%;
 		    }
-		}
-		button.primary-button {
-			font-size: .95em;
-		    padding: 14px 0;
-		    background-image: url(../images/search-icon.png);
-		    background-repeat: no-repeat;
-		    background-position: 50% 50%;
-		    background-size: 1.5em;
-		}
-		button.primary-button.group-submit.search {
-		    margin: 0 0 1em;
-		    width: 14%;
-		    height: 46px;
-		    text-align: center;
-            .square-start;
-            .round-end;
 		}
 	}
 }
