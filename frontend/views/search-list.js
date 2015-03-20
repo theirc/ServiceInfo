@@ -76,5 +76,10 @@ module.exports = Backbone.View.extend({
                 self.updateResults();
             })
         },
+        "input keyup": function(e) {
+            if (e.keyCode === 13) {
+                return false;
+            }
+        },
     }
 })
