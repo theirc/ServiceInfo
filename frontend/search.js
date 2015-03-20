@@ -6,13 +6,22 @@ var Backbone = require('backbone');
 
 
 var query = "";
+var searchTrigger = null;
+function delaySearchUpdate() {
+    if (searchTrigger) {
+        clearTimeout(searchTrigger);
+    }
+    searchTrigger = setTimeout(function() {
+        $('#page').trigger('search', query);
+    }, 1000);
+}
 hashtrack.onhashvarchange('q', function(_, value) {
     query = value;
-    $('#page').trigger('search', value)
+    delaySearchUpdate();
 })
 hashtrack.onhashvarchange('t', function(_, value) {
     query = value;
-    $('#page').trigger('search', value)
+    delaySearchUpdate();
 })
 
 var SearchControls = Backbone.View.extend({
@@ -25,9 +34,8 @@ var SearchControls = Backbone.View.extend({
             query: hashtrack.getVar('q'),
         });
         $el.html(html);
-        $el.i18n();
-
         search.populateServiceTypeDropdown();
+        $el.i18n();
     },
 
     events: {

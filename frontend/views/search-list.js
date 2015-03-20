@@ -28,7 +28,7 @@ module.exports = Backbone.View.extend({
     initialize: function(){
         var self = this;
         this.query = "";
-        this.render();
+        // this.render();
     },
 
     render: function() {
@@ -63,17 +63,30 @@ module.exports = Backbone.View.extend({
             var service = this;
         });
 
-        self.render();
+        self.resultView.render();
     },
 
     events: {
-        "click button[name=search]": function(e) {
+        // "click button[name=search]": function(e) {
+        //     var self = this;
+        //     hashtrack.setVar('q', self.$el.find('.query').val());
+        //     hashtrack.setVar('t', self.$el.find('.query-service-type').val());
+        //     search.refetchServices().then(function(){
+        //         self.updateResults();
+        //     })
+        // },
+        "search": function(_, query) {
             var self = this;
-            hashtrack.setVar('q', self.$el.find('.query').val());
-            hashtrack.setVar('t', self.$el.find('.query-service-type').val());
             search.refetchServices().then(function(){
                 self.updateResults();
             })
+        },
+        "input input.query": function(e) {
+            var query = $(e.target).val();
+            hashtrack.setVar('q', query);
+        },
+        "change .query-service-type": function(e) {
+            hashtrack.setVar('t', $(e.target).val());
         },
         "input keyup": function(e) {
             if (e.keyCode === 13) {

@@ -40,14 +40,14 @@ module.exports = Backbone.View.extend({
             self.map = new google.maps.Map(document.getElementById('map_canvas'),
                 mapOptions);
             search.refetchServices(self.query).then(function(){
-                self.updateMarkers();
+                self.updateResults();
             });
         }
 
         initialize();
     },
 
-    updateMarkers: function() {
+    updateResults: function() {
         var self = this;
         var bounds = new google.maps.LatLngBounds();
         var services = search.services.data();
@@ -81,7 +81,7 @@ module.exports = Backbone.View.extend({
         "search": function(_, query) {
             var self = this;
             search.refetchServices().then(function(){
-                self.updateMarkers();
+                self.updateResults();
             })
         },
         "input input.query": function(e) {
@@ -90,6 +90,11 @@ module.exports = Backbone.View.extend({
         },
         "change .query-service-type": function(e) {
             hashtrack.setVar('t', $(e.target).val());
+        },
+        "input keyup": function(e) {
+            if (e.keyCode === 13) {
+                return false;
+            }
         },
     }
 })
