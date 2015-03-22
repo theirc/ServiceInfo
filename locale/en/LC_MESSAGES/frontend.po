@@ -30,6 +30,9 @@ msgstr "Add Services"
 msgid "Menu##Service-Map"
 msgstr "Service Map"
 
+msgid "Menu##Search"
+msgstr "Search"
+
 msgid "Menu##Provider-Registration"
 msgstr "Provider Registration"
 
@@ -90,6 +93,12 @@ msgstr "Login"
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "Register to be a Service Provider here"
 
+msgid "Search-List##Page-Head##Title"
+msgstr "Service Provider Search"
+
+msgid "Search-List##Page-Head##Description"
+msgstr "Use the filtered search below to find the service that meets your needs."
+
 msgid "Service-Map##Page-Head##Page-Title##Title"
 msgstr "Service Provider Map"
 
@@ -136,28 +145,31 @@ msgid "Service-Map##List##Toggle"
 msgstr "Map View"
 
 msgid "Service-Map##List##Area"
-msgstr "Service Area:"
+msgstr "Service Area"
 
 msgid "Service-Map##List##Type"
-msgstr "Service Type:"
+msgstr "Service Type"
 
 msgid "Service-Map##List##Additional-Info"
-msgstr "Additional Provider Information:"
+msgstr "Additional Provider Information"
 
 msgid "Service-Map##List##Todays-Hours"
-msgstr "Todays Service Hours:"
+msgstr "Todays Service Hours"
 
 msgid "Service-Map##List##All-Hours"
-msgstr "Service Hours:"
+msgstr "Service Hours"
 
 msgid "Service-Map##List##Phone"
-msgstr "Phone-Number:"
+msgstr "Phone Number"
 
 msgid "Service-Map##List##Email"
-msgstr "Email-Address:"
+msgstr "Email Address"
 
 msgid "Service-Map##List##Website"
-msgstr "Website:"
+msgstr "Website"
+
+msgid "Service-Map##List##Unknown"
+msgstr "Unknown"
 
 msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
 msgstr "Remove Change"
