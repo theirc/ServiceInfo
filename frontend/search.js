@@ -4,9 +4,11 @@ var servicetype = require('./models/servicetype');
 var search_control_template = require('./templates/_search_controls.hbs');
 var Backbone = require('backbone');
 var config = require('./config');
+var messages = require('./messages');
 
 
 var query = "";
+var latlon = null;
 var searchTrigger = null;
 function delaySearchUpdate() {
     if (searchTrigger) {
@@ -23,6 +25,13 @@ hashtrack.onhashvarchange('q', function(_, value) {
 hashtrack.onhashvarchange('t', function(_, value) {
     query = value;
     delaySearchUpdate();
+})
+hashtrack.onhashvarchange('n', function(_, value) {
+    if (value) {
+        var parts = value.split(',');
+        latlon = {lat: parts[0], lon: parts[1]};
+        delaySearchUpdate();
+    }
 })
 
 var SearchControls = Backbone.View.extend({
@@ -47,6 +56,24 @@ var SearchControls = Backbone.View.extend({
         $el.html(html);
         search.populateServiceTypeDropdown();
         $el.i18n();
+
+        if (navigator.geolocation) {
+            this.findNearMe();
+        }
+    },
+    findNearMe: function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(handlePosition, handleError);
+        } else {
+            handleError();
+        }
+        function handlePosition(position) {
+            var latlon = position.coords.latitude + "," + position.coords.longitude;
+            hashtrack.setVar('n', latlon);
+        }
+        function handleError(error) {
+            messages.add(i18n.t('Global.GeolocationFailure'));
+        }
     },
 
     events: {
@@ -55,6 +82,9 @@ var SearchControls = Backbone.View.extend({
         },
         "click [name=map-toggle-map]": function() {
             hashtrack.setPath('/search/map');
+        },
+        "click .search-distance-trigger": function(e) {
+            this.findNearMe();
         },
     },
 });
@@ -89,6 +119,9 @@ module.exports = {
             search: query,
             type_numbers: type,
         };
+        if (latlon) {
+            params.closest = latlon.lat + ',' + latlon.lon;
+        }
         var services = this.services;
 
         return new Promise(function(onresolve, onerror) {

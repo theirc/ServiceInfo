@@ -1301,7 +1301,9 @@ div#search {
 }
 
 div#search-filter {
-	padding: 0;
+	padding: 10px 0 0;
+    clear: both;
+
 	.options {
 		.half {
 			width: 50%;
@@ -1320,10 +1322,15 @@ div#search-filter {
 			height: 24px;
 		}
 	}
-	a {
-		position: relative;
-		top: 20px;
-	}
+
+    .search-distance {
+        margin: 0px;
+    }
+
+    .search-area {
+        margin: 0px;
+    }
+
 	select#id_area.form-control {
 		height: 46px;
 	}
