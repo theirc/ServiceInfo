@@ -1485,7 +1485,7 @@ table when (@direction = ltr) {
 	-webkit-transform: translate(-50%, 0);
 	transform: translate(-50%, 0);
     @media only screen and (min-width: 1000px) {
-    	margin-left: 30px;
+    	margin-@{start}: 30px;
     	-webkit-transform: none;
     	transform: none;
     }
@@ -1495,7 +1495,7 @@ table when (@direction = rtl) {
 	-webkit-transform: translate(50%, 0);
 	transform: translate(50%, 0);
     @media only screen and (min-width: 1000px) {
-    	margin-right: 30px;
+    	margin-@{end}: 30px;
     	-webkit-transform: none;
     	transform: none;
   	}
