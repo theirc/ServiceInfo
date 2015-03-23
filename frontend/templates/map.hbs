@@ -9,65 +9,11 @@
 </div>
 <!-- End Page Head -->
 
-<div id="search">
+<div id="search" class="search-map">
 
 	<!-- Main Content -->
 	<div class="container">
-		<div class="row">
-			<!-- Main Search -->
-			<div class="side-section">
-				<!-- Main Search -->
-				<div class="primary-search">
-					<form>
-						<input name="filtered-search" type="text" class="query form-control group-input" data-i18n="[placeholder]Service-Map.Filtered-Search.Search-Placeholder" value="{{ query }}"></input>
-					</form>
-					<div class="form-group">
-			            <div class="form-group"><span class=error></label>
-			              <select id="id_type" name="type" class="query-service-type form-control">
-                                <option value="" data-i18n="Service-Map.Filtered-Search.Any"></option>
-                                <optgroup class="loading" data-i18n="[label]Service-Map.Filtered-Search.Loading"></optgroup>
-                                <optgroup class="type-header" style="display:none" data-i18n="[label]Service-Map.Filtered-Search.TypeHeader"><optgroup>
-			              </select>
-			            </div>
-					</div>
-					<button name="search" type="submit" class="primary-button group-submit search"></button>
-				</div>
-
-				<!-- Filter Area -->
-				<!-- <div id="search-filter">
-					<div class="options">
-						<div class="third">
-							<a data-i18n="Service-Map.Filtered-Search.Distance"></a>
-						</div>
-						<div class="two-third">
-							<div class="form-group">
-					            <label for="id_service_type" class="control-label"></span><span class=error></label>
-					            <div class="form-group">
-					              <select id="id_area" name="type" class=form-control>
-									<option value="" disabled=""><span data-i18n="Service-Map.Filtered-Search.Filter-Area"></option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-					              </select>
-					            </div>
-							</div>
-						</div>
-					</div>
-				</div> -->
-			</div>
-		</div>
-
-        <!-- Commenting out until the list view is functional -->
-		<!-- <div class="row">
-			<div class="map-toggle">
-				<div class="half">
-					<button name="map-toggle" type="toggle" class="primary-button" data-i18n="Service-Map.Map.Toggle"></button>
-				</div>
-				<div class="half">
-					<button name="map-toggle" type="toggle" class="primary-button" data-i18n="Service-Map.List.Toggle"></button>
-				</div>
-			</div>
-		</div> -->
+		<div id="search_controls"></div>
 
 		<div class="row">
             <div id="map_container">

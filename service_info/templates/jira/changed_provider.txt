@@ -1,0 +1,8 @@
+A provider has changed their data.
+
+You can view the changed data here: {{ provider_url }}
+
+Updated provider data
+---------------------
+
+{% include 'jira/provider_data.txt' with provider=provider %}

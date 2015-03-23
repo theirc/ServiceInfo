@@ -2,13 +2,13 @@ import datetime
 from unittest import mock
 
 from django.conf import settings
-from django.contrib.sites.models import Site
 from django.test import TestCase, override_settings
 from email_user.tests.factories import EmailUserFactory
 
 from ..models import JiraUpdateRecord, Service
 from ..tasks import process_jira_work
-from .factories import ServiceFactory, ProviderFactory
+from ..utils import absolute_url
+from .factories import ServiceFactory, ProviderFactory, SelectionCriterionFactory
 
 
 class JiraUpdateRecordModelTest(TestCase):
@@ -92,16 +92,17 @@ class JiraProviderChangeTest(MockJiraTestMixin, TestCase):
         self.assertEqual('', jira_record.jira_issue_key)
         issue_key = self.setup_issue_key(mock_JIRA)
         jira_record.do_jira_work()
-        site = Site.objects.get_current()
         expected_duedate = datetime.date.today() + datetime.timedelta(days=settings.JIRA_DUEIN_DAYS)
         mock_JIRA.return_value.create_issue.assert_called_with(
-            description="Details here:\nhttp://%s%s" %
-                        (site, self.test_provider.get_admin_edit_url()),
+            description=mock.ANY,
             project={'key': settings.JIRA_PROJECT_KEY},
             issuetype={'name': 'Task'},
             duedate=str(expected_duedate),
             summary="Changed provider from %s" % str(self.test_provider),
         )
+        description = mock_JIRA.return_value.create_issue.call_args[1]['description']
+        self.assertIn(absolute_url(self.test_provider.get_admin_edit_url()), description)
+        self.assertIn(self.test_provider.name_en, description)
         jira_record = JiraUpdateRecord.objects.get(pk=jira_record.pk)
         self.assertEqual(issue_key, jira_record.jira_issue_key)
 
@@ -168,7 +169,28 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         self.assertEqual(issue_key, self.jira_record.jira_issue_key)
 
     def test_create_issue_kwargs(self, mock_JIRA):
+        self.test_service.sunday_open = datetime.time(11, 10)
+        self.test_service.sunday_close = datetime.time(12, 10)
+        self.test_service.saturday_open = datetime.time(17, 18)
+        self.test_service.saturday_close = datetime.time(19, 18)
+        self.test_service.save()
+        self.test_service.provider.focal_point_phone_number = '12-345678'
+        self.test_service.provider.number_of_monthly_beneficiaries = '31415'
+        self.test_service.provider.save()
+        SelectionCriterionFactory(
+            service=self.test_service,
+            text_en="Must be 18",
+            text_ar="Must have passport",
+            text_fr="Must have transportation"
+        )
+        SelectionCriterionFactory(
+            service=self.test_service,
+            text_en="Must be 21",
+            text_ar="Must have shoes",
+            text_fr="Must be citizen"
+        )
         self.setup_issue_key(mock_JIRA)
+        self.jira_record = JiraUpdateRecord.objects.get(pk=self.jira_record.pk)
         self.jira_record.do_jira_work()
         call_args, call_kwargs = mock_JIRA.return_value.create_issue.call_args
         # Expecting: summary, project, issuetype, description, duedate
@@ -180,11 +202,16 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         self.assertTrue('issuetype' in call_kwargs)
         self.assertEqual({'name': 'Task'}, call_kwargs['issuetype'])
         self.assertTrue('description' in call_kwargs)
-        admin_url = 'http://%s%s' % (
-            Site.objects.get_current().domain, self.test_service.get_admin_edit_url())
+        admin_url = absolute_url(self.test_service.get_admin_edit_url())
         self.assertTrue(
             admin_url in call_kwargs['description'],
             msg='%s not found in %s' % (admin_url, call_kwargs['description']))
+        self.assertIn('11:10', call_kwargs['description'])
+        self.assertIn('17:18', call_kwargs['description'])
+        self.assertIn('Must be 18', call_kwargs['description'])
+        self.assertIn('Must have shoes', call_kwargs['description'])
+        self.assertIn('12-345678', call_kwargs['description'])
+        self.assertIn('31415', call_kwargs['description'])
         self.assertTrue('duedate' in call_kwargs)
         expected_duedate = datetime.date.today() + datetime.timedelta(days=settings.JIRA_DUEIN_DAYS)
         self.assertEqual(str(expected_duedate), call_kwargs['duedate'])
@@ -331,7 +358,6 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         # We add a comment with links to the old and new data
         call_args, call_kwargs = mock_JIRA.return_value.add_comment.call_args
         self.assertEqual(issue_key, call_args[0])
-        self.assertIn(draft_service.get_admin_edit_url(), call_args[1])
         self.assertIn(new_draft.get_admin_edit_url(), call_args[1])
 
 
