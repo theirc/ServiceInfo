@@ -30,8 +30,10 @@ hashtrack.onhashvarchange('n', function(_, value) {
     if (value) {
         var parts = value.split(',');
         latlon = {lat: parts[0], lon: parts[1]};
-        delaySearchUpdate();
+    } else {
+        latlon = null;
     }
+    delaySearchUpdate();
 })
 
 var SearchControls = Backbone.View.extend({
@@ -62,6 +64,7 @@ var SearchControls = Backbone.View.extend({
         }
     },
     findNearMe: function() {
+        var self = this;
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(handlePosition, handleError);
         } else {
@@ -69,11 +72,15 @@ var SearchControls = Backbone.View.extend({
         }
         function handlePosition(position) {
             var latlon = position.coords.latitude + "," + position.coords.longitude;
+            self.$el.find('[name=sort][value=near]').prop('checked', true);
             hashtrack.setVar('n', latlon);
         }
         function handleError(error) {
             messages.add(i18n.t('Global.GeolocationFailure'));
         }
+    },
+    sortByName: function() {
+        hashtrack.setVar('n', '');
     },
 
     events: {
@@ -83,7 +90,10 @@ var SearchControls = Backbone.View.extend({
         "click [name=map-toggle-map]": function() {
             hashtrack.setPath('/search/map');
         },
-        "click .search-distance-trigger": function(e) {
+        "change [value=name]": function(e) {
+            this.sortByName();
+        },
+        "change [value=near]": function(e) {
             this.findNearMe();
         },
     },

@@ -20,8 +20,10 @@
         <!-- Filter Area -->
         <div id="search-filter">
             <div class="options">
-                <div class="third search-distance">
-                    <a class="search-distance-trigger" data-i18n="Service-Map.Filtered-Search.Distance"></a>
+                <div class="row search-distance">
+                    <label data-i18n="Service-Map.Filtered-Search.Sort"></label>
+                    <input type="radio" name="sort" value="name" checked><span data-i18n="Service-Map.Filtered-Search.SortName" />
+                    <input type="radio" name="sort" value="near"><span data-i18n="Service-Map.Filtered-Search.SortNear" />
                 </div>
                 <!-- Disable until/if implemented -->
                 <!-- <div class="two-third search-area">
