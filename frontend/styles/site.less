@@ -1301,29 +1301,45 @@ div#search {
 }
 
 div#search-filter {
-	padding: 0;
+	padding: 10px 0 0;
+    clear: both;
+
 	.options {
-		.half {
-			width: 50%;
-			float: @start;
-		}
-		.third {
-			width: 33.333%;
-			float: @start;
-		}
-		.two-third {
-			width: 66.666%;
-			float: @start;
-			margin-bottom: 1em;
-		}
+		// .half {
+		// 	width: 50%;
+		// 	float: @start;
+		// }
+		// .third {
+		// 	width: 33.333%;
+		// 	float: @start;
+		// }
+		// .two-third {
+		// 	width: 66.666%;
+		// 	float: @start;
+		// 	margin-bottom: 1em;
+		// }
+        .row {
+            padding: 10px 0px;
+        }
 		select#id_area.form-control {
 			height: 24px;
 		}
 	}
-	a {
-		position: relative;
-		top: 20px;
-	}
+
+    .search-distance {
+        margin: 0px;
+        font-size: 23px;
+
+        input[type=radio] {
+            height: 23px;
+            width: 23px;
+        }
+    }
+
+    .search-area {
+        margin: 0px;
+    }
+
 	select#id_area.form-control {
 		height: 46px;
 	}

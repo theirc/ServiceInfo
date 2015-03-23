@@ -18,12 +18,15 @@
         </div>
 
         <!-- Filter Area -->
-        <!-- <div id="search-filter">
+        <div id="search-filter">
             <div class="options">
-                <div class="third">
-                    <a data-i18n="Service-Map.Filtered-Search.Distance"></a>
+                <div class="row search-distance">
+                    <label data-i18n="Service-Map.Filtered-Search.Sort"></label>
+                    <input type="radio" name="sort" value="name" checked><span data-i18n="Service-Map.Filtered-Search.SortName" />
+                    <input type="radio" name="sort" value="near"><span data-i18n="Service-Map.Filtered-Search.SortNear" />
                 </div>
-                <div class="two-third">
+                <!-- Disable until/if implemented -->
+                <!-- <div class="two-third search-area">
                     <div class="form-group">
                         <label for="id_service_type" class="control-label"></span><span class=error></label>
                         <div class="form-group">
@@ -35,9 +38,9 @@
                           </select>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
-        </div> -->
+        </div>
     </div>
 </div>
 

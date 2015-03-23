@@ -28,7 +28,8 @@
     "Wednesday": "Wednesday",
     "Thursday": "Thursday",
     "Friday": "Friday",
-    "Saturday": "Saturday"
+    "Saturday": "Saturday",
+    "GeolocationError": "Geolocation is not supported by this browser."
   },
   "Login-Form": {
     "Page-Head": {
@@ -67,7 +68,10 @@
       "Label": "Search term",
       "Submit": "Search",
       "Service-Type": "Service type",
-      "Distance": "Filter by distance",
+      "Distance": "Find Services Near Me",
+      "Sort": "Sort",
+      "SortName": "by Name",
+      "SortNear": "by Distance From Me",
       "Area": "Area",
       "Filter-Area": "Filter by area",
       "Filter-By-Area": "Filter your search by area",
