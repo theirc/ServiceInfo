@@ -1366,6 +1366,16 @@ div#search-filter {
     }
 }
 
+.main-content-service-list {
+	padding: 0 10px;
+	@media only screen and (min-width: 1000px) {
+		padding: 0 30px;
+	}
+	.third {
+		padding: 0;
+	}
+}
+
 #service-map {
 	.map {
 		width: 100%;
@@ -1575,14 +1585,24 @@ Table
 */
 
 table when (@direction = ltr) {
-  margin: 0 0 0 50%;
-  -webkit-transform: translate(-50%, 0);
-  transform: translate(-50%, 0);
+	margin: 0 0 0 50%;
+	-webkit-transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
+    @media only screen and (min-width: 1000px) {
+    	margin-@{start}: 30px;
+    	-webkit-transform: none;
+    	transform: none;
+    }
 }
 table when (@direction = rtl) {
-  margin: 0 50% 0 0;
-  -webkit-transform: translate(50%, 0);
-  transform: translate(50%, 0);
+	margin: 0 50% 0 0;
+	-webkit-transform: translate(50%, 0);
+	transform: translate(50%, 0);
+    @media only screen and (min-width: 1000px) {
+    	margin-@{end}: 30px;
+    	-webkit-transform: none;
+    	transform: none;
+  	}
 }
 table#service-status span.update::before when (@direction = ltr) {
   content: "\2937";  // ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS
@@ -1684,6 +1704,7 @@ table {
 			border: none;
 			position: relative;
 			border-bottom: 1px solid #DDD;
+            padding: 12px;
             padding-@{start}: 1em;
 		}
 
@@ -1691,7 +1712,7 @@ table {
 			position: absolute;
 			top: 0;
 			@{start}: 0;
-			padding: 8px;
+			padding: 12px;
 			padding-@{start}: 37%;
 			padding-@{end}: 10px;
 			font-weight: bold;
@@ -1827,6 +1848,13 @@ Service-Detail
 }
 
 .servicetype-icon {
-    width: 32px;
-    height: 32px;
+    width: 26px;
+    height: 26px;
+    vertical-align: top;
+    position: relative;
+    top: -3px;
+    @media only screen and (min-width: 640px) {
+        top: 0;
+        vertical-align: middle;
+    }
 }
