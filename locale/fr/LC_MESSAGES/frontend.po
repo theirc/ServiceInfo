@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-03-11 14:54+0000\n"
+"PO-Revision-Date: 2015-03-23 07:06+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -37,6 +37,9 @@ msgstr "Ajouter des services"
 msgid "Menu##Service-Map"
 msgstr "Service Map"
 
+msgid "Menu##Search"
+msgstr "Recherche"
+
 msgid "Menu##Provider-Registration"
 msgstr "Inscription des fournisseurs"
 
@@ -54,6 +57,9 @@ msgstr "Il y avait une erreur inconnue soumettant votre formulaire."
 
 msgid "Global##UnknownError"
 msgstr "Il y avait une erreur inconnue."
+
+msgid "Global##FormValidationError"
+msgstr "Se il vous plaît corriger les erreurs sur la forme."
 
 msgid "Global##Sunday"
 msgstr "Dimanche"
@@ -93,6 +99,84 @@ msgstr "Entrer"
 
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "Inscrivez-vous pour être un fournisseur de service ici"
+
+msgid "Search-List##Page-Head##Title"
+msgstr "Recherche fournisseur des services"
+
+msgid "Search-List##Page-Head##Description"
+msgstr "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
+
+msgid "Service-Map##Page-Head##Page-Title##Title"
+msgstr "Cart de fournisseur des services"
+
+msgid "Service-Map##Page-Head##Page-Description##Page-Description"
+msgstr "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
+
+msgid "Service-Map##Filtered-Search##Label"
+msgstr "Le terme de recherche"
+
+msgid "Service-Map##Filtered-Search##Submit"
+msgstr "Recherche"
+
+msgid "Service-Map##Filtered-Search##Service-Type"
+msgstr "type de service"
+
+msgid "Service-Map##Filtered-Search##Distance"
+msgstr "Filtrer par la distance"
+
+msgid "Service-Map##Filtered-Search##Area"
+msgstr "zone"
+
+msgid "Service-Map##Filtered-Search##Filter-Area"
+msgstr "Filtrer par zone"
+
+msgid "Service-Map##Filtered-Search##Filter-By-Area"
+msgstr "Filtrez votre recherche par zone"
+
+msgid "Service-Map##Filtered-Search##Search-Placeholder"
+msgstr "Je recherche ..."
+
+msgid "Service-Map##Filtered-Search##Loading"
+msgstr "Chargement Type de service Filtres ..."
+
+msgid "Service-Map##Filtered-Search##TypeHeader"
+msgstr "Filtrer par un type de service"
+
+msgid "Service-Map##Filtered-Search##Any"
+msgstr "Tout"
+
+msgid "Service-Map##Map##Toggle"
+msgstr "liste Voir"
+
+msgid "Service-Map##List##Toggle"
+msgstr "Voir la carte"
+
+msgid "Service-Map##List##Area"
+msgstr "Zone de service"
+
+msgid "Service-Map##List##Type"
+msgstr "Type de service"
+
+msgid "Service-Map##List##Additional-Info"
+msgstr "Informations supplémentaires sur le fournisseur"
+
+msgid "Service-Map##List##Todays-Hours"
+msgstr "Heures de service d'aujourd'hui"
+
+msgid "Service-Map##List##All-Hours"
+msgstr "Heures de service"
+
+msgid "Service-Map##List##Phone"
+msgstr "Numéro de téléphone"
+
+msgid "Service-Map##List##Email"
+msgstr "Adresse e-mail"
+
+msgid "Service-Map##List##Website"
+msgstr "Site Web"
+
+msgid "Service-Map##List##Unknown"
+msgstr "inconnu"
 
 msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
 msgstr "Retirer Change"
@@ -188,6 +272,9 @@ msgstr "Détails de base d'enregistrement d'un fournisseur de service:"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Name"
 msgstr "Nom du fournisseur de service"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Name"
+msgstr "Nom du Point Focal"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
 msgstr "Mot de passe"
 
@@ -203,6 +290,10 @@ msgstr "Choisissez un type de fournisseur"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
 msgstr "Numéro de téléphone (NN-NNNNNN)"
 
+msgid ""
+"Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Phone-Number"
+msgstr "Numéro de téléphone (NN-NNNNNN) du Point Focal"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
 msgstr "Email"
 
@@ -217,6 +308,9 @@ msgstr "Nombre de bénéficiaires mensuelles"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Description"
 msgstr "Description"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Address"
+msgstr "Adresse"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Legend"
 msgstr "Informations sur le service"
@@ -397,9 +491,3 @@ msgstr "Entrez votre nouveau mot de passe:"
 
 msgid "Password-Reset-Form##Submit-Options##Submit"
 msgstr "Soumettre"
-
-msgid "Map##Loading"
-msgstr "Chargement Type de service Filtres ..."
-
-msgid "Map##TypeHeader"
-msgstr "Filtrer par un type de service"

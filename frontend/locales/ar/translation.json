@@ -12,6 +12,7 @@
         "Services": "الخدمات",
         "Add-Services": "إضافة خدمات",
         "Service-Map": "خدمة خريطة",
+        "Search": "بحث",
         "Provider-Registration": "التسجيل مزود",
         "Feedback-Tool": "ردود الفعل أداة",
         "Change-Language": "تغيير اللغة"
@@ -20,6 +21,7 @@
         "Admin": "المشرف",
         "FormSubmissionError": "كان هناك خطأ غير معروف تقديم النموذج الخاص بك.",
         "UnknownError": "كان هناك خطأ غير معروف.",
+        "FormValidationError": "يرجى تصحيح الأخطاء في النموذج.",
         "Sunday": "الأحد",
         "Monday": "الإثنين",
         "Tuesday": "الثلاثاء",
@@ -44,6 +46,50 @@
         "Form-Submit-Options": {
             "Submit": "تسجيل الدخول",
             "Register": "سجل لتكون مقدم خدمات هنا"
+        }
+    },
+    "Search-List": {
+        "Page-Head": {
+            "Title": "بحث عن مزود الخدمات ",
+            "Description": "إستخدم البحث أدناه للعصور على الخدمة التي تريدها."
+        }
+    },
+    "Service-Map": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "خريطة مزودي الخدمات "
+            },
+            "Page-Description": {
+                "Page-Description": "إستخدم البحث أدناه للعصور على الخدمة التي تريدها."
+            }
+        },
+        "Filtered-Search": {
+            "Label": "مصطلح البحث",
+            "Submit": "بحث",
+            "Service-Type": "نوع الخدمة",
+            "Distance": "صنف حسب المسافة ",
+            "Area": "منطقة",
+            "Filter-Area": "صنف حسب المنطقة ",
+            "Filter-By-Area": "صنف حسب المنطقة ",
+            "Search-Placeholder": "انني ابحث على...",
+            "Loading": "تحميل أنواع اخدمات التي ادخلتها ",
+            "TypeHeader": "صنف حسب نوع الخدمة ",
+            "Any": "أي"
+        },
+        "Map": {
+            "Toggle": "عرض قائمة"
+        },
+        "List": {
+            "Toggle": "عرض على الخريطة",
+            "Area": "منطقة الخدمة ",
+            "Type": "نوع الخدمة",
+            "Additional-Info": "معلومات إضافية عن المزود ",
+            "Todays-Hours": "ساعات الخدمة اليوم",
+            "All-Hours": "ساعات العمل",
+            "Phone": "رقم الهاتف",
+            "Email": "البريد الإلكتروني",
+            "Website": "الموقع",
+            "Unknown": "غير معروف"
         }
     },
     "Service-Remove-Change": {
@@ -110,16 +156,19 @@
             "Basic": {
                 "Legend": "التفاصيل الأساسية لتسجيل مزود خدمات:",
                 "Name": "اسم مقدم الخدمة",
+                "Focal-Point-Name": "اسم الشخص الذي يمكن الاتصال به",
                 "Password": "كلمة السر",
                 "PasswordConfirm": "تأكيد كلمة المرور",
                 "Provider-Type": "نوع مزود",
                 "Provider-Type-Choose": "اختر نوع مزود",
                 "Phone-Number": "رقم الهاتف (رر-رررررر)",
+                "Focal-Point-Phone-Number": "رقم الهاتف (رر-رررررر)",
                 "Email": "البريد الإلكتروني",
                 "EmailPlaceholder": "أدخل البريد الإلكتروني الخاص بك",
                 "Website": "رابط الموقع (حقل اختياري)",
                 "MonthlyBeneficiaries": "عدد المستفيدين شهرياَ",
-                "Description": "توصيف "
+                "Description": "توصيف ",
+                "Address": "العنوان"
             },
             "Service-Information": {
                 "Legend": "معلومات عن الخدمة",
@@ -255,9 +304,5 @@
         "Submit-Options": {
             "Submit": "إرسال الأجوبة"
         }
-    },
-    "Map": {
-        "Loading": "تحميل أنواع اخدمات التي ادخلتها ",
-        "TypeHeader": "صنف حسب نوع الخدمة "
     }
 }

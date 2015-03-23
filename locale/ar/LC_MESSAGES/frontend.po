@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-03-11 14:50+0000\n"
+"PO-Revision-Date: 2015-03-23 06:50+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -37,6 +37,9 @@ msgstr "إضافة خدمات"
 msgid "Menu##Service-Map"
 msgstr "خدمة خريطة"
 
+msgid "Menu##Search"
+msgstr "بحث"
+
 msgid "Menu##Provider-Registration"
 msgstr "التسجيل مزود"
 
@@ -54,6 +57,9 @@ msgstr "كان هناك خطأ غير معروف تقديم النموذج ال�
 
 msgid "Global##UnknownError"
 msgstr "كان هناك خطأ غير معروف."
+
+msgid "Global##FormValidationError"
+msgstr "يرجى تصحيح الأخطاء في النموذج."
 
 msgid "Global##Sunday"
 msgstr "الأحد"
@@ -93,6 +99,84 @@ msgstr "تسجيل الدخول"
 
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "سجل لتكون مقدم خدمات هنا"
+
+msgid "Search-List##Page-Head##Title"
+msgstr "بحث عن مزود الخدمات "
+
+msgid "Search-List##Page-Head##Description"
+msgstr "إستخدم البحث أدناه للعصور على الخدمة التي تريدها."
+
+msgid "Service-Map##Page-Head##Page-Title##Title"
+msgstr "خريطة مزودي الخدمات "
+
+msgid "Service-Map##Page-Head##Page-Description##Page-Description"
+msgstr "إستخدم البحث أدناه للعصور على الخدمة التي تريدها."
+
+msgid "Service-Map##Filtered-Search##Label"
+msgstr "مصطلح البحث"
+
+msgid "Service-Map##Filtered-Search##Submit"
+msgstr "بحث"
+
+msgid "Service-Map##Filtered-Search##Service-Type"
+msgstr "نوع الخدمة"
+
+msgid "Service-Map##Filtered-Search##Distance"
+msgstr "صنف حسب المسافة "
+
+msgid "Service-Map##Filtered-Search##Area"
+msgstr "منطقة"
+
+msgid "Service-Map##Filtered-Search##Filter-Area"
+msgstr "صنف حسب المنطقة "
+
+msgid "Service-Map##Filtered-Search##Filter-By-Area"
+msgstr "صنف حسب المنطقة "
+
+msgid "Service-Map##Filtered-Search##Search-Placeholder"
+msgstr "انني ابحث على..."
+
+msgid "Service-Map##Filtered-Search##Loading"
+msgstr "تحميل أنواع اخدمات التي ادخلتها "
+
+msgid "Service-Map##Filtered-Search##TypeHeader"
+msgstr "صنف حسب نوع الخدمة "
+
+msgid "Service-Map##Filtered-Search##Any"
+msgstr "أي"
+
+msgid "Service-Map##Map##Toggle"
+msgstr "عرض قائمة"
+
+msgid "Service-Map##List##Toggle"
+msgstr "عرض على الخريطة"
+
+msgid "Service-Map##List##Area"
+msgstr "منطقة الخدمة "
+
+msgid "Service-Map##List##Type"
+msgstr "نوع الخدمة"
+
+msgid "Service-Map##List##Additional-Info"
+msgstr "معلومات إضافية عن المزود "
+
+msgid "Service-Map##List##Todays-Hours"
+msgstr "ساعات الخدمة اليوم"
+
+msgid "Service-Map##List##All-Hours"
+msgstr "ساعات العمل"
+
+msgid "Service-Map##List##Phone"
+msgstr "رقم الهاتف"
+
+msgid "Service-Map##List##Email"
+msgstr "البريد الإلكتروني"
+
+msgid "Service-Map##List##Website"
+msgstr "الموقع"
+
+msgid "Service-Map##List##Unknown"
+msgstr "غير معروف"
 
 msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
 msgstr "إزالة تغيير"
@@ -188,6 +272,9 @@ msgstr "التفاصيل الأساسية لتسجيل مزود خدمات:"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Name"
 msgstr "اسم مقدم الخدمة"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Name"
+msgstr "اسم الشخص الذي يمكن الاتصال به"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
 msgstr "كلمة السر"
 
@@ -201,6 +288,10 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
 msgstr "اختر نوع مزود"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
+msgstr "رقم الهاتف (رر-رررررر)"
+
+msgid ""
+"Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Phone-Number"
 msgstr "رقم الهاتف (رر-رررررر)"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
@@ -217,6 +308,9 @@ msgstr "عدد المستفيدين شهرياَ"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Description"
 msgstr "توصيف "
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Address"
+msgstr "العنوان"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Legend"
 msgstr "معلومات عن الخدمة"
@@ -397,9 +491,3 @@ msgstr "أدخل كلمة المرور الجديدة:"
 
 msgid "Password-Reset-Form##Submit-Options##Submit"
 msgstr "إرسال الأجوبة"
-
-msgid "Map##Loading"
-msgstr "تحميل أنواع اخدمات التي ادخلتها "
-
-msgid "Map##TypeHeader"
-msgstr "صنف حسب نوع الخدمة "
