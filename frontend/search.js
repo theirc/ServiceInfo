@@ -56,7 +56,7 @@ var SearchControls = Backbone.View.extend({
             query: hashtrack.getVar('q'),
         });
         $el.html(html);
-        search.populateServiceTypeDropdown();
+        module.exports.populateServiceTypeDropdown();
         $el.i18n();
 
         if (navigator.geolocation) {

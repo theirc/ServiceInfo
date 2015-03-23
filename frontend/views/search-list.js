@@ -1,6 +1,6 @@
 var Backbone = require('backbone'),
     template = require("../templates/search-list.hbs"),
-    result_template = require('../templates/_results_template.hbs')
+    result_template = require('../templates/_results_template.hbs'),
     service = require('../models/service'),
     servicetype = require('../models/servicetype'),
     hashtrack = require('hashtrack'),

@@ -1,7 +1,6 @@
 var $ = require('jquery');
 var Backbone = require('backbone');
 Backbone.$ = require('jquery');
-var handlebars = require('handlebars');
 var underscore = require('underscore');
 var config = require('./config');
 var api = require('./api');
@@ -19,10 +18,6 @@ window.require = require;
 
 var Router = require('./router');
 var router = new Router();
-
-handlebars.registerHelper('toLowerCase', function(str) {
-  return str.toLowerCase();
-});
 
 $('body').on("click", ".back-button", function (event) {
     event.preventDefault();
