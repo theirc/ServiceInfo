@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="row">
 		<div class="name">{{ service.name }}</div>
-		<div class="description">{{ service.description }}</div>
+		<div class="description">{{multiline service.description }}</div>
 		{{#if mapURL}}
 			<div id="static-map">
 				<div class="map">
@@ -91,7 +91,7 @@
 			<div class="row">
 				{{#if service.additional_info }}
 					<span class="control-label" data-i18n="Service-Map.List.Additional-Info"></span>
-					<p>{{ service.additional_info }}</p>
+					<p>{{multiline service.additional_info }}</p>
 				{{/if}}
 			</div>
 		</div>
