@@ -1,0 +1,52 @@
+{{#each services }}
+    <li>
+        <div class="name">
+            <div class=row>
+                <div class=half>
+                    <a href="#/service/{{ this.id }}">{{ this.name }}</a>
+                </div>
+                <div class="half servicetype">
+                    {{# if this.servicetype.icon_url }}<img class="servicetype-icon" src="{{ this.servicetype.icon_url }}"/>{{/if}}
+                    {{ this.servicetype.name }}
+                </div>
+            </div>
+        </div>
+        <div class="area">
+            <span class="control-label" data-i18n="Service-Map.List.Area"></span>
+            {{ this.servicearea.name }}
+        </div>
+        <div class="hours control-label">
+            <span class="control-label" data-i18n="Service-Map.List.Todays-Hours"></span>
+            {{#if this.today_open}}
+                {{ this.today_open }} - {{ this.today_close }}
+            {{else}}
+                <span data-i18n="Service-Map.List.Unknown"></span>
+            {{/if}}
+        </div>
+        <div class="contact">
+            <div class="row">
+                <div class="half">
+                    <span class="control-label" data-i18n="Service-Map.List.Phone"></span>
+                    {{#if this.provider.phone_number }}
+                        {{ this.provider.phone_number }}
+                    {{else}}
+                        <span data-i18n="Service-Map.List.Unknown"></span>
+                    {{/if}}
+                </div>
+                <div class="half">
+                    <span class="control-label" data-i18n="Service-Map.List.Website"></span>
+                    {{#if this.provider.website }}
+                        <a href="{{ this.provider.website }}" dir=ltr>{{ this.provider.website }}</a>
+                    {{else}}
+                        <span data-i18n="Service-Map.List.Unknown"></span>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        <div class="description">
+            <div class="row">
+                <p>{{multiline this.description }}</p>
+            </div>
+        </div>
+    </li>
+{{/each}}

@@ -19,7 +19,7 @@ class ServiceApprovalEmailTaskTest(TestCase):
         with patch('email_user.models.EmailUser.send_email_to_user') as mock_send:
             email_provider_about_service_approval_task(self.service.pk)
         site = Site.objects.get_current()
-        expected_link = 'http://%s/app/#/service/%d' % (site, self.service.pk)
+        expected_link = 'http://%s/app/#/manage/service/%d' % (site, self.service.pk)
         mock_send.assert_called_with(
             {
                 'site': site,
