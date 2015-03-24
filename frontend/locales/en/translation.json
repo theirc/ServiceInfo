@@ -86,6 +86,7 @@
       "Area": "Service Area",
       "Type": "Service Type",
       "Additional-Info": "Additional Provider Information",
+      "Cost": "Cost",
       "Todays-Hours": "Todays Service Hours",
       "All-Hours": "Service Hours",
       "Phone": "Phone Number",
