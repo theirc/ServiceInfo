@@ -63,7 +63,15 @@ module.exports = Backbone.View.extend({
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     title: this.name,
+                    icon: new google.maps.MarkerImage(
+                        this.servicetype.icon_url,
+                        null,
+                        null,
+                        new google.maps.Point(12, 12),
+                        new google.maps.Size(24, 24)
+                    ),
                 });
+                window.marker = marker;
                 marker.setMap(self.map);
                 google.maps.event.addListener(marker, 'click', function() {
                     location.hash = '#/service/' + service.id;

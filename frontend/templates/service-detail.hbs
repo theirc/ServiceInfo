@@ -3,7 +3,10 @@
 <!-- Main Content -->
 <div class="container">
 	<div class="row">
-		<div class="name">{{ service.name }}</div>
+		<div class="name">
+			{{# if service.servicetype.icon_url }}<img class="servicetype-icon" src="{{ service.servicetype.icon_url }}"/>{{/if}}
+			{{ service.name }}
+		</div>
 		<div class="description">{{multiline service.description }}</div>
 		{{#if mapURL}}
 			<div id="static-map">
