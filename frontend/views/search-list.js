@@ -12,14 +12,26 @@ var Backbone = require('backbone'),
 var SearchResultList = Backbone.View.extend({
     render: function() {
         var $el = this.$el;
-        search.refetchServices().then(function(){
+        var self = this;
+        search.refetchServices().then(renderResults)
+
+        config.change("forever.language", function() {
+            var detached = $el.closest('html').length === 0;
+            if (detached) {
+                config.unbind("forever.language", arguments.callee);
+            } else {
+                renderResults();
+            }
+        });
+
+        function renderResults() {
             var $el = $('.search-result-list');
             var html = result_template({
                 services: search.services.data(),
             })
             $el.html(html);
             $el.i18n();
-        })
+        }
     },
 });
 
