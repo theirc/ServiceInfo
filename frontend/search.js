@@ -4,9 +4,11 @@ var servicetype = require('./models/servicetype');
 var search_control_template = require('./templates/_search_controls.hbs');
 var Backbone = require('backbone');
 var config = require('./config');
+var messages = require('./messages');
 
 
 var query = "";
+var latlon = null;
 var searchTrigger = null;
 function delaySearchUpdate() {
     if (searchTrigger) {
@@ -22,6 +24,15 @@ hashtrack.onhashvarchange('q', function(_, value) {
 })
 hashtrack.onhashvarchange('t', function(_, value) {
     query = value;
+    delaySearchUpdate();
+})
+hashtrack.onhashvarchange('n', function(_, value) {
+    if (value) {
+        var parts = value.split(',');
+        latlon = {lat: parts[0], lon: parts[1]};
+    } else {
+        latlon = null;
+    }
     delaySearchUpdate();
 })
 
@@ -45,8 +56,31 @@ var SearchControls = Backbone.View.extend({
             query: hashtrack.getVar('q'),
         });
         $el.html(html);
-        search.populateServiceTypeDropdown();
+        module.exports.populateServiceTypeDropdown();
         $el.i18n();
+
+        if (navigator.geolocation) {
+            this.findNearMe();
+        }
+    },
+    findNearMe: function() {
+        var self = this;
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(handlePosition, handleError);
+        } else {
+            handleError();
+        }
+        function handlePosition(position) {
+            var latlon = position.coords.latitude + "," + position.coords.longitude;
+            self.$el.find('[name=sort][value=near]').prop('checked', true);
+            hashtrack.setVar('n', latlon);
+        }
+        function handleError(error) {
+            messages.add(i18n.t('Global.GeolocationFailure'));
+        }
+    },
+    sortByName: function() {
+        hashtrack.setVar('n', '');
     },
 
     events: {
@@ -55,6 +89,12 @@ var SearchControls = Backbone.View.extend({
         },
         "click [name=map-toggle-map]": function() {
             hashtrack.setPath('/search/map');
+        },
+        "change [value=name]": function(e) {
+            this.sortByName();
+        },
+        "change [value=near]": function(e) {
+            this.findNearMe();
         },
     },
 });
@@ -89,6 +129,9 @@ module.exports = {
             search: query,
             type_numbers: type,
         };
+        if (latlon) {
+            params.closest = latlon.lat + ',' + latlon.lon;
+        }
         var services = this.services;
 
         return new Promise(function(onresolve, onerror) {
