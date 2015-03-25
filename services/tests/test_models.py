@@ -145,16 +145,11 @@ class FeedbackTest(TestCase):
         feedback = FeedbackFactory()
         feedback.full_clean()
 
-    def test_delivered_but_no_wait_time(self):
-        feedback = FeedbackFactory(delivered=True, wait_time=None)
+    def test_delivered_but_some_required_fields_missing(self):
+        feedback = FeedbackFactory(delivered=True, wait_time=None, wait_time_satisfaction=None)
         with self.assertRaises(ValidationError) as e:
             feedback.full_clean()
         self.assertIn('wait_time', e.exception.message_dict)
-
-    def test_delivered_but_no_wait_satisfaction(self):
-        feedback = FeedbackFactory(delivered=True, wait_time_satisfaction=None)
-        with self.assertRaises(ValidationError) as e:
-            feedback.full_clean()
         self.assertIn('wait_time_satisfaction', e.exception.message_dict)
 
     def test_other_difficulties(self):

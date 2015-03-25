@@ -871,6 +871,9 @@ class Nationality(NameInCurrentLanguageMixin, models.Model):
         blank=True,
     )
 
+    def get_api_url(self):
+        return reverse('nationality-detail', args=[self.id])
+
 
 class Feedback(models.Model):
     # About the user
