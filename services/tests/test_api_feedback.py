@@ -45,6 +45,5 @@ class NationalityTest(TestCase):
     def test_nationalities(self):
         # Get list of nationalities
         url = reverse('nationality-list')
-        print(url)
         rsp = self.client.get(url)
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))

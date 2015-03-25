@@ -26,6 +26,7 @@ class ProviderTypeAdmin(admin.ModelAdmin):
 class NationalityAdmin(admin.ModelAdmin):
     pass
 
+
 class ServiceTypeAdmin(admin.ModelAdmin):
     list_display = ['number',
                     'name_en', 'name_ar', 'name_fr',
