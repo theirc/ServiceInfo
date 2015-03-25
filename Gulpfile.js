@@ -56,11 +56,28 @@ gulp.task('compile_less', function (cb) {
 });
 
 gulp.task('browserify', function(cb) {
+    /* When the templates compile themselves, have them use our
+       own 'compiler' module so we can register some helpers on it
+       first:
+     */
+    var hbsfy = require('hbsfy').configure({
+        compiler: "require('../compiler')",
+        extensions: ['hbs'],
+        precompilerOptions: {
+            knownHelpersOnly: true,
+            knownHelpers: {
+                multiline: true,
+                toLowerCase: true
+            },
+            strict: true
+        }
+    });
+
     gulp.src('frontend/index.js')
         .pipe(browserify({
             insertGlobals : true,
             debug : options.config !== 'production',
-            transform: ['hbsfy']
+            transform: [hbsfy]
         }))
         .pipe(rename('bundle.js'))
         .pipe(gulp.dest('frontend'))
