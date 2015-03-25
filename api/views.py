@@ -15,16 +15,17 @@ from rest_framework.exceptions import ValidationError as DRFValidationError, Per
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.viewsets import GenericViewSet
 
 from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, ProviderSerializer, \
     ProviderTypeSerializer, ServiceAreaSerializer, APILoginSerializer, APIActivationSerializer, \
     PasswordResetRequestSerializer, PasswordResetCheckSerializer, PasswordResetSerializer, \
     ResendActivationLinkSerializer, CreateProviderSerializer, ServiceTypeSerializer, \
     SelectionCriterionSerializer, LanguageSerializer, ServiceSearchSerializer, \
-    ProviderFetchSerializer
+    ProviderFetchSerializer, FeedbackSerializer, NationalitySerializer
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
-    SelectionCriterion
+    SelectionCriterion, Feedback, Nationality
 
 
 class TranslatedViewMixin(object):
@@ -50,6 +51,13 @@ class ServiceInfoAPIView(TranslatedViewMixin, APIView):
 
 class ServiceInfoModelViewSet(TranslatedViewMixin, viewsets.ModelViewSet):
     pass
+
+
+class FeedbackViewSet(mixins.CreateModelMixin, GenericViewSet):
+    """A write-only viewset for feedback"""
+    permission_classes = [AllowAny]
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
 
 
 class LanguageView(ServiceInfoAPIView):
@@ -94,6 +102,17 @@ class GroupViewSet(ServiceInfoModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+
+class NationalityViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
+                         ServiceInfoGenericViewSet):
+    """
+    Read-only API for nationality. You can list them or get one, but
+    cannot add, change, or delete them.
+    """
+    permission_classes = [AllowAny]
+    queryset = Nationality.objects.all()
+    serializer_class = NationalitySerializer
 
 
 class ServiceAreaViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,

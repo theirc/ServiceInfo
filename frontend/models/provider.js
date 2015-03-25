@@ -9,6 +9,7 @@ var Provider = _base.BaseModel.extend({
     },
 })
 
+var _providerCache = {};
 var Providers = _base.BaseCollection.extend({
     model: Provider,
 })
@@ -16,4 +17,21 @@ var Providers = _base.BaseCollection.extend({
 module.exports = {
     Provider: Provider,
     Providers: Providers,
+
+    fetchAndCache: function(url) {
+        if (_providerCache[url]) {
+            provider = _providerCache[url];
+            return new Promise(function(resolve, error) {
+                resolve(provider);
+            });
+        } else {
+            var provider = new Provider({url: url});
+            return new Promise(function(resolve, error) {
+                _providerCache[url] = provider;
+                provider.fetch().then(function() {
+                    resolve(provider);
+                }, error);
+            });
+        }
+    },
 };
