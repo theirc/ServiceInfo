@@ -5,7 +5,8 @@ var Backbone = require('backbone'),
     servicetype = require('../models/servicetype'),
     hashtrack = require('hashtrack'),
     i18n = require('i18next-client'),
-    search = require('../search')
+    search = require('../search'),
+    config = require('../config')
 ;
 
 
