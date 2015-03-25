@@ -1,0 +1,33 @@
+Administer:            {{ provider_url }}
+
+Name (en):             {{ provider.name_en }}
+Name (ar):             {{ provider.name_ar }}
+Name (fr):             {{ provider.name_fr }}
+Type:                  {{ provider.type.name_en }}
+Phone:                 {{ provider.phone_number }}
+Web:                   {{ provider.website }}
+Email:                 {{ provider.user.email }}
+Monthly beneficiaries: {{ provider.number_of_monthly_beneficiaries }}
+Focal point (en):      {{ provider.focal_point_name_en }}
+Focal point (ar):      {{ provider.focal_point_name_ar }}
+Focal point (fr):      {{ provider.focal_point_name_fr }}
+Focal point phone:     {{ provider.focal_point_phone_number }}
+
+Description (en):
+{{ provider.description_en }}
+
+Description (ar):
+{{ provider.description_ar }}
+
+Description (fr):
+{{ provider.description_fr }}
+
+Address (en):
+{{ provider.address_en }}
+
+Address (ar):
+{{ provider.address_ar }}
+
+Address (fr):
+{{ provider.address_fr }}
+

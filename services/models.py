@@ -1,5 +1,4 @@
 from collections import defaultdict
-from textwrap import dedent
 from django.conf import settings
 from django.contrib.gis.db import models
 from django.contrib.sites.models import Site
@@ -7,10 +6,12 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.core.validators import MinValueValidator, MaxValueValidator, RegexValidator
 from django.db.transaction import atomic
+from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _, get_language
 
 from . import jira_support
 from .tasks import email_provider_about_service_approval_task
+from .utils import absolute_url
 
 
 class NameInCurrentLanguageMixin(object):
@@ -52,6 +53,7 @@ class ProviderType(NameInCurrentLanguageMixin, models.Model):
         return self.name
 
     def get_api_url(self):
+        """Return the PATH part of the URL to access this object using the API"""
         return reverse('providertype-detail', args=[self.id])
 
 
@@ -179,9 +181,11 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
         return self.name_en
 
     def get_api_url(self):
+        """Return the PATH part of the URL to access this object using the API"""
         return reverse('provider-detail', args=[self.id])
 
     def get_fetch_url(self):
+        """Return the PATH part of the URL to fetch this object using the API"""
         return reverse('provider-fetch', args=[self.id])
 
     def notify_jira_of_change(self):
@@ -191,6 +195,7 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
         )
 
     def get_admin_edit_url(self):
+        """Return the PATH part of the URL to edit this object in the admin"""
         return reverse('admin:services_provider_change', args=[self.id])
 
 
@@ -323,6 +328,7 @@ class ServiceType(NameInCurrentLanguageMixin, models.Model):
         return reverse('servicetype-detail', args=[self.id])
 
     def get_icon_url(self):
+        """Return URL PATH of the icon image for this record"""
         # For convenience of serializers
         if self.icon:
             return self.icon.url
@@ -749,6 +755,8 @@ class JiraUpdateRecord(models.Model):
 
             if self.update_type in JiraUpdateRecord.NEW_JIRA_RECORD_UPDATE_TYPES:
                 kwargs = jira_support.default_newissue_kwargs()
+                service = None
+                service_url = None
                 change_type = {
                     JiraUpdateRecord.NEW_SERVICE: 'New service',
                     JiraUpdateRecord.CHANGE_SERVICE: 'Changed service',
@@ -756,14 +764,29 @@ class JiraUpdateRecord(models.Model):
                     JiraUpdateRecord.PROVIDER_CHANGE: 'Changed provider',
                 }[self.update_type]
                 if self.update_type in JiraUpdateRecord.SERVICE_CHANGE_UPDATE_TYPES:
-                    url = self.service.get_admin_edit_url()
+                    service = self.service
+                    service_url = absolute_url(service.get_admin_edit_url())
                     provider = self.service.provider
                 elif self.update_type in self.PROVIDER_CHANGE_UPDATE_TYPES:
-                    url = self.provider.get_admin_edit_url()
                     provider = self.provider
                 kwargs['summary'] = '%s from %s' % (change_type, provider)
-                kwargs['description'] = 'Details here:\nhttp://%s%s' % (
-                    Site.objects.get_current(), url)
+                template_name = {
+                    JiraUpdateRecord.NEW_SERVICE: 'jira/new_service.txt',
+                    JiraUpdateRecord.CHANGE_SERVICE: 'jira/changed_service.txt',
+                    JiraUpdateRecord.CANCEL_CURRENT_SERVICE: 'jira/canceled_service.txt',
+                    JiraUpdateRecord.PROVIDER_CHANGE: 'jira/changed_provider.txt',
+                }[self.update_type]
+                context = {
+                    'site': Site.objects.get_current(),
+                    'provider': provider,
+                    'provider_url': absolute_url(provider.get_admin_edit_url()),
+                    'service': service,
+                    'service_url': service_url,
+                }
+                if service and service.update_of:
+                    context['service_parent_url'] = \
+                        absolute_url(service.update_of.get_admin_edit_url())
+                kwargs['description'] = render_to_string(template_name, context)
                 new_issue = jira.create_issue(**kwargs)
                 self.jira_issue_key = new_issue.key
                 self.save()
@@ -772,15 +795,11 @@ class JiraUpdateRecord(models.Model):
                 # can comment on it.
                 previous_record = JiraUpdateRecord.objects.get(service=self.superseded_draft)
                 issue_key = previous_record.jira_issue_key
-                link1 = 'http://%s%s' % (Site.objects.get_current(),
-                                         self.superseded_draft.get_admin_edit_url())
-                link2 = 'http://%s%s' % (Site.objects.get_current(),
-                                         self.service.get_admin_edit_url())
-                comment = dedent("""
-                   The provider has updated a new service or a change that was still under review.
-                   The previous data was at %s.
-                   The new data is at %s.
-                """ % (link1, link2))
+                context = {
+                    'service': self.service,
+                    'service_url': absolute_url(self.service.get_admin_edit_url()),
+                }
+                comment = render_to_string('jira/superseded_draft.txt', context)
                 jira.add_comment(issue_key, comment)
                 self.jira_issue_key = issue_key
                 self.save()

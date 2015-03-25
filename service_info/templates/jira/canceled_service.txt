@@ -1,0 +1,13 @@
+A provider has canceled (deleted) a service.
+
+You can view the canceled service here: {{ service_url }}
+
+Provider
+--------
+
+{% include 'jira/provider_data.txt' with provider=provider %}
+
+Service
+-------
+
+{% include 'jira/service_data.txt' with service=service %}

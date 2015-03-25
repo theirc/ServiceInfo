@@ -17,7 +17,7 @@ def email_provider_about_service_approval_task(service_pk):
     service = Service.objects.get(pk=service_pk)
     # FIXME: Temporarily just give link to provider editing page
     site = Site.objects.get_current()
-    service_link = 'http://%s/app/#/service/%d' % (site, service_pk)
+    service_link = 'http://%s/app/#/manage/service/%d' % (site, service_pk)
     context = {
         'site': site,
         'service': service,

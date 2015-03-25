@@ -30,6 +30,9 @@ msgstr "Add Services"
 msgid "Menu##Service-Map"
 msgstr "Service Map"
 
+msgid "Menu##Search"
+msgstr "Search"
+
 msgid "Menu##Provider-Registration"
 msgstr "Provider Registration"
 
@@ -47,6 +50,9 @@ msgstr "There was an unknown error submitting your form."
 
 msgid "Global##UnknownError"
 msgstr "There was an unknown error."
+
+msgid "Global##FormValidationError"
+msgstr "Please correct the errors on the form."
 
 msgid "Global##Sunday"
 msgstr "Sunday"
@@ -86,6 +92,84 @@ msgstr "Login"
 
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "Register to be a Service Provider here"
+
+msgid "Search-List##Page-Head##Title"
+msgstr "Service Provider Search"
+
+msgid "Search-List##Page-Head##Description"
+msgstr "Use the filtered search below to find the service that meets your needs."
+
+msgid "Service-Map##Page-Head##Page-Title##Title"
+msgstr "Service Provider Map"
+
+msgid "Service-Map##Page-Head##Page-Description##Page-Description"
+msgstr "Use the filtered search below to find the service that meets your needs."
+
+msgid "Service-Map##Filtered-Search##Label"
+msgstr "Search term"
+
+msgid "Service-Map##Filtered-Search##Submit"
+msgstr "Search"
+
+msgid "Service-Map##Filtered-Search##Service-Type"
+msgstr "Service type"
+
+msgid "Service-Map##Filtered-Search##Distance"
+msgstr "Filter by distance"
+
+msgid "Service-Map##Filtered-Search##Area"
+msgstr "Area"
+
+msgid "Service-Map##Filtered-Search##Filter-Area"
+msgstr "Filter by area"
+
+msgid "Service-Map##Filtered-Search##Filter-By-Area"
+msgstr "Filter your search by area"
+
+msgid "Service-Map##Filtered-Search##Search-Placeholder"
+msgstr "I am searching for..."
+
+msgid "Service-Map##Filtered-Search##Loading"
+msgstr "Loading Service Type Filters..."
+
+msgid "Service-Map##Filtered-Search##TypeHeader"
+msgstr "Filter by a Service Type"
+
+msgid "Service-Map##Filtered-Search##Any"
+msgstr "Any"
+
+msgid "Service-Map##Map##Toggle"
+msgstr "List View"
+
+msgid "Service-Map##List##Toggle"
+msgstr "Map View"
+
+msgid "Service-Map##List##Area"
+msgstr "Service Area"
+
+msgid "Service-Map##List##Type"
+msgstr "Service Type"
+
+msgid "Service-Map##List##Additional-Info"
+msgstr "Additional Provider Information"
+
+msgid "Service-Map##List##Todays-Hours"
+msgstr "Todays Service Hours"
+
+msgid "Service-Map##List##All-Hours"
+msgstr "Service Hours"
+
+msgid "Service-Map##List##Phone"
+msgstr "Phone Number"
+
+msgid "Service-Map##List##Email"
+msgstr "Email Address"
+
+msgid "Service-Map##List##Website"
+msgstr "Website"
+
+msgid "Service-Map##List##Unknown"
+msgstr "Unknown"
 
 msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
 msgstr "Remove Change"
@@ -180,6 +264,9 @@ msgstr "Basic details to register a service provider:"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Name"
 msgstr "Name of Service Provider"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Name"
+msgstr "Name of Focal Point"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
 msgstr "Password"
 
@@ -195,6 +282,9 @@ msgstr "Choose a Provider Type"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
 msgstr "Phone Number (NN-NNNNNN)"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Phone-Number"
+msgstr "Phone Number (NN-NNNNNN) of Focal Point"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
 msgstr "Email"
 
@@ -209,6 +299,9 @@ msgstr "Number of Monthly Beneficiaries"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Description"
 msgstr "Description"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Address"
+msgstr "Address"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Legend"
 msgstr "Service Information"
@@ -374,9 +467,3 @@ msgstr "Enter your new password:"
 
 msgid "Password-Reset-Form##Submit-Options##Submit"
 msgstr "Submit"
-
-msgid "Map##Loading"
-msgstr "Loading Service Type Filters..."
-
-msgid "Map##TypeHeader"
-msgstr "Filter by a Service Type"

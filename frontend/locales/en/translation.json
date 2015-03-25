@@ -12,6 +12,7 @@
     "Services": "Services",
     "Add-Services": "Add Services",
   	"Service-Map": "Service Map",
+    "Search": "Search",
   	"Provider-Registration": "Provider Registration",
   	"Feedback-Tool": "Feedback Tool",
   	"Change-Language": "Change Language"
@@ -27,25 +28,72 @@
     "Wednesday": "Wednesday",
     "Thursday": "Thursday",
     "Friday": "Friday",
-    "Saturday": "Saturday"
+    "Saturday": "Saturday",
+    "GeolocationError": "Geolocation is not supported by this browser."
   },
   "Login-Form": {
-  	"Page-Head": {
-  		"Page-Title": {
-  			"Title": "Log In"
-  		},
-  		"Page-Description": {
-  			"Page-Description": "If you are a service provider and have an existing account sign into your account below."
-  		}
-  	},
-  	"Form": {
-	  	"Email": "Email",
-	  	"Password": "Password"
-  	},
-  	"Form-Submit-Options": {
-  		"Submit": "Login",
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Log In"
+      },
+      "Page-Description": {
+        "Page-Description": "If you are a service provider and have an existing account sign into your account below."
+      }
+    },
+    "Form": {
+      "Email": "Email",
+      "Password": "Password"
+    },
+    "Form-Submit-Options": {
+      "Submit": "Login",
       "Register": "Register to be a Service Provider here"
-  	}
+    }
+  },
+  "Search-List": {
+    "Page-Head": {
+      "Title": "Service Provider Search",
+      "Description": "Use the filtered search below to find the service that meets your needs."
+    }
+  },
+  "Service-Map": {
+    "Page-Head": {
+      "Page-Title": {
+        "Title": "Service Provider Map"
+      },
+      "Page-Description": {
+        "Page-Description": "Use the filtered search below to find the service that meets your needs."
+      }
+    },
+    "Filtered-Search": {
+      "Label": "Search term",
+      "Submit": "Search",
+      "Service-Type": "Service type",
+      "Distance": "Find Services Near Me",
+      "Sort": "Sort",
+      "SortName": "by Name",
+      "SortNear": "by Distance From Me",
+      "Area": "Area",
+      "Filter-Area": "Filter by area",
+      "Filter-By-Area": "Filter your search by area",
+      "Search-Placeholder": "I am searching for...",
+      "Loading": "Loading Service Type Filters...",
+      "TypeHeader": "Filter by a Service Type",
+      "Any": "Any"
+    },
+    "Map": {"Toggle": "List View"},
+    "List": {
+      "Toggle": "Map View",
+      "Area": "Service Area",
+      "Type": "Service Type",
+      "Additional-Info": "Additional Provider Information",
+      "Cost": "Cost",
+      "Todays-Hours": "Todays Service Hours",
+      "All-Hours": "Service Hours",
+      "Phone": "Phone Number",
+      "Email": "Email Address",
+      "Website": "Website",
+      "Unknown": "Unknown"
+    }
   },
   "Service-Remove-Change": {
     "Page-Head": {
@@ -275,9 +323,5 @@
     "Submit-Options": {
       "Submit": "Submit"
     }
-  },
-  "Map": {
-    "Loading": "Loading Service Type Filters...",
-    "TypeHeader": "Filter by a Service Type"
   }
 }

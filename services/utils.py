@@ -1,7 +1,11 @@
 import logging
 
+from django.conf import settings
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.sites.models import Site
+from django.db import connections
+from django.db.models import Max
 from django.forms.utils import ErrorDict, ErrorList
 
 
@@ -48,3 +52,38 @@ def validation_error_as_text(error):
     except AttributeError:
         el = ErrorList(error.messages)
         return el.as_text()
+
+
+def absolute_url(path):
+    """
+    Given the path part of a URL in our site,
+    prefix it with the appropriate scheme, domain, and optionally
+    port, and return the complete result.
+    """
+
+    site = Site.objects.get_current()
+    scheme = 'https' if settings.SECURE_LINKS else 'http'
+    return '%s://%s%s' % (scheme, site.domain, path)
+
+
+def update_postgres_sequence_generator(model, db):
+    """
+    Update the sequence generator for a model's primary key
+    to the max current value of that key, so that Postgres
+    will know not to try to use the previously-used values again.
+
+    Apparently this is needed because when we create objects
+    during the migration, we specify the primary key's value,
+    so the Postgres sequence doesn't get used or incremented.
+
+    :param db: Key for the database setting for the database to use
+    """
+    # This is specific to Postgres
+    if 'backends.post' not in settings.DATABASES[db]['ENGINE']:
+        return
+    table_name = model._meta.db_table
+    attname, colname = model._meta.pk.get_attname_column()
+    seq_name = "%s_%s_seq" % (table_name, colname)
+    max_val = model.objects.aggregate(maxkey=Max(attname))['maxkey']
+    cursor = connections[db].cursor()
+    cursor.execute("select setval(%s, %s);", [seq_name, max_val])
