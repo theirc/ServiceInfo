@@ -97,7 +97,7 @@ li {
 }
 
 .big {
-  font-size: 150%;
+  font-size: 100%;
   font-weight: bolder;
 }
 
@@ -146,6 +146,10 @@ li {
 		@media (min-width: 1000px) {
 			margin-right: 2%;
 			float: left;
+			& when (@direction = rtl) {
+				float: right;
+				margin: 0 0% 0 2%;
+			}
 		}
 	}
 
@@ -154,10 +158,11 @@ li {
 		@media (min-width: 1000px) {
 			margin-left: 2%;
 			float: left;
+			& when (@direction = rtl) {
+				float: right;
+				margin: 0 2% 0 0%;
+			}
 		}
-	}
-	@media (min-width: 1000px) {
-		float: @end;
 	}
 }
 
@@ -178,6 +183,20 @@ li {
 
 		@media (max-width:1000px) {
 			float: @start;
+		}
+	}
+}
+
+.submit-form > .half {
+	&:last-child {
+	    float: none;
+		@media (min-width: 1000px) {
+			margin-left: 2%;
+			float: left;
+			& when (@direction = rtl) {
+				float: right;
+				margin: 0 0 0 0%;
+			}
 		}
 	}
 }
@@ -263,7 +282,10 @@ li {
 	    }
 
 	    &:nth-child(3) {
-	    	margin-left: 2%;
+	    	margin-left: 0;
+	    	@media (min-width:640px) {
+	    		margin-left: 2%;
+	    	}
 	    }
 
 	    .primary-button {
@@ -303,18 +325,30 @@ li {
 		padding: 5px 0;
 	}
 	.third {
-		width: 100%;
-		padding: 0;
-		margin-top: 0;
-
-		@media (min-width: 1000px){
+		width: 32.333%;
+		padding: 0 1%;
+		display: inline-block;
+		@media (min-width: 640px) {
 			width: 33.333%;
-			padding: 0 1%;
+		}
 
+		&:last-child {
+			& when (@direction = ltr) {
+				padding-right: 0;
+			}
+			& when (@direction = rtl) {
+				padding-left: 0;
+			}
 		}
 
 		.form-group{
 			margin-bottom: 18px;
+
+			@media (max-width: 639px) {
+				.form-control {
+					padding: 8px 12px;
+				}
+			}
 		}
 	}
 }
@@ -700,16 +734,20 @@ li {
 */
 
 fieldset {
-	padding: 10px 20px;
-	margin: 0 0 30px;
-	border: 1px solid #E2E2E2;
-    min-width: 0;
+	padding: 10px 0;
+	margin: 0 0 10px;
+	min-width: 0;
+	border: none;
+	@media (min-width: 600px) {
+		padding: 10px 20px;
+		border: none;
+	}
 
 	legend {
 		font-size: 16px;
 		font-weight: 600;
 		padding: 6px 10px;
-		margin: 0 0 5px -10px;
+		margin: 0 0 5px -15px;
 		color: #3cb879;
 		border-bottom: none;
 	}
@@ -927,9 +965,11 @@ input[type=range] {
 
 #menu a {
 	color: white;
+	display: block;
 
 	&:hover {
 		cursor: pointer;
+		border-bottom: none;
 	}
 }
 
@@ -1121,6 +1161,53 @@ input[type=range] {
 }
 
 /*
+Provider Form,
+Service Form
+*/
+
+#provider-form,
+#service-form {
+	.row {
+		padding: 10px 0;
+		@media (min-width:0px) and (max-width: 639px) {
+			padding: 0;
+		}
+	}
+}
+
+#provider-form {
+	fieldset {
+		padding-bottom: 0;
+		margin-bottom: 0;
+		.row:last-child {
+			padding-bottom: 0;
+			.form-group {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+#provider-form {
+	.main-content-options {
+		margin: 0;
+		@media (min-width: 640px) {
+			padding: 0 20px;
+		}
+		button:first-child {
+			@media (max-width: 640px) {
+				margin-bottom: 1em;
+			}			
+		}
+		.row {
+			@media (max-width: 640px) {
+				padding: 10px 0 20px;
+			}
+		}
+	}
+}
+
+/*
 Service Map
 */
 
@@ -1243,6 +1330,34 @@ div#search-filter {
 	}
 	.form-group {
 		margin-bottom: 0;
+	}
+}
+
+/*
+Services
+*/
+#services {
+	max-width: 800px;
+	.table {
+		transform: none;
+		margin: 0 30px 0;
+		@media (max-width: 639px) {
+			width: 94%;
+			margin: 0 3% 0;
+		}
+	}
+	.third { 
+		padding: 0;
+	}
+	.main-content {
+		margin: 0 0 30px;
+		@media (min-width: 640px) {
+			margin: 0 30px 0;
+			padding: 0 0 15px;
+		}
+		button {
+			margin-bottom: 20px;
+		}
 	}
 }
 
@@ -1561,6 +1676,10 @@ table {
             position: absolute;
             top: -9999px;
             left: -9999px;
+	        & when (@direction = rtl) {
+	          top: -9999px;
+	          left: 9999px;
+	        } 
         }
 
 		tr {
@@ -1607,18 +1726,36 @@ Service-Detail
 */
 
 #service-detail {
+	.row > .row,
+	.contact > .row {
+		margin: 0 0 8px;
+		padding: 0;
+	}
 	.contact > .row,
 	.description > .row,{
 		p {
 			margin: 0;
 		}
 	}
-
-	.contact > .row{
-		padding: 10px 0 0;
+	.control-label {
+		display: block;
 	}
-	.description > .row{
+	.description {
 		padding: 0 0 10px;
+		max-width: 640px;
+		.row {
+			padding: 0;
+		}
+	}
+	.contact > .row > .half {
+		margin-right: 0%;
+	}
+	.half {
+		display: block;
+		float: none;
+		&last-child {
+			margin-right: 0%;
+		}
 	}
 	.third {
 		width: 33.333%;
@@ -1636,25 +1773,48 @@ Service-Detail
 		height: 150px;
         overflow: hidden;
         margin: auto;
-		margin-bottom: 1em;
+		margin: 1em 0;
 		background-color: gray;
         .map-image-ctn {
             display: inline-block;
             position: relative;
-            right: -50%;
             img {
-                position: relative;
-                left: -50%;
+		        & when (@direction = ltr) {
+		        	-webkit-transform: translate(-20%,0);
+		        	transform: translate(-20%,0);
+	                left: -50%;
+	                @media (min-width: 450px) {
+	                	-webkit-transform: translate(0%,0);
+	                	transform: translate(0%,0);
+	                }
+		        }
+		        & when (@direction = rtl) {
+		        	-webkit-transform: translate(20%,0);
+		        	transform: translate(20%,0);
+	                right: -50%;
+	                @media (min-width: 450px) {
+	                	-webkit-transform: translate(0%,0);
+	                	transform: translate(0%,0);
+	                }
+		        }
             }
 		}
 	}
 	.form-group span.control-label {
 		font-weight: 400;
 	}
-	table when (@direction = ltr) {
-	    margin: 0;
-	    -webkit-transform: translate(0, 0);
-	    transform: translate(0, 0);
+	table {
+		max-width: 640px;
+		& when (@direction = ltr) {
+		    margin: 0;
+		    -webkit-transform: translate(0, 0);
+		    transform: translate(0, 0);
+		}
+		& when (@direction = rtl) {
+		    margin: 0;
+		    -webkit-transform: translate(0, 0);
+		    transform: translate(0, 0);
+		}
 	}
 	table {
 		.third {
@@ -1676,6 +1836,16 @@ Service-Detail
 		th,
 		td {
 			padding: 6px 0;
+		}
+
+		th,
+		tr {
+			& when (@direction = rtl) {
+			    border-left: none;
+				&:first-child {
+					border-left: none;
+				}
+			}
 		}
 
 		th {
