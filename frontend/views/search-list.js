@@ -10,29 +10,25 @@ var Backbone = require('backbone'),
 ;
 
 
+function renderResults() {
+    var $el = $('.search-result-list');
+    var html = result_template({
+        services: search.services.data(),
+    })
+    $el.html(html);
+    $el.i18n();
+}
+
+config.change("forever.language", function() {
+    renderResults();
+});
+
+
 var SearchResultList = Backbone.View.extend({
     render: function() {
         var $el = this.$el;
         var self = this;
-        search.refetchServices().then(renderResults)
-
-        config.change("forever.language", function() {
-            var detached = $el.closest('html').length === 0;
-            if (detached) {
-                config.unbind("forever.language", arguments.callee);
-            } else {
-                renderResults();
-            }
-        });
-
-        function renderResults() {
-            var $el = $('.search-result-list');
-            var html = result_template({
-                services: search.services.data(),
-            })
-            $el.html(html);
-            $el.i18n();
-        }
+        search.refetchServices().then(renderResults);
     },
 });
 
