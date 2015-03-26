@@ -39,6 +39,7 @@ class SelectionCriterionAdmin(admin.ModelAdmin):
 
 class SelectionCriterionInlineAdmin(admin.TabularInline):
     model = SelectionCriterion
+    fields = ['text_en', 'text_ar', 'text_fr']
 
     # Staff can't add/delete criteria here, just edit the ones that are there:
     can_delete = False
