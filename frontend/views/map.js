@@ -15,6 +15,7 @@ module.exports = Backbone.View.extend({
         this.services = new service.PublicServices();
         this.servicetypes = new servicetype.ServiceTypes();
         //this.render();
+        this.markers = [];
     },
 
     render: function() {
@@ -49,6 +50,10 @@ module.exports = Backbone.View.extend({
 
     updateResults: function() {
         var self = this;
+        $.each(self.markers, function() {
+            this.setMap(null);
+        });
+        self.markers = [];
         var bounds = new google.maps.LatLngBounds();
         var services = search.services.data();
         $.each(services, function() {
@@ -73,6 +78,7 @@ module.exports = Backbone.View.extend({
                 });
                 window.marker = marker;
                 marker.setMap(self.map);
+                self.markers.push(marker);
                 google.maps.event.addListener(marker, 'click', function() {
                     location.hash = '#/service/' + service.id;
                 })
