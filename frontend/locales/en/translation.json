@@ -95,7 +95,8 @@
       "Phone": "Phone Number",
       "Email": "Email Address",
       "Website": "Website",
-      "Unknown": "Unknown"
+      "Unknown": "Unknown",
+      "Criteria": "Selection Criteria"
     }
   },
   "Service-Remove-Change": {
