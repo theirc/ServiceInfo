@@ -47,6 +47,7 @@ module.exports = Backbone.View.extend({
         this.$el.html(template({
             query: hashtrack.getVar('q'),
         }));
+        $('.no-search-results').hide();
 
         var $scv = this.$el.find('#search_controls');
         var SearchControlView = new search.SearchControls({
@@ -67,6 +68,14 @@ module.exports = Backbone.View.extend({
     updateResults: function() {
         var self = this;
         var services = search.services.data();
+
+        if (services.length === 0) {
+            $('.no-search-results').show();
+            $('.search-result-list').hide();
+            return;
+        }
+        $('.search-result-list').show();
+        $('.no-search-results').hide();
 
         $.each(services, function() {
             var service = this;
