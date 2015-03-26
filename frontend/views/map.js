@@ -25,6 +25,7 @@ module.exports = Backbone.View.extend({
             services: this.services,
             query: hashtrack.getVar('q'),
         }));
+        $('.no-search-results').hide();
 
         var $scv = this.$el.find('#search_controls');
         var SearchControlView = new search.SearchControls({
@@ -51,6 +52,13 @@ module.exports = Backbone.View.extend({
         var self = this;
         var bounds = new google.maps.LatLngBounds();
         var services = search.services.data();
+        if (services.length === 0) {
+            $('.no-search-results').show();
+            $('#map_container').hide();
+            return;
+        }
+        $('.no-search-results').hide();
+        $('#map_container').show();
         $.each(services, function() {
             var service = this;
 
