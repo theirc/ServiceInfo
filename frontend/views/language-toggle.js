@@ -62,6 +62,7 @@ module.exports = Backbone.View.extend({
         i18n.init(
             {
                 fallbackLng: ['en', 'ar', 'fr'],
+                fallbackOnEmpty: true,
                 lngWhitelist: ['en', 'ar', 'fr'],
                 preload: ['en', 'ar', 'fr'],
                 useCookie: false
