@@ -1,5 +1,6 @@
 var Backbone = require('backbone'),
 api = require('../api'),
+config = require('../config'),
 template = require("../templates/service-form.hbs"),
 i18n = require('i18next-client'),
 forms = require('../forms'),
@@ -131,17 +132,30 @@ module.exports = Backbone.View.extend({
         "click .form-btn-submit": function() {
             messages.clear();
             var $el = this.$el;
-            var data = forms.collect($el);
+            var update_of = this.update_of;
+            var data = forms.collect($el, update_of);
             // Like form fields, omit empty values from the data
             remove_empty_fields(data);
             // change criteria items from strings to dictionaries,
             // omitting blank ones
-            var i, name, criteria = [];
+            var i, name, criteria = [], criteria_data, criteria_id, previous_criteria = {};
             var criteria_length = !!data.selection_criteria ? data.selection_criteria.length : 0;
+            if (update_of) {
+                $.each(update_of.get('selection_criteria'), function() {
+                    previous_criteria[this.id] = {
+                        'text_en': this['text_en'],
+                        'text_fr': this['text_fr'],
+                        'text_ar': this['text_ar'],
+                    };
+                });
+            }
             for (i = 0; i < criteria_length; i++) {
+                criteria_id = $('#id_selection_criteria-'+i).data('id');
+                criteria_data = previous_criteria[criteria_id] || {};
                 name = data.selection_criteria[i];
                 if (name) {
-                    criteria.push({text_en: name});
+                    criteria_data['text_' + config.get("forever.language")] = name;
+                    criteria.push(criteria_data);
                 }
             }
             data.selection_criteria = criteria;

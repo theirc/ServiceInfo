@@ -5,7 +5,12 @@ var config = require('./config')
 ;
 
 var forms = module.exports = {
-    collect: function($form) {
+    /* collect(form: <form>, model: optional)
+     *
+     * Collect submission data from a form combined with other language data from the original
+     * model, if given.
+     */
+    collect: function($form, instance) {
         var data = {};
 
         var collect_field_data = function() {
@@ -43,6 +48,14 @@ var forms = module.exports = {
 
             if (ml) {
                 var cur_lang = config.get('forever.language');
+
+                // Set all languages if we have an original instance to pull the non-current from
+                if (instance) {
+                    $.each(['en', 'fr', 'ar'], function() {
+                        data[name + '_' + this] = instance.get(name + '_' + this);
+                    });
+                }
+
                 name = name + '_' + cur_lang;
             }
 

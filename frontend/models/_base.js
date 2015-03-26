@@ -117,6 +117,16 @@ var BaseCollection = Backbone.Collection.extend({
         }
         return data;
     },
+
+    getByUrl: function(url) {
+        var i, l=this.models.length, m;
+        for (i=0; i < l; i++) {
+            m = this.models[i];
+            if (m.get('url') === url) {
+                return m;
+            }
+        }
+    },
 });
 
 var resolve_preload;

@@ -39,12 +39,13 @@ module.exports = Backbone.View.extend({
                     $.ajax(api.getAPIPrefix() + 'api/language/', {
                         type: 'POST',
                         headers: headers,
+                        dataType: 'html',
                         data: {
                             'language': value
                         },
                         error: function (data) {
-                            console.error(data);
-                        }
+                            console.error('E', data);
+                        },
                     });
                 }
             }

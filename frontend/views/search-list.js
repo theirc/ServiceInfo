@@ -5,21 +5,30 @@ var Backbone = require('backbone'),
     servicetype = require('../models/servicetype'),
     hashtrack = require('hashtrack'),
     i18n = require('i18next-client'),
-    search = require('../search')
+    search = require('../search'),
+    config = require('../config')
 ;
+
+
+function renderResults() {
+    var $el = $('.search-result-list');
+    var html = result_template({
+        services: search.services.data(),
+    })
+    $el.html(html);
+    $el.i18n();
+}
+
+config.change("forever.language", function() {
+    renderResults();
+});
 
 
 var SearchResultList = Backbone.View.extend({
     render: function() {
         var $el = this.$el;
-        search.refetchServices().then(function(){
-            var $el = $('.search-result-list');
-            var html = result_template({
-                services: search.services.data(),
-            })
-            $el.html(html);
-            $el.i18n();
-        })
+        var self = this;
+        search.refetchServices().then(renderResults);
     },
 });
 

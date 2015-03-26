@@ -75,6 +75,9 @@ msgstr "Friday"
 msgid "Global##Saturday"
 msgstr "Saturday"
 
+msgid "Global##GeolocationError"
+msgstr "Geolocation is not supported by this browser."
+
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "Log In"
 
@@ -115,7 +118,16 @@ msgid "Service-Map##Filtered-Search##Service-Type"
 msgstr "Service type"
 
 msgid "Service-Map##Filtered-Search##Distance"
-msgstr "Filter by distance"
+msgstr "Find Services Near Me"
+
+msgid "Service-Map##Filtered-Search##Sort"
+msgstr "Sort"
+
+msgid "Service-Map##Filtered-Search##SortName"
+msgstr "by Name"
+
+msgid "Service-Map##Filtered-Search##SortNear"
+msgstr "by Distance From Me"
 
 msgid "Service-Map##Filtered-Search##Area"
 msgstr "Area"
@@ -152,6 +164,9 @@ msgstr "Service Type"
 
 msgid "Service-Map##List##Additional-Info"
 msgstr "Additional Provider Information"
+
+msgid "Service-Map##List##Cost"
+msgstr "Cost"
 
 msgid "Service-Map##List##Todays-Hours"
 msgstr "Todays Service Hours"

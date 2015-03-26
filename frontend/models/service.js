@@ -12,17 +12,16 @@ var Service = _base.BaseModel.extend({
     apiname: 'services',
     loadSubModels: function () {
         var self = this;
-        var area = new servicearea.ServiceArea({url: this.get('area_of_service')});
-        var type = new servicetype.ServiceType({url: this.get('type')});
         var provider_fetch_url = api.getAbsoluteAPIURL(this.get('provider_fetch_url'));
-        var provider_fetch = new provider.Provider({url: provider_fetch_url});
+        var provider_fetch = provider.fetchAndCache(provider_fetch_url);
 
-        var wait = [area.fetch(), type.fetch(), provider_fetch.fetch()];
+        var wait = [_base.preloaded, provider_fetch];
 
         return new Promise(function(resolve, error) {
-            Promise.all(wait).then(function(){
-                self.attributes.servicearea = area;
-                self.attributes.servicetype = type;
+            Promise.all(wait).then(function(results){
+                var preloaded = results[0];
+                self.attributes.servicearea = preloaded.servicearea.getByUrl(self.get('area_of_service'));
+                self.attributes.servicetype = preloaded.servicetype.getByUrl(self.get('type'));;
                 self.attributes.provider = provider_fetch;
 
                 resolve(self);
