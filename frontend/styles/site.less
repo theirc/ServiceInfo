@@ -1371,33 +1371,35 @@ div#search {
 		button.primary-button.group-submit.search {
 			float: @start;
 		}
+		.query-field-container > input,
+		select#id_type.form-control {
+            height: 46px;
+			box-sizing: border-box;
+		    background-repeat: no-repeat;
+            background-position: 95% 50%;
+			& when (@direction=rtl) {
+				background-position: right 95% top 50%;
+			}
+		}
 		.query-field-container {
 			margin: 0;
 			width: 50%;
 			input {
-                .round-start;
-                .square-end;
-                height: 46px;
-                box-sizing: border-box;
+				.round-start;
+            	.square-end;
 				margin: 0;
 			    background-image: url(../images/search-icon.png);
 			    background-image: url(../images/search-icon.svg);
-			    background-repeat: no-repeat;
-                background-position: 95% 50%;
 			    background-size: 1.5em;
 			}
 		}
 		select#id_type.form-control {
-			height: 46px;
-			box-sizing: border-box;
+			.square-start;
+        	.round-end;
 			width: 50%;
 			padding-@{end}: 6%;
 			-webkit-appearance: none;
-            .square-start;
-            .round-end;
 			background-image: url(../images/down-arrow.png);
-			background-repeat: no-repeat;
-            background-position: @{start} 94% top 50%;
 			background-size: 1em;
 		    @media only screen and (max-width: 600px) {
 		        padding-@{end}: 7%;
