@@ -28,7 +28,8 @@
         "Wednesday": "الأربعاء",
         "Thursday": "الخميس",
         "Friday": "الجمعة",
-        "Saturday": "السبت"
+        "Saturday": "السبت",
+        "GeolocationError": "غير معتمد تحديد الموقع الجغرافي على هذا المتصفح."
     },
     "Login-Form": {
         "Page-Head": {
@@ -67,7 +68,10 @@
             "Label": "مصطلح البحث",
             "Submit": "بحث",
             "Service-Type": "نوع الخدمة",
-            "Distance": "صنف حسب المسافة ",
+            "Distance": "ابحث عن خدمات قريبة مني ",
+            "Sort": "فرز",
+            "SortName": "",
+            "SortNear": "",
             "Area": "منطقة",
             "Filter-Area": "صنف حسب المنطقة ",
             "Filter-By-Area": "صنف حسب المنطقة ",
@@ -84,6 +88,7 @@
             "Area": "منطقة الخدمة ",
             "Type": "نوع الخدمة",
             "Additional-Info": "معلومات إضافية عن المزود ",
+            "Cost": "",
             "Todays-Hours": "ساعات الخدمة اليوم",
             "All-Hours": "ساعات العمل",
             "Phone": "رقم الهاتف",

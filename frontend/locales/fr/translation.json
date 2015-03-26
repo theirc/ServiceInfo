@@ -28,7 +28,8 @@
         "Wednesday": "Mercredi",
         "Thursday": "Jeudi",
         "Friday": "Vendredi",
-        "Saturday": "Samedi"
+        "Saturday": "Samedi",
+        "GeolocationError": ""
     },
     "Login-Form": {
         "Page-Head": {
@@ -67,7 +68,10 @@
             "Label": "Le terme de recherche",
             "Submit": "Recherche",
             "Service-Type": "type de service",
-            "Distance": "Filtrer par la distance",
+            "Distance": "",
+            "Sort": "",
+            "SortName": "",
+            "SortNear": "",
             "Area": "zone",
             "Filter-Area": "Filtrer par zone",
             "Filter-By-Area": "Filtrez votre recherche par zone",
@@ -84,6 +88,7 @@
             "Area": "Zone de service",
             "Type": "Type de service",
             "Additional-Info": "Informations supplémentaires sur le fournisseur",
+            "Cost": "",
             "Todays-Hours": "Heures de service d'aujourd'hui",
             "All-Hours": "Heures de service",
             "Phone": "Numéro de téléphone",
