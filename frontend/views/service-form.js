@@ -93,6 +93,7 @@ module.exports = Backbone.View.extend({
 
     events: {
         "click button.remove": function(ev) {
+            ev.preventDefault();
             var $btn = $(ev.target);
             var $row = $btn.closest('.criteria');
             var criteriaCount = $('.criteria').length;
@@ -104,6 +105,7 @@ module.exports = Backbone.View.extend({
             return false;
         },
         "click button.add": function(ev) {
+            ev.preventDefault();
             var $btn = $(ev.target);
             var $row = $btn.closest('.criteria');
             var $newRow = $row.clone();
@@ -129,7 +131,8 @@ module.exports = Backbone.View.extend({
 
             return false;
         },
-        "click .form-btn-submit": function() {
+        "click .form-btn-submit": function(e) {
+            e.preventDefault();
             messages.clear();
             var $el = this.$el;
             var update_of = this.update_of;
@@ -174,7 +177,8 @@ module.exports = Backbone.View.extend({
 
             return false;
         },
-        "click .form-btn-clear": function() {
+        "click .form-btn-clear": function(e) {
+            e.preventDefault();
             this.$el.find('[name]').each(function() {
                 var $field = $(this);
                 $field.val('');

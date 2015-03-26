@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from services.models import Provider, Service, ServiceArea, SelectionCriterion, ProviderType, \
-    ServiceType, JiraUpdateRecord
+    ServiceType, JiraUpdateRecord, Feedback, Nationality
 from services.utils import validation_error_as_text
 
 
@@ -15,8 +15,16 @@ class ProviderAdmin(admin.ModelAdmin):
     list_display = ['name_en', 'name_ar', 'name_fr', 'type']
 
 
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ['service', 'name']
+
+
 class ProviderTypeAdmin(admin.ModelAdmin):
     list_display = ['name_en', 'name_ar', 'name_fr']
+
+
+class NationalityAdmin(admin.ModelAdmin):
+    pass
 
 
 class ServiceTypeAdmin(admin.ModelAdmin):
@@ -210,6 +218,8 @@ class JiraUpdateRecordAdmin(admin.ModelAdmin):
     list_display = ('update_type', 'service', 'provider', 'jira_issue_key')
 
 
+admin.site.register(Feedback, FeedbackAdmin)
+admin.site.register(Nationality, NationalityAdmin)
 admin.site.register(Provider, ProviderAdmin)
 admin.site.register(ProviderType, ProviderTypeAdmin)
 admin.site.register(ServiceType, ServiceTypeAdmin)

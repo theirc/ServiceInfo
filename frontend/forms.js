@@ -13,11 +13,11 @@ var forms = module.exports = {
     collect: function($form, instance) {
         var data = {};
 
-        $form.find('[name]').each(function() {
+        var collect_field_data = function() {
             var $field = $(this);
             var value = $field.val();
             var filled = value.length > 0;
-            var name = $field.attr('name');
+            var name = $field.attr('name') || $field.parent().attr('name');
             var ml = typeof $field.data('i18n-field') !== "undefined";
 
             if (filled && name.indexOf('.') > 0) {
@@ -62,7 +62,12 @@ var forms = module.exports = {
             if (name.indexOf('.') < 0) {
                 data[name] = value;
             }
-        });
+        };
+
+        $form.find('[name]').each(collect_field_data);
+        $form.find('select[name] option:selected').each(collect_field_data);
+        $form.find('input[name][type=checkbox]:checked').each(collect_field_data);
+        $form.find('input[name][type=radio]:checked').each(collect_field_data);
 
         return data;
     },

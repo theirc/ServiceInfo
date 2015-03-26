@@ -836,6 +836,10 @@ label {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+input[type=radio].form-control  {
+  display: inline;
+  width: inherit;
+}
 .read-only-input {
   /* Not editable, make the fake control look disabled */
   background-color: lightgray;
@@ -1732,6 +1736,9 @@ Service-Detail
 */
 
 #service-detail {
+  .feedback-link {
+    float: @end;
+  }
 	.contact > .row,
 	.description > .row,{
 		p {
