@@ -59,15 +59,6 @@ module.exports = Backbone.View.extend({
     },
 
     events: {
-        "change [name=delivered]": function() {
-            var delivered = $('[name=delivered]:checked').val() === "1";
-            $('.ifdelivered').toggle(delivered);
-            $('.ifnotdelivered').toggle(!delivered);
-        },
-        "change [name=difficulty_contacting]": function() {
-            var difficulty = $("#id_difficulty_contacting option:selected").val();
-            $('#row_other_difficulties').toggle(difficulty === 'other');
-        },
         "click .form-btn-submit": function() {
             var $el = this.$el;
             var data = forms.collect($el);
