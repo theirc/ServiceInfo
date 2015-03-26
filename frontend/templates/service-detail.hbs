@@ -25,11 +25,11 @@
 				</div>
 			</div>
 		{{/if}}
-		<div >
+		<div class="row">
 			<span class="area control-label" data-i18n="Service-Map.List.Area"></span>
 			{{ service.servicearea.name }}
 		</div>
-		<div >
+		<div class="row">
 			<span class="area control-label" data-i18n="Service-Map.List.Type"></span>
 			{{ service.servicetype.name }}
 		</div>
@@ -112,7 +112,15 @@
             <p>{{multiline service.cost_of_service }}</p>
           </div>
         </div>
-	</div> <!-- End Row -->
-</div> <!-- End Container -->
-
+        <div class="description">
+          <div class="row">
+            <span class="control-label" data-i18n="Service-Map.List.Criteria"></span>
+          </div>
+          {{#each service.selection_criteria }}
+              <div class="row">
+                <p>{{ this.text }}</p>
+              </div>
+          {{/each}}
+        </div>
+    </div>
 </div>
