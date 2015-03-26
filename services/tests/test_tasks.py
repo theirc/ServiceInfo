@@ -2,7 +2,7 @@ from unittest.mock import patch
 
 from django.contrib.sites.models import Site
 from django.core import mail
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 from email_user.tests.factories import EmailUserFactory
 from services.tasks import email_provider_about_service_approval_task
@@ -16,10 +16,11 @@ class ServiceApprovalEmailTaskTest(TestCase):
         self.service = ServiceFactory(provider=self.provider)
 
     def test_email_task_calls_email_send(self):
-        with patch('email_user.models.EmailUser.send_email_to_user') as mock_send:
-            email_provider_about_service_approval_task(self.service.pk)
-        site = Site.objects.get_current()
-        expected_link = 'http://%s/app/#/manage/service/%d' % (site, self.service.pk)
+        site = Site.objects.create(domain='example.com')
+        with override_settings(SITE_ID=site.id, SECURE_LINKS=True):
+            with patch('email_user.models.EmailUser.send_email_to_user') as mock_send:
+                email_provider_about_service_approval_task(self.service.pk)
+        expected_link = 'https://example.com/app/#/service/%d' % (self.service.pk,)
         mock_send.assert_called_with(
             {
                 'site': site,
