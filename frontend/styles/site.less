@@ -151,7 +151,7 @@ li {
 }
 
 .big {
-  font-size: 100%;
+  font-size: 150%;
   font-weight: bolder;
 }
 
@@ -201,7 +201,7 @@ li {
 			margin-@{end}: 2%;
 			float: @start;
 			& when (@direction = rtl) {
-				float: right;
+				float: @end;
 				margin: 0 0% 0 2%;
 			}
 		}
@@ -210,11 +210,12 @@ li {
 	&:last-child {
 	    float: none;
 		@media (min-width: 1000px) {
+			margin: 0;
 			margin-@{start}: 2%;
 			float: @start;
 			& when (@direction = rtl) {
-				float: right;
-				margin: 0 2% 0 0%;
+				float: @end;
+				margin-@{end}: 2%;
 			}
 		}
 	}
@@ -245,12 +246,9 @@ li {
 	&:last-child {
 	    float: none;
 		@media (min-width: 1000px) {
-			margin-left: 2%;
-			float: left;
-			& when (@direction = rtl) {
-				float: right;
-				margin: 0 0 0 0%;
-			}
+			margin: 0;
+			margin-@{start}: 2%;
+			float: @start;
 		}
 	}
 }
@@ -605,7 +603,7 @@ li {
 	font-size: .85em;
 	font-weight: 600;
 	color: #fff;
-	padding: 16px 12px;
+	padding: 10px 12px 14px;
 	position: relative;
 	top: -15px;
 	border-style: solid;
@@ -1227,6 +1225,14 @@ Service Form
 				padding: 10px 0 20px;
 			}
 		}
+		@media (min-width: 1000px) {
+			.half:first-child {
+				margin-@{end}: 2%;
+			}
+			.half:last-child {
+				margin-@{start}: 2%;
+			}			
+		}
 	}
 }
 
@@ -1297,13 +1303,13 @@ div#search {
 	        .third {
 	        	@media (max-width: 640px) {
 	        		width: 33.3333%;
-	        		float: left;
+	        		float: @start;
 	        	}
 	        }
 	        .two-third {
 				@media (max-width: 640px) {
 	        		width: 66.6666%;
-	        		float: left;
+	        		float: @start;
 	        	}
 	        }
 
@@ -1317,26 +1323,26 @@ div#search {
 	        }
 
 	        .area {
-	        	float: left;
+	        	float: @start;
 	        	& when (@direction = rtl) {
-	        		float: right;
+	        		float: @end;
 	        	}
 	        }
 
 	        .hours {
-	        	clear: left;
+	        	clear: @start;
 	        	& when (@direction = rtl) {
-	        		clear: right;
+	        		clear: @end;
 	        	}
 	        }
 
             .servicetype {
                 text-align: @end;
 				width: 33.33333333%;
-				float: right;
+				float: @end;
                 & when (@direction = rtl) {
                 	text-align: @end;
-                	float: left;
+                	float: @start;
                 }
 
                 .servicetype-icon {
@@ -1362,7 +1368,7 @@ div#search {
 	        			margin: 0;
 	        			padding: 0;
 	        			& when (@direction = rtl) {
-	        				float: right;
+	        				float: @end;
 	        			}
 	        		}
 	        	}
@@ -1985,16 +1991,7 @@ Service-Detail
 	}
 	table {
 		max-width: 640px;
-		& when (@direction = ltr) {
-		    margin: 0;
-		    -webkit-transform: translate(0, 0);
-		    transform: translate(0, 0);
-		}
-		& when (@direction = rtl) {
-		    margin: 0;
-		    -webkit-transform: translate(0, 0);
-		    transform: translate(0, 0);
-		}
+		margin: 0;
 	}
 	table {
 		.third {
