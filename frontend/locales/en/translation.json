@@ -399,6 +399,7 @@
       }
   },
   "Feedback-Tool": {
-      "Title": "Feedback on services"
+      "Title": "Feedback on services",
+      "Body": "To give feedback, please search for a service, go to its page, and use the Feedback button."
   }
 }
