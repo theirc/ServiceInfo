@@ -14,7 +14,7 @@
         "Service-Map": "خدمة خريطة",
         "Search": "بحث",
         "Provider-Registration": "التسجيل مزود",
-        "Feedback-Tool": "ردود الفعل أداة",
+        "Feedback-Tool": "",
         "Change-Language": "تغيير اللغة"
     },
     "Global": {
@@ -55,6 +55,9 @@
             "Description": "إستخدم البحث أدناه للعصور على الخدمة التي تريدها."
         }
     },
+    "Service-Detail": {
+        "Give-Feedback": ""
+    },
     "Service-Map": {
         "Page-Head": {
             "Page-Title": {
@@ -70,8 +73,8 @@
             "Service-Type": "نوع الخدمة",
             "Distance": "ابحث عن خدمات قريبة مني ",
             "Sort": "فرز",
-            "SortName": "",
-            "SortNear": "",
+            "SortName": "حسب الإسم ",
+            "SortNear": "حسب المسافة مني ",
             "Area": "منطقة",
             "Filter-Area": "صنف حسب المنطقة ",
             "Filter-By-Area": "صنف حسب المنطقة ",
@@ -88,7 +91,7 @@
             "Area": "منطقة الخدمة ",
             "Type": "نوع الخدمة",
             "Additional-Info": "معلومات إضافية عن المزود ",
-            "Cost": "",
+            "Cost": "كلفة",
             "Todays-Hours": "ساعات الخدمة اليوم",
             "All-Hours": "ساعات العمل",
             "Phone": "رقم الهاتف",
@@ -268,6 +271,16 @@
             }
         }
     },
+    "Feedback-Confirmation": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": ""
+            },
+            "Page-Description": {
+                "Page-Description": ""
+            }
+        }
+    },
     "Provider-Registration-Changed": {
         "Page-Head": {
             "Page-Title": {
@@ -309,5 +322,65 @@
         "Submit-Options": {
             "Submit": "إرسال الأجوبة"
         }
+    },
+    "Map": {
+        "Loading": "",
+        "TypeHeader": ""
+    },
+    "Feedback-Form": {
+        "Title": "",
+        "Description": "",
+        "What-Service": "",
+        "Name": "",
+        "Phone-Number": "",
+        "Nationality": "",
+        "AreaOfResidence": "",
+        "Delivered": {
+            "label": "",
+            "yes": "",
+            "no": ""
+        },
+        "Submit": "",
+        "Clear": "",
+        "WaitTime": {
+            "label": "",
+            "lesshour": "",
+            "uptotwodays": "",
+            "more": "",
+            "3_7days": "",
+            "1_2weeks": ""
+        },
+        "Quality": {
+            "label": ""
+        },
+        "difficulty": {
+            "label": "",
+            "no": "",
+            "didntknow": "",
+            "nophoneresponse": "",
+            "noresponse": "",
+            "unhelpful": "",
+            "other": ""
+        },
+        "staff": {
+            "label": ""
+        },
+        "anonymous": {
+            "label": "",
+            "yes": "",
+            "no": ""
+        },
+        "non_delivery_explained": "",
+        "non_delivery##no": "",
+        "non_delivery##unclear": "",
+        "non_delivery##unfair": "",
+        "non_delivery##yes": "",
+        "wait_time##label": "",
+        "other_difficulties": "",
+        "extra_comments": ""
+    },
+    "Feedback-Tool": {
+        "Title": "",
+        "Body": ""
     }
 }

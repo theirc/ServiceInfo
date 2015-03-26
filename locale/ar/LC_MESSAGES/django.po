@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-25 21:36+0200\n"
-"PO-Revision-Date: 2015-03-25 19:37+0000\n"
+"POT-Creation-Date: 2015-03-26 16:09+0200\n"
+"PO-Revision-Date: 2015-03-26 14:09+0000\n"
 "Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -365,58 +365,58 @@ msgid ""
 " the search box (e.g. \"33.8869, 35.5131\")."
 msgstr "يمكنك كتابة عنوان، اسم مكان، أو حتى خطوط الطول والعرض في البحث (مثلاً: \"33.8869, 35.5131\")"
 
-#: services/admin.py:88
+#: services/admin.py:96
 msgid "Description and Additional Information"
 msgstr "معلومات إضافية"
 
-#: services/admin.py:99
+#: services/admin.py:107
 #, python-brace-format
 msgid "Hours (all times in time zone {timezone})"
 msgstr "ساعات (all times in time zone {timezone})"
 
-#: services/admin.py:111
+#: services/admin.py:119
 msgid "Location"
 msgstr "المكان "
 
-#: services/admin.py:130
+#: services/admin.py:138
 msgid "Only services in draft status may be approved"
 msgstr "يجوز الموافقة على الخدمات الوحيدة في مشروع وضع"
 
-#: services/admin.py:138 services/admin.py:176
+#: services/admin.py:146 services/admin.py:184
 #, python-brace-format
 msgid "Unable to approve service '{name}': {error}."
 msgstr "غير قادر على الموافقة على الخدمة {name}': {error}'."
 
-#: services/admin.py:144
+#: services/admin.py:152
 msgid "Services have been approved"
 msgstr "تمت الموافقة على الخدمات"
 
-#: services/admin.py:145
+#: services/admin.py:153
 msgid "Approve new or changed service"
 msgstr "الموافقة على الخدمة الجديدة أو تغييرها"
 
-#: services/admin.py:151
+#: services/admin.py:159
 msgid "Only services in draft status may be rejected"
 msgstr "قد يتم رفض خدمات الوحيدة في مشروع وضع"
 
-#: services/admin.py:159 services/admin.py:191
+#: services/admin.py:167 services/admin.py:199
 #, python-brace-format
 msgid "Unable to reject service '{name}': {error}."
 msgstr "غير قادر على رفض الخدمة {name}': {error}'"
 
-#: services/admin.py:165
+#: services/admin.py:173
 msgid "Services have been rejected"
 msgstr "رفضت الخدمات"
 
-#: services/admin.py:166
+#: services/admin.py:174
 msgid "Reject new or changed service"
 msgstr "رفض الخدمة الجديدة أو تغييرها"
 
-#: services/admin.py:185
+#: services/admin.py:193
 msgid "The service was approved successfully."
 msgstr "وتمت الموافقة على الخدمة بنجاح."
 
-#: services/admin.py:200
+#: services/admin.py:208
 msgid "The service was rejected successfully."
 msgstr "وقد رفض الخدمة بنجاح."
 
@@ -445,7 +445,7 @@ msgstr "الإسم في اللغة الفرنسية "
 msgid "type"
 msgstr "نوع "
 
-#: services/models.py:94 services/models.py:885
+#: services/models.py:94 services/models.py:891
 msgid "phone number"
 msgstr "رقم الهاتف "
 
@@ -641,162 +641,170 @@ msgstr "نوع آخر التطورات"
 msgid "JIRA issue"
 msgstr "قضية جيرة"
 
-#: services/models.py:881
+#: services/models.py:875
+msgid "nationalities"
+msgstr ""
+
+#: services/models.py:887
 msgid "name"
 msgstr ""
 
-#: services/models.py:892
+#: services/models.py:898
 msgid "nationality"
 msgstr ""
 
-#: services/models.py:897
+#: services/models.py:903
 msgid "area of residence"
 msgstr ""
 
-#: services/models.py:902
+#: services/models.py:908
 msgid "service"
 msgstr ""
 
-#: services/models.py:908
+#: services/models.py:914
 msgid "Was the service you sought delivered to you?"
 msgstr ""
 
-#: services/models.py:912
+#: services/models.py:918
 msgid ""
 "How would you rate the quality of the service you received (from 1 to 5, "
 "where 5 is the highest rating possible)?"
 msgstr ""
 
-#: services/models.py:925
+#: services/models.py:931
 msgid ""
 "Did you receive a clear explanation for why the service you sought was not "
 "delivered to you?"
 msgstr ""
 
-#: services/models.py:932
+#: services/models.py:938
 msgid "No explanation"
 msgstr ""
 
-#: services/models.py:933
+#: services/models.py:939
 msgid "Explanation was not clear"
 msgstr ""
 
-#: services/models.py:934
+#: services/models.py:940
 msgid "Explanation was not fair"
 msgstr ""
 
-#: services/models.py:935
+#: services/models.py:941
 msgid "Clear and appropriate explanation"
 msgstr ""
 
-#: services/models.py:940
+#: services/models.py:946
 msgid ""
 "How long did you wait for the service to be delivered, after contacting the "
 "service provider?"
 msgstr ""
 
-#: services/models.py:947
+#: services/models.py:953
 msgid "Less than 1 hour"
 msgstr ""
 
-#: services/models.py:948
+#: services/models.py:954
 msgid "1-48 hours"
 msgstr ""
 
-#: services/models.py:949
+#: services/models.py:955
 msgid "3-7 days"
 msgstr ""
 
-#: services/models.py:950
+#: services/models.py:956
 msgid "1-2 weeks"
 msgstr ""
 
-#: services/models.py:951
+#: services/models.py:957
 msgid "More than 2 weeks"
 msgstr ""
 
-#: services/models.py:955
+#: services/models.py:961
 msgid ""
 "How do you rate your satisfaction with the time that you waited for the "
 "service to be delivered (from 1 to 5, where 5 is the highest rating "
 "possible)?"
 msgstr ""
 
-#: services/models.py:968
+#: services/models.py:974
 msgid ""
 "Did you experience difficulties contacting the provider of the service you "
 "needed?"
 msgstr ""
 
-#: services/models.py:972
+#: services/models.py:978
+msgid "No"
+msgstr ""
+
+#: services/models.py:979
 msgid "Did not know how to contact them"
 msgstr ""
 
-#: services/models.py:973
+#: services/models.py:980
 msgid "Tried to contact them by phone but received no response"
 msgstr ""
 
-#: services/models.py:974
+#: services/models.py:981
 msgid ""
 "Tried to contact them in person but received no response or did not find "
 "their office"
 msgstr ""
 
-#: services/models.py:976
+#: services/models.py:983
 msgid "Contacted them but response was unhelpful"
 msgstr ""
 
-#: services/models.py:977
+#: services/models.py:984
 msgid "Other"
 msgstr ""
 
-#: services/models.py:982
+#: services/models.py:989
 msgid "Other difficulties contacting the service provider"
 msgstr ""
 
-#: services/models.py:987
+#: services/models.py:994
 msgid ""
 "How would you rate your satisfaction with the staff of the organization that"
 " provided services to you, (from 1 to 5, where 5 is the highest rating "
 "possible)?"
 msgstr ""
 
-#: services/models.py:996
+#: services/models.py:1003
 msgid "Other comments"
 msgstr ""
 
-#: services/models.py:1001
+#: services/models.py:1008
 msgid "I want my feedback to be anonymous to the service provider"
 msgstr ""
 
-#: services/models.py:1010
+#: services/models.py:1017
 msgid ""
 "Quality field is required if you answered 'Yes' to 'Was the service you "
 "sought delivered to you?'."
 msgstr ""
 
-#: services/models.py:1014
+#: services/models.py:1021
 msgid ""
 "An answer is required to 'How long did you wait for the service to be "
 "delivered, after contacting the service provider?' if you answered 'Yes' to "
 "'Was the service you sought delivered to you?'."
 msgstr ""
 
-#: services/models.py:1020
+#: services/models.py:1027
 msgid ""
 "An answer is required to 'How do you rate your satisfaction with the time "
 "that you waited for the service to be delivered?' if you answered 'Yes' to "
 "'Was the service you sought delivered to you?'."
 msgstr ""
 
-#: services/models.py:1028
+#: services/models.py:1035
 msgid ""
 "An answer is required to 'Did you receive a clear explanation for why the "
 "service you sought was not delivered to you?' if you answered 'No' to 'Was "
 "the service you sought delivered to you?'."
 msgstr ""
 
-#: services/models.py:1035
+#: services/models.py:1042
 msgid ""
 "An answer is required to 'Other difficulties contacting the service "
 "provider' if you answered 'Other' to 'Did you experience difficulties "

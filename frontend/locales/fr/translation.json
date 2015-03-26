@@ -14,7 +14,7 @@
         "Service-Map": "Service Map",
         "Search": "Recherche",
         "Provider-Registration": "Inscription des fournisseurs",
-        "Feedback-Tool": "Commentaires Outil",
+        "Feedback-Tool": "",
         "Change-Language": "Changer de langue"
     },
     "Global": {
@@ -54,6 +54,9 @@
             "Title": "Recherche fournisseur des services",
             "Description": "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
         }
+    },
+    "Service-Detail": {
+        "Give-Feedback": ""
     },
     "Service-Map": {
         "Page-Head": {
@@ -268,6 +271,16 @@
             }
         }
     },
+    "Feedback-Confirmation": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": ""
+            },
+            "Page-Description": {
+                "Page-Description": ""
+            }
+        }
+    },
     "Provider-Registration-Changed": {
         "Page-Head": {
             "Page-Title": {
@@ -309,5 +322,65 @@
         "Submit-Options": {
             "Submit": "Soumettre"
         }
+    },
+    "Map": {
+        "Loading": "",
+        "TypeHeader": ""
+    },
+    "Feedback-Form": {
+        "Title": "",
+        "Description": "",
+        "What-Service": "",
+        "Name": "",
+        "Phone-Number": "",
+        "Nationality": "",
+        "AreaOfResidence": "",
+        "Delivered": {
+            "label": "",
+            "yes": "",
+            "no": ""
+        },
+        "Submit": "",
+        "Clear": "",
+        "WaitTime": {
+            "label": "",
+            "lesshour": "",
+            "uptotwodays": "",
+            "more": "",
+            "3_7days": "",
+            "1_2weeks": ""
+        },
+        "Quality": {
+            "label": ""
+        },
+        "difficulty": {
+            "label": "",
+            "no": "",
+            "didntknow": "",
+            "nophoneresponse": "",
+            "noresponse": "",
+            "unhelpful": "",
+            "other": ""
+        },
+        "staff": {
+            "label": ""
+        },
+        "anonymous": {
+            "label": "",
+            "yes": "",
+            "no": ""
+        },
+        "non_delivery_explained": "",
+        "non_delivery##no": "",
+        "non_delivery##unclear": "",
+        "non_delivery##unfair": "",
+        "non_delivery##yes": "",
+        "wait_time##label": "",
+        "other_difficulties": "",
+        "extra_comments": ""
+    },
+    "Feedback-Tool": {
+        "Title": "",
+        "Body": ""
     }
 }
