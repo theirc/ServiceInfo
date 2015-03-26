@@ -59,7 +59,8 @@ module.exports = Backbone.View.extend({
     },
 
     events: {
-        "click .form-btn-submit": function() {
+        "click .form-btn-submit": function(e) {
+            e.preventDefault();
             var $el = this.$el;
             var data = forms.collect($el);
             var $submit = $el.find('.form-btn-submit');
@@ -77,7 +78,8 @@ module.exports = Backbone.View.extend({
                 }
             );
         },
-        "click .form-btn-clear": function() {
+        "click .form-btn-clear": function(e) {
+            e.preventDefault();
             this.$el.find('[name]').each(function() {
                 var $field = $(this);
                 $field.val('');
