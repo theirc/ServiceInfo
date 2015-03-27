@@ -1,0 +1,74 @@
+<!-- Page Head -->
+  <div class="page-head">
+    <div class="container">
+      <div class="row">
+        <div class="page-title" data-i18n="Provider-Profile-Edit.Page-Head.Page-Title.Title"></div>
+        <div class="page-descr" data-i18n="Provider-Profile-Edit.Page-Head.Page-Description.Page-Description"></div>
+      </div>
+    </div>
+  </div>
+<!-- End Page Head -->
+
+<!-- Main Content -->
+
+<!-- Forms -->
+  <div class="main-content">
+    <div class="container">
+      <form>
+
+      <div id="provider-profile-edit">
+        <div class="row">
+          <label for="name" class="control-label"><span data-i18n="Provider-Profile-Edit.Form-Sections.Basic.Name"></span><span class=error></label>
+          <p>Existing content goes here and is editable inline.</p>
+        </div>
+        <div class="row">
+          <label for="email" class="control-label"><span data-i18n="Provider-Profile-Edit.Form-Sections.Basic.Email"></span><span class="error"></span></label>
+          <p>Existing content goes here and is editable inline.</p>
+        </div>
+        <div class="row">
+          <label for="password1" class="control-label"><span data-i18n="Provider-Profile-Edit.Form-Sections.Basic.Password"></span><span class=error></label>
+          <p>Existing content goes here and is editable inline.</p>
+        </div>
+        <div class="row">
+          <label for="password2" class="control-label"><span data-i18n="Provider-Profile-Edit.Form-Sections.Basic.PasswordConfirm"></span><span class="error"></span></label>
+          <p>Existing content goes here and is editable inline.</p>
+        </div>
+        <div class="row">
+          <label for="id_type" class="control-label"><span data-i18n="Provider-Profile-Edit.Form-Sections.Basic.Provider-Type"></span><span class=error></label>
+          <select id="id_type" name="type">
+              <option value="" data-i18n="Provider-Profile-Edit.Form-Sections.Basic.Provider-Type-Choose"></option>
+              {{#each providertypes}}
+                <option value="{{ this.url }}">{{ this.name }}</option>
+              {{/each}}
+          </select>
+        </div>
+        <div class="row">
+          <label for="phone_number" class="control-label"><span data-i18n="Provider-Profile-Edit.Form-Sections.Basic.Phone-Number"></span><span class=error></label>
+          <p>Existing content goes here and is editable inline.</p>
+        </div>
+        <div class="row">
+          <label for="website" class="control-label"><span data-i18n="Provider-Profile-Edit.Form-Sections.Basic.Website"></span><span class=error></label>
+          <p>Existing content goes here and is editable inline.</p>
+        </div>
+        <div class="row">
+          <label for="id_number_of_monthly_beneficiaries" class="control-label"><span data-i18n="Provider-Profile-Edit.Form-Sections.Basic.MonthlyBeneficiaries"></span><span class=error></label>
+          <input id="id_number_of_monthly_beneficiaries" required type="number" name="number_of_monthly_beneficiaries">
+        </div>
+        <div class="row">
+          <label for="description" class="control-label"><span data-i18n="Provider-Profile-Edit.Form-Sections.Basic.Description"></span><span class=error></label>
+          <p>Existing content goes here and is editable inline. Existing content goes here and is editable inline.<br> Existing content goes here and is editable inline.</p>
+        </div>
+      </div>
+
+        <div class="row">
+          <div class="submit-form">
+            <div class="quarter">
+              <button class="form-btn-submit primary-button" tabindex="17" data-i18n="Provider-Profile-Edit.Form-Sections.Form-Submit-Options.Submit"></button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+<!-- End Main Content -->

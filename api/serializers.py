@@ -10,7 +10,10 @@ from rest_framework import exceptions, serializers
 from email_user.forms import EmailUserCreationForm
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceType, ServiceArea, \
-    SelectionCriterion
+    SelectionCriterion, Feedback, Nationality
+
+
+CAN_EDIT_STATUSES = [Service.STATUS_DRAFT, Service.STATUS_CURRENT, Service.STATUS_REJECTED]
 
 
 class RequireOneTranslationMixin(object):
@@ -46,6 +49,16 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = EmailUser
         fields = ('url', 'id', 'email', 'groups')
+
+
+class FeedbackSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Feedback
+        fields = ('name', 'phone_number', 'nationality', 'area_of_residence',
+                  'service', 'delivered', 'quality', 'non_delivery_explained',
+                  'wait_time', 'wait_time_satisfaction', 'difficulty_contacting',
+                  'other_difficulties', 'staff_satisfaction', 'extra_comments',
+                  'anonymous')
 
 
 class LanguageSerializer(serializers.Serializer):
@@ -104,6 +117,21 @@ class ProviderSerializer(RequireOneTranslationMixin, serializers.HyperlinkedMode
         }
 
 
+class ProviderFetchSerializer(RequireOneTranslationMixin, serializers.HyperlinkedModelSerializer):
+    """
+    Returns public data only
+    """
+
+    class Meta:
+        model = Provider
+        fields = ('url', 'id',
+                  'name_en', 'name_ar', 'name_fr',
+                  'type', 'phone_number', 'website',
+                  'description_en', 'description_ar', 'description_fr',
+                  'address_en', 'address_ar', 'address_fr')
+        required_translated_fields = ['name', 'description', 'address']
+
+
 class CreateProviderSerializer(ProviderSerializer):
     email = serializers.EmailField()
     password = serializers.CharField()
@@ -151,10 +179,13 @@ class CreateProviderSerializer(ProviderSerializer):
 
 
 class ServiceTypeSerializer(RequireOneTranslationMixin, serializers.HyperlinkedModelSerializer):
+    icon_url = serializers.CharField(source='get_icon_url', read_only=True)
+
     class Meta:
         model = ServiceType
         fields = (
             'url',
+            'icon_url',
             'number',
             'name_en', 'name_fr', 'name_ar',
             'comments_en', 'comments_fr', 'comments_ar',
@@ -179,6 +210,7 @@ class SelectionCriterionSerializerForService(SelectionCriterionSerializer):
 
 class ServiceSerializer(RequireOneTranslationMixin,
                         serializers.HyperlinkedModelSerializer):
+    provider_fetch_url = serializers.CharField(source='get_provider_fetch_url', read_only=True)
     selection_criteria = SelectionCriterionSerializerForService(many=True, required=False)
 
     class Meta:
@@ -193,6 +225,8 @@ class ServiceSerializer(RequireOneTranslationMixin,
             'selection_criteria',
             'status', 'update_of',
             'location',
+            'provider',
+            'provider_fetch_url',
             'sunday_open', 'sunday_close',
             'monday_open', 'monday_close',
             'tuesday_open', 'tuesday_close',
@@ -202,6 +236,7 @@ class ServiceSerializer(RequireOneTranslationMixin,
             'saturday_open', 'saturday_close',
             'type'
         )
+        read_only_fields = ('provider',)
         required_translated_fields = ['name', 'description']
 
     def validate(self, attrs):
@@ -213,9 +248,10 @@ class ServiceSerializer(RequireOneTranslationMixin,
         attrs['status'] = Service.STATUS_DRAFT
         if attrs.get('update_of', False):
             parent = attrs['update_of']
-            if parent.status not in [Service.STATUS_DRAFT, Service.STATUS_CURRENT]:
+            if parent.status not in CAN_EDIT_STATUSES:
                 raise exceptions.ValidationError(
-                    {'update_of': _("You may only submit updates to current or draft services")}
+                    {'update_of': _("You may only submit updates to current, draft or rejected"
+                                    " services")}
                 )
             if parent.status == Service.STATUS_CURRENT:
                 drafts = parent.updates.filter(status=Service.STATUS_DRAFT)
@@ -228,13 +264,13 @@ class ServiceSerializer(RequireOneTranslationMixin,
         for day in ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday',
                     'friday', 'saturday']:
             open_field, close_field = '%s_open' % day, '%s_close' % day
-            open_value = attrs.get(open_field, False)
-            close_value = attrs.get(close_field, False)
-            if open_value and not close_value:
+            open_value = attrs.get(open_field, None)
+            close_value = attrs.get(close_field, None)
+            if open_value is not None and close_value is None:
                 errs[close_field].append(_('Close time is missing.'))
-            elif close_value and not open_value:
+            elif close_value is not None and open_value is None:
                 errs[open_field].append(_('Open time is missing.'))
-            elif open_value and close_value and open_value >= close_value:
+            elif open_value is not None and close_value is not None and open_value >= close_value:
                 errs[close_field].append(_('Close time is not later than open time.'))
         if errs:
             raise exceptions.ValidationError(errs)
@@ -298,6 +334,18 @@ class ServiceAreaSerializer(RequireOneTranslationMixin,
             'children',
         )
         required_translated_fields = ['name']
+
+
+class NationalitySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Nationality
+        fields = (
+            'url',
+            'id',
+            'name_en',
+            'name_ar',
+            'name_fr',
+        )
 
 
 class APILoginSerializer(serializers.Serializer):

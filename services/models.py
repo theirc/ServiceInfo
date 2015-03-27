@@ -1,4 +1,4 @@
-from textwrap import dedent
+from collections import defaultdict
 from django.conf import settings
 from django.contrib.gis.db import models
 from django.contrib.sites.models import Site
@@ -6,10 +6,12 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.core.validators import MinValueValidator, MaxValueValidator, RegexValidator
 from django.db.transaction import atomic
+from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _, get_language
 
 from . import jira_support
 from .tasks import email_provider_about_service_approval_task
+from .utils import absolute_url
 
 
 class NameInCurrentLanguageMixin(object):
@@ -51,6 +53,7 @@ class ProviderType(NameInCurrentLanguageMixin, models.Model):
         return self.name
 
     def get_api_url(self):
+        """Return the PATH part of the URL to access this object using the API"""
         return reverse('providertype-detail', args=[self.id])
 
 
@@ -178,7 +181,12 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
         return self.name_en
 
     def get_api_url(self):
+        """Return the PATH part of the URL to access this object using the API"""
         return reverse('provider-detail', args=[self.id])
+
+    def get_fetch_url(self):
+        """Return the PATH part of the URL to fetch this object using the API"""
+        return reverse('provider-fetch', args=[self.id])
 
     def notify_jira_of_change(self):
         JiraUpdateRecord.objects.create(
@@ -187,6 +195,7 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
         )
 
     def get_admin_edit_url(self):
+        """Return the PATH part of the URL to edit this object in the admin"""
         return reverse('admin:services_provider_change', args=[self.id])
 
 
@@ -261,6 +270,11 @@ class SelectionCriterion(models.Model):
 
 class ServiceType(NameInCurrentLanguageMixin, models.Model):
     number = models.IntegerField(unique=True)
+    icon = models.ImageField(
+        upload_to='service-type-icons',
+        verbose_name=_("icon"),
+        blank=True,
+    )
     name_en = models.CharField(
         _("name in English"),
         max_length=256,
@@ -312,6 +326,12 @@ class ServiceType(NameInCurrentLanguageMixin, models.Model):
 
     def get_api_url(self):
         return reverse('servicetype-detail', args=[self.id])
+
+    def get_icon_url(self):
+        """Return URL PATH of the icon image for this record"""
+        # For convenience of serializers
+        if self.icon:
+            return self.icon.url
 
 
 class Service(NameInCurrentLanguageMixin, models.Model):
@@ -455,6 +475,10 @@ class Service(NameInCurrentLanguageMixin, models.Model):
     def get_api_url(self):
         return reverse('service-detail', args=[self.id])
 
+    def get_provider_fetch_url(self):
+        # For convenience of the serializer
+        return self.provider.get_fetch_url()
+
     def get_admin_edit_url(self):
         return reverse('admin:services_service_change', args=[self.id])
 
@@ -473,6 +497,10 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         Cancel a pending service update, or withdraw a current service
         from the directory.
         """
+        # First cancel any pending changes to this service
+        for pending_change in self.updates.filter(status=Service.STATUS_DRAFT):
+            pending_change.cancel()
+
         previous_status = self.status
         self.status = Service.STATUS_CANCELED
         self.save()
@@ -727,6 +755,8 @@ class JiraUpdateRecord(models.Model):
 
             if self.update_type in JiraUpdateRecord.NEW_JIRA_RECORD_UPDATE_TYPES:
                 kwargs = jira_support.default_newissue_kwargs()
+                service = None
+                service_url = None
                 change_type = {
                     JiraUpdateRecord.NEW_SERVICE: 'New service',
                     JiraUpdateRecord.CHANGE_SERVICE: 'Changed service',
@@ -734,14 +764,29 @@ class JiraUpdateRecord(models.Model):
                     JiraUpdateRecord.PROVIDER_CHANGE: 'Changed provider',
                 }[self.update_type]
                 if self.update_type in JiraUpdateRecord.SERVICE_CHANGE_UPDATE_TYPES:
-                    url = self.service.get_admin_edit_url()
+                    service = self.service
+                    service_url = absolute_url(service.get_admin_edit_url())
                     provider = self.service.provider
                 elif self.update_type in self.PROVIDER_CHANGE_UPDATE_TYPES:
-                    url = self.provider.get_admin_edit_url()
                     provider = self.provider
                 kwargs['summary'] = '%s from %s' % (change_type, provider)
-                kwargs['description'] = 'Details here:\nhttp://%s%s' % (
-                    Site.objects.get_current(), url)
+                template_name = {
+                    JiraUpdateRecord.NEW_SERVICE: 'jira/new_service.txt',
+                    JiraUpdateRecord.CHANGE_SERVICE: 'jira/changed_service.txt',
+                    JiraUpdateRecord.CANCEL_CURRENT_SERVICE: 'jira/canceled_service.txt',
+                    JiraUpdateRecord.PROVIDER_CHANGE: 'jira/changed_provider.txt',
+                }[self.update_type]
+                context = {
+                    'site': Site.objects.get_current(),
+                    'provider': provider,
+                    'provider_url': absolute_url(provider.get_admin_edit_url()),
+                    'service': service,
+                    'service_url': service_url,
+                }
+                if service and service.update_of:
+                    context['service_parent_url'] = \
+                        absolute_url(service.update_of.get_admin_edit_url())
+                kwargs['description'] = render_to_string(template_name, context)
                 new_issue = jira.create_issue(**kwargs)
                 self.jira_issue_key = new_issue.key
                 self.save()
@@ -750,15 +795,11 @@ class JiraUpdateRecord(models.Model):
                 # can comment on it.
                 previous_record = JiraUpdateRecord.objects.get(service=self.superseded_draft)
                 issue_key = previous_record.jira_issue_key
-                link1 = 'http://%s%s' % (Site.objects.get_current(),
-                                         self.superseded_draft.get_admin_edit_url())
-                link2 = 'http://%s%s' % (Site.objects.get_current(),
-                                         self.service.get_admin_edit_url())
-                comment = dedent("""
-                   The provider has updated a new service or a change that was still under review.
-                   The previous data was at %s.
-                   The new data is at %s.
-                """ % (link1, link2))
+                context = {
+                    'service': self.service,
+                    'service_url': absolute_url(self.service.get_admin_edit_url()),
+                }
+                comment = render_to_string('jira/superseded_draft.txt', context)
                 jira.add_comment(issue_key, comment)
                 self.jira_issue_key = issue_key
                 self.save()
@@ -804,3 +845,205 @@ class JiraUpdateRecord(models.Model):
             # empty string so it'll be tried again later.
             JiraUpdateRecord.objects.filter(pk=self.pk, jira_issue_key=sentinel_value).update(
                 jira_issue_key='')
+
+
+#
+# FEEDBACK
+#
+class Nationality(NameInCurrentLanguageMixin, models.Model):
+    number = models.IntegerField(unique=True)
+    name_en = models.CharField(
+        _("name in English"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    name_ar = models.CharField(
+        _("name in Arabic"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+    name_fr = models.CharField(
+        _("name in French"),
+        max_length=256,
+        default='',
+        blank=True,
+    )
+
+    class Meta:
+        verbose_name_plural = _("nationalities")
+
+    def __str__(self):
+        return self.name
+
+    def get_api_url(self):
+        return reverse('nationality-detail', args=[self.id])
+
+
+class Feedback(models.Model):
+    # About the user
+    name = models.CharField(
+        _("name"),
+        max_length=256
+    )
+    phone_number = models.CharField(
+        _("phone number"),
+        max_length=20,
+        validators=[
+            RegexValidator(settings.PHONE_NUMBER_REGEX)
+        ]
+    )
+    nationality = models.ForeignKey(
+        verbose_name=_("nationality"),
+        to=Nationality,
+    )
+    area_of_residence = models.ForeignKey(
+        ServiceArea,
+        verbose_name=_("area of residence"),
+    )
+
+    # The service getting feedback
+    service = models.ForeignKey(
+        verbose_name=_("service"),
+        to=Service,
+    )
+
+    # Questions about delivery of service
+    delivered = models.BooleanField(
+        help_text=_("Was the service you sought delivered to you?"),
+        default=False,  # Don't really want a default here, but Django screams at you
+    )
+    quality = models.SmallIntegerField(
+        help_text=_("How would you rate the quality of the service you received (from 1 to 5, "
+                    "where 5 is the highest rating possible)?"),
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(5)
+        ],
+        default=None,
+        blank=True,
+        null=True,
+    )
+    non_delivery_explained = models.CharField(
+        # This is required only if 'delivered' is false; so needs to be optional here
+        # and we'll validate that elsewhere
+        help_text=_("Did you receive a clear explanation for why the service you "
+                    "sought was not delivered to you?"),
+        blank=True,
+        default=None,
+        null=True,
+        max_length=8,
+        choices=[
+            ('no', _("No explanation")),
+            ('unclear', _("Explanation was not clear")),
+            ('unfair', _("Explanation was not fair")),
+            ('yes', _("Clear and appropriate explanation")),
+        ]
+    )
+    wait_time = models.CharField(
+        # Presumably, only required if 'delivered' is true
+        help_text=_("How long did you wait for the service to be delivered, after "
+                    "contacting the service provider?"),
+        blank=True,
+        null=True,
+        default=None,
+        max_length=12,
+        choices=[
+            ('lesshour', _("Less than 1 hour")),
+            ('uptotwodays', _("1-48 hours")),
+            ('3-7days', _("3-7 days")),
+            ('1-2weeks', _("1-2 weeks")),
+            ('more', _("More than 2 weeks")),
+        ]
+    )
+    wait_time_satisfaction = models.SmallIntegerField(
+        help_text=_("How do you rate your satisfaction with the time that you waited for "
+                    "the service to be delivered (from 1 to 5, where 5 is the highest "
+                    "rating possible)?"),
+        default=None,
+        null=True,
+        blank=True,
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(5)
+        ]
+    )
+
+    difficulty_contacting = models.CharField(
+        help_text=_("Did you experience difficulties contacting the provider of "
+                    "the service you needed?"),
+        max_length=20,
+        choices=[
+            ('no', _("No")),
+            ('didntknow', _("Did not know how to contact them")),
+            ('nophoneresponse', _("Tried to contact them by phone but received no response")),
+            ('noresponse', _("Tried to contact them in person but received no response or "
+                             "did not find their office")),
+            ('unhelpful', _("Contacted them but response was unhelpful")),
+            ('other', _("Other")),
+        ]
+    )
+    other_difficulties = models.TextField(
+        # Only if 'other' selected above
+        help_text=_("Other difficulties contacting the service provider"),
+        blank=True,
+        default='',
+    )
+    staff_satisfaction = models.SmallIntegerField(
+        help_text=_("How would you rate your satisfaction with the staff of the organization "
+                    "that provided services to you, (from 1 to 5, where 5 is the highest "
+                    "rating possible)?"),
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(5)
+        ]
+    )
+    extra_comments = models.TextField(
+        help_text=_("Other comments"),
+        default='',
+        blank=True,
+    )
+    anonymous = models.BooleanField(
+        help_text=_("I want my feedback to be anonymous to the service provider"),
+        default=False,
+    )
+
+    def clean(self):
+        errs = defaultdict(list)
+        if self.delivered:
+            if self.quality is None:
+                errs['quality'].append(
+                    _("Quality field is required if you answered 'Yes' to "
+                      "'Was the service you sought delivered to you?'."))
+            if self.wait_time is None:
+                errs['wait_time'].append(
+                    _("An answer is required to 'How long did you wait for the service to "
+                      "be delivered, after contacting the service provider?' "
+                      "if you answered 'Yes' to "
+                      "'Was the service you sought delivered to you?'."))
+            if self.wait_time_satisfaction is None:
+                errs['wait_time_satisfaction'].append(
+                    _("An answer is required to 'How do you rate your satisfaction with the "
+                      "time that you waited for the service to be delivered?' "
+                      "if you answered 'Yes' to "
+                      "'Was the service you sought delivered to you?'.")
+                )
+        else:
+            if self.non_delivery_explained is None:
+                errs['non_delivery_explained'].append(
+                    _("An answer is required to 'Did you receive a clear explanation for "
+                      "why the service you sought was not delivered to you?' "
+                      "if you answered 'No' to "
+                      "'Was the service you sought delivered to you?'."))
+        if self.difficulty_contacting == 'other':
+            if not self.other_difficulties:
+                errs['other_difficulties'].append(
+                    _("An answer is required to 'Other difficulties contacting the service "
+                      "provider' "
+                      "if you answered 'Other' to 'Did you experience difficulties contacting "
+                      "the provider of the service you needed?'")
+                )
+
+        if errs:
+            raise ValidationError(errs)

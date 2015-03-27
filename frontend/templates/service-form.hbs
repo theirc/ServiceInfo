@@ -20,6 +20,7 @@
             <form id=service-form>
               <input type=hidden name=provider></input>
               <input type=hidden name=update_of></input>
+              <input type=hidden name=location></input>
 
               <fieldset>
                 <legend data-i18n="Service-Form.Legend"></legend>
@@ -88,9 +89,9 @@
 
                 </div>
                 <div class="form-group row">
-                  <label for="id_additional_information" class="control-label" data-i18n="Service-Form.Additional-Information"></label>
+                  <label for="id_additional_info" class="control-label" data-i18n="Service-Form.Additional-Information"></label>
                   <div class="form-group">
-                    <textarea id="id_additional_information" rows="4" data-i18n-field name="additional_information" class="form-control"></textarea>
+                    <textarea id="id_additional_info" rows="4" data-i18n-field name="additional_info" class="form-control"></textarea>
                   </div>
                 </div>
                 <div class="form-group">
@@ -106,7 +107,7 @@
                   <div class="row criteria">
                       <div class="half">
                         <div class="form-group">
-                          <input id="id_selection_criteria.{{@index}}" type="text" name="selection_criteria.{{@index}}" class="form-control" value="{{this.text}}">
+                          <input id="id_selection_criteria-{{@index}}" data-id="{{this.id}}" type="text" name="selection_criteria.{{@index}}" class="form-control selection-criteria" value="{{this.text}}">
                         </div>
                       </div>
                       <div class="half">

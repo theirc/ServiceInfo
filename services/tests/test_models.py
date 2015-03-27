@@ -7,7 +7,7 @@ from django.utils import translation
 from email_user.tests.factories import EmailUserFactory
 from services.models import ServiceType, ProviderType, Provider, Service, \
     blank_or_at_least_one_letter
-from services.tests.factories import ProviderFactory, ServiceFactory
+from services.tests.factories import ProviderFactory, ServiceFactory, FeedbackFactory
 
 
 class ProviderTest(TestCase):
@@ -105,6 +105,18 @@ class ServiceTest(TestCase):
             service.email_provider_about_approval()
         mock_task.delay.assert_called_with(service.pk)
 
+    def test_cancel_cleans_up_pending_changes(self):
+        service1 = ServiceFactory(status=Service.STATUS_CURRENT)
+        # Make copy of service1 as an update
+        service2 = Service.objects.get(pk=service1.pk)
+        service2.pk = None
+        service2.update_of = service1
+        service2.status = Service.STATUS_DRAFT
+        service2.save()
+        service1.cancel()
+        service2 = Service.objects.get(pk=service2.pk)
+        self.assertEqual(Service.STATUS_CANCELED, service2.status)
+
     def test_approval_validation(self):
         service = ServiceFactory()
         # No location - should not allow approval
@@ -125,3 +137,29 @@ class ServiceTest(TestCase):
             self.assertIn('name', e.error_dict)
         else:
             self.fail("Should have gotten ValidationError")
+
+
+class FeedbackTest(TestCase):
+    def test_good_validation(self):
+        # Factory ought to create a valid instance
+        feedback = FeedbackFactory()
+        feedback.full_clean()
+
+    def test_delivered_but_some_required_fields_missing(self):
+        feedback = FeedbackFactory(delivered=True, wait_time=None, wait_time_satisfaction=None)
+        with self.assertRaises(ValidationError) as e:
+            feedback.full_clean()
+        self.assertIn('wait_time', e.exception.message_dict)
+        self.assertIn('wait_time_satisfaction', e.exception.message_dict)
+
+    def test_other_difficulties(self):
+        feedback = FeedbackFactory(difficulty_contacting='other', other_difficulties='')
+        with self.assertRaises(ValidationError) as e:
+            feedback.full_clean()
+        self.assertIn('other_difficulties', e.exception.message_dict)
+
+    def test_non_delivery_explanation(self):
+        feedback = FeedbackFactory(delivered=False, non_delivery_explained=None)
+        with self.assertRaises(ValidationError) as e:
+            feedback.full_clean()
+        self.assertIn('non_delivery_explained', e.exception.message_dict)

@@ -1,0 +1,126 @@
+<div id="service-detail">
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+   		<div class="name">
+			{{# if service.servicetype.icon_url }}<img class="servicetype-icon" src="{{ service.servicetype.icon_url }}"/>{{/if}}
+			{{ service.name }}
+        <div class="feedback-link">
+          <a href="#/feedback/{{ service.id }}">
+            <button class="primary-button" data-i18n="Service-Detail.Give-Feedback"></button>
+          </a>
+        </div>
+		</div>
+     
+        
+
+		<div class="description">{{multiline service.description }}</div>
+		{{#if mapURL}}
+			<div id="static-map">
+				<div class="map">
+					<div class="map-image-ctn">
+						<img src="{{ mapURL }}" />
+					</div>
+				</div>
+			</div>
+		{{/if}}
+		<div class="row">
+			<span class="area control-label" data-i18n="Service-Map.List.Area"></span>
+			{{ service.servicearea.name }}
+		</div>
+		<div class="row">
+			<span class="area control-label" data-i18n="Service-Map.List.Type"></span>
+			{{ service.servicetype.name }}
+		</div>
+		<div class="hours">
+			<div class="form-group">
+				<label class="control-label" data-i18n="Service-Map.List.All-Hours"></label>
+				<table>
+					<thead>
+						<tr>
+							<th class="third">Day</th>
+							<th class="third" data-i18n="Service-Form.Hours-Open"></th>
+							<th class="third" data-i18n="Service-Form.Hours-Close"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="third"><span data-i18n="Global.Sunday"></span></td>
+							<td class="third">{{ service.sunday_open }}</td>
+							<td class="third">{{ service.sunday_close }}</td>
+						</tr>
+						<tr>
+							<td class="third"><span data-i18n="Global.Monday"></span></td>
+							<td class="third">{{ service.monday_open }}</td>
+							<td class="third">{{ service.monday_close }}</td>
+						</tr>
+						<tr>
+							<td class="third"><span data-i18n="Global.Tuesday"></span></td>
+							<td class="third">{{ service.tuesday_open }}</td>
+							<td class="third">{{ service.tuesday_close }}</td>
+						</tr>
+						<tr>
+							<td class="third"><span data-i18n="Global.Wednesday"></span></td>
+							<td class="third">{{ service.wednesday_open }}</td>
+							<td class="third">{{ service.wednesday_close }}</td>
+						</tr>
+						<tr>
+							<td class="third"><span data-i18n="Global.Thursday"></span></td>
+							<td class="third">{{ service.thursday_open }}</td>
+							<td class="third">{{ service.thursday_close }}</td>
+						</tr>
+						<tr>
+							<td class="third"><span data-i18n="Global.Friday"></span></td>
+							<td class="third">{{ service.friday_open }}</td>
+							<td class="third">{{ service.friday_close }}</td>
+						</tr>
+						<tr>
+							<td class="third"><span data-i18n="Global.Saturday"></span></td>
+							<td class="third">{{ service.saturday_open }}</td>
+							<td class="third">{{ service.saturday_close }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="contact">
+			<div class="row">
+				<div class="half">
+					<span class="control-label" data-i18n="Service-Map.List.Phone"></span>
+					{{ service.provider.phone_number }}
+				</div>
+				<div class="half">
+					{{#if service.provider.website }}
+						<span class="control-label" data-i18n="Service-Map.List.Website"></span>
+						<a href="{{ service.provider.website }}" dir=ltr>{{ service.provider.website }}</a>
+					{{/if}}
+				</div>
+			</div>
+		</div>
+		<div class="description">
+			<div class="row">
+				{{#if service.additional_info }}
+					<span class="control-label" data-i18n="Service-Map.List.Additional-Info"></span>
+					<p>{{multiline service.additional_info }}</p>
+				{{/if}}
+			</div>
+		</div>
+        <div class="description">
+          <div class="row">
+            <span class="control-label" data-i18n="Service-Map.List.Cost"></span>
+            <p>{{multiline service.cost_of_service }}</p>
+          </div>
+        </div>
+        <div class="description">
+          <div class="row">
+            <span class="control-label" data-i18n="Service-Map.List.Criteria"></span>
+          </div>
+          {{#each service.selection_criteria }}
+              <div class="row">
+                <p>{{ this.text }}</p>
+              </div>
+          {{/each}}
+        </div>
+    </div>
+</div>

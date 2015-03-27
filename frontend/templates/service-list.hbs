@@ -1,17 +1,14 @@
 <!-- Page Head -->
     <div class="page-head">
         <div class="container">
-        	<div class="half">
-	            <div class="row">
-	                <div class="page-title" data-i18n="Service-List.Page-Head.Page-Title.Title"></div>
-                    {{#if no_services}}
-                        <div class="page-descr" data-i18n="Service-List.Empty-Message"></div>
-                    {{else}}
-	                   <div class="page-descr" data-i18n="Service-List.Page-Head.Page-Description.Page-Description"></div>
-                    {{/if}}
-	            </div>
+        	<div class="row">
+                <div class="page-title" data-i18n="Service-List.Page-Head.Page-Title.Title"></div>
+                {{#if no_services}}
+                    <div class="page-descr" data-i18n="Service-List.Empty-Message"></div>
+                {{else}}
+                   <div class="page-descr" data-i18n="Service-List.Page-Head.Page-Description.Page-Description"></div>
+                {{/if}}
 	        </div>
-            <div class="half"></div>
         </div>
     </div>
 <!-- End Page Head -->
@@ -30,23 +27,36 @@
 		</thead>
 		<tbody>
             {{#each services}}
-			<tr class="{{#if this.isApproved }}approved{{/if}} {{#if this.isRejected}}denied{{/if}} {{#if this.update_of}}update{{/if}}">
+			<tr class="{{#if this.isApproved }}approved{{/if}}{{#if this.isRejected}}denied{{/if}}">
 				<td>
-					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td">
-                        <a href="#/service/{{ this.id }}"{{#if this.is_update}} class="update"{{/if}}>{{ this.name }}</a>
-                    </span>
+
+                  <div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td {{#if this.parent }}update{{/if}}">
+                    {{#if this.can_update }}
+                      <a href="#/manage/service/{{ this.id }}">{{ this.name }}</a>
+                    {{ else }}
+                      {{#if this.isRejected}}
+                        {{this.name}}
+                      {{else}}
+                        <a href="#/service/{{ this.id }}">{{ this.name }}</a>
+                      {{/if}}
+                    {{/if}}
+                  </span>
+
 				</td>
 				<td>
-					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Name"></div><span class="vertical-td">{{ this.servicetype.name }}</span>
+					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Name"></div><span class="vertical-td">
+                    {{# if this.servicetype.icon_url }}<img class="servicetype-icon" src="{{ this.servicetype.icon_url }}"/>{{/if}}
+                    {{ this.servicetype.name }}
+                    </span>
 				</td>
 				<td>
 					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Type"></div><span class="vertical-td">{{ this.servicearea.name }}</span>
 				</td>
 				<td>
 					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Area"></div><span class="vertical-td" data-i18n="Service-List.Status.{{ this.status }}">{{ this.status }}</span>
-				</td>
+                </td>
 				<td>
-				    <div class="vertical-header" data-i18n="Service-List.Table.Thead.Remove"></div><span class="vertical-td"><a href="#/service/cancel/{{ this.id }}"><span
+				    <div class="vertical-header" data-i18n="Service-List.Table.Thead.Remove"></div><span class="vertical-td"><a href="#/manage/service/cancel/{{ this.id }}"><span
 				      {{#if this.is_draft }}
       				     data-i18n="Service-Remove-Change.Remove-Change"
                       {{else}}
@@ -61,9 +71,9 @@
 		</tbody>
 	</table>
 {{/unless}}
-<div class="main-content">
+<div class="main-content-service-list">
     <div class="third float-start">
-        <a class="btn primary-button" href="#/service" data-i18n="Service-List.Add-Service"></a>
+        <button class="primary-button" href="#/manage/service" data-i18n="Service-List.Add-Service"></a>
     </div>
 </div>
 <!-- End Main Content -->

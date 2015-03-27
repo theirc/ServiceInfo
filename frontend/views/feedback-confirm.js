@@ -1,5 +1,5 @@
 var Backbone = require('backbone'),
-    template = require("../templates/feedback.hbs"),
+    template = require("../templates/feedback-confirm.hbs"),
     i18n = require('i18next-client');
 
 module.exports = Backbone.View.extend({

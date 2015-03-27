@@ -15,15 +15,17 @@ from rest_framework.exceptions import ValidationError as DRFValidationError, Per
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.viewsets import GenericViewSet
 
 from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, ProviderSerializer, \
     ProviderTypeSerializer, ServiceAreaSerializer, APILoginSerializer, APIActivationSerializer, \
     PasswordResetRequestSerializer, PasswordResetCheckSerializer, PasswordResetSerializer, \
     ResendActivationLinkSerializer, CreateProviderSerializer, ServiceTypeSerializer, \
-    SelectionCriterionSerializer, LanguageSerializer, ServiceSearchSerializer
+    SelectionCriterionSerializer, LanguageSerializer, ServiceSearchSerializer, \
+    ProviderFetchSerializer, FeedbackSerializer, NationalitySerializer
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
-    SelectionCriterion
+    SelectionCriterion, Feedback, Nationality
 
 
 class TranslatedViewMixin(object):
@@ -51,6 +53,13 @@ class ServiceInfoModelViewSet(TranslatedViewMixin, viewsets.ModelViewSet):
     pass
 
 
+class FeedbackViewSet(mixins.CreateModelMixin, GenericViewSet):
+    """A write-only viewset for feedback"""
+    permission_classes = [AllowAny]
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
+
+
 class LanguageView(ServiceInfoAPIView):
     """
     Lookup the authenticated user's preferred language.
@@ -72,8 +81,19 @@ class UserViewSet(ServiceInfoModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
+    permission_classes = [IsAuthenticated]
     queryset = EmailUser.objects.all()
     serializer_class = UserSerializer
+
+    def get_queryset(self):
+        # Limit to user's own user object
+        return self.queryset.filter(pk=self.request.user.pk)
+
+    def update(self, request, *args, **kwargs):
+        # Don't allow users to change their email
+        instance = self.get_object()
+        request.data['email'] = instance.email
+        return super().update(request, *args, **kwargs)
 
 
 class GroupViewSet(ServiceInfoModelViewSet):
@@ -82,6 +102,17 @@ class GroupViewSet(ServiceInfoModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+
+class NationalityViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
+                         ServiceInfoGenericViewSet):
+    """
+    Read-only API for nationality. You can list them or get one, but
+    cannot add, change, or delete them.
+    """
+    permission_classes = [AllowAny]
+    queryset = Nationality.objects.all()
+    serializer_class = NationalitySerializer
 
 
 class ServiceAreaViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
@@ -294,6 +325,13 @@ class ProviderViewSet(ServiceInfoModelViewSet):
 
     queryset = Provider.objects.all()
     serializer_class = ProviderSerializer
+
+    @detail_route(methods=['get'], permission_classes=[AllowAny])
+    def fetch(self, request, pk=None):
+        # Get a provider anonymously using /api/providers/<id>/fetch/
+        instance = Provider.objects.get(pk=int(pk))
+        serializer = ProviderFetchSerializer(instance, context={'request': request})
+        return Response(serializer.data)
 
     def get_queryset(self):
         # If user is authenticated, it's not a create_provider call.

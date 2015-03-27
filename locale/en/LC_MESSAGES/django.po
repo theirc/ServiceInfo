@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-10 14:14+0200\n"
+"POT-Creation-Date: 2015-03-26 16:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,62 +17,66 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: api/serializers.py:30 services/models.py:503 services/models.py:506
+#: api/serializers.py:33 services/models.py:574 services/models.py:577
 msgid "This field is required."
 msgstr ""
 
-#: api/serializers.py:60
+#: api/serializers.py:73
 #, python-brace-format
 msgid "Invalid language code {code}. The valid codes are {valid_codes}."
 msgstr ""
 
-#: api/serializers.py:125 email_user/forms.py:18
+#: api/serializers.py:156 email_user/forms.py:18
 msgid "A user with that email already exists."
 msgstr ""
 
-#: api/serializers.py:215
-msgid "You may only submit updates to current or draft services"
+#: api/serializers.py:253
+msgid "You may only submit updates to current, draft or rejected services"
 msgstr ""
 
-#: api/serializers.py:225
+#: api/serializers.py:260
+msgid "There is already a pending draft update to this service."
+msgstr ""
+
+#: api/serializers.py:270
 msgid "Close time is missing."
 msgstr ""
 
-#: api/serializers.py:227
+#: api/serializers.py:272
 msgid "Open time is missing."
 msgstr ""
 
-#: api/serializers.py:229
+#: api/serializers.py:274
 msgid "Close time is not later than open time."
 msgstr ""
 
-#: api/serializers.py:314
+#: api/serializers.py:371
 msgid "User account is disabled."
 msgstr ""
 
-#: api/serializers.py:317
+#: api/serializers.py:374
 msgid "Unable to log in with provided credentials."
 msgstr ""
 
-#: api/serializers.py:339
+#: api/serializers.py:396
 msgid ""
 "Activation key is invalid. Check that it was copied correctly and has not "
 "already been used."
 msgstr ""
 
-#: api/serializers.py:360 api/serializers.py:412
+#: api/serializers.py:417 api/serializers.py:469
 msgid "No user with that email"
 msgstr ""
 
-#: api/serializers.py:378 api/serializers.py:396
+#: api/serializers.py:435 api/serializers.py:453
 msgid "Password reset key is not valid"
 msgstr ""
 
-#: api/serializers.py:415
+#: api/serializers.py:472
 msgid "User is not pending activation"
 msgstr ""
 
-#: api/views.py:213
+#: api/views.py:248
 msgid "Service record must be current or pending changes to be canceled"
 msgstr ""
 
@@ -157,7 +161,7 @@ msgstr ""
 msgid "User's preferred language."
 msgstr ""
 
-#: email_user/models.py:147 services/models.py:122
+#: email_user/models.py:147 services/models.py:125
 msgid "user"
 msgstr ""
 
@@ -361,226 +365,448 @@ msgid ""
 "the search box (e.g. \"33.8869, 35.5131\")."
 msgstr ""
 
-#: services/admin.py:83
+#: services/admin.py:96
 msgid "Description and Additional Information"
 msgstr ""
 
-#: services/admin.py:94
+#: services/admin.py:107
 #, python-brace-format
 msgid "Hours (all times in time zone {timezone})"
 msgstr ""
 
-#: services/admin.py:106
+#: services/admin.py:119
 msgid "Location"
 msgstr ""
 
-#: services/admin.py:125
+#: services/admin.py:138
 msgid "Only services in draft status may be approved"
 msgstr ""
 
-#: services/admin.py:133 services/admin.py:162
+#: services/admin.py:146 services/admin.py:184
 #, python-brace-format
 msgid "Unable to approve service '{name}': {error}."
 msgstr ""
 
-#: services/admin.py:139
+#: services/admin.py:152
 msgid "Services have been approved"
 msgstr ""
 
-#: services/admin.py:140
+#: services/admin.py:153
 msgid "Approve new or changed service"
 msgstr ""
 
-#: services/admin.py:146
+#: services/admin.py:159
 msgid "Only services in draft status may be rejected"
 msgstr ""
 
-#: services/admin.py:151
+#: services/admin.py:167 services/admin.py:199
+#, python-brace-format
+msgid "Unable to reject service '{name}': {error}."
+msgstr ""
+
+#: services/admin.py:173
 msgid "Services have been rejected"
 msgstr ""
 
-#: services/admin.py:152
+#: services/admin.py:174
 msgid "Reject new or changed service"
 msgstr ""
 
-#: services/admin.py:171
+#: services/admin.py:193
 msgid "The service was approved successfully."
 msgstr ""
 
-#: services/admin.py:175
+#: services/admin.py:208
 msgid "The service was rejected successfully."
 msgstr ""
 
 #. Translators: Provider name
 #. Translators: Service name
-#: services/models.py:32 services/models.py:64 services/models.py:152
-#: services/models.py:222 services/models.py:281
+#: services/models.py:34 services/models.py:67 services/models.py:204
+#: services/models.py:279 services/models.py:344 services/models.py:856
 msgid "name in English"
 msgstr ""
 
 #. Translators: Provider name
 #. Translators: Service name
-#: services/models.py:38 services/models.py:72 services/models.py:158
-#: services/models.py:228 services/models.py:288
+#: services/models.py:40 services/models.py:75 services/models.py:210
+#: services/models.py:285 services/models.py:351 services/models.py:862
 msgid "name in Arabic"
 msgstr ""
 
 #. Translators: Provider name
 #. Translators: Service name
-#: services/models.py:44 services/models.py:80 services/models.py:164
-#: services/models.py:234 services/models.py:295
+#: services/models.py:46 services/models.py:83 services/models.py:216
+#: services/models.py:291 services/models.py:358 services/models.py:868
 msgid "name in French"
 msgstr ""
 
-#: services/models.py:88 services/models.py:405
+#: services/models.py:91 services/models.py:467
 msgid "type"
 msgstr ""
 
-#: services/models.py:91
+#: services/models.py:94 services/models.py:891
 msgid "phone number"
 msgstr ""
 
-#: services/models.py:98
+#: services/models.py:101
 msgid "website"
 msgstr ""
 
 #. Translators: Provider description
 #. Translators: Service description
-#: services/models.py:104 services/models.py:306
+#: services/models.py:107 services/models.py:369
 msgid "description in English"
 msgstr ""
 
 #. Translators: Provider description
 #. Translators: Service description
-#: services/models.py:110 services/models.py:312
+#: services/models.py:113 services/models.py:375
 msgid "description in Arabic"
 msgstr ""
 
 #. Translators: Provider description
 #. Translators: Service description
-#: services/models.py:116 services/models.py:318
+#: services/models.py:119 services/models.py:381
 msgid "description in French"
 msgstr ""
 
-#: services/models.py:123
+#: services/models.py:126
 msgid "user account for this provider"
 msgstr ""
 
-#: services/models.py:126
+#: services/models.py:129
 msgid "number of targeted beneficiaries monthly"
 msgstr ""
 
-#: services/models.py:171
+#: services/models.py:137
+msgid "focal point name in English"
+msgstr ""
+
+#: services/models.py:144
+msgid "focal point name in Arabic"
+msgstr ""
+
+#: services/models.py:151
+msgid "focal point name in French"
+msgstr ""
+
+#: services/models.py:158
+msgid "focal point phone number"
+msgstr ""
+
+#: services/models.py:165
+msgid "provider address in English"
+msgstr ""
+
+#: services/models.py:170
+msgid "provider address in Arabic"
+msgstr ""
+
+#: services/models.py:175
+msgid "provider address in French"
+msgstr ""
+
+#: services/models.py:223
 msgid "parent area"
 msgstr ""
 
-#: services/models.py:172
+#: services/models.py:224
 msgid "the area that contains this area"
 msgstr ""
 
-#: services/models.py:210
+#: services/models.py:262
 msgid "selection criteria"
 msgstr ""
 
-#: services/models.py:241
+#: services/models.py:275
+msgid "icon"
+msgstr ""
+
+#: services/models.py:298
 msgid "comments in English"
 msgstr ""
 
-#: services/models.py:247
+#: services/models.py:304
 msgid "comments in Arabic"
 msgstr ""
 
-#: services/models.py:253
+#: services/models.py:310
 msgid "comments in French"
 msgstr ""
 
-#: services/models.py:277
+#: services/models.py:340
 msgid "provider"
 msgstr ""
 
-#: services/models.py:302
+#: services/models.py:365
 msgid "area of service"
 msgstr ""
 
-#: services/models.py:323
+#: services/models.py:386
 msgid "additional information in English"
 msgstr ""
 
-#: services/models.py:328
+#: services/models.py:391
 msgid "additional information in Arabic"
 msgstr ""
 
-#: services/models.py:333
+#: services/models.py:396
 msgid "additional information in French"
 msgstr ""
 
-#: services/models.py:338
+#: services/models.py:401
 msgid "cost of service"
 msgstr ""
 
-#: services/models.py:353
+#: services/models.py:416
 msgid "draft"
 msgstr ""
 
-#: services/models.py:356
+#: services/models.py:419
 msgid "current"
 msgstr ""
 
-#: services/models.py:358
+#: services/models.py:421
 msgid "rejected"
 msgstr ""
 
-#: services/models.py:361
+#: services/models.py:424
 msgid "canceled"
 msgstr ""
 
-#: services/models.py:363
+#: services/models.py:426
 msgid "archived"
 msgstr ""
 
-#: services/models.py:366
+#: services/models.py:429
 msgid "status"
 msgstr ""
 
-#: services/models.py:373
+#: services/models.py:436
 msgid ""
-"If a service record represents a modification of an existing service record "
-"that is still pending approval, this field links to the existing service "
-"record."
+"If a service record represents a modification of another service record, "
+"this field links to that other record."
 msgstr ""
 
-#: services/models.py:382
+#: services/models.py:444
 msgid "location"
 msgstr ""
 
-#: services/models.py:547
+#: services/models.py:579
+msgid "Only services in draft status may be approved."
+msgstr ""
+
+#: services/models.py:622
+msgid "Only services in draft status may be rejected."
+msgstr ""
+
+#: services/models.py:656
 msgid "Provider updated their information"
 msgstr ""
 
-#: services/models.py:548
+#: services/models.py:657
 msgid "New service submitted by provider"
 msgstr ""
 
-#: services/models.py:549
+#: services/models.py:658
 msgid "Change to existing service submitted by provider"
 msgstr ""
 
-#: services/models.py:550
+#: services/models.py:659
 msgid "Provider canceled a draft service"
 msgstr ""
 
-#: services/models.py:551
+#: services/models.py:660
 msgid "Provider canceled a current service"
 msgstr ""
 
-#: services/models.py:552
+#: services/models.py:661
 msgid "Provider superseded a previous draft"
 msgstr ""
 
-#: services/models.py:570
+#: services/models.py:662
+msgid "Staff approved a new or changed service"
+msgstr ""
+
+#: services/models.py:663
+msgid "Staff rejected a new or changed service"
+msgstr ""
+
+#: services/models.py:687
 msgid "update type"
 msgstr ""
 
-#: services/models.py:575
+#: services/models.py:692
 msgid "JIRA issue"
+msgstr ""
+
+#: services/models.py:875
+msgid "nationalities"
+msgstr ""
+
+#: services/models.py:887
+msgid "name"
+msgstr ""
+
+#: services/models.py:898
+msgid "nationality"
+msgstr ""
+
+#: services/models.py:903
+msgid "area of residence"
+msgstr ""
+
+#: services/models.py:908
+msgid "service"
+msgstr ""
+
+#: services/models.py:914
+msgid "Was the service you sought delivered to you?"
+msgstr ""
+
+#: services/models.py:918
+msgid ""
+"How would you rate the quality of the service you received (from 1 to 5, "
+"where 5 is the highest rating possible)?"
+msgstr ""
+
+#: services/models.py:931
+msgid ""
+"Did you receive a clear explanation for why the service you sought was not "
+"delivered to you?"
+msgstr ""
+
+#: services/models.py:938
+msgid "No explanation"
+msgstr ""
+
+#: services/models.py:939
+msgid "Explanation was not clear"
+msgstr ""
+
+#: services/models.py:940
+msgid "Explanation was not fair"
+msgstr ""
+
+#: services/models.py:941
+msgid "Clear and appropriate explanation"
+msgstr ""
+
+#: services/models.py:946
+msgid ""
+"How long did you wait for the service to be delivered, after contacting the "
+"service provider?"
+msgstr ""
+
+#: services/models.py:953
+msgid "Less than 1 hour"
+msgstr ""
+
+#: services/models.py:954
+msgid "1-48 hours"
+msgstr ""
+
+#: services/models.py:955
+msgid "3-7 days"
+msgstr ""
+
+#: services/models.py:956
+msgid "1-2 weeks"
+msgstr ""
+
+#: services/models.py:957
+msgid "More than 2 weeks"
+msgstr ""
+
+#: services/models.py:961
+msgid ""
+"How do you rate your satisfaction with the time that you waited for the "
+"service to be delivered (from 1 to 5, where 5 is the highest rating "
+"possible)?"
+msgstr ""
+
+#: services/models.py:974
+msgid ""
+"Did you experience difficulties contacting the provider of the service you "
+"needed?"
+msgstr ""
+
+#: services/models.py:978
+msgid "No"
+msgstr ""
+
+#: services/models.py:979
+msgid "Did not know how to contact them"
+msgstr ""
+
+#: services/models.py:980
+msgid "Tried to contact them by phone but received no response"
+msgstr ""
+
+#: services/models.py:981
+msgid ""
+"Tried to contact them in person but received no response or did not find "
+"their office"
+msgstr ""
+
+#: services/models.py:983
+msgid "Contacted them but response was unhelpful"
+msgstr ""
+
+#: services/models.py:984
+msgid "Other"
+msgstr ""
+
+#: services/models.py:989
+msgid "Other difficulties contacting the service provider"
+msgstr ""
+
+#: services/models.py:994
+msgid ""
+"How would you rate your satisfaction with the staff of the organization that "
+"provided services to you, (from 1 to 5, where 5 is the highest rating "
+"possible)?"
+msgstr ""
+
+#: services/models.py:1003
+msgid "Other comments"
+msgstr ""
+
+#: services/models.py:1008
+msgid "I want my feedback to be anonymous to the service provider"
+msgstr ""
+
+#: services/models.py:1017
+msgid ""
+"Quality field is required if you answered 'Yes' to 'Was the service you "
+"sought delivered to you?'."
+msgstr ""
+
+#: services/models.py:1021
+msgid ""
+"An answer is required to 'How long did you wait for the service to be "
+"delivered, after contacting the service provider?' if you answered 'Yes' to "
+"'Was the service you sought delivered to you?'."
+msgstr ""
+
+#: services/models.py:1027
+msgid ""
+"An answer is required to 'How do you rate your satisfaction with the time "
+"that you waited for the service to be delivered?' if you answered 'Yes' to "
+"'Was the service you sought delivered to you?'."
+msgstr ""
+
+#: services/models.py:1035
+msgid ""
+"An answer is required to 'Did you receive a clear explanation for why the "
+"service you sought was not delivered to you?' if you answered 'No' to 'Was "
+"the service you sought delivered to you?'."
+msgstr ""
+
+#: services/models.py:1042
+msgid ""
+"An answer is required to 'Other difficulties contacting the service "
+"provider' if you answered 'Other' to 'Did you experience difficulties "
+"contacting the provider of the service you needed?'"
 msgstr ""

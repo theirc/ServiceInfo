@@ -16,7 +16,7 @@ var debabelize = function debabelize(data, lang1, lang2, lang3) {
     for (i = 0; i < keys.length; i += 1) {
         name = keys[i];
         if (name.indexOf('_en') > 0 || name.indexOf('_ar') > 0 || name.indexOf('_fr') > 0) {
-            key = name.split('_')[0];
+            key = name.substr(0, name.length - 3);
             if (!out[key]) {
                 name1 = key + '_' + lang1;
                 name2 = key + '_' + lang2;
@@ -89,6 +89,7 @@ var BaseModel = Backbone.Model.extend({
         }
 
         data['id'] = this.get('id');
+        data['the_url'] = this.url();
         return data;
     },
 });
@@ -115,6 +116,16 @@ var BaseCollection = Backbone.Collection.extend({
             data.push(this.models[i].data());
         }
         return data;
+    },
+
+    getByUrl: function(url) {
+        var i, l=this.models.length, m;
+        for (i=0; i < l; i++) {
+            m = this.models[i];
+            if (m.get('url') === url) {
+                return m;
+            }
+        }
     },
 });
 

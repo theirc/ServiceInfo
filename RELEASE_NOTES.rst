@@ -2,7 +2,31 @@ Service Info
 
 Release Notes
 
-0.1.0 - Mar. 12, 2015
+0.1.2 - Mar. 27, 2015
+---------------------
+
+* Continue updating translations
+* Continue fixing and improving styling
+* Unified list and map options on search page
+* If no translation for a particular message, fall back to another
+  language rather than leaving the text blank.
+* When nothing matches in search, display a message to let the user
+  know.
+* Display cost and selection criteria on service detail page.
+* Replace red markers on map with service icons
+* Make ordering english-arabic-french consistent in admin
+* Add new feedback page (styling TBD)
+* Fix bug - preserve translations of fields in other languages
+  when submitting an update to a service
+* Improve performance by reducing redundant API calls
+* Include all provider and service data in JIRA tickets
+* In JIRA data about a service, display "Closed" on days when a
+  service has no hours.
+* Add service type icons to database
+* Improved display of errors in frontend
+* New logo
+
+0.1.1 - Mar. 12, 2015
 ---------------------
 
 * Add JIRA comment when a service is approved or rejected

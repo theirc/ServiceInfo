@@ -1,16 +1,23 @@
-var config = require('./config');
-var api = require('./api');
-var i18n = require('i18next-client');
+var config = require('./config')
+,   api = require('./api')
+,   i18n = require('i18next-client')
+,   messages = require('./messages')
+;
 
 var forms = module.exports = {
-    collect: function($form) {
+    /* collect(form: <form>, model: optional)
+     *
+     * Collect submission data from a form combined with other language data from the original
+     * model, if given.
+     */
+    collect: function($form, instance) {
         var data = {};
 
-        $form.find('[name]').each(function() {
+        var collect_field_data = function() {
             var $field = $(this);
             var value = $field.val();
             var filled = value.length > 0;
-            var name = $field.attr('name');
+            var name = $field.attr('name') || $field.parent().attr('name');
             var ml = typeof $field.data('i18n-field') !== "undefined";
 
             if (filled && name.indexOf('.') > 0) {
@@ -41,13 +48,26 @@ var forms = module.exports = {
 
             if (ml) {
                 var cur_lang = config.get('forever.language');
+
+                // Set all languages if we have an original instance to pull the non-current from
+                if (instance) {
+                    $.each(['en', 'fr', 'ar'], function() {
+                        data[name + '_' + this] = instance.get(name + '_' + this);
+                    });
+                }
+
                 name = name + '_' + cur_lang;
             }
 
             if (name.indexOf('.') < 0) {
                 data[name] = value;
             }
-        });
+        };
+
+        $form.find('[name]').each(collect_field_data);
+        $form.find('select[name] option:selected').each(collect_field_data);
+        $form.find('input[name][type=checkbox]:checked').each(collect_field_data);
+        $form.find('input[name][type=radio]:checked').each(collect_field_data);
 
         return data;
     },
@@ -132,6 +152,8 @@ var forms = module.exports = {
         })
         if (e.status >= 500) {
             $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
+        } else if (e.status === 400) {
+            messages.add(i18n.t('Global.FormValidationError'));
         }
         return missing;
     },
@@ -150,7 +172,8 @@ var forms = module.exports = {
                 },
                 function onerror(e) {
                     $submit.removeAttr('disabled');
-                    $.extend(errors, e.responseJSON);
+                    $.extend(e.responseJSON, errors);  // merge errors into e.responseJSON
+                    messages.clear();
                     var missing = self.show_errors_on_form($form, e);
                     error(missing);
                 }
