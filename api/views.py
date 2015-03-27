@@ -233,11 +233,14 @@ class ServiceViewSet(ServiceInfoModelViewSet):
         # Only make visible the Services owned by the current provider
         # and not archived
         if self.is_search:
-            return Service.objects.filter(status=Service.STATUS_CURRENT)
+            qs = Service.objects.filter(status=Service.STATUS_CURRENT)
         else:
-            return self.queryset.filter(provider__user=self.request.user)\
+            qs = self.queryset.filter(provider__user=self.request.user)\
                 .exclude(status=Service.STATUS_ARCHIVED)\
                 .exclude(status=Service.STATUS_CANCELED)
+        if not self.request.GET.get('closest', None):
+            qs = qs.order_by('name_' + self.request.user.language)
+        return qs
 
     @detail_route(methods=['post'])
     def cancel(self, request, *args, **kwargs):
