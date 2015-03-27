@@ -15,9 +15,14 @@ logger = logging.getLogger(__name__)
 def email_provider_about_service_approval_task(service_pk):
     from .models import Service
     service = Service.objects.get(pk=service_pk)
-    # FIXME: Temporarily just give link to provider editing page
     site = Site.objects.get_current()
-    service_link = 'http://%s/app/#/manage/service/%d' % (site, service_pk)
+    scheme = 'https' if settings.SECURE_LINKS else 'http'
+    if settings.DEBUG:
+        # E.g. http://localhost:8000/#/service/168
+        service_link = '%s://%s/#/service/%d' % (scheme, site, service_pk)
+    else:
+        # E.g. https://serviceinfo-staging.rescue.org/app/#/service/22
+        service_link = '%s://%s/app/#/service/%d' % (scheme, site, service_pk)
     context = {
         'site': site,
         'service': service,
