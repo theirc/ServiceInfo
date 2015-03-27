@@ -2,19 +2,24 @@
 
 <!-- Main Content -->
 <div class="container">
-	<div class="row">
-   		<div class="name">
-			{{# if service.servicetype.icon_url }}<img class="servicetype-icon" src="{{ service.servicetype.icon_url }}"/>{{/if}}
-			{{ service.name }}
-        <div class="feedback-link">
-          <a href="#/feedback/{{ service.id }}">
-            <button class="primary-button" data-i18n="Service-Detail.Give-Feedback"></button>
-          </a>
-        </div>
+	<div class="row name-row">
+		<div class="two-third">
+	   		<div class="name">
+				{{# if service.servicetype.icon_url }}<img class="servicetype-icon" src="{{ service.servicetype.icon_url }}"/>{{/if}}
+				{{ service.name }}
+			</div>
 		</div>
+		<div class="third">
+	        <div class="feedback-link">
+	          <a href="#/feedback/{{ service.id }}">
+	            <button class="primary-button" data-i18n="Service-Detail.Give-Feedback"></button>
+	          </a>
+	        </div>
+	    </div>
+    </div>
      
         
-
+    <div class="row">
 		<div class="description">{{multiline service.description }}</div>
 		{{#if mapURL}}
 			<div id="static-map">
