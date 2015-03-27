@@ -14,7 +14,7 @@
         "Service-Map": "خدمة خريطة",
         "Search": "بحث",
         "Provider-Registration": "التسجيل مزود",
-        "Feedback-Tool": "",
+        "Feedback-Tool": "ملاحظات",
         "Change-Language": "تغيير اللغة"
     },
     "Global": {
@@ -56,7 +56,7 @@
         }
     },
     "Service-Detail": {
-        "Give-Feedback": ""
+        "Give-Feedback": "قدّم ملاحظاتك بالنسبة لهذه الخدم"
     },
     "Service-Map": {
         "Page-Head": {
@@ -274,10 +274,10 @@
     "Feedback-Confirmation": {
         "Page-Head": {
             "Page-Title": {
-                "Title": ""
+                "Title": "لقد تم إرسال معلوماتك بنجاح"
             },
             "Page-Description": {
-                "Page-Description": ""
+                "Page-Description": "شكرا\" لملاحظاتك"
             }
         }
     },
@@ -324,63 +324,63 @@
         }
     },
     "Map": {
-        "Loading": "",
-        "TypeHeader": ""
+        "Loading": "تحميل أنواع الخدمات التي صنّفتها",
+        "TypeHeader": "تصنيف حسب نوع الخدمة"
     },
     "Feedback-Form": {
-        "Title": "",
-        "Description": "",
-        "What-Service": "",
-        "Name": "",
-        "Phone-Number": "",
-        "Nationality": "",
-        "AreaOfResidence": "",
+        "Title": "نموذج الملاحظات",
+        "Description": "إملأ النموذج أدناه",
+        "What-Service": "أنت تعطي ملاحظاتك حول هذه الخدمة",
+        "Name": "الإسم",
+        "Phone-Number": "رقم الهاتف (XX-XXXX)",
+        "Nationality": "الجنسية",
+        "AreaOfResidence": "محل الإقامة",
         "Delivered": {
-            "label": "",
-            "yes": "",
-            "no": ""
+            "label": "هل تم توصيل الخدمة؟",
+            "yes": "نعم",
+            "no": "لا"
         },
-        "Submit": "",
-        "Clear": "",
+        "Submit": "إرسال الأجوبة",
+        "Clear": "إزالة الأجوبة",
         "WaitTime": {
-            "label": "",
-            "lesshour": "",
-            "uptotwodays": "",
-            "more": "",
-            "3_7days": "",
-            "1_2weeks": ""
+            "label": "بعد الإتصال بمقدم الخدمات، كم من الوقت انتظرت لكي تصلك الخدمة؟",
+            "lesshour": "أقل من ساعة واحدة        1",
+            "uptotwodays": "لغاية يومين        2",
+            "more": "أطول من ذلك",
+            "3_7days": "3-7 أيام",
+            "1_2weeks": "من أسبوع واحد إلى أسبوعين      1-2"
         },
         "Quality": {
-            "label": ""
+            "label": "كيف تقيّم نوعية الخدمة التي تلقّيتها (من 1 إلى 5، بحيث أن 5 هي أعلى تقييم ممكن)؟"
         },
         "difficulty": {
-            "label": "",
-            "no": "",
-            "didntknow": "",
-            "nophoneresponse": "",
-            "noresponse": "",
-            "unhelpful": "",
-            "other": ""
+            "label": "هل واجهت صعوبات في الإتصال بمقدم الخدمات الذي تحتاجه؟",
+            "no": "لا",
+            "didntknow": "لم أعرف كيفية الإتصال بهم",
+            "nophoneresponse": "حاولت الإتصال بهم و لكن لم أتلق أي جواب",
+            "noresponse": "حاولت التواصل معهم شخصيا\" و لكن لم أتلق أي جواب أو لم أجد مكتبهم",
+            "unhelpful": "تواصلت معهم ولكن الجواب كان غير مفيد",
+            "other": "آخر"
         },
         "staff": {
-            "label": ""
+            "label": "كيف تقيّم رضاك على طاقم المنظمة/المؤسسة التي قدمت لك الخدمات (من 1 إلى 5، بحيث أن 5 هو أعلى تقييم ممكن)"
         },
         "anonymous": {
-            "label": "",
-            "yes": "",
-            "no": ""
+            "label": "أريد من ملاحظاتي أن تبقى مجهولة الهوية لمقدم الخدمات",
+            "yes": "نعم",
+            "no": "لا"
         },
-        "non_delivery_explained": "",
-        "non_delivery##no": "",
-        "non_delivery##unclear": "",
-        "non_delivery##unfair": "",
-        "non_delivery##yes": "",
-        "wait_time##label": "",
-        "other_difficulties": "",
-        "extra_comments": ""
+        "non_delivery_explained": "هل وصلك تفسير واضح لعدم تلقّيك الخدمة التي ابتغيتها؟",
+        "non_delivery##no": "لا تفسير",
+        "non_delivery##unclear": "التفسير كان غير واضح",
+        "non_delivery##unfair": "التفسير كان غير عادل",
+        "non_delivery##yes": "التفسير كان منطقي و مناسب",
+        "wait_time##label": "كيف تقيّم رضاك على المدة التي انتظرتها لتصلك الخدمة (من 1 إلى 5، بحيث أن 5 هو أعلى تقييم ممكن)",
+        "other_difficulties": "صعوبات أخرى بالنسبة للتواصل مع مقدم الخدمة",
+        "extra_comments": "ملاحظات أخرى"
     },
     "Feedback-Tool": {
-        "Title": "",
-        "Body": ""
+        "Title": "ملاحظات حول الخدمات",
+        "Body": "لإعطاء الملاحظات، الرجاء البحث عن الخدمة، إذهب إلى صفحة الخدمة و استعمل زر الملاحظات"
     }
 }
