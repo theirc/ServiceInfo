@@ -111,6 +111,9 @@ msgstr "Service Provider Map"
 msgid "Service-Map##Page-Head##Page-Description##Page-Description"
 msgstr "Use the filtered search below to find the service that meets your needs."
 
+msgid "Service-Map##No-Search-Results"
+msgstr "No services matched your search terms. Please try other terms."
+
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "Search term"
 
@@ -188,6 +191,9 @@ msgstr "Website"
 
 msgid "Service-Map##List##Unknown"
 msgstr "Unknown"
+
+msgid "Service-Map##List##Criteria"
+msgstr "Selection Criteria"
 
 msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
 msgstr "Remove Change"
