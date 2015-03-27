@@ -293,7 +293,6 @@ li {
 }
 
 .main-content {
-	background-color: #f3f3f4;
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
@@ -908,17 +907,8 @@ input[type=range] {
     width: 100%;
     height: 70px;
     background-color: #343538;
-}
-#application-header when (@direction = ltr) {
-    -webkit-box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
-    -moz-box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
-    box-shadow: 4px 0px 6px rgba(200, 200, 200, 1);
     z-index: 99;
-}
-#application-header when (@direction = rtl) {
-    -webkit-box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
-    -moz-box-shadow: -4px 0px 6px rgba(200, 200, 200, 1);
-    box-shadow: -4px 0px 6px rgba(200, 200, 200, 1)
+    position: relative;
 }
 
 #application-header .brand #logo {
@@ -934,7 +924,7 @@ input[type=range] {
     -webkit-box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
-    z-index: 4;
+    z-index: 100;
     &.no-animate {
     	transition: none;
     }
@@ -1023,7 +1013,7 @@ input[type=range] {
         margin: 1.25em auto;
     }
     #page {
-    	height: 100%;
+    	// height: 100%;
     	box-sizing: border-box;
     }
     #page-container {
@@ -1143,6 +1133,21 @@ input[type=range] {
         }
     }
 }
+
+/*
+Login
+*/
+
+#login {
+	.main-content {
+		padding: 0 0 15px;
+		max-width: 800px;
+		.half {
+			margin-@{start}: 0; 
+		} 
+	}
+}
+
 
 /*
 Service Map
@@ -1546,73 +1551,69 @@ div#search-filter {
 /*
 Landing page
 */
-
-.landing {
-	background-color: #154965;
-	background: -webkit-radial-gradient(rgb(28, 83, 107), rgb(15, 51, 72));
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 1;
-	.landing-img {
-		background-image: url(../images/map.png);
-		background-image: url(../images/map.svg);
-		opacity: 0.04;
-		background-repeat: no-repeat;
-		background-size: 100%;
+#landing {
+	.main-content,
+	.row {
+		padding: 0;
+	}
+	.main-content {
+		background: #F3F3F4 url(../images/map2.svg) center center no-repeat;
+		background-size: cover;
+		z-index: 1;
 		width: 100%;
 		height: 100%;
+		border-radius: 0;
 		position: absolute;
-		z-index: 2;
-	}
-	.row {
-		text-align: center;
-		position: relative;
-		z-index: 3;
-		.landing-logo {
-			background-image: url(../images/landing-logo.png);
-			background-image: url(../images/landingPage-logo.svg);
-			background-repeat: no-repeat;
-			background-size: 100%;
-			width: 170px;
-			height: 170px;
-			transform: translate(-50%,0);
-			  margin: 2.5em 0 2.5em 50%;
-			z-index: 4;
+		top: -10px;
+		@{start}: 0;
+		padding-bottom: 10px;
+		@media (max-width: 640px){
 		}
-		.service-user,
-		.service-provider {
-			margin: 1.25em .75em;
-			padding: 16px 20px;
-			background-color: #0f3348;
-			width: auto;
+
+		.row {
 			text-align: center;
-			color: white;
-			-webkit-border-radius: 4px;
-			-moz-border-radius: 4px;
-			border-radius: 4px;
-			vertical-align: top;
-			-webkit-box-shadow: 0px 2px 6px rgba(15, 51, 72, 1);
-			-moz-box-shadow: 0px 2px 6px rgba(15, 51, 72, 1);
-			box-shadow: 0px 2px 6px rgba(15, 51, 72, 1);
-			z-index: 4;
+			z-index: 3;
+			@media (min-width: 640px){
+				margin-@{start}: 230px;
+			}
 
-			p {
+			.service-user,
+			.service-provider {
+				margin: 2em .75em;
+				padding: 16px 20px;
+				background-color: rgba(11, 38, 51, 0.65);
+				width: auto;
+				text-align: center;
 				color: white;
-				margin: 0 0 18px;
+				border-radius: @round;
+				vertical-align: top;
+				-webkit-box-shadow: 0px 2px 6px rgba(15, 51, 72, 1);
+				-moz-box-shadow: 0px 2px 6px rgba(15, 51, 72, 1);
+				box-shadow: 0px 2px 6px rgba(15, 51, 72, 1);
+				z-index: 4;
+				max-width: 600px;
+
+				@media (min-width: 640px){
+					padding: 1.5em 2.5em;
+				}
+
+				p {
+					color: white;
+					margin: 0 0 18px;
+				}
+
+				button.primary-button {
+					font-weight: 400;
+					margin-bottom: 18px;
+				}
 			}
 
-			button.primary-button {
-				font-weight: 400;
-				margin-bottom: 18px;
-			}
-
-			@media (min-width: 1000px) {
-
-		        margin-top: 33.0%;
-		    }
+				.service-user {
+					margin-top: 120px;
+					@media (min-width: 640px) {
+						margin-top: 30px;
+					}
+				}
 		}
 	}
 }

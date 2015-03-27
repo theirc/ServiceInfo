@@ -316,12 +316,12 @@
   },
   "Landing": {
     "User": {
-      "Title": "I'm a service user, I want to:",
+      "Title": "I'm a service user, I want to",
       "Search": "Search for a Service",
       "Give-Feedback": "Give Feedback"
     },
     "Provider": {
-      "Title": "I'm a service provider, I want to:",
+      "Title": "I'm a service provider, I want to",
       "Register": "Register and Update My Service"
     }
   }
