@@ -89,6 +89,7 @@ var BaseModel = Backbone.Model.extend({
         }
 
         data['id'] = this.get('id');
+        data['the_url'] = this.url();
         return data;
     },
 });

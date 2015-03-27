@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-03-23 07:06+0000\n"
-"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
+"PO-Revision-Date: 2015-03-26 14:09+0000\n"
+"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +44,7 @@ msgid "Menu##Provider-Registration"
 msgstr "Inscription des fournisseurs"
 
 msgid "Menu##Feedback-Tool"
-msgstr "Commentaires Outil"
+msgstr ""
 
 msgid "Menu##Change-Language"
 msgstr "Changer de langue"
@@ -82,6 +82,9 @@ msgstr "Vendredi"
 msgid "Global##Saturday"
 msgstr "Samedi"
 
+msgid "Global##GeolocationError"
+msgstr ""
+
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "Entrer"
 
@@ -106,6 +109,9 @@ msgstr "Recherche fournisseur des services"
 msgid "Search-List##Page-Head##Description"
 msgstr "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
 
+msgid "Service-Detail##Give-Feedback"
+msgstr ""
+
 msgid "Service-Map##Page-Head##Page-Title##Title"
 msgstr "Cart de fournisseur des services"
 
@@ -122,7 +128,16 @@ msgid "Service-Map##Filtered-Search##Service-Type"
 msgstr "type de service"
 
 msgid "Service-Map##Filtered-Search##Distance"
-msgstr "Filtrer par la distance"
+msgstr ""
+
+msgid "Service-Map##Filtered-Search##Sort"
+msgstr ""
+
+msgid "Service-Map##Filtered-Search##SortName"
+msgstr ""
+
+msgid "Service-Map##Filtered-Search##SortNear"
+msgstr ""
 
 msgid "Service-Map##Filtered-Search##Area"
 msgstr "zone"
@@ -159,6 +174,9 @@ msgstr "Type de service"
 
 msgid "Service-Map##List##Additional-Info"
 msgstr "Informations supplémentaires sur le fournisseur"
+
+msgid "Service-Map##List##Cost"
+msgstr ""
 
 msgid "Service-Map##List##Todays-Hours"
 msgstr "Heures de service d'aujourd'hui"
@@ -461,6 +479,12 @@ msgid ""
 "Description"
 msgstr "Nous avons envoyé un e-mail de confirmation sur le compte e-mail utilisée lors de votre inscription. Cliquez sur le lien de confirmation dans l'e-mail pour terminer le processus d'inscription."
 
+msgid "Feedback-Confirmation##Page-Head##Page-Title##Title"
+msgstr ""
+
+msgid "Feedback-Confirmation##Page-Head##Page-Description##Page-Description"
+msgstr ""
+
 msgid "Provider-Registration-Changed##Page-Head##Page-Title##Title"
 msgstr "Votre information a été soumis avec succès"
 
@@ -491,3 +515,139 @@ msgstr "Entrez votre nouveau mot de passe:"
 
 msgid "Password-Reset-Form##Submit-Options##Submit"
 msgstr "Soumettre"
+
+msgid "Map##Loading"
+msgstr ""
+
+msgid "Map##TypeHeader"
+msgstr ""
+
+msgid "Feedback-Form##Title"
+msgstr ""
+
+msgid "Feedback-Form##Description"
+msgstr ""
+
+msgid "Feedback-Form##What-Service"
+msgstr ""
+
+msgid "Feedback-Form##Name"
+msgstr ""
+
+msgid "Feedback-Form##Phone-Number"
+msgstr ""
+
+msgid "Feedback-Form##Nationality"
+msgstr ""
+
+msgid "Feedback-Form##AreaOfResidence"
+msgstr ""
+
+msgid "Feedback-Form##Delivered##label"
+msgstr ""
+
+msgid "Feedback-Form##Delivered##yes"
+msgstr ""
+
+msgid "Feedback-Form##Delivered##no"
+msgstr ""
+
+msgid "Feedback-Form##Submit"
+msgstr ""
+
+msgid "Feedback-Form##Clear"
+msgstr ""
+
+msgid "Feedback-Form##WaitTime##label"
+msgstr ""
+
+msgid "Feedback-Form##WaitTime##lesshour"
+msgstr ""
+
+msgid "Feedback-Form##WaitTime##uptotwodays"
+msgstr ""
+
+msgid "Feedback-Form##WaitTime##more"
+msgstr ""
+
+msgid "Feedback-Form##Quality##label"
+msgstr ""
+
+msgid "Feedback-Form##difficulty##label"
+msgstr ""
+
+msgid "Feedback-Form##difficulty##no"
+msgstr ""
+
+msgid "Feedback-Form##difficulty##didntknow"
+msgstr ""
+
+msgid "Feedback-Form##difficulty##nophoneresponse"
+msgstr ""
+
+msgid "Feedback-Form##difficulty##noresponse"
+msgstr ""
+
+msgid "Feedback-Form##difficulty##unhelpful"
+msgstr ""
+
+msgid "Feedback-Form##difficulty##other"
+msgstr ""
+
+msgid "Feedback-Form##staff##label"
+msgstr ""
+
+msgid "Feedback-Form##anonymous##label"
+msgstr ""
+
+msgid "Feedback-Form##anonymous##yes"
+msgstr ""
+
+msgid "Feedback-Form##anonymous##no"
+msgstr ""
+
+msgid "Feedback-Tool##Title"
+msgstr ""
+
+msgid "Feedback-Tool##Body"
+msgstr ""
+
+msgctxt "explained"
+msgid "Feedback-Form##non_delivery"
+msgstr ""
+
+msgctxt "delivery##no"
+msgid "Feedback-Form##non"
+msgstr ""
+
+msgctxt "delivery##unclear"
+msgid "Feedback-Form##non"
+msgstr ""
+
+msgctxt "delivery##unfair"
+msgid "Feedback-Form##non"
+msgstr ""
+
+msgctxt "delivery##yes"
+msgid "Feedback-Form##non"
+msgstr ""
+
+msgctxt "7days"
+msgid "Feedback-Form##WaitTime##3"
+msgstr ""
+
+msgctxt "2weeks"
+msgid "Feedback-Form##WaitTime##1"
+msgstr ""
+
+msgctxt "time##label"
+msgid "Feedback-Form##wait"
+msgstr ""
+
+msgctxt "difficulties"
+msgid "Feedback-Form##other"
+msgstr ""
+
+msgctxt "comments"
+msgid "Feedback-Form##extra"
+msgstr ""

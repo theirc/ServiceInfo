@@ -326,7 +326,7 @@ li {
 	    }
 
 	    &:nth-child(3) {
-	    	margin-left: 0;
+	    	margin-@{start}: 0;
 	    	@media (min-width:640px) {
 	    		margin-@{start}: 2%;
 	    	}
@@ -692,8 +692,8 @@ li {
 .btn-group>.btn+.dropdown-toggle>.caret {
 	color: #FFF;
 	border-top: 8px solid;
-	border-right: 6px solid transparent;
-	border-left: 6px solid transparent;
+	border-@{end}: 6px solid transparent;
+	border-@{start}: 6px solid transparent;
     display: inline-block;
     width: 0;
     height: 0;
@@ -854,6 +854,10 @@ label {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+input[type=radio].form-control  {
+  display: inline;
+  width: inherit;
 }
 .read-only-input {
   /* Not editable, make the fake control look disabled */
@@ -1868,6 +1872,23 @@ Service-Detail
 		margin: 0 0 8px;
 		padding: 0;
 	}
+	.container > .row > .name > .feedback-link {
+		float: @end;
+	    a {
+	    	font-size: 100%;
+	    }
+	}
+	.name-row {
+		.two-third {
+			width: 66.666%;
+			float: @start;
+		}
+		.third {
+			width: 33.333%;
+			float: @end;
+			margin-top: 0;
+		}
+	}
 	.contact > .row,
 	.description > .row,{
 		p {
@@ -1885,13 +1906,13 @@ Service-Detail
 		}
 	}
 	.contact > .row > .half {
-		margin-right: 0%;
+		margin-@{end}: 0%;
 	}
 	.half {
 		display: block;
 		float: none;
 		&last-child {
-			margin-right: 0%;
+			margin-@{end}: 0%;
 		}
 	}
 	.third {
@@ -1916,8 +1937,10 @@ Service-Detail
             display: inline-block;
             position: relative;
             img {
-                position: relative;
-                @{start}: -50%;
+            	@media (max-width: 639px) {
+	                position: relative;
+	                @{start}: -20%;
+	            }
             }
 		}
 	}
@@ -1927,6 +1950,8 @@ Service-Detail
 	table {
 		max-width: 640px;
 		margin: 0;
+		transform: translate(0,0); //clears transform from earlier table setting.
+
 	}
 	table {
 		.third {
@@ -1953,9 +1978,9 @@ Service-Detail
 		th,
 		tr {
 			& when (@direction = rtl) {
-			    border-left: none;
+			    border-@{start}: none;
 				&:first-child {
-					border-left: none;
+					border-@{start}: none;
 				}
 			}
 		}

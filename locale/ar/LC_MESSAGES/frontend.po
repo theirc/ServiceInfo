@@ -1,11 +1,12 @@
 # 
 # Translators:
+# Hasnaa Yazbek <hasnaa.yazbek@rescue.org>, 2015
 # Omar Meksassi <omar.meksassi@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-03-23 06:50+0000\n"
-"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
+"PO-Revision-Date: 2015-03-27 10:52+0000\n"
+"Last-Translator: Hasnaa Yazbek <hasnaa.yazbek@rescue.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +45,7 @@ msgid "Menu##Provider-Registration"
 msgstr "التسجيل مزود"
 
 msgid "Menu##Feedback-Tool"
-msgstr "ردود الفعل أداة"
+msgstr "ملاحظات"
 
 msgid "Menu##Change-Language"
 msgstr "تغيير اللغة"
@@ -82,6 +83,9 @@ msgstr "الجمعة"
 msgid "Global##Saturday"
 msgstr "السبت"
 
+msgid "Global##GeolocationError"
+msgstr "غير معتمد تحديد الموقع الجغرافي على هذا المتصفح."
+
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "تسجيل الدخول"
 
@@ -106,6 +110,9 @@ msgstr "بحث عن مزود الخدمات "
 msgid "Search-List##Page-Head##Description"
 msgstr "إستخدم البحث أدناه للعصور على الخدمة التي تريدها."
 
+msgid "Service-Detail##Give-Feedback"
+msgstr "قدّم ملاحظاتك بالنسبة لهذه الخدم"
+
 msgid "Service-Map##Page-Head##Page-Title##Title"
 msgstr "خريطة مزودي الخدمات "
 
@@ -122,7 +129,16 @@ msgid "Service-Map##Filtered-Search##Service-Type"
 msgstr "نوع الخدمة"
 
 msgid "Service-Map##Filtered-Search##Distance"
-msgstr "صنف حسب المسافة "
+msgstr "ابحث عن خدمات قريبة مني "
+
+msgid "Service-Map##Filtered-Search##Sort"
+msgstr "فرز"
+
+msgid "Service-Map##Filtered-Search##SortName"
+msgstr "حسب الإسم "
+
+msgid "Service-Map##Filtered-Search##SortNear"
+msgstr "حسب المسافة مني "
 
 msgid "Service-Map##Filtered-Search##Area"
 msgstr "منطقة"
@@ -159,6 +175,9 @@ msgstr "نوع الخدمة"
 
 msgid "Service-Map##List##Additional-Info"
 msgstr "معلومات إضافية عن المزود "
+
+msgid "Service-Map##List##Cost"
+msgstr "كلفة"
 
 msgid "Service-Map##List##Todays-Hours"
 msgstr "ساعات الخدمة اليوم"
@@ -461,6 +480,12 @@ msgid ""
 "Description"
 msgstr "لقد قمنا بإرسال رسالة تأكيد بالبريد الإلكتروني إلى حساب البريد الإلكتروني الذي استخدمته أثناء التسجيل. انقر على رابط التأكيد في رسالة البريد الإلكتروني لاستكمال عملية التسجيل."
 
+msgid "Feedback-Confirmation##Page-Head##Page-Title##Title"
+msgstr "لقد تم إرسال معلوماتك بنجاح"
+
+msgid "Feedback-Confirmation##Page-Head##Page-Description##Page-Description"
+msgstr "شكرا\" لملاحظاتك"
+
 msgid "Provider-Registration-Changed##Page-Head##Page-Title##Title"
 msgstr "قدم بياناتك بنجاح"
 
@@ -491,3 +516,139 @@ msgstr "أدخل كلمة المرور الجديدة:"
 
 msgid "Password-Reset-Form##Submit-Options##Submit"
 msgstr "إرسال الأجوبة"
+
+msgid "Map##Loading"
+msgstr "تحميل أنواع الخدمات التي صنّفتها"
+
+msgid "Map##TypeHeader"
+msgstr "تصنيف حسب نوع الخدمة"
+
+msgid "Feedback-Form##Title"
+msgstr "نموذج الملاحظات"
+
+msgid "Feedback-Form##Description"
+msgstr "إملأ النموذج أدناه"
+
+msgid "Feedback-Form##What-Service"
+msgstr "أنت تعطي ملاحظاتك حول هذه الخدمة"
+
+msgid "Feedback-Form##Name"
+msgstr "الإسم"
+
+msgid "Feedback-Form##Phone-Number"
+msgstr "رقم الهاتف (XX-XXXX)"
+
+msgid "Feedback-Form##Nationality"
+msgstr "الجنسية"
+
+msgid "Feedback-Form##AreaOfResidence"
+msgstr "محل الإقامة"
+
+msgid "Feedback-Form##Delivered##label"
+msgstr "هل تم توصيل الخدمة؟"
+
+msgid "Feedback-Form##Delivered##yes"
+msgstr "نعم"
+
+msgid "Feedback-Form##Delivered##no"
+msgstr "لا"
+
+msgid "Feedback-Form##Submit"
+msgstr "إرسال الأجوبة"
+
+msgid "Feedback-Form##Clear"
+msgstr "إزالة الأجوبة"
+
+msgid "Feedback-Form##WaitTime##label"
+msgstr "بعد الإتصال بمقدم الخدمات، كم من الوقت انتظرت لكي تصلك الخدمة؟"
+
+msgid "Feedback-Form##WaitTime##lesshour"
+msgstr "أقل من ساعة واحدة        1"
+
+msgid "Feedback-Form##WaitTime##uptotwodays"
+msgstr "لغاية يومين        2"
+
+msgid "Feedback-Form##WaitTime##more"
+msgstr "أطول من ذلك"
+
+msgid "Feedback-Form##Quality##label"
+msgstr "كيف تقيّم نوعية الخدمة التي تلقّيتها (من 1 إلى 5، بحيث أن 5 هي أعلى تقييم ممكن)؟"
+
+msgid "Feedback-Form##difficulty##label"
+msgstr "هل واجهت صعوبات في الإتصال بمقدم الخدمات الذي تحتاجه؟"
+
+msgid "Feedback-Form##difficulty##no"
+msgstr "لا"
+
+msgid "Feedback-Form##difficulty##didntknow"
+msgstr "لم أعرف كيفية الإتصال بهم"
+
+msgid "Feedback-Form##difficulty##nophoneresponse"
+msgstr "حاولت الإتصال بهم و لكن لم أتلق أي جواب"
+
+msgid "Feedback-Form##difficulty##noresponse"
+msgstr "حاولت التواصل معهم شخصيا\" و لكن لم أتلق أي جواب أو لم أجد مكتبهم"
+
+msgid "Feedback-Form##difficulty##unhelpful"
+msgstr "تواصلت معهم ولكن الجواب كان غير مفيد"
+
+msgid "Feedback-Form##difficulty##other"
+msgstr "آخر"
+
+msgid "Feedback-Form##staff##label"
+msgstr "كيف تقيّم رضاك على طاقم المنظمة/المؤسسة التي قدمت لك الخدمات (من 1 إلى 5، بحيث أن 5 هو أعلى تقييم ممكن)"
+
+msgid "Feedback-Form##anonymous##label"
+msgstr "أريد من ملاحظاتي أن تبقى مجهولة الهوية لمقدم الخدمات"
+
+msgid "Feedback-Form##anonymous##yes"
+msgstr "نعم"
+
+msgid "Feedback-Form##anonymous##no"
+msgstr "لا"
+
+msgid "Feedback-Tool##Title"
+msgstr "ملاحظات حول الخدمات"
+
+msgid "Feedback-Tool##Body"
+msgstr "لإعطاء الملاحظات، الرجاء البحث عن الخدمة، إذهب إلى صفحة الخدمة و استعمل زر الملاحظات"
+
+msgctxt "explained"
+msgid "Feedback-Form##non_delivery"
+msgstr "هل وصلك تفسير واضح لعدم تلقّيك الخدمة التي ابتغيتها؟"
+
+msgctxt "delivery##no"
+msgid "Feedback-Form##non"
+msgstr "لا تفسير"
+
+msgctxt "delivery##unclear"
+msgid "Feedback-Form##non"
+msgstr "التفسير كان غير واضح"
+
+msgctxt "delivery##unfair"
+msgid "Feedback-Form##non"
+msgstr "التفسير كان غير عادل"
+
+msgctxt "delivery##yes"
+msgid "Feedback-Form##non"
+msgstr "التفسير كان منطقي و مناسب"
+
+msgctxt "7days"
+msgid "Feedback-Form##WaitTime##3"
+msgstr "3-7 أيام"
+
+msgctxt "2weeks"
+msgid "Feedback-Form##WaitTime##1"
+msgstr "من أسبوع واحد إلى أسبوعين      1-2"
+
+msgctxt "time##label"
+msgid "Feedback-Form##wait"
+msgstr "كيف تقيّم رضاك على المدة التي انتظرتها لتصلك الخدمة (من 1 إلى 5، بحيث أن 5 هو أعلى تقييم ممكن)"
+
+msgctxt "difficulties"
+msgid "Feedback-Form##other"
+msgstr "صعوبات أخرى بالنسبة للتواصل مع مقدم الخدمة"
+
+msgctxt "comments"
+msgid "Feedback-Form##extra"
+msgstr "ملاحظات أخرى"

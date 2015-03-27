@@ -5,14 +5,19 @@ var config = require('./config')
 ;
 
 var forms = module.exports = {
-    collect: function($form) {
+    /* collect(form: <form>, model: optional)
+     *
+     * Collect submission data from a form combined with other language data from the original
+     * model, if given.
+     */
+    collect: function($form, instance) {
         var data = {};
 
-        $form.find('[name]').each(function() {
+        var collect_field_data = function() {
             var $field = $(this);
             var value = $field.val();
             var filled = value.length > 0;
-            var name = $field.attr('name');
+            var name = $field.attr('name') || $field.parent().attr('name');
             var ml = typeof $field.data('i18n-field') !== "undefined";
 
             if (filled && name.indexOf('.') > 0) {
@@ -43,13 +48,26 @@ var forms = module.exports = {
 
             if (ml) {
                 var cur_lang = config.get('forever.language');
+
+                // Set all languages if we have an original instance to pull the non-current from
+                if (instance) {
+                    $.each(['en', 'fr', 'ar'], function() {
+                        data[name + '_' + this] = instance.get(name + '_' + this);
+                    });
+                }
+
                 name = name + '_' + cur_lang;
             }
 
             if (name.indexOf('.') < 0) {
                 data[name] = value;
             }
-        });
+        };
+
+        $form.find('[name]').each(collect_field_data);
+        $form.find('select[name] option:selected').each(collect_field_data);
+        $form.find('input[name][type=checkbox]:checked').each(collect_field_data);
+        $form.find('input[name][type=radio]:checked').each(collect_field_data);
 
         return data;
     },

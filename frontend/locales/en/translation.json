@@ -14,7 +14,7 @@
   	"Service-Map": "Service Map",
     "Search": "Search",
   	"Provider-Registration": "Provider Registration",
-  	"Feedback-Tool": "Feedback Tool",
+  	"Feedback-Tool": "Feedback",
   	"Change-Language": "Change Language"
   },
   "Global": {
@@ -55,6 +55,9 @@
       "Description": "Use the filtered search below to find the service that meets your needs."
     }
   },
+  "Service-Detail": {
+      "Give-Feedback": "Give feedback on this service"
+  },
   "Service-Map": {
     "Page-Head": {
       "Page-Title": {
@@ -64,6 +67,7 @@
         "Page-Description": "Use the filtered search below to find the service that meets your needs."
       }
     },
+    "No-Search-Results": "No services matched your search terms. Please try other terms.",
     "Filtered-Search": {
       "Label": "Search term",
       "Submit": "Search",
@@ -92,7 +96,8 @@
       "Phone": "Phone Number",
       "Email": "Email Address",
       "Website": "Website",
-      "Unknown": "Unknown"
+      "Unknown": "Unknown",
+      "Criteria": "Selection Criteria"
     }
   },
   "Service-Remove-Change": {
@@ -282,6 +287,16 @@
       }
     }
   },
+  "Feedback-Confirmation": {
+    "Page-Head": {
+        "Page-Title": {
+            "Title": "Your Information was Submitted Successfully"
+        },
+        "Page-Description": {
+          "Page-Description": "Thank you for your feedback."
+        }
+    }
+  },
   "Provider-Registration-Changed": {
     "Page-Head": {
       "Page-Title": {
@@ -323,5 +338,70 @@
     "Submit-Options": {
       "Submit": "Submit"
     }
+  },
+  "Map": {
+    "Loading": "Loading Service Type Filters...",
+    "TypeHeader": "Filter by a Service Type"
+  },
+  "Feedback-Form": {
+      "Title": "Feedback form",
+      "Description": "Fill out the form below.",
+      "What-Service": "You are giving feedback on this service:",
+      "Name": "Name",
+      "Phone-Number": "Phone Number (NN-NNNNNN)",
+      "Nationality": "Nationality",
+      "AreaOfResidence": "Area of residence",
+      "Delivered": {
+          "label": "Was service delivered?",
+          "yes": "Yes",
+          "no": "No"
+      },
+      "non_delivery_explained": "Did you receive a clear explanation for why the service you sought was not delivered to you?",
+      "non_delivery_explanation": {
+         "no": "No explanation",
+          "unclear": "Explanation was not clear",
+          "unfair": "Explanation was not fair",
+          "yes": "Clear and appropriate explanation"
+      },
+      "Submit": "Submit Answers",
+      "Clear": "Remove Answers",
+      "WaitTime": {
+         "label": "How long did you wait for the service to be delivered, after contacting the service provider?",
+          "lesshour": "Less than 1 hour",
+          "uptotwodays": "Up to 2 days",
+          "3_7days": "3-7 days",
+          "1_2weeks": "1-2 weeks",
+          "more": "Longer"
+      },
+      "wait_time_satisfaction": {
+          "label": "How do you rate your satisfaction with the time that you waited for the service to be delivered (from 1 to 5, where 5 is the highest rating possible)?"
+      },
+      "Quality": {
+          "label": "How would you rate the quality of the service you received (from 1 to 5, where 5 is the highest rating possible)?"
+      },
+      "difficulty_contacting": {
+          "label": "Did you experience difficulties contacting the provider of the service you needed?",
+          "no": "No",
+          "didntknow": "Did not know how to contact them",
+          "nophoneresponse": "Tried to contact them by phone but received no response",
+          "noresponse": "Tried to contact them in person but received no response or did not find their office",
+          "unhelpful": "Contacted them but response was unhelpful",
+          "other": "Other"
+
+      },
+      "staff_satisfaction": {
+            "label": "How would you rate your satisfaction with the staff of the organization that provided services to you, (from 1 to 5, where 5 is the highest rating possible)?"
+      },
+      "other_difficulties": "Other difficulties contacting the service provider",
+      "extra_comments": "Other comments",
+      "anonymous": {
+          "label": "I want my feedback to be anonymous to the service provider",
+          "yes": "Yes",
+          "no": "No"
+      }
+  },
+  "Feedback-Tool": {
+      "Title": "Feedback on services",
+      "Body": "To give feedback, please search for a service, go to its page, and use the Feedback button."
   }
 }

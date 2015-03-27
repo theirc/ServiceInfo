@@ -1,4 +1,4 @@
-from http.client import CREATED
+from http.client import CREATED, OK, NOT_FOUND
 
 from django.core.urlresolvers import reverse
 from django.forms import model_to_dict
@@ -38,4 +38,12 @@ class FeedbackTest(TestCase):
         # url = reverse('feedback-detail', args=[self.id])
         url = '/api/feedbacks/%d/' % feedback.pk
         rsp = self.client.get(url)
-        self.assertEqual(404, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        self.assertEqual(NOT_FOUND, rsp.status_code, msg=rsp.content.decode('utf-8'))
+
+
+class NationalityTest(TestCase):
+    def test_nationalities(self):
+        # Get list of nationalities
+        url = reverse('nationality-list')
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))

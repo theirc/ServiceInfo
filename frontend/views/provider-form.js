@@ -74,7 +74,7 @@ module.exports = Backbone.View.extend({
     events: {
         "click .form-btn-submit": function() {
             var $el = this.$el;
-            var data = forms.collect($el);
+            var data = forms.collect($el, this.provider);
             var is_new = this.provider === undefined;
 
             var $submit = $el.find('.form-btn-submit');
