@@ -239,7 +239,8 @@ class ServiceViewSet(ServiceInfoModelViewSet):
                 .exclude(status=Service.STATUS_ARCHIVED)\
                 .exclude(status=Service.STATUS_CANCELED)
         if not self.request.GET.get('closest', None):
-            qs = qs.order_by('name_' + self.request.user.language)
+            language = getattr(self.request.user, 'language', 'en')
+            qs = qs.order_by('name_' + language)
         return qs
 
     @detail_route(methods=['post'])
