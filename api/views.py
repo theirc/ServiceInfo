@@ -239,7 +239,7 @@ class ServiceViewSet(ServiceInfoModelViewSet):
                 .exclude(status=Service.STATUS_ARCHIVED)\
                 .exclude(status=Service.STATUS_CANCELED)
         if not self.request.GET.get('closest', None):
-            language = getattr(self.request.user, 'language', 'en')
+            language = getattr(self.request.user, 'language', None) or 'en'
             qs = qs.order_by('name_' + language)
         return qs
 
