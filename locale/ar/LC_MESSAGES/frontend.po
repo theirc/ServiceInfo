@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-03-27 10:52+0000\n"
-"Last-Translator: Hasnaa Yazbek <hasnaa.yazbek@rescue.org>\n"
+"PO-Revision-Date: 2015-03-30 06:08+0000\n"
+"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -119,6 +119,9 @@ msgstr "خريطة مزودي الخدمات "
 msgid "Service-Map##Page-Head##Page-Description##Page-Description"
 msgstr "إستخدم البحث أدناه للعصور على الخدمة التي تريدها."
 
+msgid "Service-Map##No-Search-Results"
+msgstr "لم يتم وجود أي خدمات مطابقة. يرجى المحاولة مرة أخرى."
+
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "مصطلح البحث"
 
@@ -196,6 +199,9 @@ msgstr "الموقع"
 
 msgid "Service-Map##List##Unknown"
 msgstr "غير معروف"
+
+msgid "Service-Map##List##Criteria"
+msgstr "معايير الاختيار"
 
 msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
 msgstr "إزالة تغيير"

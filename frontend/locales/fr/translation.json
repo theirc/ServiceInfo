@@ -67,6 +67,7 @@
                 "Page-Description": "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
             }
         },
+        "No-Search-Results": "",
         "Filtered-Search": {
             "Label": "Le terme de recherche",
             "Submit": "Recherche",
@@ -97,7 +98,8 @@
             "Phone": "Numéro de téléphone",
             "Email": "Adresse e-mail",
             "Website": "Site Web",
-            "Unknown": "inconnu"
+            "Unknown": "inconnu",
+            "Criteria": ""
         }
     },
     "Service-Remove-Change": {

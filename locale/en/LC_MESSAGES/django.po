@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-26 16:09+0200\n"
+"POT-Creation-Date: 2015-03-27 20:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,7 +76,7 @@ msgstr ""
 msgid "User is not pending activation"
 msgstr ""
 
-#: api/views.py:248
+#: api/views.py:252
 msgid "Service record must be current or pending changes to be canceled"
 msgstr ""
 
@@ -322,37 +322,48 @@ msgid "Dear %(provider_name)s"
 msgstr ""
 
 #: service_info/templates/email/service_approved_body.html:7
+#, python-format
+msgid ""
+"\n"
+"Your service %(service_name)s has been vetted and approved by International "
+"Rescue Committee staff.\n"
+"  It has been published on the following link: <a href=\"%(service_link)s\">"
+"%(service_link)s</a>\n"
+msgstr ""
+
+#: service_info/templates/email/service_approved_body.html:14
+#: service_info/templates/email/service_approved_body.txt:8
+msgid "For more information please contact support at serviceinfo@rescue.org"
+msgstr ""
+
+#: service_info/templates/email/service_approved_body.html:15
+#: service_info/templates/email/service_approved_body.txt:9
+msgid "Thanks for your submission."
+msgstr ""
+
+#: service_info/templates/email/service_approved_body.html:19
+#: service_info/templates/email/service_approved_body.txt:11
+msgid "Best Regards"
+msgstr ""
+
+#: service_info/templates/email/service_approved_body.html:23
+#: service_info/templates/email/service_approved_body.txt:13
+msgid "Service Info"
+msgstr ""
+
+#: service_info/templates/email/service_approved_body.html:25
+#: service_info/templates/email/service_approved_body.txt:15
+msgid "Support:"
+msgstr ""
+
 #: service_info/templates/email/service_approved_body.txt:3
 #, python-format
 msgid ""
 "\n"
 "Your service %(service_name)s has been vetted and approved by International "
 "Rescue Committee staff.\n"
-msgstr ""
-
-#: service_info/templates/email/service_approved_body.html:17
-#: service_info/templates/email/service_approved_body.txt:11
-msgid "For more information please contact support at serviceinfo@rescue.org"
-msgstr ""
-
-#: service_info/templates/email/service_approved_body.html:18
-#: service_info/templates/email/service_approved_body.txt:12
-msgid "Thanks for your submission."
-msgstr ""
-
-#: service_info/templates/email/service_approved_body.html:22
-#: service_info/templates/email/service_approved_body.txt:14
-msgid "Best Regards"
-msgstr ""
-
-#: service_info/templates/email/service_approved_body.html:26
-#: service_info/templates/email/service_approved_body.txt:16
-msgid "Service Info"
-msgstr ""
-
-#: service_info/templates/email/service_approved_body.html:28
-#: service_info/templates/email/service_approved_body.txt:18
-msgid "Support:"
+"It has been published on the following link: <a href=\"%(service_link)s\">"
+"%(service_link)s</a>\n"
 msgstr ""
 
 #: service_info/templates/email/service_approved_subject.txt:1
@@ -365,58 +376,58 @@ msgid ""
 "the search box (e.g. \"33.8869, 35.5131\")."
 msgstr ""
 
-#: services/admin.py:96
+#: services/admin.py:97
 msgid "Description and Additional Information"
 msgstr ""
 
-#: services/admin.py:107
+#: services/admin.py:108
 #, python-brace-format
 msgid "Hours (all times in time zone {timezone})"
 msgstr ""
 
-#: services/admin.py:119
+#: services/admin.py:120
 msgid "Location"
 msgstr ""
 
-#: services/admin.py:138
+#: services/admin.py:139
 msgid "Only services in draft status may be approved"
 msgstr ""
 
-#: services/admin.py:146 services/admin.py:184
+#: services/admin.py:147 services/admin.py:185
 #, python-brace-format
 msgid "Unable to approve service '{name}': {error}."
 msgstr ""
 
-#: services/admin.py:152
+#: services/admin.py:153
 msgid "Services have been approved"
 msgstr ""
 
-#: services/admin.py:153
+#: services/admin.py:154
 msgid "Approve new or changed service"
 msgstr ""
 
-#: services/admin.py:159
+#: services/admin.py:160
 msgid "Only services in draft status may be rejected"
 msgstr ""
 
-#: services/admin.py:167 services/admin.py:199
+#: services/admin.py:168 services/admin.py:200
 #, python-brace-format
 msgid "Unable to reject service '{name}': {error}."
 msgstr ""
 
-#: services/admin.py:173
+#: services/admin.py:174
 msgid "Services have been rejected"
 msgstr ""
 
-#: services/admin.py:174
+#: services/admin.py:175
 msgid "Reject new or changed service"
 msgstr ""
 
-#: services/admin.py:193
+#: services/admin.py:194
 msgid "The service was approved successfully."
 msgstr ""
 
-#: services/admin.py:208
+#: services/admin.py:209
 msgid "The service was rejected successfully."
 msgstr ""
 
