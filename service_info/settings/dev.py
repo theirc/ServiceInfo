@@ -20,6 +20,10 @@ CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 
 SITE_ID = DEV_SITE_ID
 
+# Use https when constructing links to ourselves?
+# Generally True, we'll change to False in dev.py for running locally
+SECURE_LINKS = False
+
 # Special test settings
 if 'test' in sys.argv:
     PASSWORD_HASHERS = (

@@ -89,6 +89,7 @@ var BaseModel = Backbone.Model.extend({
         }
 
         data['id'] = this.get('id');
+        data['the_url'] = this.url();
         return data;
     },
 });
@@ -115,6 +116,16 @@ var BaseCollection = Backbone.Collection.extend({
             data.push(this.models[i].data());
         }
         return data;
+    },
+
+    getByUrl: function(url) {
+        var i, l=this.models.length, m;
+        for (i=0; i < l; i++) {
+            m = this.models[i];
+            if (m.get('url') === url) {
+                return m;
+            }
+        }
     },
 });
 

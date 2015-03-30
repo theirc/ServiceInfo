@@ -14,7 +14,8 @@ module.exports = Backbone.View.extend({
         this.query = "";
         this.services = new service.PublicServices();
         this.servicetypes = new servicetype.ServiceTypes();
-        this.render();
+        //this.render();
+        this.markers = [];
     },
 
     render: function() {
@@ -25,8 +26,13 @@ module.exports = Backbone.View.extend({
             services: this.services,
             query: hashtrack.getVar('q'),
         }));
+        $('.no-search-results').hide();
 
-        search.populateServiceTypeDropdown();
+        var $scv = this.$el.find('#search_controls');
+        var SearchControlView = new search.SearchControls({
+            $el: $scv,
+        });
+        SearchControlView.render();
 
         function initialize() {
             var mapOptions = {
@@ -36,17 +42,28 @@ module.exports = Backbone.View.extend({
             self.map = new google.maps.Map(document.getElementById('map_canvas'),
                 mapOptions);
             search.refetchServices(self.query).then(function(){
-                self.updateMarkers();
+                self.updateResults();
             });
         }
 
         initialize();
     },
 
-    updateMarkers: function() {
+    updateResults: function() {
         var self = this;
+        $.each(self.markers, function() {
+            this.setMap(null);
+        });
+        self.markers = [];
         var bounds = new google.maps.LatLngBounds();
         var services = search.services.data();
+        if (services.length === 0) {
+            $('.no-search-results').show();
+            $('#map_container').hide();
+            return;
+        }
+        $('.no-search-results').hide();
+        $('#map_container').show();
         $.each(services, function() {
             var service = this;
 
@@ -59,8 +76,17 @@ module.exports = Backbone.View.extend({
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     title: this.name,
+                    icon: new google.maps.MarkerImage(
+                        this.servicetype.icon_url,
+                        null,
+                        null,
+                        new google.maps.Point(12, 12),
+                        new google.maps.Size(24, 24)
+                    ),
                 });
+                window.marker = marker;
                 marker.setMap(self.map);
+                self.markers.push(marker);
                 google.maps.event.addListener(marker, 'click', function() {
                     location.hash = '#/service/' + service.id;
                 })
@@ -77,16 +103,20 @@ module.exports = Backbone.View.extend({
         "search": function(_, query) {
             var self = this;
             search.refetchServices().then(function(){
-                self.updateMarkers();
+                self.updateResults();
             })
         },
         "input input.query": function(e) {
             var query = $(e.target).val();
-            // this.refetchServices(query);
             hashtrack.setVar('q', query);
         },
         "change .query-service-type": function(e) {
             hashtrack.setVar('t', $(e.target).val());
+        },
+        "input keyup": function(e) {
+            if (e.keyCode === 13) {
+                return false;
+            }
         },
     }
 })

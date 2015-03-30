@@ -33,9 +33,9 @@
                         <li class="menu-item-logout"><a href="#/logout" data-i18n="Menu.Logout"></a></li>
                         <li class="menu-item-logout"><a href="#/manage/service-list" data-i18n="Menu.Services"></a></li>
                         <li class="menu-item-logout"><a href="#/manage/service" data-i18n="Menu.Add-Services"></a></li>
-                        <li><a href="#/search/map" data-i18n="Menu.Service-Map"></a></li>
+                        <li><a href="#/search" data-i18n="Menu.Search"></a></li>
                         <li><a href="#/register" data-i18n="Menu.Provider-Registration"></a></li>
-                        <!-- (hide until implemented) <li><a href="#/feedback" data-i18n="Menu.Feedback-Tool"></a></li> -->
+                        <li><a href="#/feedback" data-i18n="Menu.Feedback-Tool"></a></li>
                         <li class="menu-item-staff"><a data-i18n="Global.Admin" href="#/admin"></a></li>
                         <li class="menu-item-language"><a data-i18n="Menu.Change-Language"></a></li>
                     </ul>
@@ -44,33 +44,31 @@
             <div id="page-container">
                 <div id="messages"></div>
                 <div id="page"></div>
-                <div id="footer">
-                    <div class="row">
-                        <div id="about-si">
-                            <div class="page-title" data-i18n="Footer.About.Title"></div>
-                            <div class="page-descr" data-i18n="Footer.About.Paragraph"></div>
-                        </div>
+            </div>
+            <div id="footer">
+                <div class="row">
+                    <div id="about-si" class="two-third">
+                        <div class="page-title" data-i18n="Footer.About.Title"></div>
+                        <div class="page-descr" data-i18n="Footer.About.Paragraph"></div>
                     </div>
-                    <div class="row">
-                        <div id="contact-si">
-                            <div class="page-title" data-i18n="Footer.Contact.Title"></div>
-                            <div class="page-descr" data-i18n="Footer.Contact.Paragraph"></div>
-                            <div id="contact-icons">
-                                <div class="icon">
-                                    <a href="#">
-                                        <img src="images/mail.svg" onerror="this.src='images/mail.png'">
-                                    </a>
-                                </div>
-                                <div class="icon">
-                                    <a href="#">
-                                        <img src="images/facebook.svg" onerror="this.src='images/facebook.png'">
-                                    </a>
-                                </div>
-                                <div class="icon">
-                                    <a href="#">
-                                        <img src="images/twitter.svg" onerror="this.src='images/twitter.png'">
-                                    </a>
-                                </div>
+                    <div id="contact-si" class="third">
+                        <div class="page-title" data-i18n="Footer.Contact.Title"></div>
+                        <div class="page-descr" data-i18n="Footer.Contact.Paragraph"></div>
+                        <div id="contact-icons">
+                            <div class="icon">
+                                <a href="#">
+                                    <img src="images/mail.svg" onerror="this.src='images/mail.png'">
+                                </a>
+                            </div>
+                            <div class="icon">
+                                <a href="#">
+                                    <img src="images/facebook.svg" onerror="this.src='images/facebook.png'">
+                                </a>
+                            </div>
+                            <div class="icon">
+                                <a href="#">
+                                    <img src="images/twitter.svg" onerror="this.src='images/twitter.png'">
+                                </a>
                             </div>
                         </div>
                     </div>

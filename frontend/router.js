@@ -12,8 +12,11 @@ var views = {
     "register-changed": require('./views/provider-form-changed'),
     "account-activate": require('./views/account-activate'),
     "service": require('./views/service-form'),
-    "feedback": require('./views/feedback'),
+    "feedback-form": require('./views/feedback-form'),
+    "feedback-confirm": require('./views/feedback-confirm'),
+    "feedback-help": require('./views/feedback-help'),
     "map": require('./views/map'),
+    "search-list": require('./views/search-list'),
     "service-cancel": require('./views/service-cancel'),
     "service-list": require('./views/service-list'),
     "service-detail": require('./views/service-detail'),
@@ -60,6 +63,10 @@ function loadPage(name, params) {
 }
 
 module.exports = Backbone.Router.extend({
+    initialize: function() {
+        this.route(/search\/?/, loadPage("search-list"));
+        this.route(/search\/map/, loadPage("map"));
+    },
     routes: {
         "": function() {
             if (config.get('forever.authToken')) {
@@ -80,8 +87,10 @@ module.exports = Backbone.Router.extend({
 
         "service/:id": loadPage("service-detail", ['id']),
 
-        "feedback": loadPage("feedback"),
-        "search/map": loadPage("map"),
+        "feedback": loadPage("feedback-help"),
+        "feedback/confirm": loadPage("feedback-confirm"),
+        "feedback/:id": loadPage("feedback-form", ['id']),
+
         "service/cancel/:id": loadPage("service-cancel", ['id']),
         "service-list": loadPage("service-list"),
         "login": loadPage("login"),

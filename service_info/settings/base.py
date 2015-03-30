@@ -288,3 +288,7 @@ JIRA_DUEIN_DAYS = 2
 PHONE_NUMBER_REGEX = r'^\d{2}-\d{6}$'
 
 TEST_RUNNER = 'service_info.runner.CustomTestSuiteRunner'
+
+# Use https when constructing links to ourselves?
+# Generally True, we'll change to False in dev.py for running locally
+SECURE_LINKS = True

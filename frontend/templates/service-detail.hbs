@@ -2,9 +2,25 @@
 
 <!-- Main Content -->
 <div class="container">
-	<div class="row">
-		<div class="name">{{ service.name }}</div>
-		<div class="description">{{ service.description }}</div>
+	<div class="row name-row">
+		<div class="two-third">
+	   		<div class="name">
+				{{# if service.servicetype.icon_url }}<img class="servicetype-icon" src="{{ service.servicetype.icon_url }}"/>{{/if}}
+				{{ service.name }}
+			</div>
+		</div>
+		<div class="third">
+	        <div class="feedback-link">
+	          <a href="#/feedback/{{ service.id }}">
+	            <button class="primary-button" data-i18n="Service-Detail.Give-Feedback"></button>
+	          </a>
+	        </div>
+	    </div>
+    </div>
+     
+        
+    <div class="row">
+		<div class="description">{{multiline service.description }}</div>
 		{{#if mapURL}}
 			<div id="static-map">
 				<div class="map">
@@ -14,11 +30,11 @@
 				</div>
 			</div>
 		{{/if}}
-		<div >
+		<div class="row">
 			<span class="area control-label" data-i18n="Service-Map.List.Area"></span>
 			{{ service.servicearea.name }}
 		</div>
-		<div >
+		<div class="row">
 			<span class="area control-label" data-i18n="Service-Map.List.Type"></span>
 			{{ service.servicetype.name }}
 		</div>
@@ -82,7 +98,7 @@
 				<div class="half">
 					{{#if service.provider.website }}
 						<span class="control-label" data-i18n="Service-Map.List.Website"></span>
-						<a href="{{ service.provider.website }}">{{ service.provider.website }}</a>
+						<a href="{{ service.provider.website }}" dir=ltr>{{ service.provider.website }}</a>
 					{{/if}}
 				</div>
 			</div>
@@ -91,11 +107,25 @@
 			<div class="row">
 				{{#if service.additional_info }}
 					<span class="control-label" data-i18n="Service-Map.List.Additional-Info"></span>
-					<p>{{ service.additional_info }}</p>
+					<p>{{multiline service.additional_info }}</p>
 				{{/if}}
 			</div>
 		</div>
-	</div> <!-- End Row -->
-</div> <!-- End Container -->
-
+        <div class="description">
+          <div class="row">
+            <span class="control-label" data-i18n="Service-Map.List.Cost"></span>
+            <p>{{multiline service.cost_of_service }}</p>
+          </div>
+        </div>
+        <div class="description">
+          <div class="row">
+            <span class="control-label" data-i18n="Service-Map.List.Criteria"></span>
+          </div>
+          {{#each service.selection_criteria }}
+              <div class="row">
+                <p>{{ this.text }}</p>
+              </div>
+          {{/each}}
+        </div>
+    </div>
 </div>

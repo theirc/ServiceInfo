@@ -6,7 +6,7 @@ import factory.fuzzy
 from email_user.tests.factories import EmailUserFactory
 
 from services.models import Provider, ProviderType, SelectionCriterion, Service, ServiceArea, \
-    ServiceType
+    ServiceType, Feedback, Nationality
 
 
 class FuzzyURL(factory.fuzzy.BaseFuzzyAttribute):
@@ -106,3 +106,77 @@ class SelectionCriterionFactory(factory.DjangoModelFactory):
     text_ar = factory.fuzzy.FuzzyText()
     text_fr = factory.fuzzy.FuzzyText()
     service = factory.SubFactory(ServiceFactory)
+
+
+# I'm a bit surprised at having to write all this boilerplate code,
+# but I didn't see anything in FactoryBoy that would do it for us.
+# Somebody clue me in if I'm missing something, please.
+def random_boolean():
+    return random.choice([False, True])
+
+
+def random_nationality():
+    return random.choice(Nationality.objects.all())
+
+
+def random_service_area():
+    return random.choice(ServiceArea.objects.all())
+
+
+def get_random_value_for_choice_field(field_name):
+    field = Feedback._meta.get_field(field_name)
+    choices = [value for value, name in field.get_flatchoices(include_blank=False)]
+    return random.choice(choices)
+
+
+def random_difficulty_contacting():
+    return get_random_value_for_choice_field('difficulty_contacting')
+
+
+def random_non_delivery_explained():
+    return get_random_value_for_choice_field('non_delivery_explained')
+
+
+def get_wait_time(stub):
+    if stub.delivered:
+        return get_random_value_for_choice_field('wait_time')
+
+
+def get_wait_time_satisfaction(stub):
+    if stub.delivered:
+        return random.randint(1, 5)
+
+
+def get_quality(stub):
+    if stub.delivered:
+        return random.randint(1, 5)
+
+
+def get_other_difficulties(stub):
+    if stub.difficulty_contacting == 'other':
+        chars = [random.choice(string.ascii_letters) for _i in range(10)]
+        return ''.join(chars)
+    return ''
+
+
+class FeedbackFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Feedback
+
+    delivered = factory.fuzzy.FuzzyAttribute(random_boolean)
+    nationality = factory.fuzzy.FuzzyAttribute(random_nationality)
+    staff_satisfaction = factory.fuzzy.FuzzyInteger(1, 5)
+    area_of_residence = factory.fuzzy.FuzzyAttribute(random_service_area)
+    service = factory.SubFactory(ServiceFactory)
+    non_delivery_explained = factory.fuzzy.FuzzyAttribute(random_non_delivery_explained)
+    name = factory.fuzzy.FuzzyText()
+    phone_number = factory.LazyAttribute(create_valid_phone_number)
+    difficulty_contacting = factory.fuzzy.FuzzyAttribute(random_difficulty_contacting)
+
+    # These only have to be set if delivered is True
+    quality = factory.LazyAttribute(get_quality)
+    wait_time = factory.LazyAttribute(get_wait_time)
+    wait_time_satisfaction = factory.LazyAttribute(get_wait_time_satisfaction)
+
+    # This only has to be set if difficulty_contacting was 'other'
+    other_difficulties = factory.LazyAttribute(get_other_difficulties)
