@@ -8,6 +8,7 @@ env:
 - DJANGO_SETTINGS_MODULE="service_info.settings.dev"
 install:
 - pip install -r requirements/dev.txt --use-mirrors
+- npm install
 before_script:
 - createdb -E UTF-8 service_info -U postgres -O $USER
 - psql service_info -c "CREATE EXTENSION postgis;" -U postgres
