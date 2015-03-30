@@ -70,8 +70,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-html,body,#application {
+html,body {
     height: 100%;
+}
+#application {
+	min-height: 100%;
+	position: relative;
 }
 #messages {
     padding: 5px;
@@ -1027,6 +1031,22 @@ input[type=range] {
     border-bottom: none;
 }
 
+#page-container {
+	width: 100%;
+    display: block;
+    overflow-y: auto;
+    padding-bottom: 380px;
+	@media (min-width: 640px) {
+	    width: 80%;
+	    margin-@{start}: 20%;
+		padding-bottom: 200px;
+	}
+	@media (min-width: 1000px) {
+		margin-@{start}: 200px;
+		padding-bottom: 200px;
+	}
+}
+
 @media only screen and (min-width: 640px) {
     #application-header {
         width: 20%;
@@ -1054,17 +1074,6 @@ input[type=range] {
     	height: 100%;
     	box-sizing: border-box;
     	display: inherit;
-    }
-    #page-container {
-        width: 80%;
-        margin-@{start}: 20%;
-        display: block;
-		@media (min-width: 640px) {
-			min-height: 100%;
-		}
-		@media (min-width: 1000px) {
-			margin-@{start}: 200px;
-		}
     }
 
     #menu-toggle {
@@ -2040,28 +2049,33 @@ Footer
 */
 
 #footer{
-	padding: 20px 15px;
+	padding: 20px 0;
 	background-color: #343538;
 	display: block;
 	margin-top: 30px;
 	overflow: auto;
     margin-@{start}: 0;
+    clear: both;
+	position: absolute;
+	bottom: 0;
+	@{start}: 0;
+	height: 320px;
     @media (min-width: 640px) {
-	    width: 80%;
+	    width: 81.5%;
 	    margin-@{start}: 20%;
 		background-color: darkgray;
+		height: 160px;
     }
 	@media (min-width: 1000px) {
 		margin-@{start}: 200px;
-		padding: 20px 30px;
 		margin-top: 50px;
-		width: auto;
 	}
 	.row {
-		padding: 10px 0;
+		padding: 10px 15px;
 		width: 100%;
 		@media (min-width: 640px) {
 			max-width: 800px;
+			padding: 10px 30px;
 			.third {
 				margin-top: 0;
 				width: 33.333%;
