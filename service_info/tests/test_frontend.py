@@ -13,7 +13,7 @@ from selenium import webdriver
 
 
 class FrontEndTestCase(LiveServerTestCase):
-    """Base test class to setup selenium and express server for end to end testing."""
+    """End to end testing with selenium and express server."""
 
     @classmethod
     def setUpClass(cls):
@@ -24,6 +24,8 @@ class FrontEndTestCase(LiveServerTestCase):
             shlex.split('gulp startExpress --config test --port 9000 --fast'),
             cwd=settings.PROJECT_ROOT, stdout=cls.log_file, stderr=cls.log_file)
         cls.browser = webdriver.PhantomJS()
+        # Set desktop size
+        cls.browser.set_window_size(1280, 600)
         # Wait for server to be available
         time.sleep(1.5)
         super().setUpClass()
@@ -41,3 +43,14 @@ class FrontEndTestCase(LiveServerTestCase):
         self.browser.get(self.express_url)
         form = self.browser.find_element_by_id('language-toggle')
         self.assertTrue(form.is_displayed(), 'Language form should be visible.')
+
+    def test_select_language(self):
+        """Select user language."""
+
+        self.browser.get(self.express_url)
+        form = self.browser.find_element_by_id('language-toggle')
+        button = form.find_element_by_css_selector('[data-lang="fr"]')
+        button.click()
+        menu = self.browser.find_element_by_id('menu')
+        language = menu.find_element_by_class_name('menu-item-language')
+        self.assertEqual(language.text, 'Changer de langue', 'Menu should now be French')
