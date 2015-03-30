@@ -12,13 +12,14 @@ var knownOptions = {
     default: {
         config: "base",
         fast: false,
+        port: 8000
     }
 }
 
 var options = minimist(process.argv.slice(2), knownOptions);
 
 var API_PORT = 4005;
-var EXPRESS_PORT = 8000;
+var EXPRESS_PORT = options.port;
 var EXPRESS_ROOT = __dirname + "/frontend";
 var LIVERELOAD_PORT = 3572;
 
