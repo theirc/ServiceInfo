@@ -38,6 +38,7 @@
                       <div class="form-group">
                         <label for="id_name" class="control-label"><span data-i18n="Feedback-Form.Name"></span><span class=error></span></label>
                         <input id="id_name" type="text" name="name" class="form-control"
+                            maxlength="256"
                             pattern=".*[^\d\s\.`~!@#$%^&*\(\)-_=\+\[\]{};:',\<\>/\?]|[A-Z].*"><!-- at least one alphabetic? -->
                       </div>
                     </div>
@@ -46,7 +47,7 @@
                       <div class="form-group">
                         <label for="id_phone_number" class="control-label"><span data-i18n="Feedback-Form.Phone-Number"></span><span class=error></span></label>
                         <div class="form-group">
-                          <input id="id_phone_number" type="tel" name="phone_number" class="form-control" pattern="\d{2}-\d{6}">
+                          <input id="id_phone_number" type="tel" name="phone_number" class="form-control" pattern="\d{2}-\d{6}" maxlength="9" minlength="9">
                         </div>
                       </div>
                     </div>

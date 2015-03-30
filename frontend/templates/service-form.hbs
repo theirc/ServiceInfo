@@ -28,7 +28,7 @@
                   <div class="form-group">
                     <label for="id_name" class="control-label"><span data-i18n="Service-Form.Service-Name"></span><span class="error"></span></label>
                       <div class="form-group">
-                        <input id="id_name" type="text" name="name" data-i18n-field class="form-control"  >
+                        <input id="id_name" type="text" name="name" data-i18n-field class="form-control" maxlength="256">
                       </div>
                   </div>
                 </row>
@@ -107,7 +107,7 @@
                   <div class="row criteria">
                       <div class="half">
                         <div class="form-group">
-                          <input id="id_selection_criteria-{{@index}}" data-id="{{this.id}}" type="text" name="selection_criteria.{{@index}}" class="form-control selection-criteria" value="{{this.text}}">
+                          <input id="id_selection_criteria-{{@index}}" data-id="{{this.id}}" type="text" name="selection_criteria.{{@index}}" class="form-control selection-criteria" value="{{this.text}}" maxlength="100">
                         </div>
                       </div>
                       <div class="half">
