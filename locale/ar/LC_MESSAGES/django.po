@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-26 16:09+0200\n"
-"PO-Revision-Date: 2015-03-27 09:53+0000\n"
-"Last-Translator: Hasnaa Yazbek <hasnaa.yazbek@rescue.org>\n"
+"POT-Creation-Date: 2015-03-27 20:05+0200\n"
+"PO-Revision-Date: 2015-03-30 06:12+0000\n"
+"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -79,7 +79,7 @@ msgstr "مفتاح إعادة تعيين كلمة المرور غير صالح"
 msgid "User is not pending activation"
 msgstr "المستخدم ليس في حالة إنتظار التفعيل "
 
-#: api/views.py:248
+#: api/views.py:252
 msgid "Service record must be current or pending changes to be canceled"
 msgstr "يجب أن يكون سجل الخدمة الحالية أو التغييرات المعلقة ليتم إلغاء"
 
@@ -324,37 +324,45 @@ msgid "Dear %(provider_name)s"
 msgstr "عزيزي مقدم الخدمات  %(provider_name)s"
 
 #: service_info/templates/email/service_approved_body.html:7
+#, python-format
+msgid ""
+"\n"
+"Your service %(service_name)s has been vetted and approved by International Rescue Committee staff.\n"
+"  It has been published on the following link: <a href=\"%(service_link)s\">%(service_link)s</a>\n"
+msgstr "\nتم تدقيق الخدمة %(service_name)s من قبل لجنة الإنقاذ الدولية.\nوقد تم نشر ذلك على الرابط التالي: <a href=\"%(service_link)s\">%(service_link)s</a>\n"
+
+#: service_info/templates/email/service_approved_body.html:14
+#: service_info/templates/email/service_approved_body.txt:8
+msgid "For more information please contact support at serviceinfo@rescue.org"
+msgstr "لمزيد من المعلومات يرجى الاتصال على serviceinfo@rescue.org"
+
+#: service_info/templates/email/service_approved_body.html:15
+#: service_info/templates/email/service_approved_body.txt:9
+msgid "Thanks for your submission."
+msgstr "شكرا لتقديم الطلب."
+
+#: service_info/templates/email/service_approved_body.html:19
+#: service_info/templates/email/service_approved_body.txt:11
+msgid "Best Regards"
+msgstr "مع أطيب التحيات"
+
+#: service_info/templates/email/service_approved_body.html:23
+#: service_info/templates/email/service_approved_body.txt:13
+msgid "Service Info"
+msgstr "خارطة الخدمات"
+
+#: service_info/templates/email/service_approved_body.html:25
+#: service_info/templates/email/service_approved_body.txt:15
+msgid "Support:"
+msgstr "الدعم:"
+
 #: service_info/templates/email/service_approved_body.txt:3
 #, python-format
 msgid ""
 "\n"
 "Your service %(service_name)s has been vetted and approved by International Rescue Committee staff.\n"
-msgstr "\nخدمتك %(service_name)s تم فحصها وإقرارها من قبل موظفي لجنة الإنقاذ الدولية.\n"
-
-#: service_info/templates/email/service_approved_body.html:17
-#: service_info/templates/email/service_approved_body.txt:11
-msgid "For more information please contact support at serviceinfo@rescue.org"
-msgstr "لمزيد من المعلومات يرجى الاتصال على serviceinfo@rescue.org"
-
-#: service_info/templates/email/service_approved_body.html:18
-#: service_info/templates/email/service_approved_body.txt:12
-msgid "Thanks for your submission."
-msgstr "شكرا لتقديم الطلب."
-
-#: service_info/templates/email/service_approved_body.html:22
-#: service_info/templates/email/service_approved_body.txt:14
-msgid "Best Regards"
-msgstr "مع أطيب التحيات"
-
-#: service_info/templates/email/service_approved_body.html:26
-#: service_info/templates/email/service_approved_body.txt:16
-msgid "Service Info"
-msgstr "خارطة الخدمات"
-
-#: service_info/templates/email/service_approved_body.html:28
-#: service_info/templates/email/service_approved_body.txt:18
-msgid "Support:"
-msgstr "الدعم:"
+"It has been published on the following link: <a href=\"%(service_link)s\">%(service_link)s</a>\n"
+msgstr "\nتم تدقيق الخدمة %(service_name)s من قبل لجنة الإنقاذ الدولية.\nوقد تم نشر ذلك على الرابط التالي: <a href=\"%(service_link)s\">%(service_link)s</a>\n"
 
 #: service_info/templates/email/service_approved_subject.txt:1
 msgid "Service has been approved"
@@ -366,58 +374,58 @@ msgid ""
 " the search box (e.g. \"33.8869, 35.5131\")."
 msgstr "يمكنك كتابة عنوان، اسم مكان، أو حتى خطوط الطول والعرض في البحث (مثلاً: \"33.8869, 35.5131\")"
 
-#: services/admin.py:96
+#: services/admin.py:97
 msgid "Description and Additional Information"
 msgstr "معلومات إضافية"
 
-#: services/admin.py:107
+#: services/admin.py:108
 #, python-brace-format
 msgid "Hours (all times in time zone {timezone})"
 msgstr "ساعات (all times in time zone {timezone})"
 
-#: services/admin.py:119
+#: services/admin.py:120
 msgid "Location"
 msgstr "المكان "
 
-#: services/admin.py:138
+#: services/admin.py:139
 msgid "Only services in draft status may be approved"
 msgstr "يجوز الموافقة على الخدمات الوحيدة في مشروع وضع"
 
-#: services/admin.py:146 services/admin.py:184
+#: services/admin.py:147 services/admin.py:185
 #, python-brace-format
 msgid "Unable to approve service '{name}': {error}."
 msgstr "غير قادر على الموافقة على الخدمة {name}': {error}'."
 
-#: services/admin.py:152
+#: services/admin.py:153
 msgid "Services have been approved"
 msgstr "تمت الموافقة على الخدمات"
 
-#: services/admin.py:153
+#: services/admin.py:154
 msgid "Approve new or changed service"
 msgstr "الموافقة على الخدمة الجديدة أو تغييرها"
 
-#: services/admin.py:159
+#: services/admin.py:160
 msgid "Only services in draft status may be rejected"
 msgstr "قد يتم رفض خدمات الوحيدة في مشروع وضع"
 
-#: services/admin.py:167 services/admin.py:199
+#: services/admin.py:168 services/admin.py:200
 #, python-brace-format
 msgid "Unable to reject service '{name}': {error}."
 msgstr "غير قادر على رفض الخدمة {name}': {error}'"
 
-#: services/admin.py:173
+#: services/admin.py:174
 msgid "Services have been rejected"
 msgstr "رفضت الخدمات"
 
-#: services/admin.py:174
+#: services/admin.py:175
 msgid "Reject new or changed service"
 msgstr "رفض الخدمة الجديدة أو تغييرها"
 
-#: services/admin.py:193
+#: services/admin.py:194
 msgid "The service was approved successfully."
 msgstr "وتمت الموافقة على الخدمة بنجاح."
 
-#: services/admin.py:208
+#: services/admin.py:209
 msgid "The service was rejected successfully."
 msgstr "وقد رفض الخدمة بنجاح."
 

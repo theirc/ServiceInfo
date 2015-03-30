@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-03-26 14:09+0000\n"
+"PO-Revision-Date: 2015-03-27 18:06+0000\n"
 "Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -118,6 +118,9 @@ msgstr "Cart de fournisseur des services"
 msgid "Service-Map##Page-Head##Page-Description##Page-Description"
 msgstr "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
 
+msgid "Service-Map##No-Search-Results"
+msgstr ""
+
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "Le terme de recherche"
 
@@ -195,6 +198,9 @@ msgstr "Site Web"
 
 msgid "Service-Map##List##Unknown"
 msgstr "inconnu"
+
+msgid "Service-Map##List##Criteria"
+msgstr ""
 
 msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
 msgstr "Retirer Change"
