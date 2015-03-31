@@ -75,8 +75,11 @@ msgstr "Friday"
 msgid "Global##Saturday"
 msgstr "Saturday"
 
-msgid "Global##GeolocationError"
+msgid "Global##GeolocationNotSupported"
 msgstr "Geolocation is not supported by this browser."
+
+msgid "Global##GeoPositionUnavailable"
+msgstr "Location is not available at this time."
 
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "Log In"
@@ -429,14 +432,20 @@ msgstr "Area:"
 msgid "Service-List##Table##Thead##Status"
 msgstr "Status:"
 
-msgid "Service-List##Table##Thead##Remove"
-msgstr "Remove:"
+msgid "Service-List##Table##Thead##Change"
+msgstr "Change:"
 
 msgid "Service-List##Cancel"
 msgstr "Cancel"
 
 msgid "Service-List##Delete"
 msgstr "Delete"
+
+msgid "Service-List##Change-Service"
+msgstr "Change service"
+
+msgid "Service-List##Change-Change"
+msgstr "Change change"
 
 msgid "Home##Service-Map##Title"
 msgstr "View The Service Map"
@@ -503,6 +512,18 @@ msgstr "Loading Service Type Filters..."
 
 msgid "Map##TypeHeader"
 msgstr "Filter by a Service Type"
+
+msgid "Footer##About##Title"
+msgstr "About Service Info"
+
+msgid "Footer##About##Paragraph"
+msgstr "Service info is a tool to allow both service providers to register their services online and beneficiaries to map services and give feedback on services. Service Info is open source and free to use, data is quality checked by International Rescue Committee."
+
+msgid "Footer##Contact##Title"
+msgstr "Reach Us"
+
+msgid "Footer##Contact##Paragraph"
+msgstr "Contact us on one of our social networks below or drop us a mail at"
 
 msgid "Feedback-Form##Title"
 msgstr "Feedback form"

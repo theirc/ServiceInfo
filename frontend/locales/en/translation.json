@@ -29,7 +29,8 @@
     "Thursday": "Thursday",
     "Friday": "Friday",
     "Saturday": "Saturday",
-    "GeolocationError": "Geolocation is not supported by this browser."
+    "GeolocationNotSupported": "Geolocation is not supported by this browser.",
+    "GeoPositionUnavailable": "Location is not available at this time."
   },
   "Login-Form": {
     "Page-Head": {
@@ -331,6 +332,16 @@
   "Map": {
     "Loading": "Loading Service Type Filters...",
     "TypeHeader": "Filter by a Service Type"
+  },
+  "Footer": {
+    "About": {
+      "Title": "About Service Info",
+      "Paragraph": "Service info is a tool to allow both service providers to register their services online and beneficiaries to map services and give feedback on services. Service Info is open source and free to use, data is quality checked by International Rescue Committee."
+    },
+    "Contact": {
+      "Title": "Reach Us",
+      "Paragraph": "Contact us on one of our social networks below or drop us a mail at"
+    }
   },
   "Feedback-Form": {
     "Title": "Feedback form",

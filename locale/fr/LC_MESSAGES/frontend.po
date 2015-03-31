@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-03-27 18:06+0000\n"
-"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
+"PO-Revision-Date: 2015-03-31 12:14+0000\n"
+"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +44,7 @@ msgid "Menu##Provider-Registration"
 msgstr "Inscription des fournisseurs"
 
 msgid "Menu##Feedback-Tool"
-msgstr ""
+msgstr "Outil de Commentaire"
 
 msgid "Menu##Change-Language"
 msgstr "Changer de langue"
@@ -83,7 +83,7 @@ msgid "Global##Saturday"
 msgstr "Samedi"
 
 msgid "Global##GeolocationError"
-msgstr ""
+msgstr "Géolocalisation ne est pas supporté par ce navigateur."
 
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "Entrer"
@@ -110,7 +110,7 @@ msgid "Search-List##Page-Head##Description"
 msgstr "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
 
 msgid "Service-Detail##Give-Feedback"
-msgstr ""
+msgstr "Améliorer les informations sur ce service"
 
 msgid "Service-Map##Page-Head##Page-Title##Title"
 msgstr "Cart de fournisseur des services"
@@ -119,7 +119,7 @@ msgid "Service-Map##Page-Head##Page-Description##Page-Description"
 msgstr "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
 
 msgid "Service-Map##No-Search-Results"
-msgstr ""
+msgstr "Aucun service ne correspond à vos termes de recherche. Se il vous plaît essayer d'autres termes."
 
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "Le terme de recherche"
@@ -131,16 +131,16 @@ msgid "Service-Map##Filtered-Search##Service-Type"
 msgstr "type de service"
 
 msgid "Service-Map##Filtered-Search##Distance"
-msgstr ""
+msgstr "Trouver Services près de moi"
 
 msgid "Service-Map##Filtered-Search##Sort"
-msgstr ""
+msgstr "trier"
 
 msgid "Service-Map##Filtered-Search##SortName"
-msgstr ""
+msgstr "Par Nom"
 
 msgid "Service-Map##Filtered-Search##SortNear"
-msgstr ""
+msgstr "Par Distance de moi"
 
 msgid "Service-Map##Filtered-Search##Area"
 msgstr "zone"
@@ -179,7 +179,7 @@ msgid "Service-Map##List##Additional-Info"
 msgstr "Informations supplémentaires sur le fournisseur"
 
 msgid "Service-Map##List##Cost"
-msgstr ""
+msgstr "Coût"
 
 msgid "Service-Map##List##Todays-Hours"
 msgstr "Heures de service d'aujourd'hui"
@@ -200,7 +200,7 @@ msgid "Service-Map##List##Unknown"
 msgstr "inconnu"
 
 msgid "Service-Map##List##Criteria"
-msgstr ""
+msgstr "les critères de sélection"
 
 msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
 msgstr "Retirer Change"
@@ -486,10 +486,10 @@ msgid ""
 msgstr "Nous avons envoyé un e-mail de confirmation sur le compte e-mail utilisée lors de votre inscription. Cliquez sur le lien de confirmation dans l'e-mail pour terminer le processus d'inscription."
 
 msgid "Feedback-Confirmation##Page-Head##Page-Title##Title"
-msgstr ""
+msgstr "Votre information a été soumis avec succès"
 
 msgid "Feedback-Confirmation##Page-Head##Page-Description##Page-Description"
-msgstr ""
+msgstr "Merci pour vos commentaires."
 
 msgid "Provider-Registration-Changed##Page-Head##Page-Title##Title"
 msgstr "Votre information a été soumis avec succès"
@@ -523,137 +523,137 @@ msgid "Password-Reset-Form##Submit-Options##Submit"
 msgstr "Soumettre"
 
 msgid "Map##Loading"
-msgstr ""
+msgstr "Chargement Type de service Filtres ..."
 
 msgid "Map##TypeHeader"
-msgstr ""
+msgstr "Filtrer par un type de service"
 
 msgid "Feedback-Form##Title"
-msgstr ""
+msgstr "Outil de Commentaire"
 
 msgid "Feedback-Form##Description"
-msgstr ""
+msgstr "Remplissez le formulaire ci-dessous."
 
 msgid "Feedback-Form##What-Service"
-msgstr ""
+msgstr "Vous donnez des commentaires sur ce service:"
 
 msgid "Feedback-Form##Name"
-msgstr ""
+msgstr "Nom"
 
 msgid "Feedback-Form##Phone-Number"
-msgstr ""
+msgstr "Numéro de téléphone (NN-NNNNNN)"
 
 msgid "Feedback-Form##Nationality"
-msgstr ""
+msgstr "Nationalité"
 
 msgid "Feedback-Form##AreaOfResidence"
-msgstr ""
+msgstr "domaine du service"
 
 msgid "Feedback-Form##Delivered##label"
-msgstr ""
+msgstr "Service a été livré?"
 
 msgid "Feedback-Form##Delivered##yes"
-msgstr ""
+msgstr "Oui"
 
 msgid "Feedback-Form##Delivered##no"
-msgstr ""
+msgstr "No"
 
 msgid "Feedback-Form##Submit"
-msgstr ""
+msgstr "Valider les réponses"
 
 msgid "Feedback-Form##Clear"
-msgstr ""
+msgstr "Retirer Réponses"
 
 msgid "Feedback-Form##WaitTime##label"
-msgstr ""
+msgstr "Combien de temps avez-vous attendu pour le service à livrer, après contact avec le fournisseur de services?"
 
 msgid "Feedback-Form##WaitTime##lesshour"
-msgstr ""
+msgstr "Moins de 1 heure"
 
 msgid "Feedback-Form##WaitTime##uptotwodays"
-msgstr ""
+msgstr "Jusqu'à 2 jours"
 
 msgid "Feedback-Form##WaitTime##more"
-msgstr ""
+msgstr "plus"
 
 msgid "Feedback-Form##Quality##label"
-msgstr ""
+msgstr "Comment évalueriez-vous la qualité du service que vous avez reçu (1-5, 5 étant la meilleure note possible)?"
 
 msgid "Feedback-Form##difficulty##label"
-msgstr ""
+msgstr "Avez-vous éprouvé des difficultés à contacter le fournisseur du service que vous avez besoin?"
 
 msgid "Feedback-Form##difficulty##no"
-msgstr ""
+msgstr "No"
 
 msgid "Feedback-Form##difficulty##didntknow"
-msgstr ""
+msgstr "Je ne savais pas comment les contacter"
 
 msgid "Feedback-Form##difficulty##nophoneresponse"
-msgstr ""
+msgstr "Je ai essayé de les contacter par téléphone, mais n'a reçu aucune réponse"
 
 msgid "Feedback-Form##difficulty##noresponse"
-msgstr ""
+msgstr "Je ai essayé de les contacter en personne, mais n'a reçu aucune réponse ou ne ont pas trouvé leur bureau"
 
 msgid "Feedback-Form##difficulty##unhelpful"
-msgstr ""
+msgstr "Contact avec eux mais la réponse était inutile"
 
 msgid "Feedback-Form##difficulty##other"
-msgstr ""
+msgstr "Autre"
 
 msgid "Feedback-Form##staff##label"
-msgstr ""
+msgstr "Comment évaluez-vous votre satisfaction avec le personnel de l'organisation qui a fourni des services à vous, (1-5, 5 étant la meilleure note possible)?"
 
 msgid "Feedback-Form##anonymous##label"
-msgstr ""
+msgstr "Je veux que mon retour soit anonyme au fournisseur de services"
 
 msgid "Feedback-Form##anonymous##yes"
-msgstr ""
+msgstr "Oui"
 
 msgid "Feedback-Form##anonymous##no"
-msgstr ""
+msgstr "No"
 
 msgid "Feedback-Tool##Title"
-msgstr ""
+msgstr "Commentaires sur les services"
 
 msgid "Feedback-Tool##Body"
-msgstr ""
+msgstr "Pour faire un commentaire, se il vous plaît rechercher un service, aller sur sa page, et utilisez le bouton Feedback."
 
 msgctxt "explained"
 msgid "Feedback-Form##non_delivery"
-msgstr ""
+msgstr "Avez-vous reçu une explication claire pourquoi le service que vous cherché n'a pas été livré pour vous?"
 
 msgctxt "delivery##no"
 msgid "Feedback-Form##non"
-msgstr ""
+msgstr "aucune explication"
 
 msgctxt "delivery##unclear"
 msgid "Feedback-Form##non"
-msgstr ""
+msgstr "Explication ne était pas clair"
 
 msgctxt "delivery##unfair"
 msgid "Feedback-Form##non"
-msgstr ""
+msgstr "Explication ne était pas juste"
 
 msgctxt "delivery##yes"
 msgid "Feedback-Form##non"
-msgstr ""
+msgstr "Une explication claire et appropriée"
 
 msgctxt "7days"
 msgid "Feedback-Form##WaitTime##3"
-msgstr ""
+msgstr "3-7 jours"
 
 msgctxt "2weeks"
 msgid "Feedback-Form##WaitTime##1"
-msgstr ""
+msgstr "1-2 semaines"
 
 msgctxt "time##label"
 msgid "Feedback-Form##wait"
-msgstr ""
+msgstr "Comment évaluez-vous votre satisfaction avec le temps que vous avez attendu pour le service à fournir (1-5, 5 étant la meilleure note possible)?"
 
 msgctxt "difficulties"
 msgid "Feedback-Form##other"
-msgstr ""
+msgstr "Autres difficultés à contacter le fournisseur de services"
 
 msgctxt "comments"
 msgid "Feedback-Form##extra"
-msgstr ""
+msgstr "autres commentaires"

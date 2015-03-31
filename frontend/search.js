@@ -5,6 +5,7 @@ var search_control_template = require('./templates/_search_controls.hbs');
 var Backbone = require('backbone');
 var config = require('./config');
 var messages = require('./messages');
+var i18n = require('i18next-client');
 
 
 var query = "";
@@ -64,11 +65,18 @@ var SearchControls = Backbone.View.extend({
         }
     },
     findNearMe: function() {
+        // http://diveintohtml5.info/geolocation.html
         var self = this;
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(handlePosition, handleError);
+            navigator.geolocation.getCurrentPosition(
+                handlePosition,
+                handleError,
+                {
+                    maximumAge: 90000  // okay to cache location up to 90 seconds
+                }
+            );
         } else {
-            handleError();
+            messages.add(i18n.t('Global.GeolocationNotSupported'));
         }
         function handlePosition(position) {
             var latlon = position.coords.latitude + "," + position.coords.longitude;
@@ -76,7 +84,33 @@ var SearchControls = Backbone.View.extend({
             hashtrack.setVar('n', latlon);
         }
         function handleError(error) {
-            messages.add(i18n.t('Global.GeolocationFailure'));
+            // DiveIntoHTML5 says that 'error' will be an object with a
+            // 'code' attribute... but in Chrome I seem to just be getting a number.
+            // Deal with it either way.
+            if (typeof error === 'number') {
+                error = {
+                    code: error
+                };
+            }
+            if (error.code === 1) {
+                // PERMISSION_DENIED
+                // if the user clicks the "Don’t Share" button or otherwise denies you access to their location.
+                // Silently carry on
+            }
+            else if (error.code === 2) {
+                // POSITION_UNAVAILABLE
+                // if the network is down or the positioning satellites can't be contacted.
+                messages.add(i18n.t('Global.GeoPositionUnavailable'));
+            }
+            else if (error.code === 3) {
+                // TIMEOUT
+                // if the network is up but it takes too long to calculate the user's position.
+                messages.add(i18n.t('Global.GeoPositionUnavailable'));
+            }
+            else {
+                // unexpected
+                console.error(error);
+            }
         }
     },
     sortByName: function() {

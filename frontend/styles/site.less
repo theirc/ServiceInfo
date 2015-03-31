@@ -67,10 +67,15 @@ body {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   margin: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
-html,body,#application {
+html,body {
     height: 100%;
+}
+#application {
+	min-height: 100%;
+	position: relative;
 }
 #messages {
     padding: 5px;
@@ -310,9 +315,11 @@ li {
 }
 
 .submit-form {
-    height: 60px;
+	width: 100%;
     margin-bottom: 10px;
-    width: 100%;
+    @media (min-width:1000px){
+    	height: 60px;
+    }
 
 	.half {
 		&:nth-child(2),
@@ -1014,6 +1021,22 @@ input[type=range] {
     border-bottom: none;
 }
 
+#page-container {
+	width: 100%;
+    display: block;
+    overflow-y: auto;
+    padding-bottom: 380px;
+	@media (min-width: 640px) {
+	    width: 80%;
+	    margin-@{start}: 20%;
+		padding-bottom: 200px;
+	}
+	@media (min-width: 1000px) {
+		margin-@{start}: 200px;
+		padding-bottom: 200px;
+	}
+}
+
 @media only screen and (min-width: 640px) {
     #application-header {
         width: 20%;
@@ -1040,13 +1063,9 @@ input[type=range] {
     #page {
     	// height: 100%;
     	box-sizing: border-box;
+    	display: inherit;
     }
-    #page-container {
-        display: inline-block;
-        width: 80%;
-        height: 100%;
-        margin-@{start}: 20%;
-    }
+
     #menu-toggle {
         display: none;
     }
@@ -1114,13 +1133,6 @@ input[type=range] {
     		background-color: rgba(0, 0, 0, 1.0);
     	}
     }
-}
-
-@media only screen and (min-width: 1000px) {
-	#page-container {
-	    display: inline-block;
-	    margin-@{start}: 200px;
-	}
 }
 
 /*
@@ -1214,7 +1226,7 @@ Service Form
 		}
 		.row {
 			@media (max-width: 640px) {
-				padding: 10px 0 20px;
+				padding: 10px 0 0px;
 			}
 		}
 		@media (min-width: 1000px) {
@@ -2068,6 +2080,72 @@ Service-Detail
 }
 .query-service-type option:not(:first-child) {
     margin-@{start}: 10px;
+}
+
+/*
+Footer
+*/
+
+#footer{
+	padding: 20px 0;
+	background-color: #343538;
+	display: block;
+	margin-top: 30px;
+	overflow: auto;
+    margin-@{start}: 0;
+    clear: both;
+	position: absolute;
+	bottom: 0;
+	@{start}: 0;
+	height: 320px;
+    @media (min-width: 640px) {
+	    width: 81.5%;
+	    margin-@{start}: 20%;
+		background-color: darkgray;
+		height: 160px;
+    }
+	@media (min-width: 1000px) {
+		margin-@{start}: 200px;
+		margin-top: 50px;
+	}
+	.row {
+		padding: 10px 15px;
+		width: 100%;
+		@media (min-width: 640px) {
+			max-width: 800px;
+			padding: 10px 30px;
+			.third {
+				margin-top: 0;
+				width: 33.333%;
+				float: @start;
+			}
+			.two-third {
+				padding-@{end}: 20px;
+				width: 66.666%;
+				float: @start;
+			}
+		}
+	}
+	.page-title,
+	.page-descr {
+		color: white;
+	}
+
+	.page-descr {
+		letter-spacing: .05em;
+		font-size: 1em;
+	}
+	#contact-icons > .icon {
+		width: 32px;
+		height: 32px;
+		display: inline-block;
+		padding: 10px 15px 0 0;
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
 }
 
 .servicetype-icon {
