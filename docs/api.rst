@@ -17,6 +17,14 @@ of those models, only those owned by the currently authenticated user
 are returned. The relevant record types are Service and SelectionCriterion
 for creation, and those plus Provider for querying.
 
+Paginating results
+------------------
+
+By default the API returns all results in a single response. The caller
+can optionally provide `limit` and `offset` fields to retrieve a subset
+of the results using DRF's
+`LimitOffsetPagination <http://www.django-rest-framework.org/api-guide/pagination/#limitoffsetpagination>`_.
+
 Creating a new provider
 -----------------------
 

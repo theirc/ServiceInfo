@@ -232,7 +232,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'api.auth.ServiceInfoTokenAuthentication',
     ),
-    'PAGINATE_BY': None,
+    # LimitOffsetPagination allows the caller to control pagination.
+    # We won't paginate by default.
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
 }
 
 
