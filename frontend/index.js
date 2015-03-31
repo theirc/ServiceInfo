@@ -48,5 +48,7 @@ $(function(){
 
     $('.menu-item-language').click(function() {
         lt.show();
+        $('#menu-container').addClass("menu-closed");
+        $('#menu-container').removeClass("menu-open");
     })
 });

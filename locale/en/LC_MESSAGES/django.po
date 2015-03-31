@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-25 21:36+0200\n"
+"POT-Creation-Date: 2015-03-27 20:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,7 +76,7 @@ msgstr ""
 msgid "User is not pending activation"
 msgstr ""
 
-#: api/views.py:248
+#: api/views.py:252
 msgid "Service record must be current or pending changes to be canceled"
 msgstr ""
 
@@ -322,37 +322,48 @@ msgid "Dear %(provider_name)s"
 msgstr ""
 
 #: service_info/templates/email/service_approved_body.html:7
+#, python-format
+msgid ""
+"\n"
+"Your service %(service_name)s has been vetted and approved by International "
+"Rescue Committee staff.\n"
+"  It has been published on the following link: <a href=\"%(service_link)s\">"
+"%(service_link)s</a>\n"
+msgstr ""
+
+#: service_info/templates/email/service_approved_body.html:14
+#: service_info/templates/email/service_approved_body.txt:8
+msgid "For more information please contact support at serviceinfo@rescue.org"
+msgstr ""
+
+#: service_info/templates/email/service_approved_body.html:15
+#: service_info/templates/email/service_approved_body.txt:9
+msgid "Thanks for your submission."
+msgstr ""
+
+#: service_info/templates/email/service_approved_body.html:19
+#: service_info/templates/email/service_approved_body.txt:11
+msgid "Best Regards"
+msgstr ""
+
+#: service_info/templates/email/service_approved_body.html:23
+#: service_info/templates/email/service_approved_body.txt:13
+msgid "Service Info"
+msgstr ""
+
+#: service_info/templates/email/service_approved_body.html:25
+#: service_info/templates/email/service_approved_body.txt:15
+msgid "Support:"
+msgstr ""
+
 #: service_info/templates/email/service_approved_body.txt:3
 #, python-format
 msgid ""
 "\n"
 "Your service %(service_name)s has been vetted and approved by International "
 "Rescue Committee staff.\n"
-msgstr ""
-
-#: service_info/templates/email/service_approved_body.html:17
-#: service_info/templates/email/service_approved_body.txt:11
-msgid "For more information please contact support at serviceinfo@rescue.org"
-msgstr ""
-
-#: service_info/templates/email/service_approved_body.html:18
-#: service_info/templates/email/service_approved_body.txt:12
-msgid "Thanks for your submission."
-msgstr ""
-
-#: service_info/templates/email/service_approved_body.html:22
-#: service_info/templates/email/service_approved_body.txt:14
-msgid "Best Regards"
-msgstr ""
-
-#: service_info/templates/email/service_approved_body.html:26
-#: service_info/templates/email/service_approved_body.txt:16
-msgid "Service Info"
-msgstr ""
-
-#: service_info/templates/email/service_approved_body.html:28
-#: service_info/templates/email/service_approved_body.txt:18
-msgid "Support:"
+"It has been published on the following link: <a href=\"%(service_link)s\">"
+"%(service_link)s</a>\n"
 msgstr ""
 
 #: service_info/templates/email/service_approved_subject.txt:1
@@ -365,58 +376,58 @@ msgid ""
 "the search box (e.g. \"33.8869, 35.5131\")."
 msgstr ""
 
-#: services/admin.py:88
+#: services/admin.py:97
 msgid "Description and Additional Information"
 msgstr ""
 
-#: services/admin.py:99
+#: services/admin.py:108
 #, python-brace-format
 msgid "Hours (all times in time zone {timezone})"
 msgstr ""
 
-#: services/admin.py:111
+#: services/admin.py:120
 msgid "Location"
 msgstr ""
 
-#: services/admin.py:130
+#: services/admin.py:139
 msgid "Only services in draft status may be approved"
 msgstr ""
 
-#: services/admin.py:138 services/admin.py:176
+#: services/admin.py:147 services/admin.py:185
 #, python-brace-format
 msgid "Unable to approve service '{name}': {error}."
 msgstr ""
 
-#: services/admin.py:144
+#: services/admin.py:153
 msgid "Services have been approved"
 msgstr ""
 
-#: services/admin.py:145
+#: services/admin.py:154
 msgid "Approve new or changed service"
 msgstr ""
 
-#: services/admin.py:151
+#: services/admin.py:160
 msgid "Only services in draft status may be rejected"
 msgstr ""
 
-#: services/admin.py:159 services/admin.py:191
+#: services/admin.py:168 services/admin.py:200
 #, python-brace-format
 msgid "Unable to reject service '{name}': {error}."
 msgstr ""
 
-#: services/admin.py:165
+#: services/admin.py:174
 msgid "Services have been rejected"
 msgstr ""
 
-#: services/admin.py:166
+#: services/admin.py:175
 msgid "Reject new or changed service"
 msgstr ""
 
-#: services/admin.py:185
+#: services/admin.py:194
 msgid "The service was approved successfully."
 msgstr ""
 
-#: services/admin.py:200
+#: services/admin.py:209
 msgid "The service was rejected successfully."
 msgstr ""
 
@@ -445,7 +456,7 @@ msgstr ""
 msgid "type"
 msgstr ""
 
-#: services/models.py:94 services/models.py:885
+#: services/models.py:94 services/models.py:891
 msgid "phone number"
 msgstr ""
 
@@ -641,162 +652,170 @@ msgstr ""
 msgid "JIRA issue"
 msgstr ""
 
-#: services/models.py:881
+#: services/models.py:875
+msgid "nationalities"
+msgstr ""
+
+#: services/models.py:887
 msgid "name"
 msgstr ""
 
-#: services/models.py:892
+#: services/models.py:898
 msgid "nationality"
 msgstr ""
 
-#: services/models.py:897
+#: services/models.py:903
 msgid "area of residence"
 msgstr ""
 
-#: services/models.py:902
+#: services/models.py:908
 msgid "service"
 msgstr ""
 
-#: services/models.py:908
+#: services/models.py:914
 msgid "Was the service you sought delivered to you?"
 msgstr ""
 
-#: services/models.py:912
+#: services/models.py:918
 msgid ""
 "How would you rate the quality of the service you received (from 1 to 5, "
 "where 5 is the highest rating possible)?"
 msgstr ""
 
-#: services/models.py:925
+#: services/models.py:931
 msgid ""
 "Did you receive a clear explanation for why the service you sought was not "
 "delivered to you?"
 msgstr ""
 
-#: services/models.py:932
+#: services/models.py:938
 msgid "No explanation"
 msgstr ""
 
-#: services/models.py:933
+#: services/models.py:939
 msgid "Explanation was not clear"
 msgstr ""
 
-#: services/models.py:934
+#: services/models.py:940
 msgid "Explanation was not fair"
 msgstr ""
 
-#: services/models.py:935
+#: services/models.py:941
 msgid "Clear and appropriate explanation"
 msgstr ""
 
-#: services/models.py:940
+#: services/models.py:946
 msgid ""
 "How long did you wait for the service to be delivered, after contacting the "
 "service provider?"
 msgstr ""
 
-#: services/models.py:947
+#: services/models.py:953
 msgid "Less than 1 hour"
 msgstr ""
 
-#: services/models.py:948
+#: services/models.py:954
 msgid "1-48 hours"
 msgstr ""
 
-#: services/models.py:949
+#: services/models.py:955
 msgid "3-7 days"
 msgstr ""
 
-#: services/models.py:950
+#: services/models.py:956
 msgid "1-2 weeks"
 msgstr ""
 
-#: services/models.py:951
+#: services/models.py:957
 msgid "More than 2 weeks"
 msgstr ""
 
-#: services/models.py:955
+#: services/models.py:961
 msgid ""
 "How do you rate your satisfaction with the time that you waited for the "
 "service to be delivered (from 1 to 5, where 5 is the highest rating "
 "possible)?"
 msgstr ""
 
-#: services/models.py:968
+#: services/models.py:974
 msgid ""
 "Did you experience difficulties contacting the provider of the service you "
 "needed?"
 msgstr ""
 
-#: services/models.py:972
+#: services/models.py:978
+msgid "No"
+msgstr ""
+
+#: services/models.py:979
 msgid "Did not know how to contact them"
 msgstr ""
 
-#: services/models.py:973
+#: services/models.py:980
 msgid "Tried to contact them by phone but received no response"
 msgstr ""
 
-#: services/models.py:974
+#: services/models.py:981
 msgid ""
 "Tried to contact them in person but received no response or did not find "
 "their office"
 msgstr ""
 
-#: services/models.py:976
+#: services/models.py:983
 msgid "Contacted them but response was unhelpful"
 msgstr ""
 
-#: services/models.py:977
+#: services/models.py:984
 msgid "Other"
 msgstr ""
 
-#: services/models.py:982
+#: services/models.py:989
 msgid "Other difficulties contacting the service provider"
 msgstr ""
 
-#: services/models.py:987
+#: services/models.py:994
 msgid ""
 "How would you rate your satisfaction with the staff of the organization that "
 "provided services to you, (from 1 to 5, where 5 is the highest rating "
 "possible)?"
 msgstr ""
 
-#: services/models.py:996
+#: services/models.py:1003
 msgid "Other comments"
 msgstr ""
 
-#: services/models.py:1001
+#: services/models.py:1008
 msgid "I want my feedback to be anonymous to the service provider"
 msgstr ""
 
-#: services/models.py:1010
+#: services/models.py:1017
 msgid ""
 "Quality field is required if you answered 'Yes' to 'Was the service you "
 "sought delivered to you?'."
 msgstr ""
 
-#: services/models.py:1014
+#: services/models.py:1021
 msgid ""
 "An answer is required to 'How long did you wait for the service to be "
 "delivered, after contacting the service provider?' if you answered 'Yes' to "
 "'Was the service you sought delivered to you?'."
 msgstr ""
 
-#: services/models.py:1020
+#: services/models.py:1027
 msgid ""
 "An answer is required to 'How do you rate your satisfaction with the time "
 "that you waited for the service to be delivered?' if you answered 'Yes' to "
 "'Was the service you sought delivered to you?'."
 msgstr ""
 
-#: services/models.py:1028
+#: services/models.py:1035
 msgid ""
 "An answer is required to 'Did you receive a clear explanation for why the "
 "service you sought was not delivered to you?' if you answered 'No' to 'Was "
 "the service you sought delivered to you?'."
 msgstr ""
 
-#: services/models.py:1035
+#: services/models.py:1042
 msgid ""
 "An answer is required to 'Other difficulties contacting the service "
 "provider' if you answered 'Other' to 'Did you experience difficulties "

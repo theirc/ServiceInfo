@@ -37,7 +37,7 @@ msgid "Menu##Provider-Registration"
 msgstr "Provider Registration"
 
 msgid "Menu##Feedback-Tool"
-msgstr "Feedback Tool"
+msgstr "Feedback"
 
 msgid "Menu##Change-Language"
 msgstr "Change Language"
@@ -102,11 +102,17 @@ msgstr "Service Provider Search"
 msgid "Search-List##Page-Head##Description"
 msgstr "Use the filtered search below to find the service that meets your needs."
 
+msgid "Service-Detail##Give-Feedback"
+msgstr "Give feedback on this service"
+
 msgid "Service-Map##Page-Head##Page-Title##Title"
 msgstr "Service Provider Map"
 
 msgid "Service-Map##Page-Head##Page-Description##Page-Description"
 msgstr "Use the filtered search below to find the service that meets your needs."
+
+msgid "Service-Map##No-Search-Results"
+msgstr "No services matched your search terms. Please try other terms."
 
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "Search term"
@@ -185,6 +191,9 @@ msgstr "Website"
 
 msgid "Service-Map##List##Unknown"
 msgstr "Unknown"
+
+msgid "Service-Map##List##Criteria"
+msgstr "Selection Criteria"
 
 msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
 msgstr "Remove Change"
@@ -453,6 +462,12 @@ msgstr "Your Information was Submitted Successfully"
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Description##Page-Description"
 msgstr "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
 
+msgid "Feedback-Confirmation##Page-Head##Page-Title##Title"
+msgstr "Your Information was Submitted Successfully"
+
+msgid "Feedback-Confirmation##Page-Head##Page-Description##Page-Description"
+msgstr "Thank you for your feedback."
+
 msgid "Provider-Registration-Changed##Page-Head##Page-Title##Title"
 msgstr "Your Information was Submitted Successfully"
 
@@ -482,3 +497,139 @@ msgstr "Enter your new password:"
 
 msgid "Password-Reset-Form##Submit-Options##Submit"
 msgstr "Submit"
+
+msgid "Map##Loading"
+msgstr "Loading Service Type Filters..."
+
+msgid "Map##TypeHeader"
+msgstr "Filter by a Service Type"
+
+msgid "Feedback-Form##Title"
+msgstr "Feedback form"
+
+msgid "Feedback-Form##Description"
+msgstr "Fill out the form below."
+
+msgid "Feedback-Form##What-Service"
+msgstr "You are giving feedback on this service:"
+
+msgid "Feedback-Form##Name"
+msgstr "Name"
+
+msgid "Feedback-Form##Phone-Number"
+msgstr "Phone Number (NN-NNNNNN)"
+
+msgid "Feedback-Form##Nationality"
+msgstr "Nationality"
+
+msgid "Feedback-Form##AreaOfResidence"
+msgstr "Area of residence"
+
+msgid "Feedback-Form##Delivered##label"
+msgstr "Was service delivered?"
+
+msgid "Feedback-Form##Delivered##yes"
+msgstr "Yes"
+
+msgid "Feedback-Form##Delivered##no"
+msgstr "No"
+
+msgid "Feedback-Form##Submit"
+msgstr "Submit Answers"
+
+msgid "Feedback-Form##Clear"
+msgstr "Remove Answers"
+
+msgid "Feedback-Form##WaitTime##label"
+msgstr "How long did you wait for the service to be delivered, after contacting the service provider?"
+
+msgid "Feedback-Form##WaitTime##lesshour"
+msgstr "Less than 1 hour"
+
+msgid "Feedback-Form##WaitTime##uptotwodays"
+msgstr "Up to 2 days"
+
+msgid "Feedback-Form##WaitTime##more"
+msgstr "Longer"
+
+msgid "Feedback-Form##Quality##label"
+msgstr "How would you rate the quality of the service you received (from 1 to 5, where 5 is the highest rating possible)?"
+
+msgid "Feedback-Form##difficulty##label"
+msgstr "Did you experience difficulties contacting the provider of the service you needed?"
+
+msgid "Feedback-Form##difficulty##no"
+msgstr "No"
+
+msgid "Feedback-Form##difficulty##didntknow"
+msgstr "Did not know how to contact them"
+
+msgid "Feedback-Form##difficulty##nophoneresponse"
+msgstr "Tried to contact them by phone but received no response"
+
+msgid "Feedback-Form##difficulty##noresponse"
+msgstr "Tried to contact them in person but received no response or did not find their office"
+
+msgid "Feedback-Form##difficulty##unhelpful"
+msgstr "Contacted them but response was unhelpful"
+
+msgid "Feedback-Form##difficulty##other"
+msgstr "Other"
+
+msgid "Feedback-Form##staff##label"
+msgstr "How would you rate your satisfaction with the staff of the organization that provided services to you, (from 1 to 5, where 5 is the highest rating possible)?"
+
+msgid "Feedback-Form##anonymous##label"
+msgstr "I want my feedback to be anonymous to the service provider"
+
+msgid "Feedback-Form##anonymous##yes"
+msgstr "Yes"
+
+msgid "Feedback-Form##anonymous##no"
+msgstr "No"
+
+msgid "Feedback-Tool##Title"
+msgstr "Feedback on services"
+
+msgid "Feedback-Tool##Body"
+msgstr "To give feedback, please search for a service, go to its page, and use the Feedback button."
+
+msgctxt "explained"
+msgid "Feedback-Form##non_delivery"
+msgstr "Did you receive a clear explanation for why the service you sought was not delivered to you?"
+
+msgctxt "delivery##no"
+msgid "Feedback-Form##non"
+msgstr "No explanation"
+
+msgctxt "delivery##unclear"
+msgid "Feedback-Form##non"
+msgstr "Explanation was not clear"
+
+msgctxt "delivery##unfair"
+msgid "Feedback-Form##non"
+msgstr "Explanation was not fair"
+
+msgctxt "delivery##yes"
+msgid "Feedback-Form##non"
+msgstr "Clear and appropriate explanation"
+
+msgctxt "7days"
+msgid "Feedback-Form##WaitTime##3"
+msgstr "3-7 days"
+
+msgctxt "2weeks"
+msgid "Feedback-Form##WaitTime##1"
+msgstr "1-2 weeks"
+
+msgctxt "time##label"
+msgid "Feedback-Form##wait"
+msgstr "How do you rate your satisfaction with the time that you waited for the service to be delivered (from 1 to 5, where 5 is the highest rating possible)?"
+
+msgctxt "difficulties"
+msgid "Feedback-Form##other"
+msgstr "Other difficulties contacting the service provider"
+
+msgctxt "comments"
+msgid "Feedback-Form##extra"
+msgstr "Other comments"

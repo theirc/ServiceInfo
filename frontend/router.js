@@ -13,7 +13,9 @@ var views = {
     "register-changed": require('./views/provider-form-changed'),
     "account-activate": require('./views/account-activate'),
     "service": require('./views/service-form'),
-    "feedback": require('./views/feedback'),
+    "feedback-form": require('./views/feedback-form'),
+    "feedback-confirm": require('./views/feedback-confirm'),
+    "feedback-help": require('./views/feedback-help'),
     "map": require('./views/map'),
     "search-list": require('./views/search-list'),
     "service-cancel": require('./views/service-cancel'),
@@ -80,9 +82,9 @@ module.exports = Backbone.Router.extend({
 
         "service/:id": loadPage("service-detail", ['id']),
 
-        "feedback": loadPage("feedback"),
-
-        // "search/?": loadPage("search-list"),
+        "feedback": loadPage("feedback-help"),
+        "feedback/confirm": loadPage("feedback-confirm"),
+        "feedback/:id": loadPage("feedback-form", ['id']),
 
         "service/cancel/:id": loadPage("service-cancel", ['id']),
         "service-list": loadPage("service-list"),

@@ -14,7 +14,7 @@
         "Service-Map": "Service Map",
         "Search": "Recherche",
         "Provider-Registration": "Inscription des fournisseurs",
-        "Feedback-Tool": "Commentaires Outil",
+        "Feedback-Tool": "",
         "Change-Language": "Changer de langue"
     },
     "Global": {
@@ -28,7 +28,8 @@
         "Wednesday": "Mercredi",
         "Thursday": "Jeudi",
         "Friday": "Vendredi",
-        "Saturday": "Samedi"
+        "Saturday": "Samedi",
+        "GeolocationError": ""
     },
     "Login-Form": {
         "Page-Head": {
@@ -54,6 +55,9 @@
             "Description": "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
         }
     },
+    "Service-Detail": {
+        "Give-Feedback": ""
+    },
     "Service-Map": {
         "Page-Head": {
             "Page-Title": {
@@ -63,11 +67,15 @@
                 "Page-Description": "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
             }
         },
+        "No-Search-Results": "",
         "Filtered-Search": {
             "Label": "Le terme de recherche",
             "Submit": "Recherche",
             "Service-Type": "type de service",
-            "Distance": "Filtrer par la distance",
+            "Distance": "",
+            "Sort": "",
+            "SortName": "",
+            "SortNear": "",
             "Area": "zone",
             "Filter-Area": "Filtrer par zone",
             "Filter-By-Area": "Filtrez votre recherche par zone",
@@ -84,12 +92,14 @@
             "Area": "Zone de service",
             "Type": "Type de service",
             "Additional-Info": "Informations supplémentaires sur le fournisseur",
+            "Cost": "",
             "Todays-Hours": "Heures de service d'aujourd'hui",
             "All-Hours": "Heures de service",
             "Phone": "Numéro de téléphone",
             "Email": "Adresse e-mail",
             "Website": "Site Web",
-            "Unknown": "inconnu"
+            "Unknown": "inconnu",
+            "Criteria": ""
         }
     },
     "Service-Remove-Change": {
@@ -263,6 +273,16 @@
             }
         }
     },
+    "Feedback-Confirmation": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": ""
+            },
+            "Page-Description": {
+                "Page-Description": ""
+            }
+        }
+    },
     "Provider-Registration-Changed": {
         "Page-Head": {
             "Page-Title": {
@@ -304,5 +324,65 @@
         "Submit-Options": {
             "Submit": "Soumettre"
         }
+    },
+    "Map": {
+        "Loading": "",
+        "TypeHeader": ""
+    },
+    "Feedback-Form": {
+        "Title": "",
+        "Description": "",
+        "What-Service": "",
+        "Name": "",
+        "Phone-Number": "",
+        "Nationality": "",
+        "AreaOfResidence": "",
+        "Delivered": {
+            "label": "",
+            "yes": "",
+            "no": ""
+        },
+        "Submit": "",
+        "Clear": "",
+        "WaitTime": {
+            "label": "",
+            "lesshour": "",
+            "uptotwodays": "",
+            "more": "",
+            "3_7days": "",
+            "1_2weeks": ""
+        },
+        "Quality": {
+            "label": ""
+        },
+        "difficulty": {
+            "label": "",
+            "no": "",
+            "didntknow": "",
+            "nophoneresponse": "",
+            "noresponse": "",
+            "unhelpful": "",
+            "other": ""
+        },
+        "staff": {
+            "label": ""
+        },
+        "anonymous": {
+            "label": "",
+            "yes": "",
+            "no": ""
+        },
+        "non_delivery_explained": "",
+        "non_delivery##no": "",
+        "non_delivery##unclear": "",
+        "non_delivery##unfair": "",
+        "non_delivery##yes": "",
+        "wait_time##label": "",
+        "other_difficulties": "",
+        "extra_comments": ""
+    },
+    "Feedback-Tool": {
+        "Title": "",
+        "Body": ""
     }
 }

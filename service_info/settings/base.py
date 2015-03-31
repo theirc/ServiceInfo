@@ -146,8 +146,12 @@ INSTALLED_APPS = (
     # Our apps - Must precede django.contrib.auth so templates override Django's.
     'services',
     'email_user',
-    'django.contrib.auth',
+    # contenttypes needs to be listed before auth due to problems with
+    # create_permissions and the TransactionTestCase/LiveServerTestCase
+    # See https://code.djangoproject.com/ticket/10827
+    # ¯\_(ツ)_/¯
     'django.contrib.contenttypes',
+    'django.contrib.auth',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -228,7 +232,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'api.auth.ServiceInfoTokenAuthentication',
     ),
-    'PAGINATE_BY': None,
+    # LimitOffsetPagination allows the caller to control pagination.
+    # We won't paginate by default.
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
 }
 
 
