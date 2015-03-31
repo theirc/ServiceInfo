@@ -23,7 +23,7 @@
 				<th data-i18n="Service-List.Table.Thead.Type"></th>
 				<th data-i18n="Service-List.Table.Thead.Area"></th>
 				<th data-i18n="Service-List.Table.Thead.Status"></th>
-				<th data-i18n="Service-List.Table.Thead.Remove"></th>
+				<th data-i18n="Service-List.Table.Thead.Change"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -32,14 +32,10 @@
 				<td>
 
                   <div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td {{#if this.parent }}update{{/if}}">
-                    {{#if this.can_update }}
-                      <a href="#/manage/service/{{ this.id }}">{{ this.name }}</a>
-                    {{ else }}
-                      {{#if this.isRejected}}
-                        {{this.name}}
-                      {{else}}
-                        <a href="#/service/{{ this.id }}">{{ this.name }}</a>
-                      {{/if}}
+                    {{#if this.is_current}}
+                      <a href="#/service/{{ this.id }}">{{ this.name }}</a>
+                    {{else}}
+                      {{this.name}}
                     {{/if}}
                   </span>
 
@@ -57,7 +53,17 @@
 					<div class="vertical-header" data-i18n="Service-List.Table.Thead.Area"></div><span class="vertical-td" data-i18n="Service-List.Status.{{ this.status }}">{{ this.status }}</span>
                 </td>
 				<td>
-				    <div class="vertical-header" data-i18n="Service-List.Table.Thead.Remove"></div><span class="vertical-td"><a href="#/manage/service/cancel/{{ this.id }}"><span
+				    <div class="vertical-header" data-i18n="Service-List.Table.Thead.Change"></div>
+                    <span class="vertical-td">
+                     {{#if this.can_update }}<a href="#/manage/service/{{ this.id }}"
+                         {{#if this.is_draft}}
+                         data-i18n="Service-List.Change-Change"
+                         {{else}}
+                         data-i18n="Service-List.Change-Service"
+                         {{/if}}
+                         ></a>,
+                     {{/if}}
+                     <a href="#/manage/service/cancel/{{ this.id }}"><span
 				      {{#if this.is_draft }}
       				     data-i18n="Service-Remove-Change.Remove-Change"
                       {{else}}
@@ -78,4 +84,3 @@
     </div>
 </div>
 <!-- End Main Content -->
-</div>

@@ -257,11 +257,14 @@
         "Type": "Type:",
         "Area": "Area:",
         "Status": "Status:",
-        "Remove": "Remove:"
+        "Change": "Change:"
+
       }
     },
     "Cancel": "Cancel",
-    "Delete": "Delete"
+    "Delete": "Delete",
+    "Change-Service": "Change service",
+    "Change-Change": "Change change"
   },
   "Home": {
     "Service-Map": {
