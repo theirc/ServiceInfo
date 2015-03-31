@@ -29,7 +29,8 @@
     "Thursday": "Thursday",
     "Friday": "Friday",
     "Saturday": "Saturday",
-    "GeolocationError": "Geolocation is not supported by this browser."
+    "GeolocationNotSupported": "Geolocation is not supported by this browser.",
+    "GeoPositionUnavailable": "Location is not available at this time."
   },
   "Login-Form": {
     "Page-Head": {
