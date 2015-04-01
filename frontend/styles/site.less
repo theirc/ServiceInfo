@@ -967,9 +967,13 @@ input[type=range] {
         background-image: url(../images/logo-large.png);
         background-image: url(../images/logo-large.svg);
         background-size: 100%;
+        width: 116px;
+        height: 124px;
+        margin: 1.25em auto;
+    }
+    @media (min-width: 1000px){
         width: 140px;
         height: 140px;
-        margin: 1.25em auto;
     }
 }
 
@@ -1709,12 +1713,17 @@ Landing page
 	.row {
 		padding: 0;
 	}
-	.main-content {
+	.landing-img {
 		background: #F3F3F4 url(../images/map2.svg) center center no-repeat;
 		background-size: cover;
 		z-index: 1;
 		width: 100%;
 		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	.main-content {
 		border-radius: 0;
 		margin-bottom: -30px;
 		position: relative;
@@ -1722,13 +1731,13 @@ Landing page
 		@{start}: 0;
 		padding-top: 50px;
 		padding-bottom: 40px;
+		z-index: 2;
 		@media (min-width: 640px){
 			padding-top: 10%;
-			padding-bottom: 58%;
 		}
 		@media (min-width: 1000px){
-			padding-top: 10%;
-			padding-bottom: 10%;
+			padding-top: 5%;
+			padding-bottom: 5%;
 		}
 
 		.row {
@@ -2113,11 +2122,12 @@ Footer
 	bottom: 0;
 	@{start}: 0;
 	height: 320px;
+	z-index: 98;
     @media (min-width: 640px) {
 	    width: 80%;
 	    margin-@{start}: 20%;
 		background-color: #5A5A5A;
-		height: 200px;
+		height: 180px;
     }
 	@media (min-width: 1000px) {
 	    width: 85%;
