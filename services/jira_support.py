@@ -16,7 +16,16 @@ def get_jira():
 def default_newissue_kwargs():
     duedate = datetime.date.today() + datetime.timedelta(days=settings.JIRA_DUEIN_DAYS)
     return {
-        'project': {'key': settings.JIRA_PROJECT_KEY},
+        'project': {'key': settings.JIRA_SERVICES_PROJECT_KEY},
+        'issuetype': {'name': 'Task'},
+        'duedate': str(duedate),
+    }
+
+
+def default_feedback_kwargs():
+    duedate = datetime.date.today() + datetime.timedelta(days=settings.JIRA_DUEIN_DAYS)
+    return {
+        'project': {'key': settings.JIRA_FEEDBACK_PROJECT_KEY},
         'issuetype': {'name': 'Task'},
         'duedate': str(duedate),
     }

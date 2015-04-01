@@ -1,0 +1,25 @@
+Name:                    {{ feedback.name }}
+Phone:                   {{ feedback.phone_number }}
+Nationality:             {{ feedback.nationality.name_en }}
+Area of residence:       {{ feedback.area_of_residence.name_en }}
+Anonymous:               {{ feedback.anonymous|yesno|capfirst }}
+
+Service:                 {{ feedback.service.name_en }}
+
+Delivered:               {{ feedback.delivered|yesno|capfirst }}
+{% if feedback.delivered %}
+Quality:                 {{ feedback.quality }}
+Wait:                    {{ feedback.get_wait_time_display }}
+Wait satisfaction:       {{ feedback.wait_time_satisfaction }}
+{% else %}
+Explained:               {{ feedback.get_non_delivery_explained_display }}
+{% endif %}
+Difficulty contacting:   {{ feedback.get_difficulty_contacting_display }}
+{% if feedback.other_difficulties %}
+Other difficulties contacting:
+{{ feedback.other_difficulties }}
+
+{% endif %}
+Satisfaction with staff: {{ feedback.staff_satisfaction }}
+Other comments:
+{{ feedback.extra_comments }}
