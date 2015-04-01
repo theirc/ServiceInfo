@@ -144,6 +144,16 @@ li {
 	margin: 0;
 }
 
+select {
+    height: 46px;
+	box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
+	& when (@direction=rtl) {
+		background-position: right 95% top 50%;
+	}
+}
+
 .sr-only {
     position: absolute;
     width: 1px;
@@ -1384,8 +1394,7 @@ div#search {
 		button.primary-button.group-submit.search {
 			float: @start;
 		}
-		.query-field-container > input,
-		select#id_type.form-control {
+		.query-field-container > input {
             height: 46px;
 			box-sizing: border-box;
 		    background-repeat: no-repeat;
@@ -2120,4 +2129,17 @@ Footer
         top: 0;
         vertical-align: middle;
     }
+}
+
+/*
+Feedback Form
+Feedback Confirm
+Feedback Help
+*/
+#feedback-form,
+#feedback-confirm,
+#feedback-help {
+	.main-content {
+		padding-@{start}: 0;
+	}
 }
