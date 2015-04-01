@@ -20,8 +20,8 @@ from services.tests.factories import ProviderFactory, ProviderTypeFactory, Servi
     ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory
 
 
-ERROR_REQUIRED_FIELD_MISSING = Field.default_error_messages['required']
-ERROR_FIELD_CANNOT_BE_BLANK = CharField.default_error_messages['blank']
+ERROR_REQUIRED_FIELD_MISSING = str(Field.default_error_messages['required'])
+ERROR_FIELD_CANNOT_BE_BLANK = str(CharField.default_error_messages['blank'])
 
 
 class APITestMixin(object):
