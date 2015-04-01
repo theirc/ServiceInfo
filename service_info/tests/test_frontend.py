@@ -6,10 +6,18 @@ import subprocess
 import tempfile
 import time
 
+from urllib.parse import urlparse
+
 from django.conf import settings
+from django.contrib.sites.models import Site
 from django.test import LiveServerTestCase
 
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions
+
+from email_user.tests.factories import EmailUserFactory
 
 
 class FrontEndTestCase(LiveServerTestCase):
@@ -37,6 +45,41 @@ class FrontEndTestCase(LiveServerTestCase):
         super().tearDownClass()
         shutil.rmtree(cls.log_dir)
 
+    def setUp(self):
+        self.clear_storage()
+        # Django prior to 1.8 doesn't create the default site with the correct pk
+        # See https://code.djangoproject.com/ticket/23945
+        defaults = {
+            'domain':  'example.com',
+            'name': 'example.com',
+        }
+        Site.objects.get_or_create(pk=settings.SITE_ID, defaults=defaults)
+
+    def assertHashLocation(self, expected):
+        """Assert current URL hash."""
+
+        current = urlparse(self.browser.current_url)
+        self.assertEqual(current.fragment, expected)
+
+    def clear_storage(self):
+        """Clear all browser local storage."""
+        
+        self.browser.get(self.express_url)
+        self.browser.execute_script('localStorage.clear();')
+
+    def set_language(self, language='en'):
+        """Helper to set language choice in the browser."""
+
+        self.browser.get(self.express_url)
+        form = self.browser.find_element_by_id('language-toggle')
+        button = form.find_element_by_css_selector('[data-lang="%s"]' % language)
+        button.click()
+
+    def wait_for_element(self, selector, match=By.ID, timeout=2):
+        return WebDriverWait(self.browser, timeout).until(
+            expected_conditions.visibility_of_element_located((match, selector))
+        )
+
     def test_get_homepage(self):
         """Load the homepage."""
 
@@ -47,10 +90,29 @@ class FrontEndTestCase(LiveServerTestCase):
     def test_select_language(self):
         """Select user language."""
 
-        self.browser.get(self.express_url)
-        form = self.browser.find_element_by_id('language-toggle')
-        button = form.find_element_by_css_selector('[data-lang="fr"]')
-        button.click()
-        menu = self.browser.find_element_by_id('menu')
+        self.set_language('fr')
+        menu = self.wait_for_element('menu')
         language = menu.find_element_by_class_name('menu-item-language')
         self.assertEqual(language.text, 'Changer de langue', 'Menu should now be French')
+
+    def test_login(self):
+        """Login an existing user."""
+
+        user = EmailUserFactory(password='abc123')
+        self.set_language()
+        menu = self.wait_for_element('menu')
+        self.browser.save_screenshot('screenshot.png')
+        login = menu.find_elements_by_link_text('Login')[0]
+        login.click()
+        form = self.wait_for_element('form-login', match=By.CLASS_NAME)
+        self.assertHashLocation('/login')
+        data = {
+            'email': user.email,
+            'password': 'abc123',
+        }
+        for name, value in data.items():
+            element = form.find_element_by_name(name)
+            element.send_keys(value)
+        form.find_element_by_class_name('submit').click()
+        self.wait_for_element('services')
+        self.assertHashLocation('/manage/service-list')
