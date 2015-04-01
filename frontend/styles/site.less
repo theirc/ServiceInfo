@@ -936,14 +936,41 @@ input[type=range] {
 #application-header {
     width: 100%;
     height: 70px;
-    background-color: #343538;
+    background-color: #2A2A2A;
     z-index: 99;
     position: relative;
+	@media (min-width: 640px) {
+        position: absolute;
+        width: 20%;
+        height: 100%;
+        // display: inline-block;
+        // float: @start;
+        overflow: auto;
+	}
+	@media (min-width: 1000px) {
+        width: 15%;
+	}
+}
+
+#application-header .brand {
+	@media (min-width: 640px) {
+	    background: white;
+	    padding: .25em .25em 0.1em;
+	    text-align: center;
+	}
 }
 
 #application-header .brand #logo {
     height: 100%;
     background-repeat: no-repeat;
+    @media (min-width: 640px){
+        background-image: url(../images/logo-large.png);
+        background-image: url(../images/logo-large.svg);
+        background-size: 100%;
+        width: 140px;
+        height: 140px;
+        margin: 1.25em auto;
+    }
 }
 
 #language-toggle {
@@ -977,7 +1004,7 @@ input[type=range] {
 }
 
 #menu {
-    background: #343538;
+    background: #2A2A2A;
     list-style: none;
     padding: 0;
     font-size: inherit;
@@ -1029,37 +1056,15 @@ input[type=range] {
 	@media (min-width: 640px) {
 	    width: 80%;
 	    margin-@{start}: 20%;
-		padding-bottom: 200px;
+		padding-bottom: 260px;
 	}
 	@media (min-width: 1000px) {
-		margin-@{start}: 200px;
-		padding-bottom: 200px;
+		width: 85%;
+		margin-@{start}: 15%;
 	}
 }
 
 @media only screen and (min-width: 640px) {
-    #application-header {
-        width: 20%;
-        height: 100%;
-        max-width: 200px;
-        display: inline-block;
-        position: fixed;
-        float: @start;
-        overflow: auto;
-    }
-    #application-header .brand {
-        background: white;
-        padding: .25em .25em 0.1em;
-        text-align: center;
-    }
-    #application-header .brand #logo {
-        background-image: url(../images/logo-large.png);
-        background-image: url(../images/logo-large.svg);
-        background-size: 100%;
-        width: 140px;
-        height: 140px;
-        margin: 1.25em auto;
-    }
     #page {
     	// height: 100%;
     	box-sizing: border-box;
@@ -1711,18 +1716,37 @@ Landing page
 		width: 100%;
 		height: 100%;
 		border-radius: 0;
-		position: absolute;
+		margin-bottom: -30px;
+		position: relative;
 		top: -10px;
 		@{start}: 0;
-		padding-bottom: 10px;
-		@media (max-width: 640px){
+		padding-top: 50px;
+		padding-bottom: 40px;
+		@media (min-width: 640px){
+			padding-top: 10%;
+			padding-bottom: 58%;
+		}
+		@media (min-width: 1000px){
+			padding-top: 10%;
+			padding-bottom: 10%;
 		}
 
 		.row {
 			text-align: center;
 			z-index: 3;
 			@media (min-width: 640px){
-				margin-@{start}: 230px;
+				margin: 0;
+				margin-@{start}: 50%;
+				min-width: 400px;
+
+			    & when (@direction = ltr) {
+			    	-webkit-transform: translate(-50%, 0);
+			    	transform: translate(-50%, 0);
+			    }
+			    & when (@direction = rtl) {
+			    	-webkit-transform: translate(50%, 0);
+			    	transform: translate(50%, 0);
+			    }
 			}
 
 			.service-user,
@@ -1739,7 +1763,7 @@ Landing page
 				-moz-box-shadow: 0px 2px 6px rgba(15, 51, 72, 1);
 				box-shadow: 0px 2px 6px rgba(15, 51, 72, 1);
 				z-index: 4;
-				max-width: 600px;
+				// max-width: 600px;
 
 				@media (min-width: 640px){
 					padding: 1.5em 2.5em;
@@ -1755,13 +1779,6 @@ Landing page
 					margin-bottom: 18px;
 				}
 			}
-
-				.service-user {
-					margin-top: 120px;
-					@media (min-width: 640px) {
-						margin-top: 30px;
-					}
-				}
 		}
 	}
 }
@@ -2088,10 +2105,8 @@ Footer
 
 #footer{
 	padding: 20px 0;
-	background-color: #343538;
-	display: block;
+	background-color: #2A2A2A;
 	margin-top: 30px;
-	overflow: auto;
     margin-@{start}: 0;
     clear: both;
 	position: absolute;
@@ -2099,13 +2114,14 @@ Footer
 	@{start}: 0;
 	height: 320px;
     @media (min-width: 640px) {
-	    width: 81.5%;
+	    width: 80%;
 	    margin-@{start}: 20%;
-		background-color: darkgray;
-		height: 160px;
+		background-color: #5A5A5A;
+		height: 200px;
     }
 	@media (min-width: 1000px) {
-		margin-@{start}: 200px;
+	    width: 85%;
+	    margin-@{start}: 15%;
 		margin-top: 50px;
 	}
 	.row {
