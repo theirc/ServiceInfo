@@ -201,3 +201,12 @@ class FrontEndTestCase(LiveServerTestCase):
         self.set_language()
         self.browser.get(self.express_url + '#/register/verify/1234567890')
         self.wait_for_page_title_contains('Your account activation Failed.', timeout=5)
+
+    def test_text_list_search(self):
+        """Find services by text based search."""
+
+    def test_filtered_list_search(self):
+        """Find services by type."""
+
+    def test_localized_search_options(self):
+        """Search options should be localized."""
