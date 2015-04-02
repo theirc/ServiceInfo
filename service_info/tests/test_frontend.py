@@ -48,8 +48,8 @@ class FrontEndTestCase(LiveServerTestCase):
 
     def setUp(self):
         self.clear_storage()
-        # # Django prior to 1.8 doesn't create the default site with the correct pk
-        # # See https://code.djangoproject.com/ticket/23945
+        # Django prior to 1.8 doesn't create the default site with the correct pk
+        # See https://code.djangoproject.com/ticket/23945
         defaults = {
             'domain':  'example.com',
             'name': 'example.com',
@@ -160,7 +160,7 @@ class FrontEndTestCase(LiveServerTestCase):
     def test_confirm_registration(self):
         """New user activating their registration."""
 
-        user = EmailUserFactory(
+        EmailUserFactory(
             password='abc123', is_active=False, activation_key='1234567890')
         self.set_language()
         self.browser.get(self.express_url + '#/register/verify/1234567890')
