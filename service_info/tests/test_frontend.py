@@ -87,6 +87,16 @@ class FrontEndTestCase(LiveServerTestCase):
                 (By.CLASS_NAME, 'page-title'), title)
         )
 
+    def submit_form(self, form, data, button_class='submit'):
+        for name, value in data.items():
+            element = form.find_element_by_name(name)
+            if element.tag_name.lower() == 'select':
+                select = Select(element)
+                select.select_by_visible_text(value)
+            else:
+                element.send_keys(value)
+        form.find_element_by_class_name(button_class).click()
+
     def test_get_homepage(self):
         """Load the homepage."""
 
@@ -116,10 +126,7 @@ class FrontEndTestCase(LiveServerTestCase):
             'email': user.email,
             'password': 'abc123',
         }
-        for name, value in data.items():
-            element = form.find_element_by_name(name)
-            element.send_keys(value)
-        form.find_element_by_class_name('submit').click()
+        self.submit_form(form, data)
         self.wait_for_element('services')
         self.assertHashLocation('/manage/service-list')
 
@@ -144,14 +151,9 @@ class FrontEndTestCase(LiveServerTestCase):
             'password1': 'foobar',
             'password2': 'foobar',
             'number_of_monthly_beneficiaries': '37',
+            'type': provider_type.name,
         }
-        for name, value in data.items():
-            element = form.find_element_by_name(name)
-            element.send_keys(value)
-        # Select provider type
-        select = Select(form.find_element_by_name('type'))
-        select.select_by_visible_text(provider_type.name)
-        form.find_element_by_class_name('form-btn-submit').click()
+        self.submit_form(form, data, button_class='form-btn-submit')
         self.wait_for_page_title_contains('Submitted Successfully', timeout=5)
         self.assertHashLocation('/register/confirm')
 
