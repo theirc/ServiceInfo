@@ -14,6 +14,7 @@
   	"Service-Map": "Service Map",
     "Search": "Search",
   	"Provider-Registration": "Provider Registration",
+    "Edit-Provider-Information": "Edit Provider Information",
   	"Feedback-Tool": "Feedback",
   	"Change-Language": "Change Language"
   },
@@ -52,7 +53,7 @@
   },
   "Search-List": {
     "Page-Head": {
-      "Title": "Service Provider Search",
+      "Title": "Search For Services",
       "Description": "Use the filtered search below to find the service that meets your needs."
     }
   },
@@ -62,7 +63,7 @@
   "Service-Map": {
     "Page-Head": {
       "Page-Title": {
-        "Title": "Service Provider Map"
+        "Title": "Search For Services"
       },
       "Page-Description": {
         "Page-Description": "Use the filtered search below to find the service that meets your needs."
