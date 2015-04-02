@@ -154,3 +154,12 @@ class FrontEndTestCase(LiveServerTestCase):
         form.find_element_by_class_name('form-btn-submit').click()
         self.wait_for_page_title_contains('Submitted Successfully', timeout=5)
         self.assertHashLocation('/register/confirm')
+
+    def test_confirm_registration(self):
+        """New user activating their registration."""
+
+        user = EmailUserFactory(
+            password='abc123', is_active=False, activation_key='1234567890')
+        self.set_language()
+        self.browser.get(self.express_url + '#/register/verify/1234567890')
+        self.wait_for_page_title_contains('Your account has been activated.', timeout=5)
