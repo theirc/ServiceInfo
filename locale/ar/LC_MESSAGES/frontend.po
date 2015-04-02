@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-03-30 06:08+0000\n"
+"PO-Revision-Date: 2015-04-02 07:59+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -83,8 +83,11 @@ msgstr "الجمعة"
 msgid "Global##Saturday"
 msgstr "السبت"
 
-msgid "Global##GeolocationError"
+msgid "Global##GeolocationNotSupported"
 msgstr "غير معتمد تحديد الموقع الجغرافي على هذا المتصفح."
+
+msgid "Global##GeoPositionUnavailable"
+msgstr "الموقع غير متوفر في هذا الوقت."
 
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "تسجيل الدخول"
@@ -451,14 +454,20 @@ msgstr "المنطقة:"
 msgid "Service-List##Table##Thead##Status"
 msgstr "الحالة:"
 
-msgid "Service-List##Table##Thead##Remove"
-msgstr "إزالة:"
+msgid "Service-List##Table##Thead##Change"
+msgstr "تغيير:"
 
 msgid "Service-List##Cancel"
 msgstr "إلغاء"
 
 msgid "Service-List##Delete"
 msgstr "حذف"
+
+msgid "Service-List##Change-Service"
+msgstr "تغيير الخدمة"
+
+msgid "Service-List##Change-Change"
+msgstr ""
 
 msgid "Home##Service-Map##Title"
 msgstr "عرض خريطة الخدمات "
@@ -528,6 +537,18 @@ msgstr "تحميل أنواع الخدمات التي صنّفتها"
 
 msgid "Map##TypeHeader"
 msgstr "تصنيف حسب نوع الخدمة"
+
+msgid "Footer##About##Title"
+msgstr "عن خريطة الخدمات "
+
+msgid "Footer##About##Paragraph"
+msgstr "معلومات الخدمة هي أداة لتسمح لكل من مقدمي الخدمة لتسجيل خدماتها عبر الإنترنت والمستفيدين لرسم خريطة الخدمات وإعطاء معلومات عن الخدمات. معلومات عن الخدمة هو المصدر المفتوح ومجانا للاستخدام، البيانات هو نوعية فحصها من قبل لجنة الإنقاذ الدولية."
+
+msgid "Footer##Contact##Title"
+msgstr "إتصل بنا "
+
+msgid "Footer##Contact##Paragraph"
+msgstr "تواصل معنا على إحدى شبكة التواصل الإجتماعي أو أرسل لنا على البريد الإلكتروني أدناه "
 
 msgid "Feedback-Form##Title"
 msgstr "نموذج الملاحظات"
