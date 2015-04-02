@@ -163,3 +163,10 @@ class FrontEndTestCase(LiveServerTestCase):
         self.set_language()
         self.browser.get(self.express_url + '#/register/verify/1234567890')
         self.wait_for_page_title_contains('Your account has been activated.', timeout=5)
+
+    def test_invalid_activation(self):
+        """Show message for invalid activation code."""
+
+        self.set_language()
+        self.browser.get(self.express_url + '#/register/verify/1234567890')
+        self.wait_for_page_title_contains('Your account activation Failed.', timeout=5)
