@@ -56,13 +56,18 @@ module.exports = Backbone.View.extend({
 
         // hide the conditional ones to start
         $('.ifdelivered, .ifnotdelivered, #row_other_difficulties').hide();
+
+        // Don't allow submit until they've said if the service was delivered
+        $('button.form-btn-submit').hide()
     },
 
     events: {
         "change [name=delivered]": function() {
             var delivered = $('[name=delivered]:checked').val() === "1";
+            $('.hideuntildelivered').show();
             $('.ifdelivered').toggle(delivered);
             $('.ifnotdelivered').toggle(!delivered);
+            $('button.form-btn-submit').show()
         },
         "change [name=difficulty_contacting]": function() {
             var difficulty = $("#id_difficulty_contacting option:selected").val();
