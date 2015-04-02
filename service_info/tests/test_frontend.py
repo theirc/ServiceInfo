@@ -14,10 +14,11 @@ from django.test import LiveServerTestCase
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.support import expected_conditions
 
 from email_user.tests.factories import EmailUserFactory
+from services.tests.factories import ProviderTypeFactory
 
 
 class FrontEndTestCase(LiveServerTestCase):
@@ -47,8 +48,8 @@ class FrontEndTestCase(LiveServerTestCase):
 
     def setUp(self):
         self.clear_storage()
-        # Django prior to 1.8 doesn't create the default site with the correct pk
-        # See https://code.djangoproject.com/ticket/23945
+        # # Django prior to 1.8 doesn't create the default site with the correct pk
+        # # See https://code.djangoproject.com/ticket/23945
         defaults = {
             'domain':  'example.com',
             'name': 'example.com',
@@ -63,7 +64,7 @@ class FrontEndTestCase(LiveServerTestCase):
 
     def clear_storage(self):
         """Clear all browser local storage."""
-        
+
         self.browser.get(self.express_url)
         self.browser.execute_script('localStorage.clear();')
 
@@ -78,6 +79,12 @@ class FrontEndTestCase(LiveServerTestCase):
     def wait_for_element(self, selector, match=By.ID, timeout=2):
         return WebDriverWait(self.browser, timeout).until(
             expected_conditions.visibility_of_element_located((match, selector))
+        )
+
+    def wait_for_page_title_contains(self, title, timeout=2):
+        return WebDriverWait(self.browser, timeout).until(
+            expected_conditions.text_to_be_present_in_element(
+                (By.CLASS_NAME, 'page-title'), title)
         )
 
     def test_get_homepage(self):
@@ -101,7 +108,6 @@ class FrontEndTestCase(LiveServerTestCase):
         user = EmailUserFactory(password='abc123')
         self.set_language()
         menu = self.wait_for_element('menu')
-        self.browser.save_screenshot('screenshot.png')
         login = menu.find_elements_by_link_text('Login')[0]
         login.click()
         form = self.wait_for_element('form-login', match=By.CLASS_NAME)
@@ -116,3 +122,35 @@ class FrontEndTestCase(LiveServerTestCase):
         form.find_element_by_class_name('submit').click()
         self.wait_for_element('services')
         self.assertHashLocation('/manage/service-list')
+
+    def test_register(self):
+        """Register for a new site account."""
+
+        provider_type = ProviderTypeFactory()
+        self.set_language()
+        menu = self.wait_for_element('menu')
+        registration = menu.find_elements_by_link_text('Provider Registration')[0]
+        registration.click()
+        form = self.wait_for_element('provider-form')
+        self.assertHashLocation('/register')
+        data = {
+            'name': 'Joe Provider',
+            'phone_number': '12-345678',
+            'description': 'Test provider',
+            'focal_point_name': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address': '1313 Mockingbird Lane, Beirut, Lebanon',
+            'email': 'fred@example.com',
+            'password1': 'foobar',
+            'password2': 'foobar',
+            'number_of_monthly_beneficiaries': '37',
+        }
+        for name, value in data.items():
+            element = form.find_element_by_name(name)
+            element.send_keys(value)
+        # Select provider type
+        select = Select(form.find_element_by_name('type'))
+        select.select_by_visible_text(provider_type.name)
+        form.find_element_by_class_name('form-btn-submit').click()
+        self.wait_for_page_title_contains('Submitted Successfully', timeout=5)
+        self.assertHashLocation('/register/confirm')
