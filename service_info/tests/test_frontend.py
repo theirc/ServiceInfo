@@ -154,8 +154,37 @@ class FrontEndTestCase(LiveServerTestCase):
             'type': provider_type.name,
         }
         self.submit_form(form, data, button_class='form-btn-submit')
+
         self.wait_for_page_title_contains('Submitted Successfully', timeout=5)
         self.assertHashLocation('/register/confirm')
+
+    def test_duplicate_registration(self):
+        """Notify user of attempted duplicate registration."""
+
+        user = EmailUserFactory(password='abc123')
+        provider_type = ProviderTypeFactory()
+        self.set_language()
+        menu = self.wait_for_element('menu')
+        registration = menu.find_elements_by_link_text('Provider Registration')[0]
+        registration.click()
+        form = self.wait_for_element('provider-form')
+        self.assertHashLocation('/register')
+        data = {
+            'name': 'Joe Provider',
+            'phone_number': '12-345678',
+            'description': 'Test provider',
+            'focal_point_name': 'John Doe',
+            'focal_point_phone_number': '87-654321',
+            'address': '1313 Mockingbird Lane, Beirut, Lebanon',
+            'email': user.email,
+            'password1': 'foobar',
+            'password2': 'foobar',
+            'number_of_monthly_beneficiaries': '37',
+            'type': provider_type.name,
+        }
+        self.submit_form(form, data, button_class='form-btn-submit')
+        error = self.wait_for_element('label[for="id_email"] .error', match=By.CSS_SELECTOR)
+        self.assertIn('email already exists', error.text)
 
     def test_confirm_registration(self):
         """New user activating their registration."""
