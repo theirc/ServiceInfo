@@ -66,7 +66,7 @@ class FrontEndTestCase(LiveServerTestCase):
         """Clear all browser local storage."""
 
         self.browser.get(self.express_url)
-        self.browser.execute_script('localStorage.clear();')
+        self.browser.execute_script('window.localStorage.clear();')
 
     def set_language(self, language='en'):
         """Helper to set language choice in the browser."""
