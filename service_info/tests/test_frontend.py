@@ -18,7 +18,8 @@ from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.support import expected_conditions
 
 from email_user.tests.factories import EmailUserFactory
-from services.tests.factories import ProviderTypeFactory
+from services.models import Service
+from services.tests.factories import ProviderTypeFactory, ServiceFactory
 
 
 class FrontEndTestCase(LiveServerTestCase):
@@ -205,8 +206,50 @@ class FrontEndTestCase(LiveServerTestCase):
     def test_text_list_search(self):
         """Find services by text based search."""
 
+        service = ServiceFactory(status=Service.STATUS_CURRENT)
+        self.set_language()
+        menu = self.wait_for_element('menu')
+        search = menu.find_elements_by_link_text('Search')[0]
+        search.click()
+        form = self.wait_for_element('search_controls')
+        self.assertHashLocation('/search')
+        form.find_element_by_name('filtered-search').send_keys(
+            service.provider.name_en[:5])
+        form.find_element_by_name('map-toggle-list').click()
+        result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
+        name = result.find_element_by_class_name('name')
+        self.assertEqual(name.text, service.name_en)
+
     def test_filtered_list_search(self):
         """Find services by type."""
 
-    def test_localized_search_options(self):
-        """Search options should be localized."""
+        service = ServiceFactory(status=Service.STATUS_CURRENT)
+        self.set_language()
+        menu = self.wait_for_element('menu')
+        search = menu.find_elements_by_link_text('Search')[0]
+        search.click()
+        form = self.wait_for_element('search_controls')
+        self.assertHashLocation('/search')
+        Select(form.find_element_by_name('type')).select_by_visible_text(
+            service.type.name_en)
+        form.find_element_by_name('map-toggle-list').click()
+        result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
+        name = result.find_element_by_class_name('name')
+        self.assertEqual(name.text, service.name_en)
+
+    def test_localized_search(self):
+        """Search options and results should be localized."""
+
+        service = ServiceFactory(status=Service.STATUS_CURRENT)
+        self.set_language('fr')
+        menu = self.wait_for_element('menu')
+        search = menu.find_elements_by_link_text('Recherche')[0]
+        search.click()
+        form = self.wait_for_element('search_controls')
+        self.assertHashLocation('/search')
+        Select(form.find_element_by_name('type')).select_by_visible_text(
+            service.type.name_fr)
+        form.find_element_by_name('map-toggle-list').click()
+        result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
+        name = result.find_element_by_class_name('name')
+        self.assertEqual(name.text, service.name_fr)
