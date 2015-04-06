@@ -29,15 +29,22 @@
                 <div id=menu-container class="menu-closed">
                     <button id=menu-toggle class="btn menu" data-i18n="Menu.Menu-Toggle"></button>
                     <ul id="menu">
+                        <!-- For the public -->
+                        <li><a href="#/search" data-i18n="Menu.Search"></a></li>
+                        <li><a href="#/feedback" data-i18n="Menu.Feedback-Tool"></a></li>
+                        <li class="menu-item-language"><a data-i18n="Menu.Change-Language"></a></li>
+
+                        <!-- for providers or staff only -->
+
+                        <!-- class menu-item-login shows up when the user is NOT logged in -->
+                        <!-- class menu-item-logout shows up when the user IS logged in -->
                         <li class="menu-item-login"><a href="#/login" data-i18n="Menu.Login"></a></li>
                         <li class="menu-item-logout"><a href="#/logout" data-i18n="Menu.Logout"></a></li>
                         <li class="menu-item-logout"><a href="#/manage/service-list" data-i18n="Menu.Services"></a></li>
                         <li class="menu-item-logout"><a href="#/manage/service" data-i18n="Menu.Add-Services"></a></li>
-                        <li><a href="#/search" data-i18n="Menu.Search"></a></li>
-                        <li><a href="#/register" data-i18n="Menu.Provider-Registration"></a></li>
-                        <li><a href="#/feedback" data-i18n="Menu.Feedback-Tool"></a></li>
+                        <li class="menu-item-login"><a href="#/register" data-i18n="Menu.Provider-Registration"></a></li>
+                        <li class="menu-item-logout"><a href="#/register" data-i18n="Menu.Edit-Provider-Information"></a></li>
                         <li class="menu-item-staff"><a data-i18n="Global.Admin" href="#/admin"></a></li>
-                        <li class="menu-item-language"><a data-i18n="Menu.Change-Language"></a></li>
                     </ul>
                 </div>
             </header>
