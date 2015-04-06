@@ -723,9 +723,6 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
         results = json.loads(rsp.content.decode('utf-8'))
         result = results[0]
         self.assertIn('icon_url', result)
-        rsp = self.client.get(result['icon_url'])
-        self.assertEqual(OK, rsp.status_code)
-        self.assertEqual('image/png', rsp['Content-Type'])
 
     def test_get_type(self):
         # Try it unauthenticated
@@ -735,9 +732,6 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
         self.assertEqual(OK, rsp.status_code)
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertIn('icon_url', result)
-        rsp = self.client.get(result['icon_url'])
-        self.assertEqual(OK, rsp.status_code)
-        self.assertEqual('image/png', rsp['Content-Type'])
 
 
 class LanguageTest(APITestMixin, TestCase):
