@@ -1,5 +1,6 @@
 """Integration tests for the single page front end."""
 
+import os
 import shlex
 import shutil
 import subprocess
@@ -33,22 +34,20 @@ class FrontEndTestCase(LiveServerTestCase):
         cls.express = subprocess.Popen(
             shlex.split('gulp startExpress --config test --port 9000 --fast'),
             cwd=settings.PROJECT_ROOT, stdout=cls.log_file, stderr=cls.log_file)
-        cls.browser = webdriver.PhantomJS()
-        # Set desktop size
-        cls.browser.set_window_size(1280, 600)
         # Wait for server to be available
         time.sleep(1.5)
         super().setUpClass()
 
     @classmethod
     def tearDownClass(cls):
-        cls.browser.quit()
         cls.express.terminate()
         super().tearDownClass()
         shutil.rmtree(cls.log_dir)
 
     def setUp(self):
-        self.clear_storage()
+        self.browser = webdriver.PhantomJS()
+        # Set desktop size
+        self.browser.set_window_size(1280, 600)
         # Django prior to 1.8 doesn't create the default site with the correct pk
         # See https://code.djangoproject.com/ticket/23945
         defaults = {
@@ -56,6 +55,10 @@ class FrontEndTestCase(LiveServerTestCase):
             'name': 'example.com',
         }
         Site.objects.get_or_create(pk=settings.SITE_ID, defaults=defaults)
+
+    def tearDown(self):
+        self.browser.quit()
+        self.clear_storage()
 
     def assertHashLocation(self, expected):
         """Assert current URL hash."""
@@ -65,15 +68,19 @@ class FrontEndTestCase(LiveServerTestCase):
 
     def clear_storage(self):
         """Clear all browser local storage."""
-
-        self.browser.get(self.express_url)
-        self.browser.execute_script('window.localStorage.clear();')
+        # PhantomJS does not respect the --local-storage-path option
+        # See https://github.com/ariya/phantomjs/issues/11596
+        # Files are stored in ~/.qws/share/data/Ofi Labs/PhantomJS
+        storage_path = os.path.expanduser('~/.qws/share/data/Ofi Labs/PhantomJS')
+        full_path = os.path.join(storage_path, 'http_localhost_9000.localstorage')
+        if os.path.exists(full_path):
+            os.remove(full_path)
 
     def set_language(self, language='en'):
         """Helper to set language choice in the browser."""
 
         self.browser.get(self.express_url)
-        form = self.browser.find_element_by_id('language-toggle')
+        form = self.wait_for_element('language-toggle')
         button = form.find_element_by_css_selector('[data-lang="%s"]' % language)
         button.click()
 
@@ -102,7 +109,7 @@ class FrontEndTestCase(LiveServerTestCase):
         """Load the homepage."""
 
         self.browser.get(self.express_url)
-        form = self.browser.find_element_by_id('language-toggle')
+        form = self.wait_for_element('language-toggle')
         self.assertTrue(form.is_displayed(), 'Language form should be visible.')
 
     def test_select_language(self):
