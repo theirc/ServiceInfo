@@ -268,20 +268,6 @@
     "Change-Service": "Change service",
     "Change-Change": "Make further changes to this pending update"
   },
-  "Home": {
-    "Service-Map": {
-      "Title": "View The Service Map",
-      "Body": "Use the service map to locate service providers."
-      },
-    "Feedback": {
-      "Title": "Provide Feedback",
-      "Body": "Tell us about your experience working with your service provider."
-      },
-    "Log-in": {
-      "Title": "Service Provider Login",
-      "Body": "Log in to an existing service provider account, or create a new account."
-    }
-  },
   "Provider-Registration-Confirmation": {
     "Page-Head": {
       "Page-Title": {
@@ -416,7 +402,19 @@
     }
   },
   "Feedback-Tool": {
-      "Title": "Feedback on services",
-      "Body": "To give feedback, please search for a service, go to its page, and use the Feedback button."
+    "Title": "Feedback on services",
+    "Body": "To give feedback, please search for a service, go to its page, and use the Feedback button."
+  },
+  "Landing": {
+    "User": {
+      "Title": "I'm a service user, I want to",
+      "Search": "Search for a Service",
+      "Give-Feedback": "Give Feedback"
+    },
+    "Provider": {
+      "Title": "I'm a service provider, I want to",
+      "Register": "Register and Update My Service",
+      "Services": "View My List of Services"
+    }
   }
 }
