@@ -412,7 +412,8 @@
     },
     "Provider": {
       "Title": "I'm a service provider, I want to",
-      "Register": "Register and Update My Service"
+      "Register": "Register and Update My Service",
+      "Services": "View My List of Services"
     }
   }
 }
