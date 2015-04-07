@@ -52,7 +52,7 @@ class APITestMixin(object):
             HTTP_SERVICEINFOAUTHORIZATION="Token %s" % self.token
         )
 
-    def post_with_token(self, url, data=None):
+    def post_with_token(self, url, data=None, format='json'):
         """
         Make a POST to a url, passing self.token in the request headers.
         Return the response.
@@ -61,7 +61,7 @@ class APITestMixin(object):
             url,
             data=data,
             HTTP_SERVICEINFOAUTHORIZATION="Token %s" % self.token,
-            format='json'
+            format=format
         )
 
     def put_with_token(self, url, data=None):
@@ -423,7 +423,7 @@ class ServiceAPITest(APITestMixin, TestCase):
 
     def test_update_service(self):
         # It's not allowed to update a service using the API
-        service = ServiceFactory(provider=self.provider)
+        service = ServiceFactory(provider=self.provider, location=None)
 
         data = model_to_dict(service)
         data['url'] = service.get_api_url()

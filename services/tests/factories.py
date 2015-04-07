@@ -16,6 +16,14 @@ class FuzzyURL(factory.fuzzy.BaseFuzzyAttribute):
         return 'http://www.%s.com' % chars
 
 
+class FuzzyLocation(factory.fuzzy.BaseFuzzyAttribute):
+    """random geographic location"""
+    def fuzz(self):
+        longitude = random.uniform(-180.0, 180.0)
+        latitude = random.uniform(-90.0, 90.0)
+        return "POINT( %f %f )" % (longitude, latitude)
+
+
 class ProviderTypeFactory(factory.DjangoModelFactory):
     class Meta:
         model = ProviderType
@@ -46,7 +54,7 @@ class ProviderFactory(factory.DjangoModelFactory):
     description_ar = factory.fuzzy.FuzzyText()
     description_fr = factory.fuzzy.FuzzyText()
     user = factory.SubFactory(EmailUserFactory)
-    number_of_monthly_beneficiaries = 0
+    number_of_monthly_beneficiaries = factory.fuzzy.FuzzyInteger(0, 999999)
     phone_number = factory.LazyAttribute(create_valid_phone_number)
     website = FuzzyURL()
     focal_point_name_en = factory.fuzzy.FuzzyText()
@@ -96,6 +104,7 @@ class ServiceFactory(factory.DjangoModelFactory):
     additional_info_fr = factory.fuzzy.FuzzyText()
     area_of_service = factory.SubFactory(ServiceAreaFactory)
     type = factory.SubFactory(ServiceTypeFactory)
+    location = FuzzyLocation()
 
 
 class SelectionCriterionFactory(factory.DjangoModelFactory):

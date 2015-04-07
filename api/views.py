@@ -1,7 +1,11 @@
+from http.client import BAD_REQUEST
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.contrib.gis.geos import Point
+from django.core import signing
 from django.core.exceptions import ValidationError as DjangoValidationError
+from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.db.transaction import atomic
 from django.utils.timezone import now
@@ -22,7 +26,7 @@ from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, 
     PasswordResetRequestSerializer, PasswordResetCheckSerializer, PasswordResetSerializer, \
     ResendActivationLinkSerializer, CreateProviderSerializer, ServiceTypeSerializer, \
     SelectionCriterionSerializer, LanguageSerializer, ServiceSearchSerializer, \
-    ProviderFetchSerializer, FeedbackSerializer, NationalitySerializer
+    ProviderFetchSerializer, FeedbackSerializer, NationalitySerializer, ImportSerializer
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
     SelectionCriterion, Feedback, Nationality
@@ -532,4 +536,29 @@ class ResendActivationLinkView(ServiceInfoAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         user.send_activation_email(request.site, request, request.data['base_activation_link'])
+        return Response()
+
+
+class GetExportURLView(APIView):
+    """Return a signed time-limited URL for downloading an export"""
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        user = request.user
+        thing_to_sign = {'u': user.id, 'what': 'export'}
+        signature = signing.dumps(thing_to_sign)
+        export_url = reverse('export', kwargs={'signature': signature})
+        return Response({'url': export_url})
+
+
+class ImportView(APIView):
+    parser_classes = (parsers.MultiPartParser, parsers.FormParser)
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        serializer = ImportSerializer(data=request.data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+        if 'errors' in data:
+            return Response(data={'errors': data['errors']}, status=BAD_REQUEST)
         return Response()

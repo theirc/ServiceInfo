@@ -1,6 +1,7 @@
 from collections import defaultdict
 from django.conf import settings
 from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
 from django.contrib.sites.models import Site
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
@@ -638,6 +639,28 @@ class Service(NameInCurrentLanguageMixin, models.Model):
             update_type=JiraUpdateRecord.REJECT_SERVICE,
             by=staff_user
         )
+
+    @property
+    def longitude(self):
+        if self.location:
+            return self.location[0]
+
+    @longitude.setter
+    def longitude(self, value):
+        if self.location is None:
+            self.location = Point(0, 0)
+        self.location[0] = value
+
+    @property
+    def latitude(self):
+        if self.location:
+            return self.location[1]
+
+    @latitude.setter
+    def latitude(self, value):
+        if self.location is None:
+            self.location = Point(0, 0)
+        self.location[1] = value
 
 
 class JiraUpdateRecord(models.Model):

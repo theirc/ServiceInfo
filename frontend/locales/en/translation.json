@@ -12,6 +12,7 @@
     "Logout": "Logout",
     "Services": "List of Services",
     "Add-Services": "Add Services",
+    "Import-Export": "Import/Export",
   	"Service-Map": "Service Map",
     "Search": "Search",
   	"Provider-Registration": "Provider Registration",
@@ -277,6 +278,9 @@
     },
     "Empty-Message": "You have not submitted any services yet. You may submit your first service for review by tapping the New Service button.",
     "Add-Service": "New Service",
+    "Import": "Import",
+    "Import-File": "Excel spreadsheet file to import",
+    "Export": "Export",
     "Status": {
       "draft": "Draft",
       "current": "Current",
@@ -457,5 +461,30 @@
         "Login": "Login to an Existing Service Provider Account"
       }
     }
+  },
+  "Export-Tool": {
+      "Title": "Export services",
+      "Button": "Export",
+      "Description1": "Click the button to download an Excel spreadsheet file containing the data you have access to.",
+      "Description2": "The file will contain three tabs or sheets: one for provider data, one for service data, and one for selection criteria.",
+      "Description3": "You can edit the information in the spreadsheet and import it to make changes to the data."
+  },
+  "Import-Tool": {
+      "Title": "Import services",
+      "Button": "Import",
+      "Success": "The import was successful",
+      "Errors": "There were errors in the file.  No data was changed."
+  },
+  "Import-Export": {
+      "Help": {
+        "Title": "Help",
+        "Help1": "On import, any invalid data will cause the entire import to be rejected and the errors will be reported to the user.",
+        "Help2": "Any row with a valid ID field but with all the other values cleared means to delete that record.",
+        "Help3": "Times of day are represented as a string in 24-hour 'HH:MM' format.",
+        "Help4": "The provider sheet has a column “password” that never contains any values on export. The provider password can be changed by putting a value in that column for import.",
+        "Help5": "When creating a new service, leave the 'ID' column blank.",
+        "Help6": "When adding selection criteria to an existing service, set the 'service__id' field to the 'ID' of the existing service.",
+        "Help7": "When adding selection criteria to a new service, set the 'service__id' field to the 'name_en' of the new service."
+      }
   }
 }
