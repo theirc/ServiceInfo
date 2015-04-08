@@ -143,8 +143,7 @@ function notifyLivereload(event) {
 }
 
 gulp.task('default', ['startLiveReload', 'startDjango'], function() {
-    gulp.watch(['frontend/index.html', 'frontend/index.js', 'frontend/router.js',
+    gulp.watch(['frontend/index.html', 'frontend/**/*.js',
                 'frontend/styles/site.less', 'frontend/templates/*.hbs', 'frontend/views/*.js'],
                 notifyLivereload);
 });
-

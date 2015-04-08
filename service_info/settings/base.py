@@ -283,7 +283,8 @@ CELERYBEAT_SCHEDULE = {
 JIRA_SERVER = 'http://54.154.50.144:8080/'
 JIRA_USER = os.environ.get('JIRA_USER', '')
 JIRA_PASSWORD = os.environ.get('JIRA_PASSWORD', '')
-JIRA_PROJECT_KEY = 'SM'
+JIRA_SERVICES_PROJECT_KEY = 'SM'
+JIRA_FEEDBACK_PROJECT_KEY = 'LBF'
 JIRA_DUEIN_DAYS = 2
 
 # Regex string that will only match valid phone numbers

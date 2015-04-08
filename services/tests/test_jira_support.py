@@ -8,7 +8,7 @@ from email_user.tests.factories import EmailUserFactory
 from ..models import JiraUpdateRecord, Service
 from ..tasks import process_jira_work
 from ..utils import absolute_url
-from .factories import ServiceFactory, ProviderFactory, SelectionCriterionFactory
+from .factories import ServiceFactory, ProviderFactory, SelectionCriterionFactory, FeedbackFactory
 
 
 class JiraUpdateRecordModelTest(TestCase):
@@ -60,6 +60,12 @@ class JiraUpdateRecordModelTest(TestCase):
                 'must not specify service' in str(cm.exception),
                 msg='Unexpected exception message (%s) for %s' % (str(cm.exception), update_type))
 
+    def test_feedback_requires_feedback(self):
+        with self.assertRaises(Exception) as cm:
+            JiraUpdateRecord.objects.create(update_type=JiraUpdateRecord.FEEDBACK,
+                                            feedback=None)
+        self.assertIn('must specify feedback', str(cm.exception))
+
 
 class MockJiraTestMixin(object):
     def setup_issue_key(self, mock_JIRA):
@@ -95,7 +101,7 @@ class JiraProviderChangeTest(MockJiraTestMixin, TestCase):
         expected_duedate = datetime.date.today() + datetime.timedelta(days=settings.JIRA_DUEIN_DAYS)
         mock_JIRA.return_value.create_issue.assert_called_with(
             description=mock.ANY,
-            project={'key': settings.JIRA_PROJECT_KEY},
+            project={'key': settings.JIRA_SERVICES_PROJECT_KEY},
             issuetype={'name': 'Task'},
             duedate=str(expected_duedate),
             summary="Changed provider from %s" % str(self.test_provider),
@@ -198,7 +204,7 @@ class JiraNewServiceTest(MockJiraTestMixin, TestCase):
         self.assertTrue('new service' in call_kwargs['summary'].lower())
         self.assertTrue(self.test_service.provider.name_en in call_kwargs['summary'])
         self.assertTrue('project' in call_kwargs)
-        self.assertEqual({'key': settings.JIRA_PROJECT_KEY}, call_kwargs['project'])
+        self.assertEqual({'key': settings.JIRA_SERVICES_PROJECT_KEY}, call_kwargs['project'])
         self.assertTrue('issuetype' in call_kwargs)
         self.assertEqual({'name': 'Task'}, call_kwargs['issuetype'])
         self.assertTrue('description' in call_kwargs)
@@ -387,3 +393,46 @@ class JiraTaskTest(MockJiraTestMixin, TestCase):
         self.setup_issue_key(mock_JIRA)
         process_jira_work()
         self.assertEqual(0, JiraUpdateRecord.objects.filter(jira_issue_key='').count())
+
+
+@mock.patch('services.jira_support.JIRA', autospec=True)
+class JiraFeedbackTest(MockJiraTestMixin, TestCase):
+    def setUp(self):
+        self.test_service = ServiceFactory()
+
+    def test_creating_feedback_sends_data_to_jira(self, mock_JIRA):
+        for delivered in [False, True]:
+            mock_JIRA.reset_mock()
+            feedback = FeedbackFactory(
+                service=self.test_service,
+                delivered=delivered,
+                difficulty_contacting='didntknow',
+                extra_comments='I have a little dog',
+            )
+            jira_record = feedback.jira_records.get()
+            self.assertEqual(jira_record.feedback, feedback)
+            self.assertEqual('', jira_record.jira_issue_key)
+            self.setup_issue_key(mock_JIRA)
+            jira_project = 'XYZ'
+            with override_settings(JIRA_FEEDBACK_PROJECT_KEY=jira_project):
+                jira_record.do_jira_work()
+            mock_JIRA.return_value.create_issue.assert_called_with(
+                issuetype={'name': 'Task'},
+                summary='Feedback about %s' % feedback.service.name_en,
+                project={'key': jira_project},
+                description=mock.ANY,
+                duedate=mock.ANY,
+            )
+            description = mock_JIRA.return_value.create_issue.call_args[1]['description']
+            self.assertIn(feedback.name, description)
+            self.assertIn(feedback.nationality.name_en, description)
+            self.assertIn(feedback.phone_number, description)
+            self.assertIn(feedback.service.name_en, description)
+            if delivered:
+                self.assertIn('Quality', description)
+                self.assertIn(feedback.get_wait_time_display(), description)
+            else:
+                self.assertNotIn('Quality', description)
+                self.assertIn(feedback.get_non_delivery_explained_display(), description)
+            self.assertIn('Did not know how to contact them', description)
+            self.assertIn('I have a little dog', description)
