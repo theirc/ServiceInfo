@@ -87,17 +87,22 @@ html,body {
 }
 .language-toggle {
     background-color: none;
+    &:first-child { margin-top: 50px;}
 }
 
 .language-toggle button {
     border: 1px solid #3cb879;
     height: 100px;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-	width: 400px;
+    margin-bottom: 20px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+	width: 90%;
 	display: block;
-
+    font-size: 130%;
+    @media (min-width: 640px) {
+        width: 400px;
+    }
 }
 
 .lang-btn-ar {
@@ -475,23 +480,28 @@ li {
 */
 
 .page-head {
-	background-color: none;
-	padding: 8px 0 0;
+    background-color: #33A069;
+    padding: 8px 0 15px;
+    position: relative;
+    top: -10px;
+    margin-bottom: 1em;
 }
 
 .page-title {
-	font-size: 28px;
-	line-height: 1.25em;
-	margin-bottom: 10px;
+	font-size: 200%;
+	margin-bottom: 4px;
 	line-height: 1.3em;
-	color: #333333;
+	color: white;
+    font-weight: 700;
+    max-width: 800px;
 }
 
 .page-descr {
-	font-size: 14px;
-    line-height: 1.6em;
+	font-size: 140%;
+    line-height: 1.45em;
 	padding-bottom: 0.5em;
-	color: #666666;
+	color: white;
+    max-width: 800px;
 
 	@media (min-width: 767px) {
 		padding-bottom: 0;
@@ -540,7 +550,7 @@ li {
 	border-color: #3CB879;
 	width: 100%;
 	text-align: center;
-    font-size: .85em;
+    font-size: 1em;
 	font-weight: 600;
 	color: #fff;
 	-webkit-border-radius: 4px;
