@@ -17,11 +17,20 @@
 	<div class="row">
 		<div id="service-provider" class="service-provider">
 			<p data-i18n="Landing.Provider.Title"></p>
-			<a href="#/register">
-				<button class="primary-button" data-i18n="Landing.Provider.Register"></button>
+			<a class=when-logged-out href="#/register">
+				<button class="primary-button" data-i18n="Landing.Provider.Logged-Out.Register"></button>
 			</a>
-			<a class=menu-item-logout href="#/manage/service-list">
-				<button class="primary-button" data-i18n="Landing.Provider.Services"></button>
+			<a class=when-logged-out href="#/login">
+				<button class="primary-button" data-i18n="Landing.Provider.Logged-Out.Login"></button>
+			</a>
+			<a class=when-logged-in href="/#/register">
+				<button class="primary-button" data-i18n="Landing.Provider.Logged-In.Update-My-Info"></button>
+			</a>
+			<a class=when-logged-in href="/#/manage/service-list">
+				<button class="primary-button" data-i18n="Landing.Provider.Logged-In.Update-My-Service"></button>
+			</a>
+			<a class=when-logged-in href="/#/manage/service">
+				<button class="primary-button" data-i18n="Landing.Provider.Logged-In.Add-Service"></button>
 			</a>
 		</div>
 	</div>

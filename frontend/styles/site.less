@@ -1025,7 +1025,7 @@ input[type=range] {
 	}
 }
 
-#menu li {
+.menu li {
     color: #fff;
     display: block;
     padding: 12px 14px 14px;
@@ -1050,6 +1050,14 @@ input[type=range] {
 
 #menu li:last-child {
     border-bottom: none;
+}
+
+body.is-logged-in .when-logged-out {
+    display: none;
+}
+
+body.is-logged-out .when-logged-in {
+    display: none;
 }
 
 #page-container {

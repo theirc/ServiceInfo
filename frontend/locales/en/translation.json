@@ -412,8 +412,15 @@
     },
     "Provider": {
       "Title": "I'm a service provider, I want to",
-      "Register": "Register and Update My Service",
-      "Services": "View My List of Services"
+      "Logged-In": {
+        "Update-My-Info": "Update My Provider Information",
+        "Update-My-Service": "Update My List of Services",
+        "Add-Service": "Add a New Service"
+      },
+      "Logged-Out": {
+        "Register": "Register to be a Service Provider",
+        "Login": "Login to an Existing Service Provider Account"
+      }
     }
   }
 }
