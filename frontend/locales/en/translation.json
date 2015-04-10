@@ -9,13 +9,13 @@
     "Menu-Toggle": "MENU",
     "Login": "Login",
     "Logout": "Logout",
-    "Services": "Services",
+    "Services": "List of Services",
     "Add-Services": "Add Services",
   	"Service-Map": "Service Map",
     "Search": "Search",
   	"Provider-Registration": "Provider Registration",
     "Edit-Provider-Information": "Edit Provider Information",
-  	"Feedback-Tool": "Feedback",
+  	"Feedback-Tool": "Give Feedback",
   	"Change-Language": "Change Language"
   },
   "Global": {
