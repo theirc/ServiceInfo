@@ -46,6 +46,8 @@
       "Email": "Email",
       "Password": "Password"
     },
+    "More-Options-Title": "Additional Options",
+    "More-Options": "If you need your verification email sent again, or to register to be a service provider click the corresponding button below.",
     "Form-Submit-Options": {
       "Submit": "Login",
       "Register": "Register to be a Service Provider here"
