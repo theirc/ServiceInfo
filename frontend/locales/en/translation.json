@@ -237,6 +237,10 @@
       "Resend-Email": "Resend Verification Email"
     }
   },
+  "Account-Resend-Verification": {
+    "Title":" Resend Verification Email",
+    "Description": ""
+  },
   "Service-List": {
     "Page-Head": {
       "Page-Title": {
