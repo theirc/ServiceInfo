@@ -1,10 +1,12 @@
 from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND, METHOD_NOT_ALLOWED, UNAUTHORIZED
 import json
 
+from django.conf import settings
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.models import Group
 from django.contrib.gis.geos import Point
 from django.core import mail
+from django.core.files.storage import default_storage
 from django.core.urlresolvers import reverse
 from django.forms import model_to_dict
 from django.test import TestCase
@@ -723,6 +725,10 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
         results = json.loads(rsp.content.decode('utf-8'))
         result = results[0]
         self.assertIn('icon_url', result)
+        icon_url = result['icon_url']
+        self.assertTrue(icon_url.startswith(settings.MEDIA_URL))
+        path = icon_url.replace(settings.MEDIA_URL, '')
+        self.assertTrue(default_storage.exists(path))
 
     def test_get_type(self):
         # Try it unauthenticated
@@ -732,6 +738,10 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
         self.assertEqual(OK, rsp.status_code)
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertIn('icon_url', result)
+        icon_url = result['icon_url']
+        self.assertTrue(icon_url.startswith(settings.MEDIA_URL))
+        path = icon_url.replace(settings.MEDIA_URL, '')
+        self.assertTrue(default_storage.exists(path))
 
 
 class LanguageTest(APITestMixin, TestCase):
