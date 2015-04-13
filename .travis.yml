@@ -13,6 +13,7 @@ env:
 install:
 - pip install -r requirements/dev.txt
 - npm install
+- npm update
 before_script:
 - createdb -E UTF-8 service_info -U postgres -O $USER
 - psql service_info -c "CREATE EXTENSION postgis;" -U postgres
