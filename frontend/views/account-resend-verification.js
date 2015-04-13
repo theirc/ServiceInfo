@@ -1,5 +1,5 @@
 var Backbone = require('backbone'),
-    template = require("../templates/account-resend-verification.hbs"),
+    resend_verification_template = require("../templates/account-resend-verification.hbs"),
     i18n = require('i18next-client'),
     config = require('../config'),
     forms = require('../forms')
@@ -7,13 +7,15 @@ var Backbone = require('backbone'),
 ;
 
 module.exports = Backbone.View.extend({
+    template: resend_verification_template,
+
     initialize: function(opts){
         this.render();
     },
 
     render: function() {
         var $el = this.$el;
-        this.$el.html(template());
+        $el.html(this.template());
         $el.i18n();
     },
 

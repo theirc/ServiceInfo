@@ -1,9 +1,10 @@
 var Backbone = require('backbone'),
-    template = require("../templates/account-activate.hbs"),
+    account_activate_template = require("../templates/account-activate.hbs"),
     i18n = require('i18next-client'),
     config = require('../config'),
-    forms = require('../forms')
-    api = require('../api')
+    api = require('../api'),
+    resend_verification = require('./account-resend-verification')
+
 ;
 
 var Activation = Backbone.Model.extend({
@@ -29,7 +30,7 @@ var Activation = Backbone.Model.extend({
     },
 })
 
-module.exports = Backbone.View.extend({
+module.exports = resend_verification.extend({
     initialize: function(opts){
         var $this = this;
         this.activation = new Activation({key: opts.key});
@@ -41,32 +42,10 @@ module.exports = Backbone.View.extend({
     render: function() {
         var $el = this.$el;
         var status = this.activation.get('status');
-        this.$el.html(template({
+        $el.html(account_activate_template({
             status: status,
-            failed: status == 'Failed',
+            failed: status == 'Failed'
         }));
         $el.i18n();
-    },
-
-    events: {
-        "click #resend-form": function() {
-            var self = this;
-            var $form = $('#resend-form');
-            var data = forms.collect($form);
-            var action = 'api/resend_activation_link/';
-
-            data["base_activation_link"] = location.protocol + '//' + location.host + location.pathname + '?#/register/verify/';
-
-            forms.submit($form, action, data).then(
-                function onsuccess() {
-                    self.activation.set('status', 'Resent');
-                },
-                function onerror(e) {
-                    console.error(e);
-                }
-            )
-
-            return false;
-        },
     },
 })
