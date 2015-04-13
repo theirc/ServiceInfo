@@ -378,7 +378,7 @@ li {
 		width: 32.333%;
 		padding: 0 1%;
 		display: inline-block;
-		@media (min-width: 640px) {
+		@media (min-width: 1000px) {
 			width: 33.333%;
 		}
 
@@ -552,8 +552,8 @@ li {
 }
 
 .primary-button:hover, .primary-button:visited, .primary-button:active {
-    background-color: #33A069;
-    border: 1px solid #33A069;
+    background-color: #288355;
+    border: 1px solid #288355;
     cursor: pointer;
     color: #fff;
 }
@@ -829,7 +829,8 @@ label {
         float: @end;
     }
 }
-.error {
+.error,
+.no-search-results {
     color: darkred;
 }
 
@@ -1442,6 +1443,12 @@ div#search {
 		    }
 		}
 	}
+	.container > .no-search-results {
+		padding: 30px;
+		padding-top: 20px;
+		font-size: 110%;
+		font-weight: bold;
+	}
 }
 
 div#search-filter {
@@ -1651,8 +1658,8 @@ Services
 }
 .search-map {
     .map-toggle .half:first-child button {
-        background-color: #33A069;
-        border: 1px solid #33A069;
+        background-color: #288355;
+        border: 1px solid #288355;
     }
     #search-filter {
         visibility: hidden;
@@ -1660,8 +1667,8 @@ Services
 }
 .search-list {
     .map-toggle .half:last-child button {
-        background-color: #33A069;
-        border: 1px solid #33A069;
+        background-color: #288355;
+        border: 1px solid #288355;
     }
 }
 
