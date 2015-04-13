@@ -2235,8 +2235,17 @@ Feedback Help
 }
 
 #feedback-form {
+    p.what_service {
+        margin: 10px 0 5px;
+    }
     fieldset {
-        padding: 10px 0;
+        padding: 10px 0 0;
+        @media (max-width: 640px) {
+            .row {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
     }
     .name {
         color: #3cb879;
@@ -2254,7 +2263,41 @@ Feedback Help
             margin-@{end}: 14px;
         }
         input {
+            margin-top: 10px;
             margin-@{end}: 5px;
+        }
+    }
+    .ifnotdelivered .form-group select {
+        margin: 10px 0;
+
+    }
+    .ifdelivered,
+    .row.ifnotdelivered {
+        background-color: #E5E5E5;
+        border: 1px solid #CCC;
+        padding: 15px;
+        margin-@{start}: 0;
+        margin-@{end}: 0;
+        .round-start;
+        .round-end;
+        margin-top: 30px;
+        margin-bottom: 14px;
+        overflow-y: auto;
+        @media (max-width: 640px) {
+            margin-top: 0;
+        }
+        .row {
+            padding: 0;
+            @media (max-width: 640px) {
+                .row {
+                    padding: 15px 10px
+                }
+            }
+            .half>.form-group {
+                @media (max-width:640px) {
+                    margin-bottom: 14px;
+                }
+            }
         }
     }
     .main-content {

@@ -17,7 +17,7 @@
   <div class="main-content">
     <div class="container">
       <div class="row">
-        <p data-i18n="Feedback-Form.What-Service"></p>
+        <p class="what_service" data-i18n="Feedback-Form.What-Service"></p>
         <div class="name">{{ service.name }}</div>
       </div>
 
@@ -72,7 +72,7 @@
                   </div>
                 </div>
               </div>
-          </div>
+            </div>
 
             <div class="row">
               <div class="form-group">
@@ -103,68 +103,70 @@
                   </label>
                 </div>
               </div>
-            </div>
+            </div>{{!-- /row --}}
 
-            <div class="row ifdelivered"> {{!-- only if delivered --}}
-              <div class="form-group">
-                <div class="half">
-                  <div class="form-group">
-                    <label for="id_quality" class="control-label"><span data-i18n="Feedback-Form.Quality.label"></span><span class=error></span></label>
+            <div class="ifdelivered">
+              <div class="row"> {{!-- only if delivered --}}
+                <div class="form-group">
+                  <div class="half">
                     <div class="form-group">
-                      {{# each starvalues }}
+                      <label for="id_quality" class="control-label"><span data-i18n="Feedback-Form.Quality.label"></span><span class=error></span></label>
+                      <div class="form-group">
+                        {{# each starvalues }}
                           <label>
                             <input type="radio" name="quality" class="form-control" value="{{ this }}">{{ this }}
                           </label>
-                      {{/each}}
+                        {{/each}}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="half">
-                  <div class="form-group">
-                    <label for="id_staff_satisfaction" class="control-label"><span data-i18n="Feedback-Form.staff_satisfaction.label"></span><span class=error></span></label>
+                  <div class="half">
                     <div class="form-group">
-                      {{# each starvalues }}
-                          <label>
-                            <input type="radio" name="staff_satisfaction" class="form-control" value="{{ this }}">{{ this }}
-                          </label>
-                      {{/each}}
-                    </div>
-                  </div>
-                </div>
-            </div>
-        </div>{{!-- /row --}}
-
-            {{!-- wait time and wait time satisfaction --}}
-            <div class="row ifdelivered"> {{!-- only if delivered --}}
-              <div class="form-group">
-                <div class="half">
-                  <div class="form-group">
-                  <label for="id_wait_time" class="control-label"><span data-i18n="Feedback-Form.WaitTime.label"></span></label>
-                    <select id="id_wait_time" name="wait_time" class="form-control">
-                      <option></option>{{!-- empty initial value --}}
-                      <option value="lesshour" data-i18n="Feedback-Form.WaitTime.lesshour"></option>
-                      <option value="uptotwodays" data-i18n="Feedback-Form.WaitTime.uptotwodays"></option>
-                      <option value="3-7days" data-i18n="Feedback-Form.WaitTime.3_7days"></option>
-                      <option value="1-2weeks" data-i18n="Feedback-Form.WaitTime.1_2weeks"></option>
-                      <option value="more" data-i18n="Feedback-Form.WaitTime.more"></option>
-                    </select>
-                  </div>
-                </div>
-                <div class="half">
-                  <div class="form-group">
-                    <label for="id_wait_time_satisfaction" class="control-label"><span data-i18n="Feedback-Form.wait_time_satisfaction.label"></span><span class=error></span></label>
-                    <div class="form-group">
-                      {{# each starvalues }}
-                          <label>
-                            <input type="radio" name="wait_time_satisfaction" class="form-control" value="{{ this }}">{{ this }}
-                          </label>
-                      {{/each}}
-                      <textarea id=id_other_difficulties rows="4" name="other_difficulties" class="form-control"></textarea>
+                      <label for="id_staff_satisfaction" class="control-label"><span data-i18n="Feedback-Form.staff_satisfaction.label"></span><span class=error></span></label>
+                      <div class="form-group">
+                        {{# each starvalues }}
+                            <label>
+                              <input type="radio" name="staff_satisfaction" class="form-control" value="{{ this }}">{{ this }}
+                            </label>
+                        {{/each}}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+
+              {{!-- wait time and wait time satisfaction --}}
+              <div class="row"> {{!-- only if delivered --}}
+                <div class="form-group">
+                  <div class="half">
+                    <div class="form-group">
+                    <label for="id_wait_time" class="control-label"><span data-i18n="Feedback-Form.WaitTime.label"></span></label>
+                      <select id="id_wait_time" name="wait_time" class="form-control">
+                        <option></option>{{!-- empty initial value --}}
+                        <option value="lesshour" data-i18n="Feedback-Form.WaitTime.lesshour"></option>
+                        <option value="uptotwodays" data-i18n="Feedback-Form.WaitTime.uptotwodays"></option>
+                        <option value="3-7days" data-i18n="Feedback-Form.WaitTime.3_7days"></option>
+                        <option value="1-2weeks" data-i18n="Feedback-Form.WaitTime.1_2weeks"></option>
+                        <option value="more" data-i18n="Feedback-Form.WaitTime.more"></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="half">
+                    <div class="form-group">
+                      <label for="id_wait_time_satisfaction" class="control-label"><span data-i18n="Feedback-Form.wait_time_satisfaction.label"></span><span class=error></span></label>
+                      <div class="form-group">
+                        {{# each starvalues }}
+                            <label>
+                              <input type="radio" name="wait_time_satisfaction" class="form-control" value="{{ this }}">{{ this }}
+                            </label>
+                        {{/each}}
+                        <textarea id=id_other_difficulties rows="4" name="other_difficulties" class="form-control"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>{{!-- /ifdelivered --}}
 
             <div class="row ifnotdelivered"> {{!-- only if not delivered --}}
               <div class="form-group">
