@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-03-31 12:14+0000\n"
+"PO-Revision-Date: 2015-04-02 08:01+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -82,8 +82,11 @@ msgstr "Vendredi"
 msgid "Global##Saturday"
 msgstr "Samedi"
 
-msgid "Global##GeolocationError"
+msgid "Global##GeolocationNotSupported"
 msgstr "Géolocalisation ne est pas supporté par ce navigateur."
+
+msgid "Global##GeoPositionUnavailable"
+msgstr "Emplacement ne est pas disponible en ce moment."
 
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "Entrer"
@@ -450,14 +453,20 @@ msgstr "Emplacement:"
 msgid "Service-List##Table##Thead##Status"
 msgstr "Statu:"
 
-msgid "Service-List##Table##Thead##Remove"
-msgstr "Retirer:"
+msgid "Service-List##Table##Thead##Change"
+msgstr "Changer:"
 
 msgid "Service-List##Cancel"
 msgstr "Annuler"
 
 msgid "Service-List##Delete"
 msgstr "Effacer"
+
+msgid "Service-List##Change-Service"
+msgstr "Changer de service"
+
+msgid "Service-List##Change-Change"
+msgstr ""
 
 msgid "Home##Service-Map##Title"
 msgstr "Voir la carte service"
@@ -527,6 +536,18 @@ msgstr "Chargement Type de service Filtres ..."
 
 msgid "Map##TypeHeader"
 msgstr "Filtrer par un type de service"
+
+msgid "Footer##About##Title"
+msgstr "À propos de Service Info"
+
+msgid "Footer##About##Paragraph"
+msgstr "Info service est un outil pour permettre aux fournisseurs de services d'enregistrer leurs services en ligne et les bénéficiaires des services à la carte et donner votre avis sur les services. Service Info est open source et libre d'utilisation, les données sont de qualité vérifiée par International Rescue Committee."
+
+msgid "Footer##Contact##Title"
+msgstr "Contactez nous"
+
+msgid "Footer##Contact##Paragraph"
+msgstr "Contactez-nous sur l'un de nos réseaux sociaux ci-dessous ou à nous envoyer un mail à"
 
 msgid "Feedback-Form##Title"
 msgstr "Outil de Commentaire"

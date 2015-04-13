@@ -445,7 +445,7 @@ msgid "Service-List##Change-Service"
 msgstr "Change service"
 
 msgid "Service-List##Change-Change"
-msgstr "Change change"
+msgstr "Make further changes to this pending update"
 
 msgid "Home##Service-Map##Title"
 msgstr "View The Service Map"

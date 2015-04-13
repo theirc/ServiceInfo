@@ -130,6 +130,9 @@ function notifyLivereload(event) {
     // `gulp.watch()` events provide an absolute path
     // so we need to make it relative to the server root
     var fileName = require('path').relative(EXPRESS_ROOT, event.path);
+    if (fileName.match(/bundle/)) {
+        return;
+    }
 
     gulp.run('build');
 
@@ -143,8 +146,7 @@ function notifyLivereload(event) {
 }
 
 gulp.task('default', ['startLiveReload', 'startDjango'], function() {
-    gulp.watch(['frontend/index.html', 'frontend/index.js', 'frontend/router.js',
+    gulp.watch(['frontend/index.html', 'frontend/**/*.js',
                 'frontend/styles/site.less', 'frontend/templates/*.hbs', 'frontend/views/*.js'],
                 notifyLivereload);
 });
-

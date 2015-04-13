@@ -29,7 +29,8 @@
         "Thursday": "Jeudi",
         "Friday": "Vendredi",
         "Saturday": "Samedi",
-        "GeolocationError": "Géolocalisation ne est pas supporté par ce navigateur."
+        "GeolocationNotSupported": "Géolocalisation ne est pas supporté par ce navigateur.",
+        "GeoPositionUnavailable": "Emplacement ne est pas disponible en ce moment."
     },
     "Login-Form": {
         "Page-Head": {
@@ -243,11 +244,13 @@
                 "Type": "Type:",
                 "Area": "Emplacement:",
                 "Status": "Statu:",
-                "Remove": "Retirer:"
+                "Change": "Changer:"
             }
         },
         "Cancel": "Annuler",
-        "Delete": "Effacer"
+        "Delete": "Effacer",
+        "Change-Service": "Changer de service",
+        "Change-Change": ""
     },
     "Home": {
         "Service-Map": {
@@ -328,6 +331,16 @@
     "Map": {
         "Loading": "Chargement Type de service Filtres ...",
         "TypeHeader": "Filtrer par un type de service"
+    },
+    "Footer": {
+        "About": {
+            "Title": "À propos de Service Info",
+            "Paragraph": "Info service est un outil pour permettre aux fournisseurs de services d'enregistrer leurs services en ligne et les bénéficiaires des services à la carte et donner votre avis sur les services. Service Info est open source et libre d'utilisation, les données sont de qualité vérifiée par International Rescue Committee."
+        },
+        "Contact": {
+            "Title": "Contactez nous",
+            "Paragraph": "Contactez-nous sur l'un de nos réseaux sociaux ci-dessous ou à nous envoyer un mail à"
+        }
     },
     "Feedback-Form": {
         "Title": "Outil de Commentaire",

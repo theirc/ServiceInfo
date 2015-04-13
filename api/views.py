@@ -383,7 +383,8 @@ class ProviderViewSet(ServiceInfoModelViewSet):
                 password=request.data['password'],
                 is_active=False
             )
-            user.groups.add(Group.objects.get(name='Providers'))
+            provider_group, _ = Group.objects.get_or_create(name='Providers')
+            user.groups.add(provider_group)
 
             # Create Provider
             data = dict(request.data, user=user.get_api_url())

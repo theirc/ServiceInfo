@@ -1,0 +1,20 @@
+Feedback has been submitted on a service.
+
+You can view the service here: {{ service_url }}
+
+Feedback
+--------
+
+{% include 'jira/feedback_data.txt' with feedback=feedback %}
+
+Provider
+--------
+
+{% include 'jira/provider_data.txt' with provider=provider %}
+
+Service
+-------
+
+{% include 'jira/service_data.txt' with service=service %}
+
+

@@ -94,9 +94,11 @@ module.exports = Backbone.View.extend({
         //     })
         // },
         "search": function(_, query) {
+            $('.spinner').show();
             var self = this;
             search.refetchServices().then(function(){
                 self.updateResults();
+                $('.spinner').hide();
             })
         },
         "input input.query": function(e) {

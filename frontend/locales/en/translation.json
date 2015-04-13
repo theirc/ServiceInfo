@@ -9,12 +9,13 @@
     "Menu-Toggle": "MENU",
     "Login": "Login",
     "Logout": "Logout",
-    "Services": "Services",
+    "Services": "List of Services",
     "Add-Services": "Add Services",
   	"Service-Map": "Service Map",
     "Search": "Search",
   	"Provider-Registration": "Provider Registration",
-  	"Feedback-Tool": "Feedback",
+    "Edit-Provider-Information": "Edit Provider Information",
+  	"Feedback-Tool": "Give Feedback",
   	"Change-Language": "Change Language"
   },
   "Global": {
@@ -52,7 +53,7 @@
   },
   "Search-List": {
     "Page-Head": {
-      "Title": "Service Provider Search",
+      "Title": "Search For Services",
       "Description": "Use the filtered search below to find the service that meets your needs."
     }
   },
@@ -62,7 +63,7 @@
   "Service-Map": {
     "Page-Head": {
       "Page-Title": {
-        "Title": "Service Provider Map"
+        "Title": "Search For Services"
       },
       "Page-Description": {
         "Page-Description": "Use the filtered search below to find the service that meets your needs."
@@ -265,21 +266,7 @@
     "Cancel": "Cancel",
     "Delete": "Delete",
     "Change-Service": "Change service",
-    "Change-Change": "Change change"
-  },
-  "Home": {
-    "Service-Map": {
-      "Title": "View The Service Map",
-      "Body": "Use the service map to locate service providers."
-      },
-    "Feedback": {
-      "Title": "Provide Feedback",
-      "Body": "Tell us about your experience working with your service provider."
-      },
-    "Log-in": {
-      "Title": "Service Provider Login",
-      "Body": "Log in to an existing service provider account, or create a new account."
-    }
+    "Change-Change": "Make further changes to this pending update"
   },
   "Provider-Registration-Confirmation": {
     "Page-Head": {
@@ -415,7 +402,26 @@
     }
   },
   "Feedback-Tool": {
-      "Title": "Feedback on services",
-      "Body": "To give feedback, please search for a service, go to its page, and use the Feedback button."
+    "Title": "Feedback on services",
+    "Body": "To give feedback, please search for a service, go to its page, and use the Feedback button."
+  },
+  "Landing": {
+    "User": {
+      "Title": "I'm a service user, I want to",
+      "Search": "Search for a Service",
+      "Give-Feedback": "Give Feedback"
+    },
+    "Provider": {
+      "Title": "I'm a service provider, I want to",
+      "Logged-In": {
+        "Update-My-Info": "Update My Provider Information",
+        "Update-My-Service": "Update My List of Services",
+        "Add-Service": "Add a New Service"
+      },
+      "Logged-Out": {
+        "Register": "Register to be a Service Provider",
+        "Login": "Login to an Existing Service Provider Account"
+      }
+    }
   }
 }
