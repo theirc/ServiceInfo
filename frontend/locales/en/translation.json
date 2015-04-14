@@ -7,6 +7,7 @@
   },
   "Menu": {
     "Menu-Toggle": "MENU",
+    "Home": "Home",
     "Login": "Login",
     "Logout": "Logout",
     "Services": "List of Services",
