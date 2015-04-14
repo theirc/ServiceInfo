@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-04-02 08:01+0000\n"
+"PO-Revision-Date: 2015-04-07 05:42+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -466,7 +466,7 @@ msgid "Service-List##Change-Service"
 msgstr "Changer de service"
 
 msgid "Service-List##Change-Change"
-msgstr ""
+msgstr "Apporter d'autres modifications à cette mise à jour en attente"
 
 msgid "Home##Service-Map##Title"
 msgstr "Voir la carte service"
