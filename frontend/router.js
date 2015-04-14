@@ -15,7 +15,6 @@ var views = {
     "service": require('./views/service-form'),
     "feedback-form": require('./views/feedback-form'),
     "feedback-confirm": require('./views/feedback-confirm'),
-    "feedback-help": require('./views/feedback-help'),
     "map": require('./views/map'),
     "search-list": require('./views/search-list'),
     "service-cancel": require('./views/service-cancel'),
@@ -40,25 +39,22 @@ function loadPage(name, params) {
             var opts = {
                 el: $el
             };
-            if (viewName && viewName === name) {
-            } else {
-                for (var i=0; i < params.length; i++) {
-                    opts[params[i]] = viewArguments[i];
-                };
-                if (view) {
-                    view.undelegateEvents();
-                }
-                view = new views[name](opts);
-                viewName = name;
-                i18n.init(function(){
-                    view.render.apply(view, viewArguments);
-                    view.$el.i18n({
-                        lng: config.get('forever.language'),
-                    });
-                });
-                $('#menu-container').addClass("menu-closed");
-                $('#menu-container').removeClass("menu-open");
+            for (var i=0; i < params.length; i++) {
+                opts[params[i]] = viewArguments[i];
+            };
+            if (view) {
+                view.undelegateEvents();
             }
+            view = new views[name](opts);
+            viewName = name;
+            i18n.init(function(){
+                view.render.apply(view, viewArguments);
+                view.$el.i18n({
+                    lng: config.get('forever.language'),
+                });
+            });
+            $('#menu-container').addClass("menu-closed");
+            $('#menu-container').removeClass("menu-open");
         })
     }
 }
@@ -67,6 +63,8 @@ module.exports = Backbone.Router.extend({
     initialize: function() {
         this.route(/search\/?/, loadPage("search-list"));
         this.route(/search\/map/, loadPage("map"));
+        this.route(/feedback\/list/, loadPage("search-list", ['feedback']));
+        this.route(/feedback\/map/, loadPage("map", ['feedback']));
     },
     routes: {
         "": loadPage("home"),
@@ -82,7 +80,6 @@ module.exports = Backbone.Router.extend({
 
         "service/:id": loadPage("service-detail", ['id']),
 
-        "feedback": loadPage("feedback-help"),
         "feedback/confirm": loadPage("feedback-confirm"),
         "feedback/:id": loadPage("feedback-form", ['id']),
 
