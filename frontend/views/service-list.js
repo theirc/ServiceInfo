@@ -3,14 +3,14 @@ var Backbone = require('backbone'),
     template = require("../templates/service-list.hbs"),
     i18n = require('i18next-client'),
     messages = require('../messages'),
-    models = require('../models/service')
+    models = require('../models/service'),
+    language = require('../language')
 ;
 
 module.exports = Backbone.View.extend({
     initialize: function(){
+        var self = this;
         this.services = new models.Services();
-        this.render();
-
         this.sort_order_by_status = {
             'current': '0',
             'draft': '1',
@@ -18,6 +18,10 @@ module.exports = Backbone.View.extend({
             'canceled': '2',
             'archived': '3'
         };
+
+        language.ready(function() {
+            self.render();
+        });
     },
 
     render: function() {

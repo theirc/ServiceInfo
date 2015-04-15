@@ -1,6 +1,7 @@
 var Backbone = require('backbone'),
 config = require("../config"),
 api = require("../api"),
+language = require('../language'),
 template = require("../templates/language-toggle.hbs"),
 i18n = require('i18next-client');
 
@@ -39,6 +40,7 @@ module.exports = Backbone.View.extend({
             },
             function () {
                 $("body").i18n();
+                language.set_initialized();
             }
         );
         if (lang === 'ar') {

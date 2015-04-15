@@ -3,7 +3,8 @@ var $ = require('jquery'),
     config = require('./config'),
     i18n = require('i18next-client'),
     Backbone = require('backbone'),
-    messages = require('./messages')
+    messages = require('./messages'),
+    language = require('./language')
 ;
 
 var views = {
@@ -50,7 +51,7 @@ function loadPage(name, params) {
                 }
                 view = new views[name](opts);
                 viewName = name;
-                i18n.init(function(){
+                language.ready(function(){
                     view.render.apply(view, viewArguments);
                     view.$el.i18n({
                         lng: config.get('forever.language'),

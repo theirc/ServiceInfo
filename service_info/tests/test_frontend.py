@@ -76,7 +76,7 @@ class FrontEndTestCase(LiveServerTestCase):
         if os.path.exists(full_path):
             os.remove(full_path)
 
-    def set_language(self, language='en'):
+    def load_page_and_set_language(self, language='en'):
         """Helper to set language choice in the browser."""
 
         self.browser.get(self.express_url)
@@ -115,7 +115,7 @@ class FrontEndTestCase(LiveServerTestCase):
     def test_select_language(self):
         """Select user language."""
 
-        self.set_language('fr')
+        self.load_page_and_set_language('fr')
         menu = self.wait_for_element('menu')
         language = menu.find_element_by_class_name('menu-item-language')
         self.assertEqual(language.text, 'Changer de langue', 'Menu should now be French')
@@ -124,7 +124,7 @@ class FrontEndTestCase(LiveServerTestCase):
         """Login an existing user."""
 
         user = EmailUserFactory(password='abc123')
-        self.set_language()
+        self.load_page_and_set_language()
         menu = self.wait_for_element('menu')
         login = menu.find_elements_by_link_text('Login')[0]
         login.click()
@@ -142,7 +142,7 @@ class FrontEndTestCase(LiveServerTestCase):
         """Register for a new site account."""
 
         provider_type = ProviderTypeFactory()
-        self.set_language()
+        self.load_page_and_set_language()
         menu = self.wait_for_element('menu')
         registration = menu.find_elements_by_link_text('Provider Registration')[0]
         registration.click()
@@ -171,7 +171,7 @@ class FrontEndTestCase(LiveServerTestCase):
 
         user = EmailUserFactory(password='abc123')
         provider_type = ProviderTypeFactory()
-        self.set_language()
+        self.load_page_and_set_language()
         menu = self.wait_for_element('menu')
         registration = menu.find_elements_by_link_text('Provider Registration')[0]
         registration.click()
@@ -199,14 +199,14 @@ class FrontEndTestCase(LiveServerTestCase):
 
         EmailUserFactory(
             password='abc123', is_active=False, activation_key='1234567890')
-        self.set_language()
+        self.load_page_and_set_language()
         self.browser.get(self.express_url + '#/register/verify/1234567890')
         self.wait_for_page_title_contains('Your account has been activated.', timeout=5)
 
     def test_invalid_activation(self):
         """Show message for invalid activation code."""
 
-        self.set_language()
+        self.load_page_and_set_language()
         self.browser.get(self.express_url + '#/register/verify/1234567890')
         self.wait_for_page_title_contains('Your account activation Failed.', timeout=5)
 
@@ -214,7 +214,7 @@ class FrontEndTestCase(LiveServerTestCase):
         """Find services by text based search."""
 
         service = ServiceFactory(status=Service.STATUS_CURRENT)
-        self.set_language()
+        self.load_page_and_set_language()
         menu = self.wait_for_element('menu')
         search = menu.find_elements_by_link_text('Search')[0]
         search.click()
@@ -231,7 +231,7 @@ class FrontEndTestCase(LiveServerTestCase):
         """Find services by type."""
 
         service = ServiceFactory(status=Service.STATUS_CURRENT)
-        self.set_language()
+        self.load_page_and_set_language()
         menu = self.wait_for_element('menu')
         search = menu.find_elements_by_link_text('Search')[0]
         search.click()
@@ -248,7 +248,7 @@ class FrontEndTestCase(LiveServerTestCase):
         """Search options and results should be localized."""
 
         service = ServiceFactory(status=Service.STATUS_CURRENT)
-        self.set_language('fr')
+        self.load_page_and_set_language('fr')
         menu = self.wait_for_element('menu')
         search = menu.find_elements_by_link_text('Recherche')[0]
         search.click()

@@ -6,6 +6,7 @@ var Backbone = require('backbone');
 var config = require('./config');
 var messages = require('./messages');
 var i18n = require('i18next-client');
+var language = require('./language');
 
 
 var query = "";
@@ -41,6 +42,9 @@ var SearchControls = Backbone.View.extend({
     initialize: function(opts) {
         this.$el = opts.$el;
         var self=this;
+        language.ready(function() {
+            self.render();
+        });
     },
     render: function() {
         var $el = this.$el;
