@@ -58,8 +58,20 @@
       "Description": "Use the filtered search below to find the service that meets your needs."
     }
   },
+  "Feedback-Search": {
+    "Page-Head": {
+      "Title": "Give Feedback on Services",
+      "Description": "Please search for a service provider first to give your feedback, you must select the service provider and click on give feedback to begin."
+    }
+  },
   "Service-Detail": {
       "Give-Feedback": "Give feedback on this service"
+  },
+  "Feedback-Map": {
+    "Page-Head": {
+      "Title": "Give Feedback on Services",
+      "Description": "Please search for a service provider first to give your feedback, you must select the service provider and click on give feedback to begin."
+    }
   },
   "Service-Map": {
     "Page-Head": {
