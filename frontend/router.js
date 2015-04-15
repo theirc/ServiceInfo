@@ -91,7 +91,7 @@ module.exports = Backbone.Router.extend({
         "logout": function() {
             config.remove('forever.authToken');
             config.remove('forever.email');
-            config.set('forever.isStaff', false);
+            config.remove('forever.isStaff');
             $('.menu-item-staff').hide();
             window.location.hash = '';
             window.location.reload();
