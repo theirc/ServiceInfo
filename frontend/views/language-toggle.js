@@ -10,73 +10,37 @@ i18n = require('i18next-client');
 
 module.exports = Backbone.View.extend({
     initialize: function(){
-        var language = config.get('forever.language'),
-            lt = this;
-        this.render();
-        this.setLanguage(language);
-        if (!config.isset('forever.language')) {
-            this.show(true);
-        };
-        // Get called when forever.language is changed in the config.
-        // This will (1) update the app and (2) if the user is logged in,
-        // update their preferred language.
-        config.change('forever.language', function (key, change, value) {
-            // If user is logged in, save their language preference
-            var token,
-                headers = {};
-            if (change === 'set') {
-                // Update the app
-                lt.setLanguage(value);
-                if (value) {
-                    // make sure language toggle is hidden
-                    lt.hide(true);
-                }
-                token = config.get('forever.authToken');
-                if (token) {
-                    // user is logged in
-                    // remember user's preference in the backend
-                    headers.ServiceInfoAuthorization = 'Token ' + token;
-                    $.ajax(api.getAPIPrefix() + 'api/language/', {
-                        type: 'POST',
-                        headers: headers,
-                        dataType: 'html',
-                        data: {
-                            'language': value
-                        },
-                        error: function (data) {
-                            console.error('E', data);
-                        },
-                    });
-                }
-            }
-        });
+        var lt = this;
+        config.ready(function() {
+            lt.setLanguage(config.get('forever.language'));
+            lt.render();
+            if (!config.isset('forever.language')) {
+                lt.show(true);
+            };
+        })
     },
 
     render: function() {
-        var $el = this.$el;
         this.$el.html(template({
-
         }));
+    },
+
+    setLanguage: function(lang) {
          /* We have to be firm with i18next to stop it trying to load all sorts
            of non-existent language files like 'en-US' and 'dev' */
         i18n.init(
             {
+                lng: lang,
                 fallbackLng: ['en', 'ar', 'fr'],
                 fallbackOnEmpty: true,
                 lngWhitelist: ['en', 'ar', 'fr'],
                 preload: ['en', 'ar', 'fr'],
                 useCookie: false
             },
-            function () {}
+            function () {
+                $("body").i18n();
+            }
         );
-    },
-
-    setLanguage: function(lang) {
-        i18n.init({
-            lng: lang
-        }, function(t){
-            $("body").i18n();
-        });
         if (lang === 'ar') {
             /* RIGHT to LEFT */
             $('body').attr('dir', 'rtl');
@@ -151,9 +115,27 @@ module.exports = Backbone.View.extend({
 
     events: {
         "click button": function(ev) {
-            var lang = $(ev.target).data('lang');
+            var lang = $(ev.target).data('lang'),
+                token = config.get('forever.authToken');
             config.set('forever.language', lang);
-            this.hide();
-        },
-    },
+            if (token) {
+                // user is logged in
+                // remember user's preference in the backend
+                var headers = {};
+                headers.ServiceInfoAuthorization = 'Token ' + token;
+                $.ajax(api.getAPIPrefix() + 'api/language/', {
+                    type: 'POST',
+                    headers: headers,
+                    dataType: 'html',
+                    data: {
+                        'language': lang
+                    }
+                }).always(function() {
+                    location.reload();
+                });
+            } else {
+                location.reload();
+            }
+        }
+    }
 })

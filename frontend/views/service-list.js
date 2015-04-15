@@ -11,18 +11,6 @@ module.exports = Backbone.View.extend({
         this.services = new models.Services();
         this.render();
 
-        /* Render again if language changes */
-        var $el = this.$el;
-        var self = this;
-        config.change("forever.language", function() {
-            var detached = $('table#service-status').length === 0;
-            if (detached) {
-                config.unbind("forever.language", arguments.callee);
-            } else {
-                self.render();
-            }
-        });
-
         this.sort_order_by_status = {
             'current': '0',
             'draft': '1',

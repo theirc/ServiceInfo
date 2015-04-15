@@ -19,11 +19,6 @@ function renderResults() {
     $el.i18n();
 }
 
-config.change("forever.language", function() {
-    renderResults();
-});
-
-
 var SearchResultList = Backbone.View.extend({
     render: function() {
         var $el = this.$el;

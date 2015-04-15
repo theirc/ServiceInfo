@@ -41,15 +41,6 @@ var SearchControls = Backbone.View.extend({
     initialize: function(opts) {
         this.$el = opts.$el;
         var self=this;
-
-        config.change("forever.language", function() {
-            var detached = opts.$el.closest('body').length === 0;
-            if (detached) {
-                config.unbind("forever.language", arguments.callee);
-            } else {
-                self.render();
-            }
-        });
     },
     render: function() {
         var $el = this.$el;
