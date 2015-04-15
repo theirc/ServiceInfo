@@ -222,7 +222,9 @@ class FrontEndTestCase(LiveServerTestCase):
         self.assertHashLocation('/search')
         form.find_element_by_name('filtered-search').send_keys(
             service.provider.name_en[:5])
-        form.find_element_by_name('map-toggle-list').click()
+        # Results are updated automatically as search characters are entered
+        # Wait a sec to make sure we have the final results
+        time.sleep(1)
         result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
         name = result.find_element_by_class_name('name')
         self.assertEqual(name.text, service.name_en)
@@ -239,7 +241,8 @@ class FrontEndTestCase(LiveServerTestCase):
         self.assertHashLocation('/search')
         Select(form.find_element_by_name('type')).select_by_visible_text(
             service.type.name_en)
-        form.find_element_by_name('map-toggle-list').click()
+        controls = self.wait_for_element('map-toggle', match=By.CLASS_NAME)
+        controls.find_element_by_name('map-toggle-list').click()
         result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
         name = result.find_element_by_class_name('name')
         self.assertEqual(name.text, service.name_en)
@@ -256,7 +259,8 @@ class FrontEndTestCase(LiveServerTestCase):
         self.assertHashLocation('/search')
         Select(form.find_element_by_name('type')).select_by_visible_text(
             service.type.name_fr)
-        form.find_element_by_name('map-toggle-list').click()
+        controls = self.wait_for_element('map-toggle', match=By.CLASS_NAME)
+        controls.find_element_by_name('map-toggle-list').click()
         result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
         name = result.find_element_by_class_name('name')
         self.assertEqual(name.text, service.name_fr)
