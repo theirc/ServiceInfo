@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-04-02 13:32+0000\n"
-"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
+"PO-Revision-Date: 2015-04-15 12:42+0000\n"
+"Last-Translator: Hasnaa Yazbek <hasnaa.yazbek@rescue.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +30,7 @@ msgid "Menu##Logout"
 msgstr "تسجيل الخروج"
 
 msgid "Menu##Services"
-msgstr "الخدمات"
+msgstr "لائحة بالخدمات"
 
 msgid "Menu##Add-Services"
 msgstr "إضافة خدمات"
@@ -44,8 +44,11 @@ msgstr "بحث"
 msgid "Menu##Provider-Registration"
 msgstr "التسجيل مزود"
 
+msgid "Menu##Edit-Provider-Information"
+msgstr "تغييرمعلومات مقدم الخدمات"
+
 msgid "Menu##Feedback-Tool"
-msgstr "ملاحظات"
+msgstr "إبداء الملاحظات"
 
 msgid "Menu##Change-Language"
 msgstr "تغيير اللغة"
@@ -108,7 +111,7 @@ msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "سجل لتكون مقدم خدمات هنا"
 
 msgid "Search-List##Page-Head##Title"
-msgstr "بحث عن مزود الخدمات "
+msgstr "البحث عن الخدمات"
 
 msgid "Search-List##Page-Head##Description"
 msgstr "إستخدم البحث أدناه للعصور على الخدمة التي تريدها."
@@ -117,7 +120,7 @@ msgid "Service-Detail##Give-Feedback"
 msgstr "قدّم ملاحظاتك بالنسبة لهذه الخدم"
 
 msgid "Service-Map##Page-Head##Page-Title##Title"
-msgstr "خريطة مزودي الخدمات "
+msgstr "لبحث عن الخدمات"
 
 msgid "Service-Map##Page-Head##Page-Description##Page-Description"
 msgstr "إستخدم البحث أدناه للعصور على الخدمة التي تريدها."
@@ -469,24 +472,6 @@ msgstr "تغيير الخدمة"
 msgid "Service-List##Change-Change"
 msgstr "إجراء مزيد من التغييرات في انتظار هذا التحديث "
 
-msgid "Home##Service-Map##Title"
-msgstr "عرض خريطة الخدمات "
-
-msgid "Home##Service-Map##Body"
-msgstr "استخدام خدمة خرائط لتحديد مقدمي الخدمات."
-
-msgid "Home##Feedback##Title"
-msgstr "شاركنا رأيك"
-
-msgid "Home##Feedback##Body"
-msgstr "أخبرنا عن تجربتك العمل مع مزود الخدمة الخاص بك."
-
-msgid "Home##Log-in##Title"
-msgstr "مقدم الخدمة تسجيل الدخول"
-
-msgid "Home##Log-in##Body"
-msgstr "تسجيل الدخول إلى حساب مزود خدمة القائمة، أو إنشاء حساب جديد."
-
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
 msgstr "قدم بياناتك بنجاح"
 
@@ -639,6 +624,33 @@ msgstr "ملاحظات حول الخدمات"
 
 msgid "Feedback-Tool##Body"
 msgstr "لإعطاء الملاحظات، الرجاء البحث عن الخدمة، إذهب إلى صفحة الخدمة و استعمل زر الملاحظات"
+
+msgid "Landing##User##Title"
+msgstr "أنا مستخدم للخدمات، أريد أن"
+
+msgid "Landing##User##Search"
+msgstr "البحث عن الخدمات"
+
+msgid "Landing##User##Give-Feedback"
+msgstr "إبداء الملاحظات"
+
+msgid "Landing##Provider##Title"
+msgstr "أنا مقدم خدمات، أريد أن"
+
+msgid "Landing##Provider##Logged-In##Update-My-Info"
+msgstr "تحديث معلومات مقدم الخدمات"
+
+msgid "Landing##Provider##Logged-In##Update-My-Service"
+msgstr "تحديث لائحة الخدمات"
+
+msgid "Landing##Provider##Logged-In##Add-Service"
+msgstr "إضافة خدمة جديدة"
+
+msgid "Landing##Provider##Logged-Out##Register"
+msgstr "إن كنت مقدما\" للخدمات، سجل هنا"
+
+msgid "Landing##Provider##Logged-Out##Login"
+msgstr "الدخول إلى حساب  حالي لمقدم الخدمات"
 
 msgctxt "explained"
 msgid "Feedback-Form##non_delivery"
