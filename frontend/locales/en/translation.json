@@ -60,7 +60,7 @@
   "Feedback-Search": {
     "Page-Head": {
       "Title": "Give Feedback on Services",
-      "Description": "Use the search to find the service you wish to give feedback on, then use the service's Feedback button to give feedback."
+      "Description": "Please search for a service provider first to give your feedback, you must select the service provider and click on give feedback to begin."
     }
   },
   "Service-Detail": {
@@ -69,7 +69,7 @@
   "Feedback-Map": {
     "Page-Head": {
       "Title": "Give Feedback on Services",
-      "Description": "Use the search to find the service you wish to give feedback on, then use the service's Feedback button to give feedback."
+      "Description": "Please search for a service provider first to give your feedback, you must select the service provider and click on give feedback to begin."
     }
   },
   "Service-Map": {
