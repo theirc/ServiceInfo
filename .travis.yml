@@ -4,14 +4,19 @@ python:
 - '3.4'
 addons:
   postgresql: '9.3'
+cache:
+  directories:
+    - $HOME/.cache/pip
+    - node_modules
 env:
 - DJANGO_SETTINGS_MODULE="service_info.settings.dev"
 install:
-- pip install -r requirements/dev.txt --use-mirrors
+- pip install -r requirements/dev.txt
+- npm install
+- npm update
 before_script:
 - createdb -E UTF-8 service_info -U postgres -O $USER
 - psql service_info -c "CREATE EXTENSION postgis;" -U postgres
-- python manage.py migrate --noinput
 script:
 - coverage run manage.py test
 - coverage report -m --fail-under 60

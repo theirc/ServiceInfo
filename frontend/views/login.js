@@ -8,21 +8,21 @@ var Backbone = require('backbone'),
 ;
 
 function toggleLoginMenuItem() {
-    $('.menu-item-login, .menu-item-logout, .menu-item-staff').hide();
-    if (config.get('forever.authToken')) {
-        $('.menu-item-login').hide();
-        $('.menu-item-logout').show();
-        $('.menu-item-staff').toggle(config.get('forever.isStaff'));
+    if (config.get('forever.isStaff')) {
+        $('body').removeClass("is-not-staff");
     } else {
-        $('.menu-item-login').show();
-        $('.menu-item-logout').hide();
-        $('.menu-item-staff').hide();
+        $('body').addClass("is-not-staff");
+    }
+    if (config.get('forever.authToken')) {
+        $('body').addClass("is-logged-in").removeClass("is-logged-out");
+    } else {
+        $('body').addClass("is-logged-out").removeClass("is-logged-in");
     }
 };
+
+config.ready(toggleLoginMenuItem);
+config.change('forever.isStaff', toggleLoginMenuItem);
 config.change('forever.authToken', toggleLoginMenuItem);
-$(function() {
-    toggleLoginMenuItem();
-})
 
 
 module.exports = Backbone.View.extend({

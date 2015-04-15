@@ -22,7 +22,7 @@ msgid "Menu##Logout"
 msgstr "Logout"
 
 msgid "Menu##Services"
-msgstr "Services"
+msgstr "List of Services"
 
 msgid "Menu##Add-Services"
 msgstr "Add Services"
@@ -36,8 +36,11 @@ msgstr "Search"
 msgid "Menu##Provider-Registration"
 msgstr "Provider Registration"
 
+msgid "Menu##Edit-Provider-Information"
+msgstr "Edit Provider Information"
+
 msgid "Menu##Feedback-Tool"
-msgstr "Feedback"
+msgstr "Give Feedback"
 
 msgid "Menu##Change-Language"
 msgstr "Change Language"
@@ -75,8 +78,11 @@ msgstr "Friday"
 msgid "Global##Saturday"
 msgstr "Saturday"
 
-msgid "Global##GeolocationError"
+msgid "Global##GeolocationNotSupported"
 msgstr "Geolocation is not supported by this browser."
+
+msgid "Global##GeoPositionUnavailable"
+msgstr "Location is not available at this time."
 
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "Log In"
@@ -97,7 +103,7 @@ msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "Register to be a Service Provider here"
 
 msgid "Search-List##Page-Head##Title"
-msgstr "Service Provider Search"
+msgstr "Search For Services"
 
 msgid "Search-List##Page-Head##Description"
 msgstr "Use the filtered search below to find the service that meets your needs."
@@ -106,10 +112,13 @@ msgid "Service-Detail##Give-Feedback"
 msgstr "Give feedback on this service"
 
 msgid "Service-Map##Page-Head##Page-Title##Title"
-msgstr "Service Provider Map"
+msgstr "Search For Services"
 
 msgid "Service-Map##Page-Head##Page-Description##Page-Description"
 msgstr "Use the filtered search below to find the service that meets your needs."
+
+msgid "Service-Map##No-Search-Results"
+msgstr "No services matched your search terms. Please try other terms."
 
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "Search term"
@@ -188,6 +197,9 @@ msgstr "Website"
 
 msgid "Service-Map##List##Unknown"
 msgstr "Unknown"
+
+msgid "Service-Map##List##Criteria"
+msgstr "Selection Criteria"
 
 msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
 msgstr "Remove Change"
@@ -423,8 +435,8 @@ msgstr "Area:"
 msgid "Service-List##Table##Thead##Status"
 msgstr "Status:"
 
-msgid "Service-List##Table##Thead##Remove"
-msgstr "Remove:"
+msgid "Service-List##Table##Thead##Change"
+msgstr "Change:"
 
 msgid "Service-List##Cancel"
 msgstr "Cancel"
@@ -432,23 +444,11 @@ msgstr "Cancel"
 msgid "Service-List##Delete"
 msgstr "Delete"
 
-msgid "Home##Service-Map##Title"
-msgstr "View The Service Map"
+msgid "Service-List##Change-Service"
+msgstr "Change service"
 
-msgid "Home##Service-Map##Body"
-msgstr "Use the service map to locate service providers."
-
-msgid "Home##Feedback##Title"
-msgstr "Provide Feedback"
-
-msgid "Home##Feedback##Body"
-msgstr "Tell us about your experience working with your service provider."
-
-msgid "Home##Log-in##Title"
-msgstr "Service Provider Login"
-
-msgid "Home##Log-in##Body"
-msgstr "Log in to an existing service provider account, or create a new account."
+msgid "Service-List##Change-Change"
+msgstr "Make further changes to this pending update"
 
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
 msgstr "Your Information was Submitted Successfully"
@@ -497,6 +497,18 @@ msgstr "Loading Service Type Filters..."
 
 msgid "Map##TypeHeader"
 msgstr "Filter by a Service Type"
+
+msgid "Footer##About##Title"
+msgstr "About Service Info"
+
+msgid "Footer##About##Paragraph"
+msgstr "Service info is a tool to allow both service providers to register their services online and beneficiaries to map services and give feedback on services. Service Info is open source and free to use, data is quality checked by International Rescue Committee."
+
+msgid "Footer##Contact##Title"
+msgstr "Reach Us"
+
+msgid "Footer##Contact##Paragraph"
+msgstr "Contact us on one of our social networks below or drop us a mail at"
 
 msgid "Feedback-Form##Title"
 msgstr "Feedback form"
@@ -587,6 +599,33 @@ msgstr "Feedback on services"
 
 msgid "Feedback-Tool##Body"
 msgstr "To give feedback, please search for a service, go to its page, and use the Feedback button."
+
+msgid "Landing##User##Title"
+msgstr "I'm a service user, I want to"
+
+msgid "Landing##User##Search"
+msgstr "Search for a Service"
+
+msgid "Landing##User##Give-Feedback"
+msgstr "Give Feedback"
+
+msgid "Landing##Provider##Title"
+msgstr "I'm a service provider, I want to"
+
+msgid "Landing##Provider##Logged-In##Update-My-Info"
+msgstr "Update My Provider Information"
+
+msgid "Landing##Provider##Logged-In##Update-My-Service"
+msgstr "Update My List of Services"
+
+msgid "Landing##Provider##Logged-In##Add-Service"
+msgstr "Add a New Service"
+
+msgid "Landing##Provider##Logged-Out##Register"
+msgstr "Register to be a Service Provider"
+
+msgid "Landing##Provider##Logged-Out##Login"
+msgstr "Login to an Existing Service Provider Account"
 
 msgctxt "explained"
 msgid "Feedback-Form##non_delivery"

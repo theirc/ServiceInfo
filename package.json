@@ -30,7 +30,8 @@
     "i18next-conv": "^0.1.4",
     "less": "^2.2.0",
     "sync-exec": "^0.5.0",
-    "tiny-lr": "^0.1.4"
+    "tiny-lr": "^0.1.4",
+    "phantomjs": "^1.9.16"
   },
   "config": {},
   "scripts": {},

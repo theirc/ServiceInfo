@@ -1,12 +1,12 @@
 psycopg2==2.5.4
 Pillow==2.5.3
-Django==1.7.3
+Django==1.7.7
 six==1.6.1
 celery==3.1.17
 
 BeautifulSoup4==4.3.2
 
-djangorestframework==3.0.2
+djangorestframework==3.1.1
 # Optional, but used by DRF
 markdown==2.5.2
 django-filter==0.9.1

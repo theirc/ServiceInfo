@@ -7,6 +7,7 @@ var $ = require('jquery'),
 ;
 
 var views = {
+    "home": require('./views/home'),
     "register": require('./views/provider-form'),
     "register-confirm": require('./views/provider-form-confirm'),
     "register-changed": require('./views/provider-form-changed'),
@@ -68,13 +69,7 @@ module.exports = Backbone.Router.extend({
         this.route(/search\/map/, loadPage("map"));
     },
     routes: {
-        "": function() {
-            if (config.get('forever.authToken')) {
-
-            } else {
-
-            }
-        },
+        "": loadPage("home"),
         "admin": loadPage("admin"),
         "register": loadPage("register"),
         "register/changed": loadPage("register-changed"),
@@ -99,7 +94,7 @@ module.exports = Backbone.Router.extend({
         "logout": function() {
             config.remove('forever.authToken');
             config.remove('forever.email');
-            config.set('forever.isStaff', false);
+            config.remove('forever.isStaff');
             $('.menu-item-staff').hide();
             window.location.hash = '';
             window.location.reload();

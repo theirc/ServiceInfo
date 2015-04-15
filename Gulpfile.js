@@ -12,13 +12,14 @@ var knownOptions = {
     default: {
         config: "base",
         fast: false,
+        port: 8000
     }
 }
 
 var options = minimist(process.argv.slice(2), knownOptions);
 
 var API_PORT = 4005;
-var EXPRESS_PORT = 8000;
+var EXPRESS_PORT = options.port;
 var EXPRESS_ROOT = __dirname + "/frontend";
 var LIVERELOAD_PORT = 3572;
 
@@ -29,7 +30,9 @@ gulp.task('startExpress', ['build'], function() {
     app.use(require('connect-livereload')());
     app.use(express.static(EXPRESS_ROOT));
     app.listen(EXPRESS_PORT);
+});
 
+gulp.task('startDjango', function() {
     bg("python", "manage.py", "runserver", API_PORT)();
 });
 
@@ -127,6 +130,9 @@ function notifyLivereload(event) {
     // `gulp.watch()` events provide an absolute path
     // so we need to make it relative to the server root
     var fileName = require('path').relative(EXPRESS_ROOT, event.path);
+    if (fileName.match(/bundle/)) {
+        return;
+    }
 
     gulp.run('build');
 
@@ -139,9 +145,8 @@ function notifyLivereload(event) {
     }, 500); // For some reason, triggering live reload too early serves the old version
 }
 
-gulp.task('default', ['startLiveReload'], function() {
-    gulp.watch(['frontend/index.html', 'frontend/index.js', 'frontend/router.js',
+gulp.task('default', ['startLiveReload', 'startDjango'], function() {
+    gulp.watch(['frontend/index.html', 'frontend/**/*.js',
                 'frontend/styles/site.less', 'frontend/templates/*.hbs', 'frontend/views/*.js'],
                 notifyLivereload);
 });
-

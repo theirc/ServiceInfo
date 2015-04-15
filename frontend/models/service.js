@@ -22,7 +22,7 @@ var Service = _base.BaseModel.extend({
                 var preloaded = results[0];
                 self.attributes.servicearea = preloaded.servicearea.getByUrl(self.get('area_of_service'));
                 self.attributes.servicetype = preloaded.servicetype.getByUrl(self.get('type'));;
-                self.attributes.provider = provider_fetch;
+                self.attributes.provider = results[1];
 
                 resolve(self);
             }, function onerror(error) {

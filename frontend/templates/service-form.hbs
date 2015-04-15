@@ -14,9 +14,9 @@
 <!-- Main Content -->
 
 <!-- Forms -->
+    <div id="service-form">
       <div class="main-content">
         <div class="container">
-          <div class="row">
             <form id=service-form>
               <input type=hidden name=provider></input>
               <input type=hidden name=update_of></input>
@@ -28,7 +28,7 @@
                   <div class="form-group">
                     <label for="id_name" class="control-label"><span data-i18n="Service-Form.Service-Name"></span><span class="error"></span></label>
                       <div class="form-group">
-                        <input id="id_name" type="text" name="name" data-i18n-field class="form-control"  >
+                        <input id="id_name" type="text" name="name" data-i18n-field class="form-control" maxlength="256">
                       </div>
                   </div>
                 </row>
@@ -103,11 +103,12 @@
 
                 <!-- selection criteria -->
                 <label for="id_selection_criteria" class="control-label" data-i18n="Service-Form.Selection-Criteria"></label>
+                <div>
                 {{#each criteria}}
                   <div class="row criteria">
                       <div class="half">
                         <div class="form-group">
-                          <input id="id_selection_criteria-{{@index}}" data-id="{{this.id}}" type="text" name="selection_criteria.{{@index}}" class="form-control selection-criteria" value="{{this.text}}">
+                          <input id="id_selection_criteria-{{@index}}" data-id="{{this.id}}" type="text" name="selection_criteria.{{@index}}" class="form-control selection-criteria" value="{{this.text}}" maxlength="100">
                         </div>
                       </div>
                       <div class="half">
@@ -124,25 +125,22 @@
                       </div>
                   </div>
                 {{/each}}
+                </div>
+
+                <div class="submit-form">
+                    <div class="row error error-submission"></div>
+                    <div class="half">
+                      <button class="form-btn-submit primary-button" data-i18n="Service-Form.Form-Submit-Options.Submit"></button>
+                    </div>
+                    <div class="half">
+                      <button class="form-btn-clear primary-button" data-i18n="Service-Form.Form-Submit-Options.Clear"></button>
+                    </div>
+                </div>
 
               </fieldset>
             </form>
-            <form>
-              <div class="submit-form">
-                  <div class="row error error-submission"></div>
-                  <div class="half">
-                    <button class="form-btn-submit primary-button" data-i18n="Service-Form.Form-Submit-Options.Submit"></button>
-                  </div>
-                  <div class="half">
-                    <button class="form-btn-clear primary-button" data-i18n="Service-Form.Form-Submit-Options.Clear"></button>
-                  </div>
-              </div>
-            </form>
 
-            </div>
+
           </div>
         </div>
-
-<!-- End Forms -->
-
-<!-- End Main Content -->
+      </div>

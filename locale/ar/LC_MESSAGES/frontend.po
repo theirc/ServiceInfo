@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-03-27 10:52+0000\n"
+"PO-Revision-Date: 2015-04-15 12:42+0000\n"
 "Last-Translator: Hasnaa Yazbek <hasnaa.yazbek@rescue.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgid "Menu##Logout"
 msgstr "تسجيل الخروج"
 
 msgid "Menu##Services"
-msgstr "الخدمات"
+msgstr "لائحة بالخدمات"
 
 msgid "Menu##Add-Services"
 msgstr "إضافة خدمات"
@@ -44,8 +44,11 @@ msgstr "بحث"
 msgid "Menu##Provider-Registration"
 msgstr "التسجيل مزود"
 
+msgid "Menu##Edit-Provider-Information"
+msgstr "تغييرمعلومات مقدم الخدمات"
+
 msgid "Menu##Feedback-Tool"
-msgstr "ملاحظات"
+msgstr "إبداء الملاحظات"
 
 msgid "Menu##Change-Language"
 msgstr "تغيير اللغة"
@@ -83,8 +86,11 @@ msgstr "الجمعة"
 msgid "Global##Saturday"
 msgstr "السبت"
 
-msgid "Global##GeolocationError"
+msgid "Global##GeolocationNotSupported"
 msgstr "غير معتمد تحديد الموقع الجغرافي على هذا المتصفح."
+
+msgid "Global##GeoPositionUnavailable"
+msgstr "الموقع غير متوفر في هذا الوقت."
 
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "تسجيل الدخول"
@@ -105,7 +111,7 @@ msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "سجل لتكون مقدم خدمات هنا"
 
 msgid "Search-List##Page-Head##Title"
-msgstr "بحث عن مزود الخدمات "
+msgstr "البحث عن الخدمات"
 
 msgid "Search-List##Page-Head##Description"
 msgstr "إستخدم البحث أدناه للعصور على الخدمة التي تريدها."
@@ -114,10 +120,13 @@ msgid "Service-Detail##Give-Feedback"
 msgstr "قدّم ملاحظاتك بالنسبة لهذه الخدم"
 
 msgid "Service-Map##Page-Head##Page-Title##Title"
-msgstr "خريطة مزودي الخدمات "
+msgstr "لبحث عن الخدمات"
 
 msgid "Service-Map##Page-Head##Page-Description##Page-Description"
 msgstr "إستخدم البحث أدناه للعصور على الخدمة التي تريدها."
+
+msgid "Service-Map##No-Search-Results"
+msgstr "لم يتم وجود أي خدمات مطابقة. يرجى المحاولة مرة أخرى."
 
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "مصطلح البحث"
@@ -196,6 +205,9 @@ msgstr "الموقع"
 
 msgid "Service-Map##List##Unknown"
 msgstr "غير معروف"
+
+msgid "Service-Map##List##Criteria"
+msgstr "معايير الاختيار"
 
 msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
 msgstr "إزالة تغيير"
@@ -445,8 +457,8 @@ msgstr "المنطقة:"
 msgid "Service-List##Table##Thead##Status"
 msgstr "الحالة:"
 
-msgid "Service-List##Table##Thead##Remove"
-msgstr "إزالة:"
+msgid "Service-List##Table##Thead##Change"
+msgstr "تغيير:"
 
 msgid "Service-List##Cancel"
 msgstr "إلغاء"
@@ -454,23 +466,11 @@ msgstr "إلغاء"
 msgid "Service-List##Delete"
 msgstr "حذف"
 
-msgid "Home##Service-Map##Title"
-msgstr "عرض خريطة الخدمات "
+msgid "Service-List##Change-Service"
+msgstr "تغيير الخدمة"
 
-msgid "Home##Service-Map##Body"
-msgstr "استخدام خدمة خرائط لتحديد مقدمي الخدمات."
-
-msgid "Home##Feedback##Title"
-msgstr "شاركنا رأيك"
-
-msgid "Home##Feedback##Body"
-msgstr "أخبرنا عن تجربتك العمل مع مزود الخدمة الخاص بك."
-
-msgid "Home##Log-in##Title"
-msgstr "مقدم الخدمة تسجيل الدخول"
-
-msgid "Home##Log-in##Body"
-msgstr "تسجيل الدخول إلى حساب مزود خدمة القائمة، أو إنشاء حساب جديد."
+msgid "Service-List##Change-Change"
+msgstr "إجراء مزيد من التغييرات في انتظار هذا التحديث "
 
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
 msgstr "قدم بياناتك بنجاح"
@@ -522,6 +522,18 @@ msgstr "تحميل أنواع الخدمات التي صنّفتها"
 
 msgid "Map##TypeHeader"
 msgstr "تصنيف حسب نوع الخدمة"
+
+msgid "Footer##About##Title"
+msgstr "عن خريطة الخدمات "
+
+msgid "Footer##About##Paragraph"
+msgstr "معلومات الخدمة هي أداة لتسمح لكل من مقدمي الخدمة لتسجيل خدماتها عبر الإنترنت والمستفيدين لرسم خريطة الخدمات وإعطاء معلومات عن الخدمات. معلومات عن الخدمة هو المصدر المفتوح ومجانا للاستخدام، البيانات هو نوعية فحصها من قبل لجنة الإنقاذ الدولية."
+
+msgid "Footer##Contact##Title"
+msgstr "إتصل بنا "
+
+msgid "Footer##Contact##Paragraph"
+msgstr "تواصل معنا على إحدى شبكة التواصل الإجتماعي أو أرسل لنا على البريد الإلكتروني أدناه "
 
 msgid "Feedback-Form##Title"
 msgstr "نموذج الملاحظات"
@@ -612,6 +624,33 @@ msgstr "ملاحظات حول الخدمات"
 
 msgid "Feedback-Tool##Body"
 msgstr "لإعطاء الملاحظات، الرجاء البحث عن الخدمة، إذهب إلى صفحة الخدمة و استعمل زر الملاحظات"
+
+msgid "Landing##User##Title"
+msgstr "أنا مستخدم للخدمات، أريد أن"
+
+msgid "Landing##User##Search"
+msgstr "البحث عن الخدمات"
+
+msgid "Landing##User##Give-Feedback"
+msgstr "إبداء الملاحظات"
+
+msgid "Landing##Provider##Title"
+msgstr "أنا مقدم خدمات، أريد أن"
+
+msgid "Landing##Provider##Logged-In##Update-My-Info"
+msgstr "تحديث معلومات مقدم الخدمات"
+
+msgid "Landing##Provider##Logged-In##Update-My-Service"
+msgstr "تحديث لائحة الخدمات"
+
+msgid "Landing##Provider##Logged-In##Add-Service"
+msgstr "إضافة خدمة جديدة"
+
+msgid "Landing##Provider##Logged-Out##Register"
+msgstr "إن كنت مقدما\" للخدمات، سجل هنا"
+
+msgid "Landing##Provider##Logged-Out##Login"
+msgstr "الدخول إلى حساب  حالي لمقدم الخدمات"
 
 msgctxt "explained"
 msgid "Feedback-Form##non_delivery"

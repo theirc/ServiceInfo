@@ -233,11 +233,15 @@ class ServiceViewSet(ServiceInfoModelViewSet):
         # Only make visible the Services owned by the current provider
         # and not archived
         if self.is_search:
-            return Service.objects.filter(status=Service.STATUS_CURRENT)
+            qs = Service.objects.filter(status=Service.STATUS_CURRENT)
         else:
-            return self.queryset.filter(provider__user=self.request.user)\
+            qs = self.queryset.filter(provider__user=self.request.user)\
                 .exclude(status=Service.STATUS_ARCHIVED)\
                 .exclude(status=Service.STATUS_CANCELED)
+        if not self.request.GET.get('closest', None):
+            language = getattr(self.request.user, 'language', None) or 'en'
+            qs = qs.order_by('name_' + language)
+        return qs
 
     @detail_route(methods=['post'])
     def cancel(self, request, *args, **kwargs):
@@ -379,7 +383,8 @@ class ProviderViewSet(ServiceInfoModelViewSet):
                 password=request.data['password'],
                 is_active=False
             )
-            user.groups.add(Group.objects.get(name='Providers'))
+            provider_group, _ = Group.objects.get_or_create(name='Providers')
+            user.groups.add(provider_group)
 
             # Create Provider
             data = dict(request.data, user=user.get_api_url())

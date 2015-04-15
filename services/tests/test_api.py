@@ -1,15 +1,18 @@
 from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND, METHOD_NOT_ALLOWED, UNAUTHORIZED
 import json
 
+from django.conf import settings
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.models import Group
 from django.contrib.gis.geos import Point
 from django.core import mail
+from django.core.files.storage import default_storage
 from django.core.urlresolvers import reverse
 from django.forms import model_to_dict
 from django.test import TestCase
 
 from rest_framework.authtoken.models import Token
+from rest_framework.fields import Field, CharField
 from rest_framework.test import APIClient
 
 from email_user.models import EmailUser
@@ -17,6 +20,10 @@ from email_user.tests.factories import EmailUserFactory
 from services.models import Provider, Service, SelectionCriterion, ServiceArea, ServiceType
 from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory, \
     ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory
+
+
+ERROR_REQUIRED_FIELD_MISSING = str(Field.default_error_messages['required'])
+ERROR_FIELD_CANNOT_BE_BLANK = str(CharField.default_error_messages['blank'])
 
 
 class APITestMixin(object):
@@ -718,9 +725,10 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
         results = json.loads(rsp.content.decode('utf-8'))
         result = results[0]
         self.assertIn('icon_url', result)
-        rsp = self.client.get(result['icon_url'])
-        self.assertEqual(OK, rsp.status_code)
-        self.assertEqual('image/png', rsp['Content-Type'])
+        icon_url = result['icon_url']
+        self.assertTrue(icon_url.startswith(settings.MEDIA_URL))
+        path = icon_url.replace(settings.MEDIA_URL, '')
+        self.assertTrue(default_storage.exists(path))
 
     def test_get_type(self):
         # Try it unauthenticated
@@ -730,9 +738,10 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
         self.assertEqual(OK, rsp.status_code)
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertIn('icon_url', result)
-        rsp = self.client.get(result['icon_url'])
-        self.assertEqual(OK, rsp.status_code)
-        self.assertEqual('image/png', rsp['Content-Type'])
+        icon_url = result['icon_url']
+        self.assertTrue(icon_url.startswith(settings.MEDIA_URL))
+        path = icon_url.replace(settings.MEDIA_URL, '')
+        self.assertTrue(default_storage.exists(path))
 
 
 class LanguageTest(APITestMixin, TestCase):
@@ -804,7 +813,7 @@ class LoginTest(APITestMixin, TestCase):
                                data={'username': 'Joe Sixpack', 'password': 'not_password'})
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         response = json.loads(rsp.content.decode('utf-8'))
-        self.assertEqual({'email': ['This field may not be blank.']}, response)
+        self.assertEqual({'email': [ERROR_REQUIRED_FIELD_MISSING]}, response)
 
     def test_bad_password(self):
         # Call the API with a bad password
@@ -821,7 +830,7 @@ class LoginTest(APITestMixin, TestCase):
                                data={'password': 'password'})
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         response = json.loads(rsp.content.decode('utf-8'))
-        self.assertEqual({'email': ['This field may not be blank.']},
+        self.assertEqual({'email': [ERROR_REQUIRED_FIELD_MISSING]},
                          response)
 
     def test_no_password(self):
@@ -830,7 +839,7 @@ class LoginTest(APITestMixin, TestCase):
                                data={'email': self.user.email})
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         response = json.loads(rsp.content.decode('utf-8'))
-        self.assertEqual({'password': ['This field may not be blank.']},
+        self.assertEqual({'password': [ERROR_REQUIRED_FIELD_MISSING]},
                          response)
 
 
@@ -942,7 +951,7 @@ class ActivationTest(APITestMixin, TestCase):
         )
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         response = json.loads(rsp.content.decode('utf-8'))
-        self.assertEqual(response, {'activation_key': ['This field may not be blank.']})
+        self.assertEqual(response, {'activation_key': [ERROR_REQUIRED_FIELD_MISSING]})
 
     def test_empty_key(self):
         rsp = self.client.post(
@@ -951,7 +960,7 @@ class ActivationTest(APITestMixin, TestCase):
         )
         self.assertEqual(BAD_REQUEST, rsp.status_code, msg=rsp.content.decode('utf-8'))
         response = json.loads(rsp.content.decode('utf-8'))
-        self.assertEqual(response, {'activation_key': ['This field may not be blank.']})
+        self.assertEqual(response, {'activation_key': [ERROR_FIELD_CANNOT_BE_BLANK]})
 
     def test_bad_key_format(self):
         rsp = self.client.post(

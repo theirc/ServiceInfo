@@ -9,12 +9,13 @@
     "Menu-Toggle": "MENU",
     "Login": "Login",
     "Logout": "Logout",
-    "Services": "Services",
+    "Services": "List of Services",
     "Add-Services": "Add Services",
   	"Service-Map": "Service Map",
     "Search": "Search",
   	"Provider-Registration": "Provider Registration",
-  	"Feedback-Tool": "Feedback",
+    "Edit-Provider-Information": "Edit Provider Information",
+  	"Feedback-Tool": "Give Feedback",
   	"Change-Language": "Change Language"
   },
   "Global": {
@@ -29,7 +30,8 @@
     "Thursday": "Thursday",
     "Friday": "Friday",
     "Saturday": "Saturday",
-    "GeolocationError": "Geolocation is not supported by this browser."
+    "GeolocationNotSupported": "Geolocation is not supported by this browser.",
+    "GeoPositionUnavailable": "Location is not available at this time."
   },
   "Login-Form": {
     "Page-Head": {
@@ -51,7 +53,7 @@
   },
   "Search-List": {
     "Page-Head": {
-      "Title": "Service Provider Search",
+      "Title": "Search For Services",
       "Description": "Use the filtered search below to find the service that meets your needs."
     }
   },
@@ -61,7 +63,7 @@
   "Service-Map": {
     "Page-Head": {
       "Page-Title": {
-        "Title": "Service Provider Map"
+        "Title": "Search For Services"
       },
       "Page-Description": {
         "Page-Description": "Use the filtered search below to find the service that meets your needs."
@@ -257,25 +259,14 @@
         "Type": "Type:",
         "Area": "Area:",
         "Status": "Status:",
-        "Remove": "Remove:"
+        "Change": "Change:"
+
       }
     },
     "Cancel": "Cancel",
-    "Delete": "Delete"
-  },
-  "Home": {
-    "Service-Map": {
-      "Title": "View The Service Map",
-      "Body": "Use the service map to locate service providers."
-      },
-    "Feedback": {
-      "Title": "Provide Feedback",
-      "Body": "Tell us about your experience working with your service provider."
-      },
-    "Log-in": {
-      "Title": "Service Provider Login",
-      "Body": "Log in to an existing service provider account, or create a new account."
-    }
+    "Delete": "Delete",
+    "Change-Service": "Change service",
+    "Change-Change": "Make further changes to this pending update"
   },
   "Provider-Registration-Confirmation": {
     "Page-Head": {
@@ -343,65 +334,94 @@
     "Loading": "Loading Service Type Filters...",
     "TypeHeader": "Filter by a Service Type"
   },
+  "Footer": {
+    "About": {
+      "Title": "About Service Info",
+      "Paragraph": "Service info is a tool to allow both service providers to register their services online and beneficiaries to map services and give feedback on services. Service Info is open source and free to use, data is quality checked by International Rescue Committee."
+    },
+    "Contact": {
+      "Title": "Reach Us",
+      "Paragraph": "Contact us on one of our social networks below or drop us a mail at"
+    }
+  },
   "Feedback-Form": {
-      "Title": "Feedback form",
-      "Description": "Fill out the form below.",
-      "What-Service": "You are giving feedback on this service:",
-      "Name": "Name",
-      "Phone-Number": "Phone Number (NN-NNNNNN)",
-      "Nationality": "Nationality",
-      "AreaOfResidence": "Area of residence",
-      "Delivered": {
-          "label": "Was service delivered?",
-          "yes": "Yes",
-          "no": "No"
-      },
-      "non_delivery_explained": "Did you receive a clear explanation for why the service you sought was not delivered to you?",
-      "non_delivery_explanation": {
-         "no": "No explanation",
-          "unclear": "Explanation was not clear",
-          "unfair": "Explanation was not fair",
-          "yes": "Clear and appropriate explanation"
-      },
-      "Submit": "Submit Answers",
-      "Clear": "Remove Answers",
-      "WaitTime": {
-         "label": "How long did you wait for the service to be delivered, after contacting the service provider?",
-          "lesshour": "Less than 1 hour",
-          "uptotwodays": "Up to 2 days",
-          "3_7days": "3-7 days",
-          "1_2weeks": "1-2 weeks",
-          "more": "Longer"
-      },
-      "wait_time_satisfaction": {
-          "label": "How do you rate your satisfaction with the time that you waited for the service to be delivered (from 1 to 5, where 5 is the highest rating possible)?"
-      },
-      "Quality": {
-          "label": "How would you rate the quality of the service you received (from 1 to 5, where 5 is the highest rating possible)?"
-      },
-      "difficulty_contacting": {
-          "label": "Did you experience difficulties contacting the provider of the service you needed?",
-          "no": "No",
-          "didntknow": "Did not know how to contact them",
-          "nophoneresponse": "Tried to contact them by phone but received no response",
-          "noresponse": "Tried to contact them in person but received no response or did not find their office",
-          "unhelpful": "Contacted them but response was unhelpful",
-          "other": "Other"
+    "Title": "Feedback form",
+    "Description": "Fill out the form below.",
+    "What-Service": "You are giving feedback on this service:",
+    "Name": "Name",
+    "Phone-Number": "Phone Number (NN-NNNNNN)",
+    "Nationality": "Nationality",
+    "AreaOfResidence": "Area of residence",
+    "Delivered": {
+        "label": "Was service delivered?",
+        "yes": "Yes",
+        "no": "No"
+    },
+    "non_delivery_explained": "Did you receive a clear explanation for why the service you sought was not delivered to you?",
+    "non_delivery_explanation": {
+       "no": "No explanation",
+        "unclear": "Explanation was not clear",
+        "unfair": "Explanation was not fair",
+        "yes": "Clear and appropriate explanation"
+    },
+    "Submit": "Submit Answers",
+    "Clear": "Remove Answers",
+    "WaitTime": {
+       "label": "How long did you wait for the service to be delivered, after contacting the service provider?",
+        "lesshour": "Less than 1 hour",
+        "uptotwodays": "Up to 2 days",
+        "3_7days": "3-7 days",
+        "1_2weeks": "1-2 weeks",
+        "more": "Longer"
+    },
+    "wait_time_satisfaction": {
+        "label": "How do you rate your satisfaction with the time that you waited for the service to be delivered (from 1 to 5, where 5 is the highest rating possible)?"
+    },
+    "Quality": {
+        "label": "How would you rate the quality of the service you received (from 1 to 5, where 5 is the highest rating possible)?"
+    },
+    "difficulty_contacting": {
+        "label": "Did you experience difficulties contacting the provider of the service you needed?",
+        "no": "No",
+        "didntknow": "Did not know how to contact them",
+        "nophoneresponse": "Tried to contact them by phone but received no response",
+        "noresponse": "Tried to contact them in person but received no response or did not find their office",
+        "unhelpful": "Contacted them but response was unhelpful",
+        "other": "Other"
 
-      },
-      "staff_satisfaction": {
-            "label": "How would you rate your satisfaction with the staff of the organization that provided services to you, (from 1 to 5, where 5 is the highest rating possible)?"
-      },
-      "other_difficulties": "Other difficulties contacting the service provider",
-      "extra_comments": "Other comments",
-      "anonymous": {
-          "label": "I want my feedback to be anonymous to the service provider",
-          "yes": "Yes",
-          "no": "No"
-      }
+    },
+    "staff_satisfaction": {
+          "label": "How would you rate your satisfaction with the staff of the organization that provided services to you, (from 1 to 5, where 5 is the highest rating possible)?"
+    },
+    "other_difficulties": "Other difficulties contacting the service provider",
+    "extra_comments": "Other comments",
+    "anonymous": {
+        "label": "I want my feedback to be anonymous to the service provider",
+        "yes": "Yes",
+        "no": "No"
+    }
   },
   "Feedback-Tool": {
-      "Title": "Feedback on services",
-      "Body": "To give feedback, please search for a service, go to its page, and use the Feedback button."
+    "Title": "Feedback on services",
+    "Body": "To give feedback, please search for a service, go to its page, and use the Feedback button."
+  },
+  "Landing": {
+    "User": {
+      "Title": "I'm a service user, I want to",
+      "Search": "Search for a Service",
+      "Give-Feedback": "Give Feedback"
+    },
+    "Provider": {
+      "Title": "I'm a service provider, I want to",
+      "Logged-In": {
+        "Update-My-Info": "Update My Provider Information",
+        "Update-My-Service": "Update My List of Services",
+        "Add-Service": "Add a New Service"
+      },
+      "Logged-Out": {
+        "Register": "Register to be a Service Provider",
+        "Login": "Login to an Existing Service Provider Account"
+      }
+    }
   }
 }
