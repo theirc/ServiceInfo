@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-31 18:19+0300\n"
-"PO-Revision-Date: 2015-03-31 12:22+0000\n"
+"POT-Creation-Date: 2015-04-14 17:08+0300\n"
+"PO-Revision-Date: 2015-04-07 05:42+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -430,21 +430,21 @@ msgstr "Le service a été rejetée avec succès."
 #. Translators: Provider name
 #. Translators: Service name
 #: services/models.py:34 services/models.py:67 services/models.py:204
-#: services/models.py:279 services/models.py:344 services/models.py:856
+#: services/models.py:279 services/models.py:344 services/models.py:878
 msgid "name in English"
 msgstr "Nom en anglais"
 
 #. Translators: Provider name
 #. Translators: Service name
 #: services/models.py:40 services/models.py:75 services/models.py:210
-#: services/models.py:285 services/models.py:351 services/models.py:862
+#: services/models.py:285 services/models.py:351 services/models.py:884
 msgid "name in Arabic"
 msgstr "Nom en arabe"
 
 #. Translators: Provider name
 #. Translators: Service name
 #: services/models.py:46 services/models.py:83 services/models.py:216
-#: services/models.py:291 services/models.py:358 services/models.py:868
+#: services/models.py:291 services/models.py:358 services/models.py:890
 msgid "name in French"
 msgstr "Nom en Français"
 
@@ -452,7 +452,7 @@ msgstr "Nom en Français"
 msgid "type"
 msgstr "type"
 
-#: services/models.py:94 services/models.py:891
+#: services/models.py:94 services/models.py:913
 msgid "phone number"
 msgstr "Numéro de téléphone"
 
@@ -608,210 +608,214 @@ msgstr "Seuls les services dans le projet de statut peuvent être approuvés"
 msgid "Only services in draft status may be rejected."
 msgstr "Seuls les services dans le projet de statut peuvent être rejetées"
 
-#: services/models.py:656
+#: services/models.py:659
 msgid "Provider updated their information"
 msgstr "Fournisseur mis à jour leurs informations"
 
-#: services/models.py:657
+#: services/models.py:660
 msgid "New service submitted by provider"
 msgstr "Nouveau service soumis par le fournisseur"
 
-#: services/models.py:658
+#: services/models.py:661
 msgid "Change to existing service submitted by provider"
 msgstr "Changez au service existants soumis par le fournisseur"
 
-#: services/models.py:659
+#: services/models.py:662
 msgid "Provider canceled a draft service"
 msgstr "Fournisseur annulé un projet de services"
 
-#: services/models.py:660
+#: services/models.py:663
 msgid "Provider canceled a current service"
 msgstr "Fournisseur annulé un service courant"
 
-#: services/models.py:661
+#: services/models.py:664
 msgid "Provider superseded a previous draft"
 msgstr "Fournisseur remplace une version précédente"
 
-#: services/models.py:662
+#: services/models.py:665
 msgid "Staff approved a new or changed service"
 msgstr "Le personnel approuve un service nouveau ou modifié"
 
-#: services/models.py:663
+#: services/models.py:666
 msgid "Staff rejected a new or changed service"
 msgstr "Le personnel a rejeté un service nouveau ou modifié"
 
-#: services/models.py:687
+#: services/models.py:667
+msgid "User submitted feedback"
+msgstr "Les commentaires des utilisateurs soumis"
+
+#: services/models.py:691
 msgid "update type"
 msgstr "Type de mise à jour"
 
-#: services/models.py:692
+#: services/models.py:696
 msgid "JIRA issue"
 msgstr "question JIRA"
 
-#: services/models.py:875
+#: services/models.py:897
 msgid "nationalities"
 msgstr "Nationalité"
 
-#: services/models.py:887
+#: services/models.py:909
 msgid "name"
 msgstr "Nom"
 
-#: services/models.py:898
+#: services/models.py:920
 msgid "nationality"
 msgstr "Nationalité"
 
-#: services/models.py:903
+#: services/models.py:925
 msgid "area of residence"
 msgstr "la région de résidence"
 
-#: services/models.py:908
+#: services/models.py:930
 msgid "service"
 msgstr "services"
 
-#: services/models.py:914
+#: services/models.py:936
 msgid "Was the service you sought delivered to you?"
 msgstr "Le service que vous cherchiez vous a été livré?"
 
-#: services/models.py:918
+#: services/models.py:940
 msgid ""
 "How would you rate the quality of the service you received (from 1 to 5, "
 "where 5 is the highest rating possible)?"
 msgstr "Comment évalueriez-vous la qualité du service que vous avez reçu (1-5, 5 étant la meilleure note possible)?"
 
-#: services/models.py:931
+#: services/models.py:953
 msgid ""
 "Did you receive a clear explanation for why the service you sought was not "
 "delivered to you?"
 msgstr "Avez-vous reçu une explication claire pourquoi le service que vous cherché n'a pas été livré pour vous?"
 
-#: services/models.py:938
+#: services/models.py:960
 msgid "No explanation"
 msgstr "aucune explication"
 
-#: services/models.py:939
+#: services/models.py:961
 msgid "Explanation was not clear"
 msgstr "Explication ne était pas clair"
 
-#: services/models.py:940
+#: services/models.py:962
 msgid "Explanation was not fair"
 msgstr "Explication ne était pas juste"
 
-#: services/models.py:941
+#: services/models.py:963
 msgid "Clear and appropriate explanation"
 msgstr "Une explication claire et appropriée"
 
-#: services/models.py:946
+#: services/models.py:968
 msgid ""
 "How long did you wait for the service to be delivered, after contacting the "
 "service provider?"
 msgstr "Combien de temps avez-vous attendu pour le service à livrer, après contact avec le fournisseur de services?"
 
-#: services/models.py:953
+#: services/models.py:975
 msgid "Less than 1 hour"
 msgstr "Moins de 1 heure"
 
-#: services/models.py:954
+#: services/models.py:976
 msgid "1-48 hours"
 msgstr "1-48 heures"
 
-#: services/models.py:955
+#: services/models.py:977
 msgid "3-7 days"
 msgstr "3-7 jours"
 
-#: services/models.py:956
+#: services/models.py:978
 msgid "1-2 weeks"
 msgstr "1-2 semaines"
 
-#: services/models.py:957
+#: services/models.py:979
 msgid "More than 2 weeks"
 msgstr "Plus de 2 semaines"
 
-#: services/models.py:961
+#: services/models.py:983
 msgid ""
 "How do you rate your satisfaction with the time that you waited for the "
 "service to be delivered (from 1 to 5, where 5 is the highest rating "
 "possible)?"
 msgstr "Comment évaluez-vous votre satisfaction avec le temps que vous avez attendu pour le service à fournir (1-5, 5 étant la meilleure note possible)?"
 
-#: services/models.py:974
+#: services/models.py:996
 msgid ""
 "Did you experience difficulties contacting the provider of the service you "
 "needed?"
 msgstr "Avez-vous éprouvé des difficultés à contacter le fournisseur du service que vous avez besoin?"
 
-#: services/models.py:978
+#: services/models.py:1000
 msgid "No"
 msgstr "No"
 
-#: services/models.py:979
+#: services/models.py:1001
 msgid "Did not know how to contact them"
 msgstr "Je ne savais pas comment les contacter"
 
-#: services/models.py:980
+#: services/models.py:1002
 msgid "Tried to contact them by phone but received no response"
 msgstr "Je ai essayé de les contacter par téléphone, mais n'a reçu aucune réponse"
 
-#: services/models.py:981
+#: services/models.py:1003
 msgid ""
 "Tried to contact them in person but received no response or did not find "
 "their office"
 msgstr "Je ai essayé de les contacter en personne, mais n'a reçu aucune réponse ou ne ont pas trouvé leur bureau"
 
-#: services/models.py:983
+#: services/models.py:1005
 msgid "Contacted them but response was unhelpful"
 msgstr "Contact avec eux mais la réponse était inutile"
 
-#: services/models.py:984
+#: services/models.py:1006
 msgid "Other"
 msgstr "Autre"
 
-#: services/models.py:989
+#: services/models.py:1011
 msgid "Other difficulties contacting the service provider"
 msgstr "Autres difficultés à contacter le fournisseur de services"
 
-#: services/models.py:994
+#: services/models.py:1016
 msgid ""
 "How would you rate your satisfaction with the staff of the organization that"
 " provided services to you, (from 1 to 5, where 5 is the highest rating "
 "possible)?"
 msgstr "Comment évaluez-vous votre satisfaction avec le personnel de l'organisation qui a fourni des services à vous, (1-5, 5 étant la meilleure note possible)?"
 
-#: services/models.py:1003
+#: services/models.py:1025
 msgid "Other comments"
 msgstr "autres commentaires"
 
-#: services/models.py:1008
+#: services/models.py:1030
 msgid "I want my feedback to be anonymous to the service provider"
 msgstr "Je veux que mon retour soit anonyme au fournisseur de services"
 
-#: services/models.py:1017
+#: services/models.py:1039
 msgid ""
 "Quality field is required if you answered 'Yes' to 'Was the service you "
 "sought delivered to you?'."
 msgstr "Domaine de la qualité est nécessaire si vous avez répondu «Oui» à «était le service Vous avez cherché livré pour vous? '."
 
-#: services/models.py:1021
+#: services/models.py:1043
 msgid ""
 "An answer is required to 'How long did you wait for the service to be "
 "delivered, after contacting the service provider?' if you answered 'Yes' to "
 "'Was the service you sought delivered to you?'."
 msgstr "Une réponse est requise pour \"Combien de temps avez-vous attendu pour le service à fournir, après contact avec le fournisseur de services? si vous avez répondu «Oui» à «était le service Vous avez cherché livré pour vous? '."
 
-#: services/models.py:1027
+#: services/models.py:1049
 msgid ""
 "An answer is required to 'How do you rate your satisfaction with the time "
 "that you waited for the service to be delivered?' if you answered 'Yes' to "
 "'Was the service you sought delivered to you?'."
 msgstr "Une réponse est requise pour «Comment évaluez-vous votre satisfaction avec le temps que vous avez attendu pour le service à livrer? si vous avez répondu «Oui» à «était le service Vous avez cherché livré pour vous? '."
 
-#: services/models.py:1035
+#: services/models.py:1057
 msgid ""
 "An answer is required to 'Did you receive a clear explanation for why the "
 "service you sought was not delivered to you?' if you answered 'No' to 'Was "
 "the service you sought delivered to you?'."
 msgstr "Une réponse est requise pour «Avez-vous reçu une explication claire pourquoi le service que vous cherché n'a pas été livré pour vous? 'si vous avez répondu «Non» à «était le service Vous avez cherché livré pour vous? '."
 
-#: services/models.py:1042
+#: services/models.py:1064
 msgid ""
 "An answer is required to 'Other difficulties contacting the service "
 "provider' if you answered 'Other' to 'Did you experience difficulties "

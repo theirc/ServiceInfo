@@ -7,15 +7,16 @@
   },
   "Menu": {
     "Menu-Toggle": "MENU",
+    "Home": "Home",
     "Login": "Login",
     "Logout": "Logout",
-    "Services": "Services",
+    "Services": "List of Services",
     "Add-Services": "Add Services",
   	"Service-Map": "Service Map",
     "Search": "Search",
   	"Provider-Registration": "Provider Registration",
     "Edit-Provider-Information": "Edit Provider Information",
-  	"Feedback-Tool": "Feedback",
+  	"Feedback-Tool": "Give Feedback",
   	"Change-Language": "Change Language"
   },
   "Global": {
@@ -59,8 +60,20 @@
       "Description": "Use the filtered search below to find the service that meets your needs."
     }
   },
+  "Feedback-Search": {
+    "Page-Head": {
+      "Title": "Give Feedback on Services",
+      "Description": "Please search for a service provider first to give your feedback, you must select the service provider and click on give feedback to begin."
+    }
+  },
   "Service-Detail": {
       "Give-Feedback": "Give feedback on this service"
+  },
+  "Feedback-Map": {
+    "Page-Head": {
+      "Title": "Give Feedback on Services",
+      "Description": "Please search for a service provider first to give your feedback, you must select the service provider and click on give feedback to begin."
+    }
   },
   "Service-Map": {
     "Page-Head": {

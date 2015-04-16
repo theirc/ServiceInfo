@@ -34,10 +34,12 @@ var SearchResultList = Backbone.View.extend({
 
 
 module.exports = Backbone.View.extend({
-    initialize: function(){
+    feedback: false,
+
+    initialize: function(params){
         var self = this;
         this.query = "";
-        // this.render();
+        self.feedback = params.hasOwnProperty('feedback');
     },
 
     render: function() {
@@ -46,12 +48,14 @@ module.exports = Backbone.View.extend({
 
         this.$el.html(template({
             query: hashtrack.getVar('q'),
+            feedback: this.feedback
         }));
         $('.no-search-results').hide();
 
         var $scv = this.$el.find('#search_controls');
         var SearchControlView = new search.SearchControls({
             $el: $scv,
+            feedback: this.feedback
         });
         SearchControlView.render();
 
