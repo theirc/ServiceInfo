@@ -9,6 +9,8 @@ var Backbone = require('backbone'),
     i18n = require('i18next-client');
 
 module.exports = Backbone.View.extend({
+    skip_initial_render: true,
+
     initialize: function(opts){
         var $el = this.$el,
             self = this;
@@ -29,7 +31,9 @@ module.exports = Backbone.View.extend({
             self.service = public_services.models[0];
             self.service.loadSubModels().then(function(){
                 self.service = self.service.data();
-                self.render();
+                i18n.init(function() {
+                    self.render();
+                })
             });
         }, function onerror(error) {
             messages.error(error);

@@ -41,6 +41,7 @@ hashtrack.onhashvarchange('n', function(_, value) {
 var SearchControls = Backbone.View.extend({
     initialize: function(opts) {
         this.$el = opts.$el;
+        this.feedback = opts.feedback;
         var self=this;
         language.ready(function() {
             self.render();
@@ -114,10 +115,10 @@ var SearchControls = Backbone.View.extend({
 
     events: {
         "click [name=map-toggle-list]": function() {
-            hashtrack.setPath('/search');
+            hashtrack.setPath(this.feedback ? '/feedback/list' : '/search');
         },
         "click [name=map-toggle-map]": function() {
-            hashtrack.setPath('/search/map');
+            hashtrack.setPath(this.feedback ? '/feedback/map' : '/search/map');
         },
         "change [value=name]": function(e) {
             this.sortByName();

@@ -8,6 +8,8 @@ var Backbone = require('backbone'),
 ;
 
 module.exports = Backbone.View.extend({
+    skip_initial_render: true,
+
     initialize: function(){
         var self = this;
         this.services = new models.Services();

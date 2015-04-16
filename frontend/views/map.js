@@ -9,8 +9,11 @@ var Backbone = require('backbone'),
 
 
 module.exports = Backbone.View.extend({
-    initialize: function(){
+    feedback: false,
+
+    initialize: function(params){
         var self = this;
+        this.feedback = params.hasOwnProperty('feedback');
         this.query = "";
         this.services = new service.PublicServices();
         this.servicetypes = new servicetype.ServiceTypes();
@@ -25,12 +28,14 @@ module.exports = Backbone.View.extend({
         this.$el.html(template({
             services: this.services,
             query: hashtrack.getVar('q'),
+            feedback: this.feedback
         }));
         $('.no-search-results').hide();
 
         var $scv = this.$el.find('#search_controls');
         var SearchControlView = new search.SearchControls({
             $el: $scv,
+            feedback: this.feedback
         });
         SearchControlView.render();
 

@@ -1061,6 +1061,14 @@ body.is-logged-out .when-logged-in {
     display: none;
 }
 
+body.is-not-staff .menu-item-staff {
+  display: none;
+}
+
+body.is-logged-out .menu-item-staff {
+  display: none;
+}
+
 #page-container {
 	width: 100%;
     display: block;
@@ -1197,11 +1205,48 @@ Login
 
 #login {
 	.main-content {
+        .row {
+            overflow-y: auto;
+        }
 		padding: 0 0 15px;
 		max-width: 800px;
 		.half {
 			margin-@{start}: 0; 
 		} 
+        .more-options {
+            background-color: #E5E5E5;
+            border: 1px solid #CCC;
+            padding: 15px;
+            margin-@{start}: 15px;
+            margin-@{end}: 15px;
+            .round-start;
+            .round-end;
+            margin-top: 20px;
+            overflow-y: auto;
+            @media (min-width: 640px) {
+                margin-@{start}: 30px;
+                margin-@{end}: 30px;
+            }
+            .page-title {
+                font-size: 150%;
+            }
+            .page-descr {
+                padding-bottom: 10px;
+            }
+            @media (max-width: 640px) {
+                button {
+                    margin-bottom: 18px;
+                }
+            }
+            @media (min-width: 1000px) {
+                .half:first-child {
+                    margin-@{end}: 2%;
+                }
+                .half:last-child {
+                    margin-@{start}: 4%;
+                }
+            }
+        }
 	}
 }
 

@@ -14,6 +14,7 @@ from django.contrib.sites.models import Site
 from django.test import LiveServerTestCase
 
 from selenium import webdriver
+from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.support import expected_conditions
@@ -94,6 +95,9 @@ class FrontEndTestCase(LiveServerTestCase):
             expected_conditions.text_to_be_present_in_element(
                 (By.CLASS_NAME, 'page-title'), title)
         )
+
+    def wait_for_landing_page(self, timeout=2):
+        return self.wait_for_element('landing-img', By.CLASS_NAME, timeout)
 
     def submit_form(self, form, data, button_class='submit'):
         for name, value in data.items():
@@ -201,7 +205,7 @@ class FrontEndTestCase(LiveServerTestCase):
             password='abc123', is_active=False, activation_key='1234567890')
         self.load_page_and_set_language()
         self.browser.get(self.express_url + '#/register/verify/1234567890')
-        self.wait_for_page_title_contains('Your account has been activated.', timeout=5)
+        self.wait_for_landing_page(timeout=5)
 
     def test_invalid_activation(self):
         """Show message for invalid activation code."""
@@ -222,7 +226,9 @@ class FrontEndTestCase(LiveServerTestCase):
         self.assertHashLocation('/search')
         form.find_element_by_name('filtered-search').send_keys(
             service.provider.name_en[:5])
-        form.find_element_by_name('map-toggle-list').click()
+        # Results are updated automatically as search characters are entered
+        # Wait a sec to make sure we have the final results
+        time.sleep(1)
         result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
         name = result.find_element_by_class_name('name')
         self.assertEqual(name.text, service.name_en)
@@ -239,7 +245,8 @@ class FrontEndTestCase(LiveServerTestCase):
         self.assertHashLocation('/search')
         Select(form.find_element_by_name('type')).select_by_visible_text(
             service.type.name_en)
-        form.find_element_by_name('map-toggle-list').click()
+        controls = self.wait_for_element('map-toggle', match=By.CLASS_NAME)
+        controls.find_element_by_name('map-toggle-list').click()
         result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
         name = result.find_element_by_class_name('name')
         self.assertEqual(name.text, service.name_en)
@@ -256,7 +263,15 @@ class FrontEndTestCase(LiveServerTestCase):
         self.assertHashLocation('/search')
         Select(form.find_element_by_name('type')).select_by_visible_text(
             service.type.name_fr)
-        form.find_element_by_name('map-toggle-list').click()
-        result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
-        name = result.find_element_by_class_name('name')
-        self.assertEqual(name.text, service.name_fr)
+        controls = self.wait_for_element('map-toggle', match=By.CLASS_NAME)
+        controls.find_element_by_name('map-toggle-list').click()
+        try:
+            result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
+            name = result.find_element_by_class_name('name')
+            name_text = name.text
+        except StaleElementReferenceException:
+            # Hit a race where we got a search element but then the page replaced it
+            result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
+            name = result.find_element_by_class_name('name')
+            name_text = name.text
+        self.assertEqual(name_text, service.name_fr)
