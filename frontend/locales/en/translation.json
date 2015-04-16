@@ -47,6 +47,8 @@
       "Email": "Email",
       "Password": "Password"
     },
+    "More-Options-Title": "Additional Options",
+    "More-Options": "If you need your verification email sent again, or to register to be a service provider click the corresponding button below.",
     "Form-Submit-Options": {
       "Submit": "Login",
       "Register": "Register to be a Service Provider here"
@@ -229,12 +231,10 @@
   },
   "Account-Activation": {
     "Pending": {
-        "Title": "Your account activation is pending...",
-        "Description": ""
+        "Title": "Your account activation is pending..."
     },
     "Success": {
-        "Title": "Your account has been activated.",
-        "Description": ""
+        "Title": "Your account has been activated."
     },
     "Failed": {
         "Title": "Your account activation Failed.",
@@ -247,6 +247,9 @@
     "Buttons": {
       "Resend-Email": "Resend Verification Email"
     }
+  },
+  "Account-Resend-Verification": {
+    "Title":" Resend Verification Email"
   },
   "Service-List": {
     "Page-Head": {

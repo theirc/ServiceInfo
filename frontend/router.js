@@ -12,6 +12,8 @@ var views = {
     "register-confirm": require('./views/provider-form-confirm'),
     "register-changed": require('./views/provider-form-changed'),
     "account-activate": require('./views/account-activate'),
+    "account-activation-failed": require('./views/account-activation-failed'),
+    "account-resend-verification": require('./views/account-resend-verification'),
     "service": require('./views/service-form'),
     "feedback-form": require('./views/feedback-form'),
     "feedback-confirm": require('./views/feedback-confirm'),
@@ -47,12 +49,14 @@ function loadPage(name, params) {
             }
             view = new views[name](opts);
             viewName = name;
-            i18n.init(function(){
-                view.render.apply(view, viewArguments);
-                view.$el.i18n({
-                    lng: config.get('forever.language'),
+            if (!view.skip_initial_render) {
+                i18n.init(function () {
+                    view.render.apply(view, viewArguments);
+                    view.$el.i18n({
+                        lng: config.get('forever.language'),
+                    });
                 });
-            });
+            }
             $('#menu-container').addClass("menu-closed");
             $('#menu-container').removeClass("menu-open");
         })
@@ -73,6 +77,8 @@ module.exports = Backbone.Router.extend({
         "register/changed": loadPage("register-changed"),
         "register/confirm": loadPage("register-confirm"),
         "register/verify/:key": loadPage("account-activate", ['key']),
+        "register/activation_failed": loadPage("account-activation-failed"),
+        "register/resend_verification": loadPage("account-resend-verification"),
         "manage/service": loadPage("service"),
         "manage/service/:id": loadPage("service", ['id']),
         "manage/service/cancel/:id": loadPage("service-cancel", ['id']),
