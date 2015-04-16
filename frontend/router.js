@@ -49,12 +49,14 @@ function loadPage(name, params) {
             }
             view = new views[name](opts);
             viewName = name;
-            i18n.init(function(){
-                view.render.apply(view, viewArguments);
-                view.$el.i18n({
-                    lng: config.get('forever.language'),
+            if (!view.skip_initial_render) {
+                i18n.init(function () {
+                    view.render.apply(view, viewArguments);
+                    view.$el.i18n({
+                        lng: config.get('forever.language'),
+                    });
                 });
-            });
+            }
             $('#menu-container').addClass("menu-closed");
             $('#menu-container').removeClass("menu-open");
         })
