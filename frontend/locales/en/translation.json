@@ -231,12 +231,10 @@
   },
   "Account-Activation": {
     "Pending": {
-        "Title": "Your account activation is pending...",
-        "Description": ""
+        "Title": "Your account activation is pending..."
     },
     "Success": {
-        "Title": "Your account has been activated.",
-        "Description": ""
+        "Title": "Your account has been activated."
     },
     "Failed": {
         "Title": "Your account activation Failed.",
@@ -251,8 +249,7 @@
     }
   },
   "Account-Resend-Verification": {
-    "Title":" Resend Verification Email",
-    "Description": ""
+    "Title":" Resend Verification Email"
   },
   "Service-List": {
     "Page-Head": {
