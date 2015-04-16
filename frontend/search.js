@@ -6,6 +6,7 @@ var Backbone = require('backbone');
 var config = require('./config');
 var messages = require('./messages');
 var i18n = require('i18next-client');
+var language = require('./language');
 
 
 var query = "";
@@ -42,14 +43,8 @@ var SearchControls = Backbone.View.extend({
         this.$el = opts.$el;
         this.feedback = opts.feedback;
         var self=this;
-
-        config.change("forever.language", function() {
-            var detached = opts.$el.closest('body').length === 0;
-            if (detached) {
-                config.unbind("forever.language", arguments.callee);
-            } else {
-                self.render();
-            }
+        language.ready(function() {
+            self.render();
         });
     },
     render: function() {
