@@ -15,6 +15,9 @@ msgstr "Hello, World"
 msgid "Menu##Menu-Toggle"
 msgstr "MENU"
 
+msgid "Menu##Home"
+msgstr "Home"
+
 msgid "Menu##Login"
 msgstr "Login"
 
@@ -96,6 +99,12 @@ msgstr "Email"
 msgid "Login-Form##Form##Password"
 msgstr "Password"
 
+msgid "Login-Form##More-Options-Title"
+msgstr "Additional Options"
+
+msgid "Login-Form##More-Options"
+msgstr "If you need your verification email sent again, or to register to be a service provider click the corresponding button below."
+
 msgid "Login-Form##Form-Submit-Options##Submit"
 msgstr "Login"
 
@@ -108,8 +117,20 @@ msgstr "Search For Services"
 msgid "Search-List##Page-Head##Description"
 msgstr "Use the filtered search below to find the service that meets your needs."
 
+msgid "Feedback-Search##Page-Head##Title"
+msgstr "Give Feedback on Services"
+
+msgid "Feedback-Search##Page-Head##Description"
+msgstr "Please search for a service provider first to give your feedback, you must select the service provider and click on give feedback to begin."
+
 msgid "Service-Detail##Give-Feedback"
 msgstr "Give feedback on this service"
+
+msgid "Feedback-Map##Page-Head##Title"
+msgstr "Give Feedback on Services"
+
+msgid "Feedback-Map##Page-Head##Description"
+msgstr "Please search for a service provider first to give your feedback, you must select the service provider and click on give feedback to begin."
 
 msgid "Service-Map##Page-Head##Page-Title##Title"
 msgstr "Search For Services"
@@ -372,14 +393,8 @@ msgstr "Resend Verification Email"
 msgid "Account-Activation##Pending##Title"
 msgstr "Your account activation is pending..."
 
-msgid "Account-Activation##Pending##Description"
-msgstr ""
-
 msgid "Account-Activation##Success##Title"
 msgstr "Your account has been activated."
-
-msgid "Account-Activation##Success##Description"
-msgstr ""
 
 msgid "Account-Activation##Failed##Title"
 msgstr "Your account activation Failed."
@@ -395,6 +410,9 @@ msgstr "We have sent a confirmation email to the email account you used during r
 
 msgid "Account-Activation##Buttons##Resend-Email"
 msgstr "Resend Verification Email"
+
+msgid "Account-Resend-Verification##Title"
+msgstr " Resend Verification Email"
 
 msgid "Service-List##Page-Head##Page-Title##Title"
 msgstr "Services List"
