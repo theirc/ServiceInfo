@@ -20,7 +20,8 @@ module.exports = Backbone.View.extend({
     },
 
     events: {
-        "click #id_submit": function() {
+        "click .form-btn-submit": function(e) {
+            e.preventDefault();
             var self = this;
             var $form = $('#resend-form');
             var data = forms.collect($form);
@@ -28,12 +29,14 @@ module.exports = Backbone.View.extend({
 
             data["base_activation_link"] = location.protocol + '//' + location.host + location.pathname + '?#/register/verify/';
 
+            // Note: the forms library will display any submission errors for us
             forms.submit($form, action, data).then(
                 function onsuccess() {
-                    window.location.hash = '';
-                    window.location.reload();
+                    // register/confirm will tell them we've sent a confirmation email
+                    window.location = '#/register/confirm';
                 },
                 function onerror(e) {
+                    console.error("ERROR submitting resend verification:");
                     console.error(e);
                 }
             )
