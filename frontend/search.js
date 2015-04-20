@@ -11,23 +11,13 @@ var language = require('./language');
 
 var query = "";
 var latlon = null;
-var searchTrigger = null;
-function delaySearchUpdate() {
-    if (searchTrigger) {
-        clearTimeout(searchTrigger);
-    }
-    searchTrigger = setTimeout(function() {
-        $('#page').trigger('search', query);
-    }, 1000);
-}
+
 hashtrack.onhashvarchange('q', function(_, value) {
     query = value;
-    delaySearchUpdate();
-})
+});
 hashtrack.onhashvarchange('t', function(_, value) {
     query = value;
-    delaySearchUpdate();
-})
+});
 hashtrack.onhashvarchange('n', function(_, value) {
     if (value) {
         var parts = value.split(',');
@@ -35,8 +25,7 @@ hashtrack.onhashvarchange('n', function(_, value) {
     } else {
         latlon = null;
     }
-    delaySearchUpdate();
-})
+});
 
 var SearchControls = Backbone.View.extend({
     initialize: function(opts) {
