@@ -2,6 +2,41 @@ Service Info
 
 Release Notes
 
+0.1.4 - Apr. 20, 2015
+---------------------
+
+* Fix for not everything changing language
+* Update translations
+* Fix Arabic font in select element
+* Improve resend verification link UI visibility
+* Feedback link goes to search page
+* Add Home link to side menu
+
+0.1.3 - Apr. 15, 2015
+---------------------
+
+* Add frontend tests
+* Add links to footer
+* Translation updates
+* Django 1.7.7
+* Fix admin link
+* Fix menu items appearing in the right context
+* Rearrange and reword menu items
+* Fix new service button
+* Give list/map buttons more contrast
+* Some wording changes
+* Fix add criterion button
+* Send feedback to JIRA
+* Add feedback pages
+* Add landing page
+* Better handling of geolocation "errors"
+* Allow pagination in the API
+* Limit input lengths
+* Clarify view and change operations on services list
+* Close menu when opening language picker
+* Hide sort options on map
+* Sort by name when not sorting by nearest
+
 0.1.2 - Mar. 27, 2015
 ---------------------
 

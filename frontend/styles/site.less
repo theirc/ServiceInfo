@@ -383,7 +383,7 @@ li {
 		width: 32.333%;
 		padding: 0 1%;
 		display: inline-block;
-		@media (min-width: 640px) {
+		@media (min-width: 1000px) {
 			width: 33.333%;
 		}
 
@@ -562,8 +562,8 @@ li {
 }
 
 .primary-button:hover, .primary-button:visited, .primary-button:active {
-    background-color: #33A069;
-    border: 1px solid #33A069;
+    background-color: #288355;
+    border: 1px solid #288355;
     cursor: pointer;
     color: #fff;
 }
@@ -839,7 +839,8 @@ label {
         float: @end;
     }
 }
-.error {
+.error,
+.no-search-results {
     color: darkred;
 }
 
@@ -1070,6 +1071,14 @@ body.is-logged-out .when-logged-in {
     display: none;
 }
 
+body.is-not-staff .menu-item-staff {
+  display: none;
+}
+
+body.is-logged-out .menu-item-staff {
+  display: none;
+}
+
 #page-container {
 	width: 100%;
     display: block;
@@ -1206,11 +1215,48 @@ Login
 
 #login {
 	.main-content {
+        .row {
+            overflow-y: auto;
+        }
 		padding: 0 0 15px;
 		max-width: 800px;
 		.half {
 			margin-@{start}: 0; 
 		} 
+        .more-options {
+            background-color: #E5E5E5;
+            border: 1px solid #CCC;
+            padding: 15px;
+            margin-@{start}: 15px;
+            margin-@{end}: 15px;
+            .round-start;
+            .round-end;
+            margin-top: 20px;
+            overflow-y: auto;
+            @media (min-width: 640px) {
+                margin-@{start}: 30px;
+                margin-@{end}: 30px;
+            }
+            .page-title {
+                font-size: 150%;
+            }
+            .page-descr {
+                padding-bottom: 10px;
+            }
+            @media (max-width: 640px) {
+                button {
+                    margin-bottom: 18px;
+                }
+            }
+            @media (min-width: 1000px) {
+                .half:first-child {
+                    margin-@{end}: 2%;
+                }
+                .half:last-child {
+                    margin-@{start}: 4%;
+                }
+            }
+        }
 	}
 }
 
@@ -1452,6 +1498,12 @@ div#search {
 		    }
 		}
 	}
+	.container > .no-search-results {
+		padding: 30px;
+		padding-top: 20px;
+		font-size: 110%;
+		font-weight: bold;
+	}
 }
 
 div#search-filter {
@@ -1665,8 +1717,8 @@ Services
 }
 .search-map {
     .map-toggle .half:first-child button {
-        background-color: #33A069;
-        border: 1px solid #33A069;
+        background-color: #288355;
+        border: 1px solid #288355;
     }
     #search-filter {
         visibility: hidden;
@@ -1674,8 +1726,8 @@ Services
 }
 .search-list {
     .map-toggle .half:last-child button {
-        background-color: #33A069;
-        border: 1px solid #33A069;
+        background-color: #288355;
+        border: 1px solid #288355;
     }
 }
 
