@@ -6,6 +6,7 @@ var Backbone = require('backbone');
 var config = require('./config');
 var messages = require('./messages');
 var i18n = require('i18next-client');
+var language = require('./language');
 
 
 var query = "";
@@ -40,15 +41,10 @@ hashtrack.onhashvarchange('n', function(_, value) {
 var SearchControls = Backbone.View.extend({
     initialize: function(opts) {
         this.$el = opts.$el;
+        this.feedback = opts.feedback;
         var self=this;
-
-        config.change("forever.language", function() {
-            var detached = opts.$el.closest('body').length === 0;
-            if (detached) {
-                config.unbind("forever.language", arguments.callee);
-            } else {
-                self.render();
-            }
+        language.ready(function() {
+            self.render();
         });
     },
     render: function() {
@@ -119,10 +115,10 @@ var SearchControls = Backbone.View.extend({
 
     events: {
         "click [name=map-toggle-list]": function() {
-            hashtrack.setPath('/search');
+            hashtrack.setPath(this.feedback ? '/feedback/list' : '/search');
         },
         "click [name=map-toggle-map]": function() {
-            hashtrack.setPath('/search/map');
+            hashtrack.setPath(this.feedback ? '/feedback/map' : '/search/map');
         },
         "change [value=name]": function(e) {
             this.sortByName();

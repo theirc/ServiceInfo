@@ -7,6 +7,7 @@
   },
   "Menu": {
     "Menu-Toggle": "MENU",
+    "Home": "Home",
     "Login": "Login",
     "Logout": "Logout",
     "Services": "List of Services",
@@ -46,6 +47,8 @@
       "Email": "Email",
       "Password": "Password"
     },
+    "More-Options-Title": "Additional Options",
+    "More-Options": "If you need your verification email sent again, or to register to be a service provider click the corresponding button below.",
     "Form-Submit-Options": {
       "Submit": "Login",
       "Register": "Register to be a Service Provider here"
@@ -57,8 +60,20 @@
       "Description": "Use the filtered search below to find the service that meets your needs."
     }
   },
+  "Feedback-Search": {
+    "Page-Head": {
+      "Title": "Give Feedback on Services",
+      "Description": "Please search for a service provider first to give your feedback, you must select the service provider and click on give feedback to begin."
+    }
+  },
   "Service-Detail": {
       "Give-Feedback": "Give feedback on this service"
+  },
+  "Feedback-Map": {
+    "Page-Head": {
+      "Title": "Give Feedback on Services",
+      "Description": "Please search for a service provider first to give your feedback, you must select the service provider and click on give feedback to begin."
+    }
   },
   "Service-Map": {
     "Page-Head": {
@@ -216,12 +231,10 @@
   },
   "Account-Activation": {
     "Pending": {
-        "Title": "Your account activation is pending...",
-        "Description": ""
+        "Title": "Your account activation is pending..."
     },
     "Success": {
-        "Title": "Your account has been activated.",
-        "Description": ""
+        "Title": "Your account has been activated."
     },
     "Failed": {
         "Title": "Your account activation Failed.",
@@ -234,6 +247,9 @@
     "Buttons": {
       "Resend-Email": "Resend Verification Email"
     }
+  },
+  "Account-Resend-Verification": {
+    "Title":" Resend Verification Email"
   },
   "Service-List": {
     "Page-Head": {

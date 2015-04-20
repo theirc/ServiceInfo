@@ -23,6 +23,8 @@ function remove_empty_fields(data) {
 }
 
 module.exports = Backbone.View.extend({
+    skip_initial_render: true,
+
     initialize: function(opts){
         var self = this;
         self.serviceareas = [];
@@ -42,8 +44,9 @@ module.exports = Backbone.View.extend({
             if (opts.id) {
                 self.update_of = current_service;
             }
-
-            self.render();
+            i18n.init(function() {
+                self.render();
+            })
         }, function onerror(e) {
             messages.error(e);
         });

@@ -36,7 +36,7 @@ module.exports = Backbone.View.extend({
     },
 
     events: {
-        "click button": function(ev) {
+        "click button#id_login": function(ev) {
             messages.clear();
             var $el = this.$el;
             ev.preventDefault();
