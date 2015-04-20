@@ -1500,14 +1500,18 @@ div#search-filter {
 Services
 */
 #services {
-	max-width: 800px;
+	max-width: 100%;
 	.table {
+        max-width: 800px;
 		transform: none;
 		margin: 0 30px 0;
 		@media (max-width: 639px) {
 			width: 94%;
 			margin: 0 3% 0;
 		}
+        td {
+            overflow-x: auto;
+        }
 	}
 	.third {
 		padding: 0;
