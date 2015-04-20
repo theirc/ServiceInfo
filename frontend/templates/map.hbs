@@ -2,8 +2,13 @@
 <div class="page-head">
     <div class="container">
         <div class="row">
-            <div class="page-title" data-i18n="Service-Map.Page-Head.Page-Title.Title"></div>
-            <div class="page-descr" data-i18n="Service-Map.Page-Head.Page-Description.Page-Description"></div>
+            {{#if feedback }}
+                <div class="page-title" data-i18n="Feedback-Map.Page-Head.Title"></div>
+                <div class="page-descr" data-i18n="Feedback-Map.Page-Head.Description"></div>
+            {{else}}
+                <div class="page-title" data-i18n="Service-Map.Page-Head.Page-Title.Title"></div>
+                <div class="page-descr" data-i18n="Service-Map.Page-Head.Page-Description.Page-Description"></div>
+            {{/if}}
         </div>
     </div>
 </div>

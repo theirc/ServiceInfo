@@ -127,14 +127,6 @@ var forms = module.exports = {
         }
 
         resetOptions();
-        config.change("forever.language", function() {
-            var detached = $form.closest('html').length === 0;
-            if (detached) {
-                config.unbind("forever.language", arguments.callee);
-            } else {
-                resetOptions();
-            }
-        });
     },
 
     show_errors_on_form: function($form, e) {

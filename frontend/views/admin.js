@@ -1,6 +1,6 @@
 /* View to go to the Django admin */
 var Backbone = require('backbone'),
-    config = require('../config')
+    api = require('../api')
 ;
 
 module.exports = Backbone.View.extend({
@@ -9,6 +9,6 @@ module.exports = Backbone.View.extend({
     },
 
     render: function() {
-        window.location = config.get('api_location') + 'admin/';
+        window.location = api.getAPIPrefix() + 'admin/';
     }
 })
