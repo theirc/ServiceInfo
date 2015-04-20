@@ -126,7 +126,19 @@ var SearchControls = Backbone.View.extend({
         "change [value=near]": function(e) {
             this.findNearMe();
         },
-    },
+        "input input.query": function(e) {
+            var query = $(e.target).val();
+            hashtrack.setVar('q', query);
+        },
+        "change .query-service-type": function(e) {
+            hashtrack.setVar('t', $(e.target).val());
+        },
+        "input keyup": function(e) {
+            if (e.keyCode === 13) {
+                return false;
+            }
+        }
+    }
 });
 
 module.exports = {

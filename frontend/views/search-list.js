@@ -84,14 +84,6 @@ module.exports = Backbone.View.extend({
     },
 
     events: {
-        // "click button[name=search]": function(e) {
-        //     var self = this;
-        //     hashtrack.setVar('q', self.$el.find('.query').val());
-        //     hashtrack.setVar('t', self.$el.find('.query-service-type').val());
-        //     search.refetchServices().then(function(){
-        //         self.updateResults();
-        //     })
-        // },
         "search": function(_, query) {
             $('.spinner').show();
             var self = this;
@@ -99,18 +91,6 @@ module.exports = Backbone.View.extend({
                 self.updateResults();
                 $('.spinner').hide();
             })
-        },
-        "input input.query": function(e) {
-            var query = $(e.target).val();
-            hashtrack.setVar('q', query);
-        },
-        "change .query-service-type": function(e) {
-            hashtrack.setVar('t', $(e.target).val());
-        },
-        "input keyup": function(e) {
-            if (e.keyCode === 13) {
-                return false;
-            }
-        },
+        }
     }
 })
