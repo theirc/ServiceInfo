@@ -2,6 +2,16 @@ Service Info
 
 Release Notes
 
+0.1.4 - Apr. 20, 2015
+---------------------
+
+* Fix for not everything changing language
+* Update translations
+* Fix Arabic font in select element
+* Improve resend verification link UI visibility
+* Feedback link goes to search page
+* Add Home link to side menu
+
 0.1.3 - Apr. 15, 2015
 ---------------------
 
