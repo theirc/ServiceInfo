@@ -144,6 +144,16 @@ li {
 	margin: 0;
 }
 
+select {
+    height: 46px;
+	box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
+	& when (@direction=rtl) {
+		background-position: right 95% top 50%;
+	}
+}
+
 .sr-only {
     position: absolute;
     width: 1px;
@@ -495,6 +505,11 @@ li {
 	@media (min-width: 767px) {
 		padding-bottom: 0;
 	}
+}
+
+.page-title,
+.page-descr {
+    max-width: 800px;
 }
 
 /*
@@ -1453,8 +1468,7 @@ div#search {
 		button.primary-button.group-submit.search {
 			float: @start;
 		}
-		.query-field-container > input,
-		select#id_type.form-control {
+		.query-field-container > input {
             height: 46px;
 			box-sizing: border-box;
 		    background-repeat: no-repeat;
@@ -2254,6 +2268,113 @@ Footer
     @media only screen and (min-width: 640px) {
         top: 0;
         vertical-align: middle;
+    }
+}
+
+/*
+Feedback Form
+Feedback Confirm
+Feedback Help
+*/
+#feedback-form,
+#feedback-confirm,
+#feedback-help {
+	.main-content {
+		padding-@{start}: 0;
+	}
+}
+
+#feedback-form {
+    p.what_service {
+        margin: 10px 0 5px;
+    }
+    fieldset {
+        padding: 10px 0 0;
+        @media (max-width: 640px) {
+            .row {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+    }
+    .name {
+        color: #3cb879;
+        font-size: 150%;
+        font-weight: 700;
+    }
+    .checkbox {
+        padding-bottom: 14px;
+    }
+    label>input {
+        margin-@{end}: 14px;
+    }
+    .ifdelivered .form-group {
+        label {
+            margin-@{end}: 14px;
+        }
+        input {
+            margin-top: 10px;
+            margin-@{end}: 5px;
+        }
+    }
+    .ifnotdelivered .form-group select {
+        margin: 10px 0;
+
+    }
+    .ifdelivered,
+    .row.ifnotdelivered {
+        background-color: #E5E5E5;
+        border: 1px solid #CCC;
+        padding: 15px;
+        margin-@{start}: 0;
+        margin-@{end}: 0;
+        .round-start;
+        .round-end;
+        margin-top: 30px;
+        margin-bottom: 14px;
+        overflow-y: auto;
+        @media (max-width: 640px) {
+            margin-top: 0;
+        }
+        .row {
+            padding: 0;
+            @media (max-width: 640px) {
+                .row {
+                    padding: 15px 10px
+                }
+            }
+            .half>.form-group {
+                @media (max-width:640px) {
+                    margin-bottom: 14px;
+                }
+            }
+        }
+    }
+    .main-content {
+        overflow-y: auto;
+        @media (max-width: 640px) {
+            padding: 0 0 30px;
+        }
+    }
+    @media (min-width: 640px) {
+        .submit-form {
+            padding: 0;
+            .half:nth-child(2) {
+                margin-@{end}: 4%;
+            }
+            .half:nth-child(3) {
+                margin-@{start}: 0;
+            }
+        }
+    }
+    textarea#id_other_difficulties {
+        margin-top: 10px;
+    }
+    .control-label {
+        display: block;
+    }
+    label.yes-no {
+            float: @start;
     }
 }
 
