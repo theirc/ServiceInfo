@@ -116,7 +116,7 @@ module.exports = Backbone.View.extend({
                 data["base_activation_link"] = location.protocol + '//' + location.host + location.pathname + '?#/register/verify/';
 
                 forms.submit($el, 'api/providers/create_provider/', data, errors).then(
-                    function success(data) {
+                    function success() {
                         $submit.removeAttr('disabled');
                         config.set('temp.email', data.email);
                         window.location = '#/register/confirm';
