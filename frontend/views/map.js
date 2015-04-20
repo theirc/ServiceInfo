@@ -102,16 +102,5 @@ module.exports = Backbone.View.extend({
         if (zoom > 10) {
             self.map.setZoom(10);
         }
-    },
-
-    events: {
-        "search": function(_, query) {
-            $('.spinner').show();
-            var self = this;
-            search.refetchServices().then(function(){
-                self.updateResults();
-                $('.spinner').hide();
-            })
-        }
     }
-})
+});

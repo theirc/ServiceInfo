@@ -62,35 +62,5 @@ module.exports = Backbone.View.extend({
         this.resultView.render();
 
         $el.i18n();
-    },
-
-    updateResults: function() {
-        var self = this;
-        var services = search.services.data();
-
-        if (services.length === 0) {
-            $('.no-search-results').show();
-            $('.search-result-list').hide();
-            return;
-        }
-        $('.search-result-list').show();
-        $('.no-search-results').hide();
-
-        $.each(services, function() {
-            var service = this;
-        });
-
-        self.resultView.render();
-    },
-
-    events: {
-        "search": function(_, query) {
-            $('.spinner').show();
-            var self = this;
-            search.refetchServices().then(function(){
-                self.updateResults();
-                $('.spinner').hide();
-            })
-        }
     }
-})
+});
