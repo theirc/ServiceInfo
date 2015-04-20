@@ -79,8 +79,7 @@
                 {{!-- anonymous feedback? --}}
                 <div class="half checkbox">
                   <label class="control-label"><span data-i18n="Feedback-Form.anonymous.label"></span><span class=error></span></label>
-                    <br/>  {{!-- HACK HACK --}}
-                  <label class="control-label">
+                  <label class="control-label yes-no">
                     <span data-i18n="Feedback-Form.anonymous.yes"></span>
                     <input type="radio" name="anonymous" class="form-control" value="1">
                   </label>
@@ -92,8 +91,7 @@
             {{!-- was service delivered? --}}
                 <div class="half checkbox">
                   <label class="control-label"><span data-i18n="Feedback-Form.Delivered.label"></span><span class=error></span></label>
-                  <br/>  {{!-- HACK HACK --}}
-                  <label for="id_delivered" class="control-label">
+                  <label for="id_delivered" class="control-label yes-no">
                     <span data-i18n="Feedback-Form.Delivered.yes"></span>
                     <input type="radio" name="delivered" class="form-control" value="1">
                   </label>
@@ -181,6 +179,7 @@
                           <option value="unfair" data-i18n="Feedback-Form.non_delivery_explanation.unfair"></option>
                           <option value="yes" data-i18n="Feedback-Form.non_delivery_explanation.yes"></option>
                       </select>
+                      <label for="id_extra_comments" class="control-label"><span  data-i18n="Feedback-Form.extra_comments"></span><span class="error"></span></label>
                       <textarea id=id_extra_comments rows="4" name="extra_comments" class="form-control"></textarea>
                     </div>
                   </div>
