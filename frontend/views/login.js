@@ -10,12 +10,10 @@ var Backbone = require('backbone'),
 function toggleLoginMenuItem() {
     $('.menu-item-login, .menu-item-logout, .menu-item-staff').hide();
     if (config.get('forever.authToken')) {
-        $('.menu-item-login').hide();
-        $('.menu-item-logout').show();
+        $('body').addClass("is-logged-in").removeClass("is-logged-out");
         $('.menu-item-staff').toggle(config.get('forever.isStaff'));
     } else {
-        $('.menu-item-login').show();
-        $('.menu-item-logout').hide();
+        $('body').addClass("is-logged-out").removeClass("is-logged-in");
         $('.menu-item-staff').hide();
     }
 };
