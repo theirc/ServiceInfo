@@ -42,7 +42,7 @@ module.exports = Backbone.View.extend({
         function initialize() {
             var mapOptions = {
                 center: { lat: 33.8869, lng: 35.5131},
-                zoom: 8
+                zoom: 10
             };
             self.map = new google.maps.Map(document.getElementById('map_canvas'),
                 mapOptions);
@@ -60,7 +60,6 @@ module.exports = Backbone.View.extend({
             this.setMap(null);
         });
         self.markers = [];
-        var bounds = new google.maps.LatLngBounds();
         var services = search.services.data();
         if (services.length === 0) {
             $('.no-search-results').show();
@@ -77,7 +76,6 @@ module.exports = Backbone.View.extend({
             var long_lat_str = /(-?\d+\.\d+) (-?\d+\.\d+)/.exec(this.location);
             if (long_lat_str) {
                 var myLatlng = new google.maps.LatLng(long_lat_str[2], long_lat_str[1]);
-                bounds.extend(myLatlng);
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     title: this.name,
@@ -97,10 +95,5 @@ module.exports = Backbone.View.extend({
                 })
             }
         });
-        self.map.fitBounds(bounds);
-        var zoom = self.map.getZoom();
-        if (zoom > 10) {
-            self.map.setZoom(10);
-        }
     }
 });
