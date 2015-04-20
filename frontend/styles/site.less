@@ -835,9 +835,27 @@ label {
     margin-bottom: 5px;
 
     .error {
+        &:empty {
+            display: none;
+        }
         float: @end;
+        background-color: #FAC6BD;
+        padding: 4px 6px;
+        margin-@{end}: 10px;
+        .round-top-start;
+        .round-top-end;
     }
 }
+.non-field-errors {
+    &:empty {
+        display: none;
+    }
+    background-color: #FAC6BD;
+    padding: 8px 10px;
+    .round-start;
+    .round-end;
+}
+
 .error,
 .no-search-results {
     color: darkred;
@@ -1210,7 +1228,12 @@ Login
 		max-width: 800px;
 		.half {
 			margin-@{start}: 0; 
-		} 
+		}
+        .row {
+            .row {
+                padding: 10px 0;
+            }
+        }
 	}
 }
 
