@@ -158,6 +158,7 @@ module.exports = {
         var params = {
             search: query,
             type_numbers: type,
+            limit: 25
         };
         if (latlon) {
             params.closest = latlon.lat + ',' + latlon.lon;
