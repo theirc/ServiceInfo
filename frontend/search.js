@@ -128,7 +128,12 @@ var SearchControls = Backbone.View.extend({
         },
         "input input.query": function(e) {
             var query = $(e.target).val();
-            hashtrack.setVar('q', query);
+            if (this.timeout) {
+                clearTimeout(this.timeout);
+            }
+            this.timeout = setTimeout(function () {
+                hashtrack.setVar('q', query);
+            }, 500);
         },
         "change .query-service-type": function(e) {
             hashtrack.setVar('t', $(e.target).val());
