@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-04-15 12:42+0000\n"
+"PO-Revision-Date: 2015-04-17 06:54+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,9 @@ msgstr "Bonjour Le Monde"
 
 msgid "Menu##Menu-Toggle"
 msgstr "Menu"
+
+msgid "Menu##Home"
+msgstr "Principale"
 
 msgid "Menu##Login"
 msgstr "Login"
@@ -103,6 +106,12 @@ msgstr "Email"
 msgid "Login-Form##Form##Password"
 msgstr "Mot de passe"
 
+msgid "Login-Form##More-Options-Title"
+msgstr "options supplémentaires"
+
+msgid "Login-Form##More-Options"
+msgstr "Si vous avez besoin de votre email de vérification envoyé à nouveau, ou pour vous inscrire pour être un fournisseur de services, cliquez sur le bouton correspondant ci-dessous."
+
 msgid "Login-Form##Form-Submit-Options##Submit"
 msgstr "Entrer"
 
@@ -115,8 +124,20 @@ msgstr "Recherche de services"
 msgid "Search-List##Page-Head##Description"
 msgstr "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
 
+msgid "Feedback-Search##Page-Head##Title"
+msgstr "Envoyer des commentaires sur les services"
+
+msgid "Feedback-Search##Page-Head##Description"
+msgstr "Se il vous plaît chercher un fournisseur de service premier à donner votre feedback, vous devez sélectionner le fournisseur de services et cliquez sur la rétroaction de donner pour commencer."
+
 msgid "Service-Detail##Give-Feedback"
 msgstr "Améliorer les informations sur ce service"
+
+msgid "Feedback-Map##Page-Head##Title"
+msgstr "Envoyer des commentaires sur les services"
+
+msgid "Feedback-Map##Page-Head##Description"
+msgstr "Se il vous plaît chercher un fournisseur de service premier à donner votre feedback, vous devez sélectionner le fournisseur de services et cliquez sur la rétroaction de donner pour commencer."
 
 msgid "Service-Map##Page-Head##Page-Title##Title"
 msgstr "Recherche de services"
@@ -393,14 +414,8 @@ msgstr "Vérification Renvoyer Email"
 msgid "Account-Activation##Pending##Title"
 msgstr "L'activation de votre compte est en attente ..."
 
-msgid "Account-Activation##Pending##Description"
-msgstr "Compte-activation ## en attente ## Description"
-
 msgid "Account-Activation##Success##Title"
 msgstr "Votre compte a été activé."
-
-msgid "Account-Activation##Success##Description"
-msgstr "Compte-Activation ##  réussite ## Description "
 
 msgid "Account-Activation##Failed##Title"
 msgstr "L'activation de votre compte a échoué."
@@ -415,6 +430,9 @@ msgid "Account-Activation##Resent##Description"
 msgstr "Nous avons envoyé un e-mail de confirmation sur le compte e-mail utilisée lors de votre inscription. Cliquez sur le lien de confirmation dans l'e-mail pour terminer le processus d'inscription."
 
 msgid "Account-Activation##Buttons##Resend-Email"
+msgstr "Vérification Renvoyer Email"
+
+msgid "Account-Resend-Verification##Title"
 msgstr "Vérification Renvoyer Email"
 
 msgid "Service-List##Page-Head##Page-Title##Title"
