@@ -14,7 +14,6 @@ from django.contrib.sites.models import Site
 from django.test import LiveServerTestCase
 
 from selenium import webdriver
-from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.support import expected_conditions
@@ -24,7 +23,7 @@ from services.models import Service
 from services.tests.factories import ProviderTypeFactory, ServiceFactory
 
 
-class FrontEndTestCase(LiveServerTestCase):
+class ServiceInfoFrontendTestCase(LiveServerTestCase):
     """End to end testing with selenium and express server."""
 
     @classmethod
@@ -108,6 +107,9 @@ class FrontEndTestCase(LiveServerTestCase):
             else:
                 element.send_keys(value)
         form.find_element_by_class_name(button_class).click()
+
+
+class FrontEndTestCase(ServiceInfoFrontendTestCase):
 
     def test_get_homepage(self):
         """Load the homepage."""
@@ -232,46 +234,3 @@ class FrontEndTestCase(LiveServerTestCase):
         result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
         name = result.find_element_by_class_name('name')
         self.assertEqual(name.text, service.name_en)
-
-    def test_filtered_list_search(self):
-        """Find services by type."""
-
-        service = ServiceFactory(status=Service.STATUS_CURRENT)
-        self.load_page_and_set_language()
-        menu = self.wait_for_element('menu')
-        search = menu.find_elements_by_link_text('Search')[0]
-        search.click()
-        form = self.wait_for_element('search_controls')
-        self.assertHashLocation('/search')
-        Select(form.find_element_by_name('type')).select_by_visible_text(
-            service.type.name_en)
-        controls = self.wait_for_element('map-toggle', match=By.CLASS_NAME)
-        controls.find_element_by_name('map-toggle-list').click()
-        result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
-        name = result.find_element_by_class_name('name')
-        self.assertEqual(name.text, service.name_en)
-
-    def test_localized_search(self):
-        """Search options and results should be localized."""
-
-        service = ServiceFactory(status=Service.STATUS_CURRENT)
-        self.load_page_and_set_language('fr')
-        menu = self.wait_for_element('menu')
-        search = menu.find_elements_by_link_text('Recherche')[0]
-        search.click()
-        form = self.wait_for_element('search_controls')
-        self.assertHashLocation('/search')
-        Select(form.find_element_by_name('type')).select_by_visible_text(
-            service.type.name_fr)
-        controls = self.wait_for_element('map-toggle', match=By.CLASS_NAME)
-        controls.find_element_by_name('map-toggle-list').click()
-        try:
-            result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
-            name = result.find_element_by_class_name('name')
-            name_text = name.text
-        except StaleElementReferenceException:
-            # Hit a race where we got a search element but then the page replaced it
-            result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
-            name = result.find_element_by_class_name('name')
-            name_text = name.text
-        self.assertEqual(name_text, service.name_fr)
