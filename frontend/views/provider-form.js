@@ -118,6 +118,7 @@ module.exports = Backbone.View.extend({
                 forms.submit($el, 'api/providers/create_provider/', data, errors).then(
                     function success(data) {
                         $submit.removeAttr('disabled');
+                        config.set('temp.email', data.email);
                         window.location = '#/register/confirm';
                     },
                     function error(errors) {
