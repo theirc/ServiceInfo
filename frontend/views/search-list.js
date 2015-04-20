@@ -48,11 +48,11 @@ module.exports = Backbone.View.extend({
         $('.no-search-results').hide();
 
         var $scv = this.$el.find('#search_controls');
-        var SearchControlView = new search.SearchControls({
+        this.SearchControlView = new search.SearchControls({
             $el: $scv,
             feedback: this.feedback
         });
-        SearchControlView.render();
+        this.SearchControlView.render();
 
         var $results = $('.search-result-list');
         this.resultView = new SearchResultList({
@@ -91,6 +91,16 @@ module.exports = Backbone.View.extend({
                 self.updateResults();
                 $('.spinner').hide();
             })
+        }
+    },
+
+    undelegateEvents: function () {
+        Backbone.View.prototype.undelegateEvents.apply(this, arguments);
+        if (this.SearchControlView) {
+            this.SearchControlView.undelegateEvents();
+        }
+        if (this.resultView) {
+            this.resultView.undelegateEvents();
         }
     }
 })
