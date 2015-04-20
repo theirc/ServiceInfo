@@ -1,5 +1,6 @@
 """Integration tests for the single page front end."""
 
+import os
 import shlex
 import shutil
 import subprocess
@@ -18,10 +19,11 @@ from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.support import expected_conditions
 
 from email_user.tests.factories import EmailUserFactory
-from services.tests.factories import ProviderTypeFactory
+from services.models import Service
+from services.tests.factories import ProviderTypeFactory, ServiceFactory
 
 
-class FrontEndTestCase(LiveServerTestCase):
+class ServiceInfoFrontendTestCase(LiveServerTestCase):
     """End to end testing with selenium and express server."""
 
     @classmethod
@@ -32,22 +34,20 @@ class FrontEndTestCase(LiveServerTestCase):
         cls.express = subprocess.Popen(
             shlex.split('gulp startExpress --config test --port 9000 --fast'),
             cwd=settings.PROJECT_ROOT, stdout=cls.log_file, stderr=cls.log_file)
-        cls.browser = webdriver.PhantomJS()
-        # Set desktop size
-        cls.browser.set_window_size(1280, 600)
         # Wait for server to be available
         time.sleep(1.5)
         super().setUpClass()
 
     @classmethod
     def tearDownClass(cls):
-        cls.browser.quit()
         cls.express.terminate()
         super().tearDownClass()
         shutil.rmtree(cls.log_dir)
 
     def setUp(self):
-        self.clear_storage()
+        self.browser = webdriver.PhantomJS()
+        # Set desktop size
+        self.browser.set_window_size(1280, 600)
         # Django prior to 1.8 doesn't create the default site with the correct pk
         # See https://code.djangoproject.com/ticket/23945
         defaults = {
@@ -55,6 +55,10 @@ class FrontEndTestCase(LiveServerTestCase):
             'name': 'example.com',
         }
         Site.objects.get_or_create(pk=settings.SITE_ID, defaults=defaults)
+
+    def tearDown(self):
+        self.browser.quit()
+        self.clear_storage()
 
     def assertHashLocation(self, expected):
         """Assert current URL hash."""
@@ -64,15 +68,19 @@ class FrontEndTestCase(LiveServerTestCase):
 
     def clear_storage(self):
         """Clear all browser local storage."""
+        # PhantomJS does not respect the --local-storage-path option
+        # See https://github.com/ariya/phantomjs/issues/11596
+        # Files are stored in ~/.qws/share/data/Ofi Labs/PhantomJS
+        storage_path = os.path.expanduser('~/.qws/share/data/Ofi Labs/PhantomJS')
+        full_path = os.path.join(storage_path, 'http_localhost_9000.localstorage')
+        if os.path.exists(full_path):
+            os.remove(full_path)
 
-        self.browser.get(self.express_url)
-        self.browser.execute_script('window.localStorage.clear();')
-
-    def set_language(self, language='en'):
+    def load_page_and_set_language(self, language='en'):
         """Helper to set language choice in the browser."""
 
         self.browser.get(self.express_url)
-        form = self.browser.find_element_by_id('language-toggle')
+        form = self.wait_for_element('language-toggle')
         button = form.find_element_by_css_selector('[data-lang="%s"]' % language)
         button.click()
 
@@ -87,6 +95,9 @@ class FrontEndTestCase(LiveServerTestCase):
                 (By.CLASS_NAME, 'page-title'), title)
         )
 
+    def wait_for_landing_page(self, timeout=2):
+        return self.wait_for_element('landing-img', By.CLASS_NAME, timeout)
+
     def submit_form(self, form, data, button_class='submit'):
         for name, value in data.items():
             element = form.find_element_by_name(name)
@@ -97,17 +108,20 @@ class FrontEndTestCase(LiveServerTestCase):
                 element.send_keys(value)
         form.find_element_by_class_name(button_class).click()
 
+
+class FrontEndTestCase(ServiceInfoFrontendTestCase):
+
     def test_get_homepage(self):
         """Load the homepage."""
 
         self.browser.get(self.express_url)
-        form = self.browser.find_element_by_id('language-toggle')
+        form = self.wait_for_element('language-toggle')
         self.assertTrue(form.is_displayed(), 'Language form should be visible.')
 
     def test_select_language(self):
         """Select user language."""
 
-        self.set_language('fr')
+        self.load_page_and_set_language('fr')
         menu = self.wait_for_element('menu')
         language = menu.find_element_by_class_name('menu-item-language')
         self.assertEqual(language.text, 'Changer de langue', 'Menu should now be French')
@@ -116,7 +130,7 @@ class FrontEndTestCase(LiveServerTestCase):
         """Login an existing user."""
 
         user = EmailUserFactory(password='abc123')
-        self.set_language()
+        self.load_page_and_set_language()
         menu = self.wait_for_element('menu')
         login = menu.find_elements_by_link_text('Login')[0]
         login.click()
@@ -134,7 +148,7 @@ class FrontEndTestCase(LiveServerTestCase):
         """Register for a new site account."""
 
         provider_type = ProviderTypeFactory()
-        self.set_language()
+        self.load_page_and_set_language()
         menu = self.wait_for_element('menu')
         registration = menu.find_elements_by_link_text('Provider Registration')[0]
         registration.click()
@@ -163,7 +177,7 @@ class FrontEndTestCase(LiveServerTestCase):
 
         user = EmailUserFactory(password='abc123')
         provider_type = ProviderTypeFactory()
-        self.set_language()
+        self.load_page_and_set_language()
         menu = self.wait_for_element('menu')
         registration = menu.find_elements_by_link_text('Provider Registration')[0]
         registration.click()
@@ -191,13 +205,32 @@ class FrontEndTestCase(LiveServerTestCase):
 
         EmailUserFactory(
             password='abc123', is_active=False, activation_key='1234567890')
-        self.set_language()
+        self.load_page_and_set_language()
         self.browser.get(self.express_url + '#/register/verify/1234567890')
-        self.wait_for_page_title_contains('Your account has been activated.', timeout=5)
+        self.wait_for_landing_page(timeout=5)
 
     def test_invalid_activation(self):
         """Show message for invalid activation code."""
 
-        self.set_language()
+        self.load_page_and_set_language()
         self.browser.get(self.express_url + '#/register/verify/1234567890')
         self.wait_for_page_title_contains('Your account activation Failed.', timeout=5)
+
+    def test_text_list_search(self):
+        """Find services by text based search."""
+
+        service = ServiceFactory(status=Service.STATUS_CURRENT)
+        self.load_page_and_set_language()
+        menu = self.wait_for_element('menu')
+        search = menu.find_elements_by_link_text('Search')[0]
+        search.click()
+        form = self.wait_for_element('search_controls')
+        self.assertHashLocation('/search')
+        form.find_element_by_name('filtered-search').send_keys(
+            service.provider.name_en[:5])
+        # Results are updated automatically as search characters are entered
+        # Wait a sec to make sure we have the final results
+        time.sleep(1)
+        result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
+        name = result.find_element_by_class_name('name')
+        self.assertEqual(name.text, service.name_en)

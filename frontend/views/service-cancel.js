@@ -9,6 +9,8 @@ service = require('../models/service')
 ;
 
 module.exports = Backbone.View.extend({
+    skip_initial_render: true,
+
     initialize: function(opts){
         var self = this;
         var current_service = new service.Service({id: opts.id});

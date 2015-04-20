@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-04-02 08:01+0000\n"
+"PO-Revision-Date: 2015-04-17 06:54+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -22,6 +22,9 @@ msgstr "Bonjour Le Monde"
 msgid "Menu##Menu-Toggle"
 msgstr "Menu"
 
+msgid "Menu##Home"
+msgstr "Principale"
+
 msgid "Menu##Login"
 msgstr "Login"
 
@@ -29,7 +32,7 @@ msgid "Menu##Logout"
 msgstr "Logout"
 
 msgid "Menu##Services"
-msgstr "Services"
+msgstr "Liste des services"
 
 msgid "Menu##Add-Services"
 msgstr "Ajouter des services"
@@ -43,8 +46,11 @@ msgstr "Recherche"
 msgid "Menu##Provider-Registration"
 msgstr "Inscription des fournisseurs"
 
+msgid "Menu##Edit-Provider-Information"
+msgstr "Modifier les informations de fournisseur"
+
 msgid "Menu##Feedback-Tool"
-msgstr "Outil de Commentaire"
+msgstr "Donne Un Compte-Rendu"
 
 msgid "Menu##Change-Language"
 msgstr "Changer de langue"
@@ -100,6 +106,12 @@ msgstr "Email"
 msgid "Login-Form##Form##Password"
 msgstr "Mot de passe"
 
+msgid "Login-Form##More-Options-Title"
+msgstr "options supplémentaires"
+
+msgid "Login-Form##More-Options"
+msgstr "Si vous avez besoin de votre email de vérification envoyé à nouveau, ou pour vous inscrire pour être un fournisseur de services, cliquez sur le bouton correspondant ci-dessous."
+
 msgid "Login-Form##Form-Submit-Options##Submit"
 msgstr "Entrer"
 
@@ -107,16 +119,28 @@ msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "Inscrivez-vous pour être un fournisseur de service ici"
 
 msgid "Search-List##Page-Head##Title"
-msgstr "Recherche fournisseur des services"
+msgstr "Recherche de services"
 
 msgid "Search-List##Page-Head##Description"
 msgstr "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
 
+msgid "Feedback-Search##Page-Head##Title"
+msgstr "Envoyer des commentaires sur les services"
+
+msgid "Feedback-Search##Page-Head##Description"
+msgstr "Se il vous plaît chercher un fournisseur de service premier à donner votre feedback, vous devez sélectionner le fournisseur de services et cliquez sur la rétroaction de donner pour commencer."
+
 msgid "Service-Detail##Give-Feedback"
 msgstr "Améliorer les informations sur ce service"
 
+msgid "Feedback-Map##Page-Head##Title"
+msgstr "Envoyer des commentaires sur les services"
+
+msgid "Feedback-Map##Page-Head##Description"
+msgstr "Se il vous plaît chercher un fournisseur de service premier à donner votre feedback, vous devez sélectionner le fournisseur de services et cliquez sur la rétroaction de donner pour commencer."
+
 msgid "Service-Map##Page-Head##Page-Title##Title"
-msgstr "Cart de fournisseur des services"
+msgstr "Recherche de services"
 
 msgid "Service-Map##Page-Head##Page-Description##Page-Description"
 msgstr "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
@@ -390,14 +414,8 @@ msgstr "Vérification Renvoyer Email"
 msgid "Account-Activation##Pending##Title"
 msgstr "L'activation de votre compte est en attente ..."
 
-msgid "Account-Activation##Pending##Description"
-msgstr "Compte-activation ## en attente ## Description"
-
 msgid "Account-Activation##Success##Title"
 msgstr "Votre compte a été activé."
-
-msgid "Account-Activation##Success##Description"
-msgstr "Compte-Activation ##  réussite ## Description "
 
 msgid "Account-Activation##Failed##Title"
 msgstr "L'activation de votre compte a échoué."
@@ -412,6 +430,9 @@ msgid "Account-Activation##Resent##Description"
 msgstr "Nous avons envoyé un e-mail de confirmation sur le compte e-mail utilisée lors de votre inscription. Cliquez sur le lien de confirmation dans l'e-mail pour terminer le processus d'inscription."
 
 msgid "Account-Activation##Buttons##Resend-Email"
+msgstr "Vérification Renvoyer Email"
+
+msgid "Account-Resend-Verification##Title"
 msgstr "Vérification Renvoyer Email"
 
 msgid "Service-List##Page-Head##Page-Title##Title"
@@ -466,25 +487,7 @@ msgid "Service-List##Change-Service"
 msgstr "Changer de service"
 
 msgid "Service-List##Change-Change"
-msgstr ""
-
-msgid "Home##Service-Map##Title"
-msgstr "Voir la carte service"
-
-msgid "Home##Service-Map##Body"
-msgstr "Utilisez la carte de services de localiser les fournisseurs de services."
-
-msgid "Home##Feedback##Title"
-msgstr "Faire un commentaire"
-
-msgid "Home##Feedback##Body"
-msgstr "Parlez-nous de votre expérience de travail avec votre fournisseur de services."
-
-msgid "Home##Log-in##Title"
-msgstr "Prestataire de services Connexion"
-
-msgid "Home##Log-in##Body"
-msgstr "Connectez-vous à un compte de fournisseur de services existant ou en créer un nouveau compte."
+msgstr "Apporter d'autres modifications à cette mise à jour en attente"
 
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
 msgstr "Votre information a été soumis avec succès"
@@ -638,6 +641,33 @@ msgstr "Commentaires sur les services"
 
 msgid "Feedback-Tool##Body"
 msgstr "Pour faire un commentaire, se il vous plaît rechercher un service, aller sur sa page, et utilisez le bouton Feedback."
+
+msgid "Landing##User##Title"
+msgstr "Je suis un utilisateur de service, je veux"
+
+msgid "Landing##User##Search"
+msgstr "Rechercher un service"
+
+msgid "Landing##User##Give-Feedback"
+msgstr "Donne Un Compte-Rendu"
+
+msgid "Landing##Provider##Title"
+msgstr "Je suis un fournisseur de services, je veux"
+
+msgid "Landing##Provider##Logged-In##Update-My-Info"
+msgstr "Mettre à jour mon fournisseur d'information"
+
+msgid "Landing##Provider##Logged-In##Update-My-Service"
+msgstr "Mettre à jour ma liste des services"
+
+msgid "Landing##Provider##Logged-In##Add-Service"
+msgstr "Ajouter un nouveau service"
+
+msgid "Landing##Provider##Logged-Out##Register"
+msgstr "Inscrivez-vous pour être un fournisseur de services"
+
+msgid "Landing##Provider##Logged-Out##Login"
+msgstr "Connectez-vous à un compte de fournisseur de service existant"
 
 msgctxt "explained"
 msgid "Feedback-Form##non_delivery"

@@ -7,6 +7,8 @@ var Backbone = require('backbone')
 ;
 
 module.exports = Backbone.View.extend({
+    skip_initial_render: true,
+
     initialize: function(opts){
         var self = this;
         messages.clear();

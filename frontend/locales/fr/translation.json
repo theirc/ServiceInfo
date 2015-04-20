@@ -7,14 +7,16 @@
     },
     "Menu": {
         "Menu-Toggle": "Menu",
+        "Home": "Principale",
         "Login": "Login",
         "Logout": "Logout",
-        "Services": "Services",
+        "Services": "Liste des services",
         "Add-Services": "Ajouter des services",
         "Service-Map": "Service Map",
         "Search": "Recherche",
         "Provider-Registration": "Inscription des fournisseurs",
-        "Feedback-Tool": "Outil de Commentaire",
+        "Edit-Provider-Information": "Modifier les informations de fournisseur",
+        "Feedback-Tool": "Donne Un Compte-Rendu",
         "Change-Language": "Changer de langue"
     },
     "Global": {
@@ -45,6 +47,8 @@
             "Email": "Email",
             "Password": "Mot de passe"
         },
+        "More-Options-Title": "options supplémentaires",
+        "More-Options": "Si vous avez besoin de votre email de vérification envoyé à nouveau, ou pour vous inscrire pour être un fournisseur de services, cliquez sur le bouton correspondant ci-dessous.",
         "Form-Submit-Options": {
             "Submit": "Entrer",
             "Register": "Inscrivez-vous pour être un fournisseur de service ici"
@@ -52,17 +56,29 @@
     },
     "Search-List": {
         "Page-Head": {
-            "Title": "Recherche fournisseur des services",
+            "Title": "Recherche de services",
             "Description": "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
+        }
+    },
+    "Feedback-Search": {
+        "Page-Head": {
+            "Title": "Envoyer des commentaires sur les services",
+            "Description": "Se il vous plaît chercher un fournisseur de service premier à donner votre feedback, vous devez sélectionner le fournisseur de services et cliquez sur la rétroaction de donner pour commencer."
         }
     },
     "Service-Detail": {
         "Give-Feedback": "Améliorer les informations sur ce service"
     },
+    "Feedback-Map": {
+        "Page-Head": {
+            "Title": "Envoyer des commentaires sur les services",
+            "Description": "Se il vous plaît chercher un fournisseur de service premier à donner votre feedback, vous devez sélectionner le fournisseur de services et cliquez sur la rétroaction de donner pour commencer."
+        }
+    },
     "Service-Map": {
         "Page-Head": {
             "Page-Title": {
-                "Title": "Cart de fournisseur des services"
+                "Title": "Recherche de services"
             },
             "Page-Description": {
                 "Page-Description": "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
@@ -201,12 +217,10 @@
     },
     "Account-Activation": {
         "Pending": {
-            "Title": "L'activation de votre compte est en attente ...",
-            "Description": "Compte-activation ## en attente ## Description"
+            "Title": "L'activation de votre compte est en attente ..."
         },
         "Success": {
-            "Title": "Votre compte a été activé.",
-            "Description": "Compte-Activation ##  réussite ## Description "
+            "Title": "Votre compte a été activé."
         },
         "Failed": {
             "Title": "L'activation de votre compte a échoué.",
@@ -219,6 +233,9 @@
         "Buttons": {
             "Resend-Email": "Vérification Renvoyer Email"
         }
+    },
+    "Account-Resend-Verification": {
+        "Title": "Vérification Renvoyer Email"
     },
     "Service-List": {
         "Page-Head": {
@@ -250,21 +267,7 @@
         "Cancel": "Annuler",
         "Delete": "Effacer",
         "Change-Service": "Changer de service",
-        "Change-Change": ""
-    },
-    "Home": {
-        "Service-Map": {
-            "Title": "Voir la carte service",
-            "Body": "Utilisez la carte de services de localiser les fournisseurs de services."
-        },
-        "Feedback": {
-            "Title": "Faire un commentaire",
-            "Body": "Parlez-nous de votre expérience de travail avec votre fournisseur de services."
-        },
-        "Log-in": {
-            "Title": "Prestataire de services Connexion",
-            "Body": "Connectez-vous à un compte de fournisseur de services existant ou en créer un nouveau compte."
-        }
+        "Change-Change": "Apporter d'autres modifications à cette mise à jour en attente"
     },
     "Provider-Registration-Confirmation": {
         "Page-Head": {
@@ -397,5 +400,24 @@
     "Feedback-Tool": {
         "Title": "Commentaires sur les services",
         "Body": "Pour faire un commentaire, se il vous plaît rechercher un service, aller sur sa page, et utilisez le bouton Feedback."
+    },
+    "Landing": {
+        "User": {
+            "Title": "Je suis un utilisateur de service, je veux",
+            "Search": "Rechercher un service",
+            "Give-Feedback": "Donne Un Compte-Rendu"
+        },
+        "Provider": {
+            "Title": "Je suis un fournisseur de services, je veux",
+            "Logged-In": {
+                "Update-My-Info": "Mettre à jour mon fournisseur d'information",
+                "Update-My-Service": "Mettre à jour ma liste des services",
+                "Add-Service": "Ajouter un nouveau service"
+            },
+            "Logged-Out": {
+                "Register": "Inscrivez-vous pour être un fournisseur de services",
+                "Login": "Connectez-vous à un compte de fournisseur de service existant"
+            }
+        }
     }
 }

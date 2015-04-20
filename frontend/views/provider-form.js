@@ -11,6 +11,9 @@ models = require('../models/models')
 ;
 
 module.exports = Backbone.View.extend({
+    // Hint to router that we'll render ourselves when we're ready
+    skip_initial_render: true,
+
     initialize: function(){
         var self = this,
             providers,
@@ -37,7 +40,9 @@ module.exports = Backbone.View.extend({
                 self.user = users.where({'email': config.get('forever.email')})[0];
                 self.provider = providers.where({'user': self.user.get('url')})[0];
             }
-            self.render();
+            i18n.init(function () {
+                self.render();
+            })
         }, function onerror(error) {
             messages.error(error);
         });
