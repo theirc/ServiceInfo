@@ -113,15 +113,5 @@ module.exports = Backbone.View.extend({
                 $('.spinner').hide();
             })
         }
-    },
-
-    undelegateEvents: function () {
-        Backbone.View.prototype.undelegateEvents.apply(this, arguments);
-        if (this.SearchControlView) {
-            this.SearchControlView.undelegateEvents();
-        }
-        if (this.resultView) {
-            this.resultView.undelegateEvents();
-        }
     }
 })
