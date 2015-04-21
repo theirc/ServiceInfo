@@ -424,7 +424,6 @@ class PasswordResetCheckSerializer(serializers.Serializer):
     Serializer for our API to check if a password
     reset key appears to be valid.
     """
-    email = serializers.EmailField()
     key = serializers.CharField()
 
     def validate(self, attrs):
