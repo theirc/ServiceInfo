@@ -258,14 +258,23 @@ msgstr "Name of Service"
 msgid "Service-Form##Service-Area"
 msgstr "Area of Service"
 
+msgid "Service-Form##Service-Area-Help"
+msgstr "The location of the service you provide"
+
 msgid "Service-Form##Type"
 msgstr "Service Type"
 
 msgid "Service-Form##Service-Description"
 msgstr "Description"
 
+msgid "Service-Form##Service-Description-Help"
+msgstr "A short explanation about the mentioned service; this explains more about the provided service and helps identify it and its components."
+
 msgid "Service-Form##Service-Hours"
 msgstr "Working Hours"
+
+msgid "Service-Form##Service-Hours-Help"
+msgstr "Please mention the detailed hours of work; this assists the beneficiary in accessing the service easily and without obstacles."
 
 msgid "Service-Form##Additional-Information"
 msgstr "Additional Information (Optional Field)"
@@ -273,8 +282,14 @@ msgstr "Additional Information (Optional Field)"
 msgid "Service-Form##Service-Cost"
 msgstr "Cost of Service (Optional Field)"
 
+msgid "Service-Form##Service-Cost-Help"
+msgstr "Please mention whether the offered service is free of charge or not. If not, please mention the cost of it."
+
 msgid "Service-Form##Selection-Criteria"
 msgstr "Selection Criteria (Optional Field)"
+
+msgid "Service-Form##Selection-Criteria-Help"
+msgstr "Determines the criteria under which the beneficiary is allowed to benefit from the service. Ex: females aged between 3 and 30 years old."
 
 msgid "Service-Form##Hours-Open"
 msgstr "Opening Time:"
@@ -318,6 +333,9 @@ msgstr "Name of Service Provider"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Name"
 msgstr "Name of Focal Point"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Name-Help"
+msgstr "The name of the person to refer to in case of feedback or clarification"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
 msgstr "Password"
 
@@ -327,14 +345,23 @@ msgstr "Confirm Password"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type"
 msgstr "Provider Type"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Help"
+msgstr "Mention what type of provider are you; ex: local NGO, international NGO"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
 msgstr "Choose a Provider Type"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
-msgstr "Phone Number (NN-NNNNNN)"
+msgstr "Phone Number"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number-Help"
+msgstr "Ex: 70-972074"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Phone-Number"
-msgstr "Phone Number (NN-NNNNNN) of Focal Point"
+msgstr "Phone Number of Focal Point"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Phone-Number-Help"
+msgstr "Ex: 70-972074"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
 msgstr "Email"
@@ -345,14 +372,26 @@ msgstr "Enter your Email"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
 msgstr "Website URL (Optional Field)"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Website-Help"
+msgstr "The official website"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
 msgstr "Number of Monthly Beneficiaries"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries-Help"
+msgstr "Number of persons who benefit from your service per month"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Description"
 msgstr "Description"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Description-Help"
+msgstr "A short explanation about the mentioned service; this explains more about the provided service and helps identify it and its components."
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Address"
 msgstr "Address"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Address-Help"
+msgstr "The address of the main headquarters of your NGO or firm"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Legend"
 msgstr "Service Information"
