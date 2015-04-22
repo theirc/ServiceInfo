@@ -30,3 +30,8 @@ if 'test' in sys.argv:
         'django.contrib.auth.hashers.SHA1PasswordHasher',
         'django.contrib.auth.hashers.MD5PasswordHasher',
     )
+
+    # Dummy JIRA projects (we need some settings or JIRA code short-circuits
+    # and we can't test it)
+    JIRA_SERVICES_PROJECT_KEY = 'DUMMYSM'
+    JIRA_FEEDBACK_PROJECT_KEY = 'DUMMYLBF'
