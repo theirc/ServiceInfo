@@ -44,3 +44,7 @@ if 'BROKER_PASSWORD' in os.environ:
     os.environ.setdefault('BROKER_HOST', '127.0.0.1:5672')
     BROKER_URL = 'amqp://service_info_staging:%(BROKER_PASSWORD)s@%(BROKER_HOST)s' \
                  '/service_info_staging' % os.environ
+
+# Staging JIRA projects:
+JIRA_SERVICES_PROJECT_KEY = 'QASM'
+JIRA_FEEDBACK_PROJECT_KEY = 'QALBF'
