@@ -38,8 +38,9 @@ var SearchControls = Backbone.View.extend({
     },
     render: function() {
         var $el = this.$el;
+        var q = hashtrack.getVar('q');
         var html = search_control_template({
-            query: hashtrack.getVar('q'),
+            query: q,
         });
         $el.html(html);
         module.exports.populateServiceTypeDropdown();
@@ -47,6 +48,15 @@ var SearchControls = Backbone.View.extend({
 
         if (navigator.geolocation) {
             this.findNearMe();
+        }
+
+        // Refocus on query input if there is a current value
+        var input = $('input.query', $el);
+        if (q) {
+            input.focus();
+            // Change input value to ensure cursor is at the end
+            input.val('');
+            input.val(q);
         }
     },
     findNearMe: function() {
