@@ -32,7 +32,8 @@
     "Friday": "Friday",
     "Saturday": "Saturday",
     "GeolocationNotSupported": "Geolocation is not supported by this browser.",
-    "GeoPositionUnavailable": "Location is not available at this time."
+    "GeoPositionUnavailable": "Location is not available at this time.",
+    "RequiredField": "This field is required."
   },
   "Login-Form": {
     "Page-Head": {
@@ -51,7 +52,8 @@
     "More-Options": "If you need your verification email sent again, or to register to be a service provider click the corresponding button below.",
     "Form-Submit-Options": {
       "Submit": "Login",
-      "Register": "Register to be a Service Provider here"
+      "Register": "Register to be a Service Provider here",
+      "Password": "Change or reset password"
     }
   },
   "Search-List": {
@@ -255,7 +257,7 @@
     },
     "Resent": {
         "Title": "Your activation e-mail has been resent.",
-        "Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+        "Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process.   If you do not receive the email in a few minutes, check your spam folder."
     },
     "Buttons": {
       "Resend-Email": "Resend Verification Email"
@@ -303,7 +305,7 @@
         "Title": "Your Information was Submitted Successfully"
       },
       "Page-Description": {
-        "Page-Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+        "Page-Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process.  If you do not receive the email in a few minutes, check your spam folder."
       }
     }
   },
@@ -341,22 +343,25 @@
     },
     "Submit-Options": {
       "Submit": "Submit"
-    }
+    },
+    "Submitted": "We have sent an email to the email address. Check your email for a message containing a link to the password reset form. If you do not receive the email in a few minutes, check your spam folder."
   },
   "Password-Reset-Form": {
-    "Page-Head": {
-      "Page-Title": {
-        "Title": "Password Reset Form"
-      },
-      "Page-Description": {
-        "Page-Description": "Enter your new password in the text field below, then click submit to update your password."
-      }
-    },
+    "Title": "Password Reset Form",
+    "Description": "Enter your new password in the text field below, then click submit to update your password.",
     "Input-Label": {
-      "New-Password": "Enter your new password:"
+      "New-Password": "Enter your new password:",
+      "New-Password2": "Enter your new password again:"
     },
     "Submit-Options": {
       "Submit": "Submit"
+    },
+    "Invalid-Link": "This is not a valid password reset link. Please check that it was copied correctly from the email, and has not already been used. Go to the login page if you need to request another reset link.",
+    "Changed": "Your password has been changed.",
+    "Errors": {
+        "Password-Blank": "Password must not be blank",
+        "Password-Repeat": "Password must be repeated",
+        "Password-Match": "Passwords must match"
     }
   },
   "Map": {
