@@ -52,8 +52,8 @@ var SearchControls = Backbone.View.extend({
 
         // Refocus on query input if there is a current value
         var input = $('input.query', $el);
+        input.focus();
         if (q) {
-            input.focus();
             // Change input value to ensure cursor is at the end
             input.val('');
             input.val(q);
