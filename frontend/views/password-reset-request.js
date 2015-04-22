@@ -9,8 +9,7 @@ var Backbone = require('backbone'),
     i18n = require('i18next-client');
 
 module.exports = Backbone.View.extend({
-    initialize: function(opts){
-        self.key = opts.key;
+    initialize: function(){
     },
 
     render: function() {
@@ -19,7 +18,8 @@ module.exports = Backbone.View.extend({
     },
 
     events: {
-        "click .form-btn-submit": function () {
+        "click .form-btn-submit": function (e) {
+            e.preventDefault();
             var $el = this.$el;
             var $form = $el.find('form');
 
