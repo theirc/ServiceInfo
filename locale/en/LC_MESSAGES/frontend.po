@@ -586,7 +586,7 @@ msgid "Footer##About##Title"
 msgstr "About Service Info"
 
 msgid "Footer##About##Paragraph"
-msgstr "Service info is a tool to allow both service providers to register their services online and beneficiaries to map services and give feedback on services. Service Info is open source and free to use, data is quality checked by International Rescue Committee."
+msgstr "Powered by the International Rescue Committee, Service Info is a tool that allows both service providers to register their services online and beneficiaries to both discover those services on a map and give feedback on them. Service Info is open source and free to use."
 
 msgid "Footer##Contact##Title"
 msgstr "Reach Us"
