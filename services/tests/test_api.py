@@ -804,6 +804,13 @@ class LoginTest(APITestMixin, TestCase):
         # This was not a staff user
         self.assertFalse(result['is_staff'])
 
+    def test_case_insensitive_email(self):
+        # Login should not care about the case of the email address
+        ucase_email = self.user.email.upper()
+        rsp = self.client.post(reverse('api-login'),
+                               data={'email': ucase_email, 'password': 'password'})
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+
     def test_success_staff(self):
         # Login with is_staff user
         self.user.is_staff = True

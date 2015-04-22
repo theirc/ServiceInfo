@@ -112,6 +112,9 @@ class EmailUserManager(BaseUserManager):
                 return user
         return None
 
+    def get_by_natural_key(self, username):
+        return self.get(**{"%s__iexact" % self.model.USERNAME_FIELD: username})
+
 
 class EmailUser(AbstractBaseUser, PermissionsMixin):
     ACTIVATED = "ALREADY_ACTIVATED"
@@ -148,6 +151,15 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    # Enforce unique email address, case-insensitive
+    def save(self, *args, **kwargs):
+        others = type(self).objects.filter(email__iexact=self.email)
+        if self.pk:
+            others = others.exclude(pk=self.pk)
+        if others.exists():
+            raise ValidationError(_("User emails must be unique without regard to case."))
+        super().save(*args, **kwargs)
 
     def get_api_url(self):
         return reverse('user-detail', args=[self.id])
