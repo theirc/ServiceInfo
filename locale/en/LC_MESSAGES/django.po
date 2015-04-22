@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-22 19:40+0300\n"
+"POT-Creation-Date: 2015-04-22 19:44+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,15 +68,15 @@ msgid ""
 "already been used."
 msgstr ""
 
-#: api/serializers.py:421 api/serializers.py:473
+#: api/serializers.py:421 api/serializers.py:472
 msgid "No user with that email"
 msgstr ""
 
-#: api/serializers.py:439 api/serializers.py:457
+#: api/serializers.py:438 api/serializers.py:456
 msgid "Password reset key is not valid"
 msgstr ""
 
-#: api/serializers.py:476
+#: api/serializers.py:475
 msgid "User is not pending activation"
 msgstr ""
 

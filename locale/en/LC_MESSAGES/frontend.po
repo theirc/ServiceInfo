@@ -87,6 +87,9 @@ msgstr "Geolocation is not supported by this browser."
 msgid "Global##GeoPositionUnavailable"
 msgstr "Location is not available at this time."
 
+msgid "Global##RequiredField"
+msgstr "This field is required."
+
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "Log In"
 
@@ -110,6 +113,9 @@ msgstr "Login"
 
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "Register to be a Service Provider here"
+
+msgid "Login-Form##Form-Submit-Options##Password"
+msgstr "Change or reset password"
 
 msgid "Search-List##Page-Head##Title"
 msgstr "Search For Services"
@@ -445,7 +451,7 @@ msgid "Account-Activation##Resent##Title"
 msgstr "Your activation e-mail has been resent."
 
 msgid "Account-Activation##Resent##Description"
-msgstr "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+msgstr "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process.   If you do not receive the email in a few minutes, check your spam folder."
 
 msgid "Account-Activation##Buttons##Resend-Email"
 msgstr "Resend Verification Email"
@@ -511,7 +517,7 @@ msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
 msgstr "Your Information was Submitted Successfully"
 
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Description##Page-Description"
-msgstr "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+msgstr "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process.  If you do not receive the email in a few minutes, check your spam folder."
 
 msgid "Feedback-Confirmation##Page-Head##Page-Title##Title"
 msgstr "Your Information was Submitted Successfully"
@@ -537,17 +543,38 @@ msgstr "Enter your email:"
 msgid "Password-Reset##Submit-Options##Submit"
 msgstr "Submit"
 
-msgid "Password-Reset-Form##Page-Head##Page-Title##Title"
+msgid "Password-Reset##Submitted"
+msgstr "We have sent an email to the email address. Check your email for a message containing a link to the password reset form. If you do not receive the email in a few minutes, check your spam folder."
+
+msgid "Password-Reset-Form##Title"
 msgstr "Password Reset Form"
 
-msgid "Password-Reset-Form##Page-Head##Page-Description##Page-Description"
+msgid "Password-Reset-Form##Description"
 msgstr "Enter your new password in the text field below, then click submit to update your password."
 
 msgid "Password-Reset-Form##Input-Label##New-Password"
 msgstr "Enter your new password:"
 
+msgid "Password-Reset-Form##Input-Label##New-Password2"
+msgstr "Enter your new password again:"
+
 msgid "Password-Reset-Form##Submit-Options##Submit"
 msgstr "Submit"
+
+msgid "Password-Reset-Form##Invalid-Link"
+msgstr "This is not a valid password reset link. Please check that it was copied correctly from the email, and has not already been used. Go to the login page if you need to request another reset link."
+
+msgid "Password-Reset-Form##Changed"
+msgstr "Your password has been changed."
+
+msgid "Password-Reset-Form##Errors##Password-Blank"
+msgstr "Password must not be blank"
+
+msgid "Password-Reset-Form##Errors##Password-Repeat"
+msgstr "Password must be repeated"
+
+msgid "Password-Reset-Form##Errors##Password-Match"
+msgstr "Passwords must match"
 
 msgid "Map##Loading"
 msgstr "Loading Service Type Filters..."
