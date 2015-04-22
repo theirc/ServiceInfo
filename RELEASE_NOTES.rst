@@ -2,6 +2,12 @@ Service Info
 
 Release Notes
 
+0.1.6 - Apr. 22, 2015
+---------------------
+
+* Update footer text as requested by IRC
+* Use different JIRA projects for staging
+
 0.1.5 - Apr. 22, 2015
 ---------------------
 
