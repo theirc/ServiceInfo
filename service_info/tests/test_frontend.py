@@ -14,7 +14,6 @@ from django.contrib.sites.models import Site
 from django.test import LiveServerTestCase
 
 from selenium import webdriver
-from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.support import expected_conditions
@@ -24,7 +23,10 @@ from services.models import Service
 from services.tests.factories import ProviderTypeFactory, ServiceFactory
 
 
-class FrontEndTestCase(LiveServerTestCase):
+DEFAULT_TIMEOUT = 4  # Seconds
+
+
+class ServiceInfoFrontendTestCase(LiveServerTestCase):
     """End to end testing with selenium and express server."""
 
     @classmethod
@@ -85,18 +87,18 @@ class FrontEndTestCase(LiveServerTestCase):
         button = form.find_element_by_css_selector('[data-lang="%s"]' % language)
         button.click()
 
-    def wait_for_element(self, selector, match=By.ID, timeout=2):
+    def wait_for_element(self, selector, match=By.ID, timeout=DEFAULT_TIMEOUT):
         return WebDriverWait(self.browser, timeout).until(
             expected_conditions.visibility_of_element_located((match, selector))
         )
 
-    def wait_for_page_title_contains(self, title, timeout=2):
+    def wait_for_page_title_contains(self, title, timeout=DEFAULT_TIMEOUT):
         return WebDriverWait(self.browser, timeout).until(
             expected_conditions.text_to_be_present_in_element(
                 (By.CLASS_NAME, 'page-title'), title)
         )
 
-    def wait_for_landing_page(self, timeout=2):
+    def wait_for_landing_page(self, timeout=DEFAULT_TIMEOUT):
         return self.wait_for_element('landing-img', By.CLASS_NAME, timeout)
 
     def submit_form(self, form, data, button_class='submit'):
@@ -108,6 +110,9 @@ class FrontEndTestCase(LiveServerTestCase):
             else:
                 element.send_keys(value)
         form.find_element_by_class_name(button_class).click()
+
+
+class FrontEndTestCase(ServiceInfoFrontendTestCase):
 
     def test_get_homepage(self):
         """Load the homepage."""
@@ -167,7 +172,7 @@ class FrontEndTestCase(LiveServerTestCase):
         }
         self.submit_form(form, data, button_class='form-btn-submit')
 
-        self.wait_for_page_title_contains('Submitted Successfully', timeout=5)
+        self.wait_for_page_title_contains('Submitted Successfully', timeout=2 * DEFAULT_TIMEOUT)
         self.assertHashLocation('/register/confirm')
 
     def test_duplicate_registration(self):
@@ -205,14 +210,15 @@ class FrontEndTestCase(LiveServerTestCase):
             password='abc123', is_active=False, activation_key='1234567890')
         self.load_page_and_set_language()
         self.browser.get(self.express_url + '#/register/verify/1234567890')
-        self.wait_for_landing_page(timeout=5)
+        self.wait_for_landing_page(timeout=2 * DEFAULT_TIMEOUT)
 
     def test_invalid_activation(self):
         """Show message for invalid activation code."""
 
         self.load_page_and_set_language()
         self.browser.get(self.express_url + '#/register/verify/1234567890')
-        self.wait_for_page_title_contains('Your account activation Failed.', timeout=5)
+        self.wait_for_page_title_contains('Your account activation Failed.',
+                                          timeout=2 * DEFAULT_TIMEOUT)
 
     def test_text_list_search(self):
         """Find services by text based search."""
@@ -232,46 +238,3 @@ class FrontEndTestCase(LiveServerTestCase):
         result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
         name = result.find_element_by_class_name('name')
         self.assertEqual(name.text, service.name_en)
-
-    def test_filtered_list_search(self):
-        """Find services by type."""
-
-        service = ServiceFactory(status=Service.STATUS_CURRENT)
-        self.load_page_and_set_language()
-        menu = self.wait_for_element('menu')
-        search = menu.find_elements_by_link_text('Search')[0]
-        search.click()
-        form = self.wait_for_element('search_controls')
-        self.assertHashLocation('/search')
-        Select(form.find_element_by_name('type')).select_by_visible_text(
-            service.type.name_en)
-        controls = self.wait_for_element('map-toggle', match=By.CLASS_NAME)
-        controls.find_element_by_name('map-toggle-list').click()
-        result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
-        name = result.find_element_by_class_name('name')
-        self.assertEqual(name.text, service.name_en)
-
-    def test_localized_search(self):
-        """Search options and results should be localized."""
-
-        service = ServiceFactory(status=Service.STATUS_CURRENT)
-        self.load_page_and_set_language('fr')
-        menu = self.wait_for_element('menu')
-        search = menu.find_elements_by_link_text('Recherche')[0]
-        search.click()
-        form = self.wait_for_element('search_controls')
-        self.assertHashLocation('/search')
-        Select(form.find_element_by_name('type')).select_by_visible_text(
-            service.type.name_fr)
-        controls = self.wait_for_element('map-toggle', match=By.CLASS_NAME)
-        controls.find_element_by_name('map-toggle-list').click()
-        try:
-            result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
-            name = result.find_element_by_class_name('name')
-            name_text = name.text
-        except StaleElementReferenceException:
-            # Hit a race where we got a search element but then the page replaced it
-            result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
-            name = result.find_element_by_class_name('name')
-            name_text = name.text
-        self.assertEqual(name_text, service.name_fr)

@@ -74,6 +74,18 @@ var Services = _base.BaseCollection.extend({
         });
         return Promise.all(p);
     },
+
+    parse: function (response) {
+        /* Sometimes DRF returns a JSON array of models, other times it
+           returns a dict whose 'results' property contains the JSON array,
+           depending on whether we're paginating.  But Backbone always needs
+           the array of models.
+         */
+        if (response.hasOwnProperty('results')) {
+            return response.results;
+        }
+        return response;
+    }
 })
 
 var PublicServices = Services.extend({

@@ -33,16 +33,16 @@ module.exports = Backbone.View.extend({
         $('.no-search-results').hide();
 
         var $scv = this.$el.find('#search_controls');
-        var SearchControlView = new search.SearchControls({
+        // Renders automatically when language is ready
+        this.SearchControlView = new search.SearchControls({
             $el: $scv,
             feedback: this.feedback
         });
-        SearchControlView.render();
 
         function initialize() {
             var mapOptions = {
                 center: { lat: 33.8869, lng: 35.5131},
-                zoom: 8
+                zoom: 10
             };
             self.map = new google.maps.Map(document.getElementById('map_canvas'),
                 mapOptions);
@@ -60,7 +60,6 @@ module.exports = Backbone.View.extend({
             this.setMap(null);
         });
         self.markers = [];
-        var bounds = new google.maps.LatLngBounds();
         var services = search.services.data();
         if (services.length === 0) {
             $('.no-search-results').show();
@@ -77,7 +76,6 @@ module.exports = Backbone.View.extend({
             var long_lat_str = /(-?\d+\.\d+) (-?\d+\.\d+)/.exec(this.location);
             if (long_lat_str) {
                 var myLatlng = new google.maps.LatLng(long_lat_str[2], long_lat_str[1]);
-                bounds.extend(myLatlng);
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     title: this.name,
@@ -97,33 +95,5 @@ module.exports = Backbone.View.extend({
                 })
             }
         });
-        self.map.fitBounds(bounds);
-        var zoom = self.map.getZoom();
-        if (zoom > 10) {
-            self.map.setZoom(10);
-        }
-    },
-
-    events: {
-        "search": function(_, query) {
-            $('.spinner').show();
-            var self = this;
-            search.refetchServices().then(function(){
-                self.updateResults();
-                $('.spinner').hide();
-            })
-        },
-        "input input.query": function(e) {
-            var query = $(e.target).val();
-            hashtrack.setVar('q', query);
-        },
-        "change .query-service-type": function(e) {
-            hashtrack.setVar('t', $(e.target).val());
-        },
-        "input keyup": function(e) {
-            if (e.keyCode === 13) {
-                return false;
-            }
-        },
     }
-})
+});

@@ -58,3 +58,9 @@ class UserActivationTest(TestCase):
             self.assertIn(expected_text, mail.outbox[0].body)
             # Empty the test outbox
             mail.outbox = []
+
+    def test_unique_emails(self):
+        # Users' emails must be unique, case-insensitively
+        user1 = EmailUserFactory()
+        with self.assertRaises(ValidationError):
+            EmailUserFactory(email=user1.email.upper())

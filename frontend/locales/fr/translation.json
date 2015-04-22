@@ -7,6 +7,7 @@
     },
     "Menu": {
         "Menu-Toggle": "Menu",
+        "Home": "Principale",
         "Login": "Login",
         "Logout": "Logout",
         "Services": "Liste des services",
@@ -46,6 +47,8 @@
             "Email": "Email",
             "Password": "Mot de passe"
         },
+        "More-Options-Title": "options supplémentaires",
+        "More-Options": "Si vous avez besoin de votre email de vérification envoyé à nouveau, ou pour vous inscrire pour être un fournisseur de services, cliquez sur le bouton correspondant ci-dessous.",
         "Form-Submit-Options": {
             "Submit": "Entrer",
             "Register": "Inscrivez-vous pour être un fournisseur de service ici"
@@ -57,8 +60,20 @@
             "Description": "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
         }
     },
+    "Feedback-Search": {
+        "Page-Head": {
+            "Title": "Envoyer des commentaires sur les services",
+            "Description": "Se il vous plaît chercher un fournisseur de service premier à donner votre feedback, vous devez sélectionner le fournisseur de services et cliquez sur la rétroaction de donner pour commencer."
+        }
+    },
     "Service-Detail": {
         "Give-Feedback": "Améliorer les informations sur ce service"
+    },
+    "Feedback-Map": {
+        "Page-Head": {
+            "Title": "Envoyer des commentaires sur les services",
+            "Description": "Se il vous plaît chercher un fournisseur de service premier à donner votre feedback, vous devez sélectionner le fournisseur de services et cliquez sur la rétroaction de donner pour commencer."
+        }
     },
     "Service-Map": {
         "Page-Head": {
@@ -202,12 +217,10 @@
     },
     "Account-Activation": {
         "Pending": {
-            "Title": "L'activation de votre compte est en attente ...",
-            "Description": "Compte-activation ## en attente ## Description"
+            "Title": "L'activation de votre compte est en attente ..."
         },
         "Success": {
-            "Title": "Votre compte a été activé.",
-            "Description": "Compte-Activation ##  réussite ## Description "
+            "Title": "Votre compte a été activé."
         },
         "Failed": {
             "Title": "L'activation de votre compte a échoué.",
@@ -220,6 +233,9 @@
         "Buttons": {
             "Resend-Email": "Vérification Renvoyer Email"
         }
+    },
+    "Account-Resend-Verification": {
+        "Title": "Vérification Renvoyer Email"
     },
     "Service-List": {
         "Page-Head": {
