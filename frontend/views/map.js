@@ -33,11 +33,11 @@ module.exports = Backbone.View.extend({
         $('.no-search-results').hide();
 
         var $scv = this.$el.find('#search_controls');
+        // Renders automatically when language is ready
         this.SearchControlView = new search.SearchControls({
             $el: $scv,
             feedback: this.feedback
         });
-        this.SearchControlView.render();
 
         function initialize() {
             var mapOptions = {
