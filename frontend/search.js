@@ -11,23 +11,13 @@ var language = require('./language');
 
 var query = "";
 var latlon = null;
-var searchTrigger = null;
-function delaySearchUpdate() {
-    if (searchTrigger) {
-        clearTimeout(searchTrigger);
-    }
-    searchTrigger = setTimeout(function() {
-        $('#page').trigger('search', query);
-    }, 1000);
-}
+
 hashtrack.onhashvarchange('q', function(_, value) {
     query = value;
-    delaySearchUpdate();
-})
+});
 hashtrack.onhashvarchange('t', function(_, value) {
     query = value;
-    delaySearchUpdate();
-})
+});
 hashtrack.onhashvarchange('n', function(_, value) {
     if (value) {
         var parts = value.split(',');
@@ -35,8 +25,7 @@ hashtrack.onhashvarchange('n', function(_, value) {
     } else {
         latlon = null;
     }
-    delaySearchUpdate();
-})
+});
 
 var SearchControls = Backbone.View.extend({
     initialize: function(opts) {
@@ -49,8 +38,9 @@ var SearchControls = Backbone.View.extend({
     },
     render: function() {
         var $el = this.$el;
+        var q = hashtrack.getVar('q');
         var html = search_control_template({
-            query: hashtrack.getVar('q'),
+            query: q,
         });
         $el.html(html);
         module.exports.populateServiceTypeDropdown();
@@ -58,6 +48,15 @@ var SearchControls = Backbone.View.extend({
 
         if (navigator.geolocation) {
             this.findNearMe();
+        }
+
+        // Refocus on query input if there is a current value
+        var input = $('input.query', $el);
+        input.focus();
+        if (q) {
+            // Change input value to ensure cursor is at the end
+            input.val('');
+            input.val(q);
         }
     },
     findNearMe: function() {
@@ -126,7 +125,24 @@ var SearchControls = Backbone.View.extend({
         "change [value=near]": function(e) {
             this.findNearMe();
         },
-    },
+        "input input.query": function(e) {
+            var query = $(e.target).val();
+            if (this.timeout) {
+                clearTimeout(this.timeout);
+            }
+            this.timeout = setTimeout(function () {
+                hashtrack.setVar('q', query);
+            }, 500);
+        },
+        "change .query-service-type": function(e) {
+            hashtrack.setVar('t', $(e.target).val());
+        },
+        "input keyup": function(e) {
+            if (e.keyCode === 13) {
+                return false;
+            }
+        }
+    }
 });
 
 module.exports = {

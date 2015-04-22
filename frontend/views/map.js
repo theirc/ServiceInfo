@@ -33,11 +33,11 @@ module.exports = Backbone.View.extend({
         $('.no-search-results').hide();
 
         var $scv = this.$el.find('#search_controls');
-        var SearchControlView = new search.SearchControls({
+        // Renders automatically when language is ready
+        this.SearchControlView = new search.SearchControls({
             $el: $scv,
             feedback: this.feedback
         });
-        SearchControlView.render();
 
         function initialize() {
             var mapOptions = {
@@ -95,28 +95,5 @@ module.exports = Backbone.View.extend({
                 })
             }
         });
-    },
-
-    events: {
-        "search": function(_, query) {
-            $('.spinner').show();
-            var self = this;
-            search.refetchServices().then(function(){
-                self.updateResults();
-                $('.spinner').hide();
-            })
-        },
-        "input input.query": function(e) {
-            var query = $(e.target).val();
-            hashtrack.setVar('q', query);
-        },
-        "change .query-service-type": function(e) {
-            hashtrack.setVar('t', $(e.target).val());
-        },
-        "input keyup": function(e) {
-            if (e.keyCode === 13) {
-                return false;
-            }
-        },
     }
-})
+});
