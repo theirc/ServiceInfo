@@ -403,6 +403,24 @@ class ServiceAPITest(APITestMixin, TestCase):
         self.assertEqual('Crit 2', [record.text_fr for record in criteria if record.text_fr][0])
         self.assertEqual('Crit 3', [record.text_ar for record in criteria if record.text_ar][0])
 
+    def test_create_service_not_provider(self):
+        Provider.objects.get(user=self.user).delete()
+        area = ServiceAreaFactory()
+        data = {
+            'name_en': 'Some service',
+            'area_of_service': area.get_api_url(),
+            'description_en': "Awesome\nService",
+            'selection_criteria': [],  # none required
+            'type': ServiceTypeFactory().get_api_url(),
+            'selection_criteria': [
+                {'text_en': 'Crit 1'},
+                {'text_fr': 'Crit 2'},
+                {'text_ar': 'Crit 3'},
+            ]
+        }
+        rsp = self.post_with_token(reverse('service-list'), data=data)
+        self.assertEqual(BAD_REQUEST, rsp.status_code)
+
     def test_update_service(self):
         # It's not allowed to update a service using the API
         service = ServiceFactory(provider=self.provider)

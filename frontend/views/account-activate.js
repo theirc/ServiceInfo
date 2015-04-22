@@ -23,6 +23,7 @@ var Activation = Backbone.Model.extend({
             success: function(resp) {
                 config.set('forever.authToken', resp.token);
                 config.set('forever.email', resp.email);
+                config.remove('temp.email');
                 window.location = '#/'
             },
             error: function(e) {
