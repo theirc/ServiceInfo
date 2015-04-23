@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-16 19:20+0300\n"
-"PO-Revision-Date: 2015-04-02 13:33+0000\n"
+"POT-Creation-Date: 2015-04-22 19:52+0300\n"
+"PO-Revision-Date: 2015-04-23 08:55+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -33,49 +33,53 @@ msgstr "رمز اللغة غير صالح  {code} رموز الصحيحة هي  
 msgid "A user with that email already exists."
 msgstr "البريد الإلكتروني موجود من قبل."
 
-#: api/serializers.py:253
+#: api/serializers.py:249
+msgid "User is not a provider.  Only providers can create services."
+msgstr "المستخدم ليس مقدم. لا يمكن إلا أن مقدمي خدمات خلق الخدمات."
+
+#: api/serializers.py:257
 msgid "You may only submit updates to current, draft or rejected services"
 msgstr "يمكنك تقديم التحديثات فقط على الحالي، مسودة أو خدمات مرفوضة"
 
-#: api/serializers.py:260
+#: api/serializers.py:264
 msgid "There is already a pending draft update to this service."
 msgstr "هناك بالفعل مسودة منتظرة عن الخدمة "
 
-#: api/serializers.py:270
+#: api/serializers.py:274
 msgid "Close time is missing."
 msgstr "وثيق الوقت مفقود."
 
-#: api/serializers.py:272
+#: api/serializers.py:276
 msgid "Open time is missing."
 msgstr "الوقت مفتوح مفقود."
 
-#: api/serializers.py:274
+#: api/serializers.py:278
 msgid "Close time is not later than open time."
 msgstr "وثيق الوقت ليس في وقت لاحق من الوقت المفتوح."
 
-#: api/serializers.py:371
+#: api/serializers.py:375
 msgid "User account is disabled."
 msgstr "تم تعطيل حساب المستخدم."
 
-#: api/serializers.py:374
+#: api/serializers.py:378
 msgid "Unable to log in with provided credentials."
 msgstr "غير قادر على الدخول مع المعلومات المتوفرة."
 
-#: api/serializers.py:396
+#: api/serializers.py:400
 msgid ""
 "Activation key is invalid. Check that it was copied correctly and has not "
 "already been used."
 msgstr "مفتاح تنشيط غير صالح. تحقق من الذي تم نسخه بشكل صحيح وأنه لم يتم بالفعل استخدامه."
 
-#: api/serializers.py:417 api/serializers.py:469
+#: api/serializers.py:421 api/serializers.py:472
 msgid "No user with that email"
 msgstr "لا مستخدم بهذا البريد الإلكتروني "
 
-#: api/serializers.py:435 api/serializers.py:453
+#: api/serializers.py:438 api/serializers.py:456
 msgid "Password reset key is not valid"
 msgstr "مفتاح إعادة تعيين كلمة المرور غير صالح"
 
-#: api/serializers.py:472
+#: api/serializers.py:475
 msgid "User is not pending activation"
 msgstr "المستخدم ليس في حالة إنتظار التفعيل "
 
@@ -126,52 +130,103 @@ msgstr "يجب أن يكون للمستخدمين عنوان بريد إلكتر
 msgid "Activation key is invalid or has already been used."
 msgstr "مفتاح تنشيط غير صالح أو تم إستخدامه."
 
-#: email_user/models.py:120
+#: email_user/models.py:123
 msgid "email address"
 msgstr "البريد الإلكتروني"
 
-#: email_user/models.py:125
+#: email_user/models.py:128
 msgid "staff status"
 msgstr "حالة الموظفين "
 
-#: email_user/models.py:126
+#: email_user/models.py:129
 msgid "Designates whether the user can log into this admin site."
 msgstr "يحدد ما إذا كان المستخدم يستطيع الدخول إلى إدارة الموقع."
 
-#: email_user/models.py:129
+#: email_user/models.py:132
 msgid "active"
 msgstr "نشيط "
 
-#: email_user/models.py:130
+#: email_user/models.py:133
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr "يهدد ما إذا كان المستخدم سيعمل على أنه مستخدم نشيط.لا تنقر هذه إذا أردت أن يبقى المستخدم. "
 
-#: email_user/models.py:132
+#: email_user/models.py:135
 msgid "date joined"
 msgstr "تاريخ الاشتراك"
 
-#: email_user/models.py:134
+#: email_user/models.py:137
 msgid "activation key"
 msgstr "مفتاح التفعيل "
 
-#: email_user/models.py:137
+#: email_user/models.py:140
 msgid "language"
 msgstr "لغة"
 
-#: email_user/models.py:138
+#: email_user/models.py:141
 msgid "User's preferred language."
 msgstr "اللغة المفضلة للمستخدم."
 
-#: email_user/models.py:147 services/models.py:125
+#: email_user/models.py:150 services/models.py:125
 msgid "user"
 msgstr "المستخدم"
 
-#: email_user/models.py:180
+#: email_user/models.py:161
+msgid "User emails must be unique without regard to case."
+msgstr "ويجب أن تكون رسائل البريد الإلكتروني مستخدم فريد دون النظر إلى القضية."
+
+#: email_user/models.py:192
 #, python-brace-format
 msgid "Password is too short. It must have at least {min_length} characters."
 msgstr "كلمة المرور قصيرة جدا. فإنه يجب أن يكون على الأقل {min_length} حرفا."
+
+#: email_user/templates/email_user/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site.name)s."
+msgstr "كنت تتلقى هذا البريد الإلكتروني لأنك طلبت إعادة تعيين كلمة المرور لحساب المستخدم الخاص بك في %(site.name)s."
+
+#: email_user/templates/email_user/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr "يرجى الدخول إلى الصفحة التالية واختر كلمة سر جديدة:"
+
+#: email_user/templates/email_user/password_reset_email.html:8
+msgid "Your username is your email address:"
+msgstr "إسم المستخدم هو عنوان بريدك الإلكتروني:"
+
+#: email_user/templates/email_user/password_reset_email.html:10
+msgid "Thanks for using our site!"
+msgstr "شكرا لاستخدام موقعنا!"
+
+#: email_user/templates/email_user/password_reset_email.html:12
+#, python-format
+msgid "The %(site_name)s team"
+msgstr "فريق %(site_name)s"
+
+#: email_user/templates/email_user/password_reset_email.txt:3
+#, python-format
+msgid ""
+"\n"
+"You (or someone pretending to be you) have asked to reset the\n"
+"password of an account at\n"
+"%(site_name)s.  If this wasn't you, please ignore this email.\n"
+msgstr "\nأنت (أو شخص يتظاهر بأنه أنت) وطلب لتسجيل حساب في\n%(site_name)s إذا لم يكن هذا لكم، يرجى تجاهل هذا البريد الإلكتروني\nوسيتم إزالة عنوانك من سجلاتنا.\n"
+
+#: email_user/templates/email_user/password_reset_email.txt:8
+msgid ""
+"\n"
+"To reset the password, please click the following link:\n"
+msgstr "\nلتفعيل هذا الحساب، يرجى الضغط على الرابط التالي.\n"
+
+#: email_user/templates/email_user/password_reset_email.txt:14
+#, python-format
+msgid ""
+"\n"
+"Sincerely,\n"
+"%(site_name)s Management\n"
+msgstr "\nمع خالص التقدير,\n%(site_name)s\n الإدارة \n"
 
 #: email_user/templates/registration/activation_email.html:7
 msgid "registration"
@@ -229,53 +284,6 @@ msgstr "\nمع خالص التقدير,\n%(site.name)s\n الإدارة.\n"
 #: email_user/templates/registration/activation_email_subject.txt:1
 msgid "Account activation on"
 msgstr "تم تفعيل الحساب "
-
-#: email_user/templates/registration/password_reset_email.html:2
-#, python-format
-msgid ""
-"You're receiving this email because you requested a password reset for your "
-"user account at %(site.name)s."
-msgstr "كنت تتلقى هذا البريد الإلكتروني لأنك طلبت إعادة تعيين كلمة المرور لحساب المستخدم الخاص بك في %(site.name)s."
-
-#: email_user/templates/registration/password_reset_email.html:4
-msgid "Please go to the following page and choose a new password:"
-msgstr "يرجى الدخول إلى الصفحة التالية واختر كلمة سر جديدة:"
-
-#: email_user/templates/registration/password_reset_email.html:8
-msgid "Your username is your email address:"
-msgstr "إسم المستخدم هو عنوان بريدك الإلكتروني:"
-
-#: email_user/templates/registration/password_reset_email.html:10
-msgid "Thanks for using our site!"
-msgstr "شكرا لاستخدام موقعنا!"
-
-#: email_user/templates/registration/password_reset_email.html:12
-#, python-format
-msgid "The %(site_name)s team"
-msgstr "فريق %(site_name)s"
-
-#: email_user/templates/registration/password_reset_email.txt:3
-#, python-format
-msgid ""
-"\n"
-"You (or someone pretending to be you) have asked to reset the\n"
-"password of an account at\n"
-"%(site_name)s.  If this wasn't you, please ignore this email.\n"
-msgstr "\nأنت (أو شخص يتظاهر بأنه أنت) وطلب لتسجيل حساب في\n%(site_name)s إذا لم يكن هذا لكم، يرجى تجاهل هذا البريد الإلكتروني\nوسيتم إزالة عنوانك من سجلاتنا.\n"
-
-#: email_user/templates/registration/password_reset_email.txt:8
-msgid ""
-"\n"
-"To reset the password, please click the following link:\n"
-msgstr "\nلتفعيل هذا الحساب، يرجى الضغط على الرابط التالي.\n"
-
-#: email_user/templates/registration/password_reset_email.txt:14
-#, python-format
-msgid ""
-"\n"
-"Sincerely,\n"
-"%(site_name)s Management\n"
-msgstr "\nمع خالص التقدير,\n%(site_name)s\n الإدارة \n"
 
 #: service_info/settings/base.py:49
 msgid "Arabic"
