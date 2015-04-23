@@ -2,6 +2,11 @@ Service Info
 
 Release Notes
 
+0.1.7 - Apr. 23, 2015
+---------------------
+
+* Get completed translations of changes in 0.1.5 & 0.1.6
+
 0.1.6 - Apr. 22, 2015
 ---------------------
 
