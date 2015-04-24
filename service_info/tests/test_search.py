@@ -36,8 +36,13 @@ class SearchFrontendTest(ServiceInfoFrontendTestCase):
             service.type.name_en)
         controls = self.wait_for_element('map-toggle', match=By.CLASS_NAME)
         controls.find_element_by_name('map-toggle-list').click()
-        result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
-        name = result.find_element_by_class_name('name')
+        try:
+            result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
+            name = result.find_element_by_class_name('name')
+        except StaleElementReferenceException:
+            # Hit a race where we got a search element but then the page replaced it
+            result = self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
+            name = result.find_element_by_class_name('name')
         self.assertEqual(name.text, service.name_en)
 
     def test_localized_search(self):

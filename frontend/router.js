@@ -24,7 +24,7 @@ var views = {
     "service-list": require('./views/service-list'),
     "service-detail": require('./views/service-detail'),
     "login": require('./views/login'),
-    "password-reset": require('./views/password-reset'),
+    "password-reset-request": require('./views/password-reset-request'),
     "password-reset-form": require('./views/password-reset-form'),
     "admin": require('./views/admin'),
 };
@@ -93,8 +93,8 @@ module.exports = Backbone.Router.extend({
         "service/cancel/:id": loadPage("service-cancel", ['id']),
         "service-list": loadPage("service-list"),
         "login": loadPage("login"),
-        "password-reset": loadPage("password-reset"),
-        "password-reset-form": loadPage("password-reset-form"),
+        "password-reset/:uid/:token": loadPage("password-reset-form", ['uid', 'token']),
+        "password-reset": loadPage("password-reset-request"),
         "logout": function() {
             config.remove('forever.authToken');
             config.remove('forever.email');

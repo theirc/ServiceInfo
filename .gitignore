@@ -21,3 +21,4 @@ frontend/styles/site-ltr.css
 frontend/styles/site-rtl.css
 node_modules
 bundle_min.js
+feedback-help.hbs

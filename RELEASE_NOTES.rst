@@ -2,6 +2,29 @@ Service Info
 
 Release Notes
 
+0.1.7 - Apr. 23, 2015
+---------------------
+
+* Get completed translations of changes in 0.1.5 & 0.1.6
+
+0.1.6 - Apr. 22, 2015
+---------------------
+
+* Update footer text as requested by IRC
+* Use different JIRA projects for staging
+
+0.1.5 - Apr. 22, 2015
+---------------------
+
+* Add password reset/change (see login page)
+* Make login email not case sensitive
+* Fix losing focus while typing search text
+* Add field help text provided by IRC
+* Fix missing link from password reset emails
+* Ensure user is provider when creating a service
+* Multiple style improvements
+* Limit view in initial map display
+
 0.1.4 - Apr. 20, 2015
 ---------------------
 
