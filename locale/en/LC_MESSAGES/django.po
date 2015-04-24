@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-16 19:20+0300\n"
+"POT-Creation-Date: 2015-04-22 19:52+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,49 +30,53 @@ msgstr ""
 msgid "A user with that email already exists."
 msgstr ""
 
-#: api/serializers.py:253
+#: api/serializers.py:249
+msgid "User is not a provider.  Only providers can create services."
+msgstr ""
+
+#: api/serializers.py:257
 msgid "You may only submit updates to current, draft or rejected services"
 msgstr ""
 
-#: api/serializers.py:260
+#: api/serializers.py:264
 msgid "There is already a pending draft update to this service."
 msgstr ""
 
-#: api/serializers.py:270
+#: api/serializers.py:274
 msgid "Close time is missing."
 msgstr ""
 
-#: api/serializers.py:272
+#: api/serializers.py:276
 msgid "Open time is missing."
 msgstr ""
 
-#: api/serializers.py:274
+#: api/serializers.py:278
 msgid "Close time is not later than open time."
 msgstr ""
 
-#: api/serializers.py:371
+#: api/serializers.py:375
 msgid "User account is disabled."
 msgstr ""
 
-#: api/serializers.py:374
+#: api/serializers.py:378
 msgid "Unable to log in with provided credentials."
 msgstr ""
 
-#: api/serializers.py:396
+#: api/serializers.py:400
 msgid ""
 "Activation key is invalid. Check that it was copied correctly and has not "
 "already been used."
 msgstr ""
 
-#: api/serializers.py:417 api/serializers.py:469
+#: api/serializers.py:421 api/serializers.py:472
 msgid "No user with that email"
 msgstr ""
 
-#: api/serializers.py:435 api/serializers.py:453
+#: api/serializers.py:438 api/serializers.py:456
 msgid "Password reset key is not valid"
 msgstr ""
 
-#: api/serializers.py:472
+#: api/serializers.py:475
 msgid "User is not pending activation"
 msgstr ""
 
@@ -123,51 +127,102 @@ msgstr ""
 msgid "Activation key is invalid or has already been used."
 msgstr ""
 
-#: email_user/models.py:120
+#: email_user/models.py:123
 msgid "email address"
 msgstr ""
 
-#: email_user/models.py:125
+#: email_user/models.py:128
 msgid "staff status"
 msgstr ""
 
-#: email_user/models.py:126
+#: email_user/models.py:129
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: email_user/models.py:129
+#: email_user/models.py:132
 msgid "active"
 msgstr ""
 
-#: email_user/models.py:130
+#: email_user/models.py:133
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: email_user/models.py:132
+#: email_user/models.py:135
 msgid "date joined"
 msgstr ""
 
-#: email_user/models.py:134
+#: email_user/models.py:137
 msgid "activation key"
 msgstr ""
 
-#: email_user/models.py:137
+#: email_user/models.py:140
 msgid "language"
 msgstr ""
 
-#: email_user/models.py:138
+#: email_user/models.py:141
 msgid "User's preferred language."
 msgstr ""
 
-#: email_user/models.py:147 services/models.py:125
+#: email_user/models.py:150 services/models.py:125
 msgid "user"
 msgstr ""
 
-#: email_user/models.py:180
+#: email_user/models.py:161
+msgid "User emails must be unique without regard to case."
+msgstr ""
+
+#: email_user/models.py:192
 #, python-brace-format
 msgid "Password is too short. It must have at least {min_length} characters."
+msgstr ""
+
+#: email_user/templates/email_user/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site.name)s."
+msgstr ""
+
+#: email_user/templates/email_user/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: email_user/templates/email_user/password_reset_email.html:8
+msgid "Your username is your email address:"
+msgstr ""
+
+#: email_user/templates/email_user/password_reset_email.html:10
+msgid "Thanks for using our site!"
+msgstr ""
+
+#: email_user/templates/email_user/password_reset_email.html:12
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""
+
+#: email_user/templates/email_user/password_reset_email.txt:3
+#, python-format
+msgid ""
+"\n"
+"You (or someone pretending to be you) have asked to reset the\n"
+"password of an account at\n"
+"%(site_name)s.  If this wasn't you, please ignore this email.\n"
+msgstr ""
+
+#: email_user/templates/email_user/password_reset_email.txt:8
+msgid ""
+"\n"
+"To reset the password, please click the following link:\n"
+msgstr ""
+
+#: email_user/templates/email_user/password_reset_email.txt:14
+#, python-format
+msgid ""
+"\n"
+"Sincerely,\n"
+"%(site_name)s Management\n"
 msgstr ""
 
 #: email_user/templates/registration/activation_email.html:7
@@ -226,53 +281,6 @@ msgstr ""
 
 #: email_user/templates/registration/activation_email_subject.txt:1
 msgid "Account activation on"
-msgstr ""
-
-#: email_user/templates/registration/password_reset_email.html:2
-#, python-format
-msgid ""
-"You're receiving this email because you requested a password reset for your "
-"user account at %(site.name)s."
-msgstr ""
-
-#: email_user/templates/registration/password_reset_email.html:4
-msgid "Please go to the following page and choose a new password:"
-msgstr ""
-
-#: email_user/templates/registration/password_reset_email.html:8
-msgid "Your username is your email address:"
-msgstr ""
-
-#: email_user/templates/registration/password_reset_email.html:10
-msgid "Thanks for using our site!"
-msgstr ""
-
-#: email_user/templates/registration/password_reset_email.html:12
-#, python-format
-msgid "The %(site_name)s team"
-msgstr ""
-
-#: email_user/templates/registration/password_reset_email.txt:3
-#, python-format
-msgid ""
-"\n"
-"You (or someone pretending to be you) have asked to reset the\n"
-"password of an account at\n"
-"%(site_name)s.  If this wasn't you, please ignore this email.\n"
-msgstr ""
-
-#: email_user/templates/registration/password_reset_email.txt:8
-msgid ""
-"\n"
-"To reset the password, please click the following link:\n"
-msgstr ""
-
-#: email_user/templates/registration/password_reset_email.txt:14
-#, python-format
-msgid ""
-"\n"
-"Sincerely,\n"
-"%(site_name)s Management\n"
 msgstr ""
 
 #: service_info/settings/base.py:49

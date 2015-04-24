@@ -87,6 +87,9 @@ msgstr "Geolocation is not supported by this browser."
 msgid "Global##GeoPositionUnavailable"
 msgstr "Location is not available at this time."
 
+msgid "Global##RequiredField"
+msgstr "This field is required."
+
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "Log In"
 
@@ -110,6 +113,9 @@ msgstr "Login"
 
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "Register to be a Service Provider here"
+
+msgid "Login-Form##Form-Submit-Options##Password"
+msgstr "Change or reset password"
 
 msgid "Search-List##Page-Head##Title"
 msgstr "Search For Services"
@@ -258,14 +264,23 @@ msgstr "Name of Service"
 msgid "Service-Form##Service-Area"
 msgstr "Area of Service"
 
+msgid "Service-Form##Service-Area-Help"
+msgstr "The location of the service you provide"
+
 msgid "Service-Form##Type"
 msgstr "Service Type"
 
 msgid "Service-Form##Service-Description"
 msgstr "Description"
 
+msgid "Service-Form##Service-Description-Help"
+msgstr "A short explanation about the mentioned service; this explains more about the provided service and helps identify it and its components."
+
 msgid "Service-Form##Service-Hours"
 msgstr "Working Hours"
+
+msgid "Service-Form##Service-Hours-Help"
+msgstr "Please mention the detailed hours of work; this assists the beneficiary in accessing the service easily and without obstacles."
 
 msgid "Service-Form##Additional-Information"
 msgstr "Additional Information (Optional Field)"
@@ -273,8 +288,14 @@ msgstr "Additional Information (Optional Field)"
 msgid "Service-Form##Service-Cost"
 msgstr "Cost of Service (Optional Field)"
 
+msgid "Service-Form##Service-Cost-Help"
+msgstr "Please mention whether the offered service is free of charge or not. If not, please mention the cost of it."
+
 msgid "Service-Form##Selection-Criteria"
 msgstr "Selection Criteria (Optional Field)"
+
+msgid "Service-Form##Selection-Criteria-Help"
+msgstr "Determines the criteria under which the beneficiary is allowed to benefit from the service. Ex: females aged between 3 and 30 years old."
 
 msgid "Service-Form##Hours-Open"
 msgstr "Opening Time:"
@@ -318,6 +339,9 @@ msgstr "Name of Service Provider"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Name"
 msgstr "Name of Focal Point"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Name-Help"
+msgstr "The name of the person to refer to in case of feedback or clarification"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
 msgstr "Password"
 
@@ -327,14 +351,23 @@ msgstr "Confirm Password"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type"
 msgstr "Provider Type"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Help"
+msgstr "Mention what type of provider are you; ex: local NGO, international NGO"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
 msgstr "Choose a Provider Type"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
-msgstr "Phone Number (NN-NNNNNN)"
+msgstr "Phone Number"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number-Help"
+msgstr "Ex: 70-972074"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Phone-Number"
-msgstr "Phone Number (NN-NNNNNN) of Focal Point"
+msgstr "Phone Number of Focal Point"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Phone-Number-Help"
+msgstr "Ex: 70-972074"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
 msgstr "Email"
@@ -345,14 +378,26 @@ msgstr "Enter your Email"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
 msgstr "Website URL (Optional Field)"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Website-Help"
+msgstr "The official website"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
 msgstr "Number of Monthly Beneficiaries"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries-Help"
+msgstr "Number of persons who benefit from your service per month"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Description"
 msgstr "Description"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Description-Help"
+msgstr "A short explanation about the mentioned service; this explains more about the provided service and helps identify it and its components."
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Address"
 msgstr "Address"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Address-Help"
+msgstr "The address of the main headquarters of your NGO or firm"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Legend"
 msgstr "Service Information"
@@ -406,7 +451,7 @@ msgid "Account-Activation##Resent##Title"
 msgstr "Your activation e-mail has been resent."
 
 msgid "Account-Activation##Resent##Description"
-msgstr "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+msgstr "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process.   If you do not receive the email in a few minutes, check your spam folder."
 
 msgid "Account-Activation##Buttons##Resend-Email"
 msgstr "Resend Verification Email"
@@ -472,7 +517,7 @@ msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
 msgstr "Your Information was Submitted Successfully"
 
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Description##Page-Description"
-msgstr "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+msgstr "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process.  If you do not receive the email in a few minutes, check your spam folder."
 
 msgid "Feedback-Confirmation##Page-Head##Page-Title##Title"
 msgstr "Your Information was Submitted Successfully"
@@ -498,17 +543,38 @@ msgstr "Enter your email:"
 msgid "Password-Reset##Submit-Options##Submit"
 msgstr "Submit"
 
-msgid "Password-Reset-Form##Page-Head##Page-Title##Title"
+msgid "Password-Reset##Submitted"
+msgstr "We have sent an email to the email address. Check your email for a message containing a link to the password reset form. If you do not receive the email in a few minutes, check your spam folder."
+
+msgid "Password-Reset-Form##Title"
 msgstr "Password Reset Form"
 
-msgid "Password-Reset-Form##Page-Head##Page-Description##Page-Description"
+msgid "Password-Reset-Form##Description"
 msgstr "Enter your new password in the text field below, then click submit to update your password."
 
 msgid "Password-Reset-Form##Input-Label##New-Password"
 msgstr "Enter your new password:"
 
+msgid "Password-Reset-Form##Input-Label##New-Password2"
+msgstr "Enter your new password again:"
+
 msgid "Password-Reset-Form##Submit-Options##Submit"
 msgstr "Submit"
+
+msgid "Password-Reset-Form##Invalid-Link"
+msgstr "This is not a valid password reset link. Please check that it was copied correctly from the email, and has not already been used. Go to the login page if you need to request another reset link."
+
+msgid "Password-Reset-Form##Changed"
+msgstr "Your password has been changed."
+
+msgid "Password-Reset-Form##Errors##Password-Blank"
+msgstr "Password must not be blank"
+
+msgid "Password-Reset-Form##Errors##Password-Repeat"
+msgstr "Password must be repeated"
+
+msgid "Password-Reset-Form##Errors##Password-Match"
+msgstr "Passwords must match"
 
 msgid "Map##Loading"
 msgstr "Loading Service Type Filters..."
@@ -520,7 +586,7 @@ msgid "Footer##About##Title"
 msgstr "About Service Info"
 
 msgid "Footer##About##Paragraph"
-msgstr "Service info is a tool to allow both service providers to register their services online and beneficiaries to map services and give feedback on services. Service Info is open source and free to use, data is quality checked by International Rescue Committee."
+msgstr "Powered by the International Rescue Committee, Service Info is a tool that allows both service providers to register their services online and beneficiaries to both discover those services on a map and give feedback on them. Service Info is open source and free to use."
 
 msgid "Footer##Contact##Title"
 msgstr "Reach Us"

@@ -149,6 +149,16 @@ li {
 	margin: 0;
 }
 
+select {
+    height: 46px;
+	box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
+	& when (@direction=rtl) {
+		background-position: right 95% top 50%;
+	}
+}
+
 .sr-only {
     position: absolute;
     width: 1px;
@@ -505,6 +515,11 @@ li {
 	@media (min-width: 767px) {
 		padding-bottom: 0;
 	}
+}
+
+.page-title,
+.page-descr {
+    max-width: 800px;
 }
 
 /*
@@ -1259,7 +1274,7 @@ Login
                     margin-@{end}: 2%;
                 }
                 .half:last-child {
-                    margin-@{start}: 4%;
+                    margin-@{start}: 2%;
                 }
             }
         }
@@ -1469,8 +1484,7 @@ div#search {
 		button.primary-button.group-submit.search {
 			float: @start;
 		}
-		.query-field-container > input,
-		select#id_type.form-control {
+		.query-field-container > input {
             height: 46px;
 			box-sizing: border-box;
 		    background-repeat: no-repeat;
@@ -1574,6 +1588,47 @@ Services
 	.third {
 		padding: 0;
 	}
+    .key {
+        padding-bottom: 10px;
+        .row {
+            overflow-y: auto;
+        }
+        .half {
+            .third {
+                width: 33.3333%;
+                float: @start;
+                &:first-child {
+                    @media (max-width: 639px) {
+                        margin-top: 0;
+                    }
+                }
+            }
+            margin-@{start}: 0;
+            .control-label {
+                float: @start;
+                padding-top: 1px;
+                margin-@{end}: 5px;
+                display: inline-block;
+            }
+            .service-status-approved,
+            .service-status-denied,
+            .service-status-draft {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                display: inline-block;
+            }
+            .service-status-approved {
+                background-color: #3cb879;
+            }
+            .service-status-denied {
+                background-color: #E04733;
+            }
+            .service-status-draft {
+                background-color: #1F6BC2;
+            }
+        }
+    }
 	.main-content {
 		margin: 0 0 30px;
 		@media (min-width: 640px) {
@@ -1908,11 +1963,13 @@ table {
     }
 }
 
-table#service-status span.update::before when (@direction = ltr) {
+table#service-status tr.has_parent td span.service-name::before when (@direction = ltr) {
   content: "\2937";  // ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS
+  font-size: 26px;
 }
-table#service-status span.update::before when (@direction = rtl) {
+table#service-status tr.has_parent td span.service-name::before when (@direction = rtl) {
   content: "\2936"; // ARROW POINTING DOWNWARDS THEN CURVING LEFTWARDS
+  font-size: 26px;
 }
 table {
  	width: 97.25%;
@@ -1938,8 +1995,12 @@ table {
 		&.denied {
 			border-@{end}-color: #E04733;
 		}
-        &.update td:first-child span {
-            margin-@{start}: 0.5em;
+        &.update {
+            border-@{end}-color: #1F6BC2;    
+        }
+        tr.update td span {
+            padding-@{start}: 1.5em;
+            display: block;
         }
 	}
 	th {
@@ -2011,6 +2072,8 @@ table {
 			border-bottom: 1px solid #DDD;
             padding: 12px;
             padding-@{start}: 1em;
+            overflow-y: hidden;
+            overflow-x: auto;
 		}
 
 		.vertical-td {
@@ -2022,7 +2085,6 @@ table {
 			padding-@{end}: 10px;
 			font-weight: bold;
 			white-space: nowrap;
-			border-@{start}: 5px solid #fdc82f !important;
 		}
 
 	    .vertical-header {
@@ -2271,9 +2333,119 @@ Footer
     vertical-align: top;
     position: relative;
     top: -3px;
+    display: inline-block;
+    margin-@{end}: 3px;
     @media only screen and (min-width: 640px) {
         top: 0;
         vertical-align: middle;
+        display: block;
+    }
+}
+
+/*
+Feedback Form
+Feedback Confirm
+Feedback Help
+*/
+#feedback-form,
+#feedback-confirm,
+#feedback-help {
+	.main-content {
+		padding-@{start}: 0;
+	}
+}
+
+#feedback-form {
+    p.what_service {
+        margin: 10px 0 5px;
+    }
+    fieldset {
+        padding: 10px 0 0;
+        @media (max-width: 640px) {
+            .row {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+    }
+    .name {
+        color: #3cb879;
+        font-size: 150%;
+        font-weight: 700;
+    }
+    .checkbox {
+        padding-bottom: 14px;
+    }
+    label>input {
+        margin-@{end}: 14px;
+    }
+    .ifdelivered .form-group {
+        label {
+            margin-@{end}: 14px;
+        }
+        input {
+            margin-top: 10px;
+            margin-@{end}: 5px;
+        }
+    }
+    .ifnotdelivered .form-group select {
+        margin: 10px 0;
+
+    }
+    .ifdelivered,
+    .row.ifnotdelivered {
+        background-color: #E5E5E5;
+        border: 1px solid #CCC;
+        padding: 15px;
+        margin-@{start}: 0;
+        margin-@{end}: 0;
+        .round-start;
+        .round-end;
+        margin-top: 30px;
+        margin-bottom: 14px;
+        overflow-y: auto;
+        @media (max-width: 640px) {
+            margin-top: 0;
+        }
+        .row {
+            padding: 0;
+            @media (max-width: 640px) {
+                .row {
+                    padding: 15px 10px
+                }
+            }
+            .half>.form-group {
+                @media (max-width:640px) {
+                    margin-bottom: 14px;
+                }
+            }
+        }
+    }
+    .main-content {
+        overflow-y: auto;
+        @media (max-width: 640px) {
+            padding: 0 0 30px;
+        }
+    }
+    @media (min-width: 640px) {
+        .submit-form {
+            padding: 0;
+            .half:nth-child(2) {
+                margin-@{end}: 4%;
+            }
+            .half:nth-child(3) {
+                margin-@{start}: 0;
+            }
+        }
+    }
+    textarea#id_other_difficulties {
+        margin-top: 10px;
+    }
+    .control-label {
+        display: block;
+    }
+    label.yes-no {
+            float: @start;
     }
 }
 

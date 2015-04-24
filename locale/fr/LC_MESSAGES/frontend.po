@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-04-15 12:42+0000\n"
+"PO-Revision-Date: 2015-04-23 08:54+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,9 @@ msgstr "Bonjour Le Monde"
 
 msgid "Menu##Menu-Toggle"
 msgstr "Menu"
+
+msgid "Menu##Home"
+msgstr "Principale"
 
 msgid "Menu##Login"
 msgstr "Login"
@@ -91,6 +94,9 @@ msgstr "Géolocalisation ne est pas supporté par ce navigateur."
 msgid "Global##GeoPositionUnavailable"
 msgstr "Emplacement ne est pas disponible en ce moment."
 
+msgid "Global##RequiredField"
+msgstr "Ce champ est obligatoire."
+
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "Entrer"
 
@@ -103,11 +109,20 @@ msgstr "Email"
 msgid "Login-Form##Form##Password"
 msgstr "Mot de passe"
 
+msgid "Login-Form##More-Options-Title"
+msgstr "options supplémentaires"
+
+msgid "Login-Form##More-Options"
+msgstr "Si vous avez besoin de votre email de vérification envoyé à nouveau, ou pour vous inscrire pour être un fournisseur de services, cliquez sur le bouton correspondant ci-dessous."
+
 msgid "Login-Form##Form-Submit-Options##Submit"
 msgstr "Entrer"
 
 msgid "Login-Form##Form-Submit-Options##Register"
 msgstr "Inscrivez-vous pour être un fournisseur de service ici"
+
+msgid "Login-Form##Form-Submit-Options##Password"
+msgstr "Modifier ou réinitialiser le mot de passe"
 
 msgid "Search-List##Page-Head##Title"
 msgstr "Recherche de services"
@@ -115,8 +130,20 @@ msgstr "Recherche de services"
 msgid "Search-List##Page-Head##Description"
 msgstr "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
 
+msgid "Feedback-Search##Page-Head##Title"
+msgstr "Envoyer des commentaires sur les services"
+
+msgid "Feedback-Search##Page-Head##Description"
+msgstr "Se il vous plaît chercher un fournisseur de service premier à donner votre feedback, vous devez sélectionner le fournisseur de services et cliquez sur la rétroaction de donner pour commencer."
+
 msgid "Service-Detail##Give-Feedback"
 msgstr "Améliorer les informations sur ce service"
+
+msgid "Feedback-Map##Page-Head##Title"
+msgstr "Envoyer des commentaires sur les services"
+
+msgid "Feedback-Map##Page-Head##Description"
+msgstr "Se il vous plaît chercher un fournisseur de service premier à donner votre feedback, vous devez sélectionner le fournisseur de services et cliquez sur la rétroaction de donner pour commencer."
 
 msgid "Service-Map##Page-Head##Page-Title##Title"
 msgstr "Recherche de services"
@@ -244,14 +271,23 @@ msgstr "Nom du service"
 msgid "Service-Form##Service-Area"
 msgstr "Zone de service"
 
+msgid "Service-Form##Service-Area-Help"
+msgstr "L'emplacement du service que vous fournissez"
+
 msgid "Service-Form##Type"
 msgstr "Type de service"
 
 msgid "Service-Form##Service-Description"
 msgstr "Description"
 
+msgid "Service-Form##Service-Description-Help"
+msgstr "Une courte explication sur le service mentionné; ce qui explique plus sur le service fourni et permet d'identifier et de ses composants."
+
 msgid "Service-Form##Service-Hours"
 msgstr "Journée de travail"
+
+msgid "Service-Form##Service-Hours-Help"
+msgstr "Se il vous plaît mentionner les heures de travail détaillés; cela aide le bénéficiaire pour accéder au service facilement et sans obstacles."
 
 msgid "Service-Form##Additional-Information"
 msgstr "Informations supplémentaires (champ facultatif)"
@@ -259,8 +295,14 @@ msgstr "Informations supplémentaires (champ facultatif)"
 msgid "Service-Form##Service-Cost"
 msgstr "Coût du service (champ facultatif)"
 
+msgid "Service-Form##Service-Cost-Help"
+msgstr "Se il vous plaît mentionner si le service offert est gratuit ou non. Si non, se il vous plaît mentionner le coût de celui-ci."
+
 msgid "Service-Form##Selection-Criteria"
 msgstr "Critères de sélection (champ optionnel)"
+
+msgid "Service-Form##Selection-Criteria-Help"
+msgstr "Détermine les critères selon lesquels le bénéficiaire est autorisé à bénéficier du service. Ex: les femmes âgés entre 3 et 30 ans."
 
 msgid "Service-Form##Hours-Open"
 msgstr "Temps d'ouverture:"
@@ -305,6 +347,10 @@ msgstr "Nom du fournisseur de service"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Name"
 msgstr "Nom du Point Focal"
 
+msgid ""
+"Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Name-Help"
+msgstr "Le nom de la personne de se référer au cas de commentaires et des clarifications"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
 msgstr "Mot de passe"
 
@@ -314,15 +360,26 @@ msgstr "Confirmez Le Mot De Passe"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type"
 msgstr "Type de prestataire"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Help"
+msgstr "Parler de ce type de fournisseur êtes-vous; ex: ONG locale, ONG internationale"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
 msgstr "Choisissez un type de fournisseur"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
-msgstr "Numéro de téléphone (NN-NNNNNN)"
+msgstr "Numéro de téléphone"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number-Help"
+msgstr "Ex: 70-972074"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Phone-Number"
-msgstr "Numéro de téléphone (NN-NNNNNN) du Point Focal"
+msgstr "Numéro de téléphone du Point Focal"
+
+msgid ""
+"Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Phone-Number-"
+"Help"
+msgstr "Ex: 70-972074"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Email"
 msgstr "Email"
@@ -333,14 +390,27 @@ msgstr "Entrez votre Email"
 msgid "Provider-Registration-Form##Form-Sections##Basic##Website"
 msgstr "URL du site Web (champ facultatif)"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Website-Help"
+msgstr "Le site officiel"
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
 msgstr "Nombre de bénéficiaires mensuelles"
+
+msgid ""
+"Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries-Help"
+msgstr "Nombre de personnes qui bénéficient de votre service par mois"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Description"
 msgstr "Description"
 
+msgid "Provider-Registration-Form##Form-Sections##Basic##Description-Help"
+msgstr "Une courte explication sur le service mentionné; ce qui explique plus sur le service fourni et permet d'identifier et de ses composants."
+
 msgid "Provider-Registration-Form##Form-Sections##Basic##Address"
 msgstr "Adresse"
+
+msgid "Provider-Registration-Form##Form-Sections##Basic##Address-Help"
+msgstr "L'adresse du siège principal de vos ONG ou entreprise"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Legend"
 msgstr "Informations sur le service"
@@ -393,14 +463,8 @@ msgstr "Vérification Renvoyer Email"
 msgid "Account-Activation##Pending##Title"
 msgstr "L'activation de votre compte est en attente ..."
 
-msgid "Account-Activation##Pending##Description"
-msgstr "Compte-activation ## en attente ## Description"
-
 msgid "Account-Activation##Success##Title"
 msgstr "Votre compte a été activé."
-
-msgid "Account-Activation##Success##Description"
-msgstr "Compte-Activation ##  réussite ## Description "
 
 msgid "Account-Activation##Failed##Title"
 msgstr "L'activation de votre compte a échoué."
@@ -412,9 +476,12 @@ msgid "Account-Activation##Resent##Title"
 msgstr "Votre e-mail d'activation a été renvoyé."
 
 msgid "Account-Activation##Resent##Description"
-msgstr "Nous avons envoyé un e-mail de confirmation sur le compte e-mail utilisée lors de votre inscription. Cliquez sur le lien de confirmation dans l'e-mail pour terminer le processus d'inscription."
+msgstr "Nous avons envoyé un e-mail de confirmation sur le compte e-mail utilisée lors de votre inscription. Cliquez sur le lien de confirmation dans l'e-mail pour terminer le processus d'inscription. Si vous ne recevez pas l'e-mail en quelques minutes, vérifiez votre dossier spam."
 
 msgid "Account-Activation##Buttons##Resend-Email"
+msgstr "Vérification Renvoyer Email"
+
+msgid "Account-Resend-Verification##Title"
 msgstr "Vérification Renvoyer Email"
 
 msgid "Service-List##Page-Head##Page-Title##Title"
@@ -477,7 +544,7 @@ msgstr "Votre information a été soumis avec succès"
 msgid ""
 "Provider-Registration-Confirmation##Page-Head##Page-Description##Page-"
 "Description"
-msgstr "Nous avons envoyé un e-mail de confirmation sur le compte e-mail utilisée lors de votre inscription. Cliquez sur le lien de confirmation dans l'e-mail pour terminer le processus d'inscription."
+msgstr "Nous avons envoyé un e-mail de confirmation sur le compte e-mail utilisée lors de votre inscription. Cliquez sur le lien de confirmation dans l'e-mail pour terminer le processus d'inscription. Si vous ne recevez pas l'e-mail en quelques minutes, vérifiez votre dossier spam."
 
 msgid "Feedback-Confirmation##Page-Head##Page-Title##Title"
 msgstr "Votre information a été soumis avec succès"
@@ -504,17 +571,38 @@ msgstr "Entrez votre email:"
 msgid "Password-Reset##Submit-Options##Submit"
 msgstr "Soumettre"
 
-msgid "Password-Reset-Form##Page-Head##Page-Title##Title"
+msgid "Password-Reset##Submitted"
+msgstr "Nous avons envoyé un courriel à l'adresse e-mail. Vérifiez votre e-mail un message contenant un lien vers le formulaire de réinitialisation de mot. Si vous ne recevez pas l'e-mail en quelques minutes, vérifiez votre dossier spam."
+
+msgid "Password-Reset-Form##Title"
 msgstr "Mot de passe Reset Form"
 
-msgid "Password-Reset-Form##Page-Head##Page-Description##Page-Description"
+msgid "Password-Reset-Form##Description"
 msgstr "Entrez votre nouveau mot de passe dans le champ de texte ci-dessous, puis cliquez sur soumettre à mettre à jour votre mot de passe."
 
 msgid "Password-Reset-Form##Input-Label##New-Password"
 msgstr "Entrez votre nouveau mot de passe:"
 
+msgid "Password-Reset-Form##Input-Label##New-Password2"
+msgstr "Entrez votre nouveau mot de passe:"
+
 msgid "Password-Reset-Form##Submit-Options##Submit"
 msgstr "Soumettre"
+
+msgid "Password-Reset-Form##Invalid-Link"
+msgstr "Ce ne est pas un lien de réinitialisation de mot valide. Se il vous plaît vérifier que il a été copié correctement à partir de l'e-mail, et n'a pas déjà été utilisé. Accédez à la page de connexion, si vous avez besoin de demander un autre lien de réinitialisation."
+
+msgid "Password-Reset-Form##Changed"
+msgstr "Votre mot de passe a été changé."
+
+msgid "Password-Reset-Form##Errors##Password-Blank"
+msgstr "Mot de passe ne doit pas être vide"
+
+msgid "Password-Reset-Form##Errors##Password-Repeat"
+msgstr "Mot de passe doit être répété"
+
+msgid "Password-Reset-Form##Errors##Password-Match"
+msgstr "Les mots de passe doivent correspondre"
 
 msgid "Map##Loading"
 msgstr "Chargement Type de service Filtres ..."
@@ -526,7 +614,7 @@ msgid "Footer##About##Title"
 msgstr "À propos de Service Info"
 
 msgid "Footer##About##Paragraph"
-msgstr "Info service est un outil pour permettre aux fournisseurs de services d'enregistrer leurs services en ligne et les bénéficiaires des services à la carte et donner votre avis sur les services. Service Info est open source et libre d'utilisation, les données sont de qualité vérifiée par International Rescue Committee."
+msgstr "Propulsé par l'International Rescue Committee, Service Info est un outil qui permet aux fournisseurs de services d'enregistrer leurs services en ligne et les bénéficiaires à la fois découvrir ces services sur une carte et donner des commentaires sur eux. Service Info est open source et libre d'utilisation."
 
 msgid "Footer##Contact##Title"
 msgstr "Contactez nous"

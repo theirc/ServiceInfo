@@ -48,11 +48,11 @@ module.exports = Backbone.View.extend({
         $('.no-search-results').hide();
 
         var $scv = this.$el.find('#search_controls');
-        var SearchControlView = new search.SearchControls({
+        // Renders automatically when language is ready
+        this.SearchControlView = new search.SearchControls({
             $el: $scv,
             feedback: this.feedback
         });
-        SearchControlView.render();
 
         var $results = $('.search-result-list');
         this.resultView = new SearchResultList({
@@ -62,55 +62,5 @@ module.exports = Backbone.View.extend({
         this.resultView.render();
 
         $el.i18n();
-    },
-
-    updateResults: function() {
-        var self = this;
-        var services = search.services.data();
-
-        if (services.length === 0) {
-            $('.no-search-results').show();
-            $('.search-result-list').hide();
-            return;
-        }
-        $('.search-result-list').show();
-        $('.no-search-results').hide();
-
-        $.each(services, function() {
-            var service = this;
-        });
-
-        self.resultView.render();
-    },
-
-    events: {
-        // "click button[name=search]": function(e) {
-        //     var self = this;
-        //     hashtrack.setVar('q', self.$el.find('.query').val());
-        //     hashtrack.setVar('t', self.$el.find('.query-service-type').val());
-        //     search.refetchServices().then(function(){
-        //         self.updateResults();
-        //     })
-        // },
-        "search": function(_, query) {
-            $('.spinner').show();
-            var self = this;
-            search.refetchServices().then(function(){
-                self.updateResults();
-                $('.spinner').hide();
-            })
-        },
-        "input input.query": function(e) {
-            var query = $(e.target).val();
-            hashtrack.setVar('q', query);
-        },
-        "change .query-service-type": function(e) {
-            hashtrack.setVar('t', $(e.target).val());
-        },
-        "input keyup": function(e) {
-            if (e.keyCode === 13) {
-                return false;
-            }
-        },
     }
-})
+});

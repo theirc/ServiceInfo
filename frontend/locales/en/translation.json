@@ -32,7 +32,8 @@
     "Friday": "Friday",
     "Saturday": "Saturday",
     "GeolocationNotSupported": "Geolocation is not supported by this browser.",
-    "GeoPositionUnavailable": "Location is not available at this time."
+    "GeoPositionUnavailable": "Location is not available at this time.",
+    "RequiredField": "This field is required."
   },
   "Login-Form": {
     "Page-Head": {
@@ -51,7 +52,8 @@
     "More-Options": "If you need your verification email sent again, or to register to be a service provider click the corresponding button below.",
     "Form-Submit-Options": {
       "Submit": "Login",
-      "Register": "Register to be a Service Provider here"
+      "Register": "Register to be a Service Provider here",
+      "Password": "Change or reset password"
     }
   },
   "Search-List": {
@@ -148,12 +150,17 @@
       "Service-Area-Choose": "Choose a Service Area",
       "Service-Name": "Name of Service",
       "Service-Area": "Area of Service",
+      "Service-Area-Help": "The location of the service you provide",
       "Type": "Service Type",
       "Service-Description": "Description",
+      "Service-Description-Help": "A short explanation about the mentioned service; this explains more about the provided service and helps identify it and its components.",
       "Service-Hours": "Working Hours",
+      "Service-Hours-Help": "Please mention the detailed hours of work; this assists the beneficiary in accessing the service easily and without obstacles.",
       "Additional-Information": "Additional Information (Optional Field)",
       "Service-Cost": "Cost of Service (Optional Field)",
+      "Service-Cost-Help": "Please mention whether the offered service is free of charge or not. If not, please mention the cost of it.",
       "Selection-Criteria": "Selection Criteria (Optional Field)",
+      "Selection-Criteria-Help": "Determines the criteria under which the beneficiary is allowed to benefit from the service. Ex: females aged between 3 and 30 years old.",
       "Hours-Open": "Opening Time:",
       "Hours-Close": "Closing Time:",
       "Selection-Criteria": "Selection Criteria",
@@ -198,18 +205,26 @@
   			"Legend": "Basic details to register a service provider:",
   			"Name": "Name of Service Provider",
             "Focal-Point-Name": "Name of Focal Point",
+            "Focal-Point-Name-Help": "The name of the person to refer to in case of feedback or clarification",
             "Password": "Password",
             "PasswordConfirm": "Confirm Password",
   			"Provider-Type": "Provider Type",
+            "Provider-Type-Help": "Mention what type of provider are you; ex: local NGO, international NGO",
             "Provider-Type-Choose": "Choose a Provider Type",
-  			"Phone-Number": "Phone Number (NN-NNNNNN)",
-  			"Focal-Point-Phone-Number": "Phone Number (NN-NNNNNN) of Focal Point",
+  			"Phone-Number": "Phone Number",
+  			"Phone-Number-Help": "Ex: 70-972074",
+  			"Focal-Point-Phone-Number": "Phone Number of Focal Point",
+  			"Focal-Point-Phone-Number-Help": "Ex: 70-972074",
   			"Email": "Email",
             "EmailPlaceholder": "Enter your Email",
   			"Website": "Website URL (Optional Field)",
+  			"Website-Help": "The official website",
             "MonthlyBeneficiaries": "Number of Monthly Beneficiaries",
+            "MonthlyBeneficiaries-Help": "Number of persons who benefit from your service per month",
   			"Description": "Description",
-            "Address": "Address"
+  			"Description-Help": "A short explanation about the mentioned service; this explains more about the provided service and helps identify it and its components.",
+            "Address": "Address",
+            "Address-Help": "The address of the main headquarters of your NGO or firm"
   		},
   		"Service-Information": {
   			"Legend": "Service Information",
@@ -242,7 +257,7 @@
     },
     "Resent": {
         "Title": "Your activation e-mail has been resent.",
-        "Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+        "Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process.   If you do not receive the email in a few minutes, check your spam folder."
     },
     "Buttons": {
       "Resend-Email": "Resend Verification Email"
@@ -263,11 +278,11 @@
     "Empty-Message": "You have not submitted any services yet. You may submit your first service for review by tapping the New Service button.",
     "Add-Service": "New Service",
     "Status": {
-      "draft": "draft",
-      "current": "current",
-      "rejected": "rejected",
-      "canceled": "canceled",
-      "archived": "archived"
+      "draft": "Draft",
+      "current": "Current",
+      "rejected": "Rejected",
+      "canceled": "Canceled",
+      "archived": "Archived"
     },
     "Table": {
       "Thead": {
@@ -282,7 +297,7 @@
     "Cancel": "Cancel",
     "Delete": "Delete",
     "Change-Service": "Change service",
-    "Change-Change": "Make further changes to this pending update"
+    "Change-Change": "Update this draft"
   },
   "Provider-Registration-Confirmation": {
     "Page-Head": {
@@ -290,7 +305,7 @@
         "Title": "Your Information was Submitted Successfully"
       },
       "Page-Description": {
-        "Page-Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process."
+        "Page-Description": "We have sent a confirmation email to the email account you used during registration. Click the confirmation link in the email to complete the registration process.  If you do not receive the email in a few minutes, check your spam folder."
       }
     }
   },
@@ -328,22 +343,25 @@
     },
     "Submit-Options": {
       "Submit": "Submit"
-    }
+    },
+    "Submitted": "We have sent an email to the email address. Check your email for a message containing a link to the password reset form. If you do not receive the email in a few minutes, check your spam folder."
   },
   "Password-Reset-Form": {
-    "Page-Head": {
-      "Page-Title": {
-        "Title": "Password Reset Form"
-      },
-      "Page-Description": {
-        "Page-Description": "Enter your new password in the text field below, then click submit to update your password."
-      }
-    },
+    "Title": "Password Reset Form",
+    "Description": "Enter your new password in the text field below, then click submit to update your password.",
     "Input-Label": {
-      "New-Password": "Enter your new password:"
+      "New-Password": "Enter your new password:",
+      "New-Password2": "Enter your new password again:"
     },
     "Submit-Options": {
       "Submit": "Submit"
+    },
+    "Invalid-Link": "This is not a valid password reset link. Please check that it was copied correctly from the email, and has not already been used. Go to the login page if you need to request another reset link.",
+    "Changed": "Your password has been changed.",
+    "Errors": {
+        "Password-Blank": "Password must not be blank",
+        "Password-Repeat": "Password must be repeated",
+        "Password-Match": "Passwords must match"
     }
   },
   "Map": {
@@ -353,7 +371,7 @@
   "Footer": {
     "About": {
       "Title": "About Service Info",
-      "Paragraph": "Service info is a tool to allow both service providers to register their services online and beneficiaries to map services and give feedback on services. Service Info is open source and free to use, data is quality checked by International Rescue Committee."
+      "Paragraph": "Powered by the International Rescue Committee, Service Info is a tool that allows both service providers to register their services online and beneficiaries to both discover those services on a map and give feedback on them. Service Info is open source and free to use."
     },
     "Contact": {
       "Title": "Reach Us",
