@@ -78,10 +78,24 @@ html,body {
 	position: relative;
 }
 #messages {
-    position: fixed;
-    top: 0;
+    &:empty {
+        display: none;
+    }
     width: 100%;
-    z-index: 99;
+    height: 59px;
+    @media (min-width: 640px) {
+        height: 79px
+    }
+    .message {
+        padding: 86px 30px 20px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 99;
+        @media (min-width: 640px) {
+            padding: 20px 30px;
+        }
+    }
 }
 .message {
     background-color: #FAC6BD;
@@ -965,7 +979,7 @@ input[type=range] {
     width: 100%;
     height: 70px;
     background-color: #2A2A2A;
-    z-index: 99;
+    z-index: 100;
     position: relative;
 	@media (min-width: 640px) {
         position: absolute;
