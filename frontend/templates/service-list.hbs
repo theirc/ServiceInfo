@@ -14,6 +14,29 @@
     </div>
 <!-- End Page Head -->
 
+<!-- End Table Key -->
+    <div class="key">
+      <div class="container">
+        <div class="row">
+          <div class="half">
+            <div class="third">
+              <div class="control-label" data-i18n="Service-List.Status.current"></div>
+              <div class="service-status-approved"></div>
+            </div>
+            <div class="third">
+              <label class="control-label" data-i18n="Service-List.Status.rejected"></label>
+              <div class="service-status-denied"></div>
+            </div>
+            <div class="third">
+              <label class="control-label" data-i18n="Service-List.Status.draft"></label>
+              <div class="service-status-draft"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- End Table Key -->
+
 <!-- Main Content -->
 {{#unless no_services}}
 	<table id="service-status" class="table">
@@ -28,10 +51,10 @@
 		</thead>
 		<tbody>
             {{#each services}}
-			<tr class="{{#if this.isApproved }}approved{{/if}}{{#if this.isRejected}}denied{{/if}}">
+			<tr class="{{#if this.isApproved }}approved{{/if}}{{#if this.isRejected}}denied{{/if}}{{#if this.parent }}update{{/if}}">
 				<td>
 
-                  <div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td {{#if this.parent }}update{{/if}}">
+                  <div class="vertical-header" data-i18n="Service-List.Table.Thead.Status"></div><span class="vertical-td service-name">
                     {{#if this.is_current}}
                       <a href="#/service/{{ this.id }}">{{ this.name }}</a>
                     {{else}}

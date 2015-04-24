@@ -263,11 +263,11 @@
     "Empty-Message": "You have not submitted any services yet. You may submit your first service for review by tapping the New Service button.",
     "Add-Service": "New Service",
     "Status": {
-      "draft": "draft",
-      "current": "current",
-      "rejected": "rejected",
-      "canceled": "canceled",
-      "archived": "archived"
+      "draft": "Draft",
+      "current": "Current",
+      "rejected": "Rejected",
+      "canceled": "Canceled",
+      "archived": "Archived"
     },
     "Table": {
       "Thead": {
@@ -282,7 +282,7 @@
     "Cancel": "Cancel",
     "Delete": "Delete",
     "Change-Service": "Change service",
-    "Change-Change": "Make further changes to this pending update"
+    "Change-Change": "Update this draft"
   },
   "Provider-Registration-Confirmation": {
     "Page-Head": {
