@@ -243,6 +243,10 @@ class ServiceSerializer(RequireOneTranslationMixin,
         # Look for "new" services that are updates of existing ones
         # and do special things with them.
         attrs = super().validate(attrs)
+        # User must be a provider
+        if not Provider.objects.filter(user=self.context['request'].user).exists():
+            raise exceptions.ValidationError(
+                _('User is not a provider.  Only providers can create services.'))
         # We don't allow service updates via the API, and all new services should
         # start with draft status, so just force it.
         attrs['status'] = Service.STATUS_DRAFT
@@ -424,7 +428,6 @@ class PasswordResetCheckSerializer(serializers.Serializer):
     Serializer for our API to check if a password
     reset key appears to be valid.
     """
-    email = serializers.EmailField()
     key = serializers.CharField()
 
     def validate(self, attrs):

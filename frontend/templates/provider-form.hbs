@@ -107,6 +107,7 @@
                     <div class="half">
                       <div class="form-group">
                         <label for="id_type" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Provider-Type"></span><span class=error></span></label>
+                        <div class="field-help" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Provider-Type-Help"></div>
                         <div class="form-group">
                           <select id="id_type" name="type" class=form-control>
                               <!-- <option value="" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Provider-Type-Choose"></option>
@@ -121,6 +122,7 @@
                     <div class="half">
                       <div class="form-group">
                         <label for="id_phone_number" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Phone-Number"></span><span class=error></span></label>
+                        <div class="field-help" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Phone-Number-Help"></div>
                         <div class="form-group">
                           <input id="id_phone_number" type="tel" name="phone_number" class="form-control" pattern="\d{2}-\d{6}" minlength="9" maxlength="9">
                         </div>
@@ -134,6 +136,7 @@
                     <div class="half">
                       <div class="form-group">
                         <label for="id_focal_point_name" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Focal-Point-Name"></span><span class=error></span></label>
+                        <div class="field-help" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Focal-Point-Name-Help"></div>
                         <input id="id_focal_point_name" type="text" name="focal_point_name" data-i18n-field class="form-control"
                             maxlength="256"
                             pattern=".*[^\d\s\.`~!@#$%^&*\(\)-_=\+\[\]{};:',\<\>/\?]|[A-Z].*"><!-- at least one alphabetic? -->
@@ -143,6 +146,7 @@
                     <div class="half">
                       <div class="form-group">
                         <label for="id_focal_point_phone_number" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Focal-Point-Phone-Number"></span><span class=error></span></label>
+                        <div class="field-help" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Focal-Point-Phone-Number-Help"></div>
                         <div class="form-group">
                           <input id="id_focal_point_phone_number" type="tel" name="focal_point_phone_number" minlength="9" maxlength="9" class="form-control" pattern="\d{2}-\d{6}">
                         </div>
@@ -157,12 +161,14 @@
                   <div class="form-group">
                     <div class=half>
                         <label for="id_website" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Website"></span><span class=error></span></label>
+                        <div class="field-help" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Website-Help"></div>
                         <div class="form-group">
                           <input id="id_website" type="url" name="website" class="form-control" placeholder="http://www.example.com" maxlength="200">
                         </div>
                     </div>
                     <div class=half>
                       <label for="id_number_of_monthly_beneficiaries" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.MonthlyBeneficiaries"></span><span class=error></span></label>
+                        <div class="field-help" data-i18n="Provider-Registration-Form.Form-Sections.Basic.MonthlyBeneficiaries-Help"></div>
                       <div class="form-group">
                           <input id="id_number_of_monthly_beneficiaries" type="number" name="number_of_monthly_beneficiaries"
                               min="0" max="1000000" class="form-control">
@@ -174,6 +180,7 @@
                 <div class="row">
                   <div class="form-group">
                     <label for="id_description" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Description"></span><span class=error></span></label>
+                    <div class="field-help" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Description-Help"></div>
                     <div class="form-group">
                       <textarea id="id_description" rows="4" name="description" data-i18n-field class="form-control"></textarea>
                     </div>
@@ -183,6 +190,7 @@
                 <div class="row">
                   <div class="form-group">
                     <label for="id_address" class="control-label"><span data-i18n="Provider-Registration-Form.Form-Sections.Basic.Address"></span><span class=error></span></label>
+                    <div class="field-help" data-i18n="Provider-Registration-Form.Form-Sections.Basic.Address-Help"></div>
                     <div class="form-group">
                       <textarea id="id_address" rows="4" name="address" data-i18n-field class="form-control"></textarea>
                     </div>

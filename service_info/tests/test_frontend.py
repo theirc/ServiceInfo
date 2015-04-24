@@ -23,6 +23,9 @@ from services.models import Service
 from services.tests.factories import ProviderTypeFactory, ServiceFactory
 
 
+DEFAULT_TIMEOUT = 4  # Seconds
+
+
 class ServiceInfoFrontendTestCase(LiveServerTestCase):
     """End to end testing with selenium and express server."""
 
@@ -84,18 +87,18 @@ class ServiceInfoFrontendTestCase(LiveServerTestCase):
         button = form.find_element_by_css_selector('[data-lang="%s"]' % language)
         button.click()
 
-    def wait_for_element(self, selector, match=By.ID, timeout=2):
+    def wait_for_element(self, selector, match=By.ID, timeout=DEFAULT_TIMEOUT):
         return WebDriverWait(self.browser, timeout).until(
             expected_conditions.visibility_of_element_located((match, selector))
         )
 
-    def wait_for_page_title_contains(self, title, timeout=2):
+    def wait_for_page_title_contains(self, title, timeout=DEFAULT_TIMEOUT):
         return WebDriverWait(self.browser, timeout).until(
             expected_conditions.text_to_be_present_in_element(
                 (By.CLASS_NAME, 'page-title'), title)
         )
 
-    def wait_for_landing_page(self, timeout=2):
+    def wait_for_landing_page(self, timeout=DEFAULT_TIMEOUT):
         return self.wait_for_element('landing-img', By.CLASS_NAME, timeout)
 
     def submit_form(self, form, data, button_class='submit'):
@@ -169,7 +172,7 @@ class FrontEndTestCase(ServiceInfoFrontendTestCase):
         }
         self.submit_form(form, data, button_class='form-btn-submit')
 
-        self.wait_for_page_title_contains('Submitted Successfully', timeout=5)
+        self.wait_for_page_title_contains('Submitted Successfully', timeout=2 * DEFAULT_TIMEOUT)
         self.assertHashLocation('/register/confirm')
 
     def test_duplicate_registration(self):
@@ -207,14 +210,15 @@ class FrontEndTestCase(ServiceInfoFrontendTestCase):
             password='abc123', is_active=False, activation_key='1234567890')
         self.load_page_and_set_language()
         self.browser.get(self.express_url + '#/register/verify/1234567890')
-        self.wait_for_landing_page(timeout=5)
+        self.wait_for_landing_page(timeout=2 * DEFAULT_TIMEOUT)
 
     def test_invalid_activation(self):
         """Show message for invalid activation code."""
 
         self.load_page_and_set_language()
         self.browser.get(self.express_url + '#/register/verify/1234567890')
-        self.wait_for_page_title_contains('Your account activation Failed.', timeout=5)
+        self.wait_for_page_title_contains('Your account activation Failed.',
+                                          timeout=2 * DEFAULT_TIMEOUT)
 
     def test_text_list_search(self):
         """Find services by text based search."""

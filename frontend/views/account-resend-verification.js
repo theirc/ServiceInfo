@@ -14,9 +14,8 @@ module.exports = Backbone.View.extend({
     },
 
     render: function() {
-        var $el = this.$el;
-        $el.html(this.template());
-        $el.i18n();
+        var email = config.get('temp.email') || '';
+        this.$el.html(this.template({email: email}));
     },
 
     events: {

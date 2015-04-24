@@ -135,11 +135,17 @@ var forms = module.exports = {
             missing = {},
             errors = e.responseJSON;
         $.each(errors, function(k) {
-            var $error = self.getFieldLabel($form, k).find('.error');
-            if ($error.length) {
-                $error.text(this[0]);
+            if (k === 'non_field_errors') {
+                for (var i = 0; i < this.length; i++) {
+                    messages.add(this[i]);
+                }
             } else {
-                missing[k] = this[0];
+                var $error = self.getFieldLabel($form, k).find('.error');
+                if ($error.length) {
+                    $error.text(this[0]);
+                } else {
+                    missing[k] = this[0];
+                }
             }
         })
         if (e.status >= 500) {

@@ -14,3 +14,7 @@ SITE_ID = PRODUCTION_SITE_ID
 if 'BROKER_PASSWORD' in os.environ:
     BROKER_URL = 'amqp://service_info_production:%(BROKER_PASSWORD)s@%(BROKER_HOST)s' \
                  '/service_info_production' % os.environ
+
+# Production JIRA projects:
+JIRA_SERVICES_PROJECT_KEY = 'SM'
+JIRA_FEEDBACK_PROJECT_KEY = 'LBF'
