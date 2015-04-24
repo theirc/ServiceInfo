@@ -1568,6 +1568,47 @@ Services
 	.third {
 		padding: 0;
 	}
+    .key {
+        padding-bottom: 10px;
+        .row {
+            overflow-y: auto;
+        }
+        .half {
+            .third {
+                width: 33.3333%;
+                float: @start;
+                &:first-child {
+                    @media (max-width: 639px) {
+                        margin-top: 0;
+                    }
+                }
+            }
+            margin-@{start}: 0;
+            .control-label {
+                float: @start;
+                padding-top: 1px;
+                margin-@{end}: 5px;
+                display: inline-block;
+            }
+            .service-status-approved,
+            .service-status-denied,
+            .service-status-draft {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                display: inline-block;
+            }
+            .service-status-approved {
+                background-color: #3cb879;
+            }
+            .service-status-denied {
+                background-color: #E04733;
+            }
+            .service-status-draft {
+                background-color: #1F6BC2;
+            }
+        }
+    }
 	.main-content {
 		margin: 0 0 30px;
 		@media (min-width: 640px) {
@@ -1902,11 +1943,13 @@ table {
     }
 }
 
-table#service-status span.update::before when (@direction = ltr) {
+table#service-status tr.has_parent td span.service-name::before when (@direction = ltr) {
   content: "\2937";  // ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS
+  font-size: 26px;
 }
-table#service-status span.update::before when (@direction = rtl) {
+table#service-status tr.has_parent td span.service-name::before when (@direction = rtl) {
   content: "\2936"; // ARROW POINTING DOWNWARDS THEN CURVING LEFTWARDS
+  font-size: 26px;
 }
 table {
  	width: 97.25%;
@@ -1932,8 +1975,12 @@ table {
 		&.denied {
 			border-@{end}-color: #E04733;
 		}
-        &.update td:first-child span {
-            margin-@{start}: 0.5em;
+        &.update {
+            border-@{end}-color: #1F6BC2;    
+        }
+        tr.update td span {
+            padding-@{start}: 1.5em;
+            display: block;
         }
 	}
 	th {
@@ -2005,6 +2052,8 @@ table {
 			border-bottom: 1px solid #DDD;
             padding: 12px;
             padding-@{start}: 1em;
+            overflow-y: hidden;
+            overflow-x: auto;
 		}
 
 		.vertical-td {
@@ -2016,7 +2065,6 @@ table {
 			padding-@{end}: 10px;
 			font-weight: bold;
 			white-space: nowrap;
-			border-@{start}: 5px solid #fdc82f !important;
 		}
 
 	    .vertical-header {
@@ -2265,9 +2313,12 @@ Footer
     vertical-align: top;
     position: relative;
     top: -3px;
+    display: inline-block;
+    margin-@{end}: 3px;
     @media only screen and (min-width: 640px) {
         top: 0;
         vertical-align: middle;
+        display: block;
     }
 }
 
