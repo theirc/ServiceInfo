@@ -109,17 +109,22 @@ html,body {
 }
 .language-toggle {
     background-color: none;
+    &:first-child { margin-top: 50px;}
 }
 
 .language-toggle button {
     border: 1px solid #3cb879;
     height: 100px;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-	width: 400px;
+    margin-bottom: 20px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+	width: 90%;
 	display: block;
-
+    font-size: 130%;
+    @media (min-width: 640px) {
+        width: 400px;
+    }
 }
 
 .lang-btn-ar {
@@ -507,23 +512,28 @@ select {
 */
 
 .page-head {
-	background-color: none;
-	padding: 8px 0 0;
+    background-color: #33A069;
+    padding: 8px 0 15px;
+    position: relative;
+    top: -10px;
+    margin-bottom: 1em;
 }
 
 .page-title {
-	font-size: 28px;
-	line-height: 1.25em;
-	margin-bottom: 10px;
+	font-size: 200%;
+	margin-bottom: 4px;
 	line-height: 1.3em;
-	color: #333333;
+	color: white;
+    font-weight: 700;
+    max-width: 800px;
 }
 
 .page-descr {
-	font-size: 14px;
-    line-height: 1.6em;
+	font-size: 140%;
+    line-height: 1.45em;
 	padding-bottom: 0.5em;
-	color: #666666;
+	color: white;
+    max-width: 800px;
 
 	@media (min-width: 767px) {
 		padding-bottom: 0;
@@ -577,7 +587,7 @@ select {
 	border-color: #3CB879;
 	width: 100%;
 	text-align: center;
-    font-size: .85em;
+    font-size: 1em;
 	font-weight: 600;
 	color: #fff;
 	-webkit-border-radius: 4px;
@@ -1288,11 +1298,17 @@ Login
                 margin-@{start}: 30px;
                 margin-@{end}: 30px;
             }
+            .page-title,
+            .page-descr {
+                color: #333;
+            }
+
             .page-title {
-                font-size: 150%;
+                font-size: 125%;
             }
             .page-descr {
-                padding-bottom: 10px;
+                font-size: 100%;
+                padding-bottom: 18px;
             }
             @media (max-width: 640px) {
                 button {
@@ -1603,18 +1619,63 @@ div#search-filter {
 Services
 */
 #services {
-	max-width: 800px;
+	max-width: 100%;
 	.table {
+        max-width: 800px;
 		transform: none;
 		margin: 0 30px 0;
 		@media (max-width: 639px) {
 			width: 94%;
 			margin: 0 3% 0;
 		}
+        td {
+            overflow-x: auto;
+        }
 	}
 	.third {
 		padding: 0;
 	}
+    .key {
+        padding-bottom: 10px;
+        .row {
+            overflow-y: auto;
+        }
+        .half {
+            .third {
+                width: 33.3333%;
+                float: @start;
+                &:first-child {
+                    @media (max-width: 639px) {
+                        margin-top: 0;
+                    }
+                }
+            }
+            margin-@{start}: 0;
+            .control-label {
+                float: @start;
+                padding-top: 1px;
+                margin-@{end}: 5px;
+                display: inline-block;
+            }
+            .service-status-approved,
+            .service-status-denied,
+            .service-status-draft {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                display: inline-block;
+            }
+            .service-status-approved {
+                background-color: #3cb879;
+            }
+            .service-status-denied {
+                background-color: #E04733;
+            }
+            .service-status-draft {
+                background-color: #1F6BC2;
+            }
+        }
+    }
 	.main-content {
 		margin: 0 0 30px;
 		@media (min-width: 640px) {
@@ -1949,11 +2010,13 @@ table {
     }
 }
 
-table#service-status span.update::before when (@direction = ltr) {
+table#service-status tr.has_parent td span.service-name::before when (@direction = ltr) {
   content: "\2937";  // ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS
+  font-size: 26px;
 }
-table#service-status span.update::before when (@direction = rtl) {
+table#service-status tr.has_parent td span.service-name::before when (@direction = rtl) {
   content: "\2936"; // ARROW POINTING DOWNWARDS THEN CURVING LEFTWARDS
+  font-size: 26px;
 }
 table {
  	width: 97.25%;
@@ -1979,8 +2042,12 @@ table {
 		&.denied {
 			border-@{end}-color: #E04733;
 		}
-        &.update td:first-child span {
-            margin-@{start}: 0.5em;
+        &.update {
+            border-@{end}-color: #1F6BC2;    
+        }
+        tr.update td span {
+            padding-@{start}: 1.5em;
+            display: block;
         }
 	}
 	th {
@@ -2052,6 +2119,8 @@ table {
 			border-bottom: 1px solid #DDD;
             padding: 12px;
             padding-@{start}: 1em;
+            overflow-y: hidden;
+            overflow-x: auto;
 		}
 
 		.vertical-td {
@@ -2063,7 +2132,6 @@ table {
 			padding-@{end}: 10px;
 			font-weight: bold;
 			white-space: nowrap;
-			border-@{start}: 5px solid #fdc82f !important;
 		}
 
 	    .vertical-header {
@@ -2312,9 +2380,12 @@ Footer
     vertical-align: top;
     position: relative;
     top: -3px;
+    display: inline-block;
+    margin-@{end}: 3px;
     @media only screen and (min-width: 640px) {
         top: 0;
         vertical-align: middle;
+        display: block;
     }
 }
 
