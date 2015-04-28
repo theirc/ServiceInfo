@@ -472,19 +472,19 @@ msgid "Service-List##Add-Service"
 msgstr "New Service"
 
 msgid "Service-List##Status##draft"
-msgstr "draft"
+msgstr "Draft"
 
 msgid "Service-List##Status##current"
-msgstr "current"
+msgstr "Current"
 
 msgid "Service-List##Status##rejected"
-msgstr "rejected"
+msgstr "Rejected"
 
 msgid "Service-List##Status##canceled"
-msgstr "canceled"
+msgstr "Canceled"
 
 msgid "Service-List##Status##archived"
-msgstr "archived"
+msgstr "Archived"
 
 msgid "Service-List##Table##Thead##Name"
 msgstr "Name:"
@@ -511,7 +511,7 @@ msgid "Service-List##Change-Service"
 msgstr "Change service"
 
 msgid "Service-List##Change-Change"
-msgstr "Make further changes to this pending update"
+msgstr "Update this draft"
 
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
 msgstr "Your Information was Submitted Successfully"
