@@ -1,12 +1,13 @@
 # 
 # Translators:
 # Hasnaa Yazbek <hasnaa.yazbek@rescue.org>, 2015
+# Nizar Najjar <ozogorgor@gmail.com>, 2015
 # Omar Meksassi <omar.meksassi@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-04-23 09:02+0000\n"
-"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
+"PO-Revision-Date: 2015-04-28 13:55+0000\n"
+"Last-Translator: Nizar Najjar <ozogorgor@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,19 +34,19 @@ msgid "Menu##Logout"
 msgstr "تسجيل الخروج"
 
 msgid "Menu##Services"
-msgstr "لائحة بالخدمات"
+msgstr "لائحة الخدمات"
 
 msgid "Menu##Add-Services"
 msgstr "إضافة خدمات"
 
 msgid "Menu##Service-Map"
-msgstr "خدمة خريطة"
+msgstr "خارطة الخدمات"
 
 msgid "Menu##Search"
 msgstr "بحث"
 
 msgid "Menu##Provider-Registration"
-msgstr "التسجيل مزود"
+msgstr "تسجيل مقدم الخدمات"
 
 msgid "Menu##Edit-Provider-Information"
 msgstr "تغييرمعلومات مقدم الخدمات"
@@ -60,10 +61,10 @@ msgid "Global##Admin"
 msgstr "المشرف"
 
 msgid "Global##FormSubmissionError"
-msgstr "كان هناك خطأ غير معروف تقديم النموذج الخاص بك."
+msgstr "حدث خطأ غير معروف عند تقديم إستمارتك "
 
 msgid "Global##UnknownError"
-msgstr "كان هناك خطأ غير معروف."
+msgstr "حدث خطأ غير معروف."
 
 msgid "Global##FormValidationError"
 msgstr "يرجى تصحيح الأخطاء في النموذج."
@@ -90,10 +91,10 @@ msgid "Global##Saturday"
 msgstr "السبت"
 
 msgid "Global##GeolocationNotSupported"
-msgstr "غير معتمد تحديد الموقع الجغرافي على هذا المتصفح."
+msgstr "محدد الموقع الجغرافي غير معتمد على هذا المتصفح."
 
 msgid "Global##GeoPositionUnavailable"
-msgstr "الموقع غير متوفر في هذا الوقت."
+msgstr "الموقع غير متوفر حاليا"
 
 msgid "Global##RequiredField"
 msgstr "هذه الخانة مطلوبه."
@@ -114,7 +115,7 @@ msgid "Login-Form##More-Options-Title"
 msgstr "خيارات إضافية"
 
 msgid "Login-Form##More-Options"
-msgstr "إذا كنت بحاجة إلى إعادة إرسال البريد الإلكتروني، أو لتسجيل ليكون مزود الخدمة انقر على الزر المقابل أدناه."
+msgstr "إذا كنت بحاجة إلى إعادة إرسال البريد الإلكتروني التحققي، أو للتسجيل كمزود خدمات انقر على الزر المناسب أدناه."
 
 msgid "Login-Form##Form-Submit-Options##Submit"
 msgstr "تسجيل الدخول"
@@ -129,31 +130,31 @@ msgid "Search-List##Page-Head##Title"
 msgstr "البحث عن الخدمات"
 
 msgid "Search-List##Page-Head##Description"
-msgstr "إستخدم البحث أدناه للعصور على الخدمة التي تريدها."
+msgstr "إستخدم خانة البحث الترشيحي أدناه للعثور على الخدمة التي تريد."
 
 msgid "Feedback-Search##Page-Head##Title"
 msgstr "أضف ملاحظات على الخدمة "
 
 msgid "Feedback-Search##Page-Head##Description"
-msgstr "الرجاء البحث عن مزود الخدمات أولاً  لإعطاء الملاحظات، إختر مزود الخدمة ثم انقر على أعطي الملاحظات للبدء."
+msgstr "الرجاء البحث عن مزود الخدمات أولاً  لإعطاء الملاحظات، إختر مزود الخدمة ثم انقر على زر أعطاء الملاحظات للبدء"
 
 msgid "Service-Detail##Give-Feedback"
-msgstr "قدّم ملاحظاتك بالنسبة لهذه الخدم"
+msgstr "قدّم ملاحظاتك حول هذه الخدمة"
 
 msgid "Feedback-Map##Page-Head##Title"
-msgstr "أضف ملاحظات على الخدمة "
+msgstr "قدّم ملاحظاتك حول الخدمات "
 
 msgid "Feedback-Map##Page-Head##Description"
-msgstr "الرجاء البحث عن مزود الخدمات أولاً  لإعطاء الملاحظات، إختر مزود الخدمة ثم انقر على أعطي الملاحظات للبدء."
+msgstr "الرجاء البحث عن مزود الخدمات أولاً  لإعطاء الملاحظات، إختر مزود الخدمة ثم انقر على زر أعطاء الملاحظات للبدء."
 
 msgid "Service-Map##Page-Head##Page-Title##Title"
-msgstr "لبحث عن الخدمات"
+msgstr "إبحث عن خدمات"
 
 msgid "Service-Map##Page-Head##Page-Description##Page-Description"
-msgstr "إستخدم البحث أدناه للعصور على الخدمة التي تريدها."
+msgstr "إستخدم البحث الترشيحي أدناه للعثور على الخدمة التي تريد."
 
 msgid "Service-Map##No-Search-Results"
-msgstr "لم يتم وجود أي خدمات مطابقة. يرجى المحاولة مرة أخرى."
+msgstr "لم يتم إيجاد أي خدمات مطابقة. يرجى المحاولة مرة أخرى."
 
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "مصطلح البحث"
@@ -165,46 +166,46 @@ msgid "Service-Map##Filtered-Search##Service-Type"
 msgstr "نوع الخدمة"
 
 msgid "Service-Map##Filtered-Search##Distance"
-msgstr "ابحث عن خدمات قريبة مني "
+msgstr "ابحث عن خدمات على مسافة قريبة مني"
 
 msgid "Service-Map##Filtered-Search##Sort"
-msgstr "فرز"
+msgstr "رتّب"
 
 msgid "Service-Map##Filtered-Search##SortName"
-msgstr "حسب الإسم "
+msgstr "بحسب الإسم "
 
 msgid "Service-Map##Filtered-Search##SortNear"
-msgstr "حسب المسافة مني "
+msgstr "بحسب قرب المسافة مني"
 
 msgid "Service-Map##Filtered-Search##Area"
 msgstr "منطقة"
 
 msgid "Service-Map##Filtered-Search##Filter-Area"
-msgstr "صنف حسب المنطقة "
+msgstr "رشح بحسب المنطقة "
 
 msgid "Service-Map##Filtered-Search##Filter-By-Area"
-msgstr "صنف حسب المنطقة "
+msgstr "رشح البحث بحسب المنطقة "
 
 msgid "Service-Map##Filtered-Search##Search-Placeholder"
-msgstr "انني ابحث على..."
+msgstr "إنّي ابحث على..."
 
 msgid "Service-Map##Filtered-Search##Loading"
-msgstr "تحميل أنواع اخدمات التي ادخلتها "
+msgstr "تحميل أنواع الخدمات"
 
 msgid "Service-Map##Filtered-Search##TypeHeader"
-msgstr "صنف حسب نوع الخدمة "
+msgstr "رشح بحسب نوع الخدمة "
 
 msgid "Service-Map##Filtered-Search##Any"
 msgstr "أي"
 
 msgid "Service-Map##Map##Toggle"
-msgstr "عرض قائمة"
+msgstr "عرض بشكل قائمة"
 
 msgid "Service-Map##List##Toggle"
 msgstr "عرض على الخريطة"
 
 msgid "Service-Map##List##Area"
-msgstr "منطقة الخدمة "
+msgstr "مكان الخدمة "
 
 msgid "Service-Map##List##Type"
 msgstr "نوع الخدمة"
@@ -216,7 +217,7 @@ msgid "Service-Map##List##Cost"
 msgstr "كلفة"
 
 msgid "Service-Map##List##Todays-Hours"
-msgstr "ساعات الخدمة اليوم"
+msgstr "ساعات عمل الخدمة اليوم"
 
 msgid "Service-Map##List##All-Hours"
 msgstr "ساعات العمل"
