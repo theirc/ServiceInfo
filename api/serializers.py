@@ -4,7 +4,8 @@ from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.db.models import Count
-from django.utils.translation import override, ugettext, ugettext_lazy as _
+from django.utils.encoding import force_text
+from django.utils.translation import override, ugettext_lazy as _
 
 from rest_framework import exceptions, serializers
 
@@ -479,9 +480,8 @@ class ResendActivationLinkSerializer(serializers.Serializer):
         return attrs
 
 
-
-class BaseServiceTypeAggregateSerializer(
-    RequireOneTranslationMixin, serializers.HyperlinkedModelSerializer):
+class BaseServiceTypeAggregateSerializer(RequireOneTranslationMixin,
+                                         serializers.HyperlinkedModelSerializer):
     """Common base class for service types aggregates."""
 
     totals = serializers.SerializerMethodField()
@@ -496,7 +496,7 @@ class BaseServiceTypeAggregateSerializer(
         )
         required_translated_fields = ['name']
 
-    def get_totals(self):
+    def get_totals(self, obj):
         raise NotImplementedError('Define in the subclass')
 
 
@@ -507,14 +507,12 @@ class ServiceTypeWaitTimeSerializer(BaseServiceTypeAggregateSerializer):
         totals = []
         results = Feedback.objects.filter(service__type=obj).values(
             'wait_time').annotate(total=Count('id')).order_by()
-        counts = {}
-        for r in results:
-            counts[r['wait_time']] = r['total']
+        counts = {r['wait_time']: r['total'] for r in results}
         field = Feedback._meta.get_field('wait_time')
         for value, label in field.choices:
             total = {'total': counts.get(value, 0)}
-            for lang, _ in settings.LANGUAGES:
+            for lang, name in settings.LANGUAGES:
                 with override(language=lang):
-                    total['label_{}'.format(lang)] = ugettext(label)
+                    total['label_{}'.format(lang)] = force_text(label)
             totals.append(total)
         return totals
