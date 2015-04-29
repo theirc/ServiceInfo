@@ -309,6 +309,7 @@ class ServiceTypeViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
 
     @list_route(methods=['get', ], url_path='wait-times', permission_classes=[IsAuthenticated, ])
     def wait_times(self, request):
+        """Wait time feedback aggregated by service type."""
         queryset = self.get_queryset()
         context = self.get_serializer_context()
         serializer = ServiceTypeWaitTimeSerializer(
