@@ -3,7 +3,8 @@ from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError as DjangoValidationError
-from django.utils.translation import ugettext_lazy as _
+from django.db.models import Count
+from django.utils.translation import override, ugettext, ugettext_lazy as _
 
 from rest_framework import exceptions, serializers
 
@@ -476,3 +477,44 @@ class ResendActivationLinkSerializer(serializers.Serializer):
             raise exceptions.ValidationError({'email': msg})
         attrs['user'] = user
         return attrs
+
+
+
+class BaseServiceTypeAggregateSerializer(
+    RequireOneTranslationMixin, serializers.HyperlinkedModelSerializer):
+    """Common base class for service types aggregates."""
+
+    totals = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ServiceType
+        fields = (
+            'url',
+            'number',
+            'name_en', 'name_fr', 'name_ar',
+            'totals',
+        )
+        required_translated_fields = ['name']
+
+    def get_totals(self):
+        raise NotImplementedError('Define in the subclass')
+
+
+class ServiceTypeWaitTimeSerializer(BaseServiceTypeAggregateSerializer):
+    """Wait time feedback bucket totals per service type."""
+
+    def get_totals(self, obj):
+        totals = []
+        results = Feedback.objects.filter(service__type=obj).values(
+            'wait_time').annotate(total=Count('id')).order_by()
+        counts = {}
+        for r in results:
+            counts[r['wait_time']] = r['total']
+        field = Feedback._meta.get_field('wait_time')
+        for value, label in field.choices:
+            total = {'total': counts.get(value, 0)}
+            for lang, _ in settings.LANGUAGES:
+                with override(language=lang):
+                    total['label_{}'.format(lang)] = ugettext(label)
+            totals.append(total)
+        return totals

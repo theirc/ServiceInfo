@@ -22,7 +22,8 @@ from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, 
     PasswordResetRequestSerializer, PasswordResetCheckSerializer, PasswordResetSerializer, \
     ResendActivationLinkSerializer, CreateProviderSerializer, ServiceTypeSerializer, \
     SelectionCriterionSerializer, LanguageSerializer, ServiceSearchSerializer, \
-    ProviderFetchSerializer, FeedbackSerializer, NationalitySerializer
+    ProviderFetchSerializer, FeedbackSerializer, NationalitySerializer, \
+    ServiceTypeWaitTimeSerializer
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
     SelectionCriterion, Feedback, Nationality
@@ -305,6 +306,14 @@ class ServiceTypeViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
     permission_classes = [AllowAny]
     queryset = ServiceType.objects.all()
     serializer_class = ServiceTypeSerializer
+
+    @list_route(methods=['get', ], url_path='wait-times')
+    def wait_times(self, request):
+        queryset = self.get_queryset()
+        context = self.get_serializer_context()
+        serializer = ServiceTypeWaitTimeSerializer(
+            queryset, many=True, context=context)
+        return Response(serializer.data)
 
 
 class ProviderViewSet(ServiceInfoModelViewSet):
