@@ -307,7 +307,7 @@ class ServiceTypeViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
     queryset = ServiceType.objects.all()
     serializer_class = ServiceTypeSerializer
 
-    @list_route(methods=['get', ], url_path='wait-times')
+    @list_route(methods=['get', ], url_path='wait-times', permission_classes=[IsAuthenticated, ])
     def wait_times(self, request):
         queryset = self.get_queryset()
         context = self.get_serializer_context()

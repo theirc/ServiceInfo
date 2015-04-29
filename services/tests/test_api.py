@@ -768,7 +768,7 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
         FeedbackFactory(service=service, delivered=True, wait_time='lesshour')
         FeedbackFactory(service=service, delivered=True, wait_time='more')
         url = reverse('servicetype-wait-times')
-        rsp = self.client.get(url)
+        rsp = self.get_with_token(url)
         self.assertEqual(OK, rsp.status_code)
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual(len(result), ServiceType.objects.all().count())
