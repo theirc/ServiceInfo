@@ -775,12 +775,16 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
         for r in result:
             if r['number'] == a_type.number:
                 # less than hour, 1-2 days, 3-7 days, 1-2 weeks, more than 2 weeks
-                expected = [2, 0, 0, 0, 1, ]
+                expected_totals = [2, 0, 0, 0, 1, ]
             else:
-                expected = [0, 0, 0, 0, 0, ]
+                expected_totals = [0, 0, 0, 0, 0, ]
+            expected_labels = [
+                'Less than 1 hour', '1-48 hours', '3-7 days',
+                '1-2 weeks', 'More than 2 weeks']
             self.assertIn('totals', r)
             totals = r['totals']
-            self.assertEqual([t['total'] for t in totals], expected)
+            self.assertEqual([t['label_en'] for t in totals], expected_labels)
+            self.assertEqual([t['total'] for t in totals], expected_totals)
 
 
 class LanguageTest(APITestMixin, TestCase):
