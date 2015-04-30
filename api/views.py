@@ -17,6 +17,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
 
+from api.renderers import CSVRenderer
 from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, ProviderSerializer, \
     ProviderTypeSerializer, ServiceAreaSerializer, APILoginSerializer, APIActivationSerializer, \
     PasswordResetRequestSerializer, PasswordResetCheckSerializer, PasswordResetSerializer, \
@@ -307,7 +308,9 @@ class ServiceTypeViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
     queryset = ServiceType.objects.all()
     serializer_class = ServiceTypeSerializer
 
-    @list_route(methods=['get', ], url_path='wait-times', permission_classes=[IsAuthenticated, ])
+    @list_route(methods=['get', ], url_path='wait-times',
+                permission_classes=[IsAuthenticated, ],
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
     def wait_times(self, request):
         """Wait time feedback aggregated by service type."""
         queryset = self.get_queryset()
