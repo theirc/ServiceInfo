@@ -486,6 +486,8 @@ class BaseServiceTypeAggregateSerializer(RequireOneTranslationMixin,
 
     totals = serializers.SerializerMethodField()
 
+    aggregate_field = None
+
     class Meta:
         model = ServiceType
         fields = (
@@ -494,21 +496,16 @@ class BaseServiceTypeAggregateSerializer(RequireOneTranslationMixin,
             'name_en', 'name_fr', 'name_ar',
             'totals',
         )
-        required_translated_fields = ['name']
+        required_translated_fields = ['name']      
 
     def get_totals(self, obj):
-        raise NotImplementedError('Define in the subclass')
-
-
-class ServiceTypeWaitTimeSerializer(BaseServiceTypeAggregateSerializer):
-    """Wait time feedback bucket totals per service type."""
-
-    def get_totals(self, obj):
+        if self.aggregate_field is None:
+            raise ValueError('aggregate_field must be defined.')
         totals = []
         results = Feedback.objects.filter(service__type=obj).values(
-            'wait_time').annotate(total=Count('id')).order_by()
-        counts = {r['wait_time']: r['total'] for r in results}
-        field = Feedback._meta.get_field('wait_time')
+            self.aggregate_field).annotate(total=Count('id')).order_by()
+        counts = {r[self.aggregate_field]: r['total'] for r in results}
+        field = Feedback._meta.get_field(self.aggregate_field)
         for value, label in field.choices:
             total = {'total': counts.get(value, 0)}
             for lang, name in settings.LANGUAGES:
@@ -516,3 +513,9 @@ class ServiceTypeWaitTimeSerializer(BaseServiceTypeAggregateSerializer):
                     total['label_{}'.format(lang)] = force_text(label)
             totals.append(total)
         return totals
+
+
+class ServiceTypeWaitTimeSerializer(BaseServiceTypeAggregateSerializer):
+    """Wait time feedback bucket totals per service type."""
+
+    aggregate_field = 'wait_time'
