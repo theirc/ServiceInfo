@@ -140,7 +140,7 @@ var forms = module.exports = {
                     messages.add(this[i]);
                 }
             } else {
-                var $error = self.getFieldLabel($form, k).find('.error');
+                var $error = self.getFieldLabel($form, k).parent().find('.error');
                 if ($error.length) {
                     $error.text(this[0]);
                 } else {

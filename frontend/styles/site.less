@@ -77,13 +77,34 @@ html,body {
 	min-height: 100%;
 	position: relative;
 }
+
 #messages {
-    padding: 5px;
+    &:empty {
+        display: none;
+    }
+    width: 100%;
+    height: 58px;
+    .message {
+        padding: 20px 30px 20px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 101;
+        margin-top: 0;
+        @media (min-width: 640px) {
+            padding: 20px 30px;
+        }
+    }
 }
 .message {
-    margin-top: 0.5em;
-    background-color: #fda;
-    padding: 5px;
+    background-color: #FAC6BD;
+    padding: 20px 30px;
+    font-size: 125%;
+    font-weight: 700;
+    @media (min-width: 640px) {
+        padding: 30px;
+        font-size: 150%;
+    }
 }
 .language-toggle {
     background-color: none;
@@ -331,7 +352,8 @@ select {
 
 .submit-form {
 	width: 100%;
-    margin-bottom: 10px;
+    margin: 20px 0 0;
+    overflow-y: auto;
     @media (min-width:1000px){
     	height: 60px;
     }
@@ -494,6 +516,8 @@ select {
     position: relative;
     top: -10px;
     margin-bottom: 1em;
+    overflow-y: auto;
+    overflow-x: 0;
 }
 
 .page-title {
@@ -849,11 +873,32 @@ fieldset {
 label {
     max-width: 100%;
     margin-bottom: 5px;
-
-    .error {
-        float: @end;
-    }
 }
+
+.error {
+    &:empty {
+        display: none;
+    }
+    font-weight: 700;
+    float: none;
+    background-color: #FAC6BD;
+    padding: .25em .4em;
+    margin: .25em 0 .4em;
+    display: block;
+    .round-start;
+    .round-end;
+}
+
+.non-field-errors {
+    &:empty {
+        display: none;
+    }
+    background-color: #FAC6BD;
+    padding: 8px 10px;
+    .round-start;
+    .round-end;
+}
+
 .error,
 .no-search-results {
     color: darkred;
@@ -963,7 +1008,7 @@ input[type=range] {
     width: 100%;
     height: 70px;
     background-color: #2A2A2A;
-    z-index: 99;
+    z-index: 100;
     position: relative;
 	@media (min-width: 640px) {
         position: absolute;
@@ -1237,7 +1282,12 @@ Login
 		max-width: 800px;
 		.half {
 			margin-@{start}: 0; 
-		} 
+		}
+        .row {
+            .row {
+                padding: 10px 0;
+            }
+        }
         .more-options {
             background-color: #E5E5E5;
             border: 1px solid #CCC;
@@ -1290,6 +1340,7 @@ Service Form
 #service-form {
 	.row {
 		padding: 10px 0;
+        overflow-y: auto;
 		@media (min-width:0px) and (max-width: 639px) {
 			padding: 0;
 		}
@@ -2104,23 +2155,18 @@ Service-Detail
 		margin: 0 0 8px;
 		padding: 0;
 	}
-	.container > .row > .name > .feedback-link {
-		float: @end;
-	    a {
-	    	font-size: 100%;
-	    }
-	}
-	.name-row {
-		.two-third {
-			width: 66.666%;
-			float: @start;
-		}
-		.third {
-			width: 33.333%;
-			float: @end;
-			margin-top: 0;
-		}
-	}
+    .page-head {
+        padding-top: 20px;
+        .servicetype-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 9px;
+            vertical-align: middle;
+            border: 1px solid white;
+        }
+    }
 	.contact > .row,
 	.description > .row,{
 		p {
@@ -2147,17 +2193,15 @@ Service-Detail
 			margin-@{end}: 0%;
 		}
 	}
-	.third {
-		width: 33.333%;
-		float: @start;
-		margin-bottom: 1em;
-	}
 	.name {
 		font-size: 1.6em;
 		font-weight: 600;
-		color: #3cb879;
-		margin-bottom: .5em;
+		color: white;
 	}
+    .feedback-btn {
+        overflow-y: auto;
+        overflow-x: none;
+    }
 	#static-map .map {
 		max-width: 640px;
 		height: 150px;
@@ -2165,6 +2209,7 @@ Service-Detail
         margin: auto;
 		margin: 1em 0;
 		background-color: gray;
+        clear: both;
         .map-image-ctn {
             display: inline-block;
             position: relative;
