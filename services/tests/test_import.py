@@ -32,16 +32,16 @@ class ValidateImportTest(TestCase):
 
 
 def set_cell_value(book, sheet_num, row_num, col_num, value):
-        sheet = book.get_sheet(sheet_num)
-        sheet.write(r=row_num, c=col_num, label=value)
+    sheet = book.get_sheet(sheet_num)
+    sheet.write(r=row_num, c=col_num, label=value)
 
 
 def blank_out_row_for_testing(book, sheet_num, row_num):
-        sheet = book.get_sheet(sheet_num)
-        num_cols = sheet.rows[row_num].get_cells_count()
-        # We always put the id in the first column, so skip that
-        for col in range(1, num_cols):
-            sheet.write(r=row_num, c=col, label='')
+    sheet = book.get_sheet(sheet_num)
+    num_cols = sheet.rows[row_num].get_cells_count()
+    # We always put the id in the first column, so skip that
+    for col in range(1, num_cols):
+        sheet.write(r=row_num, c=col, label='')
 
 
 class ImportWorkbookAPITest(APITestMixin, TestCase):
