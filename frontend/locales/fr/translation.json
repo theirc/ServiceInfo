@@ -264,11 +264,11 @@
         "Empty-Message": "Vous ne avez pas encore présenté de services. Vous pouvez soumettre votre premier service pour examen en appuyant sur le bouton Nouveau service.",
         "Add-Service": "Nouveau service",
         "Status": {
-            "draft": "Ebauche",
-            "current": "Courant",
-            "rejected": "Rejeté",
-            "canceled": "Annulé",
-            "archived": "Archivé"
+            "draft": "",
+            "current": "",
+            "rejected": "",
+            "canceled": "",
+            "archived": ""
         },
         "Table": {
             "Thead": {
@@ -282,7 +282,7 @@
         "Cancel": "Annuler",
         "Delete": "Effacer",
         "Change-Service": "Changer de service",
-        "Change-Change": "Apporter d'autres modifications à cette mise à jour en attente"
+        "Change-Change": ""
     },
     "Provider-Registration-Confirmation": {
         "Page-Head": {

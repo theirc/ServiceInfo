@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-22 19:52+0300\n"
-"PO-Revision-Date: 2015-04-23 08:55+0000\n"
-"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
+"POT-Creation-Date: 2015-04-28 20:23+0300\n"
+"PO-Revision-Date: 2015-04-30 08:48+0000\n"
+"Last-Translator: Hasnaa Yazbek <hasnaa.yazbek@rescue.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,58 +22,58 @@ msgstr ""
 
 #: api/serializers.py:33 services/models.py:574 services/models.py:577
 msgid "This field is required."
-msgstr "هذه الخانة مطلوبه."
+msgstr "هذه الخانة مطلوبة"
 
 #: api/serializers.py:73
 #, python-brace-format
 msgid "Invalid language code {code}. The valid codes are {valid_codes}."
-msgstr "رمز اللغة غير صالح  {code} رموز الصحيحة هي  {valid_codes}."
+msgstr "رمز اللغة غير صالح  {code} الرموز الصحيحة هي  {valid_codes}"
 
 #: api/serializers.py:156 email_user/forms.py:18
 msgid "A user with that email already exists."
-msgstr "البريد الإلكتروني موجود من قبل."
+msgstr "البريد الإلكتروني موجود من قبل"
 
 #: api/serializers.py:249
 msgid "User is not a provider.  Only providers can create services."
-msgstr "المستخدم ليس مقدم. لا يمكن إلا أن مقدمي خدمات خلق الخدمات."
+msgstr "المستخدم ليس مقدم خدمات. لا يمكن إلا لمقدمي الخدمات تسجيل خدماتهم"
 
 #: api/serializers.py:257
 msgid "You may only submit updates to current, draft or rejected services"
-msgstr "يمكنك تقديم التحديثات فقط على الحالي، مسودة أو خدمات مرفوضة"
+msgstr "يمكنك إرسال التحديثات فقط على الحالي، المسودة أو الخدمات المرفوضة"
 
 #: api/serializers.py:264
 msgid "There is already a pending draft update to this service."
-msgstr "هناك بالفعل مسودة منتظرة عن الخدمة "
+msgstr "هناك بالفعل مسودة معلّقة لهذه الخدمة "
 
 #: api/serializers.py:274
 msgid "Close time is missing."
-msgstr "وثيق الوقت مفقود."
+msgstr "دوام الإغلاق غير مذكور"
 
 #: api/serializers.py:276
 msgid "Open time is missing."
-msgstr "الوقت مفتوح مفقود."
+msgstr "دوام البدء  غير مذكور"
 
 #: api/serializers.py:278
 msgid "Close time is not later than open time."
-msgstr "وثيق الوقت ليس في وقت لاحق من الوقت المفتوح."
+msgstr "دوام الإغلاق لا يتخطى دوام البدء"
 
 #: api/serializers.py:375
 msgid "User account is disabled."
-msgstr "تم تعطيل حساب المستخدم."
+msgstr "تم تعطيل حساب المستخدم"
 
 #: api/serializers.py:378
 msgid "Unable to log in with provided credentials."
-msgstr "غير قادر على الدخول مع المعلومات المتوفرة."
+msgstr "غير قادر على الدخول  بالمعلومات المذكورة"
 
 #: api/serializers.py:400
 msgid ""
 "Activation key is invalid. Check that it was copied correctly and has not "
 "already been used."
-msgstr "مفتاح تنشيط غير صالح. تحقق من الذي تم نسخه بشكل صحيح وأنه لم يتم بالفعل استخدامه."
+msgstr "مفتاح التشغيل غير صالح. تحقق أنه تم نسخه بشكل صحيح وأنه لم يتم استخدامه من قبل"
 
 #: api/serializers.py:421 api/serializers.py:472
 msgid "No user with that email"
-msgstr "لا مستخدم بهذا البريد الإلكتروني "
+msgstr "لا يوجد مستخدم بهذا البريد الإلكتروني "
 
 #: api/serializers.py:438 api/serializers.py:456
 msgid "Password reset key is not valid"
@@ -85,7 +85,7 @@ msgstr "المستخدم ليس في حالة إنتظار التفعيل "
 
 #: api/views.py:252
 msgid "Service record must be current or pending changes to be canceled"
-msgstr "يجب أن يكون سجل الخدمة الحالية أو التغييرات المعلقة ليتم إلغاء"
+msgstr "يجب أن يكون سجل الخدمة \"حالي\" أو \"ينتظر التغييرات\" ليتم إلغاءه"
 
 #: email_user/admin.py:25
 msgid "Permissions"
@@ -93,7 +93,7 @@ msgstr "ضوابط"
 
 #: email_user/admin.py:27
 msgid "Important dates"
-msgstr "التواريخ الهامة"
+msgstr "تواريخ مهمة"
 
 #: email_user/forms.py:19
 msgid "The two password fields didn't match."
@@ -105,11 +105,11 @@ msgstr "البريد الإلكتروني"
 
 #: email_user/forms.py:24
 msgid "Required. 255 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr "يجب 255 حرفا أو أقل. الحروف والأرقام و @/ / + / - / _ فقط."
+msgstr "المطلوب 255 حرفا أو أقل. الحروف والأرقام و @/ / + / - / _ فقط."
 
 #: email_user/forms.py:27
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
-msgstr "قد تحتوي فقط على الأحرف والأرقام و @/ / + / - / _."
+msgstr "هذه القيمة قد تحتوي فقط على الأحرف والأرقام و @/ / + / - / _."
 
 #: email_user/forms.py:79
 msgid "Password"
@@ -128,7 +128,7 @@ msgstr "يجب أن يكون للمستخدمين عنوان بريد إلكتر
 
 #: email_user/models.py:84
 msgid "Activation key is invalid or has already been used."
-msgstr "مفتاح تنشيط غير صالح أو تم إستخدامه."
+msgstr "مفتاح التنشيط غير صالح أو تم إستخدامه من قبل"
 
 #: email_user/models.py:123
 msgid "email address"
@@ -144,13 +144,13 @@ msgstr "يحدد ما إذا كان المستخدم يستطيع الدخول �
 
 #: email_user/models.py:132
 msgid "active"
-msgstr "نشيط "
+msgstr "فعال"
 
 #: email_user/models.py:133
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
-msgstr "يهدد ما إذا كان المستخدم سيعمل على أنه مستخدم نشيط.لا تنقر هذه إذا أردت أن يبقى المستخدم. "
+msgstr "يحدد ما إذا كان المستخدم سيعمل على أنه مستخدم نشيط.لا تنقر هذه إذا أردت أن يبقى المستخدم"
 
 #: email_user/models.py:135
 msgid "date joined"
@@ -174,23 +174,23 @@ msgstr "المستخدم"
 
 #: email_user/models.py:161
 msgid "User emails must be unique without regard to case."
-msgstr "ويجب أن تكون رسائل البريد الإلكتروني مستخدم فريد دون النظر إلى القضية."
+msgstr "يجب أن يكون البريد الإلكتروني للمستخدم فريد بغض النظر إلى الحالة"
 
 #: email_user/models.py:192
 #, python-brace-format
 msgid "Password is too short. It must have at least {min_length} characters."
-msgstr "كلمة المرور قصيرة جدا. فإنه يجب أن يكون على الأقل {min_length} حرفا."
+msgstr "كلمة المرور قصيرة جدا\".  يجب أن تكون على الأقل {min_length} حرفا\""
 
 #: email_user/templates/email_user/password_reset_email.html:2
 #, python-format
 msgid ""
 "You're receiving this email because you requested a password reset for your "
 "user account at %(site.name)s."
-msgstr "كنت تتلقى هذا البريد الإلكتروني لأنك طلبت إعادة تعيين كلمة المرور لحساب المستخدم الخاص بك في %(site.name)s."
+msgstr "وصلك هذا البريد الإلكتروني لأنك طلبت إعادة تعيين كلمة المرور لحساب المستخدم الخاص بك في %(site.name)s"
 
 #: email_user/templates/email_user/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
-msgstr "يرجى الدخول إلى الصفحة التالية واختر كلمة سر جديدة:"
+msgstr "يرجى الدخول إلى الصفحة التالية واختيار كلمة سر جديدة"
 
 #: email_user/templates/email_user/password_reset_email.html:8
 msgid "Your username is your email address:"
@@ -212,13 +212,13 @@ msgid ""
 "You (or someone pretending to be you) have asked to reset the\n"
 "password of an account at\n"
 "%(site_name)s.  If this wasn't you, please ignore this email.\n"
-msgstr "\nأنت (أو شخص يتظاهر بأنه أنت) وطلب لتسجيل حساب في\n%(site_name)s إذا لم يكن هذا لكم، يرجى تجاهل هذا البريد الإلكتروني\nوسيتم إزالة عنوانك من سجلاتنا.\n"
+msgstr "\nأنت (أو شخص يتظاهر بأنه أنت) قد طلب إعادة تعيين لتسجيل حساب في\n%(site_name)s إذا لم يكن هذا لكم، يرجى تجاهل هذا البريد الإلكتروني\n"
 
 #: email_user/templates/email_user/password_reset_email.txt:8
 msgid ""
 "\n"
 "To reset the password, please click the following link:\n"
-msgstr "\nلتفعيل هذا الحساب، يرجى الضغط على الرابط التالي.\n"
+msgstr "\nلإعادة تعيين كلمة السر، يرجى الضغط على الرابط التالي\n"
 
 #: email_user/templates/email_user/password_reset_email.txt:14
 #, python-format
@@ -240,7 +240,7 @@ msgid ""
 "    %(site.name)s.  If this wasn't you, please ignore this email\n"
 "    and your address will be removed from our records.\n"
 "    "
-msgstr "\nأنت (أو شخص يتظاهر بأنه أنت) وطلب لتسجيل حساب في\n%(site.name)s إذا لم يكن هذا لكم، يرجى تجاهل هذا البريد الإلكتروني\nوسيتم إزالة عنوانك من سجلاتنا."
+msgstr "\nأنت (أو شخص يتظاهر بأنه أنت) طلب تسجيل حساب في\n%(site.name)s إذا لم يكن هذا أنت، يرجى تجاهل هذا البريد الإلكتروني\nوسيتم إزالة عنوانك من سجلاتنا."
 
 #: email_user/templates/registration/activation_email.html:19
 msgid ""
@@ -265,7 +265,7 @@ msgid ""
 "You (or someone pretending to be you) have asked to register an account at\n"
 "%(site.name)s.  If this wasn't you, please ignore this email\n"
 "and your address will be removed from our records.\n"
-msgstr "\nأنت (أو شخص يتظاهر بأنه أنت) وطلب لتسجيل حساب في\n%(site.name)s إذا لم يكن هذا لكم، يرجى تجاهل هذا البريد الإلكتروني\nوسيتم إزالة عنوانك من سجلاتنا.\n"
+msgstr "\nأنت (أو شخص يتظاهر بأنه أنت) قد طلب تسجيل حساب في\n%(site.name)s إذا لم يكن هذا أنت، يرجى تجاهل هذا البريد الإلكتروني\nوسيتم إزالة عنوانك من سجلاتنا\n"
 
 #: email_user/templates/registration/activation_email.txt:8
 msgid ""
@@ -319,7 +319,7 @@ msgstr "حفظ ومتابعة التحرير"
 
 #: service_info/templates/admin/submit_line.html:12
 msgid "Save and reject"
-msgstr "حفظ ورفض"
+msgstr "حفظ وإلغاء"
 
 #: service_info/templates/admin/submit_line.html:13
 msgid "Save and approve"
@@ -337,17 +337,17 @@ msgid ""
 "\n"
 "Your service %(service_name)s has been vetted and approved by International Rescue Committee staff.\n"
 "  It has been published on the following link: <a href=\"%(service_link)s\">%(service_link)s</a>\n"
-msgstr "\nتم تدقيق الخدمة %(service_name)s من قبل لجنة الإنقاذ الدولية.\nوقد تم نشر ذلك على الرابط التالي: <a href=\"%(service_link)s\">%(service_link)s</a>\n"
+msgstr "\nتم التدقيق بالخدمة %(service_name)s من قبل لجنة الإنقاذ الدولية.\nوقد تم نشر ذلك على الرابط التالي: <a href=\"%(service_link)s\">%(service_link)s</a>\n"
 
 #: service_info/templates/email/service_approved_body.html:14
 #: service_info/templates/email/service_approved_body.txt:8
 msgid "For more information please contact support at serviceinfo@rescue.org"
-msgstr "لمزيد من المعلومات يرجى الاتصال على serviceinfo@rescue.org"
+msgstr "لمزيد من المعلومات يرجى التواصل عبر serviceinfo@rescue.org"
 
 #: service_info/templates/email/service_approved_body.html:15
 #: service_info/templates/email/service_approved_body.txt:9
 msgid "Thanks for your submission."
-msgstr "شكرا لتقديم الطلب."
+msgstr "شكرا لتقديم الطلب"
 
 #: service_info/templates/email/service_approved_body.html:19
 #: service_info/templates/email/service_approved_body.txt:11
@@ -357,7 +357,7 @@ msgstr "مع أطيب التحيات"
 #: service_info/templates/email/service_approved_body.html:23
 #: service_info/templates/email/service_approved_body.txt:13
 msgid "Service Info"
-msgstr "خارطة الخدمات"
+msgstr "خريطة الخدمات"
 
 #: service_info/templates/email/service_approved_body.html:25
 #: service_info/templates/email/service_approved_body.txt:15
@@ -370,7 +370,7 @@ msgid ""
 "\n"
 "Your service %(service_name)s has been vetted and approved by International Rescue Committee staff.\n"
 "It has been published on the following link: <a href=\"%(service_link)s\">%(service_link)s</a>\n"
-msgstr "\nتم تدقيق الخدمة %(service_name)s من قبل لجنة الإنقاذ الدولية.\nوقد تم نشر ذلك على الرابط التالي: <a href=\"%(service_link)s\">%(service_link)s</a>\n"
+msgstr "\nتم التدقيق بالخدمة %(service_name)s من قبل لجنة الإنقاذ الدولية.\nوقد تم نشر ذلك على الرابط التالي: <a href=\"%(service_link)s\">%(service_link)s</a>\n"
 
 #: service_info/templates/email/service_approved_subject.txt:1
 msgid "Service has been approved"
@@ -380,11 +380,11 @@ msgstr "تمت الموافقة على الخدمة"
 msgid ""
 "You can type an address, a place name, or even a latitude and longitude into"
 " the search box (e.g. \"33.8869, 35.5131\")."
-msgstr "يمكنك كتابة عنوان، اسم مكان، أو حتى خطوط الطول والعرض في البحث (مثلاً: \"33.8869, 35.5131\")"
+msgstr "يمكنك كتابة عنوان، اسم مكان، أو حتى خطوط الطول والعرض في خانة البحث (مثلاً: \"33.8869, 35.5131\")"
 
 #: services/admin.py:97
 msgid "Description and Additional Information"
-msgstr "معلومات إضافية"
+msgstr "وصف ومعلومات إضافية"
 
 #: services/admin.py:108
 #, python-brace-format
@@ -393,11 +393,11 @@ msgstr "ساعات (all times in time zone {timezone})"
 
 #: services/admin.py:120
 msgid "Location"
-msgstr "المكان "
+msgstr "الموقع "
 
 #: services/admin.py:139
 msgid "Only services in draft status may be approved"
-msgstr "يجوز الموافقة على الخدمات الوحيدة في مشروع وضع"
+msgstr "قد يتم الموافقة فقط على الخدمات الموضوعة في خانة المسودة"
 
 #: services/admin.py:147 services/admin.py:185
 #, python-brace-format
@@ -410,11 +410,11 @@ msgstr "تمت الموافقة على الخدمات"
 
 #: services/admin.py:154
 msgid "Approve new or changed service"
-msgstr "الموافقة على الخدمة الجديدة أو تغييرها"
+msgstr "الموافقة على خدمة جديدة أو خدمة معدّلة"
 
 #: services/admin.py:160
 msgid "Only services in draft status may be rejected"
-msgstr "قد يتم رفض خدمات الوحيدة في مشروع وضع"
+msgstr "قد يتم رفض فقط الخدمات الموضوعة في خانة المسودة"
 
 #: services/admin.py:168 services/admin.py:200
 #, python-brace-format
@@ -423,19 +423,19 @@ msgstr "غير قادر على رفض الخدمة {name}': {error}'"
 
 #: services/admin.py:174
 msgid "Services have been rejected"
-msgstr "رفضت الخدمات"
+msgstr "لقد تم رفض الخدمات"
 
 #: services/admin.py:175
 msgid "Reject new or changed service"
-msgstr "رفض الخدمة الجديدة أو تغييرها"
+msgstr "رفض خدمة جديدة أو خدمة معدّلة"
 
 #: services/admin.py:194
 msgid "The service was approved successfully."
-msgstr "وتمت الموافقة على الخدمة بنجاح."
+msgstr "تمت الموافقة على الخدمة بنجاح."
 
 #: services/admin.py:209
 msgid "The service was rejected successfully."
-msgstr "وقد رفض الخدمة بنجاح."
+msgstr "تم  رفض الخدمة بنجاح."
 
 #. Translators: Provider name
 #. Translators: Service name
@@ -468,7 +468,7 @@ msgstr "رقم الهاتف "
 
 #: services/models.py:101
 msgid "website"
-msgstr "الموقع"
+msgstr "الموقع الإلكتروني"
 
 #. Translators: Provider description
 #. Translators: Service description
@@ -490,39 +490,39 @@ msgstr "الوصف في اللغة الفرنسية "
 
 #: services/models.py:126
 msgid "user account for this provider"
-msgstr "حساب المستخدم لهذا المزود"
+msgstr "حساب المستخدم لهذا المقدِّم"
 
 #: services/models.py:129
 msgid "number of targeted beneficiaries monthly"
-msgstr "عدد المستفيدين شهريا"
+msgstr "عدد المستفيدين شهريا\""
 
 #: services/models.py:137
 msgid "focal point name in English"
-msgstr "إسم الشخص الذي يمكن الاتصال به في الإنكليزية "
+msgstr "إسم الشخص المسؤول الذي يمكن الاتصال به بالإنكليزية "
 
 #: services/models.py:144
 msgid "focal point name in Arabic"
-msgstr "إسم الشخص الذي يمكن الاتصال به في العربية "
+msgstr "إسم الشخص المسؤول الذي يمكن الاتصال به بالعربية "
 
 #: services/models.py:151
 msgid "focal point name in French"
-msgstr "إسم الشخص الذي يمكن الاتصال به في الفرنسية "
+msgstr "إسم الشخص المسؤول الذي يمكن الاتصال به بالفرنسية "
 
 #: services/models.py:158
 msgid "focal point phone number"
-msgstr "رقم الشخص الذي يمكن الاتصال به"
+msgstr "رقم الشخص المسؤول الذي يمكن الاتصال به"
 
 #: services/models.py:165
 msgid "provider address in English"
-msgstr "عنوان المزود باللغة الإنجليزية"
+msgstr "عنوان مقدم الخدمات باللغة الإنجليزية"
 
 #: services/models.py:170
 msgid "provider address in Arabic"
-msgstr "عنوان المزود باللغة العربية"
+msgstr "عنوان مقدم الخدمات باللغة العربية"
 
 #: services/models.py:175
 msgid "provider address in French"
-msgstr "عنوان المزود باللغة الفرنسية"
+msgstr "عنوان مقدم الخدمات باللغة الفرنسية"
 
 #: services/models.py:223
 msgid "parent area"
@@ -530,7 +530,7 @@ msgstr "المنطقة الأم "
 
 #: services/models.py:224
 msgid "the area that contains this area"
-msgstr "المنطقة تابعة لمنطقة أخرى "
+msgstr "المنطقة التابعة لتلك المنطقة أخرى "
 
 #: services/models.py:262
 msgid "selection criteria"
@@ -542,27 +542,27 @@ msgstr "رمز"
 
 #: services/models.py:298
 msgid "comments in English"
-msgstr "تعليقات باللغة الإنجليزية"
+msgstr "ملاحظات باللغة الإنجليزية"
 
 #: services/models.py:304
 msgid "comments in Arabic"
-msgstr "تعليقات باللغة العربية"
+msgstr "ملاحظات  باللغة العربية"
 
 #: services/models.py:310
 msgid "comments in French"
-msgstr "تعليقات باللغة الفرنسية"
+msgstr "ملاحظات  باللغة الفرنسية"
 
 #: services/models.py:340
 msgid "provider"
-msgstr "مزود "
+msgstr "مقدم الخدمات"
 
 #: services/models.py:365
 msgid "area of service"
-msgstr "منطقة الخدمة"
+msgstr "منطقة تواجد الخدمة"
 
 #: services/models.py:386
 msgid "additional information in English"
-msgstr "معلومات إضافية في اللغة الإنجليزية"
+msgstr "معلومات إضافية باللغة الإنجليزية"
 
 #: services/models.py:391
 msgid "additional information in Arabic"
@@ -590,25 +590,25 @@ msgstr "مرفوض"
 
 #: services/models.py:424
 msgid "canceled"
-msgstr "ألغيت"
+msgstr "ملغية"
 
 #: services/models.py:426
 msgid "archived"
-msgstr "أرشفة"
+msgstr "موضوعة في أرشيف"
 
 #: services/models.py:429
 msgid "status"
-msgstr "الوضع "
+msgstr "الحالة"
 
 #: services/models.py:436
 msgid ""
 "If a service record represents a modification of another service record, "
 "this field links to that other record."
-msgstr "إذا يمثل رقما قياسيا خدمة تعديل لسجل الخدمة الحالية التي لا تزال في انتظار الموافقة، وهذا الروابط ميدانية إلى سجل الخدمة الحالية. للتغيرر"
+msgstr "إن كان سجل الخدمة يمثل تعديل آخر لسجل خدمة أخرى، إذن هذه الخانة ترمز إلى ذلك السجل الأساسي"
 
 #: services/models.py:444
 msgid "location"
-msgstr "المكان "
+msgstr "الموقع"
 
 #: services/models.py:579
 msgid "Only services in draft status may be approved."
@@ -616,27 +616,27 @@ msgstr "يجوز الموافقة على الخدمات الوحيدة في مش
 
 #: services/models.py:622
 msgid "Only services in draft status may be rejected."
-msgstr "قد يتم رفض خدمات الوحيدة في مشروع وضع"
+msgstr "قد يتم إلغاء فقط الخدمات الموضوعة في خانة المسودة"
 
 #: services/models.py:659
 msgid "Provider updated their information"
-msgstr "تحديث معلوماتهم مزود"
+msgstr "لقد تم تحديث معلومات مقدم الخدمة"
 
 #: services/models.py:660
 msgid "New service submitted by provider"
-msgstr "الخدمة الجديدة المقدمة من قبل مزود"
+msgstr "تم تسجيل خدمة جديدة من قبل مقدم الخدمة"
 
 #: services/models.py:661
 msgid "Change to existing service submitted by provider"
-msgstr "تغير إلى الخدمة الحالية للمزود "
+msgstr "تغيير إلى خدمة موجودة مسبقا\" من قبل مقدم الخدمة  "
 
 #: services/models.py:662
 msgid "Provider canceled a draft service"
-msgstr "إلغاء مزود مشروع الخدمة"
+msgstr " مقدم الخدمة ألغى مسودة الخدمة"
 
 #: services/models.py:663
 msgid "Provider canceled a current service"
-msgstr "إلغاء مزود خدمة الحالية"
+msgstr "مقدم الخدمة ألغى خدمة حالية"
 
 #: services/models.py:664
 msgid "Provider superseded a previous draft"
@@ -644,11 +644,11 @@ msgstr "مزود ألغى مسودة قديمة "
 
 #: services/models.py:665
 msgid "Staff approved a new or changed service"
-msgstr "الموظفين يوافقون على خدمة جديدة أو على تغييرها"
+msgstr "الموظفين وافقوا على خدمة جديدة أو  خدمة معدّلة"
 
 #: services/models.py:666
 msgid "Staff rejected a new or changed service"
-msgstr "الموظفين لم يوافقو على خدمة جديدة أو على تغييرها"
+msgstr "الموظفون لم يوافقوا على خدمة جديدة أو خدمة معدّلة"
 
 #: services/models.py:667
 msgid "User submitted feedback"
