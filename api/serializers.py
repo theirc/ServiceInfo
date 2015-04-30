@@ -496,7 +496,7 @@ class BaseServiceTypeAggregateSerializer(RequireOneTranslationMixin,
             'name_en', 'name_fr', 'name_ar',
             'totals',
         )
-        required_translated_fields = ['name']      
+        required_translated_fields = ['name']
 
     def get_totals(self, obj):
         if self.aggregate_field is None:

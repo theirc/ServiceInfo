@@ -13,7 +13,7 @@ class CSVRendererTestCase(SimpleTestCase):
         return [self.get_serializer_item(i) for i in range(count)]
 
     def get_serializer_item(self, number):
-        """Single item result from the serializer output.""" 
+        """Single item result from the serializer output."""
         return {
             'url': 'http://example.com/resource/{}'.format(number),
             'number': number,
