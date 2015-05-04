@@ -490,6 +490,14 @@
   },
   "Reports": {
     "Title": "Feedback Reports",
-    "Description": ""
+    "Description": "",
+    "Form": {
+      "Stat": {
+        "Label": "Report To View",
+        "Options": {
+          "WaitTime": "Waiting Time"
+        }
+      }
+    }
   }
 }

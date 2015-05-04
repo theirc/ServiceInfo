@@ -11,3 +11,27 @@
     </div>
 </div>
 <!-- End Page Head -->
+
+<!-- Main Content -->
+<div class="main-content">
+    <div class="container">
+        <form class="row">
+            <div class="form-group third">
+                <label for="id_stat" class="control-label">
+                    <span data-i18n="Reports.Form.Stat.Label"></span>
+                </label>
+                <span class=error></span>
+                <select name="stat" id="id_stat" class="form-control">
+                    {{#each options}}
+                        <option value="{{ this.value }}" {{#if this.selected }}selected{{/if}} data-i18n="Reports.Form.Stat.Options.{{ this.label }}"></option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="half"></div>
+        </form>
+    </div>
+    <div class="container">
+        <table id="report-table" class="table"></table>
+    </div>
+</div>
+<!-- End Main Content -->
