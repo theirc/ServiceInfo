@@ -32,7 +32,8 @@
               <div class="form-group">
                 <div class="half">
                   <div class="form-group">
-                    <label for="id_name" class="control-label"><span data-i18n="Feedback-Form.Name"></span><span class=error></span></label>
+                    <label for="id_name" class="control-label"><span data-i18n="Feedback-Form.Name"></span></label>
+                    <span class=error></span>
                     <input id="id_name" type="text" name="name" class="form-control"
                         maxlength="256"
                         pattern=".*[^\d\s\.`~!@#$%^&*\(\)-_=\+\[\]{};:',\<\>/\?]|[A-Z].*"><!-- at least one alphabetic? -->
@@ -41,8 +42,9 @@
 
                 <div class="half">
                   <div class="form-group">
-                    <label for="id_phone_number" class="control-label"><span data-i18n="Feedback-Form.Phone-Number"></span><span class=error></span></label>
+                    <label for="id_phone_number" class="control-label"><span data-i18n="Feedback-Form.Phone-Number"></span></label>
                     <div class="form-group">
+                      <span class=error></span>
                       <input id="id_phone_number" type="tel" name="phone_number" class="form-control" pattern="\d{2}-\d{6}" maxlength="9" minlength="9">
                     </div>
                   </div>
@@ -54,8 +56,9 @@
               <div class=form-group>
                 <div class="half">
                   <div class="form-group">
-                    <label for="id_nationality" class="control-label"><span data-i18n="Feedback-Form.Nationality"></span><span class=error></span></label>
+                    <label for="id_nationality" class="control-label"><span data-i18n="Feedback-Form.Nationality"></span></label>
                     <div class="form-group">
+                      <span class=error></span>
                       <select id="id_nationality" name="nationality" class=form-control>
                       </select>
                     </div>
@@ -64,8 +67,9 @@
 
                 <div class="half">
                   <div class="form-group">
-                    <label for="id_area_of_residence" class="control-label"><span data-i18n="Feedback-Form.AreaOfResidence"></span><span class=error></span></label>
+                    <label for="id_area_of_residence" class="control-label"><span data-i18n="Feedback-Form.AreaOfResidence"></span></label>
                     <div class="form-group">
+                      <span class=error></span>
                       <select id="id_area_of_residence" name="area_of_residence" class=form-control>
                       </select>
                     </div>
@@ -78,9 +82,10 @@
               <div class="form-group">
                 {{!-- anonymous feedback? --}}
                 <div class="half checkbox">
-                  <label class="control-label"><span data-i18n="Feedback-Form.anonymous.label"></span><span class=error></span></label>
+                  <label class="control-label"><span data-i18n="Feedback-Form.anonymous.label"></span></label>
                   <label class="control-label yes-no">
                     <span data-i18n="Feedback-Form.anonymous.yes"></span>
+                    <span class=error></span>
                     <input type="radio" name="anonymous" class="form-control" value="1">
                   </label>
                   <label class="control-label">
@@ -90,9 +95,10 @@
                 </div>
             {{!-- was service delivered? --}}
                 <div class="half checkbox">
-                  <label class="control-label"><span data-i18n="Feedback-Form.Delivered.label"></span><span class=error></span></label>
+                  <label class="control-label"><span data-i18n="Feedback-Form.Delivered.label"></span></label>
                   <label for="id_delivered" class="control-label yes-no">
                     <span data-i18n="Feedback-Form.Delivered.yes"></span>
+                    <span class=error></span>
                     <input type="radio" name="delivered" class="form-control" value="1">
                   </label>
                   <label for="id_delivered" class="control-label">
@@ -108,10 +114,11 @@
                 <div class="form-group">
                   <div class="half">
                     <div class="form-group">
-                      <label for="id_quality" class="control-label"><span data-i18n="Feedback-Form.Quality.label"></span><span class=error></span></label>
+                      <label for="id_quality" class="control-label"><span data-i18n="Feedback-Form.Quality.label"></span></label>
                       <div class="form-group">
                         {{# each starvalues }}
                           <label>
+                            <span class=error></span>
                             <input type="radio" name="quality" class="form-control" value="{{ this }}">{{ this }}
                           </label>
                         {{/each}}
@@ -120,10 +127,11 @@
                   </div>
                   <div class="half">
                     <div class="form-group">
-                      <label for="id_staff_satisfaction" class="control-label"><span data-i18n="Feedback-Form.staff_satisfaction.label"></span><span class=error></span></label>
+                      <label for="id_staff_satisfaction" class="control-label"><span data-i18n="Feedback-Form.staff_satisfaction.label"></span></label>
                       <div class="form-group">
                         {{# each starvalues }}
                             <label>
+                              <span class=error></span>
                               <input type="radio" name="staff_satisfaction" class="form-control" value="{{ this }}">{{ this }}
                             </label>
                         {{/each}}
@@ -151,10 +159,11 @@
                   </div>
                   <div class="half">
                     <div class="form-group">
-                      <label for="id_wait_time_satisfaction" class="control-label"><span data-i18n="Feedback-Form.wait_time_satisfaction.label"></span><span class=error></span></label>
+                      <label for="id_wait_time_satisfaction" class="control-label"><span data-i18n="Feedback-Form.wait_time_satisfaction.label"></span></label>
                       <div class="form-group">
                         {{# each starvalues }}
                             <label>
+                              <span class=error></span>
                               <input type="radio" name="wait_time_satisfaction" class="form-control" value="{{ this }}">{{ this }}
                             </label>
                         {{/each}}
@@ -170,8 +179,9 @@
               <div class="form-group">
                 <div class="half">
                   <div class="form-group">
-                    <label for="id_non_delivery_explained" class="control-label"><span data-i18n="Feedback-Form.non_delivery_explained"></span><span class=error></span></label>
+                    <label for="id_non_delivery_explained" class="control-label"><span data-i18n="Feedback-Form.non_delivery_explained"></span></label>
                     <div class="form-group">
+                      <span class=error></span>
                       <select id="id_non_delivery_explained" name="non_delivery_explained" class="form-control">
                           <option></option>{{!-- empty initial value --}}
                           <option value="no" data-i18n="Feedback-Form.non_delivery_explanation.no"></option>
@@ -179,7 +189,8 @@
                           <option value="unfair" data-i18n="Feedback-Form.non_delivery_explanation.unfair"></option>
                           <option value="yes" data-i18n="Feedback-Form.non_delivery_explanation.yes"></option>
                       </select>
-                      <label for="id_extra_comments" class="control-label"><span  data-i18n="Feedback-Form.extra_comments"></span><span class="error"></span></label>
+                      <label for="id_extra_comments" class="control-label"><span  data-i18n="Feedback-Form.extra_comments"></span></label>
+                      <span class=error></span>
                       <textarea id=id_extra_comments rows="4" name="extra_comments" class="form-control"></textarea>
                     </div>
                   </div>
@@ -193,7 +204,8 @@
               <div class="form-group">
                 <div class="half">
                   <div class="form-group">
-                  <label for="id_difficulty_contacting" class="control-label"><span data-i18n="Feedback-Form.difficulty_contacting.label"></span><span class=error></span></label>
+                  <label for="id_difficulty_contacting" class="control-label"><span data-i18n="Feedback-Form.difficulty_contacting.label"></span></label>
+                  <span class=error></span>
                   <select id="id_difficulty_contacting" name="difficulty_contacting" class="form-control">
                       <option></option>{{!-- empty initial value --}}
                       <option value="no" data-i18n="Feedback-Form.difficulty_contacting.no"></option>
@@ -212,8 +224,9 @@
             {{!-- this only displayed if answer to previous question is 'other' --}}
             <div class="row" id="row_other_difficulties">
               <div class="form-group">
-                <label for="id_other_difficulties" class="control-label"><span data-i18n="Feedback-Form.other_difficulties"></span><span class="error"></span></label>
+                <label for="id_other_difficulties" class="control-label"><span data-i18n="Feedback-Form.other_difficulties"></span>></label>
                 <div class="form-group">
+                  <span class=error></span>
                   <textarea id=id_other_difficulties rows="4" name="other_difficulties" data-i18n-field class="form-control"></textarea>
                 </div>
               </div>
@@ -221,8 +234,9 @@
 
             <div class=row>
               <div class="form-group">
-                <label for="id_extra_comments" class="control-label"><span data-i18n="Feedback-Form.extra_comments"></span><span class="error"></span></label>
+                <label for="id_extra_comments" class="control-label"><span data-i18n="Feedback-Form.extra_comments"></span></label>
                 <div class="form-group">
+                  <span class=error></span>
                   <textarea id=id_extra_comments rows="4" name="extra_comments" data-i18n-field class="form-control"  ></textarea>
                 </div>
               </div>

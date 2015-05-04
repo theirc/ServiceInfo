@@ -265,10 +265,10 @@
         "Add-Service": "خدمة جديدة",
         "Status": {
             "draft": "مسودة",
-            "current": "جاري",
+            "current": "الحالي",
             "rejected": "مرفوض",
             "canceled": "ألغيت",
-            "archived": "أرشفة"
+            "archived": "وضعت في الأرشيف"
         },
         "Table": {
             "Thead": {
@@ -282,7 +282,7 @@
         "Cancel": "إلغاء",
         "Delete": "حذف",
         "Change-Service": "تغيير الخدمة",
-        "Change-Change": "إجراء مزيد من التغييرات في انتظار هذا التحديث "
+        "Change-Change": "حدّث هذه المسودة"
     },
     "Provider-Registration-Confirmation": {
         "Page-Head": {

@@ -21,12 +21,14 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
 
+from api.renderers import CSVRenderer
 from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, ProviderSerializer, \
     ProviderTypeSerializer, ServiceAreaSerializer, APILoginSerializer, APIActivationSerializer, \
     PasswordResetRequestSerializer, PasswordResetCheckSerializer, PasswordResetSerializer, \
     ResendActivationLinkSerializer, CreateProviderSerializer, ServiceTypeSerializer, \
     SelectionCriterionSerializer, LanguageSerializer, ServiceSearchSerializer, \
-    ProviderFetchSerializer, FeedbackSerializer, NationalitySerializer, ImportSerializer
+    ProviderFetchSerializer, FeedbackSerializer, NationalitySerializer, ImportSerializer, \
+    ServiceTypeWaitTimeSerializer
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
     SelectionCriterion, Feedback, Nationality
@@ -165,7 +167,10 @@ class SortByDistanceFilter(django_filters.CharFilter):
     def filter(self, qset, value):
         if not len(value):
             return qset
-        lat, long = [float(x) for x in value.split(',', 1)]
+        try:
+            lat, long = [float(x) for x in value.split(',', 1)]
+        except ValueError:
+            return qset
         search_point = Point(long, lat)
         return qset.distance(search_point).order_by('distance')
 
@@ -309,6 +314,17 @@ class ServiceTypeViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
     permission_classes = [AllowAny]
     queryset = ServiceType.objects.all()
     serializer_class = ServiceTypeSerializer
+
+    @list_route(methods=['get', ], url_path='wait-times',
+                permission_classes=[IsAuthenticated, ],
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def wait_times(self, request):
+        """Wait time feedback aggregated by service type."""
+        queryset = self.get_queryset()
+        context = self.get_serializer_context()
+        serializer = ServiceTypeWaitTimeSerializer(
+            queryset, many=True, context=context)
+        return Response(serializer.data)
 
 
 class ProviderViewSet(ServiceInfoModelViewSet):

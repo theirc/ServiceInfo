@@ -19,7 +19,7 @@ from email_user.models import EmailUser
 from email_user.tests.factories import EmailUserFactory
 from services.models import Provider, Service, SelectionCriterion, ServiceArea, ServiceType
 from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory, \
-    ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory
+    ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory, FeedbackFactory
 
 
 ERROR_REQUIRED_FIELD_MISSING = str(Field.default_error_messages['required'])
@@ -761,6 +761,31 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
         path = icon_url.replace(settings.MEDIA_URL, '')
         self.assertTrue(default_storage.exists(path))
 
+    def test_get_wait_times(self):
+        a_type = ServiceType.objects.first()
+        service = ServiceFactory(type=a_type)
+        FeedbackFactory(service=service, delivered=True, wait_time='lesshour')
+        FeedbackFactory(service=service, delivered=True, wait_time='lesshour')
+        FeedbackFactory(service=service, delivered=True, wait_time='more')
+        url = reverse('servicetype-wait-times')
+        rsp = self.get_with_token(url)
+        self.assertEqual(OK, rsp.status_code)
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(len(result), ServiceType.objects.all().count())
+        for r in result:
+            if r['number'] == a_type.number:
+                # less than hour, 1-2 days, 3-7 days, 1-2 weeks, more than 2 weeks
+                expected_totals = [2, 0, 0, 0, 1, ]
+            else:
+                expected_totals = [0, 0, 0, 0, 0, ]
+            expected_labels = [
+                'Less than 1 hour', '1-48 hours', '3-7 days',
+                '1-2 weeks', 'More than 2 weeks']
+            self.assertIn('totals', r)
+            totals = r['totals']
+            self.assertEqual([t['label_en'] for t in totals], expected_labels)
+            self.assertEqual([t['total'] for t in totals], expected_totals)
+
 
 class LanguageTest(APITestMixin, TestCase):
     def setUp(self):
@@ -1164,6 +1189,55 @@ class ServiceSearchTest(APITestMixin, TestCase):
             response = json.loads(rsp.content.decode('utf-8'))
             self.assertEqual(1, len(response))
             self.assertEqual(self.service1.pk, response[0]['id'])
+
+    def test_closest_service(self):
+        # service 1 - Richmond, VA Coordinates: 37°32′N 77°28′W
+        # (very rough conversion to decimal)
+        self.service1.location = Point(-77.48, 37.5)
+        self.service1.save()
+        # service 2 - Boulder, CO
+        self.service2.location = Point(-105.251945, 40.027435)
+        self.service2.save()
+        # Search nearest Carrboro, NC
+        carrboro_lat_long = "35.920556,-79.083889"
+        url = self.url + "?closest=" + carrboro_lat_long
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(Service.objects.filter(status=Service.STATUS_CURRENT).count(),
+                         len(response))
+        s1 = response[0]
+        self.assertEqual(self.service1.id, s1['id'])
+
+    def test_closest_service_bad_latlong1(self):
+        # IF API passes badly formatted lat-long, just ignore it
+        bad_lat_long = "35.920556,-79.08388935.920556"
+        url = self.url + "?closest=" + bad_lat_long
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(Service.objects.filter(status=Service.STATUS_CURRENT).count(),
+                         len(response))
+
+    def test_closest_service_bad_latlong2(self):
+        # IF API passes badly formatted lat-long, just ignore it
+        bad_lat_long = "35.920556,-79.083889,35.920556"
+        url = self.url + "?closest=" + bad_lat_long
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(Service.objects.filter(status=Service.STATUS_CURRENT).count(),
+                         len(response))
+
+    def test_closest_service_nonsense_latlong(self):
+        # IF API passes nonsensical lat-long, just ignore it
+        bad_lat_long = "350.920556,-790.083889"
+        url = self.url + "?closest=" + bad_lat_long
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(Service.objects.filter(status=Service.STATUS_CURRENT).count(),
+                         len(response))
 
 
 class ServiceSearchFilterTest(APITestMixin, TestCase):
