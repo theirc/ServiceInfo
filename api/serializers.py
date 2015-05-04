@@ -498,11 +498,11 @@ class BaseServiceTypeAggregateSerializer(RequireOneTranslationMixin,
         )
         required_translated_fields = ['name']
 
-    def get_totals(self, obj):
+    def get_totals(self, service_type):
         if self.aggregate_field is None:
             raise ValueError('aggregate_field must be defined.')
         totals = []
-        results = Feedback.objects.filter(service__type=obj).values(
+        results = Feedback.objects.filter(service__type=service_type).values(
             self.aggregate_field).annotate(total=Count('id')).order_by()
         counts = {r[self.aggregate_field]: r['total'] for r in results}
         field = Feedback._meta.get_field(self.aggregate_field)
