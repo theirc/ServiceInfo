@@ -130,6 +130,8 @@ var forms = module.exports = {
     },
 
     show_errors_on_form: function($form, e) {
+        // 'e' should be a jqHXR object with a responseJSON attribute
+        // containing a dictionary of the errors
         // returns missing...
         var self = this,
             missing = {},

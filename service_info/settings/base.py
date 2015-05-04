@@ -297,3 +297,6 @@ TEST_RUNNER = 'service_info.runner.CustomTestSuiteRunner'
 # Use https when constructing links to ourselves?
 # Generally True, we'll change to False in dev.py for running locally
 SECURE_LINKS = True
+
+# How many seconds to allow signed URLs to be valid
+SIGNED_URL_LIFETIME = 300
