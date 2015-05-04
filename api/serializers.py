@@ -3,7 +3,9 @@ from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError as DjangoValidationError
-from django.utils.translation import ugettext_lazy as _
+from django.db.models import Count
+from django.utils.encoding import force_text
+from django.utils.translation import override, ugettext_lazy as _
 
 from rest_framework import exceptions, serializers
 
@@ -476,3 +478,44 @@ class ResendActivationLinkSerializer(serializers.Serializer):
             raise exceptions.ValidationError({'email': msg})
         attrs['user'] = user
         return attrs
+
+
+class BaseServiceTypeAggregateSerializer(RequireOneTranslationMixin,
+                                         serializers.HyperlinkedModelSerializer):
+    """Common base class for service types aggregates."""
+
+    totals = serializers.SerializerMethodField()
+
+    aggregate_field = None
+
+    class Meta:
+        model = ServiceType
+        fields = (
+            'url',
+            'number',
+            'name_en', 'name_fr', 'name_ar',
+            'totals',
+        )
+        required_translated_fields = ['name']
+
+    def get_totals(self, service_type):
+        if self.aggregate_field is None:
+            raise ValueError('aggregate_field must be defined.')
+        totals = []
+        results = Feedback.objects.filter(service__type=service_type).values(
+            self.aggregate_field).annotate(total=Count('id')).order_by()
+        counts = {r[self.aggregate_field]: r['total'] for r in results}
+        field = Feedback._meta.get_field(self.aggregate_field)
+        for value, label in field.choices:
+            total = {'total': counts.get(value, 0)}
+            for lang, name in settings.LANGUAGES:
+                with override(language=lang):
+                    total['label_{}'.format(lang)] = force_text(label)
+            totals.append(total)
+        return totals
+
+
+class ServiceTypeWaitTimeSerializer(BaseServiceTypeAggregateSerializer):
+    """Wait time feedback bucket totals per service type."""
+
+    aggregate_field = 'wait_time'

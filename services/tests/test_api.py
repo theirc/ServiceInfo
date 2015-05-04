@@ -19,7 +19,7 @@ from email_user.models import EmailUser
 from email_user.tests.factories import EmailUserFactory
 from services.models import Provider, Service, SelectionCriterion, ServiceArea, ServiceType
 from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory, \
-    ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory
+    ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory, FeedbackFactory
 
 
 ERROR_REQUIRED_FIELD_MISSING = str(Field.default_error_messages['required'])
@@ -760,6 +760,31 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
         self.assertTrue(icon_url.startswith(settings.MEDIA_URL))
         path = icon_url.replace(settings.MEDIA_URL, '')
         self.assertTrue(default_storage.exists(path))
+
+    def test_get_wait_times(self):
+        a_type = ServiceType.objects.first()
+        service = ServiceFactory(type=a_type)
+        FeedbackFactory(service=service, delivered=True, wait_time='lesshour')
+        FeedbackFactory(service=service, delivered=True, wait_time='lesshour')
+        FeedbackFactory(service=service, delivered=True, wait_time='more')
+        url = reverse('servicetype-wait-times')
+        rsp = self.get_with_token(url)
+        self.assertEqual(OK, rsp.status_code)
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(len(result), ServiceType.objects.all().count())
+        for r in result:
+            if r['number'] == a_type.number:
+                # less than hour, 1-2 days, 3-7 days, 1-2 weeks, more than 2 weeks
+                expected_totals = [2, 0, 0, 0, 1, ]
+            else:
+                expected_totals = [0, 0, 0, 0, 0, ]
+            expected_labels = [
+                'Less than 1 hour', '1-48 hours', '3-7 days',
+                '1-2 weeks', 'More than 2 weeks']
+            self.assertIn('totals', r)
+            totals = r['totals']
+            self.assertEqual([t['label_en'] for t in totals], expected_labels)
+            self.assertEqual([t['total'] for t in totals], expected_totals)
 
 
 class LanguageTest(APITestMixin, TestCase):
