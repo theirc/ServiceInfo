@@ -498,6 +498,10 @@
           "WaitTime": "Waiting Time"
         }
       }
+    },
+    "Table": {
+      "Loading": "Loading...",
+      "ServiceType": "Service Type"
     }
   }
 }
