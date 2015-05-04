@@ -310,7 +310,7 @@ class DistanceField(serializers.FloatField):
     # results querysets will have added it if the results were
     # ordered by distance. Otherwise, just use the default.
     def get_attribute(self, obj):
-        if hasattr(obj, 'distance'):
+        if getattr(obj, 'distance', None) is not None:
             return obj.distance.m  # Distance in meters
         return self.default
 
