@@ -13,6 +13,7 @@ from services.utils import validation_error_as_text
 
 class ProviderAdmin(admin.ModelAdmin):
     list_display = ['name_en', 'name_ar', 'name_fr', 'type']
+    list_display_links = list_display
 
 
 class FeedbackAdmin(admin.ModelAdmin):
@@ -21,6 +22,7 @@ class FeedbackAdmin(admin.ModelAdmin):
 
 class ProviderTypeAdmin(admin.ModelAdmin):
     list_display = ['name_en', 'name_ar', 'name_fr']
+    list_display_links = list_display
 
 
 class NationalityAdmin(admin.ModelAdmin):
