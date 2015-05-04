@@ -161,7 +161,10 @@ class SortByDistanceFilter(django_filters.CharFilter):
     def filter(self, qset, value):
         if not len(value):
             return qset
-        lat, long = [float(x) for x in value.split(',', 1)]
+        try:
+            lat, long = [float(x) for x in value.split(',', 1)]
+        except ValueError:
+            return qset
         search_point = Point(long, lat)
         return qset.distance(search_point).order_by('distance')
 

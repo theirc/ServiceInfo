@@ -1165,6 +1165,55 @@ class ServiceSearchTest(APITestMixin, TestCase):
             self.assertEqual(1, len(response))
             self.assertEqual(self.service1.pk, response[0]['id'])
 
+    def test_closest_service(self):
+        # service 1 - Richmond, VA Coordinates: 37°32′N 77°28′W
+        # (very rough conversion to decimal)
+        self.service1.location = Point(-77.48, 37.5)
+        self.service1.save()
+        # service 2 - Boulder, CO
+        self.service2.location = Point(-105.251945, 40.027435)
+        self.service2.save()
+        # Search nearest Carrboro, NC
+        carrboro_lat_long = "35.920556,-79.083889"
+        url = self.url + "?closest=" + carrboro_lat_long
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(Service.objects.filter(status=Service.STATUS_CURRENT).count(),
+                         len(response))
+        s1 = response[0]
+        self.assertEqual(self.service1.id, s1['id'])
+
+    def test_closest_service_bad_latlong1(self):
+        # IF API passes badly formatted lat-long, just ignore it
+        bad_lat_long = "35.920556,-79.08388935.920556"
+        url = self.url + "?closest=" + bad_lat_long
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(Service.objects.filter(status=Service.STATUS_CURRENT).count(),
+                         len(response))
+
+    def test_closest_service_bad_latlong2(self):
+        # IF API passes badly formatted lat-long, just ignore it
+        bad_lat_long = "35.920556,-79.083889,35.920556"
+        url = self.url + "?closest=" + bad_lat_long
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(Service.objects.filter(status=Service.STATUS_CURRENT).count(),
+                         len(response))
+
+    def test_closest_service_nonsense_latlong(self):
+        # IF API passes nonsensical lat-long, just ignore it
+        bad_lat_long = "350.920556,-790.083889"
+        url = self.url + "?closest=" + bad_lat_long
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(Service.objects.filter(status=Service.STATUS_CURRENT).count(),
+                         len(response))
+
 
 class ServiceSearchFilterTest(APITestMixin, TestCase):
     def setUp(self):
