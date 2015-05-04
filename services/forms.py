@@ -9,18 +9,69 @@ from services.models import Provider, Service, SelectionCriterion, ServiceType, 
     ProviderType
 
 
+def try_to_get_one(model, **query_kwargs):
+    """
+    Return the best match instance of `model` using as many of the given
+    query args as we can.  Returns None if we can't find a combination of
+    the args that gives us exactly one result.
+    :param model:
+    :param query_kwargs:
+    :return:
+    """
+    # If all the args gives us one result, use it.
+    qset = model.objects.filter(**query_kwargs)
+    if qset.count() == 1:
+        return qset[0]
+    if qset.count() > 1:
+        # We got more than one result even using all the args, so
+        # it's hopeless.  Removing args cannot get us down to 1 result.
+        return None
+
+    # Start a breadth-first search for a workable combination.
+    # First try all the ways of dropping one of the kwargs.
+    # If we're not successful, then start calling this recursively,
+    # each time starting by dropping a different arg.
+
+    # Try dropping just one
+    keys = query_kwargs.keys()
+    if len(keys) <= 1:
+        return None
+    for key_to_omit in keys:
+        kwargs_to_use = dict(query_kwargs)
+        del kwargs_to_use[key_to_omit]
+        qset = model.objects.filter(**kwargs_to_use)
+        if qset.count() == 1:
+            return qset[0]
+    # No luck - recurse
+    for key_to_omit in keys:
+        kwargs_to_use = dict(query_kwargs)
+        del kwargs_to_use[key_to_omit]
+        result = try_to_get_one(model, **kwargs_to_use)
+        if result:
+            return result
+
+
 # We're using form widgets to adapt from the values coming from
 # the imported spreadsheet object to the values that Django
 # would commonly expect in a form submission.
 
 class ProviderTypeWidget(forms.Widget):
     def value_from_datadict(self, data, files, name):
-        return ProviderType.objects.get(
+        """
+        Find the relevant provider type record and return its ID
+
+        Try to allow exact specification of a type but be forgiving
+        if they misspell a field or two or leave some blank and the
+        rest is still enough to identify a unique provider type:
+        """
+        provider_type = try_to_get_one(
+            ProviderType,
             number=data['type__number'],
             name_en=data['type__name_en'],
             name_ar=data['type__name_ar'],
-            name_fr=data['type__name_fr'],
-        ).id
+            name_fr=data['type__name_fr'])
+        if provider_type:
+            return provider_type.id
 
 
 class UserWidget(forms.Widget):
@@ -56,15 +107,16 @@ class ServiceTypeWidget(forms.Widget):
         Given a dictionary of data and this widget's name, returns the value
         of this widget. Returns None if it's not provided.
         """
-        try:
-            return ServiceType.objects.get(
-                name_en=data['type__name_en'],
-                name_ar=data['type__name_ar'],
-                name_fr=data['type__name_fr'],
-            ).id
-        except ServiceType.DoesNotExist:
-            raise ValidationError(_('There is no service type with English name %r')
-                                  % data['type__name_en'])
+        service_type = try_to_get_one(
+            ServiceType,
+            name_en=data['type__name_en'],
+            name_ar=data['type__name_ar'],
+            name_fr=data['type__name_fr'],
+        )
+        if service_type:
+            return service_type.id
+        raise ValidationError(_('There is no service type with English name %r')
+                              % data['type__name_en'])
 
 
 class ServiceAreaWidget(forms.Widget):
