@@ -2,7 +2,6 @@ from collections import defaultdict
 from datetime import time
 import logging
 
-from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.utils.translation import ugettext as _
 
@@ -188,13 +187,10 @@ def add_models_to_sheet(sheet, headings, records):
             elif '__' in head:
                 field_name, next_field_name = head.split('__', 1)
                 field = getattr(record, field_name)
-                try:
-                    if field:
-                        next_field = getattr(field, next_field_name)
-                        data.append(next_field)
-                    else:
-                        data.append('')
-                except AttributeError:
+                if field:
+                    next_field = getattr(field, next_field_name, '')
+                    data.append(next_field)
+                else:
                     data.append('')
             else:
                 data.append(getattr(record, head))
@@ -225,13 +221,38 @@ def validate_and_import_data(user, data):
     errs = defaultdict(list)
 
     try:
-        book = open_workbook(file_contents=data, on_demand=True)
+        book = open_workbook(file_contents=data, on_demand=True, ragged_rows=False)
     except XLRDError:
         logger.exception("Error opening uploaded file as spreadsheet")
         errs['file'].append(
             _("Unable to open spreadsheet file; is it an Excel spreadsheet?"))
-        raise ValidationError(errs)
+        return errs
     return validate_and_import_book(user, book)
+
+
+def converted_errors(errs_by_sheet_row):
+    # Convert errors for returning
+    if errs_by_sheet_row:
+        # Convert to a list of messages
+        errs = []
+        errs_by_sheet_row = dict(errs_by_sheet_row)
+        for sheet_name in errs_by_sheet_row.keys():
+            errs.append(_("Errors in sheet %s:") % sheet_name)
+            for row_num, row_errs in errs_by_sheet_row[sheet_name].items():
+                # The form validation errors each end with a period already, so we don't
+                # need to insert any more punctuation between then.
+                msgs = []
+                for field, message in row_errs:
+                    if field:
+                        msgs.append("%s: %s" % (field, message))
+                    else:
+                        msgs.append(message)
+                msg = " ".join(msgs)
+                if row_num:
+                    # Internal row numbers are 0-based, displayed row numbers are 1-based
+                    msg = _("Row %d") % (1 + row_num) + ": " + msg
+                errs.append(msg)
+        return errs
 
 
 @transaction.atomic()
@@ -246,7 +267,8 @@ def validate_and_import_book(user, book):
     errs_by_sheet_row = defaultdict(lambda: defaultdict(list))
 
     def add_error(sheet, rownum, field, message):
-        errs_by_sheet_row[sheet.name][rownum].append((field, message))
+        sheet_name = sheet.name if sheet else ''
+        errs_by_sheet_row[sheet_name][rownum].append((field, message))
 
     def add_form_errors(form):
         for fieldname, errors in form.errors.as_data().items():
@@ -262,14 +284,20 @@ def validate_and_import_book(user, book):
     # imported_providers = []
 
     if book.nsheets != 3:
-        raise ValidationError(
-            {'file': 'Spreadsheet file should contain 3 sheets, this one has %d' % book.nsheets})
+        add_error(None, 0, None,
+                  _('Spreadsheet file should contain 3 sheets, this one has %d') % book.nsheets)
+        return converted_errors(errs_by_sheet_row)
 
     is_staff = user.is_staff
 
     # Providers in first sheet
     sheet = book.sheet_by_index(0)
-    headers = sheet.row_values(0)
+    headers = []
+    if not sheet.nrows:
+        add_error(sheet, 0, None,
+                  _('First sheet has no data.'))
+    else:
+        headers = sheet.row_values(0)
     if sheet.name != PROVIDER_SHEET_NAME:
         add_error(sheet, 0, None,
                   _('First sheet has wrong name, expected {expected}, got {actual}').format(
@@ -277,13 +305,9 @@ def validate_and_import_book(user, book):
     elif headers != PROVIDER_HEADINGS:
         add_error(sheet, 0, None,
                   _('First sheet has wrong headers, expected %s') % PROVIDER_HEADINGS)
-    else:
+    elif headers:
         for rownum in range(1, sheet.nrows):
             values = sheet.row_values(rownum)
-            if len(values) != len(headers):
-                add_error(sheet, rownum, None,
-                          _("Row {number} has the wrong number of values").format(number=rownum))
-                continue
             # If they blanked all but the first column, they want the record deleted
             delete_provider = not any([value for value in values[1:]])
             data = dict(zip(headers, values))
@@ -314,6 +338,12 @@ def validate_and_import_book(user, book):
             provider_id = data.pop('id')
             if provider_id:
                 try:
+                    provider_id = int(provider_id)
+                except ValueError:
+                    add_error(sheet, rownum, 'id',
+                              _('%s is not a valid ID' % provider_id))
+                    continue
+                try:
                     instance = Provider.objects.get(id=provider_id)
                 except Provider.DoesNotExist:
                     add_error(sheet, rownum, 'provider',
@@ -337,31 +367,33 @@ def validate_and_import_book(user, book):
 
     # Services in second sheet
     sheet = book.sheet_by_index(1)
+    headers = []
     imported_services = []
     imported_services_by_id = {}
     imported_services_by_name = {}
 
+    if not sheet.nrows:
+        add_error(sheet, 0, None,
+                  _('Second sheet has no data.'))
+    else:
+        headers = sheet.row_values(0)
     if sheet.name != SERVICES_SHEET_NAME:
         add_error(sheet, 0, None,
                   _('Second sheet has wrong name, expected {expected}, got {actual}').format(
                       expected=SERVICES_SHEET_NAME, actual=sheet.name))
-    else:
+    elif headers:
         valid_service_ids = set(Service.objects.filter(provider__in=providers)
                                 .values_list('id', flat=True))
-        headers = sheet.row_values(0)
         for rownum in range(1, sheet.nrows):
             values = sheet.row_values(rownum)
-            if len(values) != len(headers):
-                add_error(sheet, rownum, None,
-                          _("Row {number} has the wrong number of values").format(number=rownum))
-                continue
 
             # If they blanked all but the first column, they want the service deleted
-            delete_service = not any([value for value in values[1:]])
+            delete_service = values[0] != '' and not any([value for value in values[1:]])
 
             data = dict(zip(headers, values))
             data['row'] = rownum
-            service_id = data['id']
+            service_id = data.pop('id')
+            instance = None
             if not is_staff and service_id and service_id not in valid_service_ids:
                 if delete_service:
                     add_error(sheet, rownum, 'service',
@@ -371,34 +403,29 @@ def validate_and_import_book(user, book):
                               _('%d is not a service this user may import') % service_id)
                 continue
 
-            if delete_service:
-                service_id = data.pop('id')
-                if not service_id:
-                    add_error(sheet, rownum, 'id', _('No data on row'))
+            if service_id:
+                try:
+                    service_id = int(service_id)
+                except ValueError:
+                    add_error(sheet, rownum, 'id',
+                              _('%s is not a valid ID' % service_id))
                     continue
                 try:
                     instance = Service.objects.get(id=service_id)
                 except Service.DoesNotExist:
                     add_error(sheet, rownum, 'id', _('No service with id=%s') % service_id)
-                else:
-                    instance.delete()
+                    continue
+
+            if delete_service:
+                instance.delete()
                 continue
 
-            if not data['id'] and not is_staff and data['provider__id'] not in valid_provider_ids:
+            if not service_id and not is_staff and data['provider__id'] not in valid_provider_ids:
                 add_error(sheet, rownum, 'provider__id',
                           _('Non-staff users may not create services for other providers'))
                 continue
 
             # Okay so far
-            service_id = data.pop('id')
-            if service_id:
-                try:
-                    instance = Service.objects.get(id=service_id)
-                except Service.DoesNotExist:
-                    add_error(sheet, rownum, 'id', _('No service with id=%s') % service_id)
-                    continue
-            else:
-                instance = None
             form = ServiceForm(instance=instance, data=data)
             if not form.is_valid():
                 add_form_errors(form)
@@ -410,25 +437,31 @@ def validate_and_import_book(user, book):
 
     # Selection criteria
     sheet = book.sheet_by_index(2)
+    headers = []
+    if not sheet.nrows:
+        add_error(sheet, 0, None,
+                  _('Second sheet has no data.'))
+    else:
+        headers = sheet.row_values(0)
     if sheet.name != SELECTION_CRITERIA_SHEET_NAME:
         add_error(sheet, 0, None,
                   _('Third sheet has wrong name, expected {expected}, got {actual}').format(
                       expected=SELECTION_CRITERIA_SHEET_NAME, actual=sheet.name))
-    else:
-        headers = sheet.row_values(0)
+    elif headers:
         for rownum in range(1, sheet.nrows):
             values = sheet.row_values(rownum)
-            if len(values) != len(headers):
-                add_error(sheet, rownum, None,
-                          _("Row {number} has the wrong number of values").format(number=rownum))
-                continue
-
             # If they blanked all but the first column, they want the record deleted
             delete_record = not any([value for value in values[1:]])
             data = dict(zip(headers, values))
 
             crit_id = data.pop('id')
             if crit_id:
+                try:
+                    crit_id = int(crit_id)
+                except ValueError:
+                    add_error(sheet, rownum, 'id',
+                              _('%s is not a valid ID' % crit_id))
+                    continue
                 try:
                     instance = SelectionCriterion.objects.get(id=crit_id)
                 except SelectionCriterion.DoesNotExist:
@@ -453,7 +486,8 @@ def validate_and_import_book(user, book):
             if not service:
                 add_error(sheet, rownum, 'service__id',
                           _("Selection criterion refers to service with ID or name %r "
-                            "that is not in the 2nd sheet") % service_id)
+                            "that is not in the 2nd sheet. Choices: %r or %r") %
+                          (service_id, imported_services_by_name, imported_services_by_id))
                 continue
 
             data['service'] = service.id
@@ -463,24 +497,4 @@ def validate_and_import_book(user, book):
             else:
                 add_form_errors(form)
 
-    if errs_by_sheet_row:
-        # Convert to a list of messages
-        errs = []
-        errs_by_sheet_row = dict(errs_by_sheet_row)
-        for sheet_name in errs_by_sheet_row.keys():
-            errs.append(_("Errors in sheet %s:") % sheet_name)
-            for row_num, row_errs in errs_by_sheet_row[sheet_name].items():
-                # The form validation errors each end with a period already, so we don't
-                # need to insert any more punctuation between then.
-                msgs = []
-                for field, message in row_errs:
-                    if field:
-                        msgs.append("%s: %s" % (field, message))
-                    else:
-                        msgs.append(message)
-                msg = " ".join(msgs)
-                if row_num:
-                    # Internal row numbers are 0-based, displayed row numbers are 1-based
-                    msg = _("Row %d") % (1 + row_num) + ": " + msg
-                errs.append(msg)
-        return errs
+    return converted_errors(errs_by_sheet_row)

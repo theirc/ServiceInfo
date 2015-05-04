@@ -262,6 +262,11 @@ class SelectionCriterion(models.Model):
     class Meta(object):
         verbose_name_plural = _("selection criteria")
 
+    def clean(self):
+        if not any([self.text_en, self.text_fr, self.text_ar]):
+            raise ValidationError(_("Selection criterion must have text in at least "
+                                    "one language"))
+
     def __str__(self):
         return ', '.join([self.text_en, self.text_fr, self.text_ar])
 
