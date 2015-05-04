@@ -58,7 +58,8 @@ var ReportTableView = Backbone.View.extend({
 
 module.exports = Backbone.View.extend({
     events: {
-        'change :input[name="stat"]': 'updateReport'
+        'change :input[name="stat"]': 'updateReport',
+        'click .download': 'downloadReport'
     },
 
     initialize: function () {
@@ -88,5 +89,14 @@ module.exports = Backbone.View.extend({
             this.resultsView.remove();
         }
         hashtrack.setVar('stat', e.target.value);
+    },
+
+    downloadReport: function (e) {
+        e.preventDefault();
+        api.request('GET', 'api/servicetypes/' + this.report + '/?format=csv')
+            .then(function (response) {
+                var blob = new Blob([response], {type: 'text/csv'});
+                window.location = window.URL.createObjectURL(blob);
+            });
     }
 }); 

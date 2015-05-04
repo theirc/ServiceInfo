@@ -497,7 +497,8 @@
         "Options": {
           "WaitTime": "Waiting Time"
         }
-      }
+      },
+      "Download": "Download Report CSV"
     },
     "Table": {
       "Loading": "Loading...",
