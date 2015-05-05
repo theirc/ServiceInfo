@@ -934,34 +934,34 @@ class Nationality(NameInCurrentLanguageMixin, models.Model):
 class Feedback(models.Model):
     # About the user
     name = models.CharField(
-        _("name"),
+        _("Name"),
         max_length=256
     )
     phone_number = models.CharField(
-        _("phone number"),
+        _("Phone Number (NN-NNNNNN)"),
         max_length=20,
         validators=[
             RegexValidator(settings.PHONE_NUMBER_REGEX)
         ]
     )
     nationality = models.ForeignKey(
-        verbose_name=_("nationality"),
+        verbose_name=_("Nationality"),
         to=Nationality,
     )
     area_of_residence = models.ForeignKey(
         ServiceArea,
-        verbose_name=_("area of residence"),
+        verbose_name=_("Area of residence"),
     )
 
     # The service getting feedback
     service = models.ForeignKey(
-        verbose_name=_("service"),
+        verbose_name=_("Service"),
         to=Service,
     )
 
     # Questions about delivery of service
     delivered = models.BooleanField(
-        help_text=_("Was the service you sought delivered to you?"),
+        help_text=_("Was service delivered?"),
         default=False,  # Don't really want a default here, but Django screams at you
     )
     quality = models.SmallIntegerField(
@@ -1001,7 +1001,7 @@ class Feedback(models.Model):
         max_length=12,
         choices=[
             ('lesshour', _("Less than 1 hour")),
-            ('uptotwodays', _("1-48 hours")),
+            ('uptotwodays', _("Up to 2 days")),
             ('3-7days', _("3-7 days")),
             ('1-2weeks', _("1-2 weeks")),
             ('more', _("More than 2 weeks")),

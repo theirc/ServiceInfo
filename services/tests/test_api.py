@@ -779,7 +779,7 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
             else:
                 expected_totals = [0, 0, 0, 0, 0, ]
             expected_labels = [
-                'Less than 1 hour', '1-48 hours', '3-7 days',
+                'Less than 1 hour', 'Up to 2 days', '3-7 days',
                 '1-2 weeks', 'More than 2 weeks']
             self.assertIn('totals', r)
             totals = r['totals']
