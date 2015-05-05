@@ -1,6 +1,7 @@
 from collections import defaultdict
 from django.conf import settings
 from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
 from django.contrib.sites.models import Site
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
@@ -260,6 +261,11 @@ class SelectionCriterion(models.Model):
 
     class Meta(object):
         verbose_name_plural = _("selection criteria")
+
+    def clean(self):
+        if not any([self.text_en, self.text_fr, self.text_ar]):
+            raise ValidationError(_("Selection criterion must have text in at least "
+                                    "one language"))
 
     def __str__(self):
         return ', '.join([self.text_en, self.text_fr, self.text_ar])
@@ -638,6 +644,28 @@ class Service(NameInCurrentLanguageMixin, models.Model):
             update_type=JiraUpdateRecord.REJECT_SERVICE,
             by=staff_user
         )
+
+    @property
+    def longitude(self):
+        if self.location:
+            return self.location[0]
+
+    @longitude.setter
+    def longitude(self, value):
+        if self.location is None:
+            self.location = Point(0, 0)
+        self.location[0] = value
+
+    @property
+    def latitude(self):
+        if self.location:
+            return self.location[1]
+
+    @latitude.setter
+    def latitude(self, value):
+        if self.location is None:
+            self.location = Point(0, 0)
+        self.location[1] = value
 
 
 class JiraUpdateRecord(models.Model):

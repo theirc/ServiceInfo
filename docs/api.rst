@@ -342,3 +342,19 @@ and negative meaning west.  Units are degrees, expressed in decimal.
 North Carolina is at 35.5000° N, 80.0000° W, which we would pass to
 this API as "35.5,-80" meaning 35.5 degrees north latitude and
 80 degrees west longitude.
+
+Data export
+-----------
+
+A user can download an Excel spreadsheet with data. To do so via
+the API, login, then call `/api/export/`.  The return value will
+contain a `url` value. That is a time-limited signed URL that
+can be used to download the spreadsheet. It will expire in a few
+minutes, and can only be used for exporting data for this user.
+
+Data import
+-----------
+
+To import a spreadsheet of data in the same format, use the
+`/api/import/` API and submit `multipart/form-data` containing
+an uploaded file named `file` with the spreadsheet.

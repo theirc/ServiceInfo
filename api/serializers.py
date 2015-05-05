@@ -8,9 +8,11 @@ from django.utils.encoding import force_text
 from django.utils.translation import override, ugettext_lazy as _
 
 from rest_framework import exceptions, serializers
+DRFValidationError = exceptions.ValidationError
 
 from email_user.forms import EmailUserCreationForm
 from email_user.models import EmailUser
+from services.import_export import validate_and_import_data
 from services.models import Service, Provider, ProviderType, ServiceType, ServiceArea, \
     SelectionCriterion, Feedback, Nationality
 
@@ -477,6 +479,18 @@ class ResendActivationLinkSerializer(serializers.Serializer):
             msg = _("User is not pending activation")
             raise exceptions.ValidationError({'email': msg})
         attrs['user'] = user
+        return attrs
+
+
+class ImportSerializer(serializers.Serializer):
+    file = serializers.FileField(required=False)
+
+    def validate(self, attrs):
+        user = self.context['request'].user
+        data = attrs['file'].read()
+        errs = validate_and_import_data(user, data)
+        if errs:
+            raise DRFValidationError(errs)
         return attrs
 
 
