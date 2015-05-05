@@ -16,6 +16,10 @@ function renderResults() {
         services: search.services.data(),
     })
     $el.html(html);
+    $('.no-search-results').hide();
+    if (search.services.length === 0) {
+        $('.no-search-results').show();
+    }
     $el.i18n();
 }
 
@@ -51,13 +55,16 @@ module.exports = Backbone.View.extend({
         // Renders automatically when language is ready
         this.SearchControlView = new search.SearchControls({
             $el: $scv,
-            feedback: this.feedback
+            feedback: this.feedback,
+            update_results: function() {
+                self.resultView.render();
+            }
         });
 
         var $results = $('.search-result-list');
         this.resultView = new SearchResultList({
             $el: $results,
-            services: this.services,
+            services: this.services
         });
         this.resultView.render();
 

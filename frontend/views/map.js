@@ -1,8 +1,8 @@
 var Backbone = require('backbone'),
+    config = require('../config'),
     template = require("../templates/map.hbs"),
     service = require('../models/service'),
     servicetype = require('../models/servicetype'),
-    hashtrack = require('hashtrack'),
     i18n = require('i18next-client'),
     search = require('../search')
 ;
@@ -27,7 +27,7 @@ module.exports = Backbone.View.extend({
         var self=this;
         this.$el.html(template({
             services: this.services,
-            query: hashtrack.getVar('q'),
+            query: config.get('q'),
             feedback: this.feedback
         }));
         $('.no-search-results').hide();
@@ -36,7 +36,8 @@ module.exports = Backbone.View.extend({
         // Renders automatically when language is ready
         this.SearchControlView = new search.SearchControls({
             $el: $scv,
-            feedback: this.feedback
+            feedback: this.feedback,
+            update_results: self.updateResults
         });
 
         function initialize() {
@@ -46,7 +47,7 @@ module.exports = Backbone.View.extend({
             };
             self.map = new google.maps.Map(document.getElementById('map_canvas'),
                 mapOptions);
-            search.refetchServices(self.query).then(function(){
+            search.refetchServices().then(function(){
                 self.updateResults();
             });
         }

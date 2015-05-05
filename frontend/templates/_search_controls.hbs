@@ -21,8 +21,8 @@
             <div class="options">
                 <div class="row search-distance">
                     <label data-i18n="Service-Map.Filtered-Search.Sort"></label>
-                    <input type="radio" name="sort" value="name" checked><span data-i18n="Service-Map.Filtered-Search.SortName" />
-                    <input type="radio" name="sort" value="near"><span data-i18n="Service-Map.Filtered-Search.SortNear" />
+                    <input type="radio" name="sort" value="name"{{#if sort_by_name }} checked{{/if}}><span data-i18n="Service-Map.Filtered-Search.SortName" />
+                    <input type="radio" name="sort" value="near"{{#if sort_by_distance }} checked{{/if}}><span data-i18n="Service-Map.Filtered-Search.SortNear" />
                 </div>
                 <!-- Disable until/if implemented -->
                 <!-- <div class="two-third search-area">
