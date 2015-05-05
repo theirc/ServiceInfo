@@ -22,7 +22,7 @@
               <input type=hidden name=update_of></input>
               <input type=hidden name=location></input>
 
-              <fieldset>
+              <fieldset class=service-form>
                 <legend data-i18n="Service-Form.Legend"></legend>
                 <div class="row">
                   <div class="form-group">
@@ -136,17 +136,18 @@
                   </div>
                 {{/each}}
                 </div>
+              </fieldset>
 
+              <fieldset class=submit-options>
                 <div class="submit-form">
                     <div class="row error error-submission"></div>
                     <div class="half">
                       <button class="form-btn-submit primary-button" data-i18n="Service-Form.Form-Submit-Options.Submit"></button>
                     </div>
                     <div class="half">
-                      <button class="form-btn-clear primary-button" data-i18n="Service-Form.Form-Submit-Options.Clear"></button>
+                      <button class="form-btn-clear primary-button remove" data-i18n="Service-Form.Form-Submit-Options.Clear"></button>
                     </div>
                 </div>
-
               </fieldset>
             </form>
 
