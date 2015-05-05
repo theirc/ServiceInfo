@@ -485,9 +485,11 @@ def validate_and_import_book(user, book):
                 service = imported_services_by_id.get(service_id, None)
             if not service:
                 add_error(sheet, rownum, 'service__id',
-                          _("Selection criterion refers to service with ID or name %r "
-                            "that is not in the 2nd sheet. Choices: %r or %r") %
-                          (service_id, imported_services_by_name, imported_services_by_id))
+                          _("Selection criterion refers to service with ID or name {name!r} "
+                            "that is not in the 2nd sheet. Choices: {list1!r} or {list2!r}").format(
+                              name=service_id, list1=imported_services_by_name,
+                              list2=imported_services_by_id
+                          ))
                 continue
 
             data['service'] = service.id
