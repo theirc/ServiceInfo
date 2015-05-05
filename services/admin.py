@@ -41,13 +41,6 @@ class SelectionCriterionInlineAdmin(admin.TabularInline):
     model = SelectionCriterion
     fields = ['text_en', 'text_ar', 'text_fr']
 
-    # Staff can't add/delete criteria here, just edit the ones that are there:
-    can_delete = False
-    extra = 0
-    max_num = 0
-    # (Though if they're clever, they can go to the admin for selection criteria
-    # and create or edit one there that links to the service.)
-
 
 class LocationWidget(BaseGeometryWidget):
     template_name = 'gis/googlemaps.html'
@@ -130,7 +123,7 @@ class ServiceAdmin(admin.ModelAdmin):
                     ]
     list_display_links = ['name_en', 'name_ar', 'name_fr', 'provider', 'area_of_service']
     list_filter = ['status', 'type']
-    readonly_fields = ['provider', 'update_of', 'status']
+    readonly_fields = ['status']
 
     def approve(self, request, queryset):
         # All must be in DRAFT status
