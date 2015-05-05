@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-04-29 08:27+0000\n"
-"Last-Translator: Hasnaa Yazbek <hasnaa.yazbek@rescue.org>\n"
+"PO-Revision-Date: 2015-05-05 11:25+0000\n"
+"Last-Translator: Nizar Najjar <ozogorgor@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +19,7 @@ msgid "app##name"
 msgstr "i18next"
 
 msgid "test##hello"
-msgstr "مرحبا بالعالم"
+msgstr "مرحباً جميعاً"
 
 msgid "Menu##Menu-Toggle"
 msgstr "قائمة"
@@ -40,7 +40,7 @@ msgid "Menu##Add-Services"
 msgstr "إضافة خدمات"
 
 msgid "Menu##Service-Map"
-msgstr "خارطة الخدمات"
+msgstr "خريطة الخدمات"
 
 msgid "Menu##Search"
 msgstr "بحث"
@@ -49,7 +49,7 @@ msgid "Menu##Provider-Registration"
 msgstr "تسجيل مقدم الخدمات"
 
 msgid "Menu##Edit-Provider-Information"
-msgstr "تغييرمعلومات مقدم الخدمات"
+msgstr "تغيير معلومات مقدم الخدمات"
 
 msgid "Menu##Feedback-Tool"
 msgstr "إبداء الملاحظات"
@@ -61,10 +61,10 @@ msgid "Global##Admin"
 msgstr "المشرف"
 
 msgid "Global##FormSubmissionError"
-msgstr "حدث خطأ غير معروف عند تقديم إستمارتك "
+msgstr "حدث خطأ غير مألوف عند تقديم إستمارتك "
 
 msgid "Global##UnknownError"
-msgstr "حدث خطأ غير معروف."
+msgstr "حدث خطأ غير مألوف"
 
 msgid "Global##FormValidationError"
 msgstr "يرجى تصحيح الأخطاء في النموذج."
@@ -97,13 +97,13 @@ msgid "Global##GeoPositionUnavailable"
 msgstr "الموقع غير متوفر حاليا"
 
 msgid "Global##RequiredField"
-msgstr "هذه الخانة مطلوبه."
+msgstr "هذه الخانة مطلوبة"
 
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "تسجيل الدخول"
 
 msgid "Login-Form##Page-Head##Page-Description##Page-Description"
-msgstr "إذا كنت من مزودي الخدمات ولك حساب، أدخل معلوماتك في الأسفل."
+msgstr "إذا كنت من مقدمي الخدمات ولديك حساب، أدخل معلوماتك في الأسفل."
 
 msgid "Login-Form##Form##Email"
 msgstr "البريد الإلكتروني"
@@ -115,13 +115,13 @@ msgid "Login-Form##More-Options-Title"
 msgstr "خيارات إضافية"
 
 msgid "Login-Form##More-Options"
-msgstr "إذا كنت بحاجة إلى إعادة إرسال البريد الإلكتروني التحققي، أو للتسجيل كمزود خدمات انقر على الزر المناسب أدناه."
+msgstr "إذا كنت بحاجة لإعادة إرسال البريد الإلكتروني التحققي، أو التسجيل كمقدم خدمات إضغط على الزر المناسب أدناه."
 
 msgid "Login-Form##Form-Submit-Options##Submit"
 msgstr "تسجيل الدخول"
 
 msgid "Login-Form##Form-Submit-Options##Register"
-msgstr "سجل لتكون مقدم خدمات هنا"
+msgstr "سجل هنا لتكون مقدم خدمات "
 
 msgid "Login-Form##Form-Submit-Options##Password"
 msgstr "تغيير أو إعادة تعيين كلمة المرور"
@@ -130,10 +130,10 @@ msgid "Search-List##Page-Head##Title"
 msgstr "البحث عن الخدمات"
 
 msgid "Search-List##Page-Head##Description"
-msgstr "إستخدم خانة البحث الترشيحي أدناه للعثور على الخدمة التي تريد."
+msgstr "إستخدم خانة البحث أدناه للعثور على الخدمة التي تريدها"
 
 msgid "Feedback-Search##Page-Head##Title"
-msgstr "أضف ملاحظات على الخدمة "
+msgstr "أبدي ملاحظات على الخدمة "
 
 msgid "Feedback-Search##Page-Head##Description"
 msgstr "الرجاء البحث عن مزود الخدمات أولاً  لإعطاء الملاحظات، إختر مزود الخدمة ثم انقر على زر أعطاء الملاحظات للبدء"
@@ -145,7 +145,7 @@ msgid "Feedback-Map##Page-Head##Title"
 msgstr "قدّم ملاحظاتك حول الخدمات "
 
 msgid "Feedback-Map##Page-Head##Description"
-msgstr "الرجاء البحث عن مزود الخدمات أولاً  لإعطاء الملاحظات، إختر مزود الخدمة ثم انقر على زر أعطاء الملاحظات للبدء."
+msgstr "الرجاء البحث أولاً عن مزود الخدمات حتى تتمكن من إعطاء الملاحظات، من ثم إختر مزود الخدمة ثم انقر على زر إعطاء الملاحظات."
 
 msgid "Service-Map##Page-Head##Page-Title##Title"
 msgstr "إبحث عن خدمات"
@@ -187,7 +187,7 @@ msgid "Service-Map##Filtered-Search##Filter-By-Area"
 msgstr "رشح البحث بحسب المنطقة "
 
 msgid "Service-Map##Filtered-Search##Search-Placeholder"
-msgstr "إنّي ابحث على..."
+msgstr "إنّي ابحث عن..."
 
 msgid "Service-Map##Filtered-Search##Loading"
 msgstr "تحميل أنواع الخدمات"
@@ -214,10 +214,10 @@ msgid "Service-Map##List##Additional-Info"
 msgstr "معلومات إضافية عن المزود "
 
 msgid "Service-Map##List##Cost"
-msgstr "كلفة"
+msgstr "الكلفة"
 
 msgid "Service-Map##List##Todays-Hours"
-msgstr "ساعات عمل الخدمة اليوم"
+msgstr "ساعات العمل اليومية"
 
 msgid "Service-Map##List##All-Hours"
 msgstr "ساعات العمل"
@@ -253,10 +253,10 @@ msgid "Service-Delete##Delete-Service"
 msgstr "حذف الخدمة"
 
 msgid "Service-Form##Page-Head##Page-Title##Title"
-msgstr "استمارة التسجيل خدمة جديدة"
+msgstr "استمارة تسجيل خدمة جديدة"
 
 msgid "Service-Form##Page-Head##Page-Description##Page-Description"
-msgstr "إملأ النموذج أدناه وأكد للحصول على خدمة مقبولة ."
+msgstr "إملأ النموذج أدناه وقدم طلب للحصول على تصديق لخدمة جديدة."
 
 msgid "Service-Form##Legend"
 msgstr "معلومات عن الخدمة"
@@ -283,13 +283,13 @@ msgid "Service-Form##Service-Description"
 msgstr "تفصيل"
 
 msgid "Service-Form##Service-Description-Help"
-msgstr "شرح قصير عن خدمة أعلاه؛ وهذا ما يفسر المزيد عن الخدمة المقدمة ويساعد على التعرف عليه ومكوناته."
+msgstr "شرح قصير عن الخدمة أعلاه؛ وهذا ما يشرح عن الخدمة المقدمة ويساعد التعرف عليها وعلى مكوناتها."
 
 msgid "Service-Form##Service-Hours"
 msgstr "ساعات العمل"
 
 msgid "Service-Form##Service-Hours-Help"
-msgstr "يرجى ذكر ساعات تفصيلية العمل؛ هذا يساعد المستفيد في الحصول على الخدمة بسهولة ودون عقبات."
+msgstr "يرجى ذكر ساعات العمل المفصلة؛ هذا يساعد المستفيد على الحصول على الخدمة بسهولة وبدون عقبات."
 
 msgid "Service-Form##Additional-Information"
 msgstr "معلومات إضافية (حقل اختياري)"
@@ -298,13 +298,13 @@ msgid "Service-Form##Service-Cost"
 msgstr "تكلفة الخدمة (حقل اختياري)"
 
 msgid "Service-Form##Service-Cost-Help"
-msgstr "يرجى ذكر ما إذا كانت الخدمة المقدمة مجانية أم لا. إذا لم يكن كذلك، يرجى ذكر تكلفة ذلك."
+msgstr "يرجى ذكر ما إذا كانت الخدمة المقدمة مجانية أم لا. إذا لم تكن كذلك، يرجى ذكر التكلفة."
 
 msgid "Service-Form##Selection-Criteria"
 msgstr "معايير الاختيار (حقل اختياري)"
 
 msgid "Service-Form##Selection-Criteria-Help"
-msgstr "يحدد المعايير التي بموجبها يتم السماح للمستفيد من الاستفادة من هذه الخدمة. مثال: إناث تتراوح أعمارهن بين 3 و 30 سنة."
+msgstr "يحدد المعايير التي بموجبها يتم السماح للمستفيد الاستفادة من هذه الخدمة. مثال: إناث تتراوح أعمارهن بين 3 و 30 سنة."
 
 msgid "Service-Form##Hours-Open"
 msgstr "ساعات البدء:"
@@ -325,14 +325,14 @@ msgid "Service-Form##Form-Submit-Options##Clear"
 msgstr "إزالة الأجوبة"
 
 msgid "Provider-Registration-Form##Page-Head##Page-Title##Title"
-msgstr "خدمة استمارة التسجيل مزود"
+msgstr "خدمة استمارة تسجيل مزود"
 
 msgid ""
 "Provider-Registration-Form##Page-Head##Page-Description##Page-Description"
 msgstr "ملء النموذج أدناه."
 
 msgid "Provider-Registration-Form##Errors##Password-Blank"
-msgstr "لا يجب أن تكون كلمة المرور فارغة"
+msgstr "على كلمة المرور أن لا تكون فارغة"
 
 msgid "Provider-Registration-Form##Errors##Password-Repeat"
 msgstr "يجب تكرار كلمة المرور"
@@ -351,7 +351,7 @@ msgstr "اسم الشخص الذي يمكن الاتصال به"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Basic##Focal-Point-Name-Help"
-msgstr "اسم الشخص إلى الرجوع إليها في حالة من ردود الفعل والتوضيح"
+msgstr "اسم الشخص إلذي سيتم الرجوع إليه عند تقديم الملاحظات وطلبات التوضيح"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Password"
 msgstr "كلمة السر"
@@ -360,13 +360,13 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##PasswordConfirm"
 msgstr "تأكيد كلمة المرور"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type"
-msgstr "نوع مزود"
+msgstr "نوع مقدم الخدمات"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Help"
-msgstr "أذكر ما هو نوع من مزود أنت. مثلا: المنظمات غير الحكومية المحلية والمنظمات غير الحكومية الدولية"
+msgstr "أذكر أي نوع من أنواع مقدمي الخدمات أنتم. مثلاً: منظمة غير حكومية محلية، منظمة غير حكومية دولية"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Provider-Type-Choose"
-msgstr "اختر نوع مزود"
+msgstr "اختر نوع مقدم الخدمات"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Phone-Number"
 msgstr "رقم الهاتف"
@@ -396,23 +396,23 @@ msgid "Provider-Registration-Form##Form-Sections##Basic##Website-Help"
 msgstr "الموقع الرسمي"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries"
-msgstr "عدد المستفيدين شهرياَ"
+msgstr "عدد المستفيدين شهرياً"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Basic##MonthlyBeneficiaries-Help"
-msgstr "عدد الأشخاص الذين يستفيدون من الخدمة شهريا"
+msgstr "عدد الأشخاص الذين يستفيدون من الخدمة شهرياً"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Description"
-msgstr "توصيف "
+msgstr "شرح توصيفي"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Description-Help"
-msgstr "شرح قصير عن خدمة أعلاه؛ وهذا ما يفسر المزيد عن الخدمة المقدمة ويساعد على التعرف عليه ومكوناته."
+msgstr "شرح قصير عن الخدمة أعلاه؛ وهذا ما يشرح عن الخدمة المقدمة ويساعد التعرف عليها وعلى مكوناتها."
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Address"
 msgstr "العنوان"
 
 msgid "Provider-Registration-Form##Form-Sections##Basic##Address-Help"
-msgstr "عنوان المقر الرئيسي للمنظمة غير حكومية أو الشركة"
+msgstr "عنوان المقر الرئيسي للمنظمة الغير حكومية أو المؤسسة"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Legend"
 msgstr "معلومات عن الخدمة"
@@ -423,7 +423,7 @@ msgstr "اسم الخدمة"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Service-Area"
-msgstr "منطقة الخدمة"
+msgstr "منطقة عمل الخدمة"
 
 msgid "Provider-Registration-Form##Form-Sections##Service-Information##Type"
 msgstr "نوع الخدمة"
@@ -431,12 +431,12 @@ msgstr "نوع الخدمة"
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Service-"
 "Description"
-msgstr "توصيف "
+msgstr "شرح توصيفي "
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Service-"
 "Hours"
-msgstr "ساعات الخدمة"
+msgstr "ساعات عمل الخدمة"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Additional-"
@@ -445,7 +445,7 @@ msgstr "معلومات إضافية (حقل اختياري)"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Service-Cost"
-msgstr "تكلفة الخدمة (حقل الاختياري، في USD)"
+msgstr "تكلفة الخدمة (حقل إختياري، العملة: دولار أميريكي)"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Service-Information##Selection-"
@@ -460,40 +460,40 @@ msgstr "إزالة الأجوبة"
 
 msgid ""
 "Provider-Registration-Form##Form-Sections##Form-Submit-Options##ResendVerify"
-msgstr "إعادة إرسال التحقق من البريد الإلكتروني"
+msgstr "إعادة إرسال البريد الإلكتروني التحققي"
 
 msgid "Account-Activation##Pending##Title"
-msgstr "تفعيل حسابك معلقة ..."
+msgstr "تفعيل حسابك معلّق..."
 
 msgid "Account-Activation##Success##Title"
 msgstr "تم تفعيل حسابك."
 
 msgid "Account-Activation##Failed##Title"
-msgstr "فشل تفعيل حسابك."
+msgstr "حصول فشل في تفعيل حسابك."
 
 msgid "Account-Activation##Failed##Description"
-msgstr "كانت هناك مشكلة إنشاء حساب مزود الخدمة الخاص بك. يرجى النقر على زر تأكيد بالبريد الإلكتروني إعادة إرسال أدناه لديك بريد إلكتروني آخر تأكيدا إرسالها إلى حساب البريد الإلكتروني الخاص بك."
+msgstr "هناك مشكلة في إنشاء حسابك كمقدم الخدمات. يرجى الضغط على زر إعادة إرسال الرسالة الإلكترونية التحققية أدناه، لإعادة إرسال رابط التفعيل مجدداً إلى حسابك البريدي الإلكتروني."
 
 msgid "Account-Activation##Resent##Title"
 msgstr "لقد تم إرسال رابط التفعيل لك مجدداً"
 
 msgid "Account-Activation##Resent##Description"
-msgstr "لقد قمنا بإرسال رسالة تأكيد بالبريد الإلكتروني إلى حساب البريد الإلكتروني الذي استخدمته أثناء التسجيل. انقر على رابط التأكيد في رسالة البريد الإلكتروني لاستكمال عملية التسجيل. إذا كنت لا تتلقى البريد الإلكتروني في بضع دقائق، مراجعة مجلد الرسائل غير المرغوب فيها."
+msgstr "لقد قمنا بإرسال رسالة تأكيد بالبريد الإلكتروني إلى حساب البريد الإلكتروني الذي استخدمته أثناء التسجيل. انقر على رابط التأكيد في رسالة البريد الإلكتروني لاستكمال عملية التسجيل. إذا لم تتلقى الرسالة الإلكترونية في خلال بضع دقائق، راجع مجلد الرسائل غير المرغوب فيها."
 
 msgid "Account-Activation##Buttons##Resend-Email"
-msgstr "إعادة إرسال التحقق من البريد الإلكتروني"
+msgstr "إعادة إرسال الرسالة الإلكترونية التحققية"
 
 msgid "Account-Resend-Verification##Title"
-msgstr "إعادة إرسال البريد الإلكتروني للتأكيد"
+msgstr "إعادة إرسال الرسالة الإلكترونية التحققية"
 
 msgid "Service-List##Page-Head##Page-Title##Title"
 msgstr "قائمة الخدمات"
 
 msgid "Service-List##Page-Head##Page-Description##Page-Description"
-msgstr "وفيما يلي قائمة من الخدمات التي تطبق على توفير. وتتميز الخدمات وافق باللون الأخضر. وتتميز خدمات لم يفوافق عليها في الحمراء. خدمات بانتظار الموافقة هي لا تحمل علامات مميزة."
+msgstr "يلي أدناه قائمة الخدمات التي قدمت طلباً لإدراجها. الخدمات التي تم الموافقة عليها مدرجة باللون الأخضر. والخدمات لم يتم الموافقة عليها مدرجة باللون الأحمر. أما الخدمات التي في طور الموافقة فلا تحمل أي علامات."
 
 msgid "Service-List##Empty-Message"
-msgstr "لم تدخل أي خدمة للأن. يمكنك إدخال أول خدمة لك بالضغط على مفتاح أضف خدمة جديدة ."
+msgstr "لم تدخل أي خدمة حتى الأن. يمكنك إدخال أول خدمة لك بالضغط على مفتاح أضف خدمة جديدة ."
 
 msgid "Service-List##Add-Service"
 msgstr "خدمة جديدة"
@@ -546,13 +546,13 @@ msgstr "قدم بياناتك بنجاح"
 msgid ""
 "Provider-Registration-Confirmation##Page-Head##Page-Description##Page-"
 "Description"
-msgstr "لقد قمنا بإرسال رسالة تأكيد بالبريد الإلكتروني إلى حساب البريد الإلكتروني الذي استخدمته أثناء التسجيل. انقر على رابط التأكيد في رسالة البريد الإلكتروني لاستكمال عملية التسجيل. إذا كنت لا تتلقى البريد الإلكتروني في بضع دقائق، مراجعة مجلد الرسائل غير المرغوب فيها."
+msgstr "لقد قمنا بإرسال رسالة تأكيد بالبريد الإلكتروني إلى حساب البريد الإلكتروني الذي استخدمته أثناء التسجيل. انقر على رابط التأكيد في رسالة البريد الإلكتروني لاستكمال عملية التسجيل. إذا لم تتلقى الرسالة الإلكترونية في خلال بضع دقائق، راجع مجلد الرسائل غير المرغوب فيها."
 
 msgid "Feedback-Confirmation##Page-Head##Page-Title##Title"
 msgstr "لقد تم إرسال معلوماتك بنجاح"
 
 msgid "Feedback-Confirmation##Page-Head##Page-Description##Page-Description"
-msgstr "شكرا\" لملاحظاتك"
+msgstr "شكراً لملاحظاتك"
 
 msgid "Provider-Registration-Changed##Page-Head##Page-Title##Title"
 msgstr "قدم بياناتك بنجاح"
@@ -565,7 +565,7 @@ msgid "Password-Reset##Page-Head##Page-Title##Title"
 msgstr "إعادة تعيين كلمة المرور"
 
 msgid "Password-Reset##Page-Head##Page-Description##Page-Description"
-msgstr "لإعادة تعيين كلمة المرور الخاصة بك أدخل عنوان بريدك الإلكتروني في الحقل أدناه ثم انقر فوق تقديم. سوف النقر تقديم إرسال ارتباط لحساب البريد الإلكتروني الخاص بك من شأنها أن توجهك إلى صفحة إعادة تعيين كلمة المرور."
+msgstr "لإعادة تعيين كلمة المرور الخاصة بك أدخل عنوان بريدك الإلكتروني في الحقل أدناه ثم انقر على زر الإرسال. النقر على زر الإرسال يرسل رابط التوجيه إلى صفحة إعادة تعيين كلمة المرور لحساب البريد الإلكتروني الخاص بك."
 
 msgid "Password-Reset##Input-Label##User-Email"
 msgstr "أدخل بريدك الإلكتروني:"
@@ -574,13 +574,13 @@ msgid "Password-Reset##Submit-Options##Submit"
 msgstr "عرض"
 
 msgid "Password-Reset##Submitted"
-msgstr "لقد قمنا بإرسال رسالة بريد إلكتروني إلى عنوان البريد الإلكتروني. تحقق من بريدك الالكتروني للحصول على رسالة تحتوي على رابط إلى نموذج إعادة تعيين كلمة المرور. إذا كنت لا تتلقى البريد الإلكتروني في بضع دقائق، مراجعة مجلد الرسائل غير المرغوب فيها."
+msgstr "لقد قمنا بإرسال رسالة إلكترونية إلى عنوان البريد الإلكتروني الخاص بك. تحقق في بريدك الإلكتروني من رسالة تحتوي رابط يوجهك إلى صفحة إعادة تعيين كلمة المرور. إذا لم تتلقى الرسالة الإلكترونية في خلال بضع دقائق، راجع مجلد الرسائل غير المرغوب فيها."
 
 msgid "Password-Reset-Form##Title"
 msgstr "إعادة تعيين كلمة المرور"
 
 msgid "Password-Reset-Form##Description"
-msgstr "أدخل كلمة المرور الجديدة في حقل النص أدناه، ثم انقر فوق تقديم لتحديث كلمة السر الخاصة بك."
+msgstr "أدخل كلمة المرور الجديدة في حقل النص أدناه، ثم انقر على إرسال لتحديث كلمة السر الخاصة بك."
 
 msgid "Password-Reset-Form##Input-Label##New-Password"
 msgstr "أدخل كلمة المرور الجديدة:"
@@ -592,7 +592,7 @@ msgid "Password-Reset-Form##Submit-Options##Submit"
 msgstr "إرسال الأجوبة"
 
 msgid "Password-Reset-Form##Invalid-Link"
-msgstr "هذه ليست صلة إعادة تعيين كلمة المرور صالح. يرجى التحقق الذي تم نسخه بشكل صحيح من البريد الإلكتروني، وأنه لم يتم بالفعل استخدامها. انتقل إلى صفحة الدخول إذا كنت بحاجة إلى طلب رابط إعادة تعيين آخر."
+msgstr "رابط إعادة تعيين كلمة المرور غير صالح. يرجى التحقق من نسخك له بشكل صحيح من الرسالة الإلكترونية، وكونه لم يتم استخدامه سابقاً. انتقل إلى صفحة تسجيل الدخول إن كنت بحاجة إلى إرسال مجدداً رابط إعادة التعيين."
 
 msgid "Password-Reset-Form##Changed"
 msgstr "تم تغيير كلمة المرور الخاصة بك."
@@ -616,13 +616,13 @@ msgid "Footer##About##Title"
 msgstr "عن خريطة الخدمات "
 
 msgid "Footer##About##Paragraph"
-msgstr "مدعوم من لجنة الإنقاذ الدولية، معلومات عن الخدمة هو أداة تسمح لكل من مقدمي الخدمة لتسجيل خدماتها عبر الإنترنت والمستفيدين على حد سواء اكتشاف تلك الخدمات على خريطة وإعطاء ردود الفعل عليها. معلومات عن الخدمة مفتوح المصدر ومجاني للاستخدام."
+msgstr "مدعومة من لجنة الإنقاذ الدولية. خريطة الخدمات (Service Info) هي أداة تسمح لمقدمي الخدمات بتسجيل خدماتهم عبر الإنترنت، وتسمح للمستفيدين والمقدمين على حد سواء اكتشاف تلك الخدمات بعرضها على خريطة، كما تسمح للمستفيدين بإعطاء ملاحظات حول تلك الخدمات. الأداة مفتوحة المصادر ومجانية."
 
 msgid "Footer##Contact##Title"
 msgstr "إتصل بنا "
 
 msgid "Footer##Contact##Paragraph"
-msgstr "تواصل معنا على إحدى شبكة التواصل الإجتماعي أو أرسل لنا على البريد الإلكتروني أدناه "
+msgstr "تواصل معنا عبر إحدى شبكات التواصل الإجتماعي أو راسلنا على البريد الإلكتروني أدناه "
 
 msgid "Feedback-Form##Title"
 msgstr "نموذج الملاحظات"
@@ -631,7 +631,7 @@ msgid "Feedback-Form##Description"
 msgstr "إملأ النموذج أدناه"
 
 msgid "Feedback-Form##What-Service"
-msgstr "أنت تعطي ملاحظاتك حول هذه الخدمة"
+msgstr "إنك تعطي ملاحظاتك حول هذه الخدمة"
 
 msgid "Feedback-Form##Name"
 msgstr "الإسم"
@@ -646,7 +646,7 @@ msgid "Feedback-Form##AreaOfResidence"
 msgstr "محل الإقامة"
 
 msgid "Feedback-Form##Delivered##label"
-msgstr "هل تم توصيل الخدمة؟"
+msgstr "هل حصلت على الخدمة؟"
 
 msgid "Feedback-Form##Delivered##yes"
 msgstr "نعم"
@@ -661,7 +661,7 @@ msgid "Feedback-Form##Clear"
 msgstr "إزالة الأجوبة"
 
 msgid "Feedback-Form##WaitTime##label"
-msgstr "بعد الإتصال بمقدم الخدمات، كم من الوقت انتظرت لكي تصلك الخدمة؟"
+msgstr "كم من الوقت انتظرت لكي تصلك الخدمة بعد الإتصال بمقدم الخدمات؟"
 
 msgid "Feedback-Form##WaitTime##lesshour"
 msgstr "أقل من ساعة واحدة        1"
@@ -676,7 +676,7 @@ msgid "Feedback-Form##Quality##label"
 msgstr "كيف تقيّم نوعية الخدمة التي تلقّيتها (من 1 إلى 5، بحيث أن 5 هي أعلى تقييم ممكن)؟"
 
 msgid "Feedback-Form##difficulty##label"
-msgstr "هل واجهت صعوبات في الإتصال بمقدم الخدمات الذي تحتاجه؟"
+msgstr "هل واجهت صعوبات في الإتصال بمقدم الخدمات الذي كنت بحاجة إليه؟"
 
 msgid "Feedback-Form##difficulty##no"
 msgstr "لا"
@@ -688,7 +688,7 @@ msgid "Feedback-Form##difficulty##nophoneresponse"
 msgstr "حاولت الإتصال بهم و لكن لم أتلق أي جواب"
 
 msgid "Feedback-Form##difficulty##noresponse"
-msgstr "حاولت التواصل معهم شخصيا\" و لكن لم أتلق أي جواب أو لم أجد مكتبهم"
+msgstr "حاولت التواصل معهم شخصياً و لكن لم أتلق أي جواب أو لم أجد مركز المنظمة"
 
 msgid "Feedback-Form##difficulty##unhelpful"
 msgstr "تواصلت معهم ولكن الجواب كان غير مفيد"
@@ -697,10 +697,10 @@ msgid "Feedback-Form##difficulty##other"
 msgstr "آخر"
 
 msgid "Feedback-Form##staff##label"
-msgstr "كيف تقيّم رضاك على طاقم المنظمة/المؤسسة التي قدمت لك الخدمات (من 1 إلى 5، بحيث أن 5 هو أعلى تقييم ممكن)"
+msgstr "ما هو تقيّمك حول موظفي المنظمة/المؤسسة التي قدمت لك الخدمات (من 1 إلى 5، بحيث أن 5 هو أعلى تقييم ممكن)"
 
 msgid "Feedback-Form##anonymous##label"
-msgstr "أريد من ملاحظاتي أن تبقى مجهولة الهوية لمقدم الخدمات"
+msgstr "أريد من إسمي المدرج في الملاحظة أن يبقى سريّاً لمقدم الخدمات"
 
 msgid "Feedback-Form##anonymous##yes"
 msgstr "نعم"
@@ -712,10 +712,10 @@ msgid "Feedback-Tool##Title"
 msgstr "ملاحظات حول الخدمات"
 
 msgid "Feedback-Tool##Body"
-msgstr "لإعطاء الملاحظات، الرجاء البحث عن الخدمة، إذهب إلى صفحة الخدمة و استعمل زر الملاحظات"
+msgstr "لإعطاء الملاحظات، الرجاء البحث عن الخدمة، ومن ثم الذهاب إلى صفحة الخدمة والضغط على زر الملاحظات"
 
 msgid "Landing##User##Title"
-msgstr "أنا مستخدم للخدمات، أريد أن"
+msgstr "أنا مستخدم للخدمات، أريد"
 
 msgid "Landing##User##Search"
 msgstr "البحث عن الخدمات"
@@ -724,7 +724,7 @@ msgid "Landing##User##Give-Feedback"
 msgstr "إبداء الملاحظات"
 
 msgid "Landing##Provider##Title"
-msgstr "أنا مقدم خدمات، أريد أن"
+msgstr "أنا مقدم خدمات، أريد"
 
 msgid "Landing##Provider##Logged-In##Update-My-Info"
 msgstr "تحديث معلومات مقدم الخدمات"
@@ -736,14 +736,14 @@ msgid "Landing##Provider##Logged-In##Add-Service"
 msgstr "إضافة خدمة جديدة"
 
 msgid "Landing##Provider##Logged-Out##Register"
-msgstr "إن كنت مقدما\" للخدمات، سجل هنا"
+msgstr "تسجيل حساب جديد كمقدم للخدمات"
 
 msgid "Landing##Provider##Logged-Out##Login"
 msgstr "الدخول إلى حساب  حالي لمقدم الخدمات"
 
 msgctxt "explained"
 msgid "Feedback-Form##non_delivery"
-msgstr "هل وصلك تفسير واضح لعدم تلقّيك الخدمة التي ابتغيتها؟"
+msgstr "هل أبلغت بوضوح عن سبب عدم تلقّيك الخدمة التي اردت؟"
 
 msgctxt "delivery##no"
 msgid "Feedback-Form##non"

@@ -112,7 +112,7 @@
             "Type": "Type de service",
             "Additional-Info": "Informations supplémentaires sur le fournisseur",
             "Cost": "Coût",
-            "Todays-Hours": "Heures de service d'aujourd'hui",
+            "Todays-Hours": "",
             "All-Hours": "Heures de service",
             "Phone": "Numéro de téléphone",
             "Email": "Adresse e-mail",
