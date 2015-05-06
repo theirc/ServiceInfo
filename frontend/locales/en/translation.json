@@ -410,7 +410,7 @@
         "uptotwodays": "Up to 2 days",
         "3_7days": "3-7 days",
         "1_2weeks": "1-2 weeks",
-        "more": "Longer"
+        "more": "More than 2 weeks"
     },
     "wait_time_satisfaction": {
         "label": "How do you rate your satisfaction with the time that you waited for the service to be delivered (from 1 to 5, where 5 is the highest rating possible)?"
