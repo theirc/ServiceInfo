@@ -28,6 +28,7 @@ var views = {
     "password-reset-request": require('./views/password-reset-request'),
     "password-reset-form": require('./views/password-reset-form'),
     "admin": require('./views/admin'),
+    "reports": require('./views/reports'),
 };
 
 var view, viewName;
@@ -97,6 +98,7 @@ module.exports = Backbone.Router.extend({
         "login": loadPage("login"),
         "password-reset/:uid/:token": loadPage("password-reset-form", ['uid', 'token']),
         "password-reset": loadPage("password-reset-request"),
+        "reports": loadPage("reports"),
         "logout": function() {
             config.remove('forever.authToken');
             config.remove('forever.email');

@@ -18,7 +18,8 @@
   	"Provider-Registration": "Provider Registration",
     "Edit-Provider-Information": "Edit Provider Information",
   	"Feedback-Tool": "Give Feedback",
-  	"Change-Language": "Change Language"
+  	"Change-Language": "Change Language",
+    "Reports": "Reports"
   },
   "Global": {
     "Admin": "Admin",
@@ -486,5 +487,22 @@
         "Help6": "When adding selection criteria to an existing service, set the 'service__id' field to the 'ID' of the existing service.",
         "Help7": "When adding selection criteria to a new service, set the 'service__id' field to the 'name_en' of the new service."
       }
+  },
+  "Reports": {
+    "Title": "Feedback Reports",
+    "Description": "",
+    "Form": {
+      "Stat": {
+        "Label": "Report To View",
+        "Options": {
+          "WaitTime": "Waiting Time"
+        }
+      },
+      "Download": "Download Report CSV"
+    },
+    "Table": {
+      "Loading": "Loading...",
+      "ServiceType": "Service Type"
+    }
   }
 }
