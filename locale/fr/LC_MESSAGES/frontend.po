@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-04-30 19:33+0000\n"
+"PO-Revision-Date: 2015-05-05 19:41+0000\n"
 "Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -36,6 +36,9 @@ msgstr "Liste des services"
 
 msgid "Menu##Add-Services"
 msgstr "Ajouter des services"
+
+msgid "Menu##Import-Export"
+msgstr ""
 
 msgid "Menu##Service-Map"
 msgstr "Service Map"
@@ -496,6 +499,15 @@ msgstr "Vous ne avez pas encore présenté de services. Vous pouvez soumettre vo
 msgid "Service-List##Add-Service"
 msgstr "Nouveau service"
 
+msgid "Service-List##Import"
+msgstr ""
+
+msgid "Service-List##Import-File"
+msgstr ""
+
+msgid "Service-List##Export"
+msgstr ""
+
 msgid "Service-List##Status##draft"
 msgstr ""
 
@@ -738,6 +750,57 @@ msgstr "Inscrivez-vous pour être un fournisseur de services"
 
 msgid "Landing##Provider##Logged-Out##Login"
 msgstr "Connectez-vous à un compte de fournisseur de service existant"
+
+msgid "Export-Tool##Title"
+msgstr ""
+
+msgid "Export-Tool##Button"
+msgstr ""
+
+msgid "Export-Tool##Description1"
+msgstr ""
+
+msgid "Export-Tool##Description2"
+msgstr ""
+
+msgid "Export-Tool##Description3"
+msgstr ""
+
+msgid "Import-Tool##Title"
+msgstr ""
+
+msgid "Import-Tool##Button"
+msgstr ""
+
+msgid "Import-Tool##Success"
+msgstr ""
+
+msgid "Import-Tool##Errors"
+msgstr ""
+
+msgid "Import-Export##Help##Title"
+msgstr ""
+
+msgid "Import-Export##Help##Help1"
+msgstr ""
+
+msgid "Import-Export##Help##Help2"
+msgstr ""
+
+msgid "Import-Export##Help##Help3"
+msgstr ""
+
+msgid "Import-Export##Help##Help4"
+msgstr ""
+
+msgid "Import-Export##Help##Help5"
+msgstr ""
+
+msgid "Import-Export##Help##Help6"
+msgstr ""
+
+msgid "Import-Export##Help##Help7"
+msgstr ""
 
 msgctxt "explained"
 msgid "Feedback-Form##non_delivery"

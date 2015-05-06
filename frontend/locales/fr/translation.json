@@ -12,6 +12,7 @@
         "Logout": "Logout",
         "Services": "Liste des services",
         "Add-Services": "Ajouter des services",
+        "Import-Export": "",
         "Service-Map": "Service Map",
         "Search": "Recherche",
         "Provider-Registration": "Inscription des fournisseurs",
@@ -263,6 +264,9 @@
         },
         "Empty-Message": "Vous ne avez pas encore présenté de services. Vous pouvez soumettre votre premier service pour examen en appuyant sur le bouton Nouveau service.",
         "Add-Service": "Nouveau service",
+        "Import": "",
+        "Import-File": "",
+        "Export": "",
         "Status": {
             "draft": "",
             "current": "",
@@ -436,6 +440,31 @@
                 "Register": "Inscrivez-vous pour être un fournisseur de services",
                 "Login": "Connectez-vous à un compte de fournisseur de service existant"
             }
+        }
+    },
+    "Export-Tool": {
+        "Title": "",
+        "Button": "",
+        "Description1": "",
+        "Description2": "",
+        "Description3": ""
+    },
+    "Import-Tool": {
+        "Title": "",
+        "Button": "",
+        "Success": "",
+        "Errors": ""
+    },
+    "Import-Export": {
+        "Help": {
+            "Title": "",
+            "Help1": "",
+            "Help2": "",
+            "Help3": "",
+            "Help4": "",
+            "Help5": "",
+            "Help6": "",
+            "Help7": ""
         }
     }
 }
