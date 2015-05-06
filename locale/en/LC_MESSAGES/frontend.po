@@ -652,7 +652,7 @@ msgid "Feedback-Form##WaitTime##uptotwodays"
 msgstr "Up to 2 days"
 
 msgid "Feedback-Form##WaitTime##more"
-msgstr "Longer"
+msgstr "More than 2 weeks"
 
 msgid "Feedback-Form##Quality##label"
 msgstr "How would you rate the quality of the service you received (from 1 to 5, where 5 is the highest rating possible)?"
