@@ -98,7 +98,6 @@ module.exports = Backbone.View.extend({
         api.request('GET', 'api/servicetypes/' + this.report + '/?format=csv')
             .then(function (response) {
                 var blob = new Blob([response], {type: 'text/csv'}),
-                    today = new Date(),
                     blobURL, link;
                 // Attempt to name the saved file
                 // IE supports a native saveBlob
