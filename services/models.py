@@ -28,6 +28,9 @@ class NameInCurrentLanguageMixin(object):
             return getattr(self, field_name)
         return self.name_en or self.name_ar or self.name_fr
 
+    def __str__(self):
+        return self.name
+
 
 class ProviderType(NameInCurrentLanguageMixin, models.Model):
     number = models.IntegerField(unique=True)
@@ -49,9 +52,6 @@ class ProviderType(NameInCurrentLanguageMixin, models.Model):
         default='',
         blank=True,
     )
-
-    def __str__(self):
-        return self.name
 
     def get_api_url(self):
         """Return the PATH part of the URL to access this object using the API"""
@@ -178,9 +178,6 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
         blank=True,
     )
 
-    def __str__(self):
-        return self.name_en
-
     def get_api_url(self):
         """Return the PATH part of the URL to access this object using the API"""
         return reverse('provider-detail', args=[self.id])
@@ -237,17 +234,6 @@ class ServiceArea(NameInCurrentLanguageMixin, models.Model):
     def get_api_url(self):
         return reverse('servicearea-detail', args=[self.id])
 
-    def __str__(self):
-        # Try to return the name field of the currently selected language
-        # if we have such a field and it has something in it.
-        # Otherwise, punt and return the English, French, or Arabic name,
-        # in that order.
-        language = get_language()
-        field_name = 'name_%s' % language[:2]
-        if hasattr(self, field_name) and getattr(self, field_name):
-            return getattr(self, field_name)
-        return self.name_en or self.name_fr or self.name_ar
-
 
 class SelectionCriterion(models.Model):
     """
@@ -268,7 +254,7 @@ class SelectionCriterion(models.Model):
                                     "one language"))
 
     def __str__(self):
-        return ', '.join([self.text_en, self.text_fr, self.text_ar])
+        return ', '.join([text for text in [self.text_en, self.text_ar, self.text_fr] if text])
 
     def get_api_url(self):
         return reverse('selectioncriterion-detail', args=[self.id])
@@ -318,17 +304,6 @@ class ServiceType(NameInCurrentLanguageMixin, models.Model):
         default='',
         blank=True,
     )
-
-    def __str__(self):
-        # Try to return the name field of the currently selected language
-        # if we have such a field and it has something in it.
-        # Otherwise, punt and return the English, French, or Arabic name,
-        # in that order.
-        language = get_language()
-        field_name = 'name_%s' % language[:2]
-        if hasattr(self, field_name) and getattr(self, field_name):
-            return getattr(self, field_name)
-        return self.name_en or self.name_fr or self.name_ar
 
     def get_api_url(self):
         return reverse('servicetype-detail', args=[self.id])
@@ -474,9 +449,6 @@ class Service(NameInCurrentLanguageMixin, models.Model):
     )
 
     objects = models.GeoManager()
-
-    def __str__(self):
-        return self.name_en
 
     def get_api_url(self):
         return reverse('service-detail', args=[self.id])
@@ -923,9 +895,6 @@ class Nationality(NameInCurrentLanguageMixin, models.Model):
 
     class Meta:
         verbose_name_plural = _("nationalities")
-
-    def __str__(self):
-        return self.name
 
     def get_api_url(self):
         return reverse('nationality-detail', args=[self.id])
