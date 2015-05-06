@@ -2,6 +2,22 @@ Service Info
 
 Release Notes
 
+0.1.8 - May 6, 2015
+-------------------
+
+* Translation updates
+* Allow creating services in the Django admin
+* Repo name change
+* Make all provider names clickable in Django admin
+* Update text on feedback form
+* Import/export feature
+* Fix for bad lat/long coming from old Firefox
+* Make error messages more prominent.
+* Added backups.
+* Numerous styling updates
+* Fixes to display logic on services list
+* Improve services list styling to make status of services more obvious.
+
 0.1.7 - Apr. 23, 2015
 ---------------------
 
