@@ -93,10 +93,34 @@ module.exports = Backbone.View.extend({
 
     downloadReport: function (e) {
         e.preventDefault();
+        var today = new Date(),
+            filename = this.report + '-' + today.toISOString().replace(/\T.*$/, '') + '.csv';
         api.request('GET', 'api/servicetypes/' + this.report + '/?format=csv')
             .then(function (response) {
-                var blob = new Blob([response], {type: 'text/csv'});
-                window.location = window.URL.createObjectURL(blob);
+                var blob = new Blob([response], {type: 'text/csv'}),
+                    today = new Date(),
+                    blobURL, link;
+                // Attempt to name the saved file
+                // IE supports a native saveBlob
+                // https://msdn.microsoft.com/en-us/library/windows/apps/hh441122.aspx
+                if (navigator.msSaveBlob) {
+                    navigator.msSaveBlob(blob, filename);
+                } else {
+                    // Fall back to download attribute if supported
+                    link = document.createElement('a');
+                    blobURL = window.URL.createObjectURL(blob);
+                    if ('download' in link) {
+                        // Use download attribute
+                        link.style = 'display: none;'
+                        link.href = blobURL;
+                        link.download = filename;
+                        document.body.appendChild(link);
+                        link.click();
+                    } else {
+                        // Can't control the file name
+                        window.location = blobURL;
+                    }
+                }
             });
     }
 }); 
