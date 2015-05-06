@@ -20,7 +20,6 @@ var SearchControls = Backbone.View.extend({
         this.$el = opts.$el;
         this.feedback = opts.feedback;
         var self=this;
-        this.update_results = opts.update_results;
         language.ready(function () {
             self.render();
         });
@@ -57,14 +56,12 @@ var SearchControls = Backbone.View.extend({
         "change [value=name]": function(e) {
             messages.clear();
             config.set('s', 'n');
-            this.update_results();
-            this.render();
+            this.trigger('search_parameters_changed');
         },
         "change [value=near]": function(e) {
             messages.clear();
             config.set('s', 'd');
-            this.update_results();
-            this.render();
+            this.trigger('search_parameters_changed');
         },
         "input input.query": function(e) {
             var query = $(e.target).val();
@@ -74,12 +71,12 @@ var SearchControls = Backbone.View.extend({
             var self = this;
             this.timeout = setTimeout(function () {
                 config.set('q', query);
-                self.update_results();
+                self.trigger('search_parameters_changed');
             }, 500);
         },
         "change .query-service-type": function(e) {
             config.set('t', $(e.target).val());
-            this.update_results();
+            this.trigger('search_parameters_changed');
         },
         "input keyup": function(e) {
             if (e.keyCode === 13) {
