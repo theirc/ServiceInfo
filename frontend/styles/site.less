@@ -1933,15 +1933,21 @@ Landing page
 		padding: 0;
 	}
 	.landing-img {
-		background: #F3F3F4 url(../images/map2.jpg) center center no-repeat;
-		background: #F3F3F4 url(../images/map2.svg) center center no-repeat;
-		background-size: cover;
-		z-index: 1;
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		top: 0;
-		left: 0;
+        position: fixed; 
+        top: -50%; 
+        left: -50%; 
+        width: 200%; 
+        height: 200%;
+        img {
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            margin: auto; 
+            min-width: 50%;
+            min-height: 50%;
+        }
 	}
 	.main-content {
 		border-radius: 0;
