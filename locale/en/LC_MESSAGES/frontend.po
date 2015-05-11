@@ -208,7 +208,7 @@ msgid "Service-Map##List##Cost"
 msgstr "Cost"
 
 msgid "Service-Map##List##Todays-Hours"
-msgstr "Todays Service Hours"
+msgstr "Today's Service Hours"
 
 msgid "Service-Map##List##All-Hours"
 msgstr "Service Hours"
