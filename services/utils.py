@@ -66,7 +66,7 @@ def absolute_url(path):
     return '%s://%s%s' % (scheme, site.domain, path)
 
 
-def update_postgres_sequence_generator(model, db):
+def update_postgres_sequence_generator(model, db='default'):
     """
     Update the sequence generator for a model's primary key
     to the max current value of that key, so that Postgres
