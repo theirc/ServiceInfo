@@ -65,7 +65,11 @@ module.exports = Backbone.View.extend({
     initialize: function () {
         this.report = hashtrack.getVar('stat') || 'wait-times';
         this.reportOptions = [
-            {value: 'wait-times', label: 'WaitTime'}
+            {value: 'wait-times', label: 'WaitTime'},
+            {value: 'qos', label: 'QOS'},
+            {value: 'failure', label: 'Failure'},
+            {value: 'contact', label: 'Contact'},
+            {value: 'communication', label: 'Communication'}
         ];
     },
 

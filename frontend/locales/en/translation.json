@@ -501,7 +501,11 @@
       "Stat": {
         "Label": "Report To View",
         "Options": {
-          "WaitTime": "Waiting Time"
+          "WaitTime": "Waiting Time by Service Type",
+          "QOS": "Quality of Service Delivered by Service Type",
+          "Failure": "Explanation of Service Delivery Failure by Service Type",
+          "Contact": "Difficulties Contacting Service Providers by Service Type",
+          "Communication": "Satisfaction with Staff Communication by Service Type"
         }
       },
       "Download": "Download Report CSV"
