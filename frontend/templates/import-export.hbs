@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
-                    <div class="page-title" data-i18n="Export-Tool.Title"></div>
+                    <div class="page-title" data-i18n="Import-Export.Page.Title"></div>
                 </div>
             </div>
         </div>
@@ -12,90 +12,68 @@
 
 <!-- Main Content -->
 
+<!-- Export -->
 <div class="main-content">
-    <div class="container">
+  <div class="container">
+    <fieldset>
+      <legend data-i18n="Export-Tool.Title"></legend>
+      <div class="row">
+        <p>
+          <span data-i18n="Export-Tool.Description1"></span>
+          <span data-i18n="Export-Tool.Description2"></span>
+          <span data-i18n="Export-Tool.Description3"></span>
+        </p>
+      </div>
+      <div class="row">
+        <div class="half">
+          <button id="export" class="submit primary-button form-btn-submit" tabindex="3" data-i18n="Export-Tool.Button"></button>
+        </div>
+        <div class="half"></div>
+      </div>
+    </fieldset>
+  </div>
+</div>
+
+<!-- Import -->
+<div class="main-content">
+  <div class="container">
+    <form method="post" enctype="multipart/form-data" id="import_form">
+      <fieldset>
+        <legend data-i18n="Import-Tool.Title"></legend>
         <div class="row">
-          <p data-i18n="Export-Tool.Description1"></p>
-          <p data-i18n="Export-Tool.Description2"></p>
-          <p data-i18n="Export-Tool.Description3"></p>
+          <label data-i18n="Service-List.Import-File"></label>
+        </div>
+        <div class="row">
+          <input type="file" name="file" id="id_file" required>
+          <div class="row error error-submission center-text"></div>
         </div>
         <div class="row">
           <div class="half">
-            <button id="export" class="submit primary-button form-btn-submit" tabindex="3" data-i18n="Export-Tool.Button"></button>
+            <button class="submit primary-button form-btn-submit" tabindex="3" data-i18n="Import-Tool.Button">Import</button>
           </div>
+          <div class="half"></div>
         </div>
-    </div>
+      </fieldset>
+    </form>
+  </div>
 </div>
 
-<!-- End Main Content -->
-
-<!-- Page Head -->
-    <div class="page-head">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-sm-offset-2">
-                    <div class="page-title" data-i18n="Import-Tool.Title"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- End Page Head -->
-
-<!-- Main Content -->
-
-<!-- Forms -->
-      <div class="main-content">
-        <div class="container">
-            <div class="row">
-              <form method="post" enctype="multipart/form-data" id="import_form">
-                <fieldset>
-                  <label for="id_file" class="control-label"><span data-i18n="Service-List.Import-File"></span><span class=error></span></label>
-                  <input type="file" name="file" id="id_file" required>
-                  <div class="row error error-submission center-text"></div>
-                </fieldset>
-              </form>
-            </div>
-            <div class="row">
-              <div class="half">
-                <button class="submit primary-button form-btn-submit" tabindex="3" data-i18n="Import-Tool.Button">Import</button>
-              </div>
-            </div>
-        </div>
+<!-- Help -->
+<div class="main-content">
+  <div class="container">
+    <fieldset>
+      <legend  data-i18n="Import-Export.Help.Title"></legend>
+      <div class="row">
+        <p data-i18n="Import-Export.Help.Help1"></p>
+        <p data-i18n="Import-Export.Help.Help2"></p>
+        <p data-i18n="Import-Export.Help.Help3"></p>
+        <p data-i18n="Import-Export.Help.Help4"></p>
+        <p data-i18n="Import-Export.Help.Help5"></p>
+        <p data-i18n="Import-Export.Help.Help6"></p>
+        <p data-i18n="Import-Export.Help.Help7"></p>
       </div>
-
-<!-- End Forms -->
-
-<!-- End Main Content -->
-
-<!-- Page Head -->
-    <div class="page-head">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-sm-offset-2">
-                    <div class="page-title" data-i18n="Import-Export.Help.Title"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- End Page Head -->
-
-<!-- Main Content -->
-
-<!-- Forms -->
-      <div class="main-content">
-        <div class="container">
-            <div class="row">
-              <p data-i18n="Import-Export.Help.Help1"></p>
-              <p data-i18n="Import-Export.Help.Help2"></p>
-              <p data-i18n="Import-Export.Help.Help3"></p>
-              <p data-i18n="Import-Export.Help.Help4"></p>
-              <p data-i18n="Import-Export.Help.Help5"></p>
-              <p data-i18n="Import-Export.Help.Help6"></p>
-              <p data-i18n="Import-Export.Help.Help7"></p>
-            </div>
-        </div>
-      </div>
-
-<!-- End Forms -->
+    </fieldset>
+  </div>
+</div>
 
 <!-- End Main Content -->
