@@ -28,7 +28,8 @@ from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, 
     ResendActivationLinkSerializer, CreateProviderSerializer, ServiceTypeSerializer, \
     SelectionCriterionSerializer, LanguageSerializer, ServiceSearchSerializer, \
     ProviderFetchSerializer, FeedbackSerializer, NationalitySerializer, ImportSerializer, \
-    ServiceTypeWaitTimeSerializer
+    ServiceTypeWaitTimeSerializer, ServiceTypeQOSSerializer, ServiceTypeFailureSerializer, \
+    ServiceTypeContactSerializer, ServiceTypeCommunicationSerializer
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
     SelectionCriterion, Feedback, Nationality
@@ -315,16 +316,47 @@ class ServiceTypeViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
     queryset = ServiceType.objects.all()
     serializer_class = ServiceTypeSerializer
 
+    def _do_service_type_report_view(self, serializer_class):
+        queryset = self.get_queryset()
+        context = self.get_serializer_context()
+        serializer = serializer_class(
+            queryset, many=True, context=context)
+        return Response(serializer.data)
+
     @list_route(methods=['get', ], url_path='wait-times',
                 permission_classes=[IsAuthenticated, ],
                 renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
     def wait_times(self, request):
         """Wait time feedback aggregated by service type."""
-        queryset = self.get_queryset()
-        context = self.get_serializer_context()
-        serializer = ServiceTypeWaitTimeSerializer(
-            queryset, many=True, context=context)
-        return Response(serializer.data)
+        return self._do_service_type_report_view(ServiceTypeWaitTimeSerializer)
+
+    @list_route(methods=['get', ], url_path='qos',
+                permission_classes=[IsAuthenticated, ],
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def qos(self, request):
+        """Quality of service delivered feedback aggregated by service type."""
+        return self._do_service_type_report_view(ServiceTypeQOSSerializer)
+
+    @list_route(methods=['get', ], url_path='failure',
+                permission_classes=[IsAuthenticated, ],
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def failure(self, request):
+        """Explanation of Service Delivery Failure by Service Type."""
+        return self._do_service_type_report_view(ServiceTypeFailureSerializer)
+
+    @list_route(methods=['get', ], url_path='contact',
+                permission_classes=[IsAuthenticated, ],
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def contact(self, request):
+        """Difficulties Contacting Service Providers by Service Type."""
+        return self._do_service_type_report_view(ServiceTypeContactSerializer)
+
+    @list_route(methods=['get', ], url_path='communication',
+                permission_classes=[IsAuthenticated, ],
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def communication(self, request):
+        """Satisfaction with Staff Communication by Service Type."""
+        return self._do_service_type_report_view(ServiceTypeCommunicationSerializer)
 
 
 class ProviderViewSet(ServiceInfoModelViewSet):
