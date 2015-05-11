@@ -51,6 +51,9 @@ msgstr "Give Feedback"
 msgid "Menu##Change-Language"
 msgstr "Change Language"
 
+msgid "Menu##Reports"
+msgstr "Reports"
+
 msgid "Global##Admin"
 msgstr "Admin"
 
@@ -89,6 +92,9 @@ msgstr "Geolocation is not supported by this browser."
 
 msgid "Global##GeoPositionUnavailable"
 msgstr "Location is not available at this time."
+
+msgid "Global##GeoLocationDenied"
+msgstr "You have not given permission to access your current location."
 
 msgid "Global##RequiredField"
 msgstr "This field is required."
@@ -636,6 +642,9 @@ msgstr "Yes"
 msgid "Feedback-Form##Delivered##no"
 msgstr "No"
 
+msgid "Feedback-Form##Form-Sections##Basic##Legend"
+msgstr "Feedback for the selected service"
+
 msgid "Feedback-Form##Submit"
 msgstr "Submit Answers"
 
@@ -773,6 +782,39 @@ msgstr "When adding selection criteria to an existing service, set the 'service_
 
 msgid "Import-Export##Help##Help7"
 msgstr "When adding selection criteria to a new service, set the 'service__id' field to the 'name_en' of the new service."
+
+msgid "Reports##Title"
+msgstr "Feedback Reports"
+
+msgid "Reports##Description"
+msgstr ""
+
+msgid "Reports##Form##Stat##Label"
+msgstr "Report To View"
+
+msgid "Reports##Form##Stat##Options##WaitTime"
+msgstr "Waiting Time by Service Type"
+
+msgid "Reports##Form##Stat##Options##QOS"
+msgstr "Quality of Service Delivered by Service Type"
+
+msgid "Reports##Form##Stat##Options##Failure"
+msgstr "Explanation of Service Delivery Failure by Service Type"
+
+msgid "Reports##Form##Stat##Options##Contact"
+msgstr "Difficulties Contacting Service Providers by Service Type"
+
+msgid "Reports##Form##Stat##Options##Communication"
+msgstr "Satisfaction with Staff Communication by Service Type"
+
+msgid "Reports##Form##Download"
+msgstr "Download Report CSV"
+
+msgid "Reports##Table##Loading"
+msgstr "Loading..."
+
+msgid "Reports##Table##ServiceType"
+msgstr "Service Type"
 
 msgctxt "explained"
 msgid "Feedback-Form##non_delivery"

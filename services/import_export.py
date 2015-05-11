@@ -300,6 +300,7 @@ def validate_and_import_book(user, book):
         headers = sheet.row_values(0)
     if sheet.name != PROVIDER_SHEET_NAME:
         add_error(sheet, 0, None,
+                  # Translators: do NOT translate text inside {braces}
                   _('First sheet has wrong name, expected {expected}, got {actual}').format(
                       expected=PROVIDER_SHEET_NAME, actual=sheet.name))
     elif headers != PROVIDER_HEADINGS:
@@ -379,6 +380,7 @@ def validate_and_import_book(user, book):
         headers = sheet.row_values(0)
     if sheet.name != SERVICES_SHEET_NAME:
         add_error(sheet, 0, None,
+                  # Translators: do NOT translate text inside {braces}
                   _('Second sheet has wrong name, expected {expected}, got {actual}').format(
                       expected=SERVICES_SHEET_NAME, actual=sheet.name))
     elif headers:
@@ -445,6 +447,7 @@ def validate_and_import_book(user, book):
         headers = sheet.row_values(0)
     if sheet.name != SELECTION_CRITERIA_SHEET_NAME:
         add_error(sheet, 0, None,
+                  # Translators: do NOT translate text inside {braces}
                   _('Third sheet has wrong name, expected {expected}, got {actual}').format(
                       expected=SELECTION_CRITERIA_SHEET_NAME, actual=sheet.name))
     elif headers:

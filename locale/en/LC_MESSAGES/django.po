@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-06 16:26+0300\n"
+"POT-Creation-Date: 2015-05-11 21:22+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,70 +21,70 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: api/serializers.py:37 services/models.py:552 services/models.py:555
+#: api/serializers.py:38 services/models.py:552 services/models.py:555
 msgid "This field is required."
 msgstr ""
 
-#: api/serializers.py:77
+#: api/serializers.py:78
 #, python-brace-format
 msgid "Invalid language code {code}. The valid codes are {valid_codes}."
 msgstr ""
 
-#: api/serializers.py:160 email_user/forms.py:18
+#: api/serializers.py:161 email_user/forms.py:18
 msgid "A user with that email already exists."
 msgstr ""
 
-#: api/serializers.py:253
+#: api/serializers.py:254
 msgid "User is not a provider.  Only providers can create services."
 msgstr ""
 
-#: api/serializers.py:261
+#: api/serializers.py:262
 msgid "You may only submit updates to current, draft or rejected services"
 msgstr ""
 
-#: api/serializers.py:268
+#: api/serializers.py:269
 msgid "There is already a pending draft update to this service."
 msgstr ""
 
-#: api/serializers.py:278
+#: api/serializers.py:279
 msgid "Close time is missing."
 msgstr ""
 
-#: api/serializers.py:280
+#: api/serializers.py:281
 msgid "Open time is missing."
 msgstr ""
 
-#: api/serializers.py:282
+#: api/serializers.py:283
 msgid "Close time is not later than open time."
 msgstr ""
 
-#: api/serializers.py:379
+#: api/serializers.py:380
 msgid "User account is disabled."
 msgstr ""
 
-#: api/serializers.py:382
+#: api/serializers.py:383
 msgid "Unable to log in with provided credentials."
 msgstr ""
 
-#: api/serializers.py:404
+#: api/serializers.py:405
 msgid ""
 "Activation key is invalid. Check that it was copied correctly and has not "
 "already been used."
 msgstr ""
 
-#: api/serializers.py:425 api/serializers.py:476
+#: api/serializers.py:426 api/serializers.py:477
 msgid "No user with that email"
 msgstr ""
 
-#: api/serializers.py:442 api/serializers.py:460
+#: api/serializers.py:443 api/serializers.py:461
 msgid "Password reset key is not valid"
 msgstr ""
 
-#: api/serializers.py:479
+#: api/serializers.py:480
 msgid "User is not pending activation"
 msgstr ""
 
-#: api/views.py:261
+#: api/views.py:262
 msgid "Service record must be current or pending changes to be canceled"
 msgstr ""
 
@@ -186,7 +186,7 @@ msgstr ""
 #, python-format
 msgid ""
 "You're receiving this email because you requested a password reset for your "
-"user account at %(site.name)s."
+"user account at %(site_name)s."
 msgstr ""
 
 #: email_user/templates/email_user/password_reset_email.html:4
@@ -211,8 +211,8 @@ msgstr ""
 msgid ""
 "\n"
 "You (or someone pretending to be you) have asked to reset the\n"
-"password of an account at\n"
-"%(site_name)s.  If this wasn't you, please ignore this email.\n"
+"password of an account at %(site_name)s.\n"
+"If this wasn't you, please ignore this email.\n"
 msgstr ""
 
 #: email_user/templates/email_user/password_reset_email.txt:8
@@ -227,6 +227,11 @@ msgid ""
 "\n"
 "Sincerely,\n"
 "%(site_name)s Management\n"
+msgstr ""
+
+#: email_user/templates/email_user/password_reset_subject.txt:2
+#, python-format
+msgid "Password reset on %(site_name)s"
 msgstr ""
 
 #: email_user/templates/registration/activation_email.html:7
@@ -476,84 +481,87 @@ msgstr ""
 msgid "First sheet has no data."
 msgstr ""
 
-#: services/import_export.py:303
+#. Translators: do NOT translate text inside {braces}
+#: services/import_export.py:304
 #, python-brace-format
 msgid "First sheet has wrong name, expected {expected}, got {actual}"
 msgstr ""
 
-#: services/import_export.py:307
+#: services/import_export.py:308
 #, python-format
 msgid "First sheet has wrong headers, expected %s"
 msgstr ""
 
-#: services/import_export.py:323
+#: services/import_export.py:324
 #, python-format
 msgid "%d is not a provider this user may delete"
 msgstr ""
 
-#: services/import_export.py:326
+#: services/import_export.py:327
 #, python-format
 msgid "%d is not a provider this user may import"
 msgstr ""
 
-#: services/import_export.py:330
+#: services/import_export.py:331
 msgid "Only staff may delete providers"
 msgstr ""
 
-#: services/import_export.py:335
+#: services/import_export.py:336
 msgid "Non-staff users may not create new providers"
 msgstr ""
 
-#: services/import_export.py:344 services/import_export.py:411
-#: services/import_export.py:463
+#: services/import_export.py:345 services/import_export.py:413
+#: services/import_export.py:466
 #, python-format
 msgid "%s is not a valid ID"
 msgstr ""
 
-#: services/import_export.py:350
+#: services/import_export.py:351
 #, python-format
 msgid "There is no provider with id=%s"
 msgstr ""
 
-#: services/import_export.py:377 services/import_export.py:443
+#: services/import_export.py:378 services/import_export.py:445
 msgid "Second sheet has no data."
 msgstr ""
 
-#: services/import_export.py:382
+#. Translators: do NOT translate text inside {braces}
+#: services/import_export.py:384
 #, python-brace-format
 msgid "Second sheet has wrong name, expected {expected}, got {actual}"
 msgstr ""
 
-#: services/import_export.py:400
+#: services/import_export.py:402
 #, python-format
 msgid "%d is not a service this user may delete"
 msgstr ""
 
-#: services/import_export.py:403
+#: services/import_export.py:405
 #, python-format
 msgid "%d is not a service this user may import"
 msgstr ""
 
-#: services/import_export.py:416
+#: services/import_export.py:418
 #, python-format
 msgid "No service with id=%s"
 msgstr ""
 
-#: services/import_export.py:425
+#: services/import_export.py:427
 msgid "Non-staff users may not create services for other providers"
 msgstr ""
 
-#: services/import_export.py:448
+#. Translators: do NOT translate text inside {braces}
+#: services/import_export.py:451
 #, python-brace-format
 msgid "Third sheet has wrong name, expected {expected}, got {actual}"
 msgstr ""
 
-#: services/import_export.py:469
+#: services/import_export.py:472
 #, python-format
 msgid "No selection criterion with id = %s"
 msgstr ""
 
-#: services/import_export.py:488
+#: services/import_export.py:491
 msgid ""
 "Selection criterion refers to service with ID or name {name!r} that is not "
 "in the 2nd sheet. Choices: {list1!r} or {list2!r}"

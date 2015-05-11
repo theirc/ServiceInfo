@@ -12,13 +12,14 @@
         "Logout": "Logout",
         "Services": "Liste des services",
         "Add-Services": "Ajouter des services",
-        "Import-Export": "",
+        "Import-Export": "Import/Export",
         "Service-Map": "Service Map",
         "Search": "Recherche",
         "Provider-Registration": "Inscription des fournisseurs",
         "Edit-Provider-Information": "Modifier les informations de fournisseur",
         "Feedback-Tool": "Donne Un Compte-Rendu",
-        "Change-Language": "Changer de langue"
+        "Change-Language": "Changer de langue",
+        "Reports": ""
     },
     "Global": {
         "Admin": "Admin",
@@ -34,6 +35,7 @@
         "Saturday": "Samedi",
         "GeolocationNotSupported": "Géolocalisation ne est pas supporté par ce navigateur.",
         "GeoPositionUnavailable": "Emplacement ne est pas disponible en ce moment.",
+        "GeoLocationDenied": "",
         "RequiredField": "Ce champ est obligatoire."
     },
     "Login-Form": {
@@ -113,7 +115,7 @@
             "Type": "Type de service",
             "Additional-Info": "Informations supplémentaires sur le fournisseur",
             "Cost": "Coût",
-            "Todays-Hours": "",
+            "Todays-Hours": "Heures de service d'aujourd'hui",
             "All-Hours": "Heures de service",
             "Phone": "Numéro de téléphone",
             "Email": "Adresse e-mail",
@@ -264,15 +266,15 @@
         },
         "Empty-Message": "Vous ne avez pas encore présenté de services. Vous pouvez soumettre votre premier service pour examen en appuyant sur le bouton Nouveau service.",
         "Add-Service": "Nouveau service",
-        "Import": "",
-        "Import-File": "",
-        "Export": "",
+        "Import": "importation",
+        "Import-File": "Fichier de feuille de calcul Excel à l'importation",
+        "Export": "exportation",
         "Status": {
-            "draft": "",
-            "current": "",
-            "rejected": "",
-            "canceled": "",
-            "archived": ""
+            "draft": "Ebauche",
+            "current": "Courant",
+            "rejected": "Rejeté",
+            "canceled": "Annulé",
+            "archived": "Archivé"
         },
         "Table": {
             "Thead": {
@@ -286,7 +288,7 @@
         "Cancel": "Annuler",
         "Delete": "Effacer",
         "Change-Service": "Changer de service",
-        "Change-Change": ""
+        "Change-Change": "Mise à jour de"
     },
     "Provider-Registration-Confirmation": {
         "Page-Head": {
@@ -380,13 +382,18 @@
             "yes": "Oui",
             "no": "No"
         },
+        "Form-Sections": {
+            "Basic": {
+                "Legend": ""
+            }
+        },
         "Submit": "Valider les réponses",
         "Clear": "Retirer Réponses",
         "WaitTime": {
             "label": "Combien de temps avez-vous attendu pour le service à livrer, après contact avec le fournisseur de services?",
             "lesshour": "Moins de 1 heure",
             "uptotwodays": "Jusqu'à 2 jours",
-            "more": "plus",
+            "more": "Plus de 2 semaines",
             "3_7days": "3-7 jours",
             "1_2weeks": "1-2 semaines"
         },
@@ -443,28 +450,49 @@
         }
     },
     "Export-Tool": {
-        "Title": "",
-        "Button": "",
-        "Description1": "",
-        "Description2": "",
-        "Description3": ""
+        "Title": "exportation de services",
+        "Button": "exportation",
+        "Description1": "Cliquez sur le bouton pour télécharger un fichier de feuille de calcul Excel contenant les données que vous avez accès.",
+        "Description2": "Le fichier contient trois onglets ou feuilles: une pour les données de fournisseurs, un pour les données de service, et l'un des critères de sélection.",
+        "Description3": "Vous pouvez modifier les informations dans le tableur et l'importer à apporter des modifications aux données."
     },
     "Import-Tool": {
-        "Title": "",
-        "Button": "",
-        "Success": "",
-        "Errors": ""
+        "Title": "importation de services",
+        "Button": "importation",
+        "Success": "L'importation a réussi",
+        "Errors": "Il y avait des erreurs dans le fichier. Aucune donnée n'a été changé."
     },
     "Import-Export": {
         "Help": {
-            "Title": "",
-            "Help1": "",
-            "Help2": "",
-            "Help3": "",
-            "Help4": "",
-            "Help5": "",
-            "Help6": "",
-            "Help7": ""
+            "Title": "aider",
+            "Help1": "Lors de l'importation, toutes les données non valides seront causer la totalité importation être rejetée et les erreurs sera signalé à l'utilisateur.",
+            "Help2": "Toute ligne avec un champ d'identité valide, mais avec toutes les autres valeurs compensés signifie pour supprimer cet enregistrement.",
+            "Help3": "Moments de la journée sont représentés sous forme de chaîne au format 'HH: MM' de 24 heures de format.",
+            "Help4": "La feuille de fournisseur a une colonne \"mot de passe\" qui ne contient aucune valeur à l'exportation. Le mot de passe du fournisseur peut être modifié en mettant une valeur dans cette colonne pour l'importation.",
+            "Help5": "Lors de la création d'un nouveau service, laissez le 'ID' colonne vide.",
+            "Help6": "Lors de l'ajout des critères de sélection à un service existant, définissez le champ 'service de _id' à l''ID' du service existant.",
+            "Help7": "Lors de l'ajout des critères de sélection pour un nouveau service, définir le champ 'service__id »à la« NAME_EN' du nouveau service."
+        }
+    },
+    "Reports": {
+        "Title": "",
+        "Description": "",
+        "Form": {
+            "Stat": {
+                "Label": "",
+                "Options": {
+                    "WaitTime": "",
+                    "QOS": "",
+                    "Failure": "",
+                    "Contact": "",
+                    "Communication": ""
+                }
+            },
+            "Download": ""
+        },
+        "Table": {
+            "Loading": "",
+            "ServiceType": ""
         }
     }
 }
