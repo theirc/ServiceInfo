@@ -69,7 +69,8 @@ module.exports = Backbone.View.extend({
             {value: 'qos', label: 'QOS'},
             {value: 'failure', label: 'Failure'},
             {value: 'contact', label: 'Contact'},
-            {value: 'communication', label: 'Communication'}
+            {value: 'communication', label: 'Communication'},
+            {value: 'num-services', label: 'NumServices'}
         ];
     },
 

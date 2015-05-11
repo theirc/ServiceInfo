@@ -16,7 +16,7 @@ from rest_framework import mixins, parsers, renderers, status, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import list_route, detail_route
 from rest_framework.exceptions import ValidationError as DRFValidationError, PermissionDenied
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
@@ -29,7 +29,8 @@ from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, 
     SelectionCriterionSerializer, LanguageSerializer, ServiceSearchSerializer, \
     ProviderFetchSerializer, FeedbackSerializer, NationalitySerializer, ImportSerializer, \
     ServiceTypeWaitTimeSerializer, ServiceTypeQOSSerializer, ServiceTypeFailureSerializer, \
-    ServiceTypeContactSerializer, ServiceTypeCommunicationSerializer
+    ServiceTypeContactSerializer, ServiceTypeCommunicationSerializer, \
+    ServiceTypeNumServicesSerializer
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
     SelectionCriterion, Feedback, Nationality
@@ -125,7 +126,8 @@ class NationalityViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
 class ServiceAreaViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
                          ServiceInfoGenericViewSet):
     permission_classes = [AllowAny]
-    queryset = ServiceArea.objects.all()
+    # We only want to display the lowest-level service areas to the frontend.
+    queryset = ServiceArea.objects.lowest_level()
     serializer_class = ServiceAreaSerializer
 
 
@@ -357,6 +359,18 @@ class ServiceTypeViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
     def communication(self, request):
         """Satisfaction with Staff Communication by Service Type."""
         return self._do_service_type_report_view(ServiceTypeCommunicationSerializer)
+
+    @list_route(methods=['get', ], url_path='num-services',
+                permission_classes=[IsAdminUser, ],
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def num_services(self, request):
+        """Number of Registered Service Providers by Type by Location."""
+        # Only top-level service areas
+        queryset = self.get_queryset()
+        context = self.get_serializer_context()
+        serializer = ServiceTypeNumServicesSerializer(
+            queryset, many=True, context=context)
+        return Response(serializer.data)
 
 
 class ProviderViewSet(ServiceInfoModelViewSet):

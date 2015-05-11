@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.utils.encoding import force_text
 from django.utils.translation import override, ugettext_lazy as _
 
@@ -514,6 +514,19 @@ class BaseServiceTypeAggregateSerializer(RequireOneTranslationMixin,
         required_translated_fields = ['name']
 
     def get_totals(self, service_type):
+        """
+        Returns a list of items, one item per possible value of
+        the aggregate field.
+
+        Each item in the list is a dictionary with the following fields:
+
+        * label_en: Label for one value, in English
+        * label_ar: Label for that value, in Arabic
+        * label_fr: label for that value, in French
+        * total: number of Feedback records where the service_type is set to
+           the service_type argument of this method, and the aggregate field
+           has the value that the labels apply to.
+        """
         if self.aggregate_field is None:
             raise ValueError('aggregate_field must be defined.')
         totals = []
@@ -573,3 +586,47 @@ class ServiceTypeCommunicationSerializer(BaseServiceTypeAggregateSerializer):
     """Satisfaction with Staff Communication by Service Type"""
 
     aggregate_field = 'staff_satisfaction'
+
+
+class ServiceTypeNumServicesSerializer(RequireOneTranslationMixin,
+                                       serializers.HyperlinkedModelSerializer):
+    totals = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ServiceType
+        fields = (
+            'url',
+            'number',
+            'name_en', 'name_fr', 'name_ar',
+            'totals',
+        )
+        required_translated_fields = ['name']
+
+    def get_totals(self, service_type):
+        """
+        Returns a list of items, one item per top-level service
+        area.
+
+        Each item in the list is a dictionary with the following fields:
+
+        * label_en: Label for one top-level area, in English
+        * label_ar: Label for that top-level area, in Arabic
+        * label_fr: label for that top-level area, in French
+        * total: number of Service records with a service area in that top-level
+          service area and with the specified service type
+       """
+
+        services = Service.objects.filter(type=service_type)
+        top_areas = ServiceArea.objects.top_level()
+        totals = []
+        for area in top_areas:
+            in_area = Q(area_of_service=area) | Q(area_of_service__parent=area)
+            count = services.filter(in_area).count()
+            totals.append({
+                'total': count,
+                'label_en': area.name_en,
+                'label_ar': area.name_ar,
+                'label_fr': area.name_fr,
+            })
+
+        return totals
