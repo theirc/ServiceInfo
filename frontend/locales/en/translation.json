@@ -18,7 +18,8 @@
   	"Provider-Registration": "Provider Registration",
     "Edit-Provider-Information": "Edit Provider Information",
   	"Feedback-Tool": "Give Feedback",
-  	"Change-Language": "Change Language"
+  	"Change-Language": "Change Language",
+    "Reports": "Reports"
   },
   "Global": {
     "Admin": "Admin",
@@ -34,6 +35,7 @@
     "Saturday": "Saturday",
     "GeolocationNotSupported": "Geolocation is not supported by this browser.",
     "GeoPositionUnavailable": "Location is not available at this time.",
+    "GeoLocationDenied": "You have not given permission to access your current location.",
     "RequiredField": "This field is required."
   },
   "Login-Form": {
@@ -281,7 +283,7 @@
     "Empty-Message": "You have not submitted any services yet. You may submit your first service for review by tapping the New Service button.",
     "Add-Service": "New Service",
     "Import": "Import",
-    "Import-File": "Excel spreadsheet file to import",
+    "Import-File": "Please choose an Excel spreadsheet file to import.",
     "Export": "Export",
     "Status": {
       "draft": "Draft",
@@ -397,6 +399,11 @@
         "yes": "Yes",
         "no": "No"
     },
+    "Form-Sections":{
+      "Basic":{
+        "Legend":"Feedback for the selected service"
+      }
+    },
     "non_delivery_explained": "Did you receive a clear explanation for why the service you sought was not delivered to you?",
     "non_delivery_explanation": {
        "no": "No explanation",
@@ -412,7 +419,7 @@
         "uptotwodays": "Up to 2 days",
         "3_7days": "3-7 days",
         "1_2weeks": "1-2 weeks",
-        "more": "Longer"
+        "more": "More than 2 weeks"
     },
     "wait_time_satisfaction": {
         "label": "How do you rate your satisfaction with the time that you waited for the service to be delivered (from 1 to 5, where 5 is the highest rating possible)?"
@@ -478,6 +485,9 @@
       "Errors": "There were errors in the file.  No data was changed."
   },
   "Import-Export": {
+      "Page": {
+        "Title": "Import/Export"
+      },
       "Help": {
         "Title": "Help",
         "Help1": "On import, any invalid data will cause the entire import to be rejected and the errors will be reported to the user.",
@@ -488,5 +498,26 @@
         "Help6": "When adding selection criteria to an existing service, set the 'service__id' field to the 'ID' of the existing service.",
         "Help7": "When adding selection criteria to a new service, set the 'service__id' field to the 'name_en' of the new service."
       }
+  },
+  "Reports": {
+    "Title": "Feedback Reports",
+    "Description": "",
+    "Form": {
+      "Stat": {
+        "Label": "Report To View",
+        "Options": {
+          "WaitTime": "Waiting Time by Service Type",
+          "QOS": "Quality of Service Delivered by Service Type",
+          "Failure": "Explanation of Service Delivery Failure by Service Type",
+          "Contact": "Difficulties Contacting Service Providers by Service Type",
+          "Communication": "Satisfaction with Staff Communication by Service Type"
+        }
+      },
+      "Download": "Download Report CSV"
+    },
+    "Table": {
+      "Loading": "Loading...",
+      "ServiceType": "Service Type"
+    }
   }
 }

@@ -30,6 +30,9 @@ msgstr "List of Services"
 msgid "Menu##Add-Services"
 msgstr "Add Services"
 
+msgid "Menu##Import-Export"
+msgstr "Import/Export"
+
 msgid "Menu##Service-Map"
 msgstr "Service Map"
 
@@ -47,6 +50,9 @@ msgstr "Give Feedback"
 
 msgid "Menu##Change-Language"
 msgstr "Change Language"
+
+msgid "Menu##Reports"
+msgstr "Reports"
 
 msgid "Global##Admin"
 msgstr "Admin"
@@ -86,6 +92,9 @@ msgstr "Geolocation is not supported by this browser."
 
 msgid "Global##GeoPositionUnavailable"
 msgstr "Location is not available at this time."
+
+msgid "Global##GeoLocationDenied"
+msgstr "You have not given permission to access your current location."
 
 msgid "Global##RequiredField"
 msgstr "This field is required."
@@ -471,6 +480,15 @@ msgstr "You have not submitted any services yet. You may submit your first servi
 msgid "Service-List##Add-Service"
 msgstr "New Service"
 
+msgid "Service-List##Import"
+msgstr "Import"
+
+msgid "Service-List##Import-File"
+msgstr "Excel spreadsheet file to import"
+
+msgid "Service-List##Export"
+msgstr "Export"
+
 msgid "Service-List##Status##draft"
 msgstr "Draft"
 
@@ -624,6 +642,9 @@ msgstr "Yes"
 msgid "Feedback-Form##Delivered##no"
 msgstr "No"
 
+msgid "Feedback-Form##Form-Sections##Basic##Legend"
+msgstr "Feedback for the selected service"
+
 msgid "Feedback-Form##Submit"
 msgstr "Submit Answers"
 
@@ -640,7 +661,7 @@ msgid "Feedback-Form##WaitTime##uptotwodays"
 msgstr "Up to 2 days"
 
 msgid "Feedback-Form##WaitTime##more"
-msgstr "Longer"
+msgstr "More than 2 weeks"
 
 msgid "Feedback-Form##Quality##label"
 msgstr "How would you rate the quality of the service you received (from 1 to 5, where 5 is the highest rating possible)?"
@@ -710,6 +731,90 @@ msgstr "Register to be a Service Provider"
 
 msgid "Landing##Provider##Logged-Out##Login"
 msgstr "Login to an Existing Service Provider Account"
+
+msgid "Export-Tool##Title"
+msgstr "Export services"
+
+msgid "Export-Tool##Button"
+msgstr "Export"
+
+msgid "Export-Tool##Description1"
+msgstr "Click the button to download an Excel spreadsheet file containing the data you have access to."
+
+msgid "Export-Tool##Description2"
+msgstr "The file will contain three tabs or sheets: one for provider data, one for service data, and one for selection criteria."
+
+msgid "Export-Tool##Description3"
+msgstr "You can edit the information in the spreadsheet and import it to make changes to the data."
+
+msgid "Import-Tool##Title"
+msgstr "Import services"
+
+msgid "Import-Tool##Button"
+msgstr "Import"
+
+msgid "Import-Tool##Success"
+msgstr "The import was successful"
+
+msgid "Import-Tool##Errors"
+msgstr "There were errors in the file.  No data was changed."
+
+msgid "Import-Export##Help##Title"
+msgstr "Help"
+
+msgid "Import-Export##Help##Help1"
+msgstr "On import, any invalid data will cause the entire import to be rejected and the errors will be reported to the user."
+
+msgid "Import-Export##Help##Help2"
+msgstr "Any row with a valid ID field but with all the other values cleared means to delete that record."
+
+msgid "Import-Export##Help##Help3"
+msgstr "Times of day are represented as a string in 24-hour 'HH:MM' format."
+
+msgid "Import-Export##Help##Help4"
+msgstr "The provider sheet has a column “password” that never contains any values on export. The provider password can be changed by putting a value in that column for import."
+
+msgid "Import-Export##Help##Help5"
+msgstr "When creating a new service, leave the 'ID' column blank."
+
+msgid "Import-Export##Help##Help6"
+msgstr "When adding selection criteria to an existing service, set the 'service__id' field to the 'ID' of the existing service."
+
+msgid "Import-Export##Help##Help7"
+msgstr "When adding selection criteria to a new service, set the 'service__id' field to the 'name_en' of the new service."
+
+msgid "Reports##Title"
+msgstr "Feedback Reports"
+
+msgid "Reports##Description"
+msgstr ""
+
+msgid "Reports##Form##Stat##Label"
+msgstr "Report To View"
+
+msgid "Reports##Form##Stat##Options##WaitTime"
+msgstr "Waiting Time by Service Type"
+
+msgid "Reports##Form##Stat##Options##QOS"
+msgstr "Quality of Service Delivered by Service Type"
+
+msgid "Reports##Form##Stat##Options##Failure"
+msgstr "Explanation of Service Delivery Failure by Service Type"
+
+msgid "Reports##Form##Stat##Options##Contact"
+msgstr "Difficulties Contacting Service Providers by Service Type"
+
+msgid "Reports##Form##Stat##Options##Communication"
+msgstr "Satisfaction with Staff Communication by Service Type"
+
+msgid "Reports##Form##Download"
+msgstr "Download Report CSV"
+
+msgid "Reports##Table##Loading"
+msgstr "Loading..."
+
+msgid "Reports##Table##ServiceType"
+msgstr "Service Type"
 
 msgctxt "explained"
 msgid "Feedback-Form##non_delivery"

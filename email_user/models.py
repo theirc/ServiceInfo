@@ -285,7 +285,7 @@ class EmailUser(AbstractBaseUser, PermissionsMixin):
         }
         self.send_email_to_user(
             ctx_dict,
-            'registration/password_reset_subject.txt',
+            'email_user/password_reset_subject.txt',
             'email_user/password_reset_email.txt',
             'email_user/password_reset_email.html',
         )

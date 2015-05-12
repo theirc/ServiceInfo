@@ -1,25 +1,22 @@
 from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND, METHOD_NOT_ALLOWED, UNAUTHORIZED
 import json
 
-from django.conf import settings
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.models import Group
 from django.contrib.gis.geos import Point
 from django.core import mail
-from django.core.files.storage import default_storage
 from django.core.urlresolvers import reverse
 from django.forms import model_to_dict
 from django.test import TestCase
-
 from rest_framework.authtoken.models import Token
 from rest_framework.fields import Field, CharField
 from rest_framework.test import APIClient
 
 from email_user.models import EmailUser
 from email_user.tests.factories import EmailUserFactory
-from services.models import Provider, Service, SelectionCriterion, ServiceArea, ServiceType
+from services.models import Provider, Service, SelectionCriterion, ServiceArea
 from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory, \
-    ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory, FeedbackFactory
+    ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory
 
 
 ERROR_REQUIRED_FIELD_MISSING = str(Field.default_error_messages['required'])
@@ -734,57 +731,6 @@ class ServiceAreaAPITest(APITestMixin, TestCase):
         rsp = self.get_with_token(self.area2.get_api_url())
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual('http://testserver%s' % self.area1.get_api_url(), result['parent'])
-
-
-class ServiceTypeAPITest(APITestMixin, TestCase):
-    def test_get_types(self):
-        rsp = self.get_with_token(reverse('servicetype-list'))
-        self.assertEqual(OK, rsp.status_code)
-        results = json.loads(rsp.content.decode('utf-8'))
-        result = results[0]
-        self.assertIn('icon_url', result)
-        icon_url = result['icon_url']
-        self.assertTrue(icon_url.startswith(settings.MEDIA_URL))
-        path = icon_url.replace(settings.MEDIA_URL, '')
-        self.assertTrue(default_storage.exists(path))
-
-    def test_get_type(self):
-        # Try it unauthenticated
-        a_type = ServiceType.objects.first()
-        url = a_type.get_api_url()
-        rsp = self.client.get(url)
-        self.assertEqual(OK, rsp.status_code)
-        result = json.loads(rsp.content.decode('utf-8'))
-        self.assertIn('icon_url', result)
-        icon_url = result['icon_url']
-        self.assertTrue(icon_url.startswith(settings.MEDIA_URL))
-        path = icon_url.replace(settings.MEDIA_URL, '')
-        self.assertTrue(default_storage.exists(path))
-
-    def test_get_wait_times(self):
-        a_type = ServiceType.objects.first()
-        service = ServiceFactory(type=a_type)
-        FeedbackFactory(service=service, delivered=True, wait_time='lesshour')
-        FeedbackFactory(service=service, delivered=True, wait_time='lesshour')
-        FeedbackFactory(service=service, delivered=True, wait_time='more')
-        url = reverse('servicetype-wait-times')
-        rsp = self.get_with_token(url)
-        self.assertEqual(OK, rsp.status_code)
-        result = json.loads(rsp.content.decode('utf-8'))
-        self.assertEqual(len(result), ServiceType.objects.all().count())
-        for r in result:
-            if r['number'] == a_type.number:
-                # less than hour, 1-2 days, 3-7 days, 1-2 weeks, more than 2 weeks
-                expected_totals = [2, 0, 0, 0, 1, ]
-            else:
-                expected_totals = [0, 0, 0, 0, 0, ]
-            expected_labels = [
-                'Less than 1 hour', '1-48 hours', '3-7 days',
-                '1-2 weeks', 'More than 2 weeks']
-            self.assertIn('totals', r)
-            totals = r['totals']
-            self.assertEqual([t['label_en'] for t in totals], expected_labels)
-            self.assertEqual([t['total'] for t in totals], expected_totals)
 
 
 class LanguageTest(APITestMixin, TestCase):

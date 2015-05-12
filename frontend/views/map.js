@@ -1,8 +1,8 @@
 var Backbone = require('backbone'),
+    config = require('../config'),
     template = require("../templates/map.hbs"),
     service = require('../models/service'),
     servicetype = require('../models/servicetype'),
-    hashtrack = require('hashtrack'),
     i18n = require('i18next-client'),
     search = require('../search')
 ;
@@ -14,47 +14,37 @@ module.exports = Backbone.View.extend({
     initialize: function(params){
         var self = this;
         this.feedback = params.hasOwnProperty('feedback');
-        this.query = "";
-        this.services = new service.PublicServices();
-        this.servicetypes = new servicetype.ServiceTypes();
-        //this.render();
         this.markers = [];
+    },
+
+    perform_query: function() {
+        search.refetchServices.then(this.renderResults);
     },
 
     render: function() {
         var $el = this.$el;
 
-        var self=this;
         this.$el.html(template({
-            services: this.services,
-            query: hashtrack.getVar('q'),
             feedback: this.feedback
         }));
         $('.no-search-results').hide();
 
-        var $scv = this.$el.find('#search_controls');
         // Renders automatically when language is ready
         this.SearchControlView = new search.SearchControls({
-            $el: $scv,
+            $el: this.$el.find('#search_controls'),
             feedback: this.feedback
         });
+        this.SearchControlView.on('search_parameters_changed', this.perform_query, this);
 
-        function initialize() {
-            var mapOptions = {
-                center: { lat: 33.8869, lng: 35.5131},
-                zoom: 10
-            };
-            self.map = new google.maps.Map(document.getElementById('map_canvas'),
-                mapOptions);
-            search.refetchServices(self.query).then(function(){
-                self.updateResults();
-            });
-        }
-
-        initialize();
+        var mapOptions = {
+            center: { lat: 33.8869, lng: 35.5131},
+            zoom: 10
+        };
+        this.map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+        this.perform_query();
     },
 
-    updateResults: function() {
+    renderResults: function() {
         var self = this;
         $.each(self.markers, function() {
             this.setMap(null);

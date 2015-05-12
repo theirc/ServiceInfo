@@ -86,9 +86,15 @@ SELECTION_CRITERIA_HEADINGS = [
 ]
 
 
-def valid_providers_for_user(user):
+def valid_providers_for_user_export(user):
     """Return queryset of providers that this user is authorized
-    to export/import"""
+    to export"""
+    return Provider.objects.all()
+
+
+def valid_providers_for_user_import(user):
+    """Return queryset of providers that this user is authorized
+    to import"""
     if user.is_staff:
         providers = Provider.objects.all()
     else:
@@ -143,7 +149,7 @@ def get_export_workbook_for_user(user):
     :param user:
     :return: xlwt.Workbook
     """
-    return get_export_workbook(valid_providers_for_user(user))
+    return get_export_workbook(valid_providers_for_user_export(user))
 
 
 def add_models_to_sheet(sheet, headings, records):
@@ -278,7 +284,7 @@ def validate_and_import_book(user, book):
                     # print("message = %r (%s)" % (message, type(message)))
                     add_error(sheet, rownum, fieldname, message)
 
-    providers = valid_providers_for_user(user)
+    providers = valid_providers_for_user_import(user)
     valid_provider_ids = set([provider.id for provider in providers])
 
     # imported_providers = []
@@ -300,6 +306,7 @@ def validate_and_import_book(user, book):
         headers = sheet.row_values(0)
     if sheet.name != PROVIDER_SHEET_NAME:
         add_error(sheet, 0, None,
+                  # Translators: do NOT translate text inside {braces}
                   _('First sheet has wrong name, expected {expected}, got {actual}').format(
                       expected=PROVIDER_SHEET_NAME, actual=sheet.name))
     elif headers != PROVIDER_HEADINGS:
@@ -379,6 +386,7 @@ def validate_and_import_book(user, book):
         headers = sheet.row_values(0)
     if sheet.name != SERVICES_SHEET_NAME:
         add_error(sheet, 0, None,
+                  # Translators: do NOT translate text inside {braces}
                   _('Second sheet has wrong name, expected {expected}, got {actual}').format(
                       expected=SERVICES_SHEET_NAME, actual=sheet.name))
     elif headers:
@@ -445,6 +453,7 @@ def validate_and_import_book(user, book):
         headers = sheet.row_values(0)
     if sheet.name != SELECTION_CRITERIA_SHEET_NAME:
         add_error(sheet, 0, None,
+                  # Translators: do NOT translate text inside {braces}
                   _('Third sheet has wrong name, expected {expected}, got {actual}').format(
                       expected=SELECTION_CRITERIA_SHEET_NAME, actual=sheet.name))
     elif headers:
@@ -485,9 +494,11 @@ def validate_and_import_book(user, book):
                 service = imported_services_by_id.get(service_id, None)
             if not service:
                 add_error(sheet, rownum, 'service__id',
-                          _("Selection criterion refers to service with ID or name %r "
-                            "that is not in the 2nd sheet. Choices: %r or %r") %
-                          (service_id, imported_services_by_name, imported_services_by_id))
+                          _("Selection criterion refers to service with ID or name {name!r} "
+                            "that is not in the 2nd sheet. Choices: {list1!r} or {list2!r}").format(
+                              name=service_id, list1=imported_services_by_name,
+                              list2=imported_services_by_id
+                          ))
                 continue
 
             data['service'] = service.id

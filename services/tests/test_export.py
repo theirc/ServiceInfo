@@ -114,7 +114,7 @@ class ExportUtilsTest(TestCase):
         SelectionCriterionFactory()  # unwanted service
 
         # Querysets of just the objects we expect to be exported
-        providers = Provider.objects.filter(id=provider.id).order_by('id')
+        providers = Provider.objects.order_by('id')
         services = Service.objects.filter(status=Service.STATUS_CURRENT,
                                           provider__in=providers).order_by('id')
         criteria = SelectionCriterion.objects.filter(service__status=Service.STATUS_CURRENT,
@@ -165,25 +165,26 @@ class ExportUtilsTest(TestCase):
         user = EmailUserFactory(is_staff=True)
         validate_and_import_data(user, get_book_bits(xlwt_book))
 
-    def test_non_staff_only_sees_their_current_data(self):
+    def test_non_staff_sees_all_current_data(self):
         provider = ProviderFactory()
         service1 = ServiceFactory(provider=provider, status=Service.STATUS_CURRENT)
         service2 = ServiceFactory(provider=provider, status=Service.STATUS_CURRENT)
         ServiceFactory(status=Service.STATUS_CURRENT)
-        ServiceFactory(provider=provider, status=Service.STATUS_DRAFT)
+        ServiceFactory(provider=provider, status=Service.STATUS_DRAFT)  # Draft - not included
         book = get_export_workbook_for_user(provider.user)
         xlrd_book = save_and_read_book(book)
 
         # First sheet - providers
         sheet = xlrd_book.get_sheet(0)
-        self.assertEqual(1, sheet.nrows - 1)
+        self.assertEqual(2, sheet.nrows - 1)
+        # first provider
         values = sheet.row_values(1)
         data = dict(zip(PROVIDER_HEADINGS, values))
         self.assertEqual(provider.id, data['id'])
 
         # Second sheet - services
         sheet = xlrd_book.get_sheet(1)
-        self.assertEqual(2, sheet.nrows - 1)
+        self.assertEqual(3, sheet.nrows - 1)
         values = sheet.row_values(1)
         data = dict(zip(SERVICE_HEADINGS, values))
         self.assertEqual(service1.id, data['id'])

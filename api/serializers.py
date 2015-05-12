@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError as DjangoValidationError
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import Count
 from django.utils.encoding import force_text
 from django.utils.translation import override, ugettext_lazy as _
@@ -520,7 +521,22 @@ class BaseServiceTypeAggregateSerializer(RequireOneTranslationMixin,
             self.aggregate_field).annotate(total=Count('id')).order_by()
         counts = {r[self.aggregate_field]: r['total'] for r in results}
         field = Feedback._meta.get_field(self.aggregate_field)
-        for value, label in field.choices:
+        choices = field.choices
+        if not choices:
+            # We don't have explicit choices; figure out the min & max values
+            # from the validators
+            for v in field.validators:
+                if isinstance(v, MinValueValidator):
+                    # SmallIntegers have validators for Min/Max small int, ignore those
+                    if v.limit_value != -32768:
+                        minimum = v.limit_value
+                elif isinstance(v, MaxValueValidator):
+                    if v.limit_value != 32767:
+                        maximum = v.limit_value
+                else:
+                    raise ValueError("Don't know what to do with validator of type %s" % type(v))
+            choices = [(i, str(i)) for i in range(minimum, maximum+1)]
+        for value, label in choices:
             total = {'total': counts.get(value, 0)}
             for lang, name in settings.LANGUAGES:
                 with override(language=lang):
@@ -533,3 +549,27 @@ class ServiceTypeWaitTimeSerializer(BaseServiceTypeAggregateSerializer):
     """Wait time feedback bucket totals per service type."""
 
     aggregate_field = 'wait_time'
+
+
+class ServiceTypeQOSSerializer(BaseServiceTypeAggregateSerializer):
+    """QOS rating totals per service type"""
+
+    aggregate_field = 'quality'
+
+
+class ServiceTypeFailureSerializer(BaseServiceTypeAggregateSerializer):
+    """Non-deliver explanations per service type"""
+
+    aggregate_field = 'non_delivery_explained'
+
+
+class ServiceTypeContactSerializer(BaseServiceTypeAggregateSerializer):
+    """Difficulties contacting per service type"""
+
+    aggregate_field = 'difficulty_contacting'
+
+
+class ServiceTypeCommunicationSerializer(BaseServiceTypeAggregateSerializer):
+    """Satisfaction with Staff Communication by Service Type"""
+
+    aggregate_field = 'staff_satisfaction'
