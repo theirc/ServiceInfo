@@ -86,9 +86,15 @@ SELECTION_CRITERIA_HEADINGS = [
 ]
 
 
-def valid_providers_for_user(user):
+def valid_providers_for_user_export(user):
     """Return queryset of providers that this user is authorized
-    to export/import"""
+    to export"""
+    return Provider.objects.all()
+
+
+def valid_providers_for_user_import(user):
+    """Return queryset of providers that this user is authorized
+    to import"""
     if user.is_staff:
         providers = Provider.objects.all()
     else:
@@ -143,7 +149,7 @@ def get_export_workbook_for_user(user):
     :param user:
     :return: xlwt.Workbook
     """
-    return get_export_workbook(valid_providers_for_user(user))
+    return get_export_workbook(valid_providers_for_user_export(user))
 
 
 def add_models_to_sheet(sheet, headings, records):
@@ -278,7 +284,7 @@ def validate_and_import_book(user, book):
                     # print("message = %r (%s)" % (message, type(message)))
                     add_error(sheet, rownum, fieldname, message)
 
-    providers = valid_providers_for_user(user)
+    providers = valid_providers_for_user_import(user)
     valid_provider_ids = set([provider.id for provider in providers])
 
     # imported_providers = []
