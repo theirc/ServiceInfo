@@ -7,11 +7,11 @@
 # Omar Meksassi <omar.meksassi@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Service Info\n"
+"Project-Id-Version: ServiceInfo\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-05-11 21:22+0300\n"
-"PO-Revision-Date: 2015-05-11 18:25+0000\n"
-"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
+"PO-Revision-Date: 2015-05-12 09:34+0000\n"
+"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -189,7 +189,7 @@ msgstr "Mot de passe est trop court. Il doit avoir au moins {min_length} caract�
 msgid ""
 "You're receiving this email because you requested a password reset for your "
 "user account at %(site_name)s."
-msgstr ""
+msgstr "Vous recevez cet email car vous avez demandé une réinitialisation de mot de passe pour votre compte d'utilisateur à %(site_name)s."
 
 #: email_user/templates/email_user/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
@@ -215,7 +215,7 @@ msgid ""
 "You (or someone pretending to be you) have asked to reset the\n"
 "password of an account at %(site_name)s.\n"
 "If this wasn't you, please ignore this email.\n"
-msgstr ""
+msgstr "\nVous (ou une personne prétendant être vous) avez demandé de réinitialiser the\nmot de passe d'un compte à %(site_name)s.\nSi cela n'a pas été vous, s'il vous plaît ignorer ce email.\n"
 
 #: email_user/templates/email_user/password_reset_email.txt:8
 msgid ""
@@ -234,7 +234,7 @@ msgstr "\nCordialement,\n%(site_name)s Management\n"
 #: email_user/templates/email_user/password_reset_subject.txt:2
 #, python-format
 msgid "Password reset on %(site_name)s"
-msgstr ""
+msgstr "Mot de passe remis à zéro %(site_name)s"
 
 #: email_user/templates/registration/activation_email.html:7
 msgid "registration"

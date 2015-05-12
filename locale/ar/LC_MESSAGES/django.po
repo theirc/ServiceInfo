@@ -9,11 +9,11 @@
 # Omar Meksassi <omar.meksassi@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Service Info\n"
+"Project-Id-Version: ServiceInfo\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-05-11 21:22+0300\n"
-"PO-Revision-Date: 2015-05-11 18:22+0000\n"
-"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
+"PO-Revision-Date: 2015-05-12 12:13+0000\n"
+"Last-Translator: Nizar Najjar <ozogorgor@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,11 +44,11 @@ msgstr "المستخدم ليس مقدم خدمات. لا يمكن إلا لمق
 
 #: api/serializers.py:262
 msgid "You may only submit updates to current, draft or rejected services"
-msgstr "يمكنك إرسال التحديثات فقط على الحالي، المسودة أو الخدمات المرفوضة"
+msgstr "يمكنك إرسال التحديثات فقط على الخدمات الحالية، المسودة أو المرفوضة"
 
 #: api/serializers.py:269
 msgid "There is already a pending draft update to this service."
-msgstr "هناك بالفعل مسودة معلّقة لهذه الخدمة "
+msgstr "هناك مسودة معلّقة لهذه الخدمة قد خلقت سابقاّ "
 
 #: api/serializers.py:279
 msgid "Close time is missing."
@@ -60,7 +60,7 @@ msgstr "دوام البدء  غير مذكور"
 
 #: api/serializers.py:283
 msgid "Close time is not later than open time."
-msgstr "دوام الإغلاق لا يتخطى دوام البدء"
+msgstr "لا يمكن على دوام الإغلاق أن يتخطى دوام البدء"
 
 #: api/serializers.py:380
 msgid "User account is disabled."
@@ -68,25 +68,25 @@ msgstr "تم تعطيل حساب المستخدم"
 
 #: api/serializers.py:383
 msgid "Unable to log in with provided credentials."
-msgstr "غير قادر على الدخول  بالمعلومات المذكورة"
+msgstr "غير ممكن تسجيل الدخول عبر المعلومات المذكورة"
 
 #: api/serializers.py:405
 msgid ""
 "Activation key is invalid. Check that it was copied correctly and has not "
 "already been used."
-msgstr "مفتاح التشغيل غير صالح. تحقق أنه تم نسخه بشكل صحيح وأنه لم يتم استخدامه من قبل"
+msgstr "رابط التفعيل غير صالح. الرجاء التحقق من نسخه بشكل صحيح وكونه لم يستخدم سابقاً"
 
 #: api/serializers.py:426 api/serializers.py:477
 msgid "No user with that email"
-msgstr "لا يوجد مستخدم بهذا البريد الإلكتروني "
+msgstr "لا يوجد مستخدم تابع لهذا البريد الإلكتروني "
 
 #: api/serializers.py:443 api/serializers.py:461
 msgid "Password reset key is not valid"
-msgstr "مفتاح إعادة تعيين كلمة المرور غير صالح"
+msgstr "رابط إعادة تعيين كلمة المرور غير صالح"
 
 #: api/serializers.py:480
 msgid "User is not pending activation"
-msgstr "المستخدم ليس في حالة إنتظار التفعيل "
+msgstr "حالة المستخدم ليست معلقة"
 
 #: api/views.py:262
 msgid "Service record must be current or pending changes to be canceled"
@@ -102,7 +102,7 @@ msgstr "تواريخ مهمة"
 
 #: email_user/forms.py:19
 msgid "The two password fields didn't match."
-msgstr "حقلي كلمة السر غير متطابقة."
+msgstr "حقليّ كلمة المرور لا تتطابقان."
 
 #: email_user/forms.py:23
 msgid "Email"
@@ -118,14 +118,14 @@ msgstr "هذه القيمة قد تحتوي فقط على الأحرف والأ�
 
 #: email_user/forms.py:79
 msgid "Password"
-msgstr "كلمة السر"
+msgstr "كلمة المرور"
 
 #: email_user/forms.py:80
 msgid ""
 "Raw passwords are not stored, so there is no way to see this user's "
 "password, but you can change the password using <a href=\"password/\">this "
 "form</a>."
-msgstr "لا يتم تخزين كلمات السر الخام، لذلك ليس هناك طريقة لمعرفة كلمة مرور هذا المستخدم، ولكن يمكنك تغيير كلمة المرور باستخدام <a href=\"password/\"> هذا النموذج </a>."
+msgstr "كلمات المرور لا يتم تخزينها بشكل خام، لذلك ليس بالإمكان معرفة كلمة مرور هذا المستخدم، ولكن يمكنك تغيير كلمة المرور عبر <a href=\"password/\"> إسم هذا النموذج </a>."
 
 #: email_user/models.py:42
 msgid "Users must have an email address"
@@ -133,7 +133,7 @@ msgstr "يجب أن يكون للمستخدمين عنوان بريد إلكتر
 
 #: email_user/models.py:84
 msgid "Activation key is invalid or has already been used."
-msgstr "مفتاح التنشيط غير صالح أو تم إستخدامه من قبل"
+msgstr "رابط التفعيل غير صالح أو قد تم إستخدامه سابقاً."
 
 #: email_user/models.py:123
 msgid "email address"
@@ -145,17 +145,17 @@ msgstr "حالة الموظفين "
 
 #: email_user/models.py:129
 msgid "Designates whether the user can log into this admin site."
-msgstr "يحدد ما إذا كان المستخدم يستطيع الدخول إلى إدارة الموقع."
+msgstr "يحدد صلاحية المستخدم في الدخول إلى إدارة الموقع."
 
 #: email_user/models.py:132
 msgid "active"
-msgstr "فعال"
+msgstr "فعّال"
 
 #: email_user/models.py:133
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
-msgstr "يحدد ما إذا كان المستخدم سيعمل على أنه مستخدم نشيط.لا تنقر هذه إذا أردت أن يبقى المستخدم"
+msgstr "يحدد ما إن كان حساب هذا المستخدم سيعامل على أنه ناشط. علق هذا الخيار بدل حذف الحساب."
 
 #: email_user/models.py:135
 msgid "date joined"
@@ -191,7 +191,7 @@ msgstr "كلمة المرور قصيرة جدا\".  يجب أن تكون على 
 msgid ""
 "You're receiving this email because you requested a password reset for your "
 "user account at %(site_name)s."
-msgstr ""
+msgstr "You're receiving this email because you requested a password reset for your user account at %(site_name)s."
 
 #: email_user/templates/email_user/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
@@ -217,7 +217,7 @@ msgid ""
 "You (or someone pretending to be you) have asked to reset the\n"
 "password of an account at %(site_name)s.\n"
 "If this wasn't you, please ignore this email.\n"
-msgstr ""
+msgstr "\nYou (or someone pretending to be you) have asked to reset the\npassword of an account at %(site_name)s.\nIf this wasn't you, please ignore this email.\n"
 
 #: email_user/templates/email_user/password_reset_email.txt:8
 msgid ""
@@ -236,7 +236,7 @@ msgstr "\nمع خالص التقدير,\n%(site_name)s\n الإدارة \n"
 #: email_user/templates/email_user/password_reset_subject.txt:2
 #, python-format
 msgid "Password reset on %(site_name)s"
-msgstr ""
+msgstr "Password reset on %(site_name)s"
 
 #: email_user/templates/registration/activation_email.html:7
 msgid "registration"
@@ -450,31 +450,31 @@ msgstr "تم  رفض الخدمة بنجاح."
 #: services/forms.py:118
 #, python-format
 msgid "There is no service type with English name %r"
-msgstr ""
+msgstr "There is no service type with English name %r"
 
 #: services/forms.py:136
 #, python-format
 msgid "There is no service area with English name %r"
-msgstr ""
+msgstr "There is no service area with English name %r"
 
 #: services/import_export.py:228
 msgid "Unable to open spreadsheet file; is it an Excel spreadsheet?"
-msgstr ""
+msgstr "Unable to open spreadsheet file; is it an Excel spreadsheet?"
 
 #: services/import_export.py:240
 #, python-format
 msgid "Errors in sheet %s:"
-msgstr ""
+msgstr "أخطاء في ورقة٪ الصورة:%s:"
 
 #: services/import_export.py:253
 #, python-format
 msgid "Row %d"
-msgstr ""
+msgstr "Row %d"
 
 #: services/import_export.py:288
 #, python-format
 msgid "Spreadsheet file should contain 3 sheets, this one has %d"
-msgstr ""
+msgstr "Spreadsheet file should contain 3 sheets, this one has %d"
 
 #: services/import_export.py:298
 msgid "First sheet has no data."
@@ -484,41 +484,41 @@ msgstr "جدول البيانات الأول فارغ"
 #: services/import_export.py:304
 #, python-brace-format
 msgid "First sheet has wrong name, expected {expected}, got {actual}"
-msgstr ""
+msgstr "First sheet has wrong name, expected {expected}, got {actual}"
 
 #: services/import_export.py:308
 #, python-format
 msgid "First sheet has wrong headers, expected %s"
-msgstr ""
+msgstr "First sheet has wrong headers, expected %s"
 
 #: services/import_export.py:324
 #, python-format
 msgid "%d is not a provider this user may delete"
-msgstr ""
+msgstr "%d is not a provider this user may delete"
 
 #: services/import_export.py:327
 #, python-format
 msgid "%d is not a provider this user may import"
-msgstr ""
+msgstr "%d is not a provider this user may import"
 
 #: services/import_export.py:331
 msgid "Only staff may delete providers"
-msgstr ""
+msgstr "الموظفين فقط قد حذف مقدمي"
 
 #: services/import_export.py:336
 msgid "Non-staff users may not create new providers"
-msgstr ""
+msgstr "المستخدمين غير الموظفين قد لا تخلق مقدمي خدمات جديدة"
 
 #: services/import_export.py:345 services/import_export.py:413
 #: services/import_export.py:466
 #, python-format
 msgid "%s is not a valid ID"
-msgstr ""
+msgstr "%s ليس بطاقة هوية صالحة"
 
 #: services/import_export.py:351
 #, python-format
 msgid "There is no provider with id=%s"
-msgstr ""
+msgstr "لا يوجد أي مزود مع id=%s"
 
 #: services/import_export.py:378 services/import_export.py:445
 msgid "Second sheet has no data."
@@ -528,43 +528,43 @@ msgstr "جدول البيانات الثاني فارغ"
 #: services/import_export.py:384
 #, python-brace-format
 msgid "Second sheet has wrong name, expected {expected}, got {actual}"
-msgstr ""
+msgstr "الورقة الثانية واسم خاطئ، من المتوقع {expected},, got {actual}"
 
 #: services/import_export.py:402
 #, python-format
 msgid "%d is not a service this user may delete"
-msgstr ""
+msgstr "%d ليس خدمة لهذا المستخدم قد حذف"
 
 #: services/import_export.py:405
 #, python-format
 msgid "%d is not a service this user may import"
-msgstr ""
+msgstr "%d  ليس خدمة لهذا المستخدم قد استيراد"
 
 #: services/import_export.py:418
 #, python-format
 msgid "No service with id=%s"
-msgstr ""
+msgstr "لا توجد خدمة مع  id=%s"
 
 #: services/import_export.py:427
 msgid "Non-staff users may not create services for other providers"
-msgstr ""
+msgstr "المستخدمين غير الموظفين قد لا تخلق الخدمات لمقدمي الخدمات الآخرين"
 
 #. Translators: do NOT translate text inside {braces}
 #: services/import_export.py:451
 #, python-brace-format
 msgid "Third sheet has wrong name, expected {expected}, got {actual}"
-msgstr ""
+msgstr "الورقة الثالثة واسم خاطئ، من المتوقع  {expected}, got {actual}"
 
 #: services/import_export.py:472
 #, python-format
 msgid "No selection criterion with id = %s"
-msgstr ""
+msgstr "لا معايير الاختيار مع id = %s"
 
 #: services/import_export.py:491
 msgid ""
 "Selection criterion refers to service with ID or name {name!r} that is not "
 "in the 2nd sheet. Choices: {list1!r} or {list2!r}"
-msgstr ""
+msgstr "ويشير معيار الاختيار للخدمة مع هوية أو اسم {الاسم! ص} غير موجود في ورقة 2. الخيارات: {! list1 ص} أو {! list2 ص}"
 
 #. Translators: Provider name
 #. Translators: Service name
@@ -667,7 +667,7 @@ msgstr "معايير الاختيار"
 
 #: services/models.py:253
 msgid "Selection criterion must have text in at least one language"
-msgstr ""
+msgstr "يجب أن يكون معيار الاختيار النص بلغة واحدة على الأقل"
 
 #: services/models.py:267
 msgid "icon"

@@ -19,7 +19,7 @@
         "Edit-Provider-Information": "Modifier les informations de fournisseur",
         "Feedback-Tool": "Donne Un Compte-Rendu",
         "Change-Language": "Changer de langue",
-        "Reports": ""
+        "Reports": "rapports"
     },
     "Global": {
         "Admin": "Admin",
@@ -35,7 +35,7 @@
         "Saturday": "Samedi",
         "GeolocationNotSupported": "Géolocalisation ne est pas supporté par ce navigateur.",
         "GeoPositionUnavailable": "Emplacement ne est pas disponible en ce moment.",
-        "GeoLocationDenied": "",
+        "GeoLocationDenied": "Vous avez pas donné la permission d'accéder à votre emplacement actuel.",
         "RequiredField": "Ce champ est obligatoire."
     },
     "Login-Form": {
@@ -384,7 +384,7 @@
         },
         "Form-Sections": {
             "Basic": {
-                "Legend": ""
+                "Legend": "Commentaires pour le service sélectionné"
             }
         },
         "Submit": "Valider les réponses",
@@ -475,24 +475,24 @@
         }
     },
     "Reports": {
-        "Title": "",
-        "Description": "",
+        "Title": "Outil de Commentaire",
+        "Description": "De rapports##Description",
         "Form": {
             "Stat": {
-                "Label": "",
+                "Label": "Rapport pour afficher",
                 "Options": {
-                    "WaitTime": "",
-                    "QOS": "",
-                    "Failure": "",
-                    "Contact": "",
-                    "Communication": ""
+                    "WaitTime": "Temps d'attente par type de service",
+                    "QOS": "Qualité de service délivrée par type de service",
+                    "Failure": "Explication de l'échec de la prestation des services par type de service",
+                    "Contact": "Des difficultés à contacter les fournisseurs de services par type de service",
+                    "Communication": "Satisfaction à l'égard du personnel de communication par type de service"
                 }
             },
-            "Download": ""
+            "Download": "Télécharger le rapport CSV"
         },
         "Table": {
-            "Loading": "",
-            "ServiceType": ""
+            "Loading": "Chargement ...",
+            "ServiceType": "Type de service"
         }
     }
 }
