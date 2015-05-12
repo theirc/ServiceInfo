@@ -281,7 +281,7 @@
     "Empty-Message": "You have not submitted any services yet. You may submit your first service for review by tapping the New Service button.",
     "Add-Service": "New Service",
     "Import": "Import",
-    "Import-File": "Excel spreadsheet file to import",
+    "Import-File": "Please choose an Excel spreadsheet file to import.",
     "Export": "Export",
     "Status": {
       "draft": "Draft",
@@ -483,6 +483,9 @@
       "Errors": "There were errors in the file.  No data was changed."
   },
   "Import-Export": {
+      "Page": {
+        "Title": "Import/Export"
+      },
       "Help": {
         "Title": "Help",
         "Help1": "On import, any invalid data will cause the entire import to be rejected and the errors will be reported to the user.",
