@@ -130,7 +130,7 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
             self.assertEqual([t['total'] for t in totals], expected_totals)
 
     def test_get_contact_non_staff(self):
-        url = reverse('servicetype-qos')
+        url = reverse('servicetype-contact')
         rsp = self.get_with_token(url)
         self.assertEqual(FORBIDDEN, rsp.status_code)
 

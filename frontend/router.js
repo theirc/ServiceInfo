@@ -98,7 +98,12 @@ module.exports = Backbone.Router.extend({
         "login": loadPage("login"),
         "password-reset/:uid/:token": loadPage("password-reset-form", ['uid', 'token']),
         "password-reset": loadPage("password-reset-request"),
-        "reports": loadPage("reports"),
+        "reports": function() {
+            if (!config.get('forever.isStaff')) {
+                return;
+            }
+            loadPage("reports")();
+        },
         "logout": function() {
             config.remove('forever.authToken');
             config.remove('forever.email');
