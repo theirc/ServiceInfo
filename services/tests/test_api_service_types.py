@@ -1,4 +1,4 @@
-from http.client import OK
+from http.client import OK, FORBIDDEN
 import json
 from django.conf import settings
 from django.core.files.storage import default_storage
@@ -10,6 +10,10 @@ from services.tests.test_api import APITestMixin
 
 
 class ServiceTypeAPITest(APITestMixin, TestCase):
+    def make_admin(self):
+        self.user.is_staff = True
+        self.user.save()
+
     def test_get_types(self):
         rsp = self.get_with_token(reverse('servicetype-list'))
         self.assertEqual(OK, rsp.status_code)
@@ -34,7 +38,13 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
         path = icon_url.replace(settings.MEDIA_URL, '')
         self.assertTrue(default_storage.exists(path))
 
+    def test_get_wait_times_non_staff(self):
+        url = reverse('servicetype-wait-times')
+        rsp = self.get_with_token(url)
+        self.assertEqual(FORBIDDEN, rsp.status_code)
+
     def test_get_wait_times(self):
+        self.make_admin()
         a_type = ServiceType.objects.first()
         service = ServiceFactory(type=a_type)
         FeedbackFactory(service=service, delivered=True, wait_time='lesshour')
@@ -59,7 +69,13 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
             self.assertEqual([t['label_en'] for t in totals], expected_labels)
             self.assertEqual([t['total'] for t in totals], expected_totals)
 
+    def test_get_qos_non_staff(self):
+        url = reverse('servicetype-qos')
+        rsp = self.get_with_token(url)
+        self.assertEqual(FORBIDDEN, rsp.status_code)
+
     def test_get_qos(self):
+        self.make_admin()
         a_type = ServiceType.objects.first()
         service = ServiceFactory(type=a_type)
         FeedbackFactory(service=service, delivered=True, quality=1)
@@ -82,7 +98,13 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
             self.assertEqual([t['label_en'] for t in totals], expected_labels)
             self.assertEqual([t['total'] for t in totals], expected_totals)
 
+    def test_get_failure_non_staff(self):
+        url = reverse('servicetype-failure')
+        rsp = self.get_with_token(url)
+        self.assertEqual(FORBIDDEN, rsp.status_code)
+
     def test_get_failure(self):
+        self.make_admin()
         a_type = ServiceType.objects.first()
         service = ServiceFactory(type=a_type)
         FeedbackFactory(service=service, delivered=True, non_delivery_explained='no')
@@ -107,7 +129,13 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
             self.assertEqual([t['label_en'] for t in totals], expected_labels)
             self.assertEqual([t['total'] for t in totals], expected_totals)
 
-    def test_get_context(self):
+    def test_get_contact_non_staff(self):
+        url = reverse('servicetype-qos')
+        rsp = self.get_with_token(url)
+        self.assertEqual(FORBIDDEN, rsp.status_code)
+
+    def test_get_contact(self):
+        self.make_admin()
         a_type = ServiceType.objects.first()
         service = ServiceFactory(type=a_type)
         FeedbackFactory(service=service, delivered=True, difficulty_contacting='no')
@@ -132,7 +160,13 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
             self.assertEqual([t['label_en'] for t in totals], expected_labels)
             self.assertEqual([t['total'] for t in totals], expected_totals)
 
+    def test_get_communication_non_staff(self):
+        url = reverse('servicetype-communication')
+        rsp = self.get_with_token(url)
+        self.assertEqual(FORBIDDEN, rsp.status_code)
+
     def test_get_communication(self):
+        self.make_admin()
         a_type = ServiceType.objects.first()
         service = ServiceFactory(type=a_type)
         FeedbackFactory(service=service, delivered=True, staff_satisfaction=1)
