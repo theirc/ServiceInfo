@@ -3,4 +3,4 @@ from __future__ import absolute_import
 # Django starts so that shared_task will use this app.
 from .celery import app as celery_app  # noqa
 
-VERSION = '0.1.7'
+VERSION = '0.1.8'
