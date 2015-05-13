@@ -1673,6 +1673,24 @@ Services
 	.third {
 		padding: 0;
 	}
+    #view-reports > .row {
+        padding: 0 30px 20px;
+        overflow: auto;
+        .third {
+            @media (min-width: 640px) {
+                width: 33.33333333%;
+                margin-top: 0;
+            }
+        }
+        .menu-item-staff {
+            margin-top: 1em;
+            margin-@{start}: 0;
+            @media (min-width: 640px) {
+                margin-top: 0;
+                margin-@{start}: 4%;
+            }    
+        }
+    }
     .key {
         padding-bottom: 10px;
         .row {
@@ -1724,6 +1742,9 @@ Services
 			margin-bottom: 20px;
 		}
 	}
+    .main-content-service-list .third {
+        margin-top: 30px;
+    }
 }
 
 #service-map,
