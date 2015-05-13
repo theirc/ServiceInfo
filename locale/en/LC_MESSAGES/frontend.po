@@ -99,6 +99,9 @@ msgstr "You have not given permission to access your current location."
 msgid "Global##RequiredField"
 msgstr "This field is required."
 
+msgid "Global##Not-Listed"
+msgstr "Not Listed"
+
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "Log In"
 
@@ -203,6 +206,12 @@ msgstr "List View"
 
 msgid "Service-Map##List##Toggle"
 msgstr "Map View"
+
+msgid "Service-Map##List##Provider-Name"
+msgstr "Service Provider Name"
+
+msgid "Service-Map##List##Service-Name"
+msgstr "Service Name"
 
 msgid "Service-Map##List##Area"
 msgstr "Service Area"
@@ -484,7 +493,7 @@ msgid "Service-List##Import"
 msgstr "Import"
 
 msgid "Service-List##Import-File"
-msgstr "Excel spreadsheet file to import"
+msgstr "Please choose an Excel spreadsheet file to import."
 
 msgid "Service-List##Export"
 msgstr "Export"
@@ -601,10 +610,10 @@ msgid "Map##TypeHeader"
 msgstr "Filter by a Service Type"
 
 msgid "Footer##About##Title"
-msgstr "About Service Info"
+msgstr "About ServiceInfo"
 
 msgid "Footer##About##Paragraph"
-msgstr "Powered by the International Rescue Committee, Service Info is a tool that allows both service providers to register their services online and beneficiaries to both discover those services on a map and give feedback on them. Service Info is open source and free to use."
+msgstr "Powered by the International Rescue Committee, ServiceInfo is a tool that allows both service providers to register their services online and beneficiaries to both discover those services on a map and give feedback on them. ServiceInfo is open source and free to use."
 
 msgid "Footer##Contact##Title"
 msgstr "Reach Us"
@@ -759,6 +768,9 @@ msgstr "The import was successful"
 msgid "Import-Tool##Errors"
 msgstr "There were errors in the file.  No data was changed."
 
+msgid "Import-Export##Page##Title"
+msgstr "Import/Export"
+
 msgid "Import-Export##Help##Title"
 msgstr "Help"
 
@@ -806,6 +818,9 @@ msgstr "Difficulties Contacting Service Providers by Service Type"
 
 msgid "Reports##Form##Stat##Options##Communication"
 msgstr "Satisfaction with Staff Communication by Service Type"
+
+msgid "Reports##Form##Stat##Options##NumServices"
+msgstr "Number of services by Location and Service Type"
 
 msgid "Reports##Form##Download"
 msgstr "Download Report CSV"
