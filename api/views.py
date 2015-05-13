@@ -16,7 +16,7 @@ from rest_framework import mixins, parsers, renderers, status, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import list_route, detail_route
 from rest_framework.exceptions import ValidationError as DRFValidationError, PermissionDenied
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
@@ -324,35 +324,35 @@ class ServiceTypeViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
         return Response(serializer.data)
 
     @list_route(methods=['get', ], url_path='wait-times',
-                permission_classes=[IsAuthenticated, ],
+                permission_classes=[IsAdminUser, ],
                 renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
     def wait_times(self, request):
         """Wait time feedback aggregated by service type."""
         return self._do_service_type_report_view(ServiceTypeWaitTimeSerializer)
 
     @list_route(methods=['get', ], url_path='qos',
-                permission_classes=[IsAuthenticated, ],
+                permission_classes=[IsAdminUser, ],
                 renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
     def qos(self, request):
         """Quality of service delivered feedback aggregated by service type."""
         return self._do_service_type_report_view(ServiceTypeQOSSerializer)
 
     @list_route(methods=['get', ], url_path='failure',
-                permission_classes=[IsAuthenticated, ],
+                permission_classes=[IsAdminUser, ],
                 renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
     def failure(self, request):
         """Explanation of Service Delivery Failure by Service Type."""
         return self._do_service_type_report_view(ServiceTypeFailureSerializer)
 
     @list_route(methods=['get', ], url_path='contact',
-                permission_classes=[IsAuthenticated, ],
+                permission_classes=[IsAdminUser, ],
                 renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
     def contact(self, request):
         """Difficulties Contacting Service Providers by Service Type."""
         return self._do_service_type_report_view(ServiceTypeContactSerializer)
 
     @list_route(methods=['get', ], url_path='communication',
-                permission_classes=[IsAuthenticated, ],
+                permission_classes=[IsAdminUser, ],
                 renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
     def communication(self, request):
         """Satisfaction with Staff Communication by Service Type."""
