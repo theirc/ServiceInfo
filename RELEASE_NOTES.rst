@@ -1,4 +1,4 @@
-Service Info
+ServiceInfo
 
 Release Notes
 

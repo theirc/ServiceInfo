@@ -16,7 +16,7 @@ TEMPLATE_DEBUG = DEBUG
 TEAM_EMAIL = 'servicemap-team@caktusgroup.com'
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
-    ('Caktus IRC Service Info Team', TEAM_EMAIL),
+    ('Caktus IRC ServiceInfo Team', TEAM_EMAIL),
 )
 SERVER_EMAIL = TEAM_EMAIL
 DEFAULT_FROM_EMAIL = TEAM_EMAIL

@@ -41,7 +41,7 @@ class ServiceApprovalEmailTaskTest(TestCase):
         self.assertEqual(len(mail.outbox), 1)
 
         # Verify that the subject of the first message is correct.
-        self.assertEqual(mail.outbox[0].subject, 'Service has been approved IRC Service Info Dev')
+        self.assertEqual(mail.outbox[0].subject, 'Service has been approved IRC ServiceInfo Dev')
 
         # Make this fancier later - probably just want to make sure that it has
         # the name of the service or something. Maybe test translation too.
