@@ -2,12 +2,23 @@ ServiceInfo
 
 Release Notes
 
-0.1.8 - May 6, 2015
+0.1.8 - May 13, 2015
 -------------------
 
+* Some IE fixes
+* Fix: "Todays hours"
+* Fix: sort search results by name
+* First 5 reports of services by service type
+* Fix: site name in password reset email subject
+* Include all providers in exports
+* Improve styling of import/export page
+* Add more checks that only staff can see reports
+* Add report with services by type and location
+* Rename from "Service Info" to "ServiceInfo"
+* Show provider name in search results and service detail page
 * Translation updates
 * Allow creating services in the Django admin
-* Repo name change
+* Git repository name changed to ServiceInfo
 * Make all provider names clickable in Django admin
 * Update text on feedback form
 * Import/export feature
