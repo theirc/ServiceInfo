@@ -28,7 +28,7 @@ CACHES = {
     }
 }
 
-EMAIL_SUBJECT_PREFIX = '[Service Info Staging] '
+EMAIL_SUBJECT_PREFIX = '[ServiceInfo Staging] '
 
 SESSION_COOKIE_SECURE = True
 
