@@ -5,7 +5,7 @@ from service_info.settings.staging import *  # noqa
 DATABASES['default']['NAME'] = 'service_info_production'
 DATABASES['default']['USER'] = 'service_info_production'
 
-EMAIL_SUBJECT_PREFIX = '[Service Info Prod] '
+EMAIL_SUBJECT_PREFIX = '[ServiceInfo Prod] '
 DEFAULT_FROM_EMAIL = 'noreply@rescue.org'
 
 SITE_ID = PRODUCTION_SITE_ID

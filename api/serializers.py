@@ -3,7 +3,8 @@ from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError as DjangoValidationError
-from django.db.models import Count
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db.models import Count, Q
 from django.utils.encoding import force_text
 from django.utils.translation import override, ugettext_lazy as _
 
@@ -513,6 +514,19 @@ class BaseServiceTypeAggregateSerializer(RequireOneTranslationMixin,
         required_translated_fields = ['name']
 
     def get_totals(self, service_type):
+        """
+        Returns a list of items, one item per possible value of
+        the aggregate field.
+
+        Each item in the list is a dictionary with the following fields:
+
+        * label_en: Label for one value, in English
+        * label_ar: Label for that value, in Arabic
+        * label_fr: label for that value, in French
+        * total: number of Feedback records where the service_type is set to
+           the service_type argument of this method, and the aggregate field
+           has the value that the labels apply to.
+        """
         if self.aggregate_field is None:
             raise ValueError('aggregate_field must be defined.')
         totals = []
@@ -520,7 +534,22 @@ class BaseServiceTypeAggregateSerializer(RequireOneTranslationMixin,
             self.aggregate_field).annotate(total=Count('id')).order_by()
         counts = {r[self.aggregate_field]: r['total'] for r in results}
         field = Feedback._meta.get_field(self.aggregate_field)
-        for value, label in field.choices:
+        choices = field.choices
+        if not choices:
+            # We don't have explicit choices; figure out the min & max values
+            # from the validators
+            for v in field.validators:
+                if isinstance(v, MinValueValidator):
+                    # SmallIntegers have validators for Min/Max small int, ignore those
+                    if v.limit_value != -32768:
+                        minimum = v.limit_value
+                elif isinstance(v, MaxValueValidator):
+                    if v.limit_value != 32767:
+                        maximum = v.limit_value
+                else:
+                    raise ValueError("Don't know what to do with validator of type %s" % type(v))
+            choices = [(i, str(i)) for i in range(minimum, maximum+1)]
+        for value, label in choices:
             total = {'total': counts.get(value, 0)}
             for lang, name in settings.LANGUAGES:
                 with override(language=lang):
@@ -533,3 +562,71 @@ class ServiceTypeWaitTimeSerializer(BaseServiceTypeAggregateSerializer):
     """Wait time feedback bucket totals per service type."""
 
     aggregate_field = 'wait_time'
+
+
+class ServiceTypeQOSSerializer(BaseServiceTypeAggregateSerializer):
+    """QOS rating totals per service type"""
+
+    aggregate_field = 'quality'
+
+
+class ServiceTypeFailureSerializer(BaseServiceTypeAggregateSerializer):
+    """Non-deliver explanations per service type"""
+
+    aggregate_field = 'non_delivery_explained'
+
+
+class ServiceTypeContactSerializer(BaseServiceTypeAggregateSerializer):
+    """Difficulties contacting per service type"""
+
+    aggregate_field = 'difficulty_contacting'
+
+
+class ServiceTypeCommunicationSerializer(BaseServiceTypeAggregateSerializer):
+    """Satisfaction with Staff Communication by Service Type"""
+
+    aggregate_field = 'staff_satisfaction'
+
+
+class ServiceTypeNumServicesSerializer(RequireOneTranslationMixin,
+                                       serializers.HyperlinkedModelSerializer):
+    totals = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ServiceType
+        fields = (
+            'url',
+            'number',
+            'name_en', 'name_fr', 'name_ar',
+            'totals',
+        )
+        required_translated_fields = ['name']
+
+    def get_totals(self, service_type):
+        """
+        Returns a list of items, one item per top-level service
+        area.
+
+        Each item in the list is a dictionary with the following fields:
+
+        * label_en: Label for one top-level area, in English
+        * label_ar: Label for that top-level area, in Arabic
+        * label_fr: label for that top-level area, in French
+        * total: number of Service records with a service area in that top-level
+          service area and with the specified service type
+       """
+
+        services = Service.objects.filter(type=service_type)
+        top_areas = ServiceArea.objects.top_level()
+        totals = []
+        for area in top_areas:
+            in_area = Q(area_of_service=area) | Q(area_of_service__parent=area)
+            count = services.filter(in_area).count()
+            totals.append({
+                'total': count,
+                'label_en': area.name_en,
+                'label_ar': area.name_ar,
+                'label_fr': area.name_fr,
+            })
+
+        return totals

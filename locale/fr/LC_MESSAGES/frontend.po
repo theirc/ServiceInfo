@@ -3,9 +3,9 @@
 # Omar Meksassi <omar.meksassi@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Service Info\n"
-"PO-Revision-Date: 2015-05-05 19:41+0000\n"
-"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
+"Project-Id-Version: ServiceInfo\n"
+"PO-Revision-Date: 2015-05-12 09:40+0000\n"
+"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgid "Menu##Add-Services"
 msgstr "Ajouter des services"
 
 msgid "Menu##Import-Export"
-msgstr ""
+msgstr "Import/Export"
 
 msgid "Menu##Service-Map"
 msgstr "Service Map"
@@ -57,6 +57,9 @@ msgstr "Donne Un Compte-Rendu"
 
 msgid "Menu##Change-Language"
 msgstr "Changer de langue"
+
+msgid "Menu##Reports"
+msgstr "rapports"
 
 msgid "Global##Admin"
 msgstr "Admin"
@@ -96,6 +99,9 @@ msgstr "Géolocalisation ne est pas supporté par ce navigateur."
 
 msgid "Global##GeoPositionUnavailable"
 msgstr "Emplacement ne est pas disponible en ce moment."
+
+msgid "Global##GeoLocationDenied"
+msgstr "Vous avez pas donné la permission d'accéder à votre emplacement actuel."
 
 msgid "Global##RequiredField"
 msgstr "Ce champ est obligatoire."
@@ -218,7 +224,7 @@ msgid "Service-Map##List##Cost"
 msgstr "Coût"
 
 msgid "Service-Map##List##Todays-Hours"
-msgstr ""
+msgstr "Heures de service d'aujourd'hui"
 
 msgid "Service-Map##List##All-Hours"
 msgstr "Heures de service"
@@ -500,28 +506,28 @@ msgid "Service-List##Add-Service"
 msgstr "Nouveau service"
 
 msgid "Service-List##Import"
-msgstr ""
+msgstr "importation"
 
 msgid "Service-List##Import-File"
-msgstr ""
+msgstr "Fichier de feuille de calcul Excel à l'importation"
 
 msgid "Service-List##Export"
-msgstr ""
+msgstr "exportation"
 
 msgid "Service-List##Status##draft"
-msgstr ""
+msgstr "Ebauche"
 
 msgid "Service-List##Status##current"
-msgstr ""
+msgstr "Courant"
 
 msgid "Service-List##Status##rejected"
-msgstr ""
+msgstr "Rejeté"
 
 msgid "Service-List##Status##canceled"
-msgstr ""
+msgstr "Annulé"
 
 msgid "Service-List##Status##archived"
-msgstr ""
+msgstr "Archivé"
 
 msgid "Service-List##Table##Thead##Name"
 msgstr "Nom:"
@@ -548,7 +554,7 @@ msgid "Service-List##Change-Service"
 msgstr "Changer de service"
 
 msgid "Service-List##Change-Change"
-msgstr ""
+msgstr "Mise à jour de"
 
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
 msgstr "Votre information a été soumis avec succès"
@@ -664,6 +670,9 @@ msgstr "Oui"
 msgid "Feedback-Form##Delivered##no"
 msgstr "No"
 
+msgid "Feedback-Form##Form-Sections##Basic##Legend"
+msgstr "Commentaires pour le service sélectionné"
+
 msgid "Feedback-Form##Submit"
 msgstr "Valider les réponses"
 
@@ -680,7 +689,7 @@ msgid "Feedback-Form##WaitTime##uptotwodays"
 msgstr "Jusqu'à 2 jours"
 
 msgid "Feedback-Form##WaitTime##more"
-msgstr "plus"
+msgstr "Plus de 2 semaines"
 
 msgid "Feedback-Form##Quality##label"
 msgstr "Comment évalueriez-vous la qualité du service que vous avez reçu (1-5, 5 étant la meilleure note possible)?"
@@ -752,55 +761,88 @@ msgid "Landing##Provider##Logged-Out##Login"
 msgstr "Connectez-vous à un compte de fournisseur de service existant"
 
 msgid "Export-Tool##Title"
-msgstr ""
+msgstr "exportation de services"
 
 msgid "Export-Tool##Button"
-msgstr ""
+msgstr "exportation"
 
 msgid "Export-Tool##Description1"
-msgstr ""
+msgstr "Cliquez sur le bouton pour télécharger un fichier de feuille de calcul Excel contenant les données que vous avez accès."
 
 msgid "Export-Tool##Description2"
-msgstr ""
+msgstr "Le fichier contient trois onglets ou feuilles: une pour les données de fournisseurs, un pour les données de service, et l'un des critères de sélection."
 
 msgid "Export-Tool##Description3"
-msgstr ""
+msgstr "Vous pouvez modifier les informations dans le tableur et l'importer à apporter des modifications aux données."
 
 msgid "Import-Tool##Title"
-msgstr ""
+msgstr "importation de services"
 
 msgid "Import-Tool##Button"
-msgstr ""
+msgstr "importation"
 
 msgid "Import-Tool##Success"
-msgstr ""
+msgstr "L'importation a réussi"
 
 msgid "Import-Tool##Errors"
-msgstr ""
+msgstr "Il y avait des erreurs dans le fichier. Aucune donnée n'a été changé."
 
 msgid "Import-Export##Help##Title"
-msgstr ""
+msgstr "aider"
 
 msgid "Import-Export##Help##Help1"
-msgstr ""
+msgstr "Lors de l'importation, toutes les données non valides seront causer la totalité importation être rejetée et les erreurs sera signalé à l'utilisateur."
 
 msgid "Import-Export##Help##Help2"
-msgstr ""
+msgstr "Toute ligne avec un champ d'identité valide, mais avec toutes les autres valeurs compensés signifie pour supprimer cet enregistrement."
 
 msgid "Import-Export##Help##Help3"
-msgstr ""
+msgstr "Moments de la journée sont représentés sous forme de chaîne au format 'HH: MM' de 24 heures de format."
 
 msgid "Import-Export##Help##Help4"
-msgstr ""
+msgstr "La feuille de fournisseur a une colonne \"mot de passe\" qui ne contient aucune valeur à l'exportation. Le mot de passe du fournisseur peut être modifié en mettant une valeur dans cette colonne pour l'importation."
 
 msgid "Import-Export##Help##Help5"
-msgstr ""
+msgstr "Lors de la création d'un nouveau service, laissez le 'ID' colonne vide."
 
 msgid "Import-Export##Help##Help6"
-msgstr ""
+msgstr "Lors de l'ajout des critères de sélection à un service existant, définissez le champ 'service de _id' à l''ID' du service existant."
 
 msgid "Import-Export##Help##Help7"
-msgstr ""
+msgstr "Lors de l'ajout des critères de sélection pour un nouveau service, définir le champ 'service__id »à la« NAME_EN' du nouveau service."
+
+msgid "Reports##Title"
+msgstr "Outil de Commentaire"
+
+msgid "Reports##Description"
+msgstr "De rapports##Description"
+
+msgid "Reports##Form##Stat##Label"
+msgstr "Rapport pour afficher"
+
+msgid "Reports##Form##Stat##Options##WaitTime"
+msgstr "Temps d'attente par type de service"
+
+msgid "Reports##Form##Stat##Options##QOS"
+msgstr "Qualité de service délivrée par type de service"
+
+msgid "Reports##Form##Stat##Options##Failure"
+msgstr "Explication de l'échec de la prestation des services par type de service"
+
+msgid "Reports##Form##Stat##Options##Contact"
+msgstr "Des difficultés à contacter les fournisseurs de services par type de service"
+
+msgid "Reports##Form##Stat##Options##Communication"
+msgstr "Satisfaction à l'égard du personnel de communication par type de service"
+
+msgid "Reports##Form##Download"
+msgstr "Télécharger le rapport CSV"
+
+msgid "Reports##Table##Loading"
+msgstr "Chargement ..."
+
+msgid "Reports##Table##ServiceType"
+msgstr "Type de service"
 
 msgctxt "explained"
 msgid "Feedback-Form##non_delivery"
