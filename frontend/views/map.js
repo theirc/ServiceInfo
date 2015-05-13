@@ -18,7 +18,10 @@ module.exports = Backbone.View.extend({
     },
 
     perform_query: function() {
-        search.refetchServices.then(this.renderResults);
+        var self = this;
+        search.refetchServices().then(function() {
+            self.renderResults();
+        });
     },
 
     render: function() {
@@ -47,7 +50,7 @@ module.exports = Backbone.View.extend({
     renderResults: function() {
         var self = this;
         $.each(self.markers, function() {
-            this.setMap(null);
+            this.setMap(null);  // yes this should be 'this'
         });
         self.markers = [];
         var services = search.services.data();
