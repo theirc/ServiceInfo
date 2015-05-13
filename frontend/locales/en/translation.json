@@ -508,7 +508,8 @@
           "QOS": "Quality of Service Delivered by Service Type",
           "Failure": "Explanation of Service Delivery Failure by Service Type",
           "Contact": "Difficulties Contacting Service Providers by Service Type",
-          "Communication": "Satisfaction with Staff Communication by Service Type"
+          "Communication": "Satisfaction with Staff Communication by Service Type",
+          "NumServices": "Number of services by Location and Service Type"
         }
       },
       "Download": "Download Report CSV"

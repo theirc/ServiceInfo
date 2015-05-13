@@ -197,6 +197,20 @@ class Provider(NameInCurrentLanguageMixin, models.Model):
         return reverse('admin:services_provider_change', args=[self.id])
 
 
+class ServiceAreaManager(models.GeoManager):
+    def top_level(self):
+        """
+        Return the top-level areas, i.e. the ones with no parents
+        """
+        return super().get_queryset().filter(parent=None)
+
+    def lowest_level(self):
+        """
+        Return the lowest-level areas, i.e. the ones with no children
+        """
+        return super().get_queryset().filter(children=None)
+
+
 class ServiceArea(NameInCurrentLanguageMixin, models.Model):
     name_en = models.CharField(
         _("name in English"),
@@ -229,7 +243,7 @@ class ServiceArea(NameInCurrentLanguageMixin, models.Model):
         null=True,
     )
 
-    objects = models.GeoManager()
+    objects = ServiceAreaManager()
 
     def get_api_url(self):
         return reverse('servicearea-detail', args=[self.id])

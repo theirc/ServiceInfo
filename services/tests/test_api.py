@@ -14,7 +14,7 @@ from rest_framework.test import APIClient
 
 from email_user.models import EmailUser
 from email_user.tests.factories import EmailUserFactory
-from services.models import Provider, Service, SelectionCriterion, ServiceArea
+from services.models import Provider, Service, SelectionCriterion
 from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory, \
     ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory
 
@@ -703,34 +703,6 @@ class SelectionCriterionAPITest(APITestMixin, TestCase):
         self.assertIn(s1.id, criteria_ids)
         self.assertIn(s2.id, criteria_ids)
         self.assertNotIn(s3.id, criteria_ids)
-
-
-class ServiceAreaAPITest(APITestMixin, TestCase):
-    def setUp(self):
-        super().setUp()
-        ServiceArea.objects.all().delete()
-        self.area1 = ServiceAreaFactory()
-        self.area2 = ServiceAreaFactory(parent=self.area1)
-        self.area3 = ServiceAreaFactory(parent=self.area1)
-
-    def test_get_areas(self):
-        rsp = self.get_with_token(reverse('servicearea-list'))
-        self.assertEqual(OK, rsp.status_code)
-        result = json.loads(rsp.content.decode('utf-8'))
-        results = result
-        names = [area.name_en for area in [self.area1, self.area2, self.area3]]
-        for item in results:
-            self.assertIn(item['name_en'], names)
-
-    def test_get_area(self):
-        rsp = self.get_with_token(self.area1.get_api_url())
-        result = json.loads(rsp.content.decode('utf-8'))
-        self.assertEqual(self.area1.id, result['id'])
-        self.assertIn('http://testserver%s' % self.area2.get_api_url(), result['children'])
-        self.assertIn('http://testserver%s' % self.area3.get_api_url(), result['children'])
-        rsp = self.get_with_token(self.area2.get_api_url())
-        result = json.loads(rsp.content.decode('utf-8'))
-        self.assertEqual('http://testserver%s' % self.area1.get_api_url(), result['parent'])
 
 
 class LanguageTest(APITestMixin, TestCase):
