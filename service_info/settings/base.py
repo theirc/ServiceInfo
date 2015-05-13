@@ -16,7 +16,7 @@ TEMPLATE_DEBUG = DEBUG
 TEAM_EMAIL = 'servicemap-team@caktusgroup.com'
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
-    ('Caktus IRC Service Info Team', TEAM_EMAIL),
+    ('Caktus IRC ServiceInfo Team', TEAM_EMAIL),
 )
 SERVER_EMAIL = TEAM_EMAIL
 DEFAULT_FROM_EMAIL = TEAM_EMAIL
@@ -297,3 +297,6 @@ TEST_RUNNER = 'service_info.runner.CustomTestSuiteRunner'
 # Use https when constructing links to ourselves?
 # Generally True, we'll change to False in dev.py for running locally
 SECURE_LINKS = True
+
+# How many seconds to allow signed URLs to be valid
+SIGNED_URL_LIFETIME = 300

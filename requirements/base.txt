@@ -18,3 +18,8 @@ tlslite==0.4.8
 requests==2.5.1
 requests-oauthlib==0.4.2
 oauthlib==0.7.2
+
+# Excel with Python 3
+xlwt-future==0.8.0
+# xlrd already supports Python 3, go figure
+xlrd==0.9.3

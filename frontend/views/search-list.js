@@ -3,29 +3,10 @@ var Backbone = require('backbone'),
     result_template = require('../templates/_results_template.hbs'),
     service = require('../models/service'),
     servicetype = require('../models/servicetype'),
-    hashtrack = require('hashtrack'),
     i18n = require('i18next-client'),
     search = require('../search'),
     config = require('../config')
 ;
-
-
-function renderResults() {
-    var $el = $('.search-result-list');
-    var html = result_template({
-        services: search.services.data(),
-    })
-    $el.html(html);
-    $el.i18n();
-}
-
-var SearchResultList = Backbone.View.extend({
-    render: function() {
-        var $el = this.$el;
-        var self = this;
-        search.refetchServices().then(renderResults);
-    },
-});
 
 
 module.exports = Backbone.View.extend({
@@ -33,34 +14,43 @@ module.exports = Backbone.View.extend({
 
     initialize: function(params){
         var self = this;
-        this.query = "";
         self.feedback = params.hasOwnProperty('feedback');
+    },
+
+    perform_query: function() {
+        search.refetchServices().then(this.renderResults);
     },
 
     render: function() {
         var $el = this.$el;
-        var self = this;
 
         this.$el.html(template({
-            query: hashtrack.getVar('q'),
             feedback: this.feedback
         }));
         $('.no-search-results').hide();
 
-        var $scv = this.$el.find('#search_controls');
         // Renders automatically when language is ready
         this.SearchControlView = new search.SearchControls({
-            $el: $scv,
+            $el: this.$el.find('#search_controls'),
             feedback: this.feedback
         });
+        this.SearchControlView.on('search_parameters_changed', this.perform_query, this);
 
-        var $results = $('.search-result-list');
-        this.resultView = new SearchResultList({
-            $el: $results,
-            services: this.services,
+        $el.i18n();
+        this.perform_query();
+    },
+
+    renderResults: function() {
+        var $el = $('.search-result-list');
+        var html = result_template({
+            services: search.services.data()
         });
-        this.resultView.render();
-
+        $el.html(html);
+        if (search.services.length === 0) {
+            $('.no-search-results').show();
+        } else {
+            $('.no-search-results').hide();
+        }
         $el.i18n();
     }
 });

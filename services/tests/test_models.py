@@ -1,4 +1,5 @@
 from unittest.mock import patch
+from django.contrib.gis.geos import Point
 
 from django.core.exceptions import ValidationError
 from django.test import TestCase, override_settings
@@ -118,7 +119,7 @@ class ServiceTest(TestCase):
         self.assertEqual(Service.STATUS_CANCELED, service2.status)
 
     def test_approval_validation(self):
-        service = ServiceFactory()
+        service = ServiceFactory(location=None)
         # No location - should not allow approval
         try:
             service.validate_for_approval()
@@ -137,6 +138,34 @@ class ServiceTest(TestCase):
             self.assertIn('name', e.error_dict)
         else:
             self.fail("Should have gotten ValidationError")
+
+    def test_get_longitude(self):
+        service = ServiceFactory(location=None)
+        self.assertIsNone(service.longitude)
+        service = ServiceFactory(location='POINT( 1.0 2.0)')
+        self.assertEqual(1.0, service.longitude)
+
+    def test_set_longitude(self):
+        service = ServiceFactory(location=None)
+        service.longitude = -66.2
+        self.assertEqual(Point(-66.2, 0), service.location)
+        service = ServiceFactory(location='POINT( 1.0 2.0)')
+        service.longitude = -66.2
+        self.assertEqual(Point(-66.2, 2.0), service.location)
+
+    def test_get_latitude(self):
+        service = ServiceFactory(location=None)
+        self.assertIsNone(service.latitude)
+        service = ServiceFactory(location='POINT( 1.0 2.0)')
+        self.assertEqual(2.0, service.latitude)
+
+    def test_set_latitude(self):
+        service = ServiceFactory(location=None)
+        service.latitude = -66.2
+        self.assertEqual(Point(0, -66.2), service.location)
+        service = ServiceFactory(location='POINT( 1.0 2.0)')
+        service.latitude = -66.2
+        self.assertEqual(Point(1.0, -66.2), service.location)
 
 
 class FeedbackTest(TestCase):

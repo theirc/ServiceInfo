@@ -24,6 +24,12 @@ urlpatterns = [
     # Wire up our API using automatic URL routing.
     url(r'^', include(router.urls)),
 
+    # Get an export URL
+    url(r'^export/$', views.GetExportURLView.as_view(), name='get-export-url'),
+
+    # import data
+    url(r'^import/$', views.ImportView.as_view(), name='import'),
+
     # Provide a special call to get an auth token
     # (This will end up as something like "/api/login/")
     url(r'^login/$', views.APILogin.as_view(), name='api-login'),

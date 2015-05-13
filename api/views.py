@@ -1,7 +1,11 @@
+from http.client import BAD_REQUEST
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.contrib.gis.geos import Point
+from django.core import signing
 from django.core.exceptions import ValidationError as DjangoValidationError
+from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.db.transaction import atomic
 from django.utils.timezone import now
@@ -12,17 +16,21 @@ from rest_framework import mixins, parsers, renderers, status, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import list_route, detail_route
 from rest_framework.exceptions import ValidationError as DRFValidationError, PermissionDenied
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
 
+from api.renderers import CSVRenderer
 from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, ProviderSerializer, \
     ProviderTypeSerializer, ServiceAreaSerializer, APILoginSerializer, APIActivationSerializer, \
     PasswordResetRequestSerializer, PasswordResetCheckSerializer, PasswordResetSerializer, \
     ResendActivationLinkSerializer, CreateProviderSerializer, ServiceTypeSerializer, \
     SelectionCriterionSerializer, LanguageSerializer, ServiceSearchSerializer, \
-    ProviderFetchSerializer, FeedbackSerializer, NationalitySerializer
+    ProviderFetchSerializer, FeedbackSerializer, NationalitySerializer, ImportSerializer, \
+    ServiceTypeWaitTimeSerializer, ServiceTypeQOSSerializer, ServiceTypeFailureSerializer, \
+    ServiceTypeContactSerializer, ServiceTypeCommunicationSerializer, \
+    ServiceTypeNumServicesSerializer
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
     SelectionCriterion, Feedback, Nationality
@@ -118,7 +126,8 @@ class NationalityViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
 class ServiceAreaViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
                          ServiceInfoGenericViewSet):
     permission_classes = [AllowAny]
-    queryset = ServiceArea.objects.all()
+    # We only want to display the lowest-level service areas to the frontend.
+    queryset = ServiceArea.objects.lowest_level()
     serializer_class = ServiceAreaSerializer
 
 
@@ -161,7 +170,10 @@ class SortByDistanceFilter(django_filters.CharFilter):
     def filter(self, qset, value):
         if not len(value):
             return qset
-        lat, long = [float(x) for x in value.split(',', 1)]
+        try:
+            lat, long = [float(x) for x in value.split(',', 1)]
+        except ValueError:
+            return qset
         search_point = Point(long, lat)
         return qset.distance(search_point).order_by('distance')
 
@@ -305,6 +317,60 @@ class ServiceTypeViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
     permission_classes = [AllowAny]
     queryset = ServiceType.objects.all()
     serializer_class = ServiceTypeSerializer
+
+    def _do_service_type_report_view(self, serializer_class):
+        queryset = self.get_queryset()
+        context = self.get_serializer_context()
+        serializer = serializer_class(
+            queryset, many=True, context=context)
+        return Response(serializer.data)
+
+    @list_route(methods=['get', ], url_path='wait-times',
+                permission_classes=[IsAdminUser, ],
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def wait_times(self, request):
+        """Wait time feedback aggregated by service type."""
+        return self._do_service_type_report_view(ServiceTypeWaitTimeSerializer)
+
+    @list_route(methods=['get', ], url_path='qos',
+                permission_classes=[IsAdminUser, ],
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def qos(self, request):
+        """Quality of service delivered feedback aggregated by service type."""
+        return self._do_service_type_report_view(ServiceTypeQOSSerializer)
+
+    @list_route(methods=['get', ], url_path='failure',
+                permission_classes=[IsAdminUser, ],
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def failure(self, request):
+        """Explanation of Service Delivery Failure by Service Type."""
+        return self._do_service_type_report_view(ServiceTypeFailureSerializer)
+
+    @list_route(methods=['get', ], url_path='contact',
+                permission_classes=[IsAdminUser, ],
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def contact(self, request):
+        """Difficulties Contacting Service Providers by Service Type."""
+        return self._do_service_type_report_view(ServiceTypeContactSerializer)
+
+    @list_route(methods=['get', ], url_path='communication',
+                permission_classes=[IsAdminUser, ],
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def communication(self, request):
+        """Satisfaction with Staff Communication by Service Type."""
+        return self._do_service_type_report_view(ServiceTypeCommunicationSerializer)
+
+    @list_route(methods=['get', ], url_path='num-services',
+                permission_classes=[IsAdminUser, ],
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def num_services(self, request):
+        """Number of Registered Service Providers by Type by Location."""
+        # Only top-level service areas
+        queryset = self.get_queryset()
+        context = self.get_serializer_context()
+        serializer = ServiceTypeNumServicesSerializer(
+            queryset, many=True, context=context)
+        return Response(serializer.data)
 
 
 class ProviderViewSet(ServiceInfoModelViewSet):
@@ -532,4 +598,29 @@ class ResendActivationLinkView(ServiceInfoAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         user.send_activation_email(request.site, request, request.data['base_activation_link'])
+        return Response()
+
+
+class GetExportURLView(APIView):
+    """Return a signed time-limited URL for downloading an export"""
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        user = request.user
+        thing_to_sign = {'u': user.id, 'what': 'export'}
+        signature = signing.dumps(thing_to_sign)
+        export_url = reverse('export', kwargs={'signature': signature})
+        return Response({'url': export_url})
+
+
+class ImportView(APIView):
+    parser_classes = (parsers.MultiPartParser, parsers.FormParser)
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        serializer = ImportSerializer(data=request.data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+        if 'errors' in data:
+            return Response(data={'errors': data['errors']}, status=BAD_REQUEST)
         return Response()

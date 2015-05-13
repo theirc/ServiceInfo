@@ -12,12 +12,14 @@
     "Logout": "Logout",
     "Services": "List of Services",
     "Add-Services": "Add Services",
+    "Import-Export": "Import/Export",
   	"Service-Map": "Service Map",
     "Search": "Search",
   	"Provider-Registration": "Provider Registration",
     "Edit-Provider-Information": "Edit Provider Information",
   	"Feedback-Tool": "Give Feedback",
-  	"Change-Language": "Change Language"
+  	"Change-Language": "Change Language",
+    "Reports": "Reports"
   },
   "Global": {
     "Admin": "Admin",
@@ -33,7 +35,9 @@
     "Saturday": "Saturday",
     "GeolocationNotSupported": "Geolocation is not supported by this browser.",
     "GeoPositionUnavailable": "Location is not available at this time.",
-    "RequiredField": "This field is required."
+    "GeoLocationDenied": "You have not given permission to access your current location.",
+    "RequiredField": "This field is required.",
+    "Not-Listed": "Not Listed"
   },
   "Login-Form": {
     "Page-Head": {
@@ -106,6 +110,8 @@
     "Map": {"Toggle": "List View"},
     "List": {
       "Toggle": "Map View",
+      "Provider-Name": "Service Provider Name",
+      "Service-Name": "Service Name",
       "Area": "Service Area",
       "Type": "Service Type",
       "Additional-Info": "Additional Provider Information",
@@ -277,12 +283,15 @@
     },
     "Empty-Message": "You have not submitted any services yet. You may submit your first service for review by tapping the New Service button.",
     "Add-Service": "New Service",
+    "Import": "Import",
+    "Import-File": "Please choose an Excel spreadsheet file to import.",
+    "Export": "Export",
     "Status": {
-      "draft": "draft",
-      "current": "current",
-      "rejected": "rejected",
-      "canceled": "canceled",
-      "archived": "archived"
+      "draft": "Draft",
+      "current": "Current",
+      "rejected": "Rejected",
+      "canceled": "Canceled",
+      "archived": "Archived"
     },
     "Table": {
       "Thead": {
@@ -297,7 +306,7 @@
     "Cancel": "Cancel",
     "Delete": "Delete",
     "Change-Service": "Change service",
-    "Change-Change": "Make further changes to this pending update"
+    "Change-Change": "Update this draft"
   },
   "Provider-Registration-Confirmation": {
     "Page-Head": {
@@ -370,8 +379,8 @@
   },
   "Footer": {
     "About": {
-      "Title": "About Service Info",
-      "Paragraph": "Powered by the International Rescue Committee, Service Info is a tool that allows both service providers to register their services online and beneficiaries to both discover those services on a map and give feedback on them. Service Info is open source and free to use."
+      "Title": "About ServiceInfo",
+      "Paragraph": "Powered by the International Rescue Committee, ServiceInfo is a tool that allows both service providers to register their services online and beneficiaries to both discover those services on a map and give feedback on them. ServiceInfo is open source and free to use."
     },
     "Contact": {
       "Title": "Reach Us",
@@ -391,6 +400,11 @@
         "yes": "Yes",
         "no": "No"
     },
+    "Form-Sections":{
+      "Basic":{
+        "Legend":"Feedback for the selected service"
+      }
+    },
     "non_delivery_explained": "Did you receive a clear explanation for why the service you sought was not delivered to you?",
     "non_delivery_explanation": {
        "no": "No explanation",
@@ -406,7 +420,7 @@
         "uptotwodays": "Up to 2 days",
         "3_7days": "3-7 days",
         "1_2weeks": "1-2 weeks",
-        "more": "Longer"
+        "more": "More than 2 weeks"
     },
     "wait_time_satisfaction": {
         "label": "How do you rate your satisfaction with the time that you waited for the service to be delivered (from 1 to 5, where 5 is the highest rating possible)?"
@@ -456,6 +470,56 @@
         "Register": "Register to be a Service Provider",
         "Login": "Login to an Existing Service Provider Account"
       }
+    }
+  },
+  "Export-Tool": {
+      "Title": "Export services",
+      "Button": "Export",
+      "Description1": "Click the button to download an Excel spreadsheet file containing the data you have access to.",
+      "Description2": "The file will contain three tabs or sheets: one for provider data, one for service data, and one for selection criteria.",
+      "Description3": "You can edit the information in the spreadsheet and import it to make changes to the data."
+  },
+  "Import-Tool": {
+      "Title": "Import services",
+      "Button": "Import",
+      "Success": "The import was successful",
+      "Errors": "There were errors in the file.  No data was changed."
+  },
+  "Import-Export": {
+      "Page": {
+        "Title": "Import/Export"
+      },
+      "Help": {
+        "Title": "Help",
+        "Help1": "On import, any invalid data will cause the entire import to be rejected and the errors will be reported to the user.",
+        "Help2": "Any row with a valid ID field but with all the other values cleared means to delete that record.",
+        "Help3": "Times of day are represented as a string in 24-hour 'HH:MM' format.",
+        "Help4": "The provider sheet has a column “password” that never contains any values on export. The provider password can be changed by putting a value in that column for import.",
+        "Help5": "When creating a new service, leave the 'ID' column blank.",
+        "Help6": "When adding selection criteria to an existing service, set the 'service__id' field to the 'ID' of the existing service.",
+        "Help7": "When adding selection criteria to a new service, set the 'service__id' field to the 'name_en' of the new service."
+      }
+  },
+  "Reports": {
+    "Title": "Feedback Reports",
+    "Description": "",
+    "Form": {
+      "Stat": {
+        "Label": "Report To View",
+        "Options": {
+          "WaitTime": "Waiting Time by Service Type",
+          "QOS": "Quality of Service Delivered by Service Type",
+          "Failure": "Explanation of Service Delivery Failure by Service Type",
+          "Contact": "Difficulties Contacting Service Providers by Service Type",
+          "Communication": "Satisfaction with Staff Communication by Service Type",
+          "NumServices": "Number of services by Location and Service Type"
+        }
+      },
+      "Download": "Download Report CSV"
+    },
+    "Table": {
+      "Loading": "Loading...",
+      "ServiceType": "Service Type"
     }
   }
 }

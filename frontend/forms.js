@@ -130,6 +130,8 @@ var forms = module.exports = {
     },
 
     show_errors_on_form: function($form, e) {
+        // 'e' should be a jqHXR object with a responseJSON attribute
+        // containing a dictionary of the errors
         // returns missing...
         var self = this,
             missing = {},
@@ -140,7 +142,7 @@ var forms = module.exports = {
                     messages.add(this[i]);
                 }
             } else {
-                var $error = self.getFieldLabel($form, k).find('.error');
+                var $error = self.getFieldLabel($form, k).parent().find('.error');
                 if ($error.length) {
                     $error.text(this[0]);
                 } else {

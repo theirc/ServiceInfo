@@ -1,23 +1,20 @@
 from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND, METHOD_NOT_ALLOWED, UNAUTHORIZED
 import json
 
-from django.conf import settings
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.models import Group
 from django.contrib.gis.geos import Point
 from django.core import mail
-from django.core.files.storage import default_storage
 from django.core.urlresolvers import reverse
 from django.forms import model_to_dict
 from django.test import TestCase
-
 from rest_framework.authtoken.models import Token
 from rest_framework.fields import Field, CharField
 from rest_framework.test import APIClient
 
 from email_user.models import EmailUser
 from email_user.tests.factories import EmailUserFactory
-from services.models import Provider, Service, SelectionCriterion, ServiceArea, ServiceType
+from services.models import Provider, Service, SelectionCriterion
 from services.tests.factories import ProviderFactory, ProviderTypeFactory, ServiceAreaFactory, \
     ServiceFactory, SelectionCriterionFactory, ServiceTypeFactory
 
@@ -52,7 +49,7 @@ class APITestMixin(object):
             HTTP_SERVICEINFOAUTHORIZATION="Token %s" % self.token
         )
 
-    def post_with_token(self, url, data=None):
+    def post_with_token(self, url, data=None, format='json'):
         """
         Make a POST to a url, passing self.token in the request headers.
         Return the response.
@@ -61,7 +58,7 @@ class APITestMixin(object):
             url,
             data=data,
             HTTP_SERVICEINFOAUTHORIZATION="Token %s" % self.token,
-            format='json'
+            format=format
         )
 
     def put_with_token(self, url, data=None):
@@ -423,7 +420,7 @@ class ServiceAPITest(APITestMixin, TestCase):
 
     def test_update_service(self):
         # It's not allowed to update a service using the API
-        service = ServiceFactory(provider=self.provider)
+        service = ServiceFactory(provider=self.provider, location=None)
 
         data = model_to_dict(service)
         data['url'] = service.get_api_url()
@@ -706,60 +703,6 @@ class SelectionCriterionAPITest(APITestMixin, TestCase):
         self.assertIn(s1.id, criteria_ids)
         self.assertIn(s2.id, criteria_ids)
         self.assertNotIn(s3.id, criteria_ids)
-
-
-class ServiceAreaAPITest(APITestMixin, TestCase):
-    def setUp(self):
-        super().setUp()
-        ServiceArea.objects.all().delete()
-        self.area1 = ServiceAreaFactory()
-        self.area2 = ServiceAreaFactory(parent=self.area1)
-        self.area3 = ServiceAreaFactory(parent=self.area1)
-
-    def test_get_areas(self):
-        rsp = self.get_with_token(reverse('servicearea-list'))
-        self.assertEqual(OK, rsp.status_code)
-        result = json.loads(rsp.content.decode('utf-8'))
-        results = result
-        names = [area.name_en for area in [self.area1, self.area2, self.area3]]
-        for item in results:
-            self.assertIn(item['name_en'], names)
-
-    def test_get_area(self):
-        rsp = self.get_with_token(self.area1.get_api_url())
-        result = json.loads(rsp.content.decode('utf-8'))
-        self.assertEqual(self.area1.id, result['id'])
-        self.assertIn('http://testserver%s' % self.area2.get_api_url(), result['children'])
-        self.assertIn('http://testserver%s' % self.area3.get_api_url(), result['children'])
-        rsp = self.get_with_token(self.area2.get_api_url())
-        result = json.loads(rsp.content.decode('utf-8'))
-        self.assertEqual('http://testserver%s' % self.area1.get_api_url(), result['parent'])
-
-
-class ServiceTypeAPITest(APITestMixin, TestCase):
-    def test_get_types(self):
-        rsp = self.get_with_token(reverse('servicetype-list'))
-        self.assertEqual(OK, rsp.status_code)
-        results = json.loads(rsp.content.decode('utf-8'))
-        result = results[0]
-        self.assertIn('icon_url', result)
-        icon_url = result['icon_url']
-        self.assertTrue(icon_url.startswith(settings.MEDIA_URL))
-        path = icon_url.replace(settings.MEDIA_URL, '')
-        self.assertTrue(default_storage.exists(path))
-
-    def test_get_type(self):
-        # Try it unauthenticated
-        a_type = ServiceType.objects.first()
-        url = a_type.get_api_url()
-        rsp = self.client.get(url)
-        self.assertEqual(OK, rsp.status_code)
-        result = json.loads(rsp.content.decode('utf-8'))
-        self.assertIn('icon_url', result)
-        icon_url = result['icon_url']
-        self.assertTrue(icon_url.startswith(settings.MEDIA_URL))
-        path = icon_url.replace(settings.MEDIA_URL, '')
-        self.assertTrue(default_storage.exists(path))
 
 
 class LanguageTest(APITestMixin, TestCase):
@@ -1164,6 +1107,55 @@ class ServiceSearchTest(APITestMixin, TestCase):
             response = json.loads(rsp.content.decode('utf-8'))
             self.assertEqual(1, len(response))
             self.assertEqual(self.service1.pk, response[0]['id'])
+
+    def test_closest_service(self):
+        # service 1 - Richmond, VA Coordinates: 37°32′N 77°28′W
+        # (very rough conversion to decimal)
+        self.service1.location = Point(-77.48, 37.5)
+        self.service1.save()
+        # service 2 - Boulder, CO
+        self.service2.location = Point(-105.251945, 40.027435)
+        self.service2.save()
+        # Search nearest Carrboro, NC
+        carrboro_lat_long = "35.920556,-79.083889"
+        url = self.url + "?closest=" + carrboro_lat_long
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(Service.objects.filter(status=Service.STATUS_CURRENT).count(),
+                         len(response))
+        s1 = response[0]
+        self.assertEqual(self.service1.id, s1['id'])
+
+    def test_closest_service_bad_latlong1(self):
+        # IF API passes badly formatted lat-long, just ignore it
+        bad_lat_long = "35.920556,-79.08388935.920556"
+        url = self.url + "?closest=" + bad_lat_long
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(Service.objects.filter(status=Service.STATUS_CURRENT).count(),
+                         len(response))
+
+    def test_closest_service_bad_latlong2(self):
+        # IF API passes badly formatted lat-long, just ignore it
+        bad_lat_long = "35.920556,-79.083889,35.920556"
+        url = self.url + "?closest=" + bad_lat_long
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(Service.objects.filter(status=Service.STATUS_CURRENT).count(),
+                         len(response))
+
+    def test_closest_service_nonsense_latlong(self):
+        # IF API passes nonsensical lat-long, just ignore it
+        bad_lat_long = "350.920556,-790.083889"
+        url = self.url + "?closest=" + bad_lat_long
+        rsp = self.client.get(url)
+        self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        response = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(Service.objects.filter(status=Service.STATUS_CURRENT).count(),
+                         len(response))
 
 
 class ServiceSearchFilterTest(APITestMixin, TestCase):

@@ -1,0 +1,23 @@
+{{#if loaded }}
+<thead>
+    <tr>
+        <th data-i18n="Reports.Table.ServiceType"></th>
+        {{#each headers}}
+            <th>{{ this }}</th>
+        {{/each}}
+    </tr>
+</thead>
+<tbody>
+    {{#each rows}}
+        <tr>
+            {{#each this}}
+                <td>{{ this }}</td>
+            {{/each}}
+        </tr>
+    {{/each}}
+</tbody>
+{{ else }}
+<thead>
+    <tr><th data-i18n="Reports.Table.Loading"></th></tr>
+</thead>
+{{/if}}

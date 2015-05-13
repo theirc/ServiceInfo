@@ -1,26 +1,31 @@
 <div id="service-detail">
 
 <!-- Main Content -->
-<div class="container">
-	<div class="row name-row">
-		<div class="two-third">
-	   		<div class="name">
-				{{# if service.servicetype.icon_url }}<img class="servicetype-icon" src="{{ service.servicetype.icon_url }}"/>{{/if}}
-				{{ service.name }}
+<div class="page-head">
+    <div class="container">
+        <div class="row name-row">
+    		<div class="half">
+		   		<div class="name">
+					{{# if service.servicetype.icon_url }}<img class="servicetype-icon" src="{{ service.servicetype.icon_url }}"/>{{/if}}
+					{{ service.name }}
+				</div>
 			</div>
+			<div class="half"></div>
 		</div>
-		<div class="third">
-	        <div class="feedback-link">
-	          <a href="#/feedback/{{ service.id }}">
-	            <button class="primary-button" data-i18n="Service-Detail.Give-Feedback"></button>
-	          </a>
-	        </div>
-	    </div>
-    </div>
-     
-        
+	</div>
+</div>
+<div class="container">      
     <div class="row">
 		<div class="description">{{multiline service.description }}</div>
+		<div class=feedback-btn>
+			<div class="third">
+		        <div class="feedback-link">
+		          <a href="#/feedback/{{ service.id }}">
+		            <button class="primary-button" data-i18n="Service-Detail.Give-Feedback"></button>
+		          </a>
+		        </div>
+		    </div>
+		</div>
 		{{#if mapURL}}
 			<div id="static-map">
 				<div class="map">
@@ -30,6 +35,16 @@
 				</div>
 			</div>
 		{{/if}}
+		<div class="row">
+	        <span class="control-label" data-i18n="Service-Map.List.Provider-Name"></span>
+	        <div class="provider-name">
+	            {{#if service.provider.name }}
+	                {{ service.provider.name }}
+	            {{else}}
+	                <span data-i18n="Service-Map.List.Unknown"></span>
+	            {{/if}}
+	        </div>
+		</div>
 		<div class="row">
 			<span class="area control-label" data-i18n="Service-Map.List.Area"></span>
 			{{ service.servicearea.name }}
@@ -114,7 +129,11 @@
         <div class="description">
           <div class="row">
             <span class="control-label" data-i18n="Service-Map.List.Cost"></span>
-            <p>{{multiline service.cost_of_service }}</p>
+            	{{#if service.cost }}
+            		<p>{{multiline service.cost_of_service }}</p>
+            	{{else}}
+            		<span data-i18n="Global.Not-Listed"></span>
+            	{{/if}}
           </div>
         </div>
         <div class="description">

@@ -23,10 +23,12 @@ var views = {
     "service-cancel": require('./views/service-cancel'),
     "service-list": require('./views/service-list'),
     "service-detail": require('./views/service-detail'),
+    "import-export": require('./views/import-export'),
     "login": require('./views/login'),
     "password-reset-request": require('./views/password-reset-request'),
     "password-reset-form": require('./views/password-reset-form'),
     "admin": require('./views/admin'),
+    "reports": require('./views/reports'),
 };
 
 var view, viewName;
@@ -84,6 +86,7 @@ module.exports = Backbone.Router.extend({
         "manage/service/:id": loadPage("service", ['id']),
         "manage/service/cancel/:id": loadPage("service-cancel", ['id']),
         "manage/service-list": loadPage("service-list"),
+        "manage/import-export": loadPage("import-export"),
 
         "service/:id": loadPage("service-detail", ['id']),
 
@@ -95,6 +98,12 @@ module.exports = Backbone.Router.extend({
         "login": loadPage("login"),
         "password-reset/:uid/:token": loadPage("password-reset-form", ['uid', 'token']),
         "password-reset": loadPage("password-reset-request"),
+        "reports": function() {
+            if (!config.get('forever.isStaff')) {
+                return;
+            }
+            loadPage("reports")();
+        },
         "logout": function() {
             config.remove('forever.authToken');
             config.remove('forever.email');

@@ -1,5 +1,5 @@
-IRC's Service Info
-==================
+IRC's ServiceInfo
+=================
 
 .. image:: https://magnum.travis-ci.com/theirc/Service-Mapper.svg?token=W924ebuDbRmmthnnyABJ&branch=develop
     :target: https://magnum.travis-ci.com/theirc/Service-Mapper

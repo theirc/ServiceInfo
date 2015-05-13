@@ -77,27 +77,53 @@ html,body {
 	min-height: 100%;
 	position: relative;
 }
+
 #messages {
-    padding: 5px;
+    &:empty {
+        display: none;
+    }
+    width: 100%;
+    height: 58px;
+    .message {
+        padding: 20px 30px 20px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 101;
+        margin-top: 0;
+        @media (min-width: 640px) {
+            padding: 20px 30px;
+        }
+    }
 }
 .message {
-    margin-top: 0.5em;
-    background-color: #fda;
-    padding: 5px;
+    background-color: #FAC6BD;
+    padding: 20px 30px;
+    font-size: 125%;
+    font-weight: 700;
+    @media (min-width: 640px) {
+        padding: 30px;
+        font-size: 150%;
+    }
 }
 .language-toggle {
     background-color: none;
+    &:first-child { margin-top: 50px;}
 }
 
 .language-toggle button {
     border: 1px solid #3cb879;
     height: 100px;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-	width: 400px;
+    margin-bottom: 20px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+	width: 90%;
 	display: block;
-
+    font-size: 130%;
+    @media (min-width: 640px) {
+        width: 400px;
+    }
 }
 
 .lang-btn-ar {
@@ -168,6 +194,10 @@ select {
 .big {
   font-size: 150%;
   font-weight: bolder;
+}
+
+.field-help {
+    padding-bottom: 6px;
 }
 
 /*
@@ -326,7 +356,8 @@ select {
 
 .submit-form {
 	width: 100%;
-    margin-bottom: 10px;
+    margin: 20px 0 0;
+    overflow-y: auto;
     @media (min-width:1000px){
     	height: 60px;
     }
@@ -484,23 +515,30 @@ select {
 */
 
 .page-head {
-	background-color: none;
-	padding: 8px 0 0;
+    background-color: #33A069;
+    padding: 8px 0 15px;
+    position: relative;
+    top: -10px;
+    margin-bottom: 1em;
+    overflow-y: auto;
+    overflow-x: 0;
 }
 
 .page-title {
-	font-size: 28px;
-	line-height: 1.25em;
-	margin-bottom: 10px;
+	font-size: 200%;
+	margin-bottom: 4px;
 	line-height: 1.3em;
-	color: #333333;
+	color: white;
+    font-weight: 700;
+    max-width: 800px;
 }
 
 .page-descr {
-	font-size: 14px;
-    line-height: 1.6em;
+	font-size: 140%;
+    line-height: 1.45em;
 	padding-bottom: 0.5em;
-	color: #666666;
+	color: white;
+    max-width: 800px;
 
 	@media (min-width: 767px) {
 		padding-bottom: 0;
@@ -554,7 +592,7 @@ select {
 	border-color: #3CB879;
 	width: 100%;
 	text-align: center;
-    font-size: .85em;
+    font-size: 1em;
 	font-weight: 600;
 	color: #fff;
 	-webkit-border-radius: 4px;
@@ -698,10 +736,10 @@ select {
 	border-width: 1px;
 	border-style: solid;
 	border-color: #3CB879;
-  -webkit-transition: background-color .2s ease-out;
-  -moz-transition: background-color .2s ease-out;
-  -o-transition: background-color .2s ease-out;
-  transition: background-color .2s ease-out;
+    -webkit-transition: background-color .2s ease-out;
+    -moz-transition: background-color .2s ease-out;
+    -o-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
 
 }
 
@@ -779,30 +817,61 @@ select {
 */
 
 fieldset {
-	padding: 10px 0;
-	margin: 0 0 10px;
+	padding: 30px 10px 10px;
+	margin: 0 0 16px;
 	min-width: 0;
-	border: none;
-	@media (min-width: 600px) {
-		padding: 10px 20px;
-		border: none;
-	}
+	border: 1px solid #CCCCCC;
+    background-color: white;
+    .round-start;
+    .round-end;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+    max-width: 800px;
+    position: relative;
+    top: -16px;
+    	@media (min-width: 600px) {
+    		padding: 20px 30px 10px;
+            margin-@{start}: 15px;
+    	}
 
-	legend {
-		font-size: 16px;
-		font-weight: 600;
-		padding: 6px 10px;
-	    margin-top: 0;
-	    margin-bottom: 5px;
-	    margin-@{start}: -10px;
-	    margin-@{end}: 0;
-		color: #3cb879;
-		border-bottom: none;
-	}
-
-	.row {
-		padding: 10px 0;
-	}
+    	legend {
+            font-size: 110%;
+            font-weight: 600;
+            padding: 14px 10px;
+            margin: 0 -10px;
+            color: white;
+            background-color: #3cb879;
+            width: 100%;
+            .round-top-start;
+            .round-top-end;
+            position: relative;
+            top: 20px;
+            @media (min-width: 640px) {
+        		font-size: 135%;
+        		padding: 16px 31px 14px;
+                margin-@{start}: -31px;
+                margin-@{end}: -31px;
+            }
+    	}
+        &.submit-options {
+            padding: 10px;
+            @media (min-width: 600px) {
+                padding: 10px 30px 10px;
+            }
+            .remove {
+                .round-start;
+                .round-end;
+                position: static;
+                top: 0;
+                padding: 13px 12px;
+                font-size: 1em;
+            }
+        }
+    	.row {
+    		padding: 10px 0;
+    	}
+    .form-control, .read-only-input {
+        background-color: #F5F5F5;
+    }
 }
 
 /*
@@ -839,11 +908,32 @@ fieldset {
 label {
     max-width: 100%;
     margin-bottom: 5px;
-
-    .error {
-        float: @end;
-    }
 }
+
+.error {
+    &:empty {
+        display: none;
+    }
+    font-weight: 700;
+    float: none;
+    background-color: #FAC6BD;
+    padding: .25em .4em;
+    margin: .25em 0 .4em;
+    display: block;
+    .round-start;
+    .round-end;
+}
+
+.non-field-errors {
+    &:empty {
+        display: none;
+    }
+    background-color: #FAC6BD;
+    padding: 8px 10px;
+    .round-start;
+    .round-end;
+}
+
 .error,
 .no-search-results {
     color: darkred;
@@ -858,7 +948,7 @@ label {
 }
 
 .form-control, .read-only-input {
-	background-color: #F5F5F5;
+	background-color: white;
 	border-radius: 4px;
 	border-color: #CCCCCC;
     display: block;
@@ -867,7 +957,6 @@ label {
     font-size: 14px;
     line-height: 1.42857143;
     color: #555;
-    background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
     -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
@@ -953,7 +1042,7 @@ input[type=range] {
     width: 100%;
     height: 70px;
     background-color: #2A2A2A;
-    z-index: 99;
+    z-index: 100;
     position: relative;
 	@media (min-width: 640px) {
         position: absolute;
@@ -983,13 +1072,9 @@ input[type=range] {
         background-image: url(../images/logo-large.png);
         background-image: url(../images/logo-large.svg);
         background-size: 100%;
-        width: 116px;
-        height: 124px;
-        margin: 1.25em auto;
-    }
-    @media (min-width: 1000px){
-        width: 140px;
-        height: 140px;
+        width: 120px;
+        height: 160px;
+        margin: 1.0em auto;
     }
 }
 
@@ -1227,7 +1312,12 @@ Login
 		max-width: 800px;
 		.half {
 			margin-@{start}: 0; 
-		} 
+		}
+        .row {
+            .row {
+                padding: 10px 0;
+            }
+        }
         .more-options {
             background-color: #E5E5E5;
             border: 1px solid #CCC;
@@ -1242,11 +1332,17 @@ Login
                 margin-@{start}: 30px;
                 margin-@{end}: 30px;
             }
+            .page-title,
+            .page-descr {
+                color: #333;
+            }
+
             .page-title {
-                font-size: 150%;
+                font-size: 125%;
             }
             .page-descr {
-                padding-bottom: 10px;
+                font-size: 100%;
+                padding-bottom: 18px;
             }
             @media (max-width: 640px) {
                 button {
@@ -1274,6 +1370,7 @@ Service Form
 #service-form {
 	.row {
 		padding: 10px 0;
+        overflow-y: auto;
 		@media (min-width:0px) and (max-width: 639px) {
 			padding: 0;
 		}
@@ -1281,31 +1378,22 @@ Service Form
 }
 
 #provider-form {
-	fieldset {
-		padding-bottom: 0;
-		margin-bottom: 0;
-		.row:last-child {
-			padding-bottom: 0;
-			.form-group {
-				margin-bottom: 0;
-			}
-		}
-	}
-}
-
-#provider-form {
+    .main-content {
+        padding: 0;
+    }
 	.main-content-options {
 		margin: 0;
+        padding: 0;
 		@media (min-width: 640px) {
 			padding: 0 20px;
 		}
 		button:first-child {
-			@media (max-width: 640px) {
+			@media (max-width: 639px) {
 				margin-bottom: 1em;
 			}
 		}
 		.row {
-			@media (max-width: 640px) {
+			@media (max-width: 639px) {
 				padding: 10px 0 0px;
 			}
 		}
@@ -1318,6 +1406,12 @@ Service Form
 			}
 		}
 	}
+    fieldset {
+        margin: 15px;
+        @media (min-width: 640px) {
+            margin: 0 30px 16px;
+        }
+    }
 }
 
 /*
@@ -1405,6 +1499,13 @@ div#search {
 	            font-size: 1.2em;
 	            font-weight: 600;
 	        }
+
+            .provider-name,
+            .name {
+                .control-label {
+                    font-size: 0.85em;
+                }
+            }
 
 	        .area {
 	        	float: @start;
@@ -1556,18 +1657,63 @@ div#search-filter {
 Services
 */
 #services {
-	max-width: 800px;
+	max-width: 100%;
 	.table {
+        max-width: 800px;
 		transform: none;
 		margin: 0 30px 0;
 		@media (max-width: 639px) {
 			width: 94%;
 			margin: 0 3% 0;
 		}
+        td {
+            overflow-x: auto;
+        }
 	}
 	.third {
 		padding: 0;
 	}
+    .key {
+        padding-bottom: 10px;
+        .row {
+            overflow-y: auto;
+        }
+        .half {
+            .third {
+                width: 33.3333%;
+                float: @start;
+                &:first-child {
+                    @media (max-width: 639px) {
+                        margin-top: 0;
+                    }
+                }
+            }
+            margin-@{start}: 0;
+            .control-label {
+                float: @start;
+                padding-top: 1px;
+                margin-@{end}: 5px;
+                display: inline-block;
+            }
+            .service-status-approved,
+            .service-status-denied,
+            .service-status-draft {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                display: inline-block;
+            }
+            .service-status-approved {
+                background-color: #3cb879;
+            }
+            .service-status-denied {
+                background-color: #E04733;
+            }
+            .service-status-draft {
+                background-color: #1F6BC2;
+            }
+        }
+    }
 	.main-content {
 		margin: 0 0 30px;
 		@media (min-width: 640px) {
@@ -1790,15 +1936,21 @@ Landing page
 		padding: 0;
 	}
 	.landing-img {
-		background: #F3F3F4 url(../images/map2.jpg) center center no-repeat;
-		background: #F3F3F4 url(../images/map2.svg) center center no-repeat;
-		background-size: cover;
-		z-index: 1;
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		top: 0;
-		left: 0;
+        position: fixed; 
+        top: -50%; 
+        left: -50%; 
+        width: 200%; 
+        height: 200%;
+        img {
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            margin: auto; 
+            min-width: 50%;
+            min-height: 50%;
+        }
 	}
 	.main-content {
 		border-radius: 0;
@@ -1902,11 +2054,13 @@ table {
     }
 }
 
-table#service-status span.update::before when (@direction = ltr) {
+table#service-status tr.has_parent td span.service-name::before when (@direction = ltr) {
   content: "\2937";  // ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS
+  font-size: 26px;
 }
-table#service-status span.update::before when (@direction = rtl) {
+table#service-status tr.has_parent td span.service-name::before when (@direction = rtl) {
   content: "\2936"; // ARROW POINTING DOWNWARDS THEN CURVING LEFTWARDS
+  font-size: 26px;
 }
 table {
  	width: 97.25%;
@@ -1932,8 +2086,12 @@ table {
 		&.denied {
 			border-@{end}-color: #E04733;
 		}
-        &.update td:first-child span {
-            margin-@{start}: 0.5em;
+        &.update {
+            border-@{end}-color: #1F6BC2;    
+        }
+        tr.update td span {
+            padding-@{start}: 1.5em;
+            display: block;
         }
 	}
 	th {
@@ -2005,6 +2163,8 @@ table {
 			border-bottom: 1px solid #DDD;
             padding: 12px;
             padding-@{start}: 1em;
+            overflow-y: hidden;
+            overflow-x: auto;
 		}
 
 		.vertical-td {
@@ -2016,7 +2176,6 @@ table {
 			padding-@{end}: 10px;
 			font-weight: bold;
 			white-space: nowrap;
-			border-@{start}: 5px solid #fdc82f !important;
 		}
 
 	    .vertical-header {
@@ -2036,23 +2195,18 @@ Service-Detail
 		margin: 0 0 8px;
 		padding: 0;
 	}
-	.container > .row > .name > .feedback-link {
-		float: @end;
-	    a {
-	    	font-size: 100%;
-	    }
-	}
-	.name-row {
-		.two-third {
-			width: 66.666%;
-			float: @start;
-		}
-		.third {
-			width: 33.333%;
-			float: @end;
-			margin-top: 0;
-		}
-	}
+    .page-head {
+        padding-top: 20px;
+        .servicetype-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 9px;
+            vertical-align: middle;
+            border: 1px solid white;
+        }
+    }
 	.contact > .row,
 	.description > .row,{
 		p {
@@ -2079,17 +2233,15 @@ Service-Detail
 			margin-@{end}: 0%;
 		}
 	}
-	.third {
-		width: 33.333%;
-		float: @start;
-		margin-bottom: 1em;
-	}
 	.name {
 		font-size: 1.6em;
 		font-weight: 600;
-		color: #3cb879;
-		margin-bottom: .5em;
+		color: white;
 	}
+    .feedback-btn {
+        overflow-y: auto;
+        overflow-x: none;
+    }
 	#static-map .map {
 		max-width: 640px;
 		height: 150px;
@@ -2097,6 +2249,7 @@ Service-Detail
         margin: auto;
 		margin: 1em 0;
 		background-color: gray;
+        clear: both;
         .map-image-ctn {
             display: inline-block;
             position: relative;
@@ -2132,6 +2285,11 @@ Service-Detail
 			display: inline-block;
 			background-color: #F3F3F4;
 			width: 100%;
+            th.third,
+            td.third {
+                width: 33.333333%;
+                float: left;
+            }
 		}
 
 		th,
@@ -2242,6 +2400,10 @@ Footer
 		color: white;
 	}
 
+    .page-title {
+        font-size: 160%;
+    }
+
 	.page-descr {
 		letter-spacing: .05em;
 		font-size: 1em;
@@ -2265,9 +2427,12 @@ Footer
     vertical-align: top;
     position: relative;
     top: -3px;
+    display: inline-block;
+    margin-@{end}: 3px;
     @media only screen and (min-width: 640px) {
         top: 0;
         vertical-align: middle;
+        display: block;
     }
 }
 
@@ -2289,7 +2454,7 @@ Feedback Help
         margin: 10px 0 5px;
     }
     fieldset {
-        padding: 10px 0 0;
+        margin-@{start}: 0;
         @media (max-width: 640px) {
             .row {
                 padding-top: 0;
@@ -2333,6 +2498,7 @@ Feedback Help
         margin-top: 30px;
         margin-bottom: 14px;
         overflow-y: auto;
+        clear: both;
         @media (max-width: 640px) {
             margin-top: 0;
         }

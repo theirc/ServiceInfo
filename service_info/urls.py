@@ -7,6 +7,8 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 
 import api.urls
+from services.views import export_view
+
 
 FRONTEND_DIR = os.path.join(settings.PROJECT_ROOT, 'frontend')
 
@@ -23,6 +25,7 @@ urlpatterns = [
         name='password_reset_confirm'),
     url(r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete',
         name='password_reset_complete'),
+    url(r'^export/(?P<signature>.*)/$', export_view, name='export'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

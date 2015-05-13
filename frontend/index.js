@@ -1,4 +1,6 @@
 var $ = require('jquery');
+window.jQuery = $;
+require('jquery-form/jquery.form');
 var Backbone = require('backbone');
 Backbone.$ = require('jquery');
 var underscore = require('underscore');
