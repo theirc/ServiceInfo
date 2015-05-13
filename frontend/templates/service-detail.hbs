@@ -36,6 +36,16 @@
 			</div>
 		{{/if}}
 		<div class="row">
+	        <span class="control-label" data-i18n="Service-Map.List.Provider-Name"></span>
+	        <div class="provider-name">
+	            {{#if service.provider.name }}
+	                {{ service.provider.name }}
+	            {{else}}
+	                <span data-i18n="Service-Map.List.Unknown"></span>
+	            {{/if}}
+	        </div>
+		</div>
+		<div class="row">
 			<span class="area control-label" data-i18n="Service-Map.List.Area"></span>
 			{{ service.servicearea.name }}
 		</div>
@@ -119,7 +129,11 @@
         <div class="description">
           <div class="row">
             <span class="control-label" data-i18n="Service-Map.List.Cost"></span>
-            <p>{{multiline service.cost_of_service }}</p>
+            	{{#if service.cost }}
+            		<p>{{multiline service.cost_of_service }}</p>
+            	{{else}}
+            		<span data-i18n="Global.Not-Listed"></span>
+            	{{/if}}
           </div>
         </div>
         <div class="description">

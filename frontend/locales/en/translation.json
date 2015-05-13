@@ -36,7 +36,8 @@
     "GeolocationNotSupported": "Geolocation is not supported by this browser.",
     "GeoPositionUnavailable": "Location is not available at this time.",
     "GeoLocationDenied": "You have not given permission to access your current location.",
-    "RequiredField": "This field is required."
+    "RequiredField": "This field is required.",
+    "Not-Listed": "Not Listed"
   },
   "Login-Form": {
     "Page-Head": {
@@ -109,6 +110,8 @@
     "Map": {"Toggle": "List View"},
     "List": {
       "Toggle": "Map View",
+      "Provider-Name": "Service Provider Name",
+      "Service-Name": "Service Name",
       "Area": "Service Area",
       "Type": "Service Type",
       "Additional-Info": "Additional Provider Information",
