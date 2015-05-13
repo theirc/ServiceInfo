@@ -75,6 +75,9 @@
   "Service-Detail": {
       "Give-Feedback": "Give feedback on this service"
   },
+  "Feedback-Confirm": {
+      "Give-More-Feedback": "Give feedback on another service"
+  },
   "Feedback-Map": {
     "Page-Head": {
       "Title": "Give Feedback on Services",
