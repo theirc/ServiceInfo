@@ -2,8 +2,14 @@ ServiceInfo
 
 Release Notes
 
+0.1.9 - May 13, 2015
+--------------------
+
+* Fix search using map
+* Add "Give feedback again" button on Feedback confirmation page
+
 0.1.8 - May 13, 2015
--------------------
+--------------------
 
 * Some IE fixes
 * Fix: "Todays hours"
