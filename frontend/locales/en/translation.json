@@ -505,7 +505,7 @@
   },
   "Reports": {
     "Title": "Feedback Reports",
-    "Description": "",
+    "Description": "Reports summarizing feedback on services",
     "Form": {
       "Stat": {
         "Label": "Report To View",
