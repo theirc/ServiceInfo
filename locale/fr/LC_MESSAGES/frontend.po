@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-05-12 09:40+0000\n"
-"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
+"PO-Revision-Date: 2015-05-13 12:03+0000\n"
+"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -105,6 +105,9 @@ msgstr "Vous avez pas donné la permission d'accéder à votre emplacement actue
 
 msgid "Global##RequiredField"
 msgstr "Ce champ est obligatoire."
+
+msgid "Global##Not-Listed"
+msgstr ""
 
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "Entrer"
@@ -210,6 +213,12 @@ msgstr "liste Voir"
 
 msgid "Service-Map##List##Toggle"
 msgstr "Voir la carte"
+
+msgid "Service-Map##List##Provider-Name"
+msgstr ""
+
+msgid "Service-Map##List##Service-Name"
+msgstr ""
 
 msgid "Service-Map##List##Area"
 msgstr "Zone de service"
@@ -509,7 +518,7 @@ msgid "Service-List##Import"
 msgstr "importation"
 
 msgid "Service-List##Import-File"
-msgstr "Fichier de feuille de calcul Excel à l'importation"
+msgstr ""
 
 msgid "Service-List##Export"
 msgstr "exportation"
@@ -629,10 +638,10 @@ msgid "Map##TypeHeader"
 msgstr "Filtrer par un type de service"
 
 msgid "Footer##About##Title"
-msgstr "À propos de Service Info"
+msgstr ""
 
 msgid "Footer##About##Paragraph"
-msgstr "Propulsé par l'International Rescue Committee, Service Info est un outil qui permet aux fournisseurs de services d'enregistrer leurs services en ligne et les bénéficiaires à la fois découvrir ces services sur une carte et donner des commentaires sur eux. Service Info est open source et libre d'utilisation."
+msgstr ""
 
 msgid "Footer##Contact##Title"
 msgstr "Contactez nous"
@@ -787,6 +796,9 @@ msgstr "L'importation a réussi"
 msgid "Import-Tool##Errors"
 msgstr "Il y avait des erreurs dans le fichier. Aucune donnée n'a été changé."
 
+msgid "Import-Export##Page##Title"
+msgstr ""
+
 msgid "Import-Export##Help##Title"
 msgstr "aider"
 
@@ -834,6 +846,9 @@ msgstr "Des difficultés à contacter les fournisseurs de services par type de s
 
 msgid "Reports##Form##Stat##Options##Communication"
 msgstr "Satisfaction à l'égard du personnel de communication par type de service"
+
+msgid "Reports##Form##Stat##Options##NumServices"
+msgstr ""
 
 msgid "Reports##Form##Download"
 msgstr "Télécharger le rapport CSV"
