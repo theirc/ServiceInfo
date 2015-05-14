@@ -309,7 +309,8 @@
     "Cancel": "Cancel",
     "Delete": "Delete",
     "Change-Service": "Change service",
-    "Change-Change": "Update this draft"
+    "Change-Change": "Update this draft",
+    "View-Reports": "View Service Reports"
   },
   "Provider-Registration-Confirmation": {
     "Page-Head": {
