@@ -10,7 +10,7 @@
         "Home": "القائمة الرئيسيّة ",
         "Login": "تسجيل الدخول",
         "Logout": "تسجيل الخروج",
-        "Services": "لائحة الخدمات",
+        "Services": "",
         "Add-Services": "إضافة خدمات",
         "Import-Export": "إستيراد/تحميل",
         "Service-Map": "خريطة الخدمات",
@@ -74,6 +74,9 @@
     },
     "Service-Detail": {
         "Give-Feedback": "قدّم ملاحظاتك حول هذه الخدمة"
+    },
+    "Feedback-Confirm": {
+        "Give-More-Feedback": ""
     },
     "Feedback-Map": {
         "Page-Head": {
@@ -291,7 +294,8 @@
         "Cancel": "إلغاء",
         "Delete": "حذف",
         "Change-Service": "تعديل الخدمة",
-        "Change-Change": "حدّث هذه المسودة"
+        "Change-Change": "حدّث هذه المسودة",
+        "View-Reports": ""
     },
     "Provider-Registration-Confirmation": {
         "Page-Head": {
@@ -482,7 +486,7 @@
     },
     "Reports": {
         "Title": "تقارير الملاحظات",
-        "Description": "شرح عن التقارير",
+        "Description": "",
         "Form": {
             "Stat": {
                 "Label": "إختيار التقرير لعرضه",

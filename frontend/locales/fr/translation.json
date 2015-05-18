@@ -10,7 +10,7 @@
         "Home": "Principale",
         "Login": "Login",
         "Logout": "Logout",
-        "Services": "Liste des services",
+        "Services": "",
         "Add-Services": "Ajouter des services",
         "Import-Export": "Import/Export",
         "Service-Map": "Service Map",
@@ -74,6 +74,9 @@
     },
     "Service-Detail": {
         "Give-Feedback": "Améliorer les informations sur ce service"
+    },
+    "Feedback-Confirm": {
+        "Give-More-Feedback": ""
     },
     "Feedback-Map": {
         "Page-Head": {
@@ -291,7 +294,8 @@
         "Cancel": "Annuler",
         "Delete": "Effacer",
         "Change-Service": "Changer de service",
-        "Change-Change": "Mise à jour de"
+        "Change-Change": "Mise à jour de",
+        "View-Reports": ""
     },
     "Provider-Registration-Confirmation": {
         "Page-Head": {
@@ -482,7 +486,7 @@
     },
     "Reports": {
         "Title": "Outil de Commentaire",
-        "Description": "De rapports##Description",
+        "Description": "",
         "Form": {
             "Stat": {
                 "Label": "Rapport pour afficher",

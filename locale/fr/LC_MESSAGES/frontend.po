@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-05-13 12:03+0000\n"
+"PO-Revision-Date: 2015-05-14 16:12+0000\n"
 "Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgid "Menu##Logout"
 msgstr "Logout"
 
 msgid "Menu##Services"
-msgstr "Liste des services"
+msgstr ""
 
 msgid "Menu##Add-Services"
 msgstr "Ajouter des services"
@@ -150,6 +150,9 @@ msgstr "Se il vous plaît chercher un fournisseur de service premier à donner v
 
 msgid "Service-Detail##Give-Feedback"
 msgstr "Améliorer les informations sur ce service"
+
+msgid "Feedback-Confirm##Give-More-Feedback"
+msgstr ""
 
 msgid "Feedback-Map##Page-Head##Title"
 msgstr "Envoyer des commentaires sur les services"
@@ -565,6 +568,9 @@ msgstr "Changer de service"
 msgid "Service-List##Change-Change"
 msgstr "Mise à jour de"
 
+msgid "Service-List##View-Reports"
+msgstr ""
+
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
 msgstr "Votre information a été soumis avec succès"
 
@@ -827,7 +833,7 @@ msgid "Reports##Title"
 msgstr "Outil de Commentaire"
 
 msgid "Reports##Description"
-msgstr "De rapports##Description"
+msgstr ""
 
 msgid "Reports##Form##Stat##Label"
 msgstr "Rapport pour afficher"
