@@ -113,7 +113,6 @@
     "Map": {"Toggle": "List View"},
     "List": {
       "Toggle": "Map View",
-      "Provider-Name": "Service Provider Name",
       "Service-Name": "Service Name",
       "Area": "Service Area",
       "Type": "Service Type",
