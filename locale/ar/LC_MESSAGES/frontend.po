@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-05-12 13:00+0000\n"
-"Last-Translator: Nizar Najjar <ozogorgor@gmail.com>\n"
+"PO-Revision-Date: 2015-05-14 16:12+0000\n"
+"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +34,7 @@ msgid "Menu##Logout"
 msgstr "تسجيل الخروج"
 
 msgid "Menu##Services"
-msgstr "لائحة الخدمات"
+msgstr ""
 
 msgid "Menu##Add-Services"
 msgstr "إضافة خدمات"
@@ -108,6 +108,9 @@ msgstr " إنك لم تعط الإذن للحصول على تحديد لموقع
 msgid "Global##RequiredField"
 msgstr "هذه الخانة مطلوبة"
 
+msgid "Global##Not-Listed"
+msgstr "غير مدرجة"
+
 msgid "Login-Form##Page-Head##Page-Title##Title"
 msgstr "تسجيل الدخول"
 
@@ -149,6 +152,9 @@ msgstr "الرجاء البحث أولاً عن مقدم الخدمات حتى �
 
 msgid "Service-Detail##Give-Feedback"
 msgstr "قدّم ملاحظاتك حول هذه الخدمة"
+
+msgid "Feedback-Confirm##Give-More-Feedback"
+msgstr ""
 
 msgid "Feedback-Map##Page-Head##Title"
 msgstr "قدّم ملاحظاتك حول الخدمات "
@@ -212,6 +218,12 @@ msgstr "عرض بشكل قائمة"
 
 msgid "Service-Map##List##Toggle"
 msgstr "عرض على الخريطة"
+
+msgid "Service-Map##List##Provider-Name"
+msgstr "إسم مقدم الخدمات"
+
+msgid "Service-Map##List##Service-Name"
+msgstr "إسم الخدمة"
 
 msgid "Service-Map##List##Area"
 msgstr "مكان الخدمة "
@@ -511,7 +523,7 @@ msgid "Service-List##Import"
 msgstr "إستيراد"
 
 msgid "Service-List##Import-File"
-msgstr "جداول البيانات إكسل (Excel) للإستيراد"
+msgstr "الرجاء إختيار ملف جداول البيانات إكسل (Excel) لإستيراده."
 
 msgid "Service-List##Export"
 msgstr "تحميل"
@@ -557,6 +569,9 @@ msgstr "تعديل الخدمة"
 
 msgid "Service-List##Change-Change"
 msgstr "حدّث هذه المسودة"
+
+msgid "Service-List##View-Reports"
+msgstr ""
 
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
 msgstr "لقد تم إرسال معلوماتك بنجاح"
@@ -631,10 +646,10 @@ msgid "Map##TypeHeader"
 msgstr "تصنيف حسب نوع الخدمة"
 
 msgid "Footer##About##Title"
-msgstr "عن خريطة الخدمات "
+msgstr "حول خريطة الخدمات (ServiceInfo)"
 
 msgid "Footer##About##Paragraph"
-msgstr "مدعومة من لجنة الإنقاذ الدولية. خريطة الخدمات (Service Info) هي أداة تسمح لمقدمي الخدمات بتسجيل خدماتهم عبر الإنترنت، وتسمح للمستفيدين والمقدمين على حد سواء اكتشاف تلك الخدمات بعرضها على خريطة، كما تسمح للمستفيدين بإعطاء ملاحظات حول تلك الخدمات. الأداة مفتوحة المصادر ومجانيّة."
+msgstr "مدعومة من لجنة الإنقاذ الدولية، خريطة الخدمات (ServiceInfo) هي أداة تسمح لمقدمي الخدمات بتسجيل خدماتهم عبر الإنترنت وتسمح للمستفيدين والمقدمين على حد سواء اكتشاف تلك الخدمات من خلال عرضها على خريطة كما تسمح بإعطاء ملاحظات حول تلك الخدمات. خريطة الخدمات مفتوحة المصادر ومجانية."
 
 msgid "Footer##Contact##Title"
 msgstr "إتصل بنا "
@@ -789,6 +804,9 @@ msgstr "لقد تم إستيراد الملف بنجاح"
 msgid "Import-Tool##Errors"
 msgstr "هناك أخطاء في الملف. لم يتم تغيير البيانات."
 
+msgid "Import-Export##Page##Title"
+msgstr "إستيراد/تحميل"
+
 msgid "Import-Export##Help##Title"
 msgstr "معلومات مُساعِدَة"
 
@@ -817,7 +835,7 @@ msgid "Reports##Title"
 msgstr "تقارير الملاحظات"
 
 msgid "Reports##Description"
-msgstr "شرح عن التقارير"
+msgstr ""
 
 msgid "Reports##Form##Stat##Label"
 msgstr "إختيار التقرير لعرضه"
@@ -836,6 +854,9 @@ msgstr "صعوبات الاتصال بمقدمي الخدمات بحسب نوع 
 
 msgid "Reports##Form##Stat##Options##Communication"
 msgstr "الرضى عن التواصل مع الموظفين بحسب نوع الخدمة"
+
+msgid "Reports##Form##Stat##Options##NumServices"
+msgstr "عدد الخدمات بحسب الموقع ونوع الخدمة"
 
 msgid "Reports##Form##Download"
 msgstr "تحميل التقرير بصيغة CSV"

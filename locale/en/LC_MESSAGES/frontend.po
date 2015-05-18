@@ -25,7 +25,7 @@ msgid "Menu##Logout"
 msgstr "Logout"
 
 msgid "Menu##Services"
-msgstr "List of Services"
+msgstr "Manage Services"
 
 msgid "Menu##Add-Services"
 msgstr "Add Services"
@@ -143,6 +143,9 @@ msgstr "Please search for a service provider first to give your feedback, you mu
 
 msgid "Service-Detail##Give-Feedback"
 msgstr "Give feedback on this service"
+
+msgid "Feedback-Confirm##Give-More-Feedback"
+msgstr "Give feedback on another service"
 
 msgid "Feedback-Map##Page-Head##Title"
 msgstr "Give Feedback on Services"
@@ -540,6 +543,9 @@ msgstr "Change service"
 msgid "Service-List##Change-Change"
 msgstr "Update this draft"
 
+msgid "Service-List##View-Reports"
+msgstr "View Service Reports"
+
 msgid "Provider-Registration-Confirmation##Page-Head##Page-Title##Title"
 msgstr "Your Information was Submitted Successfully"
 
@@ -799,7 +805,7 @@ msgid "Reports##Title"
 msgstr "Feedback Reports"
 
 msgid "Reports##Description"
-msgstr ""
+msgstr "Reports summarizing feedback on services"
 
 msgid "Reports##Form##Stat##Label"
 msgstr "Report To View"

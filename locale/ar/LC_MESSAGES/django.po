@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-11 21:22+0300\n"
-"PO-Revision-Date: 2015-05-13 11:32+0000\n"
-"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
+"POT-Creation-Date: 2015-05-14 19:12+0300\n"
+"PO-Revision-Date: 2015-05-14 05:35+0000\n"
+"Last-Translator: Nizar Najjar <ozogorgor@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,11 +21,11 @@ msgstr ""
 "Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: api/renderers.py:27 services/models.py:906
+#: api/renderers.py:27 services/models.py:920
 msgid "Name"
 msgstr "الإسم"
 
-#: api/serializers.py:38 services/models.py:552 services/models.py:555
+#: api/serializers.py:38 services/models.py:566 services/models.py:569
 msgid "This field is required."
 msgstr "هذه الخانة مطلوبة"
 
@@ -88,7 +88,7 @@ msgstr "رابط إعادة تعيين كلمة المرور غير صالح"
 msgid "User is not pending activation"
 msgstr "حالة المستخدم ليست معلقة"
 
-#: api/views.py:262
+#: api/views.py:264
 msgid "Service record must be current or pending changes to be canceled"
 msgstr "يجب أن يكون سجل الخدمة \"حالي\" أو \"ينتظر التغييرات\" ليتم إلغاءه"
 
@@ -366,7 +366,7 @@ msgstr "مع أطيب التحيات"
 
 #: service_info/templates/email/service_approved_body.html:23
 #: service_info/templates/email/service_approved_body.txt:13
-msgid "Service Info"
+msgid "ServiceInfo"
 msgstr "خريطة الخدمات"
 
 #: service_info/templates/email/service_approved_body.html:25
@@ -457,110 +457,110 @@ msgstr "There is no service type with English name %r"
 msgid "There is no service area with English name %r"
 msgstr "There is no service area with English name %r"
 
-#: services/import_export.py:228
+#: services/import_export.py:234
 msgid "Unable to open spreadsheet file; is it an Excel spreadsheet?"
 msgstr "Unable to open spreadsheet file; is it an Excel spreadsheet?"
 
-#: services/import_export.py:240
+#: services/import_export.py:246
 #, python-format
 msgid "Errors in sheet %s:"
 msgstr "أخطاء في ورقة٪ الصورة:%s:"
 
-#: services/import_export.py:253
+#: services/import_export.py:259
 #, python-format
 msgid "Row %d"
 msgstr "Row %d"
 
-#: services/import_export.py:288
+#: services/import_export.py:294
 #, python-format
 msgid "Spreadsheet file should contain 3 sheets, this one has %d"
 msgstr "Spreadsheet file should contain 3 sheets, this one has %d"
 
-#: services/import_export.py:298
+#: services/import_export.py:304
 msgid "First sheet has no data."
 msgstr "جدول البيانات الأول فارغ"
 
 #. Translators: do NOT translate text inside {braces}
-#: services/import_export.py:304
+#: services/import_export.py:310
 #, python-brace-format
 msgid "First sheet has wrong name, expected {expected}, got {actual}"
 msgstr "First sheet has wrong name, expected {expected}, got {actual}"
 
-#: services/import_export.py:308
+#: services/import_export.py:314
 #, python-format
 msgid "First sheet has wrong headers, expected %s"
 msgstr "First sheet has wrong headers, expected %s"
 
-#: services/import_export.py:324
+#: services/import_export.py:330
 #, python-format
 msgid "%d is not a provider this user may delete"
 msgstr "%d is not a provider this user may delete"
 
-#: services/import_export.py:327
+#: services/import_export.py:333
 #, python-format
 msgid "%d is not a provider this user may import"
 msgstr "%d is not a provider this user may import"
 
-#: services/import_export.py:331
+#: services/import_export.py:337
 msgid "Only staff may delete providers"
 msgstr "الموظفين فقط قد حذف مقدمي"
 
-#: services/import_export.py:336
+#: services/import_export.py:342
 msgid "Non-staff users may not create new providers"
 msgstr "المستخدمين غير الموظفين قد لا تخلق مقدمي خدمات جديدة"
 
-#: services/import_export.py:345 services/import_export.py:413
-#: services/import_export.py:466
+#: services/import_export.py:351 services/import_export.py:419
+#: services/import_export.py:472
 #, python-format
 msgid "%s is not a valid ID"
 msgstr "%s ليس بطاقة هوية صالحة"
 
-#: services/import_export.py:351
+#: services/import_export.py:357
 #, python-format
 msgid "There is no provider with id=%s"
 msgstr "لا يوجد أي مزود مع id=%s"
 
-#: services/import_export.py:378 services/import_export.py:445
+#: services/import_export.py:384 services/import_export.py:451
 msgid "Second sheet has no data."
 msgstr "جدول البيانات الثاني فارغ"
 
 #. Translators: do NOT translate text inside {braces}
-#: services/import_export.py:384
+#: services/import_export.py:390
 #, python-brace-format
 msgid "Second sheet has wrong name, expected {expected}, got {actual}"
 msgstr "الورقة الثانية واسم خاطئ، من المتوقع {expected},, got {actual}"
 
-#: services/import_export.py:402
+#: services/import_export.py:408
 #, python-format
 msgid "%d is not a service this user may delete"
 msgstr "%d ليس خدمة لهذا المستخدم قد حذف"
 
-#: services/import_export.py:405
+#: services/import_export.py:411
 #, python-format
 msgid "%d is not a service this user may import"
 msgstr "%d  ليس خدمة لهذا المستخدم قد استيراد"
 
-#: services/import_export.py:418
+#: services/import_export.py:424
 #, python-format
 msgid "No service with id=%s"
 msgstr "لا توجد خدمة مع  id=%s"
 
-#: services/import_export.py:427
+#: services/import_export.py:433
 msgid "Non-staff users may not create services for other providers"
 msgstr "المستخدمين غير الموظفين قد لا تخلق الخدمات لمقدمي الخدمات الآخرين"
 
 #. Translators: do NOT translate text inside {braces}
-#: services/import_export.py:451
+#: services/import_export.py:457
 #, python-brace-format
 msgid "Third sheet has wrong name, expected {expected}, got {actual}"
 msgstr "الورقة الثالثة واسم خاطئ، من المتوقع  {expected}, got {actual}"
 
-#: services/import_export.py:472
+#: services/import_export.py:478
 #, python-format
 msgid "No selection criterion with id = %s"
 msgstr "لا معايير الاختيار مع id = %s"
 
-#: services/import_export.py:491
+#: services/import_export.py:497
 msgid ""
 "Selection criterion refers to service with ID or name {name!r} that is not "
 "in the 2nd sheet. Choices: {list1!r} or {list2!r}"
@@ -568,26 +568,26 @@ msgstr "ويشير معيار الاختيار للخدمة مع هوية أو �
 
 #. Translators: Provider name
 #. Translators: Service name
-#: services/models.py:38 services/models.py:68 services/models.py:202
-#: services/models.py:271 services/models.py:325 services/models.py:878
+#: services/models.py:38 services/models.py:68 services/models.py:216
+#: services/models.py:285 services/models.py:339 services/models.py:892
 msgid "name in English"
 msgstr "الاسم في اللغة الإنجليزية"
 
 #. Translators: Provider name
 #. Translators: Service name
-#: services/models.py:44 services/models.py:76 services/models.py:208
-#: services/models.py:277 services/models.py:332 services/models.py:884
+#: services/models.py:44 services/models.py:76 services/models.py:222
+#: services/models.py:291 services/models.py:346 services/models.py:898
 msgid "name in Arabic"
 msgstr "الإسم في اللغة العربية "
 
 #. Translators: Provider name
 #. Translators: Service name
-#: services/models.py:50 services/models.py:84 services/models.py:214
-#: services/models.py:283 services/models.py:339 services/models.py:890
+#: services/models.py:50 services/models.py:84 services/models.py:228
+#: services/models.py:297 services/models.py:353 services/models.py:904
 msgid "name in French"
 msgstr "الإسم في اللغة الفرنسية "
 
-#: services/models.py:92 services/models.py:448
+#: services/models.py:92 services/models.py:462
 msgid "type"
 msgstr "نوع "
 
@@ -601,19 +601,19 @@ msgstr "الموقع الإلكتروني"
 
 #. Translators: Provider description
 #. Translators: Service description
-#: services/models.py:108 services/models.py:350
+#: services/models.py:108 services/models.py:364
 msgid "description in English"
 msgstr "الوصف في اللغة الإنكليزية "
 
 #. Translators: Provider description
 #. Translators: Service description
-#: services/models.py:114 services/models.py:356
+#: services/models.py:114 services/models.py:370
 msgid "description in Arabic"
 msgstr "الوصف في اللغة العربية "
 
 #. Translators: Provider description
 #. Translators: Service description
-#: services/models.py:120 services/models.py:362
+#: services/models.py:120 services/models.py:376
 msgid "description in French"
 msgstr "الوصف في اللغة الفرنسية "
 
@@ -653,312 +653,312 @@ msgstr "عنوان مقدم الخدمات باللغة العربية"
 msgid "provider address in French"
 msgstr "عنوان مقدم الخدمات باللغة الفرنسية"
 
-#: services/models.py:221
+#: services/models.py:235
 msgid "parent area"
 msgstr "المنطقة الأم "
 
-#: services/models.py:222
+#: services/models.py:236
 msgid "the area that contains this area"
 msgstr "المنطقة التابعة لتلك المنطقة أخرى "
 
-#: services/models.py:249
+#: services/models.py:263
 msgid "selection criteria"
 msgstr "معايير الاختيار"
 
-#: services/models.py:253
+#: services/models.py:267
 msgid "Selection criterion must have text in at least one language"
 msgstr "يجب أن يكون معيار الاختيار النص بلغة واحدة على الأقل"
 
-#: services/models.py:267
+#: services/models.py:281
 msgid "icon"
 msgstr "رمز"
 
-#: services/models.py:290
+#: services/models.py:304
 msgid "comments in English"
 msgstr "ملاحظات باللغة الإنجليزية"
 
-#: services/models.py:296
+#: services/models.py:310
 msgid "comments in Arabic"
 msgstr "ملاحظات  باللغة العربية"
 
-#: services/models.py:302
+#: services/models.py:316
 msgid "comments in French"
 msgstr "ملاحظات  باللغة الفرنسية"
 
-#: services/models.py:321
+#: services/models.py:335
 msgid "provider"
 msgstr "مقدم الخدمات"
 
-#: services/models.py:346
+#: services/models.py:360
 msgid "area of service"
 msgstr "منطقة تواجد الخدمة"
 
-#: services/models.py:367
+#: services/models.py:381
 msgid "additional information in English"
 msgstr "معلومات إضافية باللغة الإنجليزية"
 
-#: services/models.py:372
+#: services/models.py:386
 msgid "additional information in Arabic"
 msgstr "معلومات إضافية باللغة العربية"
 
-#: services/models.py:377
+#: services/models.py:391
 msgid "additional information in French"
 msgstr "معلومات إضافية باللغة الفرنسية"
 
-#: services/models.py:382
+#: services/models.py:396
 msgid "cost of service"
 msgstr "كلفة الخدمة"
 
-#: services/models.py:397
+#: services/models.py:411
 msgid "draft"
 msgstr "مسودة"
 
-#: services/models.py:400
+#: services/models.py:414
 msgid "current"
 msgstr "الحالي "
 
-#: services/models.py:402
+#: services/models.py:416
 msgid "rejected"
 msgstr "مرفوض"
 
-#: services/models.py:405
+#: services/models.py:419
 msgid "canceled"
 msgstr "ملغية"
 
-#: services/models.py:407
+#: services/models.py:421
 msgid "archived"
 msgstr "موضوعة في أرشيف"
 
-#: services/models.py:410
+#: services/models.py:424
 msgid "status"
 msgstr "الحالة"
 
-#: services/models.py:417
+#: services/models.py:431
 msgid ""
 "If a service record represents a modification of another service record, "
 "this field links to that other record."
 msgstr "إن كان سجل الخدمة يمثل تعديل آخر لسجل خدمة أخرى، إذن هذه الخانة ترمز إلى ذلك السجل الأساسي"
 
-#: services/models.py:425
+#: services/models.py:439
 msgid "location"
 msgstr "الموقع"
 
-#: services/models.py:557
+#: services/models.py:571
 msgid "Only services in draft status may be approved."
 msgstr "يجوز الموافقة على الخدمات الوحيدة في مشروع وضع"
 
-#: services/models.py:600
+#: services/models.py:614
 msgid "Only services in draft status may be rejected."
 msgstr "قد يتم إلغاء فقط الخدمات الموضوعة في خانة المسودة"
 
-#: services/models.py:659
+#: services/models.py:673
 msgid "Provider updated their information"
 msgstr "لقد تم تحديث معلومات مقدم الخدمة"
 
-#: services/models.py:660
+#: services/models.py:674
 msgid "New service submitted by provider"
 msgstr "تم تسجيل خدمة جديدة من قبل مقدم الخدمة"
 
-#: services/models.py:661
+#: services/models.py:675
 msgid "Change to existing service submitted by provider"
 msgstr "تغيير إلى خدمة موجودة مسبقا\" من قبل مقدم الخدمة  "
 
-#: services/models.py:662
+#: services/models.py:676
 msgid "Provider canceled a draft service"
 msgstr " مقدم الخدمة ألغى مسودة الخدمة"
 
-#: services/models.py:663
+#: services/models.py:677
 msgid "Provider canceled a current service"
 msgstr "مقدم الخدمة ألغى خدمة حالية"
 
-#: services/models.py:664
+#: services/models.py:678
 msgid "Provider superseded a previous draft"
 msgstr "مزود ألغى مسودة قديمة "
 
-#: services/models.py:665
+#: services/models.py:679
 msgid "Staff approved a new or changed service"
 msgstr "الموظفين وافقوا على خدمة جديدة أو  خدمة معدّلة"
 
-#: services/models.py:666
+#: services/models.py:680
 msgid "Staff rejected a new or changed service"
 msgstr "الموظفون لم يوافقوا على خدمة جديدة أو خدمة معدّلة"
 
-#: services/models.py:667
+#: services/models.py:681
 msgid "User submitted feedback"
 msgstr "ملاحظات المستخدم المقترحة"
 
-#: services/models.py:691
+#: services/models.py:705
 msgid "update type"
 msgstr "نوع التحديث"
 
-#: services/models.py:696
+#: services/models.py:710
 msgid "JIRA issue"
 msgstr "مسألة الجيرا"
 
-#: services/models.py:897
+#: services/models.py:911
 msgid "nationalities"
 msgstr "الجنسيات"
 
-#: services/models.py:910
+#: services/models.py:924
 msgid "Phone Number (NN-NNNNNN)"
 msgstr "رقم الهاتف (03-303030)"
 
-#: services/models.py:917
+#: services/models.py:931
 msgid "Nationality"
 msgstr "الجنسية"
 
-#: services/models.py:922
+#: services/models.py:936
 msgid "Area of residence"
 msgstr "مكان السكن"
 
-#: services/models.py:927
+#: services/models.py:941
 msgid "Service"
 msgstr "الخدمة"
 
-#: services/models.py:933
+#: services/models.py:947
 msgid "Was service delivered?"
 msgstr "حل حصلت على الخدمة؟"
 
-#: services/models.py:937
+#: services/models.py:951
 msgid ""
 "How would you rate the quality of the service you received (from 1 to 5, "
 "where 5 is the highest rating possible)?"
 msgstr "كيف تقيم نوعية الخدمة التي تلقيتها (من 1 إلى 5، حيث أن 5 هي أعلى تقييم ممكن)؟"
 
-#: services/models.py:950
+#: services/models.py:964
 msgid ""
 "Did you receive a clear explanation for why the service you sought was not "
 "delivered to you?"
 msgstr "هل وصلك تبرير واضح لعدم حصولك على الخدمة التي ابتغيتها؟"
 
-#: services/models.py:957
+#: services/models.py:971
 msgid "No explanation"
 msgstr "لا تفسير"
 
-#: services/models.py:958
+#: services/models.py:972
 msgid "Explanation was not clear"
 msgstr "التفسير غير واضح"
 
-#: services/models.py:959
+#: services/models.py:973
 msgid "Explanation was not fair"
 msgstr "التفسير غير عادل"
 
-#: services/models.py:960
+#: services/models.py:974
 msgid "Clear and appropriate explanation"
 msgstr "تفسير واضح ومناسب"
 
-#: services/models.py:965
+#: services/models.py:979
 msgid ""
 "How long did you wait for the service to be delivered, after contacting the "
 "service provider?"
 msgstr "بعد التواصل مع مقدم الخدمة، كم من الوقت انتظرت حتى تلقيت الخدمة؟"
 
-#: services/models.py:972
+#: services/models.py:986
 msgid "Less than 1 hour"
 msgstr "أقل من ساعة واحدة 1"
 
-#: services/models.py:973
+#: services/models.py:987
 msgid "Up to 2 days"
 msgstr "حتى يومين إثنين"
 
-#: services/models.py:974
+#: services/models.py:988
 msgid "3-7 days"
 msgstr "من 3 إلى 7 أيام     3-7"
 
-#: services/models.py:975
+#: services/models.py:989
 msgid "1-2 weeks"
 msgstr "من أسبوع إلى أسبوعين       1-2"
 
-#: services/models.py:976
+#: services/models.py:990
 msgid "More than 2 weeks"
 msgstr "أكثر من أسبوعين    2"
 
-#: services/models.py:980
+#: services/models.py:994
 msgid ""
 "How do you rate your satisfaction with the time that you waited for the "
 "service to be delivered (from 1 to 5, where 5 is the highest rating "
 "possible)?"
 msgstr "كيف تقيم رضاك بالنسبة للوقت الذي انتظرت فيه لتصلك الخدمة (من 1 إلى 5، بحيث أن 5 هو أعلى تقييم متاح)؟"
 
-#: services/models.py:993
+#: services/models.py:1007
 msgid ""
 "Did you experience difficulties contacting the provider of the service you "
 "needed?"
 msgstr "هل واجهتك أي عقبات عند التواصل مع مقدم الخدمة الذي تحتاجها؟"
 
-#: services/models.py:997
+#: services/models.py:1011
 msgid "No"
 msgstr "لا"
 
-#: services/models.py:998
+#: services/models.py:1012
 msgid "Did not know how to contact them"
 msgstr "لم أعرف كيفية الإتصال به"
 
-#: services/models.py:999
+#: services/models.py:1013
 msgid "Tried to contact them by phone but received no response"
 msgstr "حاولت التواصل معهم عبر الهاتف و لكن لم أتلق جوابا\" "
 
-#: services/models.py:1000
+#: services/models.py:1014
 msgid ""
 "Tried to contact them in person but received no response or did not find "
 "their office"
 msgstr "حاولت التواصل معهم شخصيا\" و لكن لم أتلق جوابا\" أو لم أجد مكتبهم"
 
-#: services/models.py:1002
+#: services/models.py:1016
 msgid "Contacted them but response was unhelpful"
 msgstr "تواصلت معهم و لكن الجواب كان غير مفيد"
 
-#: services/models.py:1003
+#: services/models.py:1017
 msgid "Other"
 msgstr "آخر"
 
-#: services/models.py:1008
+#: services/models.py:1022
 msgid "Other difficulties contacting the service provider"
 msgstr "صعوبات أخرى واجهتك خلال تواصلك مع مقدم الخدمة"
 
-#: services/models.py:1013
+#: services/models.py:1027
 msgid ""
 "How would you rate your satisfaction with the staff of the organization that"
 " provided services to you, (from 1 to 5, where 5 is the highest rating "
 "possible)?"
 msgstr "كيف تقيم رضاك عن المنظمة/المؤسسة التي أمّنت لك الخدمة (من 1 إلى 5، بحيث أن 5 هي أعلى تقييم ممكن)"
 
-#: services/models.py:1022
+#: services/models.py:1036
 msgid "Other comments"
 msgstr "ملاحظات أخرى"
 
-#: services/models.py:1027
+#: services/models.py:1041
 msgid "I want my feedback to be anonymous to the service provider"
 msgstr "أريد أن يكون تقييمي مجهول الإسم لمقدم الخدمة"
 
-#: services/models.py:1036
+#: services/models.py:1050
 msgid ""
 "Quality field is required if you answered 'Yes' to 'Was the service you "
 "sought delivered to you?'."
 msgstr "حقل النوعية مطلوب إن كنت قد أجبت ب \"نعم\" على سؤال \"هل وصلتك الخدمة التي ابتغيتها؟\""
 
-#: services/models.py:1040
+#: services/models.py:1054
 msgid ""
 "An answer is required to 'How long did you wait for the service to be "
 "delivered, after contacting the service provider?' if you answered 'Yes' to "
 "'Was the service you sought delivered to you?'."
 msgstr "إن كان جوابك \"نعم\" ل \"هل وصلتك الخدمة التي ابتغيتها؟\" فالمطلوب تقديم جواب لهذا السؤال \"بعد الإتصال بمقدم الخدمة، كم من الوقت انتظرت كي تصلك الخدمة؟\" "
 
-#: services/models.py:1046
+#: services/models.py:1060
 msgid ""
 "An answer is required to 'How do you rate your satisfaction with the time "
 "that you waited for the service to be delivered?' if you answered 'Yes' to "
 "'Was the service you sought delivered to you?'."
 msgstr "إن كان جوابك \"نعم\" ل \"هل وصلتك الخدمة التي ابتغيتها؟\" فالمطلوب الإجابة على \"كيف تقيم رضاك على الوقت الذي انتظرت فيه لتصلك الخدمة؟\""
 
-#: services/models.py:1054
+#: services/models.py:1068
 msgid ""
 "An answer is required to 'Did you receive a clear explanation for why the "
 "service you sought was not delivered to you?' if you answered 'No' to 'Was "
 "the service you sought delivered to you?'."
 msgstr "إن كان جوابك \"لا\" ل \"هل وصلتك الخدمة التي ابتغيتها؟\" فالمطلوب الإجابة على \"هل وصلك تبرير واضح لعدم حصولك على الخدمة التي ابتغيتها؟\""
 
-#: services/models.py:1061
+#: services/models.py:1075
 msgid ""
 "An answer is required to 'Other difficulties contacting the service "
 "provider' if you answered 'Other' to 'Did you experience difficulties "

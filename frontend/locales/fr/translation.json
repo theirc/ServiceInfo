@@ -10,7 +10,7 @@
         "Home": "Principale",
         "Login": "Login",
         "Logout": "Logout",
-        "Services": "Liste des services",
+        "Services": "",
         "Add-Services": "Ajouter des services",
         "Import-Export": "Import/Export",
         "Service-Map": "Service Map",
@@ -36,7 +36,8 @@
         "GeolocationNotSupported": "Géolocalisation ne est pas supporté par ce navigateur.",
         "GeoPositionUnavailable": "Emplacement ne est pas disponible en ce moment.",
         "GeoLocationDenied": "Vous avez pas donné la permission d'accéder à votre emplacement actuel.",
-        "RequiredField": "Ce champ est obligatoire."
+        "RequiredField": "Ce champ est obligatoire.",
+        "Not-Listed": ""
     },
     "Login-Form": {
         "Page-Head": {
@@ -73,6 +74,9 @@
     },
     "Service-Detail": {
         "Give-Feedback": "Améliorer les informations sur ce service"
+    },
+    "Feedback-Confirm": {
+        "Give-More-Feedback": ""
     },
     "Feedback-Map": {
         "Page-Head": {
@@ -111,6 +115,8 @@
         },
         "List": {
             "Toggle": "Voir la carte",
+            "Provider-Name": "",
+            "Service-Name": "",
             "Area": "Zone de service",
             "Type": "Type de service",
             "Additional-Info": "Informations supplémentaires sur le fournisseur",
@@ -267,7 +273,7 @@
         "Empty-Message": "Vous ne avez pas encore présenté de services. Vous pouvez soumettre votre premier service pour examen en appuyant sur le bouton Nouveau service.",
         "Add-Service": "Nouveau service",
         "Import": "importation",
-        "Import-File": "Fichier de feuille de calcul Excel à l'importation",
+        "Import-File": "",
         "Export": "exportation",
         "Status": {
             "draft": "Ebauche",
@@ -288,7 +294,8 @@
         "Cancel": "Annuler",
         "Delete": "Effacer",
         "Change-Service": "Changer de service",
-        "Change-Change": "Mise à jour de"
+        "Change-Change": "Mise à jour de",
+        "View-Reports": ""
     },
     "Provider-Registration-Confirmation": {
         "Page-Head": {
@@ -361,8 +368,8 @@
     },
     "Footer": {
         "About": {
-            "Title": "À propos de Service Info",
-            "Paragraph": "Propulsé par l'International Rescue Committee, Service Info est un outil qui permet aux fournisseurs de services d'enregistrer leurs services en ligne et les bénéficiaires à la fois découvrir ces services sur une carte et donner des commentaires sur eux. Service Info est open source et libre d'utilisation."
+            "Title": "",
+            "Paragraph": ""
         },
         "Contact": {
             "Title": "Contactez nous",
@@ -463,6 +470,9 @@
         "Errors": "Il y avait des erreurs dans le fichier. Aucune donnée n'a été changé."
     },
     "Import-Export": {
+        "Page": {
+            "Title": ""
+        },
         "Help": {
             "Title": "aider",
             "Help1": "Lors de l'importation, toutes les données non valides seront causer la totalité importation être rejetée et les erreurs sera signalé à l'utilisateur.",
@@ -476,7 +486,7 @@
     },
     "Reports": {
         "Title": "Outil de Commentaire",
-        "Description": "De rapports##Description",
+        "Description": "",
         "Form": {
             "Stat": {
                 "Label": "Rapport pour afficher",
@@ -485,7 +495,8 @@
                     "QOS": "Qualité de service délivrée par type de service",
                     "Failure": "Explication de l'échec de la prestation des services par type de service",
                     "Contact": "Des difficultés à contacter les fournisseurs de services par type de service",
-                    "Communication": "Satisfaction à l'égard du personnel de communication par type de service"
+                    "Communication": "Satisfaction à l'égard du personnel de communication par type de service",
+                    "NumServices": ""
                 }
             },
             "Download": "Télécharger le rapport CSV"

@@ -2,6 +2,14 @@ ServiceInfo
 
 Release Notes
 
+0.2.0 - May 18, 2015
+--------------------
+
+* Updated translations
+* Clean out old migrations
+* Move button for viewing reports from side menu to manage services page
+* Remove "Add service" from menu and rename "Services list" to "Manage services"
+
 0.1.9 - May 13, 2015
 --------------------
 
