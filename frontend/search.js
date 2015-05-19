@@ -18,6 +18,7 @@ var deny_permission = false;  // pretend user denied location permission
 var MAX_RESULTS = 25;
 
 var SearchControls = Backbone.View.extend({
+    el: 'div#search_controls',
     initialize: function(opts) {
         this.$el = opts.$el;
         this.feedback = opts.feedback;
