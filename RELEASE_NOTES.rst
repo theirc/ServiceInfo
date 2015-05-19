@@ -2,6 +2,11 @@ ServiceInfo
 
 Release Notes
 
+0.2.2 - May 19, 2015
+--------------------
+
+* Fix some links on the home page.
+
 0.2.1 - May 19, 2015
 --------------------
 
