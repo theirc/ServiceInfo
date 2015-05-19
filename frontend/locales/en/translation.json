@@ -94,6 +94,7 @@
       }
     },
     "No-Search-Results": "No services matched your search terms. Please try other terms.",
+    "Results-Truncated": "There were more results than could be displayed. Try a more specific search.",
     "Filtered-Search": {
       "Label": "Search term",
       "Submit": "Search",

@@ -51,6 +51,7 @@ module.exports = Backbone.View.extend({
         } else {
             $('.no-search-results').hide();
         }
+        $('.results-truncated').toggle(search.has_more);
         $el.i18n();
     }
 });
