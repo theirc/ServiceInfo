@@ -15,7 +15,10 @@ var latlon = null;
 
 var deny_permission = false;  // pretend user denied location permission
 
+var MAX_RESULTS = 25;
+
 var SearchControls = Backbone.View.extend({
+    el: 'div#search_controls',
     initialize: function(opts) {
         this.$el = opts.$el;
         this.feedback = opts.feedback;
@@ -201,7 +204,7 @@ module.exports = {
             var params = {
                 search: config.get('q'),
                 type_numbers: config.get('t'),
-                limit: 25
+                limit: MAX_RESULTS
             };
             if (latlon && config.get('s') === 'd') {
                 params.closest = latlon.lat + ',' + latlon.lon;
@@ -211,7 +214,7 @@ module.exports = {
         });
 
         // Once fetch is done, process the results some more:
-        sequence = sequence.then(function() {
+        sequence = sequence.then(function(response) {
             var days = [
                 "Sunday",
                 "Monday",
@@ -221,6 +224,7 @@ module.exports = {
                 "Friday",
                 "Saturday"
             ];
+            self.has_more = (response.next !== null);
             var today = days[new Date().getDay()];
             var todaylc = today.toLowerCase();
             var services = self.services;

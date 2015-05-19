@@ -162,6 +162,9 @@ msgstr "Use the filtered search below to find the service that meets your needs.
 msgid "Service-Map##No-Search-Results"
 msgstr "No services matched your search terms. Please try other terms."
 
+msgid "Service-Map##Results-Truncated"
+msgstr "There were more results than could be displayed. Try a more specific search."
+
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "Search term"
 
@@ -618,8 +621,11 @@ msgstr "Filter by a Service Type"
 msgid "Footer##About##Title"
 msgstr "About ServiceInfo"
 
-msgid "Footer##About##Paragraph"
-msgstr "Powered by the International Rescue Committee, ServiceInfo is a tool that allows both service providers to register their services online and beneficiaries to both discover those services on a map and give feedback on them. ServiceInfo is open source and free to use."
+msgid "Footer##About##Sentence1"
+msgstr "Powered by the International Rescue Committee."
+
+msgid "Footer##About##Remainder"
+msgstr "ServiceInfo is a tool that allows both service providers to register their services online and beneficiaries to both discover those services on a map and give feedback on them. ServiceInfo is open source and free to use."
 
 msgid "Footer##Contact##Title"
 msgstr "Reach Us"

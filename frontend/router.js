@@ -40,7 +40,11 @@ function loadPage(name, params) {
         messages.clear();
         var viewArguments = Array.prototype.slice.apply(arguments);
         config.ready(function(){
-            var $el = $(document.querySelector('#page'));
+            /* Tie the view to whatever element its 'el' attribute selects, or
+               default to '#page'.
+             */
+            var selector = views[name].el || '#page';
+            var $el = $(document.querySelector(selector));
             var opts = {
                 el: $el
             };

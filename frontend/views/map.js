@@ -61,6 +61,7 @@ module.exports = Backbone.View.extend({
         }
         $('.no-search-results').hide();
         $('#map_container').show();
+        $('.results-truncated').toggle(search.has_more);
         $.each(services, function() {
             var service = this;
 

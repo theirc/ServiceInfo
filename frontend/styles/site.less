@@ -1482,6 +1482,7 @@ div#search {
 	        	@media (max-width: 640px) {
 	        		width: 33.3333%;
 	        		float: @start;
+                    margin-top: 0;
 	        	}
 	        }
 	        .two-third {
@@ -1603,7 +1604,7 @@ div#search {
 		    }
 		}
 	}
-	.container > .no-search-results {
+	.container > .no-search-results, .container > .results-truncated {
 		padding: 30px;
 		padding-top: 20px;
 		font-size: 110%;
@@ -2227,6 +2228,11 @@ Service-Detail
             vertical-align: middle;
             border: 1px solid white;
         }
+        .provider-name {
+            padding-@{start}: 53px;
+            color: white;
+            font-size: 140%;
+        }
     }
 	.contact > .row,
 	.description > .row,{
@@ -2288,6 +2294,7 @@ Service-Detail
 	table {
 		max-width: 640px;
 		margin: 0;
+        -webkit-transform: translate(0,0); //clears transform from earlier table setting for Safari.
 		transform: translate(0,0); //clears transform from earlier table setting.
 
 	}
@@ -2440,6 +2447,9 @@ Footer
 			height: 100%;
 		}
 	}
+  .sentence1 {
+    font-weight: bold;
+  }
 }
 
 .servicetype-icon {
