@@ -2,6 +2,11 @@ ServiceInfo
 
 Release Notes
 
+0.2.1 - May 19, 2015
+--------------------
+
+* Fix search - was broken by a new release of backbone.
+
 0.2.0 - May 18, 2015
 --------------------
 
