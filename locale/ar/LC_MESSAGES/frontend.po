@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-05-19 05:28+0000\n"
-"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
+"PO-Revision-Date: 2015-05-19 11:59+0000\n"
+"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -170,6 +170,9 @@ msgstr "إستخدم البحث الترشيحي أدناه للعثور على 
 
 msgid "Service-Map##No-Search-Results"
 msgstr "لم يتم إيجاد أي خدمات مطابقة. يرجى المحاولة مرة أخرى."
+
+msgid "Service-Map##Results-Truncated"
+msgstr ""
 
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "مصطلح البحث"
@@ -648,8 +651,11 @@ msgstr "تصنيف حسب نوع الخدمة"
 msgid "Footer##About##Title"
 msgstr "حول خريطة الخدمات (ServiceInfo)"
 
-msgid "Footer##About##Paragraph"
-msgstr "مدعومة من لجنة الإنقاذ الدولية، خريطة الخدمات (ServiceInfo) هي أداة تسمح لمقدمي الخدمات بتسجيل خدماتهم عبر الإنترنت وتسمح للمستفيدين والمقدمين على حد سواء اكتشاف تلك الخدمات من خلال عرضها على خريطة كما تسمح بإعطاء ملاحظات حول تلك الخدمات. خريطة الخدمات مفتوحة المصادر ومجانية."
+msgid "Footer##About##Sentence1"
+msgstr ""
+
+msgid "Footer##About##Remainder"
+msgstr ""
 
 msgid "Footer##Contact##Title"
 msgstr "إتصل بنا "

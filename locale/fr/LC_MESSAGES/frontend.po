@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-05-19 05:25+0000\n"
-"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
+"PO-Revision-Date: 2015-05-19 11:59+0000\n"
+"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -168,6 +168,9 @@ msgstr "Utilisez la recherche filtrée ci-dessous pour trouver le service qui r�
 
 msgid "Service-Map##No-Search-Results"
 msgstr "Aucun service ne correspond à vos termes de recherche. Se il vous plaît essayer d'autres termes."
+
+msgid "Service-Map##Results-Truncated"
+msgstr ""
 
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "Le terme de recherche"
@@ -646,8 +649,11 @@ msgstr "Filtrer par un type de service"
 msgid "Footer##About##Title"
 msgstr "À propos de ServiceInfo"
 
-msgid "Footer##About##Paragraph"
-msgstr "Propulsé par l'International Rescue Committee, Service Info est un outil qui permet aux fournisseurs de services d'enregistrer leurs services en ligne et les bénéficiaires à la fois découvrir ces services sur une carte et donner des commentaires sur eux. Service Info est open source et libre d'utilisation."
+msgid "Footer##About##Sentence1"
+msgstr ""
+
+msgid "Footer##About##Remainder"
+msgstr ""
 
 msgid "Footer##Contact##Title"
 msgstr "Contactez nous"

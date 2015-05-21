@@ -94,6 +94,7 @@
             }
         },
         "No-Search-Results": "Aucun service ne correspond à vos termes de recherche. Se il vous plaît essayer d'autres termes.",
+        "Results-Truncated": "",
         "Filtered-Search": {
             "Label": "Le terme de recherche",
             "Submit": "Recherche",
@@ -369,7 +370,8 @@
     "Footer": {
         "About": {
             "Title": "À propos de ServiceInfo",
-            "Paragraph": "Propulsé par l'International Rescue Committee, Service Info est un outil qui permet aux fournisseurs de services d'enregistrer leurs services en ligne et les bénéficiaires à la fois découvrir ces services sur une carte et donner des commentaires sur eux. Service Info est open source et libre d'utilisation."
+            "Sentence1": "",
+            "Remainder": ""
         },
         "Contact": {
             "Title": "Contactez nous",
