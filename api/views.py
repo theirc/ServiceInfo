@@ -126,8 +126,7 @@ class NationalityViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
 class ServiceAreaViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
                          ServiceInfoGenericViewSet):
     permission_classes = [AllowAny]
-    # We only want to display the lowest-level service areas to the frontend.
-    queryset = ServiceArea.objects.lowest_level()
+    queryset = ServiceArea.objects.all()
     serializer_class = ServiceAreaSerializer
 
 

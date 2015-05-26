@@ -204,12 +204,6 @@ class ServiceAreaManager(models.GeoManager):
         """
         return super().get_queryset().filter(parent=None)
 
-    def lowest_level(self):
-        """
-        Return the lowest-level areas, i.e. the ones with no children
-        """
-        return super().get_queryset().filter(children=None)
-
 
 class ServiceArea(NameInCurrentLanguageMixin, models.Model):
     name_en = models.CharField(
