@@ -232,9 +232,11 @@ class ServiceArea(NameInCurrentLanguageMixin, models.Model):
         blank=True,
         related_name='children',
     )
-    region = models.PolygonField(
-        blank=True,
+    lebanon_region = models.ForeignKey(
+        'LebanonRegion',
         null=True,
+        default=None,
+        on_delete=models.SET_NULL,
     )
 
     objects = ServiceAreaManager()
@@ -1087,3 +1089,40 @@ class Feedback(models.Model):
                 feedback=self,
                 update_type=JiraUpdateRecord.FEEDBACK
             )
+
+
+class LebanonRegion(models.Model):
+    """Common model to represent levels 1, 2, 3"""
+    level = models.IntegerField(
+        choices=[
+            (1, _('Governate')),
+            (2, _('District or CAZA')),
+            # (3, _('Cadastral')),
+        ]
+    )
+    area = models.FloatField()
+    perimeter = models.FloatField()
+
+    moh_na = models.CharField(max_length=25, help_text="Seems to be the governate")
+    moh_cod = models.CharField(max_length=5, help_text="Seems to be the governate")
+    kada_name = models.CharField(max_length=28, blank=True, default='',
+                                 help_text="Seems to be the CAZA or district")
+    kadaa_code = models.CharField(max_length=10, blank=True, default='',
+                                  help_text="Seems to be the CAZA or district")
+    cad_name = models.CharField(max_length=60, blank=True, default='')
+    cad_code = models.CharField(max_length=16, blank=True, default='')
+    shape_leng = models.FloatField()
+    shape_area = models.FloatField()
+
+    geom = models.MultiPolygonField(srid=4326)
+    parent = models.ForeignKey('self', related_name='children', null=True, blank=True)
+
+    name = models.CharField(max_length=60)
+    code = models.CharField(max_length=16)
+    objects = models.GeoManager()
+
+    class Meta:
+        ordering = ['level', 'name']
+
+    def __str__(self):
+        return "%s %s" % (self.get_level_display(), self.name)
