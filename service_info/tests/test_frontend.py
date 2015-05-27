@@ -87,9 +87,17 @@ class ServiceInfoFrontendTestCase(LiveServerTestCase):
         button = form.find_element_by_css_selector('[data-lang="%s"]' % language)
         button.click()
 
-    def wait_for_element(self, selector, match=By.ID, timeout=DEFAULT_TIMEOUT):
+    def wait_for_element(self, selector, match=By.ID, timeout=DEFAULT_TIMEOUT,
+                         must_be_visible=True):
+        # If must_be_visible is True, wait for element to be visible.
+        # If must_be_visible is False, just wait for element to be in the DOM, visible or not.
+        if must_be_visible:
+            condition = expected_conditions.visibility_of_element_located
+        else:
+            condition = expected_conditions.presence_of_element_located
+
         return WebDriverWait(self.browser, timeout).until(
-            expected_conditions.visibility_of_element_located((match, selector))
+            condition((match, selector))
         )
 
     def wait_for_page_title_contains(self, title, timeout=DEFAULT_TIMEOUT):
@@ -111,6 +119,27 @@ class ServiceInfoFrontendTestCase(LiveServerTestCase):
                 element.send_keys(value)
         form.find_element_by_class_name(button_class).click()
 
+    def logout(self):
+        menu = self.wait_for_element('menu')
+        logout = menu.find_elements_by_link_text('Logout')[0]
+        logout.click()
+        self.wait_for_element('body.is-logged-out', match=By.CSS_SELECTOR)
+
+    def login(self):
+        """Login as self.user using self.password"""
+        menu = self.wait_for_element('menu')
+        login = menu.find_elements_by_link_text('Login')[0]
+        login.click()
+        form = self.wait_for_element('form-login', match=By.CLASS_NAME)
+        self.assertHashLocation('/login')
+        data = {
+            'email': self.user.email,
+            'password': self.password,
+        }
+        self.submit_form(form, data)
+        self.wait_for_element('services')
+        self.assertHashLocation('/manage/service-list')
+
 
 class FrontEndTestCase(ServiceInfoFrontendTestCase):
 
@@ -131,21 +160,10 @@ class FrontEndTestCase(ServiceInfoFrontendTestCase):
 
     def test_login(self):
         """Login an existing user."""
-
-        user = EmailUserFactory(password='abc123')
+        self.password = 'abc123'
+        self.user = EmailUserFactory(password=self.password)
         self.load_page_and_set_language()
-        menu = self.wait_for_element('menu')
-        login = menu.find_elements_by_link_text('Login')[0]
-        login.click()
-        form = self.wait_for_element('form-login', match=By.CLASS_NAME)
-        self.assertHashLocation('/login')
-        data = {
-            'email': user.email,
-            'password': 'abc123',
-        }
-        self.submit_form(form, data)
-        self.wait_for_element('services')
-        self.assertHashLocation('/manage/service-list')
+        self.login()
 
     def test_register(self):
         """Register for a new site account."""

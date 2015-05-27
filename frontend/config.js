@@ -14,7 +14,7 @@ var config = module.exports = {
         config_data[key] = value;
         has_been_set[key] = true;
         if (key.indexOf('forever.') === 0) {
-            localStorage[key] = value;
+            localStorage[key] = JSON.stringify(value);
         }
         this._triggerChange(key, 'set', value);
     },
@@ -27,6 +27,9 @@ var config = module.exports = {
         return has_been_set.hasOwnProperty(key);
     },
     remove: function(key) {
+        if (config_data.hasOwnProperty(key)) {
+            delete config_data[key];
+        }
         localStorage.removeItem(key);
         this._triggerChange(key, 'remove');
     },
@@ -81,9 +84,16 @@ $(function($){
     var config_url = './config.json';
     $.getJSON(config_url, function(data) {
         $.extend(config_data, data);
+        // "forever" config values are stored as JSON in local storage
         for (var key in localStorage) {
             if (localStorage.hasOwnProperty(key)) {
-                config.set(key, localStorage[key]);
+                try {
+                    config.set(key, JSON.parse(localStorage[key]));
+                } catch (e) {
+                    // when this fix first rolls out, users will have non-json in local storage
+                    console.error(e);
+                    localStorage.removeItem(key);
+                }
             }
         }
         _loaded = true;
