@@ -20,13 +20,13 @@ class ServiceAreaAPITest(APITestMixin, TestCase):
         self.area4 = ServiceAreaFactory()
 
     def test_get_areas(self):
-        # Should ONLY include the ones that are not parents
+        # Should get all, whether top-level or not
         rsp = self.get_with_token(reverse('servicearea-list'))
         self.assertEqual(OK, rsp.status_code)
         result = json.loads(rsp.content.decode('utf-8'))
         results = result
         result_names = [item['name_en'] for item in results]
-        self.assertNotIn(self.area1.name_en, result_names)
+        self.assertIn(self.area1.name_en, result_names)
         self.assertIn(self.area2.name_en, result_names)
         self.assertIn(self.area3.name_en, result_names)
         self.assertIn(self.area4.name_en, result_names)
