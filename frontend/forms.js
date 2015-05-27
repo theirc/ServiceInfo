@@ -14,9 +14,14 @@ var forms = module.exports = {
         var data = {};
 
         var collect_field_data = function() {
+            var value, filled;
             var $field = $(this);
-            var value = $field.val();
-            var filled = value.length > 0;
+            if ($field.attr('type') === 'checkbox') {
+                filled = value = $field.prop('checked');
+            } else {
+                value = $field.val();
+                filled = value.length > 0;
+            }
             var name = $field.attr('name') || $field.parent().attr('name');
             var ml = typeof $field.data('i18n-field') !== "undefined";
 
@@ -64,7 +69,7 @@ var forms = module.exports = {
             }
         };
 
-        $form.find('[name]').each(collect_field_data);
+        $form.find('[name]').not('select, [type=checkbox], [type=radio]').each(collect_field_data);
         $form.find('select[name] option:selected').each(collect_field_data);
         $form.find('input[name][type=checkbox]:checked').each(collect_field_data);
         $form.find('input[name][type=radio]:checked').each(collect_field_data);
@@ -86,7 +91,14 @@ var forms = module.exports = {
         var self = this;
         var data = model.data();
         $.each(data, function(name, value) {
-            self.getField($form, name).val(value);
+            var $field = self.getField($form, name);
+            if ($field.attr('type') === 'checkbox') {
+                // It's a checkbox
+                $field.prop('checked', value);
+            }
+            else {
+                $field.val(value);
+            }
         })
     },
 

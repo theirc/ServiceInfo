@@ -391,6 +391,11 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         blank=True,
         default='',
     )
+    is_mobile = models.BooleanField(
+        _("mobile service"),
+        blank=True,
+        default=False,
+    )
 
     # Note: we don't let multiple non-archived versions of a service record pile up
     # there should be no more than two, one in current status and/or one in some other
