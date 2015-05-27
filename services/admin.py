@@ -238,5 +238,6 @@ admin.site.register(
     ],
     list_filter=[
         'level',
-    ]
+    ],
+    list_select_related=['parent']
 )
