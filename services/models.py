@@ -241,6 +241,10 @@ class ServiceArea(NameInCurrentLanguageMixin, models.Model):
 
     objects = ServiceAreaManager()
 
+    @property
+    def centroid(self):
+        return self.lebanon_region.centroid
+
     def get_api_url(self):
         return reverse('servicearea-detail', args=[self.id])
 
@@ -521,6 +525,10 @@ class Service(NameInCurrentLanguageMixin, models.Model):
                 superseded_draft = self.update_of
                 # Bump this one up a level - we're replacing a pending change.
                 self.update_of = superseded_draft.update_of
+
+            # If it's mobile, force the location to the center of the area
+            if self.is_mobile:
+                self.location = self.area_of_service.centroid
 
             super().save(*args, **kwargs)
 
@@ -1126,3 +1134,7 @@ class LebanonRegion(models.Model):
 
     def __str__(self):
         return "%s %s" % (self.get_level_display(), self.name)
+
+    @property
+    def centroid(self):
+        return self.geom.centroid
