@@ -26,7 +26,7 @@ class ViewReportsButtonTest(ServiceInfoFrontendTestCase):
         self.assertTrue(button.is_displayed())
 
     def test_logout_and_login_as_non_staff(self):
-        # Non-staff user does not see the reports button, even after logging out
+        # Non-staff user sees the reports button, even after logging out
         # and in and changing language.  Even if superuser.
         self.password = 'abc123'
         self.user = EmailUserFactory(password=self.password)
@@ -35,7 +35,7 @@ class ViewReportsButtonTest(ServiceInfoFrontendTestCase):
         self.load_page_and_set_language()
         self.login()
         button = self.wait_for_element('view_reports_button', must_be_visible=False)
-        self.assertFalse(button.is_displayed())
+        self.assertTrue(button.is_displayed())
 
         # Log out and in again
         self.logout()
@@ -45,7 +45,7 @@ class ViewReportsButtonTest(ServiceInfoFrontendTestCase):
         # Give the page time to start reloading before looking for the button again
         time.sleep(0.5)
         button = self.wait_for_element('view_reports_button', must_be_visible=False)
-        self.assertFalse(button.is_displayed())
+        self.assertTrue(button.is_displayed())
 
         # Set the language again
         form = self.wait_for_element('language-toggle')
@@ -54,4 +54,4 @@ class ViewReportsButtonTest(ServiceInfoFrontendTestCase):
         # Give the page time to start reloading before looking for the button again
         time.sleep(0.5)
         button = self.wait_for_element('view_reports_button', must_be_visible=False)
-        self.assertFalse(button.is_displayed())
+        self.assertTrue(button.is_displayed())
