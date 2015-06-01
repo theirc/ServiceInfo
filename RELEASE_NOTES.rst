@@ -2,6 +2,17 @@ ServiceInfo
 
 Release Notes
 
+0.2.3 - Jun 1, 2015
+-------------------
+
+* Fix alignment of phon enumber and website sections on service detail page
+* Add a checkbox for mobile services and some help text
+* Allow selecting higher-level areas as a service's service area (e.g. choose a governate
+  or a CAZA).
+* Add geographic data to the service areas
+* On mobile services, set location field to the center of their area of service
+* Allow non-staff to use reports
+
 0.2.2 - May 19, 2015
 --------------------
 
