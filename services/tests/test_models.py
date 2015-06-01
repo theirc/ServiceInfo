@@ -7,7 +7,7 @@ from django.utils import translation
 
 from email_user.tests.factories import EmailUserFactory
 from services.models import ServiceType, ProviderType, Provider, Service, \
-    blank_or_at_least_one_letter
+    blank_or_at_least_one_letter, ServiceArea
 from services.tests.factories import ProviderFactory, ServiceFactory, FeedbackFactory
 
 
@@ -166,6 +166,19 @@ class ServiceTest(TestCase):
         service = ServiceFactory(location='POINT( 1.0 2.0)')
         service.latitude = -66.2
         self.assertEqual(Point(1.0, -66.2), service.location)
+
+    def test_mobile_services_have_location_set(self):
+        # If a service is mobile, we set its location on save to the center of its area
+        area = ServiceArea.objects.get(pk=1)  # Mount Lebanon/Baabda
+        service = ServiceFactory(is_mobile=True, location=None, area_of_service=area)
+        self.assertIsNotNone(service.location)
+        self.assertEqual(area.centroid, service.location)
+
+    def test_non_mobile_services_dont_have_location_set(self):
+        # If a service is not mobile, we don't set its location on save
+        area = ServiceArea.objects.get(pk=1)  # Mount Lebanon/Baabda
+        service = ServiceFactory(location=None, area_of_service=area)
+        self.assertIsNone(service.location)
 
 
 class FeedbackTest(TestCase):
