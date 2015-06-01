@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-05-19 11:59+0000\n"
+"PO-Revision-Date: 2015-05-27 19:33+0000\n"
 "Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -220,9 +220,6 @@ msgstr "liste Voir"
 msgid "Service-Map##List##Toggle"
 msgstr "Voir la carte"
 
-msgid "Service-Map##List##Provider-Name"
-msgstr "Nom de fournisseur de service"
-
 msgid "Service-Map##List##Service-Name"
 msgstr "Nom du service"
 
@@ -292,11 +289,17 @@ msgstr "Choisissez une zone de service"
 msgid "Service-Form##Service-Name"
 msgstr "Nom du service"
 
+msgid "Service-Form##Is-Mobile"
+msgstr ""
+
+msgid "Service-Form##Is-Mobile-Help"
+msgstr ""
+
 msgid "Service-Form##Service-Area"
 msgstr "Zone de service"
 
 msgid "Service-Form##Service-Area-Help"
-msgstr "L'emplacement du service que vous fournissez"
+msgstr ""
 
 msgid "Service-Form##Type"
 msgstr "Type de service"
