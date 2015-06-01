@@ -1,4 +1,4 @@
-from http.client import OK, FORBIDDEN
+from http.client import OK
 import json
 from django.conf import settings
 from django.core.files.storage import default_storage
@@ -41,7 +41,7 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
     def test_get_wait_times_non_staff(self):
         url = reverse('servicetype-wait-times')
         rsp = self.get_with_token(url)
-        self.assertEqual(FORBIDDEN, rsp.status_code)
+        self.assertEqual(OK, rsp.status_code)
 
     def test_get_wait_times(self):
         self.make_admin()
@@ -72,7 +72,7 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
     def test_get_qos_non_staff(self):
         url = reverse('servicetype-qos')
         rsp = self.get_with_token(url)
-        self.assertEqual(FORBIDDEN, rsp.status_code)
+        self.assertEqual(OK, rsp.status_code)
 
     def test_get_qos(self):
         self.make_admin()
@@ -101,7 +101,7 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
     def test_get_failure_non_staff(self):
         url = reverse('servicetype-failure')
         rsp = self.get_with_token(url)
-        self.assertEqual(FORBIDDEN, rsp.status_code)
+        self.assertEqual(OK, rsp.status_code)
 
     def test_get_failure(self):
         self.make_admin()
@@ -132,7 +132,7 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
     def test_get_contact_non_staff(self):
         url = reverse('servicetype-contact')
         rsp = self.get_with_token(url)
-        self.assertEqual(FORBIDDEN, rsp.status_code)
+        self.assertEqual(OK, rsp.status_code)
 
     def test_get_contact(self):
         self.make_admin()
@@ -163,7 +163,7 @@ class ServiceTypeAPITest(APITestMixin, TestCase):
     def test_get_communication_non_staff(self):
         url = reverse('servicetype-communication')
         rsp = self.get_with_token(url)
-        self.assertEqual(FORBIDDEN, rsp.status_code)
+        self.assertEqual(OK, rsp.status_code)
 
     def test_get_communication(self):
         self.make_admin()

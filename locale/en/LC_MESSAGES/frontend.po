@@ -213,9 +213,6 @@ msgstr "List View"
 msgid "Service-Map##List##Toggle"
 msgstr "Map View"
 
-msgid "Service-Map##List##Provider-Name"
-msgstr "Service Provider Name"
-
 msgid "Service-Map##List##Service-Name"
 msgstr "Service Name"
 
@@ -285,11 +282,17 @@ msgstr "Choose a Service Area"
 msgid "Service-Form##Service-Name"
 msgstr "Name of Service"
 
+msgid "Service-Form##Is-Mobile"
+msgstr "Mobile Service"
+
+msgid "Service-Form##Is-Mobile-Help"
+msgstr "A mobile service is delivered to the beneficiary. A beneficiary must come get a non-mobile service."
+
 msgid "Service-Form##Service-Area"
 msgstr "Area of Service"
 
 msgid "Service-Form##Service-Area-Help"
-msgstr "The location of the service you provide"
+msgstr "The location of the service you provide. For a mobile service, please choose the service area in which the service can be delivered."
 
 msgid "Service-Form##Type"
 msgstr "Service Type"

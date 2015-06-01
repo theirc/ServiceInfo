@@ -94,6 +94,7 @@
             }
         },
         "No-Search-Results": "Aucun service ne correspond à vos termes de recherche. Se il vous plaît essayer d'autres termes.",
+        "Results-Truncated": "",
         "Filtered-Search": {
             "Label": "Le terme de recherche",
             "Submit": "Recherche",
@@ -115,7 +116,6 @@
         },
         "List": {
             "Toggle": "Voir la carte",
-            "Provider-Name": "Nom de fournisseur de service",
             "Service-Name": "Nom du service",
             "Area": "Zone de service",
             "Type": "Type de service",
@@ -160,8 +160,10 @@
         "Type-Choose": "Choisissez un type de service",
         "Service-Area-Choose": "Choisissez une zone de service",
         "Service-Name": "Nom du service",
+        "Is-Mobile": "",
+        "Is-Mobile-Help": "",
         "Service-Area": "Zone de service",
-        "Service-Area-Help": "L'emplacement du service que vous fournissez",
+        "Service-Area-Help": "",
         "Type": "Type de service",
         "Service-Description": "Description",
         "Service-Description-Help": "Une courte explication sur le service mentionné; ce qui explique plus sur le service fourni et permet d'identifier et de ses composants.",
@@ -369,7 +371,8 @@
     "Footer": {
         "About": {
             "Title": "À propos de ServiceInfo",
-            "Paragraph": "Propulsé par l'International Rescue Committee, Service Info est un outil qui permet aux fournisseurs de services d'enregistrer leurs services en ligne et les bénéficiaires à la fois découvrir ces services sur une carte et donner des commentaires sur eux. Service Info est open source et libre d'utilisation."
+            "Sentence1": "",
+            "Remainder": ""
         },
         "Contact": {
             "Title": "Contactez nous",

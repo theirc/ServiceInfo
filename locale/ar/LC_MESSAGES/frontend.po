@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-05-19 05:28+0000\n"
-"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
+"PO-Revision-Date: 2015-05-27 19:33+0000\n"
+"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +34,7 @@ msgid "Menu##Logout"
 msgstr "تسجيل الخروج"
 
 msgid "Menu##Services"
-msgstr "تعديل الخدمة"
+msgstr "إدارة الخدمات"
 
 msgid "Menu##Add-Services"
 msgstr "إضافة خدمات"
@@ -171,6 +171,9 @@ msgstr "إستخدم البحث الترشيحي أدناه للعثور على 
 msgid "Service-Map##No-Search-Results"
 msgstr "لم يتم إيجاد أي خدمات مطابقة. يرجى المحاولة مرة أخرى."
 
+msgid "Service-Map##Results-Truncated"
+msgstr "عدد نتائج البحث أكثر مما يمكن عرضه. الرجاء تحديد البحث أكثر."
+
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "مصطلح البحث"
 
@@ -218,9 +221,6 @@ msgstr "عرض بشكل قائمة"
 
 msgid "Service-Map##List##Toggle"
 msgstr "عرض على الخريطة"
-
-msgid "Service-Map##List##Provider-Name"
-msgstr "إسم مقدم الخدمات"
 
 msgid "Service-Map##List##Service-Name"
 msgstr "إسم الخدمة"
@@ -291,11 +291,17 @@ msgstr "إختار منطقة الخدمة"
 msgid "Service-Form##Service-Name"
 msgstr "اسم الخدمة"
 
+msgid "Service-Form##Is-Mobile"
+msgstr ""
+
+msgid "Service-Form##Is-Mobile-Help"
+msgstr ""
+
 msgid "Service-Form##Service-Area"
 msgstr "منطقة الخدمة"
 
 msgid "Service-Form##Service-Area-Help"
-msgstr "موقع الخدمة التي تقدمها"
+msgstr ""
 
 msgid "Service-Form##Type"
 msgstr "نوع الخدمة"
@@ -648,8 +654,11 @@ msgstr "تصنيف حسب نوع الخدمة"
 msgid "Footer##About##Title"
 msgstr "حول خريطة الخدمات (ServiceInfo)"
 
-msgid "Footer##About##Paragraph"
-msgstr "مدعومة من لجنة الإنقاذ الدولية، خريطة الخدمات (ServiceInfo) هي أداة تسمح لمقدمي الخدمات بتسجيل خدماتهم عبر الإنترنت وتسمح للمستفيدين والمقدمين على حد سواء اكتشاف تلك الخدمات من خلال عرضها على خريطة كما تسمح بإعطاء ملاحظات حول تلك الخدمات. خريطة الخدمات مفتوحة المصادر ومجانية."
+msgid "Footer##About##Sentence1"
+msgstr "مدعومة من الهيئة الدوليّة للإغاثة"
+
+msgid "Footer##About##Remainder"
+msgstr "خريطة الخدمات (ServiceInfo) هي أداة تسمح لمقدمي الخدمات بتسجيل خدماتهم عبر الإنترنت وتسمح للمستفيدين والمقدمين على حد سواء اكتشاف تلك الخدمات من خلال عرضها على خريطة كما تسمح بإعطاء ملاحظات حول تلك الخدمات. خريطة الخدمات مفتوحة المصادر ومجانية."
 
 msgid "Footer##Contact##Title"
 msgstr "إتصل بنا "

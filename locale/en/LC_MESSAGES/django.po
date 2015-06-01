@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-19 14:59+0300\n"
+"POT-Creation-Date: 2015-06-01 19:18+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: api/renderers.py:27 services/models.py:920
+#: api/renderers.py:27 services/models.py:929
 msgid "Name"
 msgstr ""
 
-#: api/serializers.py:38 services/models.py:566 services/models.py:569
+#: api/serializers.py:38 services/models.py:575 services/models.py:578
 msgid "This field is required."
 msgstr ""
 
@@ -34,57 +34,57 @@ msgstr ""
 msgid "A user with that email already exists."
 msgstr ""
 
-#: api/serializers.py:254
+#: api/serializers.py:255
 msgid "User is not a provider.  Only providers can create services."
 msgstr ""
 
-#: api/serializers.py:262
+#: api/serializers.py:263
 msgid "You may only submit updates to current, draft or rejected services"
 msgstr ""
 
-#: api/serializers.py:269
+#: api/serializers.py:270
 msgid "There is already a pending draft update to this service."
 msgstr ""
 
-#: api/serializers.py:279
+#: api/serializers.py:280
 msgid "Close time is missing."
 msgstr ""
 
-#: api/serializers.py:281
+#: api/serializers.py:282
 msgid "Open time is missing."
 msgstr ""
 
-#: api/serializers.py:283
+#: api/serializers.py:284
 msgid "Close time is not later than open time."
 msgstr ""
 
-#: api/serializers.py:380
+#: api/serializers.py:381
 msgid "User account is disabled."
 msgstr ""
 
-#: api/serializers.py:383
+#: api/serializers.py:384
 msgid "Unable to log in with provided credentials."
 msgstr ""
 
-#: api/serializers.py:405
+#: api/serializers.py:406
 msgid ""
 "Activation key is invalid. Check that it was copied correctly and has not "
 "already been used."
 msgstr ""
 
-#: api/serializers.py:426 api/serializers.py:477
+#: api/serializers.py:427 api/serializers.py:478
 msgid "No user with that email"
 msgstr ""
 
-#: api/serializers.py:443 api/serializers.py:461
+#: api/serializers.py:444 api/serializers.py:462
 msgid "Password reset key is not valid"
 msgstr ""
 
-#: api/serializers.py:480
+#: api/serializers.py:481
 msgid "User is not pending activation"
 msgstr ""
 
-#: api/views.py:264
+#: api/views.py:263
 msgid "Service record must be current or pending changes to be canceled"
 msgstr ""
 
@@ -569,26 +569,26 @@ msgstr ""
 
 #. Translators: Provider name
 #. Translators: Service name
-#: services/models.py:38 services/models.py:68 services/models.py:216
-#: services/models.py:285 services/models.py:339 services/models.py:892
+#: services/models.py:38 services/models.py:68 services/models.py:210
+#: services/models.py:285 services/models.py:339 services/models.py:901
 msgid "name in English"
 msgstr ""
 
 #. Translators: Provider name
 #. Translators: Service name
-#: services/models.py:44 services/models.py:76 services/models.py:222
-#: services/models.py:291 services/models.py:346 services/models.py:898
+#: services/models.py:44 services/models.py:76 services/models.py:216
+#: services/models.py:291 services/models.py:346 services/models.py:907
 msgid "name in Arabic"
 msgstr ""
 
 #. Translators: Provider name
 #. Translators: Service name
-#: services/models.py:50 services/models.py:84 services/models.py:228
-#: services/models.py:297 services/models.py:353 services/models.py:904
+#: services/models.py:50 services/models.py:84 services/models.py:222
+#: services/models.py:297 services/models.py:353 services/models.py:913
 msgid "name in French"
 msgstr ""
 
-#: services/models.py:92 services/models.py:462
+#: services/models.py:92 services/models.py:467
 msgid "type"
 msgstr ""
 
@@ -654,11 +654,11 @@ msgstr ""
 msgid "provider address in French"
 msgstr ""
 
-#: services/models.py:235
+#: services/models.py:229
 msgid "parent area"
 msgstr ""
 
-#: services/models.py:236
+#: services/models.py:230
 msgid "the area that contains this area"
 msgstr ""
 
@@ -710,258 +710,270 @@ msgstr ""
 msgid "cost of service"
 msgstr ""
 
-#: services/models.py:411
-msgid "draft"
-msgstr ""
-
-#: services/models.py:414
-msgid "current"
+#: services/models.py:401
+msgid "mobile service"
 msgstr ""
 
 #: services/models.py:416
-msgid "rejected"
+msgid "draft"
 msgstr ""
 
 #: services/models.py:419
-msgid "canceled"
+msgid "current"
 msgstr ""
 
 #: services/models.py:421
-msgid "archived"
+msgid "rejected"
 msgstr ""
 
 #: services/models.py:424
+msgid "canceled"
+msgstr ""
+
+#: services/models.py:426
+msgid "archived"
+msgstr ""
+
+#: services/models.py:429
 msgid "status"
 msgstr ""
 
-#: services/models.py:431
+#: services/models.py:436
 msgid ""
 "If a service record represents a modification of another service record, "
 "this field links to that other record."
 msgstr ""
 
-#: services/models.py:439
+#: services/models.py:444
 msgid "location"
 msgstr ""
 
-#: services/models.py:571
+#: services/models.py:580
 msgid "Only services in draft status may be approved."
 msgstr ""
 
-#: services/models.py:614
+#: services/models.py:623
 msgid "Only services in draft status may be rejected."
 msgstr ""
 
-#: services/models.py:673
+#: services/models.py:682
 msgid "Provider updated their information"
 msgstr ""
 
-#: services/models.py:674
+#: services/models.py:683
 msgid "New service submitted by provider"
 msgstr ""
 
-#: services/models.py:675
+#: services/models.py:684
 msgid "Change to existing service submitted by provider"
 msgstr ""
 
-#: services/models.py:676
+#: services/models.py:685
 msgid "Provider canceled a draft service"
 msgstr ""
 
-#: services/models.py:677
+#: services/models.py:686
 msgid "Provider canceled a current service"
 msgstr ""
 
-#: services/models.py:678
+#: services/models.py:687
 msgid "Provider superseded a previous draft"
 msgstr ""
 
-#: services/models.py:679
+#: services/models.py:688
 msgid "Staff approved a new or changed service"
 msgstr ""
 
-#: services/models.py:680
+#: services/models.py:689
 msgid "Staff rejected a new or changed service"
 msgstr ""
 
-#: services/models.py:681
+#: services/models.py:690
 msgid "User submitted feedback"
 msgstr ""
 
-#: services/models.py:705
+#: services/models.py:714
 msgid "update type"
 msgstr ""
 
-#: services/models.py:710
+#: services/models.py:719
 msgid "JIRA issue"
 msgstr ""
 
-#: services/models.py:911
+#: services/models.py:920
 msgid "nationalities"
 msgstr ""
 
-#: services/models.py:924
+#: services/models.py:933
 msgid "Phone Number (NN-NNNNNN)"
 msgstr ""
 
-#: services/models.py:931
+#: services/models.py:940
 msgid "Nationality"
 msgstr ""
 
-#: services/models.py:936
+#: services/models.py:945
 msgid "Area of residence"
 msgstr ""
 
-#: services/models.py:941
+#: services/models.py:950
 msgid "Service"
 msgstr ""
 
-#: services/models.py:947
+#: services/models.py:956
 msgid "Was service delivered?"
 msgstr ""
 
-#: services/models.py:951
+#: services/models.py:960
 msgid ""
 "How would you rate the quality of the service you received (from 1 to 5, "
 "where 5 is the highest rating possible)?"
 msgstr ""
 
-#: services/models.py:964
+#: services/models.py:973
 msgid ""
 "Did you receive a clear explanation for why the service you sought was not "
 "delivered to you?"
 msgstr ""
 
-#: services/models.py:971
+#: services/models.py:980
 msgid "No explanation"
 msgstr ""
 
-#: services/models.py:972
+#: services/models.py:981
 msgid "Explanation was not clear"
 msgstr ""
 
-#: services/models.py:973
+#: services/models.py:982
 msgid "Explanation was not fair"
 msgstr ""
 
-#: services/models.py:974
+#: services/models.py:983
 msgid "Clear and appropriate explanation"
 msgstr ""
 
-#: services/models.py:979
+#: services/models.py:988
 msgid ""
 "How long did you wait for the service to be delivered, after contacting the "
 "service provider?"
 msgstr ""
 
-#: services/models.py:986
+#: services/models.py:995
 msgid "Less than 1 hour"
 msgstr ""
 
-#: services/models.py:987
+#: services/models.py:996
 msgid "Up to 2 days"
 msgstr ""
 
-#: services/models.py:988
+#: services/models.py:997
 msgid "3-7 days"
 msgstr ""
 
-#: services/models.py:989
+#: services/models.py:998
 msgid "1-2 weeks"
 msgstr ""
 
-#: services/models.py:990
+#: services/models.py:999
 msgid "More than 2 weeks"
 msgstr ""
 
-#: services/models.py:994
+#: services/models.py:1003
 msgid ""
 "How do you rate your satisfaction with the time that you waited for the "
 "service to be delivered (from 1 to 5, where 5 is the highest rating "
 "possible)?"
 msgstr ""
 
-#: services/models.py:1007
+#: services/models.py:1016
 msgid ""
 "Did you experience difficulties contacting the provider of the service you "
 "needed?"
 msgstr ""
 
-#: services/models.py:1011
+#: services/models.py:1020
 msgid "No"
 msgstr ""
 
-#: services/models.py:1012
+#: services/models.py:1021
 msgid "Did not know how to contact them"
 msgstr ""
 
-#: services/models.py:1013
+#: services/models.py:1022
 msgid "Tried to contact them by phone but received no response"
 msgstr ""
 
-#: services/models.py:1014
+#: services/models.py:1023
 msgid ""
 "Tried to contact them in person but received no response or did not find "
 "their office"
 msgstr ""
 
-#: services/models.py:1016
+#: services/models.py:1025
 msgid "Contacted them but response was unhelpful"
 msgstr ""
 
-#: services/models.py:1017
+#: services/models.py:1026
 msgid "Other"
 msgstr ""
 
-#: services/models.py:1022
+#: services/models.py:1031
 msgid "Other difficulties contacting the service provider"
 msgstr ""
 
-#: services/models.py:1027
+#: services/models.py:1036
 msgid ""
 "How would you rate your satisfaction with the staff of the organization that "
 "provided services to you, (from 1 to 5, where 5 is the highest rating "
 "possible)?"
 msgstr ""
 
-#: services/models.py:1036
+#: services/models.py:1045
 msgid "Other comments"
 msgstr ""
 
-#: services/models.py:1041
+#: services/models.py:1050
 msgid "I want my feedback to be anonymous to the service provider"
 msgstr ""
 
-#: services/models.py:1050
+#: services/models.py:1059
 msgid ""
 "Quality field is required if you answered 'Yes' to 'Was the service you "
 "sought delivered to you?'."
 msgstr ""
 
-#: services/models.py:1054
+#: services/models.py:1063
 msgid ""
 "An answer is required to 'How long did you wait for the service to be "
 "delivered, after contacting the service provider?' if you answered 'Yes' to "
 "'Was the service you sought delivered to you?'."
 msgstr ""
 
-#: services/models.py:1060
+#: services/models.py:1069
 msgid ""
 "An answer is required to 'How do you rate your satisfaction with the time "
 "that you waited for the service to be delivered?' if you answered 'Yes' to "
 "'Was the service you sought delivered to you?'."
 msgstr ""
 
-#: services/models.py:1068
+#: services/models.py:1077
 msgid ""
 "An answer is required to 'Did you receive a clear explanation for why the "
 "service you sought was not delivered to you?' if you answered 'No' to 'Was "
 "the service you sought delivered to you?'."
 msgstr ""
 
-#: services/models.py:1075
+#: services/models.py:1084
 msgid ""
 "An answer is required to 'Other difficulties contacting the service "
 "provider' if you answered 'Other' to 'Did you experience difficulties "
 "contacting the provider of the service you needed?'"
+msgstr ""
+
+#: services/models.py:1106
+msgid "Governate"
+msgstr ""
+
+#: services/models.py:1107
+msgid "District or CAZA"
 msgstr ""
