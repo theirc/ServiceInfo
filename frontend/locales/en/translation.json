@@ -154,6 +154,7 @@
           "Page-Description": "Fill out the form below and apply to have a new approved service."
         }
       },
+      "Day": "Day",
       "Legend": "Service Information",
       "Type-Choose": "Choose a Service Type",
       "Service-Area-Choose": "Choose a Service Area",
@@ -412,8 +413,8 @@
         "Legend":"Feedback for the selected service"
       }
     },
-    "non_delivery_explained": "Did you receive a clear explanation for why the service you sought was not delivered to you?",
-    "non_delivery_explanation": {
+    "non-delivery-explained": "Did you receive a clear explanation for why the service you sought was not delivered to you?",
+    "non-delivery-explanation": {
        "no": "No explanation",
         "unclear": "Explanation was not clear",
         "unfair": "Explanation was not fair",
@@ -425,17 +426,17 @@
        "label": "How long did you wait for the service to be delivered, after contacting the service provider?",
         "lesshour": "Less than 1 hour",
         "uptotwodays": "Up to 2 days",
-        "3_7days": "3-7 days",
-        "1_2weeks": "1-2 weeks",
+        "3-7days": "3-7 days",
+        "1-2weeks": "1-2 weeks",
         "more": "More than 2 weeks"
     },
-    "wait_time_satisfaction": {
+    "wait-time-satisfaction": {
         "label": "How do you rate your satisfaction with the time that you waited for the service to be delivered (from 1 to 5, where 5 is the highest rating possible)?"
     },
     "Quality": {
         "label": "How would you rate the quality of the service you received (from 1 to 5, where 5 is the highest rating possible)?"
     },
-    "difficulty_contacting": {
+    "difficulty-contacting": {
         "label": "Did you experience difficulties contacting the provider of the service you needed?",
         "no": "No",
         "didntknow": "Did not know how to contact them",
@@ -445,11 +446,11 @@
         "other": "Other"
 
     },
-    "staff_satisfaction": {
+    "staff-satisfaction": {
           "label": "How would you rate your satisfaction with the staff of the organization that provided services to you, (from 1 to 5, where 5 is the highest rating possible)?"
     },
-    "other_difficulties": "Other difficulties contacting the service provider",
-    "extra_comments": "Other comments",
+    "other-difficulties": "Other difficulties contacting the service provider",
+    "extra-comments": "Other comments",
     "anonymous": {
         "label": "I want my feedback to be anonymous to the service provider",
         "yes": "Yes",
