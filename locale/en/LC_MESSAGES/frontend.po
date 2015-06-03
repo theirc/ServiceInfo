@@ -270,6 +270,9 @@ msgstr "New Service Registration Form"
 msgid "Service-Form##Page-Head##Page-Description##Page-Description"
 msgstr "Fill out the form below and apply to have a new approved service."
 
+msgid "Service-Form##Day"
+msgstr "Day"
+
 msgid "Service-Form##Legend"
 msgstr "Service Information"
 
@@ -669,6 +672,21 @@ msgstr "No"
 msgid "Feedback-Form##Form-Sections##Basic##Legend"
 msgstr "Feedback for the selected service"
 
+msgid "Feedback-Form##non-delivery-explained"
+msgstr "Did you receive a clear explanation for why the service you sought was not delivered to you?"
+
+msgid "Feedback-Form##non-delivery-explanation##no"
+msgstr "No explanation"
+
+msgid "Feedback-Form##non-delivery-explanation##unclear"
+msgstr "Explanation was not clear"
+
+msgid "Feedback-Form##non-delivery-explanation##unfair"
+msgstr "Explanation was not fair"
+
+msgid "Feedback-Form##non-delivery-explanation##yes"
+msgstr "Clear and appropriate explanation"
+
 msgid "Feedback-Form##Submit"
 msgstr "Submit Answers"
 
@@ -684,35 +702,50 @@ msgstr "Less than 1 hour"
 msgid "Feedback-Form##WaitTime##uptotwodays"
 msgstr "Up to 2 days"
 
+msgid "Feedback-Form##WaitTime##3-7days"
+msgstr "3-7 days"
+
+msgid "Feedback-Form##WaitTime##1-2weeks"
+msgstr "1-2 weeks"
+
 msgid "Feedback-Form##WaitTime##more"
 msgstr "More than 2 weeks"
+
+msgid "Feedback-Form##wait-time-satisfaction##label"
+msgstr "How do you rate your satisfaction with the time that you waited for the service to be delivered (from 1 to 5, where 5 is the highest rating possible)?"
 
 msgid "Feedback-Form##Quality##label"
 msgstr "How would you rate the quality of the service you received (from 1 to 5, where 5 is the highest rating possible)?"
 
-msgid "Feedback-Form##difficulty##label"
+msgid "Feedback-Form##difficulty-contacting##label"
 msgstr "Did you experience difficulties contacting the provider of the service you needed?"
 
-msgid "Feedback-Form##difficulty##no"
+msgid "Feedback-Form##difficulty-contacting##no"
 msgstr "No"
 
-msgid "Feedback-Form##difficulty##didntknow"
+msgid "Feedback-Form##difficulty-contacting##didntknow"
 msgstr "Did not know how to contact them"
 
-msgid "Feedback-Form##difficulty##nophoneresponse"
+msgid "Feedback-Form##difficulty-contacting##nophoneresponse"
 msgstr "Tried to contact them by phone but received no response"
 
-msgid "Feedback-Form##difficulty##noresponse"
+msgid "Feedback-Form##difficulty-contacting##noresponse"
 msgstr "Tried to contact them in person but received no response or did not find their office"
 
-msgid "Feedback-Form##difficulty##unhelpful"
+msgid "Feedback-Form##difficulty-contacting##unhelpful"
 msgstr "Contacted them but response was unhelpful"
 
-msgid "Feedback-Form##difficulty##other"
+msgid "Feedback-Form##difficulty-contacting##other"
 msgstr "Other"
 
-msgid "Feedback-Form##staff##label"
+msgid "Feedback-Form##staff-satisfaction##label"
 msgstr "How would you rate your satisfaction with the staff of the organization that provided services to you, (from 1 to 5, where 5 is the highest rating possible)?"
+
+msgid "Feedback-Form##other-difficulties"
+msgstr "Other difficulties contacting the service provider"
+
+msgid "Feedback-Form##extra-comments"
+msgstr "Other comments"
 
 msgid "Feedback-Form##anonymous##label"
 msgstr "I want my feedback to be anonymous to the service provider"
@@ -845,43 +878,3 @@ msgstr "Loading..."
 
 msgid "Reports##Table##ServiceType"
 msgstr "Service Type"
-
-msgctxt "explained"
-msgid "Feedback-Form##non_delivery"
-msgstr "Did you receive a clear explanation for why the service you sought was not delivered to you?"
-
-msgctxt "delivery##no"
-msgid "Feedback-Form##non"
-msgstr "No explanation"
-
-msgctxt "delivery##unclear"
-msgid "Feedback-Form##non"
-msgstr "Explanation was not clear"
-
-msgctxt "delivery##unfair"
-msgid "Feedback-Form##non"
-msgstr "Explanation was not fair"
-
-msgctxt "delivery##yes"
-msgid "Feedback-Form##non"
-msgstr "Clear and appropriate explanation"
-
-msgctxt "7days"
-msgid "Feedback-Form##WaitTime##3"
-msgstr "3-7 days"
-
-msgctxt "2weeks"
-msgid "Feedback-Form##WaitTime##1"
-msgstr "1-2 weeks"
-
-msgctxt "time##label"
-msgid "Feedback-Form##wait"
-msgstr "How do you rate your satisfaction with the time that you waited for the service to be delivered (from 1 to 5, where 5 is the highest rating possible)?"
-
-msgctxt "difficulties"
-msgid "Feedback-Form##other"
-msgstr "Other difficulties contacting the service provider"
-
-msgctxt "comments"
-msgid "Feedback-Form##extra"
-msgstr "Other comments"
