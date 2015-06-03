@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-05-27 19:33+0000\n"
+"PO-Revision-Date: 2015-06-03 12:41+0000\n"
 "Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -279,6 +279,9 @@ msgstr "استمارة تسجيل خدمة جديدة"
 msgid "Service-Form##Page-Head##Page-Description##Page-Description"
 msgstr "إملأ النموذج أدناه وقدم طلب كي تحصل على تصديق لخدمة جديدة."
 
+msgid "Service-Form##Day"
+msgstr ""
+
 msgid "Service-Form##Legend"
 msgstr "معلومات عن الخدمة"
 
@@ -292,16 +295,16 @@ msgid "Service-Form##Service-Name"
 msgstr "اسم الخدمة"
 
 msgid "Service-Form##Is-Mobile"
-msgstr ""
+msgstr "الخدمات المتنقلة "
 
 msgid "Service-Form##Is-Mobile-Help"
-msgstr ""
+msgstr "يتم تسليم الخدمة المتنقلة للمستفيد مباشرة. أما في حالة الخدمة الغير متنقلة، المستفيد يجب أن يأتي بنفسه ليستلم الخدمة."
 
 msgid "Service-Form##Service-Area"
 msgstr "منطقة الخدمة"
 
 msgid "Service-Form##Service-Area-Help"
-msgstr ""
+msgstr "الموقع الجغرافي للخدمة التي تقدمها. للخدمات المتنقلة، يرجى اختيار المنطقة التي تنفذ فيها الخدمة."
 
 msgid "Service-Form##Type"
 msgstr "نوع الخدمة"
@@ -699,6 +702,21 @@ msgstr "لا"
 msgid "Feedback-Form##Form-Sections##Basic##Legend"
 msgstr "ملاحظة حول الخدمة المختارة"
 
+msgid "Feedback-Form##non-delivery-explained"
+msgstr ""
+
+msgid "Feedback-Form##non-delivery-explanation##no"
+msgstr ""
+
+msgid "Feedback-Form##non-delivery-explanation##unclear"
+msgstr ""
+
+msgid "Feedback-Form##non-delivery-explanation##unfair"
+msgstr ""
+
+msgid "Feedback-Form##non-delivery-explanation##yes"
+msgstr ""
+
 msgid "Feedback-Form##Submit"
 msgstr "إرسال الأجوبة"
 
@@ -714,35 +732,50 @@ msgstr "أقل من ساعة واحدة"
 msgid "Feedback-Form##WaitTime##uptotwodays"
 msgstr "لغاية يومين"
 
+msgid "Feedback-Form##WaitTime##3-7days"
+msgstr ""
+
+msgid "Feedback-Form##WaitTime##1-2weeks"
+msgstr ""
+
 msgid "Feedback-Form##WaitTime##more"
 msgstr "أكثر من إسبوعين"
+
+msgid "Feedback-Form##wait-time-satisfaction##label"
+msgstr ""
 
 msgid "Feedback-Form##Quality##label"
 msgstr "كيف تقيّم نوعيّة الخدمة التي تلقّيتها (من 1 إلى 5، بحيث أن 5 هي أعلى تقييم ممكن)؟"
 
-msgid "Feedback-Form##difficulty##label"
-msgstr "هل واجهت صعوبات في الإتصال بمقدّم الخدمات الذي كنت بحاجة إليه؟"
+msgid "Feedback-Form##difficulty-contacting##label"
+msgstr ""
 
-msgid "Feedback-Form##difficulty##no"
-msgstr "لا"
+msgid "Feedback-Form##difficulty-contacting##no"
+msgstr ""
 
-msgid "Feedback-Form##difficulty##didntknow"
-msgstr "لم أعرف كيفيّة الإتصال بهم"
+msgid "Feedback-Form##difficulty-contacting##didntknow"
+msgstr ""
 
-msgid "Feedback-Form##difficulty##nophoneresponse"
-msgstr "حاولت الإتصال بهم و لكن لم أتلق أي جواب"
+msgid "Feedback-Form##difficulty-contacting##nophoneresponse"
+msgstr ""
 
-msgid "Feedback-Form##difficulty##noresponse"
-msgstr "حاولت التواصل معهم شخصيّاً و لكن لم أتلق أي جواب أو لم أجد مركز المنظمة"
+msgid "Feedback-Form##difficulty-contacting##noresponse"
+msgstr ""
 
-msgid "Feedback-Form##difficulty##unhelpful"
-msgstr "تواصلت معهم ولكن الجواب لم يكن مفيد"
+msgid "Feedback-Form##difficulty-contacting##unhelpful"
+msgstr ""
 
-msgid "Feedback-Form##difficulty##other"
-msgstr "أسباب أخرى"
+msgid "Feedback-Form##difficulty-contacting##other"
+msgstr ""
 
-msgid "Feedback-Form##staff##label"
-msgstr "ما هو تقيمك لموظفي المنظمة/المؤسسة التي قدمت لك الخدمات (من 1 إلى 5، بحيث أن 5 هو أعلى تقييم ممكن)"
+msgid "Feedback-Form##staff-satisfaction##label"
+msgstr ""
+
+msgid "Feedback-Form##other-difficulties"
+msgstr ""
+
+msgid "Feedback-Form##extra-comments"
+msgstr ""
 
 msgid "Feedback-Form##anonymous##label"
 msgstr "أريد من إسمي المدرج في الملاحظة أن يبقى سريّاً تجاه مقدّم الخدمات"
@@ -875,43 +908,3 @@ msgstr "التحميل جاري..."
 
 msgid "Reports##Table##ServiceType"
 msgstr "نوع الخدمة"
-
-msgctxt "explained"
-msgid "Feedback-Form##non_delivery"
-msgstr "هل أبلغت بوضوح عن سبب عدم تلقّيك الخدمة التي اردت؟"
-
-msgctxt "delivery##no"
-msgid "Feedback-Form##non"
-msgstr "لم يكن هناك تعليل"
-
-msgctxt "delivery##unclear"
-msgid "Feedback-Form##non"
-msgstr "التعليل لم يكن واضح"
-
-msgctxt "delivery##unfair"
-msgid "Feedback-Form##non"
-msgstr "التعليل لم يكن عادل"
-
-msgctxt "delivery##yes"
-msgid "Feedback-Form##non"
-msgstr "التعليل كان منطقي و مناسب"
-
-msgctxt "7days"
-msgid "Feedback-Form##WaitTime##3"
-msgstr "ثلاث إلى سبعة أيام"
-
-msgctxt "2weeks"
-msgid "Feedback-Form##WaitTime##1"
-msgstr "من أسبوع واحد إلى أسبوعين"
-
-msgctxt "time##label"
-msgid "Feedback-Form##wait"
-msgstr "كيف تقيّم رضاك عن المدة التي انتظرتها لتصلك الخدمة (من 1 إلى 5، بحيث أن 5 هو أعلى تقييم ممكن)"
-
-msgctxt "difficulties"
-msgid "Feedback-Form##other"
-msgstr "صعوبات أخرى في التواصل مع مقدّم الخدمة"
-
-msgctxt "comments"
-msgid "Feedback-Form##extra"
-msgstr "ملاحظات أخرى"
