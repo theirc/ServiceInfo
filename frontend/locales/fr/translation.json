@@ -156,7 +156,7 @@
                 "Page-Description": "Remplissez le formulaire ci-dessous et demander qu'un nouveau service agréé."
             }
         },
-        "Day": "",
+        "Day": "Jour",
         "Legend": "Informations sur le service",
         "Type-Choose": "Choisissez un type de service",
         "Service-Area-Choose": "Choisissez une zone de service",
@@ -398,12 +398,12 @@
                 "Legend": "Commentaires pour le service sélectionné"
             }
         },
-        "non-delivery-explained": "",
+        "non-delivery-explained": "Avez-vous reçu une explication claire pourquoi le service que vous cherché n'a pas été livré pour vous?",
         "non-delivery-explanation": {
-            "no": "",
-            "unclear": "",
-            "unfair": "",
-            "yes": ""
+            "no": "Aucune explication",
+            "unclear": "Explication ne était pas clair",
+            "unfair": "Explication ne était pas juste",
+            "yes": "Une explication claire et appropriée"
         },
         "Submit": "Valider les réponses",
         "Clear": "Retirer Réponses",
@@ -411,30 +411,30 @@
             "label": "Combien de temps avez-vous attendu pour le service à livrer, après contact avec le fournisseur de services?",
             "lesshour": "Moins de 1 heure",
             "uptotwodays": "Jusqu'à 2 jours",
-            "3-7days": "",
-            "1-2weeks": "",
+            "3-7days": "3-7 jours",
+            "1-2weeks": "1-2 semaines",
             "more": "Plus de 2 semaines"
         },
         "wait-time-satisfaction": {
-            "label": ""
+            "label": "Comment évaluez-vous votre satisfaction avec le temps que vous avez attendu pour le service à fournir (1-5, 5 étant la meilleure note possible)?"
         },
         "Quality": {
             "label": "Comment évalueriez-vous la qualité du service que vous avez reçu (1-5, 5 étant la meilleure note possible)?"
         },
         "difficulty-contacting": {
-            "label": "",
-            "no": "",
-            "didntknow": "",
-            "nophoneresponse": "",
-            "noresponse": "",
-            "unhelpful": "",
-            "other": ""
+            "label": "Avez-vous éprouvé des difficultés à contacter le fournisseur du service que vous avez besoin?",
+            "no": "No",
+            "didntknow": "Je ne savais pas comment les contacter",
+            "nophoneresponse": "Je ai essayé de les contacter par téléphone, mais n'a reçu aucune réponse",
+            "noresponse": "Je ai essayé de les contacter en personne, mais n'a reçu aucune réponse ou ne ont pas trouvé leur bureau",
+            "unhelpful": "Contact avec eux mais la réponse était inutile",
+            "other": "Autre"
         },
         "staff-satisfaction": {
-            "label": ""
+            "label": "Comment évaluez-vous votre satisfaction avec le personnel de l'organisation qui a fourni des services à vous, (1-5, 5 étant la meilleure note possible)?"
         },
-        "other-difficulties": "",
-        "extra-comments": "",
+        "other-difficulties": "Autres difficultés à contacter le fournisseur de services",
+        "extra-comments": "autres commentaires",
         "anonymous": {
             "label": "Je veux que mon retour soit anonyme au fournisseur de services",
             "yes": "Oui",

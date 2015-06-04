@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-06-03 12:41+0000\n"
-"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
+"PO-Revision-Date: 2015-06-04 05:50+0000\n"
+"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -278,7 +278,7 @@ msgid "Service-Form##Page-Head##Page-Description##Page-Description"
 msgstr "Remplissez le formulaire ci-dessous et demander qu'un nouveau service agréé."
 
 msgid "Service-Form##Day"
-msgstr ""
+msgstr "Jour"
 
 msgid "Service-Form##Legend"
 msgstr "Informations sur le service"
@@ -701,19 +701,19 @@ msgid "Feedback-Form##Form-Sections##Basic##Legend"
 msgstr "Commentaires pour le service sélectionné"
 
 msgid "Feedback-Form##non-delivery-explained"
-msgstr ""
+msgstr "Avez-vous reçu une explication claire pourquoi le service que vous cherché n'a pas été livré pour vous?"
 
 msgid "Feedback-Form##non-delivery-explanation##no"
-msgstr ""
+msgstr "Aucune explication"
 
 msgid "Feedback-Form##non-delivery-explanation##unclear"
-msgstr ""
+msgstr "Explication ne était pas clair"
 
 msgid "Feedback-Form##non-delivery-explanation##unfair"
-msgstr ""
+msgstr "Explication ne était pas juste"
 
 msgid "Feedback-Form##non-delivery-explanation##yes"
-msgstr ""
+msgstr "Une explication claire et appropriée"
 
 msgid "Feedback-Form##Submit"
 msgstr "Valider les réponses"
@@ -731,49 +731,49 @@ msgid "Feedback-Form##WaitTime##uptotwodays"
 msgstr "Jusqu'à 2 jours"
 
 msgid "Feedback-Form##WaitTime##3-7days"
-msgstr ""
+msgstr "3-7 jours"
 
 msgid "Feedback-Form##WaitTime##1-2weeks"
-msgstr ""
+msgstr "1-2 semaines"
 
 msgid "Feedback-Form##WaitTime##more"
 msgstr "Plus de 2 semaines"
 
 msgid "Feedback-Form##wait-time-satisfaction##label"
-msgstr ""
+msgstr "Comment évaluez-vous votre satisfaction avec le temps que vous avez attendu pour le service à fournir (1-5, 5 étant la meilleure note possible)?"
 
 msgid "Feedback-Form##Quality##label"
 msgstr "Comment évalueriez-vous la qualité du service que vous avez reçu (1-5, 5 étant la meilleure note possible)?"
 
 msgid "Feedback-Form##difficulty-contacting##label"
-msgstr ""
+msgstr "Avez-vous éprouvé des difficultés à contacter le fournisseur du service que vous avez besoin?"
 
 msgid "Feedback-Form##difficulty-contacting##no"
-msgstr ""
+msgstr "No"
 
 msgid "Feedback-Form##difficulty-contacting##didntknow"
-msgstr ""
+msgstr "Je ne savais pas comment les contacter"
 
 msgid "Feedback-Form##difficulty-contacting##nophoneresponse"
-msgstr ""
+msgstr "Je ai essayé de les contacter par téléphone, mais n'a reçu aucune réponse"
 
 msgid "Feedback-Form##difficulty-contacting##noresponse"
-msgstr ""
+msgstr "Je ai essayé de les contacter en personne, mais n'a reçu aucune réponse ou ne ont pas trouvé leur bureau"
 
 msgid "Feedback-Form##difficulty-contacting##unhelpful"
-msgstr ""
+msgstr "Contact avec eux mais la réponse était inutile"
 
 msgid "Feedback-Form##difficulty-contacting##other"
-msgstr ""
+msgstr "Autre"
 
 msgid "Feedback-Form##staff-satisfaction##label"
-msgstr ""
+msgstr "Comment évaluez-vous votre satisfaction avec le personnel de l'organisation qui a fourni des services à vous, (1-5, 5 étant la meilleure note possible)?"
 
 msgid "Feedback-Form##other-difficulties"
-msgstr ""
+msgstr "Autres difficultés à contacter le fournisseur de services"
 
 msgid "Feedback-Form##extra-comments"
-msgstr ""
+msgstr "autres commentaires"
 
 msgid "Feedback-Form##anonymous##label"
 msgstr "Je veux que mon retour soit anonyme au fournisseur de services"
