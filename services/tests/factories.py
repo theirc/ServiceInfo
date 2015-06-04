@@ -105,6 +105,7 @@ class ServiceFactory(factory.DjangoModelFactory):
     area_of_service = factory.SubFactory(ServiceAreaFactory)
     type = factory.SubFactory(ServiceTypeFactory)
     location = FuzzyLocation()
+    cost_of_service = factory.fuzzy.FuzzyText()
 
 
 class SelectionCriterionFactory(factory.DjangoModelFactory):

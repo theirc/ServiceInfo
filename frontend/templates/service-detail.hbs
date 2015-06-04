@@ -123,10 +123,10 @@
         <div class="description">
           <div class="row">
             <span class="control-label" data-i18n="Service-Map.List.Cost"></span>
-            	{{#if service.cost }}
-            		<p>{{multiline service.cost_of_service }}</p>
+            	{{#if service.cost_of_service }}
+            		<p id="cost-of-service">{{multiline service.cost_of_service }}</p>
             	{{else}}
-            		<span data-i18n="Global.Not-Listed"></span>
+            		<span id="cost-of-service" data-i18n="Global.Not-Listed"></span>
             	{{/if}}
           </div>
         </div>
