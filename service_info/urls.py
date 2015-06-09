@@ -7,13 +7,14 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 
 import api.urls
-from services.views import export_view
+from services.views import export_view, health_view
 
 
 FRONTEND_DIR = os.path.join(settings.PROJECT_ROOT, 'frontend')
 
 # Reminder: the `static` function is a no-op if DEBUG is False, as in production.
 urlpatterns = [
+    url(r'^health/$', health_view),
     # Django admin
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(api.urls)),

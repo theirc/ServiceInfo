@@ -31,15 +31,20 @@ VALID_ROLES = (
 def staging():
     env.environment = 'staging'
     # 54.93.66.254 Staging server on AWS Frankfurt
-    env.master = 'serviceinfo-staging.rescue.org'
+    # Internal hostname for our own access to the server
+    # To change the domain, see conf/pillar/<envname>/env.sls
+    # env.master = 'serviceinfo-staging.rescue.org'
+    env.master = 'ec2-54-93-66-254.eu-central-1.compute.amazonaws.com'
     env.hosts = [env.master]
 
 
 @task
 def production():
     env.environment = 'production'
-    # 54.93.51.232
-    env.master = 'serviceinfo.rescue.org'
+    # Internal hostname for our own access to the server
+    # To change the domain, see conf/pillar/<envname>/env.sls
+    # env.master = 'serviceinfo.rescue.org'
+    env.master = 'ec2-54-93-51-232.eu-central-1.compute.amazonaws.com'
     env.hosts = [env.master]
 
 
