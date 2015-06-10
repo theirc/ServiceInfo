@@ -44,3 +44,7 @@ def export_view(request, signature):
 
 # Note: there's no Django view for imports. Those happen entirely
 # through the API and methods in ./import_export.py in this package.
+
+
+def health_view(request):
+    return HttpResponse("I am okay.", content_type="text/plain")

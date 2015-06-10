@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-05-27 19:33+0000\n"
-"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
+"PO-Revision-Date: 2015-06-04 05:50+0000\n"
+"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -170,7 +170,7 @@ msgid "Service-Map##No-Search-Results"
 msgstr "Aucun service ne correspond à vos termes de recherche. Se il vous plaît essayer d'autres termes."
 
 msgid "Service-Map##Results-Truncated"
-msgstr ""
+msgstr "Il y avait plus de résultats que pourrait être affichée. Essayez une recherche plus précise."
 
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "Le terme de recherche"
@@ -277,6 +277,9 @@ msgstr "Formulaire d'inscription Nouveau service"
 msgid "Service-Form##Page-Head##Page-Description##Page-Description"
 msgstr "Remplissez le formulaire ci-dessous et demander qu'un nouveau service agréé."
 
+msgid "Service-Form##Day"
+msgstr "Jour"
+
 msgid "Service-Form##Legend"
 msgstr "Informations sur le service"
 
@@ -290,16 +293,16 @@ msgid "Service-Form##Service-Name"
 msgstr "Nom du service"
 
 msgid "Service-Form##Is-Mobile"
-msgstr ""
+msgstr "Service mobile "
 
 msgid "Service-Form##Is-Mobile-Help"
-msgstr ""
+msgstr "Un service mobile est livré au bénéficiaire. Un bénéficiaire doit venir chercher un service non-mobile."
 
 msgid "Service-Form##Service-Area"
 msgstr "Zone de service"
 
 msgid "Service-Form##Service-Area-Help"
-msgstr ""
+msgstr "L'emplacement du service que vous fournissez. Pour un service mobile, s'il vous plaît choisir la zone de service dans laquelle le service peut être fourni."
 
 msgid "Service-Form##Type"
 msgstr "Type de service"
@@ -653,10 +656,10 @@ msgid "Footer##About##Title"
 msgstr "À propos de ServiceInfo"
 
 msgid "Footer##About##Sentence1"
-msgstr ""
+msgstr "Propulsé par l'International Rescue Committee."
 
 msgid "Footer##About##Remainder"
-msgstr ""
+msgstr "Propulsé par l'International Rescue Committee, Service Info est un outil qui permet aux fournisseurs de services d'enregistrer leurs services en ligne et les bénéficiaires à la fois découvrir ces services sur une carte et donner des commentaires sur eux. Service Info est open source et libre d'utilisation."
 
 msgid "Footer##Contact##Title"
 msgstr "Contactez nous"
@@ -697,6 +700,21 @@ msgstr "No"
 msgid "Feedback-Form##Form-Sections##Basic##Legend"
 msgstr "Commentaires pour le service sélectionné"
 
+msgid "Feedback-Form##non-delivery-explained"
+msgstr "Avez-vous reçu une explication claire pourquoi le service que vous cherché n'a pas été livré pour vous?"
+
+msgid "Feedback-Form##non-delivery-explanation##no"
+msgstr "Aucune explication"
+
+msgid "Feedback-Form##non-delivery-explanation##unclear"
+msgstr "Explication ne était pas clair"
+
+msgid "Feedback-Form##non-delivery-explanation##unfair"
+msgstr "Explication ne était pas juste"
+
+msgid "Feedback-Form##non-delivery-explanation##yes"
+msgstr "Une explication claire et appropriée"
+
 msgid "Feedback-Form##Submit"
 msgstr "Valider les réponses"
 
@@ -712,35 +730,50 @@ msgstr "Moins de 1 heure"
 msgid "Feedback-Form##WaitTime##uptotwodays"
 msgstr "Jusqu'à 2 jours"
 
+msgid "Feedback-Form##WaitTime##3-7days"
+msgstr "3-7 jours"
+
+msgid "Feedback-Form##WaitTime##1-2weeks"
+msgstr "1-2 semaines"
+
 msgid "Feedback-Form##WaitTime##more"
 msgstr "Plus de 2 semaines"
+
+msgid "Feedback-Form##wait-time-satisfaction##label"
+msgstr "Comment évaluez-vous votre satisfaction avec le temps que vous avez attendu pour le service à fournir (1-5, 5 étant la meilleure note possible)?"
 
 msgid "Feedback-Form##Quality##label"
 msgstr "Comment évalueriez-vous la qualité du service que vous avez reçu (1-5, 5 étant la meilleure note possible)?"
 
-msgid "Feedback-Form##difficulty##label"
+msgid "Feedback-Form##difficulty-contacting##label"
 msgstr "Avez-vous éprouvé des difficultés à contacter le fournisseur du service que vous avez besoin?"
 
-msgid "Feedback-Form##difficulty##no"
+msgid "Feedback-Form##difficulty-contacting##no"
 msgstr "No"
 
-msgid "Feedback-Form##difficulty##didntknow"
+msgid "Feedback-Form##difficulty-contacting##didntknow"
 msgstr "Je ne savais pas comment les contacter"
 
-msgid "Feedback-Form##difficulty##nophoneresponse"
+msgid "Feedback-Form##difficulty-contacting##nophoneresponse"
 msgstr "Je ai essayé de les contacter par téléphone, mais n'a reçu aucune réponse"
 
-msgid "Feedback-Form##difficulty##noresponse"
+msgid "Feedback-Form##difficulty-contacting##noresponse"
 msgstr "Je ai essayé de les contacter en personne, mais n'a reçu aucune réponse ou ne ont pas trouvé leur bureau"
 
-msgid "Feedback-Form##difficulty##unhelpful"
+msgid "Feedback-Form##difficulty-contacting##unhelpful"
 msgstr "Contact avec eux mais la réponse était inutile"
 
-msgid "Feedback-Form##difficulty##other"
+msgid "Feedback-Form##difficulty-contacting##other"
 msgstr "Autre"
 
-msgid "Feedback-Form##staff##label"
+msgid "Feedback-Form##staff-satisfaction##label"
 msgstr "Comment évaluez-vous votre satisfaction avec le personnel de l'organisation qui a fourni des services à vous, (1-5, 5 étant la meilleure note possible)?"
+
+msgid "Feedback-Form##other-difficulties"
+msgstr "Autres difficultés à contacter le fournisseur de services"
+
+msgid "Feedback-Form##extra-comments"
+msgstr "autres commentaires"
 
 msgid "Feedback-Form##anonymous##label"
 msgstr "Je veux que mon retour soit anonyme au fournisseur de services"
@@ -873,43 +906,3 @@ msgstr "Chargement ..."
 
 msgid "Reports##Table##ServiceType"
 msgstr "Type de service"
-
-msgctxt "explained"
-msgid "Feedback-Form##non_delivery"
-msgstr "Avez-vous reçu une explication claire pourquoi le service que vous cherché n'a pas été livré pour vous?"
-
-msgctxt "delivery##no"
-msgid "Feedback-Form##non"
-msgstr "aucune explication"
-
-msgctxt "delivery##unclear"
-msgid "Feedback-Form##non"
-msgstr "Explication ne était pas clair"
-
-msgctxt "delivery##unfair"
-msgid "Feedback-Form##non"
-msgstr "Explication ne était pas juste"
-
-msgctxt "delivery##yes"
-msgid "Feedback-Form##non"
-msgstr "Une explication claire et appropriée"
-
-msgctxt "7days"
-msgid "Feedback-Form##WaitTime##3"
-msgstr "3-7 jours"
-
-msgctxt "2weeks"
-msgid "Feedback-Form##WaitTime##1"
-msgstr "1-2 semaines"
-
-msgctxt "time##label"
-msgid "Feedback-Form##wait"
-msgstr "Comment évaluez-vous votre satisfaction avec le temps que vous avez attendu pour le service à fournir (1-5, 5 étant la meilleure note possible)?"
-
-msgctxt "difficulties"
-msgid "Feedback-Form##other"
-msgstr "Autres difficultés à contacter le fournisseur de services"
-
-msgctxt "comments"
-msgid "Feedback-Form##extra"
-msgstr "autres commentaires"

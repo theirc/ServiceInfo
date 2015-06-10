@@ -24,6 +24,9 @@ class ViewReportsButtonTest(ServiceInfoFrontendTestCase):
         time.sleep(1)
         button = self.wait_for_element('view_reports_button')
         self.assertTrue(button.is_displayed())
+        # User can view reports page
+        button.click()
+        self.wait_for_element('report-table')
 
     def test_logout_and_login_as_non_staff(self):
         # Non-staff user sees the reports button, even after logging out
@@ -55,3 +58,7 @@ class ViewReportsButtonTest(ServiceInfoFrontendTestCase):
         time.sleep(0.5)
         button = self.wait_for_element('view_reports_button', must_be_visible=False)
         self.assertTrue(button.is_displayed())
+
+        # User can view reports page
+        button.click()
+        self.wait_for_element('report-table')

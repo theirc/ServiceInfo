@@ -94,7 +94,7 @@
             }
         },
         "No-Search-Results": "Aucun service ne correspond à vos termes de recherche. Se il vous plaît essayer d'autres termes.",
-        "Results-Truncated": "",
+        "Results-Truncated": "Il y avait plus de résultats que pourrait être affichée. Essayez une recherche plus précise.",
         "Filtered-Search": {
             "Label": "Le terme de recherche",
             "Submit": "Recherche",
@@ -156,14 +156,15 @@
                 "Page-Description": "Remplissez le formulaire ci-dessous et demander qu'un nouveau service agréé."
             }
         },
+        "Day": "Jour",
         "Legend": "Informations sur le service",
         "Type-Choose": "Choisissez un type de service",
         "Service-Area-Choose": "Choisissez une zone de service",
         "Service-Name": "Nom du service",
-        "Is-Mobile": "",
-        "Is-Mobile-Help": "",
+        "Is-Mobile": "Service mobile ",
+        "Is-Mobile-Help": "Un service mobile est livré au bénéficiaire. Un bénéficiaire doit venir chercher un service non-mobile.",
         "Service-Area": "Zone de service",
-        "Service-Area-Help": "",
+        "Service-Area-Help": "L'emplacement du service que vous fournissez. Pour un service mobile, s'il vous plaît choisir la zone de service dans laquelle le service peut être fourni.",
         "Type": "Type de service",
         "Service-Description": "Description",
         "Service-Description-Help": "Une courte explication sur le service mentionné; ce qui explique plus sur le service fourni et permet d'identifier et de ses composants.",
@@ -371,8 +372,8 @@
     "Footer": {
         "About": {
             "Title": "À propos de ServiceInfo",
-            "Sentence1": "",
-            "Remainder": ""
+            "Sentence1": "Propulsé par l'International Rescue Committee.",
+            "Remainder": "Propulsé par l'International Rescue Committee, Service Info est un outil qui permet aux fournisseurs de services d'enregistrer leurs services en ligne et les bénéficiaires à la fois découvrir ces services sur une carte et donner des commentaires sur eux. Service Info est open source et libre d'utilisation."
         },
         "Contact": {
             "Title": "Contactez nous",
@@ -397,20 +398,30 @@
                 "Legend": "Commentaires pour le service sélectionné"
             }
         },
+        "non-delivery-explained": "Avez-vous reçu une explication claire pourquoi le service que vous cherché n'a pas été livré pour vous?",
+        "non-delivery-explanation": {
+            "no": "Aucune explication",
+            "unclear": "Explication ne était pas clair",
+            "unfair": "Explication ne était pas juste",
+            "yes": "Une explication claire et appropriée"
+        },
         "Submit": "Valider les réponses",
         "Clear": "Retirer Réponses",
         "WaitTime": {
             "label": "Combien de temps avez-vous attendu pour le service à livrer, après contact avec le fournisseur de services?",
             "lesshour": "Moins de 1 heure",
             "uptotwodays": "Jusqu'à 2 jours",
-            "more": "Plus de 2 semaines",
-            "3_7days": "3-7 jours",
-            "1_2weeks": "1-2 semaines"
+            "3-7days": "3-7 jours",
+            "1-2weeks": "1-2 semaines",
+            "more": "Plus de 2 semaines"
+        },
+        "wait-time-satisfaction": {
+            "label": "Comment évaluez-vous votre satisfaction avec le temps que vous avez attendu pour le service à fournir (1-5, 5 étant la meilleure note possible)?"
         },
         "Quality": {
             "label": "Comment évalueriez-vous la qualité du service que vous avez reçu (1-5, 5 étant la meilleure note possible)?"
         },
-        "difficulty": {
+        "difficulty-contacting": {
             "label": "Avez-vous éprouvé des difficultés à contacter le fournisseur du service que vous avez besoin?",
             "no": "No",
             "didntknow": "Je ne savais pas comment les contacter",
@@ -419,22 +430,16 @@
             "unhelpful": "Contact avec eux mais la réponse était inutile",
             "other": "Autre"
         },
-        "staff": {
+        "staff-satisfaction": {
             "label": "Comment évaluez-vous votre satisfaction avec le personnel de l'organisation qui a fourni des services à vous, (1-5, 5 étant la meilleure note possible)?"
         },
+        "other-difficulties": "Autres difficultés à contacter le fournisseur de services",
+        "extra-comments": "autres commentaires",
         "anonymous": {
             "label": "Je veux que mon retour soit anonyme au fournisseur de services",
             "yes": "Oui",
             "no": "No"
-        },
-        "non_delivery_explained": "Avez-vous reçu une explication claire pourquoi le service que vous cherché n'a pas été livré pour vous?",
-        "non_delivery##no": "aucune explication",
-        "non_delivery##unclear": "Explication ne était pas clair",
-        "non_delivery##unfair": "Explication ne était pas juste",
-        "non_delivery##yes": "Une explication claire et appropriée",
-        "wait_time##label": "Comment évaluez-vous votre satisfaction avec le temps que vous avez attendu pour le service à fournir (1-5, 5 étant la meilleure note possible)?",
-        "other_difficulties": "Autres difficultés à contacter le fournisseur de services",
-        "extra_comments": "autres commentaires"
+        }
     },
     "Feedback-Tool": {
         "Title": "Commentaires sur les services",
