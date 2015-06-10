@@ -2,10 +2,19 @@ ServiceInfo
 
 Release Notes
 
+0.2.4 - Jun. 10, 2015
+---------------------
+
+* Changes for AWS load balancing
+* Translation updates
+* Display cost of service on detail page (#576)
+* Allow non-staff to use reports (#574)
+* Fix translation issues related to feedback (#573)
+
 0.2.3 - Jun 1, 2015
 -------------------
 
-* Fix alignment of phon enumber and website sections on service detail page
+* Fix alignment of phone number and website sections on service detail page
 * Add a checkbox for mobile services and some help text
 * Allow selecting higher-level areas as a service's service area (e.g. choose a governate
   or a CAZA).
