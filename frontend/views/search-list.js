@@ -28,6 +28,7 @@ module.exports = Backbone.View.extend({
             feedback: this.feedback
         }));
         $('.no-search-results').hide();
+        $('.results-truncated').hide();
 
         // Renders automatically when language is ready
         this.SearchControlView = new search.SearchControls({
