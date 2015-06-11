@@ -91,7 +91,7 @@ class ServiceInfoFrontendTestCase(LiveServerTestCase):
             # Sometimes the local storage retains the previous language settings, so when
             # we load the home page, the language menu doesn't appear automatically.
             # In that case, click on the change language menu item.
-            self.wait_for_element('li.menu-item-language a').click()
+            self.wait_for_element('li.menu-item-language a', match=By.CSS_SELECTOR).click()
             form = self.wait_for_element('language-toggle')
         button = form.find_element_by_css_selector('[data-lang="%s"]' % language)
         button.click()
