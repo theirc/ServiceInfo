@@ -39,15 +39,6 @@ var SearchControls = Backbone.View.extend({
         $el.html(html);
         module.exports.populateServiceTypeDropdown();
         $el.i18n();
-
-        // Refocus on query input if there is a current value
-        var input = $('input.query', $el);
-        input.focus();
-        if (q) {
-            // Change input value to ensure cursor is at the end
-            input.val('');
-            input.val(q);
-        }
     },
     events: {
         "click [name=map-toggle-list]": function() {
