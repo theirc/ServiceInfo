@@ -28,7 +28,8 @@ module.exports = Backbone.View.extend({
     },
 
     render: function() {
-        var $el = this.$el;
+        var $el = this.$el,
+            self = this;
 
         this.$el.html(template({
             feedback: this.feedback
@@ -49,6 +50,12 @@ module.exports = Backbone.View.extend({
             zoom: 10
         };
         this.map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
+        google.maps.event.addListener(this.map, 'center_changed', function() {
+            var center = self.map.getCenter();
+            self.center_changed({lat: center.lat(), lng: center.lng()})
+        })
+
         this.perform_query();
     },
 
@@ -108,10 +115,5 @@ module.exports = Backbone.View.extend({
                 })
             }
         });
-        google.maps.event.clearListeners(self.map, 'center_changed');
-        google.maps.event.addListener(self.map, 'center_changed', function() {
-            var center = self.map.getCenter();
-            self.center_changed({lat: center.lat(), lng: center.lng()})
-        })
     }
 });
