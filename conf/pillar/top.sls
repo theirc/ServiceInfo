@@ -2,10 +2,6 @@ base:
   "*":
     - project
     - devs
-  'environment:vagrant':
-    - match: grain
-    - vagrant.env
-    - vagrant.secrets
   'environment:staging':
     - match: grain
     - staging.env

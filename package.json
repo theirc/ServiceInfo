@@ -38,12 +38,12 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/theirc/Service-Mapper.git"
+    "url": "https://github.com/theirc/ServiceInfo.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/theirc/Service-Mapper/issues"
+    "url": "https://github.com/theirc/ServiceInfo/issues"
   },
-  "homepage": "https://github.com/theirc/Service-Mapper"
+  "homepage": "https://github.com/theirc/ServiceInfo"
 }

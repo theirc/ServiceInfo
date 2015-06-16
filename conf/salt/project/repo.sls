@@ -19,20 +19,6 @@ project_repo_identity:
 {% endif %}
 
 project_repo:
-  {% if grains['environment'] == 'vagrant' %}
-  # Use rsync from the local dev env rather than forcing a commit and push
-  # to github to update your vagrant source.
-  cmd.run:
-    - name: rsync --recursive --delete "/vagrant/" {{ vars.source_dir }}
-    - user: root
-  file.directory:
-    - name: {{ vars.source_dir }}
-    - owner: {{ pillar['project_name'] }}
-    - recurse:
-      - user
-    - require:
-       - cmd: project_repo
-  {% else %}
   git.latest:
     - name: "{{ pillar['repo']['url'] }}"
     - rev: "{{ pillar['repo'].get('branch', 'master') }}"
@@ -55,7 +41,6 @@ project_repo:
     - owner: {{ pillar['project_name'] }}
     - require:
       - git: "{{ pillar['repo']['url'] }}"
-  {% endif %}
 
 delete_pyc:
   cmd.run:

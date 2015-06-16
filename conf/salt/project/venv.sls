@@ -29,11 +29,7 @@ venv:
 pip_requirements:
   pip.installed:
     - bin_env: {{ vars.venv_dir }}
-{% if grains['environment'] == 'vagrant' %}
-    - requirements: {{ vars.build_path(vars.source_dir, 'requirements/dev.txt') }}
-{% else %}
     - requirements: {{ vars.build_path(vars.source_dir, 'requirements/production.txt') }}
-{% endif %}
     - upgrade: true
     - require:
       - virtualenv: venv

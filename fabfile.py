@@ -48,41 +48,6 @@ def production():
     env.hosts = [env.master]
 
 
-def get_vagrant_ssh_config_value(name):
-    """
-    Return the value of the named ssh config parm from vagrant.
-    (Run 'vagrant ssh-config' to see what the available parms are.)
-    """
-    cmd = "vagrant ssh-config | awk '/ %s / {print $2;}'" % name
-    return subprocess.check_output(cmd, shell=True).strip()
-
-
-@task
-def vagrant_first_time():
-    # Use this the first time deploying to the vagrant VM, it'll
-    # use Vagrant's default ssh user.  After that, you can use the
-    # 'vagrant' target and connect in as your own user.
-    env.environment = 'vagrant'
-
-    # Use built-in vagrant ssh.  This'll probably use the local
-    # port 2222 that redirects to wherever vagrant is listening
-    # for ssh connections, but we don't really care.
-    env.user = get_vagrant_ssh_config_value('User')
-    host = get_vagrant_ssh_config_value('HostName')
-    port = get_vagrant_ssh_config_value('Port')
-    env.hosts = ['{user}@{host}:{port}'.format(user=env.user, host=host, port=port)]
-    env.key_filename = get_vagrant_ssh_config_value('IdentityFile')
-    env.master = host
-
-
-@task
-def vagrant():
-    # Use dev's own user, directly to port 22 on the VM
-    env.environment = 'vagrant'
-    env.master = '33.33.33.10'
-    env.hosts = [env.master]
-
-
 @task
 def setup_master():
     """Provision master with salt-master."""
@@ -272,7 +237,7 @@ def makemessages():
     pull them out into locale/en/LC_MESSAGES/django.po
     """
     local("python manage.py makemessages --ignore 'conf/*' --ignore 'docs/*' "
-          "--ignore 'requirements/*' --ignore 'frontend/*' --ignore 'vagrant/*' "
+          "--ignore 'requirements/*' --ignore 'frontend/*' "
           "--ignore 'node_modules/*'"
           "--no-location --no-obsolete "
           "-l en")

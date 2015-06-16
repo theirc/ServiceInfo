@@ -10,9 +10,6 @@ base:
 {% if 'newrelic_license_key' in pillar['secrets'] %}
     - newrelic_sysmon
 {% endif %}
-  'environment:vagrant':
-    - match: grain
-    - vagrant.user
   'roles:salt-master':
     - match: grain
     - salt.master
