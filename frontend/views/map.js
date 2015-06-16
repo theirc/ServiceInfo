@@ -47,8 +47,8 @@ module.exports = Backbone.View.extend({
         var mapOptions = {
             // Center the map wherever it was last time
             center: this.map_center,
-            // Zoom in to see the streets in the neighborhood
-            zoom: 16
+            // Zoom level to see most of Lebanon
+            zoom: 8
         };
         this.map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 
