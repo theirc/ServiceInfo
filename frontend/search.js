@@ -10,7 +10,7 @@ var language = require('./language');
 
 
 // If not null, latlon is the person's current position as
-// {lat: N; lon: M}
+// {lat: N; lng: M}
 var latlon = null;
 
 var deny_permission = false;  // pretend user denied location permission
@@ -39,15 +39,6 @@ var SearchControls = Backbone.View.extend({
         $el.html(html);
         module.exports.populateServiceTypeDropdown();
         $el.i18n();
-
-        // Refocus on query input if there is a current value
-        var input = $('input.query', $el);
-        input.focus();
-        if (q) {
-            // Change input value to ensure cursor is at the end
-            input.val('');
-            input.val(q);
-        }
     },
     events: {
         "click [name=map-toggle-list]": function() {
@@ -116,7 +107,7 @@ var findUserPosition = function() {
         }
 
         function handlePosition(position) {
-            latlon = {lat: position.coords.latitude, lon: position.coords.longitude};
+            latlon = {lat: position.coords.latitude, lng: position.coords.longitude};
             resolve();
         }
 
@@ -181,17 +172,20 @@ module.exports = {
         });
     },
 
-    refetchServices: function() {
+    refetchServices: function(centered_on) {
         /* Returns a Promise that when resolved returns the collection of services.
            Or you can just access the collection at search.services.
+
+           If centered_on is passed, it's an object with lat and lng attributes
+           and the search should be sorted based on distance from that location.
          */
         var self = this;
 
         // Start with an already resolved promise, then chain onto it:
         var sequence = Promise.resolve();
 
-        if (config.get('s') === 'd' && latlon === null) {
-            // requested to sort by distance but we don't know where the user is.
+        if (centered_on === undefined && config.get('s') === 'd' && latlon === null) {
+            // requested to sort by distance from user, but we don't know where the user is.
             // Need to query first, so add that onto our sequence of tasks:
             sequence = sequence.then(findUserPosition);
             // now sequence won't resolve until we've gotten the location
@@ -206,8 +200,11 @@ module.exports = {
                 type_numbers: config.get('t'),
                 limit: MAX_RESULTS
             };
-            if (latlon && config.get('s') === 'd') {
-                params.closest = latlon.lat + ',' + latlon.lon;
+            if (centered_on !== undefined) {
+                params.closest = centered_on.lat + ',' + centered_on.lng;
+            }
+            else if (latlon && config.get('s') === 'd') {
+                params.closest = latlon.lat + ',' + latlon.lng;
             }
             // Return the promise so the new sequence won't resolve until the fetch is done.
             return self.services.fetch({data: params});

@@ -2,6 +2,17 @@ ServiceInfo
 
 Release Notes
 
+0.2.5 - Jun. 22, 2015
+---------------------
+
+* Make "get directions" a button
+* Change maps zoom levels
+* Update messages
+* Add link to Google directions
+* Fix mobile keyboard popping up over map in some cases
+* Fix some services not showing up on map by showing results
+  closest to current map center
+
 0.2.4 - Jun. 10, 2015
 ---------------------
 
