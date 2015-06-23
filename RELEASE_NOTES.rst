@@ -2,6 +2,12 @@ ServiceInfo
 
 Release Notes
 
+0.2.6 - Jun. 23, 2015
+---------------------
+
+* New repo for open source, ServiceInfo-project
+* Updated translations
+
 0.2.5 - Jun. 22, 2015
 ---------------------
 
