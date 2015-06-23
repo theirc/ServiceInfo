@@ -1,7 +1,7 @@
 Import/Export
 =============
 
-There will be an "Import/Export" item on the menu that goes to an import/export page.
+There is be an "Import/Export" item on the menu that goes to an import/export page.
 
 Downloaded and uploaded Excel files will have the same format, as follows:
 

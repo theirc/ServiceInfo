@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-06-04 05:50+0000\n"
+"PO-Revision-Date: 2015-06-22 05:30+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -147,6 +147,9 @@ msgstr "Envoyer des commentaires sur les services"
 
 msgid "Feedback-Search##Page-Head##Description"
 msgstr "Se il vous plaît chercher un fournisseur de service premier à donner votre feedback, vous devez sélectionner le fournisseur de services et cliquez sur la rétroaction de donner pour commencer."
+
+msgid "Service-Detail##Directions"
+msgstr "Directions"
 
 msgid "Service-Detail##Give-Feedback"
 msgstr "Améliorer les informations sur ce service"

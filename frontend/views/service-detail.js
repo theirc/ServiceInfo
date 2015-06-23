@@ -34,7 +34,7 @@ module.exports = Backbone.View.extend({
             var url = "https://maps.googleapis.com/maps/api/staticmap?";
             var long_lat_str = /(-?\d+\.\d+) (-?\d+\.\d+)/.exec(location);
             url = url + "center=" + long_lat_str[2] + "," + long_lat_str[1];
-            url = url + "&zoom=8";
+            url = url + "&zoom=16";
             url = url + "&size=640x150";
             url = url + "&markers=color:red%7C" + long_lat_str[2] + "," + long_lat_str[1];
 
@@ -42,10 +42,29 @@ module.exports = Backbone.View.extend({
         }
     },
 
+    getDirectionsURL: function(service) {
+        // The format of the URLs to get a Google directions page appears not to be
+        // documented by Google, but people on the net have reverse engineered it.
+
+        // http://gearside.com/easily-link-to-locations-and-directions-using-the-new-google-maps/
+
+        // There are multiple formats that seem to work.  I've chosen this one:
+        // https://www.google.com/maps/dir/{{ start addr }}/{{ dest addr }}/@{{ center map on }},{{ zoom level }}z.
+        // because other formats didn't seem to center the map on the destination, which was
+        // confusing.
+
+        var long_lat_str = /(-?\d+\.\d+) (-?\d+\.\d+)/.exec(service.location),
+            latlong = long_lat_str[2] + "," + long_lat_str[1],
+            zoom = 16,
+            url = "https://www.google.com/maps/dir//" + latlong + "/@" + latlong + "," + zoom + "z";
+        return url;
+    },
+
     render: function() {
         var $el = this.$el;
         $el.html(template({
             service: this.service,
+            directionsURL: this.getDirectionsURL(this.service),
             mapURL: this.getStaticMap(this.service.location),
             daysofweek: [
                     i18n.t('Global.Sunday'),

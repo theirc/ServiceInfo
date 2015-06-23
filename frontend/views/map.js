@@ -10,6 +10,8 @@ var Backbone = require('backbone'),
 
 module.exports = Backbone.View.extend({
     feedback: false,
+    // Start map centered on Beirut each time it's loaded
+    map_center: {lat: 33.8869, lng: 35.5131},
 
     initialize: function(params){
         var self = this;
@@ -19,18 +21,21 @@ module.exports = Backbone.View.extend({
 
     perform_query: function() {
         var self = this;
-        search.refetchServices().then(function() {
+        // Always center queries from the map view on the current center of the map
+        search.refetchServices(self.map_center).then(function() {
             self.renderResults();
         });
     },
 
     render: function() {
-        var $el = this.$el;
+        var $el = this.$el,
+            self = this;
 
         this.$el.html(template({
             feedback: this.feedback
         }));
         $('.no-search-results').hide();
+        $('.results-truncated').hide();
 
         // Renders automatically when language is ready
         this.SearchControlView = new search.SearchControls({
@@ -40,11 +45,33 @@ module.exports = Backbone.View.extend({
         this.SearchControlView.on('search_parameters_changed', this.perform_query, this);
 
         var mapOptions = {
-            center: { lat: 33.8869, lng: 35.5131},
-            zoom: 10
+            // Center the map wherever it was last time
+            center: this.map_center,
+            // Zoom level to see most of Lebanon
+            zoom: 8
         };
         this.map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
+        google.maps.event.addListener(this.map, 'center_changed', function() {
+            var center = self.map.getCenter();
+            self.center_changed({lat: center.lat(), lng: center.lng()})
+        })
+
         this.perform_query();
+    },
+
+    center_changed: function(new_latlon) {
+        // We call this when the user moves the center of the map.  If they drag, we'll
+        // get called a ton of times, so we don't actually do anything until we go a bit without
+        // any new updates.
+        this.map_center = new_latlon;
+        if (this.timeout) {
+            clearTimeout(this.timeout);
+        }
+        var self = this;
+        this.timeout = setTimeout(function () {
+            self.perform_query();
+        }, 500);
     },
 
     renderResults: function() {
@@ -66,7 +93,7 @@ module.exports = Backbone.View.extend({
             var service = this;
 
             // this.location, from PostGIS, is in the form POINT(LONG LAT)
-            // Google Maps API's LatLng() constructor expects LAT, LONG parameters
+            // Google Maps API's LatLng() constructor expects LAT, LNG parameters
             var long_lat_str = /(-?\d+\.\d+) (-?\d+\.\d+)/.exec(this.location);
             if (long_lat_str) {
                 var myLatlng = new google.maps.LatLng(long_lat_str[2], long_lat_str[1]);

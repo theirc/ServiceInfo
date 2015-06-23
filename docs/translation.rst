@@ -10,11 +10,26 @@ Backend translation uses the standard Django translation mechanisms
 Then we use Transifex to make it easy for client staff to provide
 translations of the text in the Django project.
 
+Frontend
+--------
+
+Frontend translation uses
+`i18next-client <http://i18next.com/pages/doc_init.html>`_.
+The source messages are in
+``frontend/locales/en/translation.json``.
+
+Our fab helper commands convert those to `*.po` files and
+push them to Transifex for translation, then convert the
+translated .po files to json for i18next-client to use.
+
 Developer setup
 ~~~~~~~~~~~~~~~
 
 While the Transifex command line client is in Python, unfortunately it
-does not appear to work with Python 3 yet. So, if you're a developer
+does not appear to work with Python 3 yet. (But fabric doesn't either,
+and we're also using that to simplify our workflow.)
+
+Anyway, if you're a developer
 who needs to push or pull text to Transifex, it's probably simplest
 to install the client globally on your system
 (http://docs.transifex.com/developer/client/setup) and set it up per the
@@ -49,7 +64,7 @@ Transifex as follows:
     git checkout develop
     git pull
 
-#. regenerate the English (only) .po file::
+#. regenerate the English (only) .po files::
 
     fab makemessages
 
@@ -58,10 +73,10 @@ Transifex as follows:
 #. If so, commit the updated .po file to develop and push it
    upstream::
 
-       git commit -m "Updated messages" locale/en/LC_MESSAGES/django.po
+       git commit -m "Updated messages" locale/en/LC_MESSAGES/*.po
        git push
 
-   (Commiting the .po file isn't strictly necessary since we can recreate
+   (Commiting the .po files isn't strictly necessary since we can recreate
    it, but we can tell what's the latest version we pushed to Transifex
    by committing each version when we push it.)
 
@@ -109,8 +124,3 @@ our translation files on the develop branch as follows:
     git commit -m "Updated translations" locale/*/LC_MESSAGES/*.po locale/*/LC_MESSAGES/*.mo
     git push
 
-
-Frontend
---------
-
-To be written...

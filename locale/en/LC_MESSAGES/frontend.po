@@ -141,6 +141,9 @@ msgstr "Give Feedback on Services"
 msgid "Feedback-Search##Page-Head##Description"
 msgstr "Please search for a service provider first to give your feedback, you must select the service provider and click on give feedback to begin."
 
+msgid "Service-Detail##Directions"
+msgstr "Directions"
+
 msgid "Service-Detail##Give-Feedback"
 msgstr "Give feedback on this service"
 

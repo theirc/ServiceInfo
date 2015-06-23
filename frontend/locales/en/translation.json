@@ -73,6 +73,7 @@
     }
   },
   "Service-Detail": {
+      "Directions": "Directions",
       "Give-Feedback": "Give feedback on this service"
   },
   "Feedback-Confirm": {
