@@ -12,8 +12,8 @@ work on the project locally. In a terminal, run:
 
 .. code-block:: bash
 
-    git clone git@github.com:theirc/Service-Mapper.git
-    cd Service-Mapper/
+    git clone git@github.com:theirc/ServiceInfo-project.git
+    cd ServiceInfo-project/
 
 
 .. _backend-setup:
@@ -73,7 +73,7 @@ forwarding if it is not already by adding ``ForwardAgent yes`` to your SSH confi
 Getting Started
 ~~~~~~~~~~~~~~~
 
-If you need Python 3.4 installed, you can use this PPA::
+If you need Python 3.4 installed on Ubuntu, you can use this PPA::
 
     sudo add-apt-repository ppa:fkrull/deadsnakes
     sudo apt-get update
@@ -88,10 +88,15 @@ we need to install that globally in our Python 2.x environment::
 To setup your local environment you should create a virtualenv and install the
 necessary requirements::
 
-    mkvirtualenv --python=/usr/bin/python3.4 service_info
+    mkvirtualenv --python=/usr/bin/python3.4 ServiceInfo-project
     $VIRTUAL_ENV/bin/pip install -r $PWD/requirements/dev.txt
 
-Then create a local settings file and set your ``DJANGO_SETTINGS_MODULE`` to use it::
+Install the needed Javascript tools and libraries::
+
+    npm install
+
+Then create a local settings file and set your ``DJANGO_SETTINGS_MODULE`` to use it
+and also to use the javascript tools just installed::
 
     cp service_info/settings/local.example.py service_info/settings/local.py
     echo "export DJANGO_SETTINGS_MODULE=service_info.settings.local" >> $VIRTUAL_ENV/bin/postactivate
@@ -101,22 +106,28 @@ Then create a local settings file and set your ``DJANGO_SETTINGS_MODULE`` to use
 Exit the virtualenv and reactivate it to activate the settings just changed::
 
     deactivate
-    workon service_info
+    workon ServiceInfo-project
 
-Now, create the Postgres database and run the initial migrate::
+Now you can run the tests::
+
+    ./run_tests.sh
+
+Running locally
+~~~~~~~~~~~~~~~
+
+Create the Postgres database and run the initial migrate::
 
     createdb -E UTF-8 service_info
     psql service_info -c "CREATE EXTENSION postgis;"
     python manage.py migrate
 
-You should now be able to run the development API server::
-
-    python manage.py runserver
-
-You can run the frontend server with Gulp, which will auto-reload the browser upon detected changes. You can run one or the other, but currently don't need to run both and they will both try
-to use the same port. When the backend and frontend talk to each other, running both will safely
-will be automated and this documentation will be updated.
+You should now be able to build the frontend and run the development API server::
 
     gulp
 
 Now visit http://localhost:8000/ in your browser.
+
+If you need to debug the Javascript, you might prefer to skip running Closure.
+You can skip closure by adding the ``--fast`` option to gulp::
+
+    gulp --fast

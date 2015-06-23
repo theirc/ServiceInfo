@@ -266,6 +266,7 @@ CORS_ALLOW_HEADERS = (
 STAGING_SITE_ID = 2
 PRODUCTION_SITE_ID = 3
 DEV_SITE_ID = 4
+TESTING_SITE_ID = 5
 
 # If this changes here, also change the password fields'
 # minlength attribute in frontend/templates/provider-form.hbs
