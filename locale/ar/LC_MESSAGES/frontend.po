@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-06-04 13:44+0000\n"
-"Last-Translator: Nizar Najjar <ozogorgor@gmail.com>\n"
+"PO-Revision-Date: 2015-06-22 05:29+0000\n"
+"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -149,6 +149,9 @@ msgstr "إبدي ملاحظاتك حول الخدمات "
 
 msgid "Feedback-Search##Page-Head##Description"
 msgstr "الرجاء البحث أولاً عن مقدم الخدمات حتى تتمكن من إعطاء الملاحظات، من ثم إختر مقدم الخدمة ثم انقر على زرّ إعطاء الملاحظات."
+
+msgid "Service-Detail##Directions"
+msgstr "خذني إلى هناك "
 
 msgid "Service-Detail##Give-Feedback"
 msgstr "قدّم ملاحظاتك حول هذه الخدمة"
