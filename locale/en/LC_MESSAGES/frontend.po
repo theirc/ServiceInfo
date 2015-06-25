@@ -169,7 +169,7 @@ msgid "Service-Map##Results-Truncated"
 msgstr "There were more results than could be displayed. Try a more specific search."
 
 msgid "Service-Map##More-Results"
-msgstr "Currently showing {thecount} out of {total} services, please zoom in to the designated area to see more services."
+msgstr "Currently showing {thecount} out of {total_results} services, please zoom in to the designated area to see more services."
 
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "Search term"
