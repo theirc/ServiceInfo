@@ -82,8 +82,10 @@ var Services = _base.BaseCollection.extend({
            the array of models.
          */
         if (response.hasOwnProperty('results')) {
+            this.total_results = response.count;  // Total number of results
             return response.results;
         }
+        this.total_results = response.length;
         return response;
     }
 })

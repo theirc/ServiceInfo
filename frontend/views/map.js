@@ -75,7 +75,8 @@ module.exports = Backbone.View.extend({
     },
 
     renderResults: function() {
-        var self = this;
+        var self = this,
+            msg = '';
         $.each(self.markers, function() {
             this.setMap(null);  // yes this should be 'this'
         });
@@ -88,7 +89,21 @@ module.exports = Backbone.View.extend({
         }
         $('.no-search-results').hide();
         $('#map_container').show();
-        $('.results-truncated').toggle(search.has_more);
+
+        if (services.length < search.total_results) {
+            msg = i18n.t("Service-Map.More-Results", {
+                // I'd like to call the next variable "count", but "count" is a
+                // magic var name to i18n and won't work here, because i18n.t
+                // mingles its options and its variable values.
+                // "thecount" sounds stupid, but it works.
+                thecount: services.length,
+                total_results: search.total_results,
+                interpolationPrefix: '{',
+                interpolationSuffix: '}'
+            });
+        }
+        $('span#more_results').text(msg)
+
         $.each(services, function() {
             var service = this;
 
