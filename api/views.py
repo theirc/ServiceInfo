@@ -30,10 +30,10 @@ from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, 
     ProviderFetchSerializer, FeedbackSerializer, NationalitySerializer, ImportSerializer, \
     ServiceTypeWaitTimeSerializer, ServiceTypeQOSSerializer, ServiceTypeFailureSerializer, \
     ServiceTypeContactSerializer, ServiceTypeCommunicationSerializer, \
-    ServiceTypeNumServicesSerializer
+    ServiceTypeNumServicesSerializer, RequestForServiceSerializer
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
-    SelectionCriterion, Feedback, Nationality
+    SelectionCriterion, Feedback, Nationality, RequestForService
 
 
 class TranslatedViewMixin(object):
@@ -180,6 +180,12 @@ class SortByDistanceFilter(django_filters.CharFilter):
         # (NS position, then EW).  But Point takes (x, y) which means
         # (long, lat) because x is distance east or west, or longitude,
         # and y is distance north or south, or latitude.
+
+
+class RequestForServiceViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    permission_classes = [AllowAny]
+    queryset = RequestForService.objects.all()
+    serializer_class = RequestForServiceSerializer
 
 
 class ServiceFilter(django_filters.FilterSet):
