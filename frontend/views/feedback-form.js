@@ -79,29 +79,15 @@ module.exports = Backbone.View.extend({
         },
         "click .form-btn-submit": function(e) {
             e.preventDefault();
-            var $el = this.$el;
-            var data = forms.collect($el);
-            var $submit = $el.find('.form-btn-submit');
-            $submit.attr('disabled', 'disabled');
-            $el.find('.error').text('');
-            var errors = {};
-            forms.submit($el, 'api/feedback/', data, errors).then(
-                function success(data) {
-                    $submit.removeAttr('disabled');
-                    window.location = '#/feedback/confirm';
-                },
-                function error(errors) {
-                    $submit.removeAttr('disabled');
-                    // forms.js has already displayed any errors
-                }
-            );
+            forms.gather_and_submit({
+                el: this.$el,
+                url: 'api/feedback/',
+                next_location: '#/feedback/confirm'
+            })
         },
         "click .form-btn-clear": function(e) {
             e.preventDefault();
-            this.$el.find('[name]').each(function() {
-                var $field = $(this);
-                $field.val('');
-            });
+            forms.clear_form(this.$el);
             return false;
         }
     }

@@ -1,0 +1,134 @@
+<!-- Page Head -->
+    <div class="page-head">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div class="page-title" data-i18n="Service-Request-Form.Page-Head.Page-Title.Title"></div>
+                    <div class="page-descr" data-i18n="Service-Request-Form.Page-Head.Page-Description.Page-Description"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- End Page Head -->
+
+<!-- Main Content -->
+
+<!-- Forms -->
+    <div id="service-request">
+      <div class="main-content">
+        <div class="container">
+            <form id="service-request-form">
+
+              <fieldset class=service-request-form>
+                <legend data-i18n="Service-Request-Form.Legend"></legend>
+                <div class="row">
+                  <div class="form-group">
+                    <label for="id_provider_name" class="control-label"><span data-i18n="Service-Request-Form.Provider-Name"></span></label>
+                      <div class="form-group">
+                        <span class=error></span>
+                        <input id="id_provider_name" type="text" name="provider_name"  class="form-control" maxlength="256">
+                      </div>
+                  </div>
+                </div> <!-- row -->
+
+                <div class="row">
+                  <div class="form-group">
+                    <label for="id_service_name" class="control-label"><span data-i18n="Service-Request-Form.Service-Name"></span></label>
+                      <div class="form-group">
+                        <span class=error></span>
+                        <input id="id_service_name" type="text" name="service_name"  class="form-control" maxlength="256">
+                      </div>
+                  </div>
+                </div> <!-- row -->
+
+                <div class="row">
+                  <div class="half">
+                    <div class="form-group">
+                      <label for="id_area_of_service" class="control-label"><span data-i18n="Service-Request-Form.Service-Area"></span></label>
+                      <div class="btn-group">
+                        <span class=error></span>
+                        <select id=id_area_of_service name="area_of_service" class="form-control"></select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="half">
+                    <div class="form-group">
+                      <label for="id_service_type" class="control-label"><span data-i18n="Service-Request-Form.Type"></span></label>
+                        <div class="btn-group">
+                            <span class=error></span>
+                            <select id=id_service_type name="service_type" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group">
+                    <label for="id_address" class="control-label"><span  data-i18n="Service-Request-Form.Service-Address"></span></label>
+                    <div class="form-group">
+                      <span class=error></span>
+                      <textarea id=id_address rows="4" name="address"  class="form-control"  ></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group">
+                    <label for="id_contact" class="control-label"><span  data-i18n="Service-Request-Form.Service-Contact"></span></label>
+                      <div class="field-help" data-i18n="Service-Request-Form.Service-Contact-Help"></div>
+                    <div class="form-group">
+                      <span class=error></span>
+                      <textarea id=id_contact rows="4" name="contact"  class="form-control"  ></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group">
+                    <label for="id_description" class="control-label"><span data-i18n="Service-Request-Form.Service-Description"></span></label>
+                      <div class="field-help" data-i18n="Service-Request-Form.Service-Description-Help"></div>
+                    <div class="form-group">
+                      <span class=error></span>
+                      <textarea id=id_description rows="4" name="description"  class="form-control"  ></textarea>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label for="id_rating" class="control-label"><span data-i18n="Service-Request-Form.Rating"></span></label>
+                      <div class="form-group" id="id_rating" name="rating"> <!-- extra attrs for error labels -->
+                        <span class=error></span>
+                        {{# each starvalues }}
+                          <label>
+                            <input type="radio" name="rating" class="form-control" value="{{ this }}">{{ this }}
+                          </label>
+                        {{/each}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </fieldset>
+
+              <fieldset class=submit-options>
+                <div class="submit-form">
+                    <div class="row error error-submission"></div>
+                    <div class="half">
+                      <button class="form-btn-submit primary-button" data-i18n="Service-Request-Form.Form-Submit-Options.Submit"></button>
+                    </div>
+                    <div class="half">
+                      <button class="form-btn-clear primary-button remove" data-i18n="Service-Request-Form.Form-Submit-Options.Clear"></button>
+                    </div>
+                </div>
+              </fieldset>
+            </form>
+
+
+          </div>
+        </div>
+      </div>

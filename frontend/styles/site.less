@@ -342,6 +342,12 @@ select {
 .float-end {
     float: @end;
 }
+.float-bottom-end {
+    position: fixed;
+    @{end}: 20px;
+    bottom: 20px;
+    z-index: 150;  // float over the footer
+}
 .float-start {
     float: @start;
 }

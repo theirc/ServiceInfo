@@ -141,6 +141,13 @@ var forms = module.exports = {
         resetOptions();
     },
 
+    clear_form: function($form) {
+       $form.find('[name]').each(function() {
+            var $field = $(this);
+            $field.val('');
+        });
+    },
+
     show_errors_on_form: function($form, e) {
         // 'e' should be a jqHXR object with a responseJSON attribute
         // containing a dictionary of the errors
@@ -168,6 +175,29 @@ var forms = module.exports = {
             messages.add(i18n.t('Global.FormValidationError'));
         }
         return missing;
+    },
+
+    gather_and_submit: function(opts) {
+        /* Helper for simple forms.  Pass in {
+             el: $el,
+             url: url to submit to,
+             next_location: location to go to if successful
+           }
+         */
+        opts.el.find('.form-btn-submit').attr('disabled', 'disabled');
+        opts.el.find('.error').text('');
+
+        var data = forms.collect(opts.el),
+            errors = {};
+
+        forms.submit(opts.el.find('form'), opts.url, data, errors).then(
+            function success(data) {
+                window.location = opts.next_location;
+            },
+            function error(errors) {
+                // forms.js has already displayed any errors
+            }
+        );
     },
 
     submit: function($form, action, data, errors) {
