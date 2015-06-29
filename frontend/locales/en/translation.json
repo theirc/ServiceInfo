@@ -96,6 +96,7 @@
     },
     "No-Search-Results": "No services matched your search terms. Please try other terms.",
     "Results-Truncated": "There were more results than could be displayed. Try a more specific search.",
+    "More-Results": "Currently showing {thecount} out of {total_results} services, please zoom in to the designated area to see more services.",
     "Filtered-Search": {
       "Label": "Search term",
       "Submit": "Search",

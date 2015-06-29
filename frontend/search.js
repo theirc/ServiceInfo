@@ -15,7 +15,7 @@ var latlon = null;
 
 var deny_permission = false;  // pretend user denied location permission
 
-var MAX_RESULTS = 25;
+var MAX_RESULTS = 50;
 
 var SearchControls = Backbone.View.extend({
     el: 'div#search_controls',
@@ -225,6 +225,7 @@ module.exports = {
             var today = days[new Date().getDay()];
             var todaylc = today.toLowerCase();
             var services = self.services;
+            self.total_results = services.total_results;
             services.models.forEach(function(service) {
                 var open = service.get(todaylc + '_open');
                 var close = service.get(todaylc + '_close');

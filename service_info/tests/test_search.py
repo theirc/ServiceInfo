@@ -5,12 +5,14 @@ from service_info.tests.test_frontend import ServiceInfoFrontendTestCase
 from services.models import Service
 from services.tests.factories import ServiceFactory
 
+MAX_RESULTS = 50
+
 
 class SearchFrontendTest(ServiceInfoFrontendTestCase):
 
     def test_search_list_results_limited(self):
-        """No more than 25 services in result"""
-        for i in range(30):
+        """No more than MAX_RESULTS services in result"""
+        for i in range(MAX_RESULTS + 5):
             ServiceFactory(status=Service.STATUS_CURRENT)
         self.load_page_and_set_language()
         menu = self.wait_for_element('menu')
@@ -20,7 +22,7 @@ class SearchFrontendTest(ServiceInfoFrontendTestCase):
         self.assertHashLocation('/search')
         self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
         results = self.browser.find_elements_by_css_selector('.search-result-list > li')
-        self.assertEqual(25, len(results))
+        self.assertEqual(MAX_RESULTS, len(results))
 
     def test_filtered_list_search(self):
         """Find services by type."""

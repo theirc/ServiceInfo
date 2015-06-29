@@ -52,12 +52,32 @@ module.exports = Backbone.View.extend({
         };
         this.map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 
+        google.maps.event.addListener(this.map, 'bounds_changed', function() {
+            self.bounds_changed();
+        });
         google.maps.event.addListener(this.map, 'center_changed', function() {
             var center = self.map.getCenter();
             self.center_changed({lat: center.lat(), lng: center.lng()})
-        })
+        });
 
         this.perform_query();
+    },
+
+    bounds_changed: function() {
+        // We call this when the user moves the bounds of the map.  If they drag, we'll
+        // get called a ton of times, so we don't actually do anything until we go a bit without
+        // any new updates.
+        if (this.bounds_timeout) {
+            clearTimeout(this.bounds_timeout);
+        }
+        var self = this;
+        this.bounds_timeout = setTimeout(function () {
+            // Don't need to repeat search, just show results on different sized map
+            // so we can update the "NN services shown" message correctly.
+            if (search.services.data().length) {
+                self.renderResults();
+            }
+        }, 500);
     },
 
     center_changed: function(new_latlon) {
@@ -75,7 +95,10 @@ module.exports = Backbone.View.extend({
     },
 
     renderResults: function() {
-        var self = this;
+        var self = this,
+            msg = '',
+            map_bounds = this.map.getBounds(),
+            num_visible_markers = 0;
         $.each(self.markers, function() {
             this.setMap(null);  // yes this should be 'this'
         });
@@ -88,33 +111,50 @@ module.exports = Backbone.View.extend({
         }
         $('.no-search-results').hide();
         $('#map_container').show();
-        $('.results-truncated').toggle(search.has_more);
+
+
         $.each(services, function() {
             var service = this;
 
             // this.location, from PostGIS, is in the form POINT(LONG LAT)
             // Google Maps API's LatLng() constructor expects LAT, LNG parameters
-            var long_lat_str = /(-?\d+\.\d+) (-?\d+\.\d+)/.exec(this.location);
+            var long_lat_str = /(-?\d+\.\d+) (-?\d+\.\d+)/.exec(service.location);
             if (long_lat_str) {
-                var myLatlng = new google.maps.LatLng(long_lat_str[2], long_lat_str[1]);
-                var marker = new google.maps.Marker({
-                    position: myLatlng,
-                    title: this.name,
-                    icon: new google.maps.MarkerImage(
-                        this.servicetype.icon_url,
-                        null,
-                        null,
-                        new google.maps.Point(12, 12),
-                        new google.maps.Size(24, 24)
-                    ),
-                });
-                window.marker = marker;
-                marker.setMap(self.map);
-                self.markers.push(marker);
-                google.maps.event.addListener(marker, 'click', function() {
-                    location.hash = '#/service/' + service.id;
-                })
+                var myLatlng = new google.maps.LatLng(long_lat_str[2], long_lat_str[1], true);
+                if (map_bounds.contains(myLatlng)) {
+                    num_visible_markers += 1;
+                    var marker = new google.maps.Marker({
+                        position: myLatlng,
+                        title: this.name,
+                        icon: new google.maps.MarkerImage(
+                            this.servicetype.icon_url,
+                            null,
+                            null,
+                            new google.maps.Point(12, 12),
+                            new google.maps.Size(24, 24)
+                        ),
+                    });
+                    window.marker = marker;
+                    marker.setMap(self.map);
+                    self.markers.push(marker);
+                    google.maps.event.addListener(marker, 'click', function () {
+                        location.hash = '#/service/' + service.id;
+                    })
+                }
             }
         });
+        if (num_visible_markers < search.total_results) {
+            msg = i18n.t("Service-Map.More-Results", {
+                // I'd like to call the next variable "count", but "count" is a
+                // magic var name to i18n and won't work here, because i18n.t
+                // mingles its options and its variable values.
+                // "thecount" sounds stupid, but it works.
+                thecount: num_visible_markers,
+                total_results: search.total_results,
+                interpolationPrefix: '{',
+                interpolationSuffix: '}'
+            });
+        }
+        $('span#more_results').text(msg);
     }
 });
