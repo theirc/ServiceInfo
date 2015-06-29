@@ -2,6 +2,13 @@ ServiceInfo
 
 Release Notes
 
+0.2.7 - Jun. 29, 2015
+---------------------
+
+* Copyright in LICENSE updated
+* On map view, show number of results that are displayed in the map
+* Fix bug where some text wasn't appearing on the feedback form.
+
 0.2.6 - Jun. 23, 2015
 ---------------------
 
