@@ -39,8 +39,10 @@ class RequestForServiceTest(APITestMixin, TestCase):
         req = RequestForService.objects.get(provider_name=self.data['provider_name'])
         self.maxDiff = None
         req_data = model_to_dict(req)
-        req_data['area_of_service'] = ServiceArea.objects.get(pk=req_data['area_of_service']).get_api_url()
-        req_data['service_type'] = ServiceType.objects.get(pk=req_data['service_type']).get_api_url()
+        req_data['area_of_service'] = \
+            ServiceArea.objects.get(pk=req_data['area_of_service']).get_api_url()
+        req_data['service_type'] = \
+            ServiceType.objects.get(pk=req_data['service_type']).get_api_url()
         del req_data['id']
         self.assertEqual(req_data, self.data)
 

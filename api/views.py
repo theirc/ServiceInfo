@@ -187,9 +187,6 @@ class RequestForServiceViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet)
     queryset = RequestForService.objects.all()
     serializer_class = RequestForServiceSerializer
 
-    class Meta:
-        model = RequestForService
-
 
 class ServiceFilter(django_filters.FilterSet):
     additional_info = CharAnyLanguageFilter('additional_info')
