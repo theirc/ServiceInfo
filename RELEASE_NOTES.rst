@@ -5,7 +5,7 @@ Release Notes
 0.2.6 - Jun. 23, 2015
 ---------------------
 
-* New repo for open source, ServiceInfo-project
+* New repo for open source, serviceinfo
 * Updated translations
 
 0.2.5 - Jun. 22, 2015

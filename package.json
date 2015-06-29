@@ -38,12 +38,12 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/theirc/ServiceInfo-project.git"
+    "url": "https://github.com/theirc/serviceinfo.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/theirc/ServiceInfo-project/issues"
+    "url": "https://github.com/theirc/serviceinfo/issues"
   },
-  "homepage": "https://github.com/theirc/ServiceInfo-project"
+  "homepage": "https://github.com/theirc/serviceinfo"
 }

@@ -12,8 +12,8 @@ work on the project locally. In a terminal, run:
 
 .. code-block:: bash
 
-    git clone git@github.com:theirc/ServiceInfo-project.git
-    cd ServiceInfo-project/
+    git clone git@github.com:theirc/serviceinfo.git
+    cd serviceinfo/
 
 
 .. _backend-setup:
@@ -88,7 +88,7 @@ we need to install that globally in our Python 2.x environment::
 To setup your local environment you should create a virtualenv and install the
 necessary requirements::
 
-    mkvirtualenv --python=/usr/bin/python3.4 ServiceInfo-project
+    mkvirtualenv --python=/usr/bin/python3.4 serviceinfo
     $VIRTUAL_ENV/bin/pip install -r $PWD/requirements/dev.txt
 
 Install the needed Javascript tools and libraries::
@@ -106,7 +106,7 @@ and also to use the javascript tools just installed::
 Exit the virtualenv and reactivate it to activate the settings just changed::
 
     deactivate
-    workon ServiceInfo-project
+    workon serviceinfo
 
 Now you can run the tests::
 
