@@ -58,8 +58,12 @@ class ProviderType(NameInCurrentLanguageMixin, models.Model):
         return reverse('providertype-detail', args=[self.id])
 
 
+def at_least_one_letter(s):
+    return any([c.isalpha() for c in s])
+
+
 def blank_or_at_least_one_letter(s):
-    return s == '' or any([c.isalpha() for c in s])
+    return s == '' or at_least_one_letter(s)
 
 
 class Provider(NameInCurrentLanguageMixin, models.Model):
@@ -1097,6 +1101,36 @@ class Feedback(models.Model):
                 feedback=self,
                 update_type=JiraUpdateRecord.FEEDBACK
             )
+
+
+class RequestForService(models.Model):
+    provider_name = models.CharField(
+        max_length=256,
+        validators=[at_least_one_letter]
+    )
+    service_name = models.CharField(
+        max_length=256,
+        validators=[at_least_one_letter]
+    )
+    area_of_service = models.ForeignKey(
+        ServiceArea,
+        verbose_name=_("area of service"),
+    )
+    service_type = models.ForeignKey(
+        ServiceType,
+        verbose_name=_("type"),
+    )
+    address = models.TextField()
+    contact = models.TextField()
+    description = models.TextField()
+    rating = models.SmallIntegerField(
+        help_text=_("How would you rate the quality of the service you received (from 1 to 5, "
+                    "where 5 is the highest rating possible)?"),
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(5)
+        ]
+    )
 
 
 class LebanonRegion(models.Model):

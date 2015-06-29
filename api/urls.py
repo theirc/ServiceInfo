@@ -16,6 +16,7 @@ router.register(r'selectioncriteria', views.SelectionCriterionViewSet,
                 base_name='selectioncriterion')
 router.register(r'feedback', views.FeedbackViewSet)
 router.register(r'nationality', views.NationalityViewSet)
+router.register(r'requestsforservice', views.RequestForServiceViewSet)
 
 # See http://www.django-rest-framework.org/api-guide/routers/ for the
 # URL names that DRF comes up with, to make it easy to reverse them.

@@ -15,7 +15,7 @@ from email_user.forms import EmailUserCreationForm
 from email_user.models import EmailUser
 from services.import_export import validate_and_import_data
 from services.models import Service, Provider, ProviderType, ServiceType, ServiceArea, \
-    SelectionCriterion, Feedback, Nationality
+    SelectionCriterion, Feedback, Nationality, RequestForService
 
 
 CAN_EDIT_STATUSES = [Service.STATUS_DRAFT, Service.STATUS_CURRENT, Service.STATUS_REJECTED]
@@ -211,6 +211,18 @@ class SelectionCriterionSerializerForService(SelectionCriterionSerializer):
     # Remove 'service' from the required fields
     class Meta(SelectionCriterionSerializer.Meta):
         fields = [name for name in SelectionCriterionSerializer.Meta.fields if name != 'service']
+
+
+class RequestForServiceSerializer(serializers.HyperlinkedModelSerializer):
+    # These are text fields, if they have a trailing newline leave it alone.
+    address = serializers.CharField(trim_whitespace=False)
+    contact = serializers.CharField(trim_whitespace=False)
+    description = serializers.CharField(trim_whitespace=False)
+
+    class Meta:
+        model = RequestForService
+        fields = ['provider_name', 'service_name', 'area_of_service', 'service_type',
+                  'address', 'contact', 'description', 'rating']
 
 
 class ServiceSerializer(RequireOneTranslationMixin,
