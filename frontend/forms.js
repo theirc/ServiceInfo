@@ -143,8 +143,17 @@ var forms = module.exports = {
 
     clear_form: function($form) {
        $form.find('[name]').each(function() {
-            var $field = $(this);
-            $field.val('');
+           var $field = $(this),
+               type = $field.attr('type');
+           if (type === 'checkbox' || type === 'radio') {
+               $field.prop('checked', false);
+           }
+           else if (type === 'hidden') {
+               // don't clear hidden fields, they are not user input
+           }
+           else {
+               $field.val('');
+           }
         });
     },
 
