@@ -1040,6 +1040,9 @@ class Feedback(models.Model):
         help_text=_("How would you rate your satisfaction with the staff of the organization "
                     "that provided services to you, (from 1 to 5, where 5 is the highest "
                     "rating possible)?"),
+        blank=True,  # Only required if service was delivered
+        null=True,
+        default=None,
         validators=[
             MinValueValidator(1),
             MaxValueValidator(5)
