@@ -9,6 +9,25 @@ MAX_RESULTS = 50
 
 
 class SearchFrontendTest(ServiceInfoFrontendTestCase):
+    def test_map_view(self):
+        self.load_page_and_set_language()
+        menu = self.wait_for_element('menu')
+        search = menu.find_elements_by_link_text('Search')[0]
+        search.click()
+        self.wait_for_element('search_controls')
+        self.assertHashLocation('/search')
+        map_button = self.wait_for_element('[name="map-toggle-map"]', match=By.CSS_SELECTOR)
+        map_button.click()
+        self.wait_for_element('.search-map', match=By.CSS_SELECTOR)
+
+        # While we're here, make sure the "request new service" button
+        # has shown up
+        button = self.wait_for_element('#request_service_button', match=By.CSS_SELECTOR)
+
+        # Clicking it should go to the request a service page
+        button.click()
+        self.wait_for_element('#service-request', match=By.CSS_SELECTOR)
+        self.assertHashLocation('/service/request')
 
     def test_search_list_results_limited(self):
         """No more than MAX_RESULTS services in result"""
@@ -23,6 +42,15 @@ class SearchFrontendTest(ServiceInfoFrontendTestCase):
         self.wait_for_element('.search-result-list > li', match=By.CSS_SELECTOR)
         results = self.browser.find_elements_by_css_selector('.search-result-list > li')
         self.assertEqual(MAX_RESULTS, len(results))
+
+        # While we're here, make sure the "request new service" button
+        # has shown up
+        button = self.wait_for_element('#request_service_button', match=By.CSS_SELECTOR)
+
+        # Clicking it should go to the request a service page
+        button.click()
+        self.wait_for_element('#service-request', match=By.CSS_SELECTOR)
+        self.assertHashLocation('/service/request')
 
     def test_filtered_list_search(self):
         """Find services by type."""

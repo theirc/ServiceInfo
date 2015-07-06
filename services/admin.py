@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from services.models import Provider, Service, ServiceArea, SelectionCriterion, ProviderType, \
-    ServiceType, JiraUpdateRecord, Feedback, Nationality, LebanonRegion
+    ServiceType, JiraUpdateRecord, Feedback, Nationality, LebanonRegion, RequestForService
 from services.utils import validation_error_as_text
 
 
@@ -240,4 +240,13 @@ admin.site.register(
         'level',
     ],
     list_select_related=['parent']
+)
+
+
+admin.site.register(
+    RequestForService,
+    list_display=[
+        'provider_name',
+        'service_name',
+    ]
 )

@@ -182,11 +182,8 @@ module.exports = Backbone.View.extend({
         },
         "click .form-btn-clear": function(e) {
             e.preventDefault();
-            this.$el.find('[name]').each(function() {
-                var $field = $(this);
-                $field.val('');
-            });
+            forms.clear_form(this.$el);
             return false;
-        },
+        }
     },
 });
