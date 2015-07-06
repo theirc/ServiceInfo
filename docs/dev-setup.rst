@@ -29,13 +29,14 @@ installed from NPM and then packaged for the browser by Browserify. You'll
 need to install Node, which includes npm, in order to build the frontend
 application if you'd like to run it.
 
-On Mac, you can install Node with brew.
+On Mac, you can install Node with brew::
 
     brew install node
 
 On Ubuntu and other Linux distributions, you should download and build the
 latest version of Node. Standard package managers rarely have the most recent
-versions of Node that include NPM. You can download it from http://nodejs.org/download/ and follow the standard build instructions
+versions of Node that include NPM. You can download it from
+http://nodejs.org/download/ and follow the standard build instructions::
 
     tar -zxvf node-v0.10.35.tar.gz
     cd node-v0.10.35/
@@ -44,7 +45,7 @@ versions of Node that include NPM. You can download it from http://nodejs.org/do
     sudo make install
     cd ..
 
-With Node installed, you can install all frontend dependencies with `npm`.
+With Node installed, you can install all frontend dependencies with `npm`::
 
     npm install
 
