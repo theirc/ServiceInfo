@@ -1,0 +1,10 @@
+A user has requested the following service be added.
+
+Provider Name:   {{ rfs.provider_name }}
+Service Name:    {{ rfs.service_name }}
+Area:            {{ rfs.area_of_service.name_en|default:rfs.area_of_service.name_ar|default:rfs.area_of_service.name_fr }}
+Service Type:    {{ rfs.service_type.name_en|default:rfs.service_type.name_ar|default:rfs.service_type.name_fr }}
+Address:         {{ rfs.address }}
+Contact:         {{ rfs.contact }}
+Description:     {{ rfs.description }}
+Rating:          {{ rfs.rating }}

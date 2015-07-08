@@ -8,7 +8,8 @@ from django.utils import translation
 from email_user.tests.factories import EmailUserFactory
 from services.models import ServiceType, ProviderType, Provider, Service, \
     blank_or_at_least_one_letter, ServiceArea
-from services.tests.factories import ProviderFactory, ServiceFactory, FeedbackFactory
+from services.tests.factories import ProviderFactory, ServiceFactory, FeedbackFactory, \
+    RequestForServiceFactory
 
 
 class ProviderTest(TestCase):
@@ -205,3 +206,10 @@ class FeedbackTest(TestCase):
         with self.assertRaises(ValidationError) as e:
             feedback.full_clean()
         self.assertIn('non_delivery_explained', e.exception.message_dict)
+
+
+def RequestForServiceTest(TestCase):
+    def test_good_validation(self):
+        # Factory ought to create a valid instance
+        rfs = RequestForServiceFactory()
+        rfs.full_clean()
