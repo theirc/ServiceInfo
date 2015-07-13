@@ -1,8 +1,8 @@
 IRC's ServiceInfo
 =================
 
-.. image:: https://api.travis-ci.com/theirc/ServiceInfo.svg?token=W924ebuDbRmmthnnyABJ&branch=develop
-    :target: https://magnum.travis-ci.com/theirc/ServiceInfo
+.. image:: https://travis-ci.org/theirc/ServiceInfo.svg?branch=develop
+    :target: https://travis-ci.org/theirc/ServiceInfo
 
 Please see the `documentation`_ for more information, including
 `Development Setup`_ to configure your local development environment.
