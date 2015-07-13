@@ -673,6 +673,8 @@ class JiraUpdateRecord(models.Model):
     provider = models.ForeignKey(Provider, blank=True, null=True, related_name='jira_records')
     feedback = models.ForeignKey(
         'services.Feedback', blank=True, null=True, related_name='jira_records')
+    request_for_service = models.ForeignKey(
+        'services.RequestForService', blank=True, null=True, related_name='jira_records')
     PROVIDER_CHANGE = 'provider-change'
     NEW_SERVICE = 'new-service'
     CHANGE_SERVICE = 'change-service'
@@ -682,6 +684,7 @@ class JiraUpdateRecord(models.Model):
     APPROVE_SERVICE = 'approve-service'
     REJECT_SERVICE = 'rejected-service'
     FEEDBACK = 'feedback'
+    REQUEST_FOR_SERVICE = 'request-for-service'
     UPDATE_CHOICES = (
         (PROVIDER_CHANGE, _('Provider updated their information')),
         (NEW_SERVICE, _('New service submitted by provider')),
@@ -692,6 +695,7 @@ class JiraUpdateRecord(models.Model):
         (APPROVE_SERVICE, _('Staff approved a new or changed service')),
         (REJECT_SERVICE, _('Staff rejected a new or changed service')),
         (FEEDBACK, _('User submitted feedback')),
+        (REQUEST_FOR_SERVICE, _('User submitted request for service.')),
     )
     # Update types that indicate a new Service record was created
     NEW_SERVICE_RECORD_UPDATE_TYPES = [
@@ -741,7 +745,10 @@ class JiraUpdateRecord(models.Model):
             errors.append('must have a non-blank update_type')
         elif self.update_type == self.FEEDBACK:
             if not self.feedback:
-                errors.append("%s must specify feedback' % self.update_type")
+                errors.append('%s must specify feedback' % self.update_type)
+        elif self.update_type == self.REQUEST_FOR_SERVICE:
+            if not self.request_for_service:
+                errors.append('%s must specify request for service' % self.update_type)
         elif self.update_type in self.PROVIDER_CHANGE_UPDATE_TYPES:
             if not self.provider:
                 errors.append('%s must specify provider' % self.update_type)
@@ -884,6 +891,19 @@ class JiraUpdateRecord(models.Model):
                     'provider': self.feedback.service.provider,
                 }
                 template_name = 'jira/feedback.txt'
+                kwargs['description'] = render_to_string(template_name, context)
+                new_issue = jira.create_issue(**kwargs)
+                self.jira_issue_key = new_issue.key
+                self.save()
+            elif self.update_type == self.REQUEST_FOR_SERVICE:
+                kwargs = jira_support.default_feedback_kwargs()
+                kwargs['summary'] = 'Request service to be added: %s' % (
+                    self.request_for_service.service_name,)
+                context = {
+                    'rfs': self.request_for_service,
+                    'rfs_url': absolute_url(self.request_for_service.get_admin_edit_url()),
+                }
+                template_name = 'jira/request_for_service.txt'
                 kwargs['description'] = render_to_string(template_name, context)
                 new_issue = jira.create_issue(**kwargs)
                 self.jira_issue_key = new_issue.key
@@ -1134,6 +1154,18 @@ class RequestForService(models.Model):
             MaxValueValidator(5)
         ]
     )
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.pk:
+            JiraUpdateRecord.objects.create(
+                request_for_service=self,
+                update_type=JiraUpdateRecord.REQUEST_FOR_SERVICE
+            )
+
+    def get_admin_edit_url(self):
+        """Return the PATH part of the URL to edit this object in the admin"""
+        return reverse('admin:services_requestforservice_change', args=[self.id])
 
 
 class LebanonRegion(models.Model):

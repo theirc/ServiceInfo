@@ -8,7 +8,8 @@ from email_user.tests.factories import EmailUserFactory
 from ..models import JiraUpdateRecord, Service
 from ..tasks import process_jira_work
 from ..utils import absolute_url
-from .factories import ServiceFactory, ProviderFactory, SelectionCriterionFactory, FeedbackFactory
+from .factories import ServiceFactory, ProviderFactory, SelectionCriterionFactory, FeedbackFactory, \
+    RequestForServiceFactory
 
 
 class JiraUpdateRecordModelTest(TestCase):
@@ -65,6 +66,12 @@ class JiraUpdateRecordModelTest(TestCase):
             JiraUpdateRecord.objects.create(update_type=JiraUpdateRecord.FEEDBACK,
                                             feedback=None)
         self.assertIn('must specify feedback', str(cm.exception))
+
+    def test_request_for_service_requires_request(self):
+        with self.assertRaises(Exception) as cm:
+            JiraUpdateRecord.objects.create(update_type=JiraUpdateRecord.REQUEST_FOR_SERVICE,
+                                            request_for_service=None)
+        self.assertIn('must specify request', str(cm.exception))
 
 
 class MockJiraTestMixin(object):
@@ -436,3 +443,29 @@ class JiraFeedbackTest(MockJiraTestMixin, TestCase):
                 self.assertIn(feedback.get_non_delivery_explained_display(), description)
             self.assertIn('Did not know how to contact them', description)
             self.assertIn('I have a little dog', description)
+
+
+@mock.patch('services.jira_support.JIRA', autospec=True)
+class JiraRequestForServiceTest(MockJiraTestMixin, TestCase):
+    def test_creating_request_for_service_sends_data_to_jira(self, mock_JIRA):
+        mock_JIRA.reset_mock()
+        rfs = RequestForServiceFactory()
+        jira_record = rfs.jira_records.get()
+        self.assertEqual(jira_record.request_for_service, rfs)
+        self.assertEqual('', jira_record.jira_issue_key)
+        self.setup_issue_key(mock_JIRA)
+        jira_project = 'XYZ'
+        with override_settings(JIRA_FEEDBACK_PROJECT_KEY=jira_project):
+            jira_record.do_jira_work()
+        mock_JIRA.return_value.create_issue.assert_called_with(
+            issuetype={'name': 'Task'},
+            summary='Request service to be added: %s' % rfs.service_name,
+            project={'key': jira_project},
+            description=mock.ANY,
+            duedate=mock.ANY,
+        )
+        description = mock_JIRA.return_value.create_issue.call_args[1]['description']
+        for attr in ['provider_name', 'service_name', 'address',
+                     'contact', 'description', 'rating', ]:
+            self.assertIn(str(getattr(rfs, attr)), description)
+        self.assertIn(rfs.get_admin_edit_url(), description)
