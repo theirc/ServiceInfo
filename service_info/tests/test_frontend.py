@@ -25,7 +25,7 @@ from services.models import Service
 from services.tests.factories import ProviderTypeFactory, ServiceFactory
 
 
-DEFAULT_TIMEOUT = 4  # Seconds
+DEFAULT_TIMEOUT = 40  # Seconds
 
 
 class ServiceInfoFrontendTestCase(LiveServerTestCase):
