@@ -4,7 +4,8 @@ var Backbone = require('backbone'),
     service = require('../models/service'),
     servicetype = require('../models/servicetype'),
     i18n = require('i18next-client'),
-    search = require('../search')
+    search = require('../search'),
+    spiderfier = require('OverlappingMarkerSpiderfier/oms')
 ;
 
 
@@ -52,12 +53,17 @@ module.exports = Backbone.View.extend({
         };
         this.map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 
+        this.spiderfier = new spiderfier.OverlappingMarkerSpiderfier(self.map);
+        this.spiderfier.addListener('click', function(marker, event) {
+            // User clicks on a limb of the spider. Go to that service
+            location.hash = '#/service/' + marker.serviceId;
+        });
         google.maps.event.addListener(this.map, 'bounds_changed', function() {
             self.bounds_changed();
         });
         google.maps.event.addListener(this.map, 'center_changed', function() {
             var center = self.map.getCenter();
-            self.center_changed({lat: center.lat(), lng: center.lng()})
+            self.center_changed({lat: center.lat(), lng: center.lng()});
         });
 
         this.perform_query();
@@ -102,6 +108,7 @@ module.exports = Backbone.View.extend({
         $.each(self.markers, function() {
             this.setMap(null);  // yes this should be 'this'
         });
+        self.spiderfier.clearMarkers();
         self.markers = [];
         var services = search.services.data();
         if (services.length === 0) {
@@ -132,14 +139,13 @@ module.exports = Backbone.View.extend({
                             null,
                             new google.maps.Point(12, 12),
                             new google.maps.Size(24, 24)
-                        ),
+                        )
                     });
                     window.marker = marker;
                     marker.setMap(self.map);
+                    marker.serviceId = service.id;
+                    self.spiderfier.addMarker(marker);
                     self.markers.push(marker);
-                    google.maps.event.addListener(marker, 'click', function () {
-                        location.hash = '#/service/' + service.id;
-                    })
                 }
             }
         });
