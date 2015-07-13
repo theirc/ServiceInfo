@@ -468,3 +468,4 @@ class JiraRequestForServiceTest(MockJiraTestMixin, TestCase):
         for attr in ['provider_name', 'service_name', 'address',
                      'contact', 'description', 'rating', ]:
             self.assertIn(str(getattr(rfs, attr)), description)
+        self.assertIn(rfs.get_admin_edit_url(), description)

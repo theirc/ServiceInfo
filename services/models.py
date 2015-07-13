@@ -901,6 +901,7 @@ class JiraUpdateRecord(models.Model):
                     self.request_for_service.service_name,)
                 context = {
                     'rfs': self.request_for_service,
+                    'rfs_url': absolute_url(self.request_for_service.get_admin_edit_url()),
                 }
                 template_name = 'jira/request_for_service.txt'
                 kwargs['description'] = render_to_string(template_name, context)
@@ -1161,6 +1162,10 @@ class RequestForService(models.Model):
                 request_for_service=self,
                 update_type=JiraUpdateRecord.REQUEST_FOR_SERVICE
             )
+
+    def get_admin_edit_url(self):
+        """Return the PATH part of the URL to edit this object in the admin"""
+        return reverse('admin:services_requestforservice_change', args=[self.id])
 
 
 class LebanonRegion(models.Model):
