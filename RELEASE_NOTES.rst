@@ -2,6 +2,11 @@ ServiceInfo
 
 Release Notes
 
+0.2.8 - Jul. 14, 2015
+---------------------
+
+* Fix feedback form when service not delivered
+
 0.2.7 - Jun. 29, 2015
 ---------------------
 
