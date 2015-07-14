@@ -96,6 +96,7 @@
         },
         "No-Search-Results": "Aucun service ne correspond à vos termes de recherche. Se il vous plaît essayer d'autres termes.",
         "Results-Truncated": "Il y avait plus de résultats que pourrait être affichée. Essayez une recherche plus précise.",
+        "More-Results": "",
         "Filtered-Search": {
             "Label": "Le terme de recherche",
             "Submit": "Recherche",
