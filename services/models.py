@@ -896,7 +896,7 @@ class JiraUpdateRecord(models.Model):
                 self.jira_issue_key = new_issue.key
                 self.save()
             elif self.update_type == self.REQUEST_FOR_SERVICE:
-                kwargs = jira_support.default_feedback_kwargs()
+                kwargs = jira_support.default_request_for_service_kwargs()
                 kwargs['summary'] = 'Request service to be added: %s' % (
                     self.request_for_service.service_name,)
                 context = {
