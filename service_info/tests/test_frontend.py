@@ -25,7 +25,7 @@ from services.models import Service
 from services.tests.factories import ProviderTypeFactory, ServiceFactory
 
 
-DEFAULT_TIMEOUT = 40  # Seconds
+DEFAULT_TIMEOUT = 4  # Seconds
 
 
 class ServiceInfoFrontendTestCase(LiveServerTestCase):
@@ -81,7 +81,7 @@ class ServiceInfoFrontendTestCase(LiveServerTestCase):
         if os.path.exists(full_path):
             os.remove(full_path)
 
-    def load_page_and_set_language(self, language='en'):
+    def load_page_and_set_language(self, language='en', retries_left=2):
         """Helper to set language choice in the browser."""
 
         self.browser.get(self.express_url)
@@ -91,7 +91,13 @@ class ServiceInfoFrontendTestCase(LiveServerTestCase):
             # Sometimes the local storage retains the previous language settings, so when
             # we load the home page, the language menu doesn't appear automatically.
             # In that case, click on the change language menu item.
-            self.wait_for_element('li.menu-item-language a', match=By.CSS_SELECTOR).click()
+            try:
+                self.wait_for_element('li.menu-item-language a', match=By.CSS_SELECTOR).click()
+            except TimeoutException:
+                if retries_left:
+                    self.load_page_and_set_language(language, retries_left - 1)
+                else:
+                    raise
             form = self.wait_for_element('language-toggle')
         button = form.find_element_by_css_selector('[data-lang="%s"]' % language)
         button.click()
