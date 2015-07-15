@@ -1152,7 +1152,10 @@ class RequestForService(models.Model):
         validators=[
             MinValueValidator(1),
             MaxValueValidator(5)
-        ]
+        ],
+        default=None,
+        blank=True,
+        null=True,
     )
 
     def save(self, *args, **kwargs):
