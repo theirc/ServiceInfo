@@ -455,7 +455,7 @@ class JiraRequestForServiceTest(MockJiraTestMixin, TestCase):
         self.assertEqual('', jira_record.jira_issue_key)
         self.setup_issue_key(mock_JIRA)
         jira_project = 'XYZ'
-        with override_settings(JIRA_FEEDBACK_PROJECT_KEY=jira_project):
+        with override_settings(JIRA_REQUEST_SERVICE_PROJECT_KEY=jira_project):
             jira_record.do_jira_work()
         mock_JIRA.return_value.create_issue.assert_called_with(
             issuetype={'name': 'Task'},
