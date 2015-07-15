@@ -82,8 +82,12 @@ class ServiceInfoFrontendTestCase(LiveServerTestCase):
             os.remove(full_path)
 
     def load_page_and_set_language(self, language='en', retries_left=2):
-        """Helper to set language choice in the browser."""
+        """Helper to set language choice in the browser.
 
+        Note: This intermittently times out on Travis, and lengthening the timeout does not help.
+        When reproduced locally (which is difficult), the screenshot of the site is empty. We
+        therefore reload the page completely if there is a timeout, up to a total of 3 times.
+        """
         self.browser.get(self.express_url)
         try:
             form = self.wait_for_element('language-toggle')
@@ -95,9 +99,8 @@ class ServiceInfoFrontendTestCase(LiveServerTestCase):
                 self.wait_for_element('li.menu-item-language a', match=By.CSS_SELECTOR).click()
             except TimeoutException:
                 if retries_left:
-                    self.load_page_and_set_language(language, retries_left - 1)
-                else:
-                    raise
+                    self.load_page_and_set_language(language, retries_left-1)
+                raise
             form = self.wait_for_element('language-toggle')
         button = form.find_element_by_css_selector('[data-lang="%s"]' % language)
         button.click()
