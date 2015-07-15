@@ -78,7 +78,20 @@ module.exports = Backbone.Router.extend({
         this.route(/search\/map/, loadPage("map"));
         this.route(/feedback\/list/, loadPage("search-list", ['feedback']));
         this.route(/feedback\/map/, loadPage("map", ['feedback']));
+
+        this.bind('route', this.trackPageView);
     },
+
+    trackPageView: function() {
+        var url = Backbone.history.getFragment();
+
+        // prepend slash, if needed
+        if (!/^\//.test(url) && url != "") {
+            url = "/" + url;
+        }
+        window.ga('send', 'pageview', url);
+    },
+
     routes: {
         "": loadPage("home"),
         "admin": loadPage("admin"),
