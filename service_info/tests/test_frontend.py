@@ -99,8 +99,9 @@ class ServiceInfoFrontendTestCase(LiveServerTestCase):
                 self.wait_for_element('li.menu-item-language a', match=By.CSS_SELECTOR).click()
             except TimeoutException:
                 if retries_left:
-                    self.load_page_and_set_language(language, retries_left-1)
-                raise
+                    self.load_page_and_set_language(language, retries_left - 1)
+                else:
+                    raise
             form = self.wait_for_element('language-toggle')
         button = form.find_element_by_css_selector('[data-lang="%s"]' % language)
         button.click()
