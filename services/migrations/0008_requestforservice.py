@@ -9,7 +9,7 @@ import django.core.validators
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('services', '0007_load_geo'),
+        ('services', '0008_auto_20150702_1445'),
     ]
 
     operations = [
