@@ -65,6 +65,14 @@ class FeedbackSerializer(serializers.HyperlinkedModelSerializer):
                   'other_difficulties', 'staff_satisfaction', 'extra_comments',
                   'anonymous')
 
+    def validate(self, attrs):
+        # Staff sat required if service delivered
+        if attrs['delivered'] and not attrs.get('staff_satisfaction', False):
+            raise exceptions.ValidationError(
+                _("Staff satisfaction is required if service was delivered.")
+            )
+        return attrs
+
 
 class LanguageSerializer(serializers.Serializer):
     language = serializers.CharField(max_length=10)

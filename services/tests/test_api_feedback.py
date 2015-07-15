@@ -1,4 +1,4 @@
-from http.client import CREATED, OK, NOT_FOUND
+from http.client import CREATED, OK, NOT_FOUND, BAD_REQUEST
 
 from django.core.urlresolvers import reverse
 from django.forms import model_to_dict
@@ -9,9 +9,9 @@ from services.tests.factories import FeedbackFactory
 
 
 class FeedbackTest(TestCase):
-    # The feedback API is write-only
-    def try_to_create_one_like(self, example):
-        example.full_clean()  # double-check it's valid
+    def try_to_create_one_like(self, example, expected_status=CREATED):
+        if expected_status == CREATED:
+            example.full_clean()  # double-check it's valid
         data = model_to_dict(example)
         del data['id']
         data['area_of_residence'] = \
@@ -21,7 +21,7 @@ class FeedbackTest(TestCase):
         # Remove any fields whose value is None
         data = {k: v for k, v in data.items() if v is not None}
         rsp = self.client.post(reverse('feedback-list'), data=data)
-        self.assertEqual(CREATED, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        self.assertEqual(expected_status, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
     def test_create_delivered_feedback(self):
         example = FeedbackFactory(delivered=True)
@@ -39,6 +39,24 @@ class FeedbackTest(TestCase):
         url = '/api/feedbacks/%d/' % feedback.pk
         rsp = self.client.get(url)
         self.assertEqual(NOT_FOUND, rsp.status_code, msg=rsp.content.decode('utf-8'))
+
+    def test_staff_sat_required_if_service_provided(self):
+        example = FeedbackFactory(
+            delivered=True,
+            staff_satisfaction=None,
+        )
+        self.try_to_create_one_like(example, expected_status=BAD_REQUEST)
+        example.staff_satisfaction = ''
+        self.try_to_create_one_like(example, expected_status=BAD_REQUEST)
+        example.staff_satisfaction = 3
+        self.try_to_create_one_like(example, expected_status=CREATED)
+
+    def test_staff_sat_not_required_if_service_not_provided(self):
+        example = FeedbackFactory(
+            delivered=False,
+            staff_satisfaction=None,
+        )
+        self.try_to_create_one_like(example)
 
 
 class NationalityTest(TestCase):
