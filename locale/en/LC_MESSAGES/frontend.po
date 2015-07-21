@@ -135,6 +135,9 @@ msgstr "Search For Services"
 msgid "Search-List##Page-Head##Description"
 msgstr "Use the filtered search below to find the service that meets your needs."
 
+msgid "Search-List##Service-Request"
+msgstr "Tell us about a missing service"
+
 msgid "Feedback-Search##Page-Head##Title"
 msgstr "Give Feedback on Services"
 
@@ -350,6 +353,57 @@ msgstr "Submit Answers"
 
 msgid "Service-Form##Form-Submit-Options##Clear"
 msgstr "Remove Answers"
+
+msgid "Service-Request-Form##Page-Head##Page-Title##Title"
+msgstr "Suggest a service"
+
+msgid "Service-Request-Form##Legend"
+msgstr "To suggest a service, please fill out the form below"
+
+msgid "Service-Request-Form##Provider-Name"
+msgstr "Service Provider Name"
+
+msgid "Service-Request-Form##Service-Name"
+msgstr "Service Name"
+
+msgid "Service-Request-Form##Service-Area"
+msgstr "Service Area"
+
+msgid "Service-Request-Form##Type"
+msgstr "Service Type"
+
+msgid "Service-Request-Form##Service-Address"
+msgstr "Service Address"
+
+msgid "Service-Request-Form##Service-Address-Help"
+msgstr "Where this service is being delivered."
+
+msgid "Service-Request-Form##Service-Contact"
+msgstr "Contact Detail"
+
+msgid "Service-Request-Form##Service-Contact-Help"
+msgstr "Please enter personal contact detail, as it will be used to contact you for more details."
+
+msgid "Service-Request-Form##Service-Description"
+msgstr "Service Description"
+
+msgid "Service-Request-Form##Service-Description-Help"
+msgstr "Enter some details about this service."
+
+msgid "Service-Request-Form##Rating"
+msgstr "Rate the Service (from 1 to 5, where 5 is the highest rating possible):"
+
+msgid "Service-Request-Form##Form-Submit-Options##Submit"
+msgstr "Submit Answers"
+
+msgid "Service-Request-Form##Form-Submit-Options##Clear"
+msgstr "Remove Answers"
+
+msgid "Service-Request-Confirmation##Page-Head##Page-Title##Title"
+msgstr "Your Information was Submitted Successfully"
+
+msgid "Service-Request-Confirmation##Page-Head##Page-Description##Page-Description"
+msgstr "Thank you for your suggestion."
 
 msgid "Provider-Registration-Form##Page-Head##Page-Title##Title"
 msgstr "Service Provider Registration Form"
