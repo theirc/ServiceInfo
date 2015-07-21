@@ -29,3 +29,12 @@ def default_feedback_kwargs():
         'issuetype': {'name': 'Task'},
         'duedate': str(duedate),
     }
+
+
+def default_request_for_service_kwargs():
+    duedate = datetime.date.today() + datetime.timedelta(days=settings.JIRA_DUEIN_DAYS)
+    return {
+        'project': {'key': settings.JIRA_REQUEST_SERVICE_PROJECT_KEY},
+        'issuetype': {'name': 'Task'},
+        'duedate': str(duedate),
+    }

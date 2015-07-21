@@ -2,6 +2,14 @@ ServiceInfo
 
 Release Notes
 
+0.2.9 - Jul. 21, 2015
+---------------------
+
+* Add Request for Service functionality (#20, #21, #27, #36, #37)
+* Spiderfy to show multiple markers in close proximity (#29)
+* Minor doc / TravisCI improvements (#24, #26, #28, #30)
+* Add Google Analytics (#38)
+
 0.2.8 - Jul. 14, 2015
 ---------------------
 

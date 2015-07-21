@@ -1,0 +1,12 @@
+A user has suggested the following service be added.
+
+You can view the suggestion details here: {{ rfs_url }}
+
+Service Provider Name:   {{ rfs.provider_name }}
+Service Name:            {{ rfs.service_name }}
+Service Type:            {{ rfs.service_type.name_en|default:rfs.service_type.name_ar|default:rfs.service_type.name_fr }}
+Service Area:            {{ rfs.area_of_service.name_en|default:rfs.area_of_service.name_ar|default:rfs.area_of_service.name_fr }}
+Service Address:         {{ rfs.address }}
+Contact Detail:          {{ rfs.contact }}
+Service Description:     {{ rfs.description }}
+Rating:                  {{ rfs.rating|default:"Not provided" }}

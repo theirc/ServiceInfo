@@ -4,9 +4,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-06-22 05:30+0000\n"
-"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
-"Language-Team: French (http://www.transifex.com/projects/p/service-mapper/language/fr/)\n"
+"PO-Revision-Date: 2015-06-25 11:37+0000\n"
+"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
+"Language-Team: French (http://www.transifex.com/p/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -174,6 +174,9 @@ msgstr "Aucun service ne correspond à vos termes de recherche. Se il vous plaî
 
 msgid "Service-Map##Results-Truncated"
 msgstr "Il y avait plus de résultats que pourrait être affichée. Essayez une recherche plus précise."
+
+msgid "Service-Map##More-Results"
+msgstr ""
 
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "Le terme de recherche"

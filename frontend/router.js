@@ -22,6 +22,8 @@ var views = {
     "search-list": require('./views/search-list'),
     "service-cancel": require('./views/service-cancel'),
     "service-list": require('./views/service-list'),
+    "service-request-form": require('./views/service-request-form'),
+    "service-request-confirm": require('./views/service-request-confirm'),
     "service-detail": require('./views/service-detail'),
     "import-export": require('./views/import-export'),
     "login": require('./views/login'),
@@ -76,7 +78,20 @@ module.exports = Backbone.Router.extend({
         this.route(/search\/map/, loadPage("map"));
         this.route(/feedback\/list/, loadPage("search-list", ['feedback']));
         this.route(/feedback\/map/, loadPage("map", ['feedback']));
+
+        this.bind('route', this.trackPageView);
     },
+
+    trackPageView: function() {
+        var url = Backbone.history.getFragment();
+
+        // prepend slash, if needed
+        if (!/^\//.test(url) && url != "") {
+            url = "/" + url;
+        }
+        window.ga('send', 'pageview', url);
+    },
+
     routes: {
         "": loadPage("home"),
         "admin": loadPage("admin"),
@@ -92,11 +107,12 @@ module.exports = Backbone.Router.extend({
         "manage/service-list": loadPage("service-list"),
         "manage/import-export": loadPage("import-export"),
 
+        "service/request/confirm": loadPage("service-request-confirm"),
+        "service/request": loadPage("service-request-form"),
         "service/:id": loadPage("service-detail", ['id']),
 
         "feedback/confirm": loadPage("feedback-confirm"),
         "feedback/:id": loadPage("feedback-form", ['id']),
-
         "service/cancel/:id": loadPage("service-cancel", ['id']),
         "service-list": loadPage("service-list"),
         "login": loadPage("login"),

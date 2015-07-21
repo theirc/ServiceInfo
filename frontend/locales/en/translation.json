@@ -64,7 +64,8 @@
     "Page-Head": {
       "Title": "Search For Services",
       "Description": "Use the filtered search below to find the service that meets your needs."
-    }
+    },
+    "Service-Request": "Tell us about a missing service"
   },
   "Feedback-Search": {
     "Page-Head": {
@@ -198,6 +199,39 @@
     "Form-Submit-Options": {
         "Submit": "Submit Answers",
         "Clear": "Remove Answers"
+    }
+  },
+  "Service-Request-Form": {
+      "Page-Head": {
+        "Page-Title": {
+          "Title": "Suggest a service"
+        }
+      },
+    "Legend": "To suggest a service, please fill out the form below",
+    "Provider-Name": "Service Provider Name",
+    "Service-Name": "Service Name",
+    "Service-Area": "Service Area",
+    "Type": "Service Type",
+    "Service-Address": "Service Address",
+    "Service-Address-Help": "Where this service is being delivered.",
+    "Service-Contact": "Contact Detail",
+    "Service-Contact-Help": "Please enter personal contact detail, as it will be used to contact you for more details.",
+    "Service-Description": "Service Description",
+    "Service-Description-Help": "Enter some details about this service.",
+    "Rating": "Rate the Service (from 1 to 5, where 5 is the highest rating possible):",
+    "Form-Submit-Options": {
+        "Submit": "Submit Answers",
+        "Clear": "Remove Answers"
+    }
+  },
+  "Service-Request-Confirmation": {
+    "Page-Head": {
+        "Page-Title": {
+            "Title": "Your Information was Submitted Successfully"
+        },
+        "Page-Description": {
+          "Page-Description": "Thank you for your suggestion."
+        }
     }
   },
   "Provider-Registration-Form": {

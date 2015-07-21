@@ -6,7 +6,7 @@ import factory.fuzzy
 from email_user.tests.factories import EmailUserFactory
 
 from services.models import Provider, ProviderType, SelectionCriterion, Service, ServiceArea, \
-    ServiceType, Feedback, Nationality
+    ServiceType, Feedback, Nationality, RequestForService
 
 
 class FuzzyURL(factory.fuzzy.BaseFuzzyAttribute):
@@ -190,3 +190,17 @@ class FeedbackFactory(factory.DjangoModelFactory):
 
     # This only has to be set if difficulty_contacting was 'other'
     other_difficulties = factory.LazyAttribute(get_other_difficulties)
+
+
+class RequestForServiceFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = RequestForService
+
+    provider_name = factory.fuzzy.FuzzyText(length=50)
+    service_name = factory.fuzzy.FuzzyText(length=50)
+    area_of_service = factory.fuzzy.FuzzyAttribute(random_service_area)
+    service_type = factory.SubFactory(ServiceTypeFactory)
+    address = factory.fuzzy.FuzzyText(length=150)
+    contact = factory.fuzzy.FuzzyText(length=150)
+    description = factory.fuzzy.FuzzyText(length=150)
+    rating = factory.fuzzy.FuzzyInteger(1, 5)
