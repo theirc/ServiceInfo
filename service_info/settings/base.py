@@ -164,6 +164,7 @@ INSTALLED_APPS = (
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
+    'sorl.thumbnail',
 )
 
 # A sample logging configuration. The only tangible logging

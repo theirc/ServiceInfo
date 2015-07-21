@@ -1,5 +1,5 @@
 psycopg2==2.5.4
-Pillow==2.5.3
+Pillow==2.9.0
 Django==1.7.7
 six==1.6.1
 celery==3.1.17
@@ -23,3 +23,6 @@ oauthlib==0.7.2
 xlwt-future==0.8.0
 # xlrd already supports Python 3, go figure
 xlrd==0.9.3
+
+# images / thumbnails
+sorl-thumbnail==12.3

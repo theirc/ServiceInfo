@@ -430,6 +430,8 @@ class ServiceAPITest(APITestMixin, TestCase):
             {'text_en': 'Crit en'},
             {'text_fr': 'Crit fr'}
         ]
+        # image is read-only
+        del data['image']
         rsp = self.put_with_token(reverse('service-list'), data=data)
         self.assertEqual(METHOD_NOT_ALLOWED, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
