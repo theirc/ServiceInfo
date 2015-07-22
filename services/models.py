@@ -680,7 +680,7 @@ class Service(NameInCurrentLanguageMixin, models.Model):
     def get_thumbnail_url(self, width=100, height=100):
         """Shortcut to get the URL for an image thumbnail."""
         if self.image and hasattr(self.image, 'url'):
-            frmt = "PNG" if self.image.path.rsplit(".", 1)[-1].upper() == "PNG" else "JPEG"
+            frmt = "PNG" if self.image.path.lower().endswith('.png') else "JPEG"
             size = "{}x{}".format(width, height)
             thumbnail = get_thumbnail(self.image, size, upscale=False, format=frmt)
             return thumbnail.url
