@@ -525,6 +525,25 @@ class ServiceAPITest(APITestMixin, TestCase):
         service_type = json.loads(self.client.get(result['type']).content.decode('utf-8'))
         self.assertIn('icon_url', service_type)
 
+    def test_get_service_with_image(self):
+        # if Service has image, its URL should be available
+        service = ServiceFactory(provider=self.provider)
+        image_url = service.get_thumbnail_url(width=640, height=480)
+        rsp = self.get_with_token(service.get_api_url())
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(service.pk, result['id'])
+        self.assertEqual(image_url, result['image_url'])
+
+    def test_get_service_with_no_image(self):
+        # if Service doesn't have image, its URL should be None
+        service = ServiceFactory(provider=self.provider)
+        service.image = ''
+        service.save()
+        rsp = self.get_with_token(service.get_api_url())
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(service.pk, result['id'])
+        self.assertEqual(None, result['image_url'])
+
     def test_list_services(self):
         # Should only get user's own services
         provider = self.provider

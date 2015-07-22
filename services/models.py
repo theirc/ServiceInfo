@@ -682,7 +682,7 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         if self.image and hasattr(self.image, 'url'):
             frmt = "PNG" if self.image.path.lower().endswith('.png') else "JPEG"
             size = "{}x{}".format(width, height)
-            thumbnail = get_thumbnail(self.image, size, upscale=False, format=frmt)
+            thumbnail = get_thumbnail(self.image, size, upscale=False, format=frmt, crop='center')
             return thumbnail.url
         return None
 

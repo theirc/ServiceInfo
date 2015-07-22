@@ -20,8 +20,11 @@
 		</div>
 	</div>
 </div>
-<div class="container">      
+<div class="container">
     <div class="row">
+        {{#if service.image_url }}
+            <div class="image"><img src="{{ service.image_url }}" alt="service photo" /></div>
+        {{/if}}
 		<div class="description">{{multiline service.description }}</div>
 		<div class=feedback-btn>
 			<div class="third">
