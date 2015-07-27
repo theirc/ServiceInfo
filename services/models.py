@@ -478,8 +478,10 @@ class Service(NameInCurrentLanguageMixin, models.Model):
 
     image = ImageField(
         upload_to="service-images/",
-        help_text=_("Supported file types include GIF, JPEG, PNG, WebP. "
-                    "SVG files are not supported."),
+        help_text=_(
+            "Upload an image file (GIF, JPEG, PNG, WebP) with a square aspect "
+            "ratio (Width equal to Height). The image size should be at least "
+            "1280 x 1280 for best results. SVG files are not supported."),
         blank=True,
         default='',
     )
