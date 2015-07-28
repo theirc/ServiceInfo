@@ -37,10 +37,10 @@ var ReportTableView = Backbone.View.extend({
         var lang = config.get('forever.language'),
             headers = null,
             rows = _.map(data, function (row) {
-                var result = [row['name_' + lang], ];
+                var result = [row['name_' + lang] ];
                 _.each(row.totals, function (total) {
                     result.push(total.total);
-                })
+                });
                 if (headers === null) {
                     headers = _.map(row.totals, function (total) {
                         return total['label_' + lang];
@@ -116,7 +116,7 @@ module.exports = Backbone.View.extend({
                     blobURL = window.URL.createObjectURL(blob);
                     if ('download' in link) {
                         // Use download attribute
-                        link.style = 'display: none;'
+                        link.style = 'display: none;';
                         link.href = blobURL;
                         link.download = filename;
                         document.body.appendChild(link);
