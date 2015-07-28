@@ -237,7 +237,7 @@ class ServiceSerializer(RequireOneTranslationMixin,
                         serializers.HyperlinkedModelSerializer):
     provider_fetch_url = serializers.CharField(source='get_provider_fetch_url', read_only=True)
     selection_criteria = SelectionCriterionSerializerForService(many=True, required=False)
-    image_url = serializers.SerializerMethodField()
+    image_data = serializers.SerializerMethodField()
 
     class Meta:
         model = Service
@@ -262,7 +262,7 @@ class ServiceSerializer(RequireOneTranslationMixin,
             'saturday_open', 'saturday_close',
             'type',
             'is_mobile',
-            'image_url',
+            'image_data',
         )
         read_only_fields = ('provider',)
         required_translated_fields = ['name', 'description']
@@ -330,8 +330,21 @@ class ServiceSerializer(RequireOneTranslationMixin,
         kwargs['provider'] = Provider.objects.get(user=user)
         super().save(**kwargs)
 
-    def get_image_url(self, obj):
-        return obj.get_thumbnail_url(width=640, height=480)
+    def get_image_data(self, obj):
+        if not obj.image:
+            return
+        data = {}
+        large_size = 1280
+        medium_size = large_size // 2
+        small_size = large_size // 4
+        for size_name, size in (('large', large_size),
+                                ('medium', medium_size),
+                                ('small', small_size)):
+            if obj.image.width < size:
+                size = obj.image.width
+            data[size_name + '_url'] = obj.get_thumbnail_url(width=size, height=size)
+            data[size_name + '_width'] = size
+        return data
 
 
 class DistanceField(serializers.FloatField):
