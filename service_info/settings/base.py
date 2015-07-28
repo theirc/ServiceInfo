@@ -46,9 +46,10 @@ TIME_ZONE = 'Asia/Beirut'
 LANGUAGE_CODE = 'en-us'
 
 LANGUAGES = [
-    ('ar', _('Arabic')),
     ('en', _('English')),
-    ('fr', _('French')),
+    # Use only English for the Django Admin. Frontend will still be translated
+    # ('ar', _('Arabic')),
+    # ('fr', _('French')),
 ]
 
 # If you set this to False, Django will make some optimizations so as not
