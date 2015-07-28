@@ -18,7 +18,7 @@
     "underscore": "^1.7.0",
     "jquery-form": "~3.50.0",
     "OverlappingMarkerSpiderfier": "yagoferrer/OverlappingMarkerSpiderfier.git#0.3.3e",
-    "flot": "flot/flot.git#v0.8.3"
+    "Flot": "flot/flot.git#v0.8.3"
 
   },
   "devDependencies": {
