@@ -79,7 +79,7 @@ class LanguageSerializer(serializers.Serializer):
 
     def validate_language(self, value):
         # See if it's a valid language code
-        language_dict = dict(settings.LANGUAGES)
+        language_dict = dict(settings.FRONTEND_LANGUAGES)
         if value not in language_dict:
             valid_codes = ', '.join(language_dict.keys())
             raise exceptions.ValidationError(
@@ -577,7 +577,7 @@ class BaseServiceTypeAggregateSerializer(RequireOneTranslationMixin,
             choices = [(i, str(i)) for i in range(minimum, maximum+1)]
         for value, label in choices:
             total = {'total': counts.get(value, 0)}
-            for lang, name in settings.LANGUAGES:
+            for lang, name in settings.FRONTEND_LANGUAGES:
                 with override(language=lang):
                     total['label_{}'.format(lang)] = force_text(label)
             totals.append(total)
