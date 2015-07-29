@@ -737,7 +737,7 @@ class LanguageTest(APITestMixin, TestCase):
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         result = json.loads(rsp.content.decode('utf-8'))
         self.assertEqual('', result['language'])
-        TEST_LANG = 'en'
+        TEST_LANG = 'fr'
         rsp = self.post_with_token(url, {'language': TEST_LANG})
         self.assertEqual(OK, rsp.status_code, msg=rsp.content.decode('utf-8'))
         rsp = self.get_with_token(url)
