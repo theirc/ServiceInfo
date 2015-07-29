@@ -1,5 +1,6 @@
 var Backbone = require('backbone'),
     _ = require('underscore'),
+    flot = require('Flot'),
     template = require("../templates/reports.hbs"),
     resultsTemplate = require("../templates/stats-table.hbs"),
     hashtrack = require('hashtrack'),
@@ -127,4 +128,4 @@ module.exports = Backbone.View.extend({
                 }
             });
     }
-}); 
+});
