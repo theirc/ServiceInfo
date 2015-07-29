@@ -45,7 +45,11 @@ TIME_ZONE = 'Asia/Beirut'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
+# LANGUAGES is only used in the Django admin
 LANGUAGES = [
+    ('en', _('English')),
+]
+FRONTEND_LANGUAGES = [
     ('ar', _('Arabic')),
     ('en', _('English')),
     ('fr', _('French')),
