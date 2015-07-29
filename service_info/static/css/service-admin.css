@@ -1,0 +1,4 @@
+td.nowrap {
+    /* Allow long fields to wrap in Services admin list */
+    white-space: normal;
+}
