@@ -50,8 +50,8 @@ LANGUAGES = [
     ('en', _('English')),
 ]
 FRONTEND_LANGUAGES = [
-    ('en', _('English')),
     ('ar', _('Arabic')),
+    ('en', _('English')),
     ('fr', _('French')),
 ]
 
