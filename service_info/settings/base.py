@@ -235,6 +235,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissions'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
         'api.auth.ServiceInfoTokenAuthentication',
     ),
     # LimitOffsetPagination allows the caller to control pagination.
