@@ -1,4 +1,5 @@
-from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND, METHOD_NOT_ALLOWED, UNAUTHORIZED
+from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND, METHOD_NOT_ALLOWED, UNAUTHORIZED, \
+    FORBIDDEN
 import json
 
 from django.contrib.auth import get_user_model, authenticate
@@ -310,7 +311,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         ProviderFactory()
         url = reverse('provider-list')
         rsp = self.client.get(url)
-        self.assertEqual(UNAUTHORIZED, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        self.assertEqual(FORBIDDEN, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
     def test_get_one_provider(self):
         p1 = ProviderFactory(user=self.user)
@@ -324,7 +325,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         p1 = ProviderFactory(user=self.user)
         url = reverse('provider-detail', args=[p1.id])
         rsp = self.client.get(url)
-        self.assertEqual(UNAUTHORIZED, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        self.assertEqual(FORBIDDEN, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
     def test_update_provider(self):
         p1 = ProviderFactory(user=self.user)
