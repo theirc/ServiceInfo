@@ -1,4 +1,4 @@
-from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND, METHOD_NOT_ALLOWED, UNAUTHORIZED, \
+from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND, METHOD_NOT_ALLOWED, \
     FORBIDDEN
 import json
 
