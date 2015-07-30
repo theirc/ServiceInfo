@@ -1,5 +1,0 @@
-/* Styles applied to Service admin pages */
-
-/* Hide time zone warnings; they're not relevant to bare times (no date) */
-.timezonewarning { display: none; }
-
