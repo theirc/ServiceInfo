@@ -131,8 +131,7 @@ class ServiceAdmin(AdminImageMixin, admin.ModelAdmin):
                     'area_of_service',
                     'show_image',
                     ]
-    list_editable = ['provider', ]
-    list_display_links = ['name_en', 'name_ar', 'name_fr', 'area_of_service']
+    list_display_links = ['name_en', 'name_ar', 'name_fr', 'provider', 'area_of_service']
     list_filter = ['status', 'type']
     readonly_fields = ['status']
 
