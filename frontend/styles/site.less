@@ -2102,7 +2102,8 @@ table#service-status tr.has_parent td span.service-name::before when (@direction
   content: "\2936"; // ARROW POINTING DOWNWARDS THEN CURVING LEFTWARDS
   font-size: 26px;
 }
-table {
+table#service-status,
+table#report-table {
  	width: 97.25%;
 	text-align: @start;
 	background-color: #fff;
@@ -2223,6 +2224,18 @@ table {
 	    }
 
 	}
+}
+
+#chart {
+    width: 1000px;
+    height: 600px;
+}
+#report-tooltip {
+    display: none;
+    position: absolute;
+    border: 1px solid #fdd;
+    padding: 5px;
+    background-color: #fee;
 }
 
 /*
