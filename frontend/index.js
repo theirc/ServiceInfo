@@ -10,6 +10,12 @@ var i18n = require('i18next-client');
 var hashtrack = require('hashtrack');
 var _ = underscore;
 
+// Load Flot and 2 plugins (categories and stack)
+// http://www.flotcharts.org/
+require('Flot');
+require('Flot/jquery.flot.categories');
+require('Flot/jquery.flot.stack');
+
 hashtrack.init();
 require('es6-promise').polyfill();
 
@@ -52,5 +58,5 @@ $(function(){
         lt.show();
         $('#menu-container').addClass("menu-closed");
         $('#menu-container').removeClass("menu-open");
-    })
+    });
 });

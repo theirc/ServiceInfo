@@ -1,8 +1,6 @@
 var Backbone = require('backbone'),
     _ = require('underscore'),
-    flot = require('Flot'),
-    flotcategories = require('Flot/jquery.flot.categories'),
-    flotstack = require('Flot/jquery.flot.stack'),
+    $ = require('jquery'),
     template = require("../templates/reports.hbs"),
     resultsTemplate = require("../templates/stats-table.hbs"),
     hashtrack = require('hashtrack'),
@@ -48,7 +46,7 @@ var ReportTableView = Backbone.View.extend({
             context.loaded = true;
             context.headers = this.results.headers;
             context.rows = this.results.rows;
-            dataset = this.buildDataset(this.results);
+            var dataset = this.buildDataset(this.results);
             this.chartEl.show();
             this.chartEl.plot(dataset, this.flotOptions);
         }
@@ -60,9 +58,9 @@ var ReportTableView = Backbone.View.extend({
     buildDataset: function(results) {
         var dataset = [];
         // loop through the headers and make a data array for each
-        for(var i = 0; i < results.headers.length; i++) {
-            data = [];
-            for(var j = 0; j < results.rows.length; j++) {
+        for (var i = 0; i < results.headers.length; i++) {
+            var data = [];
+            for (var j = 0; j < results.rows.length; j++) {
                 data.push([results.rows[j][0],     // the row name
                            results.rows[j][i+1]]); // the row value for header 'i'
             }
@@ -71,7 +69,6 @@ var ReportTableView = Backbone.View.extend({
                 data: data
             });
         }
-        console.log(dataset);
         return dataset;
     },
 
@@ -125,7 +122,7 @@ module.exports = Backbone.View.extend({
     render: function () {
         var context = {
             options: _.map(this.reportOptions, function (option) {
-                option.selected = option.value == this.report;
+                option.selected = option.value === this.report;
                 return option;
             }, this)
         };
