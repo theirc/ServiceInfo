@@ -25,17 +25,16 @@ var ReportTableView = Backbone.View.extend({
             xaxis: {mode: "categories"},
             yaxis: {min: 0,
                     tickDecimals: 0}};
-        $("<div id='tooltip'></div>").appendTo("body");
         this.chartEl.bind("plothover", function (event, pos, item) {
 			if (item) {
 				var yStart = item.datapoint[1].toFixed(),
 					yEnd = item.datapoint[2].toFixed(),
                     yValue = yStart - yEnd;
-				$("#tooltip").html(yValue)
+				$("#report-tooltip").html(yValue)
 					.css({top: pos.pageY, left: pos.pageX+25})
 					.show();
 			} else {
-				$("#tooltip").hide();
+				$("#report-tooltip").hide();
 			}
 		});
     },
