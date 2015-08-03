@@ -74,6 +74,11 @@ class ServiceAdminForm(forms.ModelForm):
 
 
 class ServiceAdmin(AdminImageMixin, admin.ModelAdmin):
+    class Media:
+        css = {
+            "all": ("css/service-admin.css",)
+        }
+
     form = ServiceAdminForm
 
     actions = ['approve', 'reject']
