@@ -326,6 +326,9 @@ class ServiceType(NameInCurrentLanguageMixin, models.Model):
         blank=True,
     )
 
+    class Meta(object):
+        ordering = ['number', ]
+
     def get_api_url(self):
         return reverse('servicetype-detail', args=[self.id])
 
