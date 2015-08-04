@@ -27,21 +27,21 @@ var ReportTableView = Backbone.View.extend({
             yaxis: {min: 0,
                     tickDecimals: 0}};
         this.chartEl.bind("plothover", function (event, pos, item) {
-			if (item) {
-				var yStart = item.datapoint[1],
-					yEnd = item.datapoint[2],
+            if (item) {
+                var yStart = item.datapoint[1],
+                    yEnd = item.datapoint[2],
                     yValue = yStart - yEnd;
                 if (isFloat(yValue)) {
                     // round floats to 2 decimals
                     yValue = yValue.toFixed(2);
                 }
-				$("#report-tooltip").html(yValue)
-					.css({top: pos.pageY, left: pos.pageX+25})
-					.show();
-			} else {
-				$("#report-tooltip").hide();
-			}
-		});
+                $("#report-tooltip").html(yValue)
+                    .css({top: pos.pageY, left: pos.pageX+25})
+                    .show();
+            } else {
+                $("#report-tooltip").hide();
+            }
+        });
     },
 
     render: function () {
