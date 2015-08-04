@@ -557,7 +557,8 @@
           "Failure": "Explanation of Service Delivery Failure by Service Type",
           "Contact": "Difficulties Contacting Service Providers by Service Type",
           "Communication": "Satisfaction with Staff Communication by Service Type",
-          "NumServices": "Number of services by Location and Service Type"
+          "NumServicesByServiceType": "Number of services by Location and Service Type",
+          "NumServicesByProviderType": "Number of services by Location and Provider Type"
         }
       },
       "Download": "Download Report CSV"

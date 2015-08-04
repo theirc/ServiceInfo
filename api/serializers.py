@@ -627,21 +627,14 @@ class ServiceTypeCommunicationSerializer(BaseServiceTypeAggregateSerializer):
     aggregate_field = 'staff_satisfaction'
 
 
-class ServiceTypeNumServicesSerializer(RequireOneTranslationMixin,
-                                       serializers.HyperlinkedModelSerializer):
+class NumServicesByAreaSerializer(RequireOneTranslationMixin,
+                                  serializers.HyperlinkedModelSerializer):
     totals = serializers.SerializerMethodField()
 
-    class Meta:
-        model = ServiceType
-        fields = (
-            'url',
-            'number',
-            'name_en', 'name_fr', 'name_ar',
-            'totals',
-        )
-        required_translated_fields = ['name']
+    def get_services(self):
+        pass
 
-    def get_totals(self, service_type):
+    def get_totals(self, type):
         """
         Returns a list of items, one item per top-level service
         area.
@@ -652,10 +645,10 @@ class ServiceTypeNumServicesSerializer(RequireOneTranslationMixin,
         * label_ar: Label for that top-level area, in Arabic
         * label_fr: label for that top-level area, in French
         * total: number of Service records with a service area in that top-level
-          service area and with the specified service type
+          service area and with the specified type
        """
 
-        services = Service.objects.filter(type=service_type)
+        services = self.get_services(type)
         top_areas = ServiceArea.objects.top_level()
         totals = []
         for area in top_areas:
@@ -669,3 +662,35 @@ class ServiceTypeNumServicesSerializer(RequireOneTranslationMixin,
             })
 
         return totals
+
+
+class ServiceTypeNumServicesSerializer(NumServicesByAreaSerializer):
+
+    class Meta:
+        model = ServiceType
+        fields = (
+            'url',
+            'number',
+            'name_en', 'name_fr', 'name_ar',
+            'totals',
+        )
+        required_translated_fields = ['name']
+
+    def get_services(self, type):
+        return Service.objects.filter(type=type)
+
+
+class ProviderTypeNumServicesSerializer(NumServicesByAreaSerializer):
+
+    class Meta:
+        model = ProviderType
+        fields = (
+            'url',
+            'number',
+            'name_en', 'name_fr', 'name_ar',
+            'totals',
+        )
+        required_translated_fields = ['name', ]
+
+    def get_services(self, type):
+        return Service.objects.filter(provider__type=type)

@@ -30,7 +30,8 @@ from api.serializers import UserSerializer, GroupSerializer, ServiceSerializer, 
     ProviderFetchSerializer, FeedbackSerializer, NationalitySerializer, ImportSerializer, \
     ServiceTypeWaitTimeSerializer, ServiceTypeQOSSerializer, ServiceTypeFailureSerializer, \
     ServiceTypeContactSerializer, ServiceTypeCommunicationSerializer, \
-    ServiceTypeNumServicesSerializer, RequestForServiceSerializer
+    ServiceTypeNumServicesSerializer, ProviderTypeNumServicesSerializer, \
+    RequestForServiceSerializer
 from email_user.models import EmailUser
 from services.models import Service, Provider, ProviderType, ServiceArea, ServiceType, \
     SelectionCriterion, Feedback, Nationality, RequestForService
@@ -323,54 +324,6 @@ class ServiceTypeViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
     queryset = ServiceType.objects.all()
     serializer_class = ServiceTypeSerializer
 
-    def _do_service_type_report_view(self, serializer_class):
-        queryset = self.get_queryset()
-        context = self.get_serializer_context()
-        serializer = serializer_class(
-            queryset, many=True, context=context)
-        return Response(serializer.data)
-
-    @list_route(methods=['get', ], url_path='wait-times',
-                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
-    def wait_times(self, request):
-        """Wait time feedback aggregated by service type."""
-        return self._do_service_type_report_view(ServiceTypeWaitTimeSerializer)
-
-    @list_route(methods=['get', ], url_path='qos',
-                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
-    def qos(self, request):
-        """Quality of service delivered feedback aggregated by service type."""
-        return self._do_service_type_report_view(ServiceTypeQOSSerializer)
-
-    @list_route(methods=['get', ], url_path='failure',
-                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
-    def failure(self, request):
-        """Explanation of Service Delivery Failure by Service Type."""
-        return self._do_service_type_report_view(ServiceTypeFailureSerializer)
-
-    @list_route(methods=['get', ], url_path='contact',
-                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
-    def contact(self, request):
-        """Difficulties Contacting Service Providers by Service Type."""
-        return self._do_service_type_report_view(ServiceTypeContactSerializer)
-
-    @list_route(methods=['get', ], url_path='communication',
-                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
-    def communication(self, request):
-        """Satisfaction with Staff Communication by Service Type."""
-        return self._do_service_type_report_view(ServiceTypeCommunicationSerializer)
-
-    @list_route(methods=['get', ], url_path='num-services',
-                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
-    def num_services(self, request):
-        """Number of Registered Service Providers by Type by Location."""
-        # Only top-level service areas
-        queryset = self.get_queryset()
-        context = self.get_serializer_context()
-        serializer = ServiceTypeNumServicesSerializer(
-            queryset, many=True, context=context)
-        return Response(serializer.data)
-
 
 class ProviderViewSet(ServiceInfoModelViewSet):
     # This docstring shows up when browsing the API in a web browser:
@@ -461,6 +414,61 @@ class ProviderViewSet(ServiceInfoModelViewSet):
             # If we got here without blowing up, send the user's activation email
             user.send_activation_email(request.site, request, data['base_activation_link'])
             return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class ReportViewSet(ServiceInfoGenericViewSet):
+    permission_classes = [AllowAny]
+
+    def _do_service_type_report_view(self, serializer_class, model=ServiceType):
+        queryset = model.objects.all()
+        context = self.get_serializer_context()
+        serializer = serializer_class(
+            queryset, many=True, context=context)
+        return Response(serializer.data)
+
+    @list_route(methods=['get', ], url_path='wait-times',
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def wait_times(self, request):
+        """Wait time feedback aggregated by service type."""
+        return self._do_service_type_report_view(ServiceTypeWaitTimeSerializer)
+
+    @list_route(methods=['get', ], url_path='qos',
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def qos(self, request):
+        """Quality of service delivered feedback aggregated by service type."""
+        return self._do_service_type_report_view(ServiceTypeQOSSerializer)
+
+    @list_route(methods=['get', ], url_path='failure',
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def failure(self, request):
+        """Explanation of Service Delivery Failure by Service Type."""
+        return self._do_service_type_report_view(ServiceTypeFailureSerializer)
+
+    @list_route(methods=['get', ], url_path='contact',
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def contact(self, request):
+        """Difficulties Contacting Service Providers by Service Type."""
+        return self._do_service_type_report_view(ServiceTypeContactSerializer)
+
+    @list_route(methods=['get', ], url_path='communication',
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def communication(self, request):
+        """Satisfaction with Staff Communication by Service Type."""
+        return self._do_service_type_report_view(ServiceTypeCommunicationSerializer)
+
+    @list_route(methods=['get', ], url_path='num-services-by-service-type',
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def num_services_by_service_type(self, request):
+        """Number of Registered Service Providers by Type by Location."""
+        # Only top-level service areas
+        return self._do_service_type_report_view(ServiceTypeNumServicesSerializer)
+
+    @list_route(methods=['get', ], url_path='num-services-by-provider-type',
+                renderer_classes=[renderers.JSONRenderer, CSVRenderer, ])
+    def num_services_by_provider_type(self, request):
+        """Number of Registered Service Providers by Provider Type by Location."""
+        # Only top-level service areas
+        return self._do_service_type_report_view(ProviderTypeNumServicesSerializer, ProviderType)
 
 
 #

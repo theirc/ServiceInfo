@@ -113,9 +113,9 @@ module.exports = Backbone.View.extend({
             {value: 'wait-times', label: 'WaitTime'},
             {value: 'qos', label: 'QOS'},
             {value: 'failure', label: 'Failure'},
-            {value: 'contact', label: 'Contact'},
             {value: 'communication', label: 'Communication'},
-            {value: 'num-services', label: 'NumServices'}
+            {value: 'num-services-by-provider-type', label: 'NumServicesByProviderType'},
+            {value: 'num-services-by-service-type', label: 'NumServicesByServiceType'}
         ];
     },
 
