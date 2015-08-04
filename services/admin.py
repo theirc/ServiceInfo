@@ -6,6 +6,9 @@ from django.contrib.gis.forms import BaseGeometryWidget, PointField
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
+
+from sorl.thumbnail.admin import AdminImageMixin
+
 from services.models import Provider, Service, ServiceArea, SelectionCriterion, ProviderType, \
     ServiceType, JiraUpdateRecord, Feedback, Nationality, LebanonRegion, RequestForService
 from services.utils import validation_error_as_text
@@ -70,13 +73,14 @@ class ServiceAdminForm(forms.ModelForm):
         model = Service
 
 
-class ServiceAdmin(admin.ModelAdmin):
-    form = ServiceAdminForm
-
+class ServiceAdmin(AdminImageMixin, admin.ModelAdmin):
     class Media:
         css = {
-            "all": ("css/admin_styles.css",)
+            "all": ("css/service-admin.css",)
         }
+
+    form = ServiceAdminForm
+
     actions = ['approve', 'reject']
     fieldsets = (
         (None, {
@@ -115,6 +119,9 @@ class ServiceAdmin(admin.ModelAdmin):
         (_('Location'), {
             'fields': ['location'],
         }),
+        (_('Image'), {
+            'fields': ['image', ]
+        }),
     )
     inlines = [SelectionCriterionInlineAdmin]
     list_display = ['name_en', 'name_ar', 'name_fr',
@@ -122,6 +129,7 @@ class ServiceAdmin(admin.ModelAdmin):
                     'type',
                     'status',
                     'area_of_service',
+                    'show_image',
                     ]
     list_display_links = ['name_en', 'name_ar', 'name_fr', 'provider', 'area_of_service']
     list_filter = ['status', 'type']
@@ -204,6 +212,15 @@ class ServiceAdmin(admin.ModelAdmin):
                 msg = _('The service was rejected successfully.')
                 self.message_user(request, msg, messages.INFO)
         return super().response_change(request, obj)
+
+    def show_image(self, obj):
+        """Create a thumbnail of this image to show in the admin list."""
+        thumbnail_url = obj.get_thumbnail_url(height=100)
+        if thumbnail_url:
+            return '<img src="{}" />'.format(thumbnail_url)
+        return _("no image")
+    show_image.allow_tags = True
+    show_image.short_description = "Image"
 
 
 class ServiceAreaAdmin(admin.ModelAdmin):

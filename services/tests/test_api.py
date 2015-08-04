@@ -1,4 +1,5 @@
-from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND, METHOD_NOT_ALLOWED, UNAUTHORIZED
+from http.client import OK, CREATED, BAD_REQUEST, NOT_FOUND, METHOD_NOT_ALLOWED, \
+    FORBIDDEN
 import json
 
 from django.contrib.auth import get_user_model, authenticate
@@ -310,7 +311,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         ProviderFactory()
         url = reverse('provider-list')
         rsp = self.client.get(url)
-        self.assertEqual(UNAUTHORIZED, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        self.assertEqual(FORBIDDEN, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
     def test_get_one_provider(self):
         p1 = ProviderFactory(user=self.user)
@@ -324,7 +325,7 @@ class ProviderAPITest(APITestMixin, TestCase):
         p1 = ProviderFactory(user=self.user)
         url = reverse('provider-detail', args=[p1.id])
         rsp = self.client.get(url)
-        self.assertEqual(UNAUTHORIZED, rsp.status_code, msg=rsp.content.decode('utf-8'))
+        self.assertEqual(FORBIDDEN, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
     def test_update_provider(self):
         p1 = ProviderFactory(user=self.user)
@@ -430,6 +431,8 @@ class ServiceAPITest(APITestMixin, TestCase):
             {'text_en': 'Crit en'},
             {'text_fr': 'Crit fr'}
         ]
+        # image is read-only
+        del data['image']
         rsp = self.put_with_token(reverse('service-list'), data=data)
         self.assertEqual(METHOD_NOT_ALLOWED, rsp.status_code, msg=rsp.content.decode('utf-8'))
 
@@ -522,6 +525,27 @@ class ServiceAPITest(APITestMixin, TestCase):
         self.assertEqual(self.provider.get_fetch_url(), result['provider_fetch_url'])
         service_type = json.loads(self.client.get(result['type']).content.decode('utf-8'))
         self.assertIn('icon_url', service_type)
+
+    def test_get_service_with_image(self):
+        # if Service has image, its data should be available
+        service = ServiceFactory(provider=self.provider)
+        expected_fields = set(['large_url', 'large_width',
+                               'medium_url', 'medium_width',
+                               'small_url', 'small_width'])
+        rsp = self.get_with_token(service.get_api_url())
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(service.pk, result['id'])
+        self.assertEqual(expected_fields, set(result['image_data'].keys()))
+
+    def test_get_service_with_no_image(self):
+        # if Service doesn't have image, its data should be None
+        service = ServiceFactory(provider=self.provider)
+        service.image = ''
+        service.save()
+        rsp = self.get_with_token(service.get_api_url())
+        result = json.loads(rsp.content.decode('utf-8'))
+        self.assertEqual(service.pk, result['id'])
+        self.assertEqual(None, result['image_data'])
 
     def test_list_services(self):
         # Should only get user's own services

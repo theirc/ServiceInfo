@@ -167,3 +167,14 @@ class ServiceAdminTest(TestCase):
         self.assertEqual(200, rsp.status_code)
         self.assertIn('Only services in draft status may be rejected',
                       [str(msg) for msg in rsp.context['messages']])
+
+    def test_show_image_in_changelist(self):
+        rsp = self.client.get(reverse('admin:services_service_changelist'))
+        image_tag = '<img src="%s">' % self.service.get_thumbnail_url()
+        self.assertContains(rsp, image_tag, html=True)
+
+    def test_show_no_image_if_not_set(self):
+        self.service.image = ''
+        self.service.save()
+        rsp = self.client.get(reverse('admin:services_service_changelist'))
+        self.assertContains(rsp, 'no image')

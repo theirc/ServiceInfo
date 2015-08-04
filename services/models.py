@@ -10,6 +10,9 @@ from django.db.transaction import atomic
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _, get_language
 
+from sorl.thumbnail import ImageField
+from sorl.thumbnail.shortcuts import get_thumbnail
+
 from . import jira_support
 from .tasks import email_provider_about_service_approval_task
 from .utils import absolute_url
@@ -473,6 +476,16 @@ class Service(NameInCurrentLanguageMixin, models.Model):
 
     objects = models.GeoManager()
 
+    image = ImageField(
+        upload_to="service-images/",
+        help_text=_(
+            "Upload an image file (GIF, JPEG, PNG, WebP) with a square aspect "
+            "ratio (Width equal to Height). The image size should be at least "
+            "1280 x 1280 for best results. SVG files are not supported."),
+        blank=True,
+        default='',
+    )
+
     def get_api_url(self):
         return reverse('service-detail', args=[self.id])
 
@@ -665,6 +678,15 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         if self.location is None:
             self.location = Point(0, 0)
         self.location[1] = value
+
+    def get_thumbnail_url(self, width=100, height=100):
+        """Shortcut to get the URL for an image thumbnail."""
+        if self.image and hasattr(self.image, 'url'):
+            frmt = "PNG" if self.image.path.lower().endswith('.png') else "JPEG"
+            size = "{}x{}".format(width, height)
+            thumbnail = get_thumbnail(self.image, size, upscale=False, format=frmt, crop='center')
+            return thumbnail.url
+        return None
 
 
 class JiraUpdateRecord(models.Model):

@@ -20,7 +20,7 @@
 		</div>
 	</div>
 </div>
-<div class="container">      
+<div class="container">
     <div class="row">
 		<div class="description">{{multiline service.description }}</div>
 		<div class=feedback-btn>
@@ -147,5 +147,22 @@
               </div>
           {{/each}}
         </div>
+        {{#if service.image_data }}
+          <div class="description">
+            <div class="row">
+              <span class="control-label" data-i18n="Service-Map.List.Picture"></span>
+            </div>
+            <div class="image">
+              <img src="{{ service.image_data.medium_url }}"
+                   alt="service photo"
+                   srcset="{{ service.image_data.large_url }} {{ service.image_data.large_width }}w,
+                           {{ service.image_data.medium_url }} {{ service.image_data.medium_width }}w,
+                           {{ service.image_data.small_url }} {{ service.image_data.small_width }}w"
+                   sizes="100vw"
+                   />
+            </div>
+          </div>
+        {{/if}}
+
     </div>
 </div>

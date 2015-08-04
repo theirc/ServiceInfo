@@ -1,0 +1,12 @@
+/* Styles applied to Service admin pages */
+
+
+/* Hide time zone warnings; they're not relevant to bare times (no date) */
+.timezonewarning { display: none; }
+
+/* Django adds a nowrap class to FK fields, so that when you use them in a
+   `list_editable` declaration, the plus button doesn't wrap to the next line
+   after the dropdown. We're not using `list_editable` so it's OK if ours wrap. */
+td.nowrap {
+    white-space: normal;
+}

@@ -128,7 +128,8 @@
       "Email": "Email Address",
       "Website": "Website",
       "Unknown": "Unknown",
-      "Criteria": "Selection Criteria"
+      "Criteria": "Selection Criteria",
+      "Picture": "Service Address Picture"
     }
   },
   "Service-Remove-Change": {

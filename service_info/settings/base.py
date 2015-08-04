@@ -45,7 +45,11 @@ TIME_ZONE = 'Asia/Beirut'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
+# LANGUAGES is only used in the Django admin
 LANGUAGES = [
+    ('en', _('English')),
+]
+FRONTEND_LANGUAGES = [
     ('ar', _('Arabic')),
     ('en', _('English')),
     ('fr', _('French')),
@@ -119,8 +123,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 MIDDLEWARE_CLASSES = (
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
@@ -164,6 +169,7 @@ INSTALLED_APPS = (
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
+    'sorl.thumbnail',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -230,6 +236,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissions'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
         'api.auth.ServiceInfoTokenAuthentication',
     ),
     # LimitOffsetPagination allows the caller to control pagination.

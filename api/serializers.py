@@ -79,7 +79,7 @@ class LanguageSerializer(serializers.Serializer):
 
     def validate_language(self, value):
         # See if it's a valid language code
-        language_dict = dict(settings.LANGUAGES)
+        language_dict = dict(settings.FRONTEND_LANGUAGES)
         if value not in language_dict:
             valid_codes = ', '.join(language_dict.keys())
             raise exceptions.ValidationError(
@@ -237,6 +237,7 @@ class ServiceSerializer(RequireOneTranslationMixin,
                         serializers.HyperlinkedModelSerializer):
     provider_fetch_url = serializers.CharField(source='get_provider_fetch_url', read_only=True)
     selection_criteria = SelectionCriterionSerializerForService(many=True, required=False)
+    image_data = serializers.SerializerMethodField()
 
     class Meta:
         model = Service
@@ -260,7 +261,8 @@ class ServiceSerializer(RequireOneTranslationMixin,
             'friday_open', 'friday_close',
             'saturday_open', 'saturday_close',
             'type',
-            'is_mobile'
+            'is_mobile',
+            'image_data',
         )
         read_only_fields = ('provider',)
         required_translated_fields = ['name', 'description']
@@ -327,6 +329,22 @@ class ServiceSerializer(RequireOneTranslationMixin,
         user = self.context['request'].user
         kwargs['provider'] = Provider.objects.get(user=user)
         super().save(**kwargs)
+
+    def get_image_data(self, obj):
+        if not obj.image:
+            return
+        data = {}
+        large_size = 1280
+        medium_size = large_size // 2
+        small_size = large_size // 4
+        for size_name, size in (('large', large_size),
+                                ('medium', medium_size),
+                                ('small', small_size)):
+            if obj.image.width < size:
+                size = obj.image.width
+            data[size_name + '_url'] = obj.get_thumbnail_url(width=size, height=size)
+            data[size_name + '_width'] = size
+        return data
 
 
 class DistanceField(serializers.FloatField):
@@ -572,7 +590,7 @@ class BaseServiceTypeAggregateSerializer(RequireOneTranslationMixin,
             choices = [(i, str(i)) for i in range(minimum, maximum+1)]
         for value, label in choices:
             total = {'total': counts.get(value, 0)}
-            for lang, name in settings.LANGUAGES:
+            for lang, name in settings.FRONTEND_LANGUAGES:
                 with override(language=lang):
                     total['label_{}'.format(lang)] = force_text(label)
             totals.append(total)
