@@ -117,10 +117,10 @@ var ReportTableView = Backbone.View.extend({
                 // the more groups there are, the thinner they are
                 barWidth = 1.0 / (headers.length + 1);
 
-            chartData = _.map(headers, function(header) {
+            chartData = _.map(headers, function (header) {
                 var values = [];
                 _.each(data, function (row) {
-                    var rows_with_this_header = _.filter(row.totals, function(total){
+                    var rows_with_this_header = _.filter(row.totals, function (total){
                         return total['label_' + lang] === header;
                     });
                     _.each(rows_with_this_header, function (total) {
@@ -134,6 +134,17 @@ var ReportTableView = Backbone.View.extend({
             });
             chartOptions.xaxis = {ticks: ticks, color: '#f3f3f4'}; // matches background
             chartOptions.series.bars.barWidth = barWidth;
+            chartOptions.grid.markings = function (axes) {
+                var markings = [];
+                for (var x = Math.floor(axes.xaxis.min); x < axes.xaxis.max; x += 1) {
+                    // make vertical gray line between groups
+                    markings.push({
+                        xaxis: {from: x - barWidth, to: x - barWidth},
+                        color: "#aaa"
+                    });
+                }
+                return markings;
+            };
         }
 
         this.results = {
