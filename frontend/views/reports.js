@@ -110,7 +110,7 @@ var ReportTableView = Backbone.View.extend({
             });
             // Set options specific to 'Rating' chart
             chartOptions.xaxis = {ticks: ticks};
-            chartOptions.yaxis = {max: 5};
+            chartOptions.yaxis.max = 5;
         } else {
             // Totals Report
             var stagger = 0,
