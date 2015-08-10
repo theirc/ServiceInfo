@@ -5,7 +5,8 @@ var Backbone = require('backbone'),
     resultsTemplate = require("../templates/stats-table.hbs"),
     hashtrack = require('hashtrack'),
     api = require('../api'),
-    config = require('../config')
+    config = require('../config'),
+    i18n = require('i18next-client')
 ;
 
 var isFloat = function(n){
@@ -55,6 +56,9 @@ var ReportTableView = Backbone.View.extend({
             context.rows = this.results.rows;
             this.chartEl.show();
             this.chartEl.plot(this.results.chartData, this.results.chartOptions);
+            $('<div class="yAxisLabel"></div>')
+                .text(this.results.yAxisLabel)
+                .appendTo(this.chartEl);
         }
 
         this.$el.html(resultsTemplate(context));
@@ -87,10 +91,12 @@ var ReportTableView = Backbone.View.extend({
             }),
             chartData = [],
             ticks = [],
-            chartOptions = this.flotOptions;
+            chartOptions = this.flotOptions,
+            yAxisLabel = '';
 
         if (this.isRatingReport()) {
             // Rating Report
+            yAxisLabel = i18n.t('Reports.Chart.AverageResponse');
             _.each(data, function (row) {
                 var label = row['name_' + lang],
                     numRatings = 0,
@@ -113,6 +119,11 @@ var ReportTableView = Backbone.View.extend({
             chartOptions.yaxis.max = 5;
         } else {
             // Totals Report
+            if (this.report.indexOf('num-services') > -1) {
+                yAxisLabel = i18n.t('Reports.Chart.NumberServices');
+            } else {
+                yAxisLabel = i18n.t('Reports.Chart.NumberResponses');
+            }
             var stagger = 0,
                 // the more groups there are, the thinner they are
                 barWidth = 1.0 / (headers.length + 1);
@@ -151,7 +162,8 @@ var ReportTableView = Backbone.View.extend({
             headers: headers,
             rows: rows,
             chartData: chartData,
-            chartOptions: chartOptions
+            chartOptions: chartOptions,
+            yAxisLabel: yAxisLabel
         };
         this.render();
     }

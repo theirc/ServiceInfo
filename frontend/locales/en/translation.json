@@ -566,6 +566,11 @@
     "Table": {
       "Loading": "Loading...",
       "ServiceType": "Service Type"
+    },
+    "Chart": {
+      "AverageResponse": "Average Response",
+      "NumberServices": "Number of Services",
+      "NumberResponses": "Number of Responses"
     }
   }
 }
