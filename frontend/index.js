@@ -11,7 +11,7 @@ var hashtrack = require('hashtrack');
 var _ = underscore;
 
 // Load Flot: http://www.flotcharts.org/
-require('Flot');
+require('jquery-flot');
 
 hashtrack.init();
 require('es6-promise').polyfill();

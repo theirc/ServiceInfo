@@ -2,6 +2,17 @@ ServiceInfo
 
 Release Notes
 
+0.3.0 - Aug. 4, 2015
+--------------------
+
+* Remove leaflet references (#39)
+* Add support for responsive Service photos (#40, #41, #44)
+* Add Flot.js (#48)
+* Don't i18n Django admin (#47, #49)
+* Allow authentication for browsable API (#42)
+* Fix service overlap in admin (#50)
+* Initial chart implementation (#51)
+
 0.2.9 - Jul. 21, 2015
 ---------------------
 
