@@ -12,9 +12,9 @@ var _ = underscore;
 
 // Load Flot and 2 plugins (categories and stack)
 // http://www.flotcharts.org/
-require('Flot');
-require('Flot/jquery.flot.categories');
-require('Flot/jquery.flot.stack');
+require('jquery-flot');
+require('jquery-flot/jquery.flot.categories');
+require('jquery-flot/jquery.flot.stack');
 
 hashtrack.init();
 require('es6-promise').polyfill();
