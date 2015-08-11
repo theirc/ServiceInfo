@@ -5,36 +5,44 @@ var Backbone = require('backbone'),
     resultsTemplate = require("../templates/stats-table.hbs"),
     hashtrack = require('hashtrack'),
     api = require('../api'),
-    config = require('../config')
+    config = require('../config'),
+    i18n = require('i18next-client')
 ;
 
+var isFloat = function(n){
+    return typeof n === "number" && parseInt(n) !== n;
+};
+
 var ReportTableView = Backbone.View.extend({
+    ratingReportTypes: ['qos', 'communication'], // all other reports are 'totals' reports
 
     initialize: function (options) {
         this.chartEl = $(options.chartEl);
         this.report = options.report;
         this.results = null;
         this.flotOptions = {
-            series: {stack: true,
-                     bars: {show: true,
+            series: {bars: {show: true,
                             barWidth: 0.6,
                             align: "center"}},
             grid: {hoverable: true},
-            xaxis: {mode: "categories"},
             yaxis: {min: 0,
                     tickDecimals: 0}};
         this.chartEl.bind("plothover", function (event, pos, item) {
-			if (item) {
-				var yStart = item.datapoint[1].toFixed(),
-					yEnd = item.datapoint[2].toFixed(),
+            if (item) {
+                var yStart = item.datapoint[1],
+                    yEnd = item.datapoint[2],
                     yValue = yStart - yEnd;
-				$("#report-tooltip").html(yValue)
-					.css({top: pos.pageY, left: pos.pageX+25})
-					.show();
-			} else {
-				$("#report-tooltip").hide();
-			}
-		});
+                if (isFloat(yValue)) {
+                    // round floats to 2 decimals
+                    yValue = yValue.toFixed(2);
+                }
+                $("#report-tooltip").html(yValue)
+                    .css({top: pos.pageY, left: pos.pageX+25})
+                    .show();
+            } else {
+                $("#report-tooltip").hide();
+            }
+        });
     },
 
     render: function () {
@@ -46,35 +54,24 @@ var ReportTableView = Backbone.View.extend({
             context.loaded = true;
             context.headers = this.results.headers;
             context.rows = this.results.rows;
-            var dataset = this.buildDataset(this.results);
             this.chartEl.show();
-            this.chartEl.plot(dataset, this.flotOptions);
+            this.chartEl.plot(this.results.chartData, this.results.chartOptions);
+            $('<div class="yAxisLabel"></div>')
+                .text(this.results.yAxisLabel)
+                .appendTo(this.chartEl);
         }
 
         this.$el.html(resultsTemplate(context));
         this.$el.i18n();
     },
 
-    buildDataset: function(results) {
-        var dataset = [];
-        // loop through the headers and make a data array for each
-        for (var i = 0; i < results.headers.length; i++) {
-            var data = [];
-            for (var j = 0; j < results.rows.length; j++) {
-                data.push([results.rows[j][0],     // the row name
-                           results.rows[j][i+1]]); // the row value for header 'i'
-            }
-            dataset.push({
-                label: results.headers[i],
-                data: data
-            });
-        }
-        return dataset;
+    fetchReport: function () {
+        api.request('GET', 'api/reports/' + this.report + '/')
+            .then(_.bind(this.processReport, this));
     },
 
-    fetchReport: function () {
-        api.request('GET', 'api/servicetypes/' + this.report + '/')
-            .then(_.bind(this.processReport, this));
+    isRatingReport: function() {
+        return this.ratingReportTypes.indexOf(this.report) > -1;
     },
 
     processReport: function (data) {
@@ -91,10 +88,82 @@ var ReportTableView = Backbone.View.extend({
                     });
                 }
                 return result;
+            }),
+            chartData = [],
+            ticks = [],
+            chartOptions = this.flotOptions,
+            yAxisLabel = '';
+
+        if (this.isRatingReport()) {
+            // Rating Report
+            yAxisLabel = i18n.t('Reports.Chart.AverageResponse');
+            _.each(data, function (row) {
+                var label = row['name_' + lang],
+                    numRatings = 0,
+                    sumOfRatings = 0,
+                    avgRating = 0;
+                _.each(row.totals, function (total) {
+                    var rating = Number(total.label_en);
+                    numRatings += total.total;
+                    sumOfRatings += (total.total * rating);
+                });
+                if (numRatings !== 0) {
+                    avgRating = sumOfRatings / numRatings;
+                }
+                chartData.push({'color': row.number,
+                                'data': [[row.number, avgRating]]});
+                ticks.push([row.number, label]);
             });
+            // Set options specific to 'Rating' chart
+            chartOptions.xaxis = {ticks: ticks};
+            chartOptions.yaxis.max = 5;
+        } else {
+            // Totals Report
+            if (this.report.indexOf('num-services') > -1) {
+                yAxisLabel = i18n.t('Reports.Chart.NumberServices');
+            } else {
+                yAxisLabel = i18n.t('Reports.Chart.NumberResponses');
+            }
+            var stagger = 0,
+                // the more groups there are, the thinner they are
+                barWidth = 1.0 / (headers.length + 1);
+
+            chartData = _.map(headers, function (header) {
+                var values = [];
+                _.each(data, function (row) {
+                    var rows_with_this_header = _.filter(row.totals, function (total){
+                        return total['label_' + lang] === header;
+                    });
+                    _.each(rows_with_this_header, function (total) {
+                        // offset by 'stagger' so bar is just to right of previous bar
+                        values.push([row.number + stagger, total.total]);
+                        ticks.push([row.number, row['name_' + lang]]);
+                    });
+                });
+                stagger += barWidth;
+                return {'label': header, 'data': values};
+            });
+            chartOptions.xaxis = {ticks: ticks, color: '#f3f3f4'}; // matches background
+            chartOptions.series.bars.barWidth = barWidth;
+            chartOptions.grid.markings = function (axes) {
+                var markings = [];
+                for (var x = Math.floor(axes.xaxis.min); x < axes.xaxis.max; x += 1) {
+                    // make vertical gray line between groups
+                    markings.push({
+                        xaxis: {from: x - barWidth, to: x - barWidth},
+                        color: "#aaa"
+                    });
+                }
+                return markings;
+            };
+        }
+
         this.results = {
             headers: headers,
-            rows: rows
+            rows: rows,
+            chartData: chartData,
+            chartOptions: chartOptions,
+            yAxisLabel: yAxisLabel
         };
         this.render();
     }
@@ -113,9 +182,9 @@ module.exports = Backbone.View.extend({
             {value: 'wait-times', label: 'WaitTime'},
             {value: 'qos', label: 'QOS'},
             {value: 'failure', label: 'Failure'},
-            {value: 'contact', label: 'Contact'},
             {value: 'communication', label: 'Communication'},
-            {value: 'num-services', label: 'NumServices'}
+            {value: 'num-services-by-provider-type', label: 'NumServicesByProviderType'},
+            {value: 'num-services-by-service-type', label: 'NumServicesByServiceType'}
         ];
     },
 
