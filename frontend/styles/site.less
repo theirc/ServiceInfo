@@ -2227,8 +2227,11 @@ table#report-table {
 }
 
 #chart {
-    width: 1000px;
+    width: 100%;
     height: 600px;
+    @media (max-width: 800px) {
+        height: 300px;
+    }
 }
 #report-tooltip {
     display: none;

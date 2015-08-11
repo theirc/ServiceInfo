@@ -56,6 +56,10 @@ var ReportTableView = Backbone.View.extend({
             context.rows = this.results.rows;
             this.chartEl.show();
             this.chartEl.plot(this.results.chartData, this.results.chartOptions);
+            var self = this;
+            window.onresize = function () {
+                self.chartEl.plot(self.results.chartData, self.results.chartOptions);
+            };
             $('<div class="yAxisLabel"></div>')
                 .text(this.results.yAxisLabel)
                 .appendTo(this.chartEl);
