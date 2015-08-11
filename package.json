@@ -17,9 +17,8 @@
     "hashtrack": "^1.0.2",
     "underscore": "^1.7.0",
     "jquery-form": "~3.50.0",
-    "OverlappingMarkerSpiderfier": "yagoferrer/OverlappingMarkerSpiderfier.git#0.3.3e",
-    "Flot": "flot/flot.git#v0.8.3"
-
+    "marker-spider": "0.1.0",
+    "jquery-flot": "0.8.3"
   },
   "devDependencies": {
     "closurecompiler": "^1.5.1",

@@ -2,6 +2,12 @@ ServiceInfo
 
 Release Notes
 
+0.3.1 - Aug. 11, 2015
+---------------------
+
+* Reference npm dependencies by version (#54, #55)
+* Remove DRF session auth, fixing authenticated form submissions (#57, #58)
+
 0.3.0 - Aug. 4, 2015
 --------------------
 

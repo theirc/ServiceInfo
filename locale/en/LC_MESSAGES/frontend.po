@@ -258,6 +258,9 @@ msgstr "Unknown"
 msgid "Service-Map##List##Criteria"
 msgstr "Selection Criteria"
 
+msgid "Service-Map##List##Picture"
+msgstr "Service Address Picture"
+
 msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
 msgstr "Remove Change"
 

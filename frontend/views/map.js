@@ -4,9 +4,11 @@ var Backbone = require('backbone'),
     service = require('../models/service'),
     servicetype = require('../models/servicetype'),
     i18n = require('i18next-client'),
-    search = require('../search'),
-    spiderfier = require('OverlappingMarkerSpiderfier/oms')
+    search = require('../search')
 ;
+
+// required here because this is the only view that needs it
+require('marker-spider/dist/oms.min');
 
 
 module.exports = Backbone.View.extend({
@@ -53,7 +55,7 @@ module.exports = Backbone.View.extend({
         };
         this.map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 
-        this.spiderfier = new spiderfier.OverlappingMarkerSpiderfier(self.map);
+        this.spiderfier = new OverlappingMarkerSpiderfier(self.map);
         this.spiderfier.addListener('click', function(marker, event) {
             // User clicks on a limb of the spider. Go to that service
             location.hash = '#/service/' + marker.serviceId;
