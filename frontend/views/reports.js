@@ -43,6 +43,15 @@ var ReportTableView = Backbone.View.extend({
                 $("#report-tooltip").hide();
             }
         });
+        var self = this;
+        $(window).resize(function () {
+            if (this.resizeTimeout) {
+                clearTimeout(this.resizeTimeout);
+            }
+            this.resizeTimeout = setTimeout(function () {
+                self.render();
+            }, 500);
+        });
     },
 
     render: function () {
@@ -56,10 +65,6 @@ var ReportTableView = Backbone.View.extend({
             context.rows = this.results.rows;
             this.chartEl.show();
             this.chartEl.plot(this.results.chartData, this.results.chartOptions);
-            var self = this;
-            window.onresize = function () {
-                self.chartEl.plot(self.results.chartData, self.results.chartOptions);
-            };
             $('<div class="yAxisLabel"></div>')
                 .text(this.results.yAxisLabel)
                 .appendTo(this.chartEl);
