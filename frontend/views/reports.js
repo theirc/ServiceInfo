@@ -66,8 +66,11 @@ var ReportTableView = Backbone.View.extend({
             this.chartEl.show();
             if ($(window).width() < 800) {
                 this.results.chartOptions.xaxis.ticks = this.results.mobileTicks;
+                this.results.chartOptions.legend = {show: true,
+                                                    container: '#mobile-legend'};
             } else {
                 this.results.chartOptions.xaxis.ticks = this.results.desktopTicks;
+                this.results.chartOptions.legend = {};
             }
             this.chartEl.plot(this.results.chartData, this.results.chartOptions);
             $('<div class="yAxisLabel"></div>')
