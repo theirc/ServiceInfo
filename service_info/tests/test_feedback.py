@@ -106,4 +106,4 @@ class FeedbackTest(ServiceInfoFrontendTestCase):
         self.assertEqual('Other difficulties', feedback.other_difficulties)
         self.assertEqual(2, feedback.staff_satisfaction)
         self.assertEqual('Other comments', feedback.extra_comments)
-        self.assertEqual(True, feedback.anonymouse)
+        self.assertEqual(True, feedback.anonymous)
