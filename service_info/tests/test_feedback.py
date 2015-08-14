@@ -1,11 +1,8 @@
-import time
 from selenium.common.exceptions import TimeoutException, WebDriverException
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
+from service_info.tests.test_frontend import ServiceInfoFrontendTestCase
 
-from service_info.tests.test_frontend import ServiceInfoFrontendTestCase, DEFAULT_TIMEOUT
 from services.models import Service, Nationality, ServiceArea, Feedback
 from services.tests.factories import ServiceFactory
 
@@ -41,7 +38,8 @@ class FeedbackTest(ServiceInfoFrontendTestCase):
 
         def type_in_element(selector, text):
             try:
-                self.wait_for_element(selector, match=By.CSS_SELECTOR, must_be_visible=True).send_keys(text)
+                self.wait_for_element(selector, match=By.CSS_SELECTOR,
+                                      must_be_visible=True).send_keys(text)
             except TimeoutException:
                 print("Timeout waiting for %s to appear, continuing anyway" % selector)
 
@@ -56,7 +54,8 @@ class FeedbackTest(ServiceInfoFrontendTestCase):
         click_element('input[name=delivered][value="1"]')
 
         # Wait for javascript to display the "delivered" fields
-        self.wait_for_element('input[name=quality][value="4"]', match=By.CSS_SELECTOR, must_be_visible=True)
+        self.wait_for_element('input[name=quality][value="4"]', match=By.CSS_SELECTOR,
+                              must_be_visible=True)
 
         click_element('input[name=quality][value="4"]')
         click_element('input[name=staff_satisfaction][value="2"]')
@@ -64,7 +63,8 @@ class FeedbackTest(ServiceInfoFrontendTestCase):
         click_element('input[name=wait_time_satisfaction][value="1"]')
         click_element('select[name=difficulty_contacting] option[value=other]')
         # Wait for JS again
-        self.wait_for_element('textarea[name=other_difficulties]', match=By.CSS_SELECTOR, must_be_visible=True)
+        self.wait_for_element('textarea[name=other_difficulties]', match=By.CSS_SELECTOR,
+                              must_be_visible=True)
         type_in_element('textarea[name=other_difficulties]', 'Other difficulties')
 
         type_in_element('textarea[name=extra_comments]', 'Other comments')
@@ -72,7 +72,7 @@ class FeedbackTest(ServiceInfoFrontendTestCase):
         self.browser.get_screenshot_as_file("pre_submit.png")
 
         # Submit
-        submit_button = self.wait_for_element('button.form-btn-submit', match=By.CSS_SELECTOR).click()
+        self.wait_for_element('button.form-btn-submit', match=By.CSS_SELECTOR).click()
 
         # Wait
         try:
