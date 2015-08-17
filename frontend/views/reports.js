@@ -43,6 +43,15 @@ var ReportTableView = Backbone.View.extend({
                 $("#report-tooltip").hide();
             }
         });
+        var self = this;
+        $(window).resize(function () {
+            if (this.resizeTimeout) {
+                clearTimeout(this.resizeTimeout);
+            }
+            this.resizeTimeout = setTimeout(function () {
+                self.render();
+            }, 500);
+        });
     },
 
     render: function () {
@@ -55,6 +64,14 @@ var ReportTableView = Backbone.View.extend({
             context.headers = this.results.headers;
             context.rows = this.results.rows;
             this.chartEl.show();
+            if ($(window).width() < 800) {
+                this.results.chartOptions.xaxis.ticks = this.results.mobileTicks;
+                this.results.chartOptions.legend = {show: true,
+                                                    container: '#mobile-legend'};
+            } else {
+                this.results.chartOptions.xaxis.ticks = this.results.desktopTicks;
+                this.results.chartOptions.legend = {};
+            }
             this.chartEl.plot(this.results.chartData, this.results.chartOptions);
             $('<div class="yAxisLabel"></div>')
                 .text(this.results.yAxisLabel)
@@ -78,7 +95,7 @@ var ReportTableView = Backbone.View.extend({
         var lang = config.get('forever.language'),
             headers = null,
             rows = _.map(data, function (row) {
-                var result = [row['name_' + lang] ];
+                var result = [row.number + ': ' + row['name_' + lang]];
                 _.each(row.totals, function (total) {
                     result.push(total.total);
                 });
@@ -91,13 +108,14 @@ var ReportTableView = Backbone.View.extend({
             }),
             chartData = [],
             ticks = [],
+            mobileTicks = [],
             chartOptions = this.flotOptions,
             yAxisLabel = '';
 
         if (this.isRatingReport()) {
             // Rating Report
             yAxisLabel = i18n.t('Reports.Chart.AverageResponse');
-            _.each(data, function (row) {
+            _.each(data, function (row, i) {
                 var label = row['name_' + lang],
                     numRatings = 0,
                     sumOfRatings = 0,
@@ -110,9 +128,10 @@ var ReportTableView = Backbone.View.extend({
                 if (numRatings !== 0) {
                     avgRating = sumOfRatings / numRatings;
                 }
-                chartData.push({'color': row.number,
-                                'data': [[row.number, avgRating]]});
-                ticks.push([row.number, label]);
+                chartData.push({'color': i,
+                                'data': [[i, avgRating]]});
+                ticks.push([i, label]);
+                mobileTicks.push([i, row.number]);
             });
             // Set options specific to 'Rating' chart
             chartOptions.xaxis = {ticks: ticks};
@@ -130,14 +149,17 @@ var ReportTableView = Backbone.View.extend({
 
             chartData = _.map(headers, function (header) {
                 var values = [];
-                _.each(data, function (row) {
+                _.each(data, function (row, i) {
                     var rows_with_this_header = _.filter(row.totals, function (total){
                         return total['label_' + lang] === header;
                     });
-                    _.each(rows_with_this_header, function (total) {
+                    _.each(rows_with_this_header, function (total, j) {
                         // offset by 'stagger' so bar is just to right of previous bar
-                        values.push([row.number + stagger, total.total]);
-                        ticks.push([row.number, row['name_' + lang]]);
+                        values.push([i + stagger, total.total]);
+                        if (j === 0) {
+                            ticks.push([i, row['name_' + lang]]);
+                            mobileTicks.push([i, row.number]);
+                        }
                     });
                 });
                 stagger += barWidth;
@@ -163,7 +185,9 @@ var ReportTableView = Backbone.View.extend({
             rows: rows,
             chartData: chartData,
             chartOptions: chartOptions,
-            yAxisLabel: yAxisLabel
+            yAxisLabel: yAxisLabel,
+            mobileTicks: mobileTicks,
+            desktopTicks: ticks
         };
         this.render();
     }
