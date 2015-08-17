@@ -62,7 +62,7 @@ module.exports = Backbone.View.extend({
         $('.ifdelivered, .ifnotdelivered, #row_other_difficulties').hide();
 
         // Don't allow submit until they've said if the service was delivered
-        $('button.form-btn-submit').hide()
+        $('button.form-btn-submit').hide();
     },
 
     events: {
@@ -71,7 +71,7 @@ module.exports = Backbone.View.extend({
             $('.hideuntildelivered').show();
             $('.ifdelivered').toggle(delivered);
             $('.ifnotdelivered').toggle(!delivered);
-            $('button.form-btn-submit').show()
+            $('button.form-btn-submit').show();
         },
         "change [name=difficulty_contacting]": function() {
             var difficulty = $("#id_difficulty_contacting option:selected").val();
@@ -83,7 +83,7 @@ module.exports = Backbone.View.extend({
                 el: this.$el,
                 url: 'api/feedback/',
                 next_location: '#/feedback/confirm'
-            })
+            });
         },
         "click .form-btn-clear": function(e) {
             e.preventDefault();

@@ -2,6 +2,11 @@ ServiceInfo
 
 Release Notes
 
+0.3.2 - Aug. 17, 2015
+---------------------
+
+* Fixes for feedback form (#66)
+
 0.3.1 - Aug. 11, 2015
 ---------------------
 
