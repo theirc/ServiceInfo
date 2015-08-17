@@ -2199,6 +2199,11 @@ table#report-table {
 		}
 
 		td {
+            /* Only show first table cell (x-axis legend) */
+            display: none;
+            &.first {
+                display: block;
+            }
 			border: none;
 			position: relative;
 			border-bottom: 1px solid #DDD;

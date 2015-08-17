@@ -11,7 +11,7 @@
     {{#each rows}}
         <tr>
             {{#each this}}
-                <td>{{ this }}</td>
+                <td{{#if @first}} class="first"{{/if}}>{{ this }}</td>
             {{/each}}
         </tr>
     {{/each}}
