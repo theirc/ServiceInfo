@@ -215,7 +215,7 @@ module.exports = Backbone.View.extend({
         e.preventDefault();
         var today = new Date(),
             filename = this.report + '-' + today.toISOString().replace(/\T.*$/, '') + '.csv';
-        api.request('GET', 'api/servicetypes/' + this.report + '/?format=csv')
+        api.request('GET', 'api/reports/' + this.report + '/?format=csv')
             .then(function (response) {
                 var blob = new Blob([response], {type: 'text/csv'}),
                     blobURL, link;
