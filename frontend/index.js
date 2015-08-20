@@ -10,11 +10,8 @@ var i18n = require('i18next-client');
 var hashtrack = require('hashtrack');
 var _ = underscore;
 
-// Load Flot and 2 plugins (categories and stack)
-// http://www.flotcharts.org/
+// Load Flot: http://www.flotcharts.org/
 require('jquery-flot');
-require('jquery-flot/jquery.flot.categories');
-require('jquery-flot/jquery.flot.stack');
 
 hashtrack.init();
 require('es6-promise').polyfill();
