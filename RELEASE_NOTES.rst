@@ -2,6 +2,18 @@ ServiceInfo
 
 Release Notes
 
+0.3.3 - Aug. 20, 2015
+---------------------
+
+* Make chart sizes more flexible (#62, #64)
+* Upgrade to Django 1.7.9 (#65)
+* Fix for CSV downloads (#60)
+* Fix service feedback (#66)
+* Add charts (#53)
+
+0.3.2 - (skipped due to hotfix)
+-------------------------------
+
 0.3.1 - Aug. 11, 2015
 ---------------------
 
