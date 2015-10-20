@@ -95,7 +95,7 @@ we need to install that globally in our Python 2.x environment::
 To setup your local environment you should create a virtualenv and install the
 necessary requirements::
 
-    mkvirtualenv --python=/usr/bin/python3.4 serviceinfo
+    mkvirtualenv --python=<path>/python3.4 serviceinfo
     pip install -r requirements/dev.txt
 
 In order to use JavaScript tools that npm installs, you'll need to add
