@@ -34,16 +34,22 @@ On Mac, you can install Node with brew::
     brew install node
 
 On Ubuntu and other Linux distributions, you should download and build the
-latest version of Node. Standard package managers rarely have the most recent
+latest version of Node v0.10.*.   (Newer versions might not work.)
+
+Standard package managers rarely have the most recent
 versions of Node that include NPM. You can download it from
 http://nodejs.org/download/ and follow the standard build instructions::
 
-    tar -zxvf node-v0.10.35.tar.gz
-    cd node-v0.10.35/
+    wget https://nodejs.org/download/release/latest-v0.10.x/node-v0.10.40.tar.gz
+    tar -zxf node-v0.10.40.tar.gz
+    cd node-v0.10.40/
     ./configure
     make
     sudo make install
     cd ..
+
+WARNING: Do not build node while your ServiceInfo virtualenv is active.
+Node expects Python 2.7 and our virtualenv uses 3.4.
 
 With Node installed, you can install all frontend dependencies with `npm`::
 
@@ -57,7 +63,7 @@ Below you will find basic setup instructions for the
 project. To begin you should have the following applications installed on your
 local development system:
 
-- Python >= 3.4 (3.4 recommended)
+- Python == 3.4
 - `pip >= 1.5 <http://www.pip-installer.org/>`_
 - `virtualenv >= 1.11 <http://www.virtualenv.org/>`_
 - `virtualenvwrapper >= 3.0 <http://pypi.python.org/pypi/virtualenvwrapper>`_
@@ -89,8 +95,22 @@ we need to install that globally in our Python 2.x environment::
 To setup your local environment you should create a virtualenv and install the
 necessary requirements::
 
-    mkvirtualenv --python=/usr/bin/python3.4 serviceinfo
-    $VIRTUAL_ENV/bin/pip install -r $PWD/requirements/dev.txt
+    mkvirtualenv --python=<path>/python3.4 serviceinfo
+    pip install -r requirements/dev.txt
+
+In order to use JavaScript tools that npm installs, you'll need to add
+``node_modules/.bin`` to the *front* of your PATH. One way to do that is to
+add this to your virtualenvs' postactivate script::
+
+    if [ -d node_modules/.bin ] ; then
+        if printenv PATH | grep --quiet node_modules/.bin ; then
+            echo "node_modules already on PATH: $PATH"
+        else
+            echo "Adding node_modules to PATH"
+            PATH=$(pwd)/node_modules/.bin:$PATH
+        fi
+    fi
+
 
 Install the needed Javascript tools and libraries::
 
