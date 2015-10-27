@@ -3,6 +3,9 @@ import os
 from django.utils.translation import ugettext_lazy as _
 from celery.schedules import crontab
 
+# XXX Django CMS craziness
+gettext = lambda s: s
+
 # BASE_DIR = path/to/source/service_info
 # E.g. this file is BASE_DIR/settings/base.py
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
@@ -43,17 +46,44 @@ TIME_ZONE = 'Asia/Beirut'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+#LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 # LANGUAGES is only used in the Django admin
 LANGUAGES = [
     ('en', _('English')),
+#    ('en-us', _('English')),  # See https://github.com/divio/django-cms/issues/2179
 ]
 FRONTEND_LANGUAGES = [
     ('ar', _('Arabic')),
     ('en', _('English')),
     ('fr', _('French')),
 ]
+
+CMS_LANGUAGES = {
+    ## Customize this
+    1: [
+        {
+            'public': True,
+            'code': 'en',
+            'name': gettext('en'),
+            'hide_untranslated': False,
+            'redirect_on_fallback': True,
+        },
+        {
+            'public': True,
+            'code': 'ar',
+            'name': gettext('ar'),
+            'hide_untranslated': False,
+            'redirect_on_fallback': True,
+        },
+    ],
+    'default': {
+        'public': True,
+        'hide_untranslated': False,
+        'redirect_on_fallback': True,
+    },
+}
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -62,6 +92,7 @@ USE_I18N = True
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
 # And that's what we want, otherwise we have no control.
+# XXX Django CMS example sets this to True, which probably isn't important
 USE_L10N = False
 # Time display format:
 TIME_FORMAT = "G:i"  # 24-hour time without leading zero; minutes
@@ -110,6 +141,13 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'hfyyf*=)1!1m16vo$y=g8(r&po3(qvasinv&lv2i&%ztsg7y&a'
 
+# XXX Is this really needed?  It is in the Django CMS tutorial project
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.eggs.Loader'
+)
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
@@ -119,9 +157,28 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
+    # Django CMS
+    'sekizai.context_processors.sekizai',
+    'cms.context_processors.cms_settings',
+)
+
+# XXX temporarily change order to the one in Django CMS tutorial project
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.request',
+    'django.core.context_processors.media',
+    'django.core.context_processors.csrf',
+    'django.core.context_processors.tz',
+    'sekizai.context_processors.sekizai',
+    'django.core.context_processors.static',
+    'cms.context_processors.cms_settings'
 )
 
 MIDDLEWARE_CLASSES = (
+    # XXX not the same order as Django CMS tutorial project
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -132,6 +189,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Django CMS
+    'cms.middleware.user.CurrentUserMiddleware',
+    'cms.middleware.page.CurrentPageMiddleware',
+    'cms.middleware.toolbar.ToolbarMiddleware',
+    'cms.middleware.language.LanguageCookieMiddleware',
 )
 
 ROOT_URLCONF = 'service_info.urls'
@@ -151,6 +213,8 @@ INSTALLED_APPS = (
     # Our apps - Must precede django.contrib.auth so templates override Django's.
     'services',
     'email_user',
+    # for the Django CMS admin skin; must come before django.contrib.admin
+    'djangocms_admin_style',
     # contenttypes needs to be listed before auth due to problems with
     # create_permissions and the TransactionTestCase/LiveServerTestCase
     # See https://code.djangoproject.com/ticket/10827
@@ -170,6 +234,20 @@ INSTALLED_APPS = (
     'rest_framework',
     'rest_framework.authtoken',
     'sorl.thumbnail',
+    # Django CMS
+    'cms',  # django CMS itself
+    'treebeard',  # utilities for implementing a tree
+    'menus',  # helper for model independent hierarchical website navigation
+    'sekizai',  # for javascript and css management
+    # 'djangocms_file',
+    # 'djangocms_flash',
+    # 'djangocms_googlemap',
+    # 'djangocms_inherit',
+    # 'djangocms_picture',
+    # 'djangocms_teaser',
+    # 'djangocms_video',
+    # 'djangocms_link',
+    'reversion',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -310,3 +388,24 @@ SECURE_LINKS = True
 
 # How many seconds to allow signed URLs to be valid
 SIGNED_URL_LIFETIME = 300
+
+# Django CMS settings
+CMS_TEMPLATES = (
+    ('cms_template_1.html', 'Template One'),
+)
+
+CMS_PERMISSION = True
+CMS_PLACEHOLDER_CONF = {}
+
+# XXX Is this part of Django CMS tutorial project needed?
+MIGRATION_MODULES = {
+    'djangocms_inherit': 'djangocms_inherit.migrations_django',
+    'djangocms_style': 'djangocms_style.migrations_django',
+    'djangocms_video': 'djangocms_video.migrations_django',
+    'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
+    # 'djangocms_file': 'djangocms_file.migrations_django',
+    'djangocms_teaser': 'djangocms_teaser.migrations_django',
+    'djangocms_picture': 'djangocms_picture.migrations_django',
+    'djangocms_flash': 'djangocms_flash.migrations_django',
+    'djangocms_column': 'djangocms_column.migrations_django'
+}

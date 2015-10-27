@@ -27,10 +27,11 @@ urlpatterns = [
     url(r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete',
         name='password_reset_complete'),
     url(r'^export/(?P<signature>.*)/$', export_view, name='export'),
+    url(r'^', include('cms.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-if settings.DEBUG:
+if False and settings.DEBUG:
     urlpatterns += [
         # Redirect / to /index.html if running locally.
         url(r'^$', RedirectView.as_view(url=settings.STATIC_URL + 'index.html'),
