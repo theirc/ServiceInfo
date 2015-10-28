@@ -239,6 +239,7 @@ INSTALLED_APPS = (
     'treebeard',  # utilities for implementing a tree
     'menus',  # helper for model independent hierarchical website navigation
     'sekizai',  # for javascript and css management
+    'djangocms_text_ckeditor',
     # 'djangocms_file',
     # 'djangocms_flash',
     # 'djangocms_googlemap',
