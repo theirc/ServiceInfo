@@ -46,13 +46,13 @@ TIME_ZONE = 'Asia/Beirut'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-#LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
 LANGUAGE_CODE = 'en'
 
 # LANGUAGES is only used in the Django admin
 LANGUAGES = [
     ('en', _('English')),
-#    ('en-us', _('English')),  # See https://github.com/divio/django-cms/issues/2179
+    # ('en-us', _('English')),  See https://github.com/divio/django-cms/issues/2179
 ]
 FRONTEND_LANGUAGES = [
     ('ar', _('Arabic')),
@@ -61,7 +61,7 @@ FRONTEND_LANGUAGES = [
 ]
 
 CMS_LANGUAGES = {
-    ## Customize this
+    # Customize this
     1: [
         {
             'public': True,
