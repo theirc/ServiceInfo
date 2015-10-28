@@ -1,3 +1,30 @@
 /*
 *   Site Styles
 */
+
+@import "../fonts/ge-ss-two-light.css";
+@import "../fonts/akzidenz-grotesk.css";
+
+@arabic_font: 'GE SS Two Light';
+@latin_font: "akzidenz-grotesk";
+
+body {
+    font-family: @arabic_font, @latin_font;
+    font-size: 0.85em;  // Do not change to e.g. 14px,  it makes some of our text not renderable in our Arabic font
+    line-height: 1.4em;
+    font-weight: normal;  // Do not change to e.g. 400, it makes some of our text not renderable in our Arabic font
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+@import "includes/mixins.less";
+@import "includes/breakpoints.less";
+@import "base.less";

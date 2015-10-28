@@ -1,0 +1,41 @@
+{% load menu_tags %}
+
+<div class="languages">
+    <div id="ar">العربية</div>
+    <div id="en">English</div>
+    <div id="fr">Français</div>
+</div>
+
+<div class="logo lg"></div>
+
+<main>
+    <div class="logo sm"></div>
+
+    <header>
+        International Rescue Committee Information Portal
+    </header>
+
+    <div class="social-links">
+        <div class="email">e</div>
+        <div class="facebook">f</div>
+        <div class="twitter">t</div>
+        <div class="faq-link lg">faq</div>
+    </div>
+
+    <div class="search">
+        <input type="text" placeholder="search">
+    </div>
+
+    <div class="alert">
+        Notice board: something very bad is happening.
+    </div>
+
+    {% block nav %}
+        <nav>
+            <ul>
+                {% show_menu 0 0 0 100 "cms/includes/menu.html" %}
+                <li class="faq-link sm">FAQ</li>
+            </ul>
+        </nav>
+    {% endblock nav %}
+</main>

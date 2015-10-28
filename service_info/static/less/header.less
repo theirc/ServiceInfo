@@ -1,0 +1,96 @@
+#site-header {
+    width: 100%;
+    margin-bottom: 20px;
+
+    .centered();
+    flex-direction: column;
+
+    .languages {
+        .centered();
+        flex-direction: row;
+
+        & > * {
+            border: 1px solid darkgrey;
+            padding: 0.25em 0.5em;
+            display: inline-block;
+            box-sizing: border-box;
+
+            &:first-child ~ * {
+                margin-left: -1px;
+            }
+        }
+    }
+
+    .logo.lg {
+        display: none;
+    }
+
+    main {
+        .centered();
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        /**
+            Flex layout of main header elements
+        */
+
+        /*
+            Main row
+        */
+        .logo.sm {
+            flex: 0 0 25%;
+            min-height: 100px;
+        }
+        header {
+            text-align: center;
+            flex: 1 0 50%;
+        }
+        .social-links {
+            .centered();
+            flex-direction: column;
+
+            flex: 0 0 25%;
+            min-height: 100px;
+        }
+
+        /*
+            Rest
+        */
+        .search {
+            .centered();
+            flex-direction: row;
+            flex: 0 0 100%;
+
+            input {
+                padding: 0.5em;
+            }
+        }
+        .alert {
+            .centered();
+            flex-direction: row;
+            flex: 0 0 100%;
+
+            background-color: gold;
+            padding: 0.5em;
+        }
+
+        /*
+            Nav layout
+        */
+        nav {
+            flex: 0 0 100%;
+
+            ul {
+                .centered();
+                flex-direction: row;
+                flex-wrap: wrap;
+
+                & > * {
+                    flex-basis: calc(100% / 3);
+                    flex-grow: 0;
+                    flex-shrink: 0;
+                }
+            }
+        }
+    }
+}

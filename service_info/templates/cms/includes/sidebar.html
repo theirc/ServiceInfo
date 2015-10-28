@@ -1,0 +1,43 @@
+<form action="submit" id="register">
+    <header>Register Now</header>
+
+    <input type="text" name="name" placeholder="Your name" />
+    <input type="email" name="email" placeholder="Email address (optional)" required="false" />
+    <input type="tel" name="phone" placeholder="Phone" />
+
+    <label for="sex">
+        Male
+        <input type="radio" name="sex" value="male">
+    </label>
+    <label for="sex">
+        Female
+        <input type="radio" name="sex" value="female">
+    </label>
+
+    <label for="conditions">
+        <input type="checkbox" name="conditions">
+        Accept all conditions
+    </label>
+
+    <label for="age">
+        <input type="radio" name="age" value="under-18">
+        Under 18
+    </label>
+    <label for="age">
+        <input type="radio" name="age" value="18-59">
+        18 – 59
+    </label>
+    <label for="age">
+        <input type="radio" name="age" value="over-59">
+        59 and older
+    </label>
+
+    <button>Register me!</button>
+</form>
+
+<form action="submit" id="login">
+    <input type="text" name="username" placeholder="Username">
+    <input type="password" name="password" placeholder="Password">
+
+    <button>log in</button>
+</form>
