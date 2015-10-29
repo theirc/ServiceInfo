@@ -393,7 +393,8 @@ SIGNED_URL_LIFETIME = 300
 # Django CMS settings
 CMS_TEMPLATES = (
     ('cms/content-types/page.html', 'Page'),
-    ('cms/content-types/forum.html', 'Forum'),
+    ('cms/content-types/pages-index.html', 'Content Index'),
+    ('cms/content-types/faq.html', 'FAQ'),
 )
 
 CMS_PERMISSION = True

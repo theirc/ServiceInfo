@@ -1,52 +1,85 @@
 {% load cms_tags staticfiles sekizai_tags menu_tags %}
 
-<!DOCTYPE html>
-<html lang="en" class="no-js">
+<!doctype html>
+<html>
     <head>
-        <meta charset="utf-8">
-        <title>{% block title %}{% page_attribute "page_title" %}{% endblock title %}</title>
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="{% block meta-description %}{% endblock %}">
-        <meta name="author" content="{% block meta-author %}{% endblock %}">
-        <meta name="keywords" content="{% block meta-keywords %}{% endblock %}">
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
         {% block extra-meta %}{% endblock %}
 
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="{% static 'styles/site-ltr.css' %}" type="text/css" class="load-style"/>
+        <link rel="stylesheet" href="{% static 'less/cms.less' %}" type="text/less">
         {% render_block "css" %}
-        {% addtoblock "css" %}
-            {% if debug %}
-                <link rel="stylesheet/less" type="text/css" media="all" href="{% static 'less/site.less' %}">
-            {% else %}
-                <link rel="stylesheet" type="text/less" media="all" href="{% static 'less/site.less' %}">
-            {% endif %}
-        {% endaddtoblock %}
+
+        <link rel="shortcut icon" href="{% static 'images/sm-favicon.png' %}">
+
+        <title>{% block title %}{% page_attribute "page_title" %}{% endblock title %}</title>
     </head>
-    <body class="{% page_attribute 'slug' %}">
-        <header id="site-header">
-            {% block header %}
-                {% include "cms/includes/header.html" %}
-            {% endblock header %}
-        </header>
+    <body dir="ltr" class="left-to-right">
+        {% cms_toolbar %}
 
-        <main>
-            {% block content %}{% endblock content%}
-        </main>
+        <div id="application">
+            <header id="application-header">
+                {% block header %}
+                <div class="brand">
+                    <a href="#"><div id="logo"></div></a>
+                </div>
+                <div id=menu-container class="menu-closed">
+                    <button id=menu-toggle class="btn menu" data-i18n="Menu.Menu-Toggle"></button>
+                    <ul id="menu" class="menu">
+                        {% show_menu 0 0 0 100 "cms/includes/menu.html" %}
+                    </ul>
+                </div>
+                {% endblock header %}
+            </header>
 
-        <sidebar>
-            {% block sidebar %}
-                {% include "cms/includes/sidebar.html" %}
-            {% endblock sidebar %}
-        </sidebar>
+            <div id="page-container">
+                <div id="page">
+                    <div id="content">
+                        {% block content %}{% endblock content %}
+                    </div>
+                </div>
+            </div>
 
-        <footer>
-            {% block footer %}
-                {% include "cms/includes/footer.html" %}
-            {% endblock footer %}
-        </footer>
-        
+            <div id="footer">
+                {% block footer %}
+                <div class="row">
+                    <div id="about-si" class="two-third">
+                        <div class="page-title" data-i18n="Footer.About.Title">About ServiceInfo</div>
+                        <div class="page-descr">
+                          <span class="sentence1" data-i18n="Footer.About.Sentence1">Powered by the International Rescue Committee.</span>
+                          <span data-i18n="Footer.About.Remainder">ServiceInfo is a tool that allows both service providers to register their services online and beneficiaries to both discover those services on a map and give feedback on them. ServiceInfo is open source and free to use.</span>
+                        </div>
+                    </div>
+                    <div id="contact-si" class="third">
+                        <div class="page-title" data-i18n="Footer.Contact.Title">Reach Us</div>
+                        <div class="page-descr" data-i18n="Footer.Contact.Paragraph">Contact us on one of our social networks below or drop us a mail at</div>
+                        <div id="contact-icons">
+                            <div class="icon">
+                                <a href="mailto:serviceinfo@rescue.org">
+                                    <img src="{% static 'images/mail.svg' %}" alt="email link">
+                                </a>
+                            </div>
+                            <div class="icon">
+                                <a href="https://www.facebook.com/serviceinfolb">
+                                    <img src="{% static 'images/fbimage.svg' %}" alt="facebook link">
+                                </a>
+                            </div>
+                            <div class="icon">
+                                <a href="https://twitter.com/serviceinfolb">
+                                    <img src="{% static 'images/twimage.svg' %}" alt="twitter link">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endblock footer %}
+            </div>
+            <div id="language-toggle" class="language-toggle modal-bg hidden"></div>
+            <div id="report-tooltip"></div>
+        </div>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.5.1/less.min.js"></script>
         {% render_block "js" %}
-        {% addtoblock "js" %}
-            <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.5.1/less.min.js"></script>
-        {% endaddtoblock %}
     </body>
 </html>
