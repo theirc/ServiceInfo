@@ -1,41 +1,57 @@
 {% load menu_tags %}
 
 <div class="languages">
-    <div id="ar">العربية</div>
-    <div id="en">English</div>
-    <div id="fr">Français</div>
+    <div class="content">
+        <div id="ar">العربية</div>
+        <div id="en">English</div>
+        <div id="fr">Français</div>
+    </div>
 </div>
 
-<div class="logo lg"></div>
+<div class="logo lg">
+    <div class="content"></div>
+</div>
 
 <main>
-    <div class="logo sm"></div>
+    <div class="content">
+        <div class="logo sm">
+            <div class="content"></div>
+        </div>
 
-    <header>
-        International Rescue Committee Information Portal
-    </header>
+        <header>
+            <div class="content">
+                International Rescue Committee Information Portal
+            </div>
+        </header>
 
-    <div class="social-links">
-        <div class="email">e</div>
-        <div class="facebook">f</div>
-        <div class="twitter">t</div>
-        <div class="faq-link lg">faq</div>
+        <div class="social-links">
+            <div class="content">
+                <div class="email">e</div>
+                <div class="facebook">f</div>
+                <div class="twitter">t</div>
+                <div class="faq-link lg">faq</div>
+            </div>
+        </div>
+
+        <div class="search">
+            <div class="content">
+                <input type="text" placeholder="search">
+            </div>
+        </div>
+
+        <div class="alert">
+            <div class="content">
+                Notice board: something very bad is happening.
+            </div>
+        </div>
+
+        {% block nav %}
+            <nav>
+                <ul class="content">
+                    {% show_menu 0 0 0 100 "cms/includes/menu.html" %}
+                    <li class="faq-link sm">FAQ</li>
+                </ul>
+            </nav>
+        {% endblock nav %}
     </div>
-
-    <div class="search">
-        <input type="text" placeholder="search">
-    </div>
-
-    <div class="alert">
-        Notice board: something very bad is happening.
-    </div>
-
-    {% block nav %}
-        <nav>
-            <ul>
-                {% show_menu 0 0 0 100 "cms/includes/menu.html" %}
-                <li class="faq-link sm">FAQ</li>
-            </ul>
-        </nav>
-    {% endblock nav %}
 </main>
