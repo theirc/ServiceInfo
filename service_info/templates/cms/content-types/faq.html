@@ -1,0 +1,17 @@
+{% extends "cms/base.html" %}
+{% load cms_tags %}
+
+{% block content %}
+    <ul class="faq">
+        {% for qa in qas %}
+            <li class="qa">
+                <div class="q">
+                    {{ qa.q }}
+                </div>
+                <div class="a">
+                    {{ qa.a }}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

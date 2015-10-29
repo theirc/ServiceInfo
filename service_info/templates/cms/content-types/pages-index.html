@@ -1,0 +1,25 @@
+{% extends "cms/base.html" %}
+{% load cms_tags %}
+
+{% block content %}
+    <div class="total"></div>
+
+    <ul class="pages">
+        {% for page in pages %}
+            <li class="page">
+                <div class="link">
+                    <a href="{{ page.absolute_url }}">{{ page.short_title }}</a>
+                    <div class="arrow"></div>
+                </div>
+                <p class="description">
+                    {{ page.description }}
+                </p>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination">
+        <div class="prev">Previous Page</div>
+        <div class="next">Next Page</div>
+    </div>
+{% endblock content %}
