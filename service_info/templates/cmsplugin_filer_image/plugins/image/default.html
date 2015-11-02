@@ -1,0 +1,6 @@
+{% load thumbnail %}
+{# easy_thumnails stuff #}
+{% thumbnail instance.image 200x200 upscale as thumb %}
+<img src="{{ thumb.url }}"
+     width="{{ thumb.width }}"
+     height="{{ thumb.height }}" />

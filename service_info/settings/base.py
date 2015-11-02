@@ -233,14 +233,16 @@ INSTALLED_APPS = (
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    'sorl.thumbnail',
+    # 'sorl.thumbnail',
     # Django CMS
     'cms',  # django CMS itself
     'treebeard',  # utilities for implementing a tree
     'menus',  # helper for model independent hierarchical website navigation
     'sekizai',  # for javascript and css management
     'djangocms_text_ckeditor',
-    # 'djangocms_file',
+    'filer',
+    'mptt',
+    'easy_thumbnails',
     # 'djangocms_flash',
     # 'djangocms_googlemap',
     # 'djangocms_inherit',
@@ -249,6 +251,13 @@ INSTALLED_APPS = (
     # 'djangocms_video',
     # 'djangocms_link',
     'reversion',
+    # cmsplugin-filer:
+    'cmsplugin_filer_file',
+    'cmsplugin_filer_folder',
+    'cmsplugin_filer_link',
+    'cmsplugin_filer_image',
+    'cmsplugin_filer_teaser',
+    'cmsplugin_filer_video',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -408,4 +417,27 @@ MIGRATION_MODULES = {
     # 'djangocms_teaser': 'djangocms_teaser.migrations_django',
     # 'djangocms_picture': 'djangocms_picture.migrations_django',
     # 'djangocms_flash': 'djangocms_flash.migrations_django',
+    'filer': 'filer.migrations_django',
+    'cmsplugin_filer_file': 'cmsplugin_filer_file.migrations_django',
+    'cmsplugin_filer_folder': 'cmsplugin_filer_folder.migrations_django',
+    'cmsplugin_filer_link': 'cmsplugin_filer_link.migrations_django',
+    'cmsplugin_filer_image': 'cmsplugin_filer_image.migrations_django',
+    'cmsplugin_filer_teaser': 'cmsplugin_filer_teaser.migrations_django',
+    'cmsplugin_filer_video': 'cmsplugin_filer_video.migrations_django',
 }
+
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    # 'easy_thumbnails.processors.scale_and_crop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters',
+)
+
+# For easy_thumbnails to support retina displays (recent MacBooks, iOS)
+# add to settings.py:
+THUMBNAIL_HIGH_RESOLUTION = True
+
+# cmsplugin_filer_image provides integration with djangocms-text-ckeditor
+# for DnD via this setting:
+TEXT_SAVE_IMAGE_FUNCTION = 'cmsplugin_filer_image.integrations.ckeditor.create_image_plugin'
