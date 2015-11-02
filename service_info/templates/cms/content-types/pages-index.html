@@ -2,20 +2,84 @@
 {% load cms_tags %}
 
 {% block content %}
-    <div class="total"></div>
-
-    <ul class="pages">
+    <ul id="pages">
         {% for page in pages %}
             <li class="page">
                 <div class="link">
                     <a href="{{ page.absolute_url }}">{{ page.short_title }}</a>
-                    <div class="arrow"></div>
+                    <div class="arrow">→</div>
                 </div>
                 <p class="description">
                     {{ page.description }}
                 </p>
             </li>
         {% endfor %}
+
+        <li class="page">
+            <div class="link">
+                <a href="#">Birth Certificates</a>
+                <div class="arrow">→</div>
+            </div>
+            <p class="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </li>
+
+        <li class="page">
+            <div class="link">
+                <a href="#">Birth Certificates</a>
+                <div class="arrow">→</div>
+            </div>
+            <p class="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </li>
+
+        <li class="page">
+            <div class="link">
+                <a href="#">Birth Certificates</a>
+                <div class="arrow">→</div>
+            </div>
+            <p class="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </li>
+
+        <li class="page">
+            <div class="link">
+                <a href="#">Birth Certificates</a>
+                <div class="arrow">→</div>
+            </div>
+            <p class="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </li>
+
+        <li class="page">
+            <div class="link">
+                <a href="#">Birth Certificates</a>
+                <div class="arrow">→</div>
+            </div>
+            <p class="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </li>
+        <!-- Some mock list items. -->
     </ul>
 
     <div class="pagination">

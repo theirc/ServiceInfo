@@ -1,0 +1,36 @@
+.padded-box(@color, @bg-color, @border-color) {
+    border: 1px solid @border-color;
+    border-radius: 4px;
+
+    background-color: @bg-color;
+
+    color: @color;
+    & > a { color: @color; }
+    font-weight: 600;
+
+    text-align: center;
+    padding: 13px 12px;
+}
+
+.button-like(@color, @bg-color, @border-color, @hover-color, @hover-bg-color, @hover-border-color) {
+    .padded-box(@color, @bg-color, @border-color);
+    transition: all 0.25s;
+    &:hover {
+        transition: all 0.25s;
+        color: @hover-color;
+        & > a { color: @hover-color; }
+        border-color: @hover-border-color;
+        background-color: @hover-bg-color;
+    }
+}
+
+.green-bg() {
+    .padded-box(white, #3cb879, #3CB879);
+}
+
+.white-green-button() {
+    .button-like(
+        #3cb879, white, #3cb879,
+        white, #3cb879, #3CB879
+    );
+}
