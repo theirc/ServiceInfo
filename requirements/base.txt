@@ -48,6 +48,6 @@ django-filer==0.9.12
 # django-sekizai >= 0.4.2
 # easy_thumbnails >= 1.0
 django-appconf==1.0.1
-cmsplugin-filer==0.10.1
+cmsplugin-filer==0.10.2
 django-reversion==1.8.5
 https://github.com/divio/djangocms-text-ckeditor/archive/master.zip?1445623824.9186497
