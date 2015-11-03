@@ -52,6 +52,7 @@ LANGUAGE_CODE = 'en'
 # LANGUAGES is only used in the Django admin
 LANGUAGES = [
     ('en', _('English')),
+    ('ar', _('Arabic')),
     # ('en-us', _('English')),  See https://github.com/divio/django-cms/issues/2179
 ]
 FRONTEND_LANGUAGES = [

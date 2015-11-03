@@ -2,6 +2,7 @@ import os
 
 from django.conf import settings
 from django.conf.urls import include, url
+from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import RedirectView
@@ -15,8 +16,6 @@ FRONTEND_DIR = os.path.join(settings.PROJECT_ROOT, 'frontend')
 # Reminder: the `static` function is a no-op if DEBUG is False, as in production.
 urlpatterns = [
     url(r'^health/$', health_view),
-    # Django admin
-    url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(api.urls)),
     url(r'^password_reset/$', 'django.contrib.auth.views.password_reset', name='password_reset'),
     url(r'^password_reset/done/$', 'django.contrib.auth.views.password_reset_done',
@@ -37,6 +36,10 @@ if settings.DEBUG:
             name='index-html-redirect'),
     ]
 
-urlpatterns += [
+urlpatterns += i18n_patterns(
+    '',
+    # Django admin
+    url(r'^admin/', include(admin.site.urls)),
+    # Django CMS
     url(r'^', include('cms.urls')),
-]
+)
