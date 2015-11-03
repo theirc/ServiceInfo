@@ -233,7 +233,6 @@ INSTALLED_APPS = (
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    # 'sorl.thumbnail',
     # Django CMS
     'cms',  # django CMS itself
     'treebeard',  # utilities for implementing a tree
@@ -258,6 +257,10 @@ INSTALLED_APPS = (
     'cmsplugin_filer_image',
     'cmsplugin_filer_teaser',
     'cmsplugin_filer_video',
+    # End Django CMS
+    # Load after easy_thumbnails so that its thumbnail template tag (unused
+    # in this project) is hidden.
+    'sorl.thumbnail',
 )
 
 # A sample logging configuration. The only tangible logging
