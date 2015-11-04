@@ -182,7 +182,9 @@ MIDDLEWARE_CLASSES = (
     # XXX not the same order as Django CMS tutorial project
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'service_info.middleware.Restore404AfterLocaleMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'service_info.middleware.Hide404FromLocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

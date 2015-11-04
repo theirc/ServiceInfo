@@ -1,4 +1,5 @@
 import os
+import re
 
 from django.conf import settings
 from django.conf.urls import include, url
@@ -12,6 +13,12 @@ from services.views import export_view, health_view
 
 
 FRONTEND_DIR = os.path.join(settings.PROJECT_ROOT, 'frontend')
+
+# Our middleware will bypass locale middleware redirect processing
+# of 404s for requests matching these patterns.  Because the Django
+# CMS pattern matches anything, locale middleware thinks that
+# redirecting to /<language>/api/bad will work.
+NO_404_LOCALE_REDIRECTS = (re.compile(r'^/api/'),)
 
 # Reminder: the `static` function is a no-op if DEBUG is False, as in production.
 urlpatterns = [
