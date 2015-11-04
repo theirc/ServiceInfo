@@ -4,18 +4,21 @@
 <html>
     <head>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-        {% block extra-meta %}{% endblock %}
+        {% render_block "extra-meta" %}
 
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="{% static 'styles/site-ltr.css' %}" type="text/css" class="load-style"/>
-        <link rel="stylesheet" href="{% static 'less/cms.less' %}" type="text/less">
+        <link rel="stylesheet" href="{% if request.LANGUAGE_CODE == 'en' %}{% static 'styles/site-ltr.css' %}{% else %}{% static 'styles/site-rtl.css' %}{% endif %}" type="text/css" class="load-style"/>
         {% render_block "css" %}
+
+        {% addtoblock "css" %}
+            <link rel="stylesheet" href="{% static 'less/base.less' %}" type="text/less">
+        {% endaddtoblock %}
 
         <link rel="shortcut icon" href="{% static 'images/sm-favicon.png' %}">
 
         <title>{% block title %}{% page_attribute "page_title" %}{% endblock title %}</title>
     </head>
-    <body dir="ltr" class="left-to-right">
+    <body dir="{% if request.LANGUAGE_CODE == 'en' %}ltr{% else %}rtl{% endif %}" class="{% if request.LANGUAGE_CODE == 'en' %}left-to-right{% else %}right-to-left{% endif %}">
         {% cms_toolbar %}
 
         <div id="application">
@@ -35,7 +38,7 @@
 
             <div id="page-container">
                 <div id="page">
-                    <div id="content">
+                    <div id="content" class="{% block content-class %}{% endblock content-class %}">
                         {% block content %}{% endblock content %}
                     </div>
                 </div>
