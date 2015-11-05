@@ -1,7 +1,10 @@
 {% extends "cms/base.html" %}
-{% load cms_tags %}
+{% load cms_tags sekizai_tags staticfiles %}
 
 {% block content %}
+    {% addtoblock "css" %}
+        <link rel="stylesheet" type="text/less" media="all" href="{% static 'less/content-types/pages-index.less' %}">
+    {% endaddtoblock %}
     <ul id="pages">
         {% for page in pages %}
             <li class="page">
