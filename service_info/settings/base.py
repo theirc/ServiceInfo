@@ -3,9 +3,6 @@ import os
 from django.utils.translation import ugettext_lazy as _
 from celery.schedules import crontab
 
-# XXX Django CMS craziness
-gettext = lambda s: s
-
 # BASE_DIR = path/to/source/service_info
 # E.g. this file is BASE_DIR/settings/base.py
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
@@ -46,7 +43,6 @@ TIME_ZONE = 'Asia/Beirut'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-# LANGUAGE_CODE = 'en-us'
 LANGUAGE_CODE = 'en'
 
 # LANGUAGES is only used in the Django admin
@@ -54,7 +50,6 @@ LANGUAGES = [
     ('en', _('English')),
     ('ar', _('Arabic')),
     ('fr', _('French')),
-    # ('en-us', _('English')),  See https://github.com/divio/django-cms/issues/2179
 ]
 FRONTEND_LANGUAGES = [
     ('ar', _('Arabic')),
@@ -67,21 +62,21 @@ CMS_LANGUAGES = {
         {
             'public': True,
             'code': 'en',
-            'name': gettext('en'),
+            'name': _('en'),
             'hide_untranslated': False,
             'redirect_on_fallback': True,
         },
         {
             'public': True,
             'code': 'ar',
-            'name': gettext('ar'),
+            'name': _('ar'),
             'hide_untranslated': False,
             'redirect_on_fallback': True,
         },
         {
             'public': True,
             'code': 'fr',
-            'name': gettext('fr'),
+            'name': _('fr'),
             'hide_untranslated': False,
             'redirect_on_fallback': True,
         },
