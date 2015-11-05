@@ -7,7 +7,7 @@
         {% render_block "extra-meta" %}
 
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="{% if request.LANGUAGE_CODE == 'en' %}{% static 'styles/site-ltr.css' %}{% else %}{% static 'styles/site-rtl.css' %}{% endif %}" type="text/css" class="load-style"/>
+        <link rel="stylesheet" href="{% if request.LANGUAGE_CODE == 'ar' %}{% static 'styles/site-rtl.css' %}{% else %}{% static 'styles/site-ltr.css' %}{% endif %}" type="text/css" class="load-style"/>
         <link rel="stylesheet" href="{% static 'less/base.less' %}" type="text/less">
         {% render_block "css" %}
 
@@ -15,7 +15,7 @@
 
         <title>{% block title %}{% page_attribute "page_title" %}{% endblock title %}</title>
     </head>
-    <body dir="{% if request.LANGUAGE_CODE == 'en' %}ltr{% else %}rtl{% endif %}">
+    <body dir="{% if request.LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
         {% cms_toolbar %}
 
         <div id="cms">
@@ -48,7 +48,7 @@
                         <div class="page-title">{% trans "About ServiceInfo" %}</div>
                         <div class="page-descr">
                           <span class="sentence1">{% trans "Powered by the International Rescue Committee." %}</span>
-                          <span>{% "ServiceInfo is a tool that allows both service providers to register their services online and beneficiaries to both discover those services on a map and give feedback on them. ServiceInfo is open source and free to use." %}</span>
+                          <span>{% trans "ServiceInfo is a tool that allows both service providers to register their services online and beneficiaries to both discover those services on a map and give feedback on them. ServiceInfo is open source and free to use." %}</span>
                         </div>
                     </div>
                     <div id="contact-si" class="third">
