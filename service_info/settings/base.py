@@ -174,7 +174,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # Django CMS
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
@@ -198,7 +197,7 @@ INSTALLED_APPS = (
     # Our apps - Must precede django.contrib.auth so templates override Django's.
     'services',
     'email_user',
-    # for the Django CMS admin skin; must come before django.contrib.admin
+    # must come before django.contrib.admin
     'djangocms_admin_style',
     # contenttypes needs to be listed before auth due to problems with
     # create_permissions and the TransactionTestCase/LiveServerTestCase
@@ -218,17 +217,16 @@ INSTALLED_APPS = (
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    # Django CMS
-    'cms',  # django CMS itself
-    'treebeard',  # utilities for implementing a tree
-    'menus',  # helper for model independent hierarchical website navigation
-    'sekizai',  # for javascript and css management
+    # Django CMS-related
+    'cms',
+    'treebeard',
+    'menus',
+    'sekizai',
     'djangocms_text_ckeditor',
     'filer',
     'mptt',
     'easy_thumbnails',
     'reversion',
-    # For cmsplugin-filer:
     'cmsplugin_filer_file',
     'cmsplugin_filer_folder',
     'cmsplugin_filer_link',
