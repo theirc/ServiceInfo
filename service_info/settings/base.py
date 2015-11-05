@@ -62,7 +62,6 @@ FRONTEND_LANGUAGES = [
 ]
 
 CMS_LANGUAGES = {
-    # Customize this
     1: [
         {
             'public': True,
@@ -93,7 +92,6 @@ USE_I18N = True
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
 # And that's what we want, otherwise we have no control.
-# XXX Django CMS example sets this to True, which probably isn't important
 USE_L10N = False
 # Time display format:
 TIME_FORMAT = "G:i"  # 24-hour time without leading zero; minutes
@@ -142,13 +140,6 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'hfyyf*=)1!1m16vo$y=g8(r&po3(qvasinv&lv2i&%ztsg7y&a'
 
-# XXX Is this really needed?  It is in the Django CMS tutorial project
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-    'django.template.loaders.eggs.Loader'
-)
-
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
@@ -158,28 +149,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
-    # Django CMS
     'sekizai.context_processors.sekizai',
     'cms.context_processors.cms_settings',
 )
 
-# XXX temporarily change order to the one in Django CMS tutorial project
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.contrib.messages.context_processors.messages',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.request',
-    'django.core.context_processors.media',
-    'django.core.context_processors.csrf',
-    'django.core.context_processors.tz',
-    'sekizai.context_processors.sekizai',
-    'django.core.context_processors.static',
-    'cms.context_processors.cms_settings'
-)
-
 MIDDLEWARE_CLASSES = (
-    # XXX not the same order as Django CMS tutorial project
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'service_info.middleware.Restore404AfterLocaleMiddleware',
@@ -245,15 +219,8 @@ INSTALLED_APPS = (
     'filer',
     'mptt',
     'easy_thumbnails',
-    # 'djangocms_flash',
-    # 'djangocms_googlemap',
-    # 'djangocms_inherit',
-    # 'djangocms_picture',
-    # 'djangocms_teaser',
-    # 'djangocms_video',
-    # 'djangocms_link',
     'reversion',
-    # cmsplugin-filer:
+    # For cmsplugin-filer:
     'cmsplugin_filer_file',
     'cmsplugin_filer_folder',
     'cmsplugin_filer_link',
@@ -416,13 +383,6 @@ CMS_PERMISSION = True
 CMS_PLACEHOLDER_CONF = {}
 
 MIGRATION_MODULES = {
-    # 'djangocms_inherit': 'djangocms_inherit.migrations_django',
-    # 'djangocms_video': 'djangocms_video.migrations_django',
-    # 'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
-    # 'djangocms_file': 'djangocms_file.migrations_django',
-    # 'djangocms_teaser': 'djangocms_teaser.migrations_django',
-    # 'djangocms_picture': 'djangocms_picture.migrations_django',
-    # 'djangocms_flash': 'djangocms_flash.migrations_django',
     'cmsplugin_filer_file': 'cmsplugin_filer_file.migrations_django',
     'cmsplugin_filer_folder': 'cmsplugin_filer_folder.migrations_django',
     'cmsplugin_filer_link': 'cmsplugin_filer_link.migrations_django',
@@ -434,7 +394,6 @@ MIGRATION_MODULES = {
 THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.colorspace',
     'easy_thumbnails.processors.autocrop',
-    # 'easy_thumbnails.processors.scale_and_crop',
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters',
 )

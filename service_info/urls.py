@@ -17,7 +17,8 @@ FRONTEND_DIR = os.path.join(settings.PROJECT_ROOT, 'frontend')
 # Our middleware will bypass locale middleware redirect processing
 # of 404s for requests matching these patterns.  Because the Django
 # CMS pattern matches anything, locale middleware thinks that
-# redirecting to /<language>/api/bad will work.
+# redirecting to /<language>/api/bad might work, and the API client
+# gets a hopeless 302.
 NO_404_LOCALE_REDIRECTS = (re.compile(r'^/api/'),)
 
 # Reminder: the `static` function is a no-op if DEBUG is False, as in production.
