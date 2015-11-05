@@ -53,6 +53,7 @@ LANGUAGE_CODE = 'en'
 LANGUAGES = [
     ('en', _('English')),
     ('ar', _('Arabic')),
+    ('fr', _('French')),
     # ('en-us', _('English')),  See https://github.com/divio/django-cms/issues/2179
 ]
 FRONTEND_LANGUAGES = [
@@ -74,6 +75,13 @@ CMS_LANGUAGES = {
             'public': True,
             'code': 'ar',
             'name': gettext('ar'),
+            'hide_untranslated': False,
+            'redirect_on_fallback': True,
+        },
+        {
+            'public': True,
+            'code': 'fr',
+            'name': gettext('fr'),
             'hide_untranslated': False,
             'redirect_on_fallback': True,
         },
