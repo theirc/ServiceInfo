@@ -39,8 +39,8 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += [
-        # Redirect /app to /index.html if running locally.
-        url(r'^app$', RedirectView.as_view(url=settings.STATIC_URL + 'index.html'),
+        # Redirect / to /index.html if running locally.
+        url(r'^$', RedirectView.as_view(url=settings.STATIC_URL + 'index.html'),
             name='index-html-redirect'),
     ]
 
