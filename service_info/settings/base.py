@@ -57,30 +57,32 @@ FRONTEND_LANGUAGES = [
     ('fr', _('French')),
 ]
 
+CMS_LANGUAGES_FOR_SITE = [
+    {
+        'public': True,
+        'code': 'en',
+        'name': _('en'),
+        'hide_untranslated': False,
+        'redirect_on_fallback': True,
+    },
+    {
+        'public': True,
+        'code': 'ar',
+        'name': _('ar'),
+        'hide_untranslated': False,
+        'redirect_on_fallback': True,
+    },
+    {
+        'public': True,
+        'code': 'fr',
+        'name': _('fr'),
+        'hide_untranslated': False,
+        'redirect_on_fallback': True,
+    },
+]
+
 CMS_LANGUAGES = {
-    1: [
-        {
-            'public': True,
-            'code': 'en',
-            'name': _('en'),
-            'hide_untranslated': False,
-            'redirect_on_fallback': True,
-        },
-        {
-            'public': True,
-            'code': 'ar',
-            'name': _('ar'),
-            'hide_untranslated': False,
-            'redirect_on_fallback': True,
-        },
-        {
-            'public': True,
-            'code': 'fr',
-            'name': _('fr'),
-            'hide_untranslated': False,
-            'redirect_on_fallback': True,
-        },
-    ],
+    # in other settings files: SITE_ID: CMS_LANGUAGES_FOR_SITE
     'default': {
         'public': True,
         'hide_untranslated': False,
