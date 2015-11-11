@@ -541,7 +541,8 @@
                     "Failure": "Explication de l'échec de la prestation des services par type de service",
                     "Contact": "Des difficultés à contacter les fournisseurs de services par type de service",
                     "Communication": "Satisfaction à l'égard du personnel de communication par type de service",
-                    "NumServices": "Nombre de services par emplacement et type de service"
+                    "NumServicesByServiceType": "",
+                    "NumServicesByProviderType": ""
                 }
             },
             "Download": "Télécharger le rapport CSV"
@@ -549,6 +550,11 @@
         "Table": {
             "Loading": "Chargement ...",
             "ServiceType": "Type de service"
+        },
+        "Chart": {
+            "AverageResponse": "",
+            "NumberServices": "",
+            "NumberResponses": ""
         }
     }
 }
