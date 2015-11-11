@@ -139,6 +139,7 @@ LOCALE_PATHS = (
 # various locations.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
+    'aldryn_boilerplates.staticfile_finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
@@ -156,6 +157,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'sekizai.context_processors.sekizai',
     'cms.context_processors.cms_settings',
+    'aldryn_boilerplates.context_processors.boilerplate',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -230,6 +232,18 @@ INSTALLED_APPS = (
     'cmsplugin_filer_image',
     'cmsplugin_filer_teaser',
     'cmsplugin_filer_video',
+    # Aldryn news and blog
+    'aldryn_apphooks_config',
+    'aldryn_boilerplates',
+    'aldryn_categories',
+    'aldryn_common',
+    'aldryn_newsblog',
+    'aldryn_people',
+    'aldryn_reversion',
+    'aldryn_translation_tools',
+    'parler',
+    'sortedm2m',
+    'taggit',
     # End Django CMS
     # Load after easy_thumbnails so that its thumbnail template tag (unused
     # in this project) is hidden.
@@ -409,3 +423,13 @@ THUMBNAIL_HIGH_RESOLUTION = True
 # cmsplugin_filer_image provides integration with djangocms-text-ckeditor
 # for DnD via this setting:
 TEXT_SAVE_IMAGE_FUNCTION = 'cmsplugin_filer_image.integrations.ckeditor.create_image_plugin'
+
+# Extra config for Aldryn blogs & news
+TEMPLATE_LOADERS = [
+    'django.template.loaders.filesystem.Loader',
+    # important! place right before django.template.loaders.app_directories.Loader
+    'aldryn_boilerplates.template_loaders.AppDirectoriesLoader',
+    'django.template.loaders.app_directories.Loader',
+]
+
+ALDRYN_BOILERPLATE_NAME = 'bootstrap3'

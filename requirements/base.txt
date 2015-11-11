@@ -41,5 +41,6 @@ cmsplugin-filer==0.10.2
     django-polymorphic==0.7.2
     Unidecode==0.4.18
   django-appconf==1.0.1
+  aldryn-newsblog==1.0.9
 djangocms-text-ckeditor==2.7.0
 django-reversion==1.8.5
