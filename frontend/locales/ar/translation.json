@@ -64,7 +64,8 @@
         "Page-Head": {
             "Title": "البحث عن الخدمات",
             "Description": "إستخدم خانة البحث أدناه للعثور على الخدمة التي تريدها"
-        }
+        },
+        "Service-Request": "أخبرنا عن خدمة مفقودة"
     },
     "Feedback-Search": {
         "Page-Head": {
@@ -129,7 +130,8 @@
             "Email": "البريد الإلكتروني",
             "Website": "الموقع",
             "Unknown": "غير معروف",
-            "Criteria": "معايير الاختيار"
+            "Criteria": "معايير الاختيار",
+            "Picture": "صورة الخدمة"
         }
     },
     "Service-Remove-Change": {
@@ -184,6 +186,39 @@
         "Form-Submit-Options": {
             "Submit": "إرسال الأجوبة",
             "Clear": "إزالة الأجوبة"
+        }
+    },
+    "Service-Request-Form": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "إقترح خدمة"
+            }
+        },
+        "Legend": "تشير إلى خدمة، يرجى ملء النموذج أدناه",
+        "Provider-Name": "إسم مقدم الخدمات",
+        "Service-Name": "إسم الخدمة",
+        "Service-Area": "مكان تقديم الخدمة ",
+        "Type": "نوع الخدمة",
+        "Service-Address": "العنوان",
+        "Service-Address-Help": "أين تقدم هذه الخدمة؟",
+        "Service-Contact": "اتصل التفاصيل",
+        "Service-Contact-Help": "الرجاء إدخال التفاصيل الاتصال الشخصي، كما سيتم استخدامه للاتصال بك لمزيد من التفاصيل.",
+        "Service-Description": "معلومات توصيفيّة عن الخدمة",
+        "Service-Description-Help": "أدخل بعض التفاصيل عن هذه الخدمة.",
+        "Rating": "كيف تقيم نوعية هذه الخدمة (من 1 إلى 5، حيث أن 5 هي أعلى تقييم ممكن)؟",
+        "Form-Submit-Options": {
+            "Submit": "إرسال الأجوبة",
+            "Clear": "إزالة الأجوبة"
+        }
+    },
+    "Service-Request-Confirmation": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "لقد تم إرسال معلوماتك بنجاح"
+            },
+            "Page-Description": {
+                "Page-Description": "شكراً لإقتراحاتكم"
+            }
         }
     },
     "Provider-Registration-Form": {

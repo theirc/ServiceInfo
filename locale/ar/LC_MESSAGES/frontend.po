@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-07-14 09:39+0000\n"
-"Last-Translator: Nizar Najjar <ozogorgor@gmail.com>\n"
-"Language-Team: Arabic (http://www.transifex.com/p/service-mapper/language/ar/)\n"
+"PO-Revision-Date: 2015-08-20 06:40+0000\n"
+"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
+"Language-Team: Arabic (http://www.transifex.com/irc/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -144,6 +144,9 @@ msgstr "البحث عن الخدمات"
 msgid "Search-List##Page-Head##Description"
 msgstr "إستخدم خانة البحث أدناه للعثور على الخدمة التي تريدها"
 
+msgid "Search-List##Service-Request"
+msgstr "أخبرنا عن خدمة مفقودة"
+
 msgid "Feedback-Search##Page-Head##Title"
 msgstr "إبدي ملاحظاتك حول الخدمات "
 
@@ -264,6 +267,9 @@ msgstr "غير معروف"
 msgid "Service-Map##List##Criteria"
 msgstr "معايير الاختيار"
 
+msgid "Service-Map##List##Picture"
+msgstr "صورة الخدمة"
+
 msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
 msgstr "إزالة التعديل"
 
@@ -359,6 +365,58 @@ msgstr "إرسال الأجوبة"
 
 msgid "Service-Form##Form-Submit-Options##Clear"
 msgstr "إزالة الأجوبة"
+
+msgid "Service-Request-Form##Page-Head##Page-Title##Title"
+msgstr "إقترح خدمة"
+
+msgid "Service-Request-Form##Legend"
+msgstr "تشير إلى خدمة، يرجى ملء النموذج أدناه"
+
+msgid "Service-Request-Form##Provider-Name"
+msgstr "إسم مقدم الخدمات"
+
+msgid "Service-Request-Form##Service-Name"
+msgstr "إسم الخدمة"
+
+msgid "Service-Request-Form##Service-Area"
+msgstr "مكان تقديم الخدمة "
+
+msgid "Service-Request-Form##Type"
+msgstr "نوع الخدمة"
+
+msgid "Service-Request-Form##Service-Address"
+msgstr "العنوان"
+
+msgid "Service-Request-Form##Service-Address-Help"
+msgstr "أين تقدم هذه الخدمة؟"
+
+msgid "Service-Request-Form##Service-Contact"
+msgstr "اتصل التفاصيل"
+
+msgid "Service-Request-Form##Service-Contact-Help"
+msgstr "الرجاء إدخال التفاصيل الاتصال الشخصي، كما سيتم استخدامه للاتصال بك لمزيد من التفاصيل."
+
+msgid "Service-Request-Form##Service-Description"
+msgstr "معلومات توصيفيّة عن الخدمة"
+
+msgid "Service-Request-Form##Service-Description-Help"
+msgstr "أدخل بعض التفاصيل عن هذه الخدمة."
+
+msgid "Service-Request-Form##Rating"
+msgstr "كيف تقيم نوعية هذه الخدمة (من 1 إلى 5، حيث أن 5 هي أعلى تقييم ممكن)؟"
+
+msgid "Service-Request-Form##Form-Submit-Options##Submit"
+msgstr "إرسال الأجوبة"
+
+msgid "Service-Request-Form##Form-Submit-Options##Clear"
+msgstr "إزالة الأجوبة"
+
+msgid "Service-Request-Confirmation##Page-Head##Page-Title##Title"
+msgstr "لقد تم إرسال معلوماتك بنجاح"
+
+msgid ""
+"Service-Request-Confirmation##Page-Head##Page-Description##Page-Description"
+msgstr "شكراً لإقتراحاتكم"
 
 msgid "Provider-Registration-Form##Page-Head##Page-Title##Title"
 msgstr "إستمارة تسجيل مقدم خدمات"
