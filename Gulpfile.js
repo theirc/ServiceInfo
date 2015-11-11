@@ -25,6 +25,8 @@ var EXPRESS_PORT = options.port;
 var EXPRESS_ROOT = __dirname + "/frontend";
 var LIVERELOAD_PORT = 3572;
 
+gulp.task('noop', function () {});
+
 gulp.task('startExpress', ['build'], function() {
     var express = require('express');
     var app = express();
@@ -60,26 +62,25 @@ function compile_less (src, dest, cb) {
 }
 
 gulp.task('compile_less_app', function (cb) {
-  if (options.app) {
-    compile_less(
-        'frontend/styles/site-*.less'
-        , 'frontend/styles'
-        , cb
-    );
-  }
+  compile_less(
+      'frontend/styles/site-*.less'
+      , 'frontend/styles'
+      , cb
+  );
 });
 
 gulp.task('compile_less_cms', function (cb) {
-  if (options.cms) {
-    compile_less(
-        'service_info/static/less/site.less'
-        , 'service_info/static/css'
-        , cb
-    );
-  }
+  compile_less(
+      'service_info/static/less/site.less'
+      , 'service_info/static/css'
+      , cb
+  );
 });
 
-gulp.task('compile_less', ['compile_less_app', 'compile_less_cms'], function () {});
+gulp.task('compile_less', [
+  options.app ? 'compile_less_app' : 'noop'
+  , options.cms ? 'compile_less_cms' : 'noop'
+], function () {});
 
 function browserify_wrap (src, dest, cb) {
     /* When the templates compile themselves, have them use our
@@ -112,26 +113,25 @@ function browserify_wrap (src, dest, cb) {
 }
 
 gulp.task('browserify_app', function (cb) {
-  if (options.app) {
-    browserify_wrap(
-        'frontend/index.js'
-        , 'frontend'
-        , cb
-    );
-  }
+  browserify_wrap(
+      'frontend/index.js'
+      , 'frontend'
+      , cb
+  );
 });
 
 gulp.task('browserify_cms', function browserify_cms (cb) {
-  if (options.cms) {
-    browserify_wrap(
-        'service_info/static/js/src/index.js'
-        , 'service_info/static/js/dist'
-        , cb
-    );
-  }
+  browserify_wrap(
+      'service_info/static/js/src/index.js'
+      , 'service_info/static/js/dist'
+      , cb
+  );
 });
 
-gulp.task('browserify', ['browserify_app', 'browserify_cms'], function () {});
+gulp.task('browserify', [
+  options.app ? 'browserify_app' : 'noop'
+  , options.cms ? 'browserify_cms' : 'noop'
+], function () {});
 
 function closure (src, dest, out, cb) {
     if (options.fast) {
@@ -165,29 +165,28 @@ function closure (src, dest, out, cb) {
     cb();
 }
 
-gulp.task('closure_app', function (cb) {
-  if (options.app) {
-    closure(
-        'frontend/bundle.js'
-        , 'frontend'
-        , 'bundle_min.js'
-        , cb
-    );
-  }
+gulp.task('closure_app', ['browserify_app'], function (cb) {
+  closure(
+      'frontend/bundle.js'
+      , 'frontend'
+      , 'bundle_min.js'
+      , cb
+  );
 });
 
-gulp.task('closure_cms', function (cb) {
-  if (options.cms) {
-    closure(
-        'service_info/static/js/dist/bundle.js'
-        , 'service_info/static/js/dist'
-        , 'bundle.min.js'
-        , cb
-    );
-  }
+gulp.task('closure_cms', ['browserify_cms'], function (cb) {
+  closure(
+      'service_info/static/js/dist/bundle.js'
+      , 'service_info/static/js/dist'
+      , 'bundle.min.js'
+      , cb
+  );
 });
 
-gulp.task('closure', ['browserify', 'closure_app', 'closure_cms'], function() {});
+gulp.task('closure', [
+  options.app ? 'closure_app' : 'noop'
+  , options.cms ? 'closure_cms' : 'noop'
+], function() {});
 
 gulp.task('build', ['closure', 'compile_less', 'injectEnvConfig'], function(){});
 
