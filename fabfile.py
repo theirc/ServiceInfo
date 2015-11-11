@@ -20,7 +20,7 @@ def makemessages():
     """
     local("python manage.py makemessages --ignore 'conf/*' --ignore 'docs/*' "
           "--ignore 'requirements/*' --ignore 'frontend/*' "
-          "--ignore 'node_modules/*'"
+          "--ignore 'node_modules/*' "
           "--no-location --no-obsolete "
           "-l en")
     local("i18next-conv -s frontend/locales/en/translation.json -t "
