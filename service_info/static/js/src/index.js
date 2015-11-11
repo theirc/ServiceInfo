@@ -1,3 +1,3 @@
-var menu = require('./component/menu.js');
+var menu = require('./component/menu');
 
 menu();
