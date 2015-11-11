@@ -64,7 +64,7 @@ project. To begin you should have the following applications installed on your
 local development system:
 
 - Python == 3.4
-- `pip >= 1.5 <http://www.pip-installer.org/>`_
+- `pip >= 6.1.0 <http://www.pip-installer.org/>`_
 - `virtualenv >= 1.11 <http://www.virtualenv.org/>`_
 - `virtualenvwrapper >= 3.0 <http://pypi.python.org/pypi/virtualenvwrapper>`_
 - Postgres >= 9.1 (9.3 recommended)
@@ -96,6 +96,7 @@ To setup your local environment you should create a virtualenv and install the
 necessary requirements::
 
     mkvirtualenv --python=<path>/python3.4 serviceinfo
+    pip install -U pip
     pip install -r requirements/dev.txt
 
 In order to use JavaScript tools that npm installs, you'll need to add

@@ -1,0 +1,78 @@
+{% extends "cms/base.html" %}
+{% load cms_tags sekizai_tags staticfiles %}
+
+{% block content %}
+    {% addtoblock "css" %}
+        <link rel="stylesheet" type="text/less" media="all" href="{% static 'less/content-types/faq.less' %}">
+    {% endaddtoblock %}
+    
+    <ul id="faq">
+        {% for qa in qas %}
+            <li class="qa">
+                <div class="q">
+                    {{ qa.q }}
+                </div>
+                <div class="a">
+                    {{ qa.a }}
+                </div>
+            </li>
+        {% endfor %}
+
+<!-- Some dummy FAQ items. -->
+        <li class="qa">
+            <div class="q">
+                What is ServiceInfo?
+            </div>
+            <div class="a">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+            </div>
+        </li>
+        <li class="qa">
+            <div class="q">
+                Purpose of ServiceInfo?
+            </div>
+            <div class="a">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+            </div>
+        </li>
+        <li class="qa">
+            <div class="q">
+                What will we eat today?
+            </div>
+            <div class="a">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+            </div>
+        </li>
+        <li class="qa">
+            <div class="q">
+                What is ServiceInfo?
+            </div>
+            <div class="a">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+            </div>
+        </li>
+        <li class="qa">
+            <div class="q">
+                What is ServiceInfo?
+            </div>
+            <div class="a">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+            </div>
+        </li>
+    </ul>
+{% endblock content %}

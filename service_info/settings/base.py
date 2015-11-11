@@ -43,17 +43,52 @@ TIME_ZONE = 'Asia/Beirut'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 # LANGUAGES is only used in the Django admin
 LANGUAGES = [
     ('en', _('English')),
+    ('ar', _('Arabic')),
+    ('fr', _('French')),
 ]
 FRONTEND_LANGUAGES = [
     ('ar', _('Arabic')),
     ('en', _('English')),
     ('fr', _('French')),
 ]
+
+CMS_LANGUAGES_FOR_SITE = [
+    {
+        'public': True,
+        'code': 'en',
+        'name': _('en'),
+        'hide_untranslated': False,
+        'redirect_on_fallback': True,
+    },
+    {
+        'public': True,
+        'code': 'ar',
+        'name': _('ar'),
+        'hide_untranslated': False,
+        'redirect_on_fallback': True,
+    },
+    {
+        'public': True,
+        'code': 'fr',
+        'name': _('fr'),
+        'hide_untranslated': False,
+        'redirect_on_fallback': True,
+    },
+]
+
+CMS_LANGUAGES = {
+    # in other settings files: SITE_ID: CMS_LANGUAGES_FOR_SITE
+    'default': {
+        'public': True,
+        'hide_untranslated': False,
+        'redirect_on_fallback': True,
+    },
+}
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -119,12 +154,16 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
+    'sekizai.context_processors.sekizai',
+    'cms.context_processors.cms_settings',
 )
 
 MIDDLEWARE_CLASSES = (
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'service_info.middleware.Restore404AfterLocaleMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'service_info.middleware.Hide404FromLocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -132,6 +171,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'cms.middleware.user.CurrentUserMiddleware',
+    'cms.middleware.page.CurrentPageMiddleware',
+    'cms.middleware.toolbar.ToolbarMiddleware',
+    'cms.middleware.language.LanguageCookieMiddleware',
 )
 
 ROOT_URLCONF = 'service_info.urls'
@@ -151,6 +194,8 @@ INSTALLED_APPS = (
     # Our apps - Must precede django.contrib.auth so templates override Django's.
     'services',
     'email_user',
+    # must come before django.contrib.admin
+    'djangocms_admin_style',
     # contenttypes needs to be listed before auth due to problems with
     # create_permissions and the TransactionTestCase/LiveServerTestCase
     # See https://code.djangoproject.com/ticket/10827
@@ -169,6 +214,25 @@ INSTALLED_APPS = (
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
+    # Django CMS-related
+    'cms',
+    'treebeard',
+    'menus',
+    'sekizai',
+    'djangocms_text_ckeditor',
+    'filer',
+    'mptt',
+    'easy_thumbnails',
+    'reversion',
+    'cmsplugin_filer_file',
+    'cmsplugin_filer_folder',
+    'cmsplugin_filer_link',
+    'cmsplugin_filer_image',
+    'cmsplugin_filer_teaser',
+    'cmsplugin_filer_video',
+    # End Django CMS
+    # Load after easy_thumbnails so that its thumbnail template tag (unused
+    # in this project) is hidden.
     'sorl.thumbnail',
 )
 
@@ -310,3 +374,40 @@ SECURE_LINKS = True
 
 # How many seconds to allow signed URLs to be valid
 SIGNED_URL_LIFETIME = 300
+
+# Django CMS settings
+CMS_TEMPLATES = (
+    ('cms/content-types/page.html', 'Page'),
+    ('cms/content-types/pages-index.html', 'Content Index'),
+    ('cms/content-types/faq.html', 'FAQ'),
+    ('cms/content-types/full-width-image.html', 'Full Width Image'),
+)
+
+CMS_PERMISSION = True
+CMS_PLACEHOLDER_CONF = {}
+
+MIGRATION_MODULES = {
+    'cmsplugin_filer_file': 'cmsplugin_filer_file.migrations_django',
+    'cmsplugin_filer_folder': 'cmsplugin_filer_folder.migrations_django',
+    'cmsplugin_filer_link': 'cmsplugin_filer_link.migrations_django',
+    'cmsplugin_filer_image': 'cmsplugin_filer_image.migrations_django',
+    'cmsplugin_filer_teaser': 'cmsplugin_filer_teaser.migrations_django',
+    'cmsplugin_filer_video': 'cmsplugin_filer_video.migrations_django',
+}
+
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters',
+)
+
+# For easy_thumbnails to support retina displays (recent MacBooks, iOS)
+# add to settings.py:
+THUMBNAIL_HIGH_RESOLUTION = True
+
+# cmsplugin_filer_image provides integration with djangocms-text-ckeditor
+# for DnD via this setting:
+TEXT_SAVE_IMAGE_FUNCTION = 'cmsplugin_filer_image.integrations.ckeditor.create_image_plugin'
+
+CMS_APP_NAME = 'cms'

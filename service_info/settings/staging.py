@@ -38,6 +38,8 @@ ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(';')
 
 SITE_ID = STAGING_SITE_ID
 
+CMS_LANGUAGES[SITE_ID] = CMS_LANGUAGES_FOR_SITE
+
 # Uncomment if using celery worker configuration
 if 'BROKER_PASSWORD' in os.environ:
     CELERY_SEND_TASK_ERROR_EMAILS = True

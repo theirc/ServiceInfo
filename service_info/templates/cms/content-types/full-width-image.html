@@ -1,0 +1,12 @@
+{% extends "cms/base.html" %}
+{% load cms_tags sekizai_tags staticfiles %}
+
+{% block content-class %}full-width-image{% endblock content-class %}
+
+{% block content %}
+    {% addtoblock "css" %}
+        <link rel="stylesheet" type="text/less" media="all" href="{% static 'less/content-types/full-width-image.less' %}">
+    {% endaddtoblock %}
+    
+    {% placeholder "content" %}
+{% endblock content %}

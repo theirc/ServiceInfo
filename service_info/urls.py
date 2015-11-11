@@ -1,7 +1,9 @@
 import os
+import re
 
 from django.conf import settings
 from django.conf.urls import include, url
+from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import RedirectView
@@ -12,11 +14,16 @@ from services.views import export_view, health_view
 
 FRONTEND_DIR = os.path.join(settings.PROJECT_ROOT, 'frontend')
 
+# Our middleware will bypass locale middleware redirect processing
+# of 404s for requests matching these patterns.  Because the Django
+# CMS pattern matches anything, locale middleware thinks that
+# redirecting to /<language>/api/bad might work, and the API client
+# gets a hopeless 302.
+NO_404_LOCALE_REDIRECTS = (re.compile(r'^/api/'),)
+
 # Reminder: the `static` function is a no-op if DEBUG is False, as in production.
 urlpatterns = [
     url(r'^health/$', health_view),
-    # Django admin
-    url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(api.urls)),
     url(r'^password_reset/$', 'django.contrib.auth.views.password_reset', name='password_reset'),
     url(r'^password_reset/done/$', 'django.contrib.auth.views.password_reset_done',
@@ -36,3 +43,11 @@ if settings.DEBUG:
         url(r'^$', RedirectView.as_view(url=settings.STATIC_URL + 'index.html'),
             name='index-html-redirect'),
     ]
+
+urlpatterns += i18n_patterns(
+    '',
+    # Django admin
+    url(r'^admin/', include(admin.site.urls)),
+    # Django CMS
+    url(r'^cms/', include('cms.urls', app_name=settings.CMS_APP_NAME)),
+)
