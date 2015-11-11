@@ -409,3 +409,5 @@ THUMBNAIL_HIGH_RESOLUTION = True
 # cmsplugin_filer_image provides integration with djangocms-text-ckeditor
 # for DnD via this setting:
 TEXT_SAVE_IMAGE_FUNCTION = 'cmsplugin_filer_image.integrations.ckeditor.create_image_plugin'
+
+CMS_APP_NAME = 'cms'
