@@ -60,25 +60,26 @@ function compile_less (src, dest, cb) {
 }
 
 gulp.task('compile_less_app', function (cb) {
+  if (options.app) {
     compile_less(
         'frontend/styles/site-*.less'
         , 'frontend/styles'
         , cb
     );
+  }
 });
 
 gulp.task('compile_less_cms', function (cb) {
+  if (options.cms) {
     compile_less(
         'service_info/static/less/site.less'
         , 'service_info/static/css'
         , cb
     );
+  }
 });
 
-gulp.task('compile_less', function (cb) {
-    if (options.app) { gulp.run('compile_less_app', cb); }
-    if (options.cms) { gulp.run('compile_less_cms', cb); }
-});
+gulp.task('compile_less', ['compile_less_app', 'compile_less_cms'], function () {});
 
 function browserify_wrap (src, dest, cb) {
     /* When the templates compile themselves, have them use our
@@ -111,25 +112,26 @@ function browserify_wrap (src, dest, cb) {
 }
 
 gulp.task('browserify_app', function (cb) {
+  if (options.app) {
     browserify_wrap(
         'frontend/index.js'
         , 'frontend'
         , cb
     );
+  }
 });
 
 gulp.task('browserify_cms', function browserify_cms (cb) {
+  if (options.cms) {
     browserify_wrap(
         'service_info/static/js/src/index.js'
         , 'service_info/static/js/dist'
         , cb
     );
+  }
 });
 
-gulp.task('browserify', function(cb) {
-    if (options.app) { gulp.run('browserify_app', cb); }
-    if (options.cms) { gulp.run('browserify_cms', cb); }
-});
+gulp.task('browserify', ['browserify_app', 'browserify_cms'], function () {});
 
 function closure (src, dest, out, cb) {
     if (options.fast) {
@@ -164,27 +166,28 @@ function closure (src, dest, out, cb) {
 }
 
 gulp.task('closure_app', function (cb) {
+  if (options.app) {
     closure(
         'frontend/bundle.js'
         , 'frontend'
         , 'bundle_min.js'
         , cb
     );
+  }
 });
 
 gulp.task('closure_cms', function (cb) {
+  if (options.cms) {
     closure(
         'service_info/static/js/dist/bundle.js'
         , 'service_info/static/js/dist'
         , 'bundle.min.js'
         , cb
     );
+  }
 });
 
-gulp.task('closure', ['browserify'], function(cb) {
-    if (options.app) { gulp.run('closure_app', cb); }
-    if (options.cms) { gulp.run('closure_cms', cb); }
-});
+gulp.task('closure', ['browserify', 'closure_app', 'closure_cms'], function() {});
 
 gulp.task('build', ['closure', 'compile_less', 'injectEnvConfig'], function(){});
 
