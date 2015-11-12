@@ -433,3 +433,5 @@ TEMPLATE_LOADERS = [
 ]
 
 ALDRYN_BOILERPLATE_NAME = 'bootstrap3'
+
+CMS_APP_NAME = 'cms'
