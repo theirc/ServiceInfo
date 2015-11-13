@@ -5,6 +5,8 @@ from service_info.settings.base import *  # noqa
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
 INSTALLED_APPS += (
     'debug_toolbar',
 )

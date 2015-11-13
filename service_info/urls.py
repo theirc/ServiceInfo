@@ -43,6 +43,10 @@ if settings.DEBUG:
         url(r'^$', RedirectView.as_view(url=settings.STATIC_URL + 'index.html'),
             name='index-html-redirect'),
     ]
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]
 
 urlpatterns += i18n_patterns(
     '',
