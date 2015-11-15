@@ -100,7 +100,7 @@ PARLER_LANGUAGES = {
     # in other settings files: SITE_ID: PARLER_LANGUAGES_FOR_SITE
     'default': {
         'fallback': 'en',             # defaults to PARLER_DEFAULT_LANGUAGE_CODE
-        'hide_untranslated': False,   # the default; let .active_translations() return fallbacks too.
+        'hide_untranslated': False,   # the default; let .active_translations() return fallbacks
     }
 }
 
