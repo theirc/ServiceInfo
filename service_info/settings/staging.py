@@ -39,6 +39,7 @@ ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(';')
 SITE_ID = STAGING_SITE_ID
 
 CMS_LANGUAGES[SITE_ID] = CMS_LANGUAGES_FOR_SITE
+DISQUS_SHORTNAME = 'not-yet-created'
 
 # Uncomment if using celery worker configuration
 if 'BROKER_PASSWORD' in os.environ:

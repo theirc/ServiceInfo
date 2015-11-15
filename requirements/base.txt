@@ -43,3 +43,4 @@ cmsplugin-filer==0.10.2
   django-appconf==1.0.1
 djangocms-text-ckeditor==2.7.0
 django-reversion==1.8.5
+aldryn-disqus==1.0.0

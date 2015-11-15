@@ -230,6 +230,7 @@ INSTALLED_APPS = (
     'cmsplugin_filer_image',
     'cmsplugin_filer_teaser',
     'cmsplugin_filer_video',
+    'aldryn_disqus',
     # End Django CMS
     # Load after easy_thumbnails so that its thumbnail template tag (unused
     # in this project) is hidden.
@@ -411,3 +412,4 @@ THUMBNAIL_HIGH_RESOLUTION = True
 TEXT_SAVE_IMAGE_FUNCTION = 'cmsplugin_filer_image.integrations.ckeditor.create_image_plugin'
 
 CMS_APP_NAME = 'cms'
+DISQUS_SHORTNAME = 'trawicktestsites'  # allowed only on localhost
