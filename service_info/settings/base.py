@@ -90,6 +90,20 @@ CMS_LANGUAGES = {
     },
 }
 
+PARLER_LANGUAGES_FOR_SITE = (
+    {'code': 'en'},
+    {'code': 'ar'},
+    {'code': 'fr'},
+)
+
+PARLER_LANGUAGES = {
+    # in other settings files: SITE_ID: PARLER_LANGUAGES_FOR_SITE
+    'default': {
+        'fallback': 'en',             # defaults to PARLER_DEFAULT_LANGUAGE_CODE
+        'hide_untranslated': False,   # the default; let .active_translations() return fallbacks too.
+    }
+}
+
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
@@ -139,6 +153,8 @@ LOCALE_PATHS = (
 # various locations.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
+    # important! place right before django.contrib.staticfiles.finders.AppDirectoriesFinder
+    'aldryn_boilerplates.staticfile_finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
@@ -156,6 +172,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'sekizai.context_processors.sekizai',
     'cms.context_processors.cms_settings',
+    'aldryn_boilerplates.context_processors.boilerplate',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -230,11 +247,26 @@ INSTALLED_APPS = (
     'cmsplugin_filer_image',
     'cmsplugin_filer_teaser',
     'cmsplugin_filer_video',
+    'adminsortable2',
+    'aldryn_boilerplates',
+    'aldryn_reversion',
+    'aldryn_translation_tools',
+    'parler',
+    'sortedm2m',
+    'aldryn_faq',
+    'taggit',
     # End Django CMS
     # Load after easy_thumbnails so that its thumbnail template tag (unused
     # in this project) is hidden.
     'sorl.thumbnail',
 )
+
+TEMPLATE_LOADERS = [
+    'django.template.loaders.filesystem.Loader',
+    # important! place right before django.template.loaders.app_directories.Loader
+    'aldryn_boilerplates.template_loaders.AppDirectoriesLoader',
+    'django.template.loaders.app_directories.Loader',
+]
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -411,3 +443,4 @@ THUMBNAIL_HIGH_RESOLUTION = True
 TEXT_SAVE_IMAGE_FUNCTION = 'cmsplugin_filer_image.integrations.ckeditor.create_image_plugin'
 
 CMS_APP_NAME = 'cms'
+ALDRYN_BOILERPLATE_NAME = 'bootstrap3'
