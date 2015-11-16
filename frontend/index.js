@@ -13,6 +13,9 @@ var _ = underscore;
 // Load Flot: http://www.flotcharts.org/
 require('jquery-flot');
 
+// Initialize Google Analytics
+require('./google-analytics')();
+
 hashtrack.init();
 require('es6-promise').polyfill();
 
