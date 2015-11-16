@@ -930,8 +930,11 @@ msgstr "Difficulties Contacting Service Providers by Service Type"
 msgid "Reports##Form##Stat##Options##Communication"
 msgstr "Satisfaction with Staff Communication by Service Type"
 
-msgid "Reports##Form##Stat##Options##NumServices"
+msgid "Reports##Form##Stat##Options##NumServicesByServiceType"
 msgstr "Number of services by Location and Service Type"
+
+msgid "Reports##Form##Stat##Options##NumServicesByProviderType"
+msgstr "Number of services by Location and Provider Type"
 
 msgid "Reports##Form##Download"
 msgstr "Download Report CSV"
@@ -941,3 +944,12 @@ msgstr "Loading..."
 
 msgid "Reports##Table##ServiceType"
 msgstr "Service Type"
+
+msgid "Reports##Chart##AverageResponse"
+msgstr "Average Response"
+
+msgid "Reports##Chart##NumberServices"
+msgstr "Number of Services"
+
+msgid "Reports##Chart##NumberResponses"
+msgstr "Number of Responses"

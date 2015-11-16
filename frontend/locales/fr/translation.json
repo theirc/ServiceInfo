@@ -64,7 +64,8 @@
         "Page-Head": {
             "Title": "Recherche de services",
             "Description": "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
-        }
+        },
+        "Service-Request": "Parlez-nous un service manquant"
     },
     "Feedback-Search": {
         "Page-Head": {
@@ -96,7 +97,7 @@
         },
         "No-Search-Results": "Aucun service ne correspond à vos termes de recherche. Se il vous plaît essayer d'autres termes.",
         "Results-Truncated": "Il y avait plus de résultats que pourrait être affichée. Essayez une recherche plus précise.",
-        "More-Results": "",
+        "More-Results": "Currently showing {thecount} out of {total_results} services, please zoom in to the designated area to see more services.",
         "Filtered-Search": {
             "Label": "Le terme de recherche",
             "Submit": "Recherche",
@@ -129,7 +130,8 @@
             "Email": "Adresse e-mail",
             "Website": "Site Web",
             "Unknown": "inconnu",
-            "Criteria": "les critères de sélection"
+            "Criteria": "les critères de sélection",
+            "Picture": "Adresse de service Image"
         }
     },
     "Service-Remove-Change": {
@@ -184,6 +186,39 @@
         "Form-Submit-Options": {
             "Submit": "Valider les réponses",
             "Clear": "Retirer Réponses"
+        }
+    },
+    "Service-Request-Form": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "Proposer un service"
+            }
+        },
+        "Legend": "Pour suggérer un service, s'il vous plaît remplir le formulaire ci-dessous",
+        "Provider-Name": "Nom de fournisseur de service",
+        "Service-Name": "Nom du service",
+        "Service-Area": "Zone de service",
+        "Type": "type de service",
+        "Service-Address": "Adresse de service Image",
+        "Service-Address-Help": "Lorsque ce service est fourni.",
+        "Service-Contact": "Détail Contact",
+        "Service-Contact-Help": "S'il vous plaît entrer les détails de contact personnelle, car elle sera utilisée pour vous contacter pour plus de détails.",
+        "Service-Description": "Description du service",
+        "Service-Description-Help": "Entrez quelques détails sur ce service.",
+        "Rating": "Le taux de service (de 1 à 5, où 5 est la meilleure note possible):",
+        "Form-Submit-Options": {
+            "Submit": "Valider les réponses",
+            "Clear": "Retirer Réponses"
+        }
+    },
+    "Service-Request-Confirmation": {
+        "Page-Head": {
+            "Page-Title": {
+                "Title": "Votre information a été soumis avec succès"
+            },
+            "Page-Description": {
+                "Page-Description": "Merci pour votre présentation."
+            }
         }
     },
     "Provider-Registration-Form": {
@@ -506,7 +541,8 @@
                     "Failure": "Explication de l'échec de la prestation des services par type de service",
                     "Contact": "Des difficultés à contacter les fournisseurs de services par type de service",
                     "Communication": "Satisfaction à l'égard du personnel de communication par type de service",
-                    "NumServices": "Nombre de services par emplacement et type de service"
+                    "NumServicesByServiceType": "",
+                    "NumServicesByProviderType": ""
                 }
             },
             "Download": "Télécharger le rapport CSV"
@@ -514,6 +550,11 @@
         "Table": {
             "Loading": "Chargement ...",
             "ServiceType": "Type de service"
+        },
+        "Chart": {
+            "AverageResponse": "",
+            "NumberServices": "",
+            "NumberResponses": ""
         }
     }
 }

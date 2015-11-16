@@ -18,6 +18,8 @@ frontend/bundle_min.js
 frontend/styles/site.css
 frontend/styles/site-ltr.css
 frontend/styles/site-rtl.css
+service_info/static/js/dist/
+service_info/static/css/site.css
 node_modules
 bundle_min.js
 feedback-help.hbs

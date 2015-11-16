@@ -22,22 +22,6 @@ Our fab helper commands convert those to `*.po` files and
 push them to Transifex for translation, then convert the
 translated .po files to json for i18next-client to use.
 
-Developer setup
-~~~~~~~~~~~~~~~
-
-While the Transifex command line client is in Python, unfortunately it
-does not appear to work with Python 3 yet. (But fabric doesn't either,
-and we're also using that to simplify our workflow.)
-
-Anyway, if you're a developer
-who needs to push or pull text to Transifex, it's probably simplest
-to install the client globally on your system
-(http://docs.transifex.com/developer/client/setup) and set it up per the
-instructions.  On Ubuntu, you might even be able to use the Ubuntu
-package::
-
-    sudo apt-get install transifex-client
-
 Adding features and fixing bugs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -123,4 +107,3 @@ our translation files on the develop branch as follows:
 
     git commit -m "Updated translations" locale/*/LC_MESSAGES/*.po locale/*/LC_MESSAGES/*.mo
     git push
-

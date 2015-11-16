@@ -2,10 +2,6 @@
 {% load cms_tags sekizai_tags staticfiles %}
 
 {% block content %}
-    {% addtoblock "css" %}
-        <link rel="stylesheet" type="text/less" media="all" href="{% static 'less/content-types/faq.less' %}">
-    {% endaddtoblock %}
-    
     <ul id="faq">
         {% for qa in qas %}
             <li class="qa">
