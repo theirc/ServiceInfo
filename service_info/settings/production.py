@@ -11,7 +11,7 @@ DEFAULT_FROM_EMAIL = 'noreply@rescue.org'
 SITE_ID = PRODUCTION_SITE_ID
 
 CMS_LANGUAGES[SITE_ID] = CMS_LANGUAGES_FOR_SITE
-DISQUS_SHORTNAME = 'not-yet-created'
+DISQUS_SHORTNAME = 'serviceinfo'
 
 # Uncomment if using celery worker configuration
 if 'BROKER_PASSWORD' in os.environ:
