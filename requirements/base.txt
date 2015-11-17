@@ -43,7 +43,8 @@ cmsplugin-filer==0.10.2
   django-appconf==1.0.1
 djangocms-text-ckeditor==2.7.0
 django-reversion==1.8.5
-aldryn-newsblog==1.0.9
+# Has missing migration: aldryn-newsblog==1.0.9
+git+git://github.com/caktus/aldryn-newsblog.git@1.0.9-323#egg=aldryn-newsblog
   python-dateutil==2.4.2
   aldryn-categories==1.0.1
   aldryn-people==1.1.2
