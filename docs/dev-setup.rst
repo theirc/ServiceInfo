@@ -97,7 +97,7 @@ necessary requirements::
 
     mkvirtualenv --python=<path>/python3.4 serviceinfo
     pip install -U pip
-    pip install -r requirements/dev.txt
+    pip install -U -r requirements/dev.txt
 
 In order to use JavaScript tools that npm installs, you'll need to add
 ``node_modules/.bin`` to the *front* of your PATH. One way to do that is to
