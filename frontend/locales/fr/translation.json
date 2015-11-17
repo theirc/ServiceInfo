@@ -97,7 +97,7 @@
         },
         "No-Search-Results": "Aucun service ne correspond à vos termes de recherche. Se il vous plaît essayer d'autres termes.",
         "Results-Truncated": "Il y avait plus de résultats que pourrait être affichée. Essayez une recherche plus précise.",
-        "More-Results": "Currently showing {thecount} out of {total_results} services, please zoom in to the designated area to see more services.",
+        "More-Results": "Actuellement montrant {thecount} sur {total_results} de service, s'il vous plaît un zoom sur la zone désignée pour voir plus de services.",
         "Filtered-Search": {
             "Label": "Le terme de recherche",
             "Submit": "Recherche",
@@ -541,8 +541,8 @@
                     "Failure": "Explication de l'échec de la prestation des services par type de service",
                     "Contact": "Des difficultés à contacter les fournisseurs de services par type de service",
                     "Communication": "Satisfaction à l'égard du personnel de communication par type de service",
-                    "NumServicesByServiceType": "",
-                    "NumServicesByProviderType": ""
+                    "NumServicesByServiceType": "Nombre de services par emplacement et type de service",
+                    "NumServicesByProviderType": "Nombre de services par emplacement et type de service"
                 }
             },
             "Download": "Télécharger le rapport CSV"
@@ -552,9 +552,9 @@
             "ServiceType": "Type de service"
         },
         "Chart": {
-            "AverageResponse": "",
-            "NumberServices": "",
-            "NumberResponses": ""
+            "AverageResponse": "Réponse moyenne",
+            "NumberServices": "Nombre de services",
+            "NumberResponses": "Nombre de réponses"
         }
     }
 }
