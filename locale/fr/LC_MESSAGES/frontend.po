@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-11-11 15:31+0000\n"
-"Last-Translator: Vinod Kurup <vkurup@caktusgroup.com>\n"
+"PO-Revision-Date: 2015-11-16 06:32+0000\n"
+"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/irc/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -179,7 +179,7 @@ msgid "Service-Map##Results-Truncated"
 msgstr "Il y avait plus de résultats que pourrait être affichée. Essayez une recherche plus précise."
 
 msgid "Service-Map##More-Results"
-msgstr "Currently showing {thecount} out of {total_results} services, please zoom in to the designated area to see more services."
+msgstr "Actuellement montrant {thecount} sur {total_results} de service, s'il vous plaît un zoom sur la zone désignée pour voir plus de services."
 
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "Le terme de recherche"
@@ -960,10 +960,10 @@ msgid "Reports##Form##Stat##Options##Communication"
 msgstr "Satisfaction à l'égard du personnel de communication par type de service"
 
 msgid "Reports##Form##Stat##Options##NumServicesByServiceType"
-msgstr ""
+msgstr "Nombre de services par emplacement et type de service"
 
 msgid "Reports##Form##Stat##Options##NumServicesByProviderType"
-msgstr ""
+msgstr "Nombre de services par emplacement et type de service"
 
 msgid "Reports##Form##Download"
 msgstr "Télécharger le rapport CSV"
@@ -975,10 +975,10 @@ msgid "Reports##Table##ServiceType"
 msgstr "Type de service"
 
 msgid "Reports##Chart##AverageResponse"
-msgstr ""
+msgstr "Réponse moyenne"
 
 msgid "Reports##Chart##NumberServices"
-msgstr ""
+msgstr "Nombre de services"
 
 msgid "Reports##Chart##NumberResponses"
-msgstr ""
+msgstr "Nombre de réponses"
