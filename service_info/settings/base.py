@@ -247,6 +247,7 @@ INSTALLED_APPS = (
     'cmsplugin_filer_image',
     'cmsplugin_filer_teaser',
     'cmsplugin_filer_video',
+    'aldryn_disqus',
     'adminsortable2',
     'aldryn_boilerplates',
     'aldryn_reversion',
@@ -443,4 +444,5 @@ THUMBNAIL_HIGH_RESOLUTION = True
 TEXT_SAVE_IMAGE_FUNCTION = 'cmsplugin_filer_image.integrations.ckeditor.create_image_plugin'
 
 CMS_APP_NAME = 'cms'
+DISQUS_SHORTNAME = 'trawicktestsites'  # allowed only on localhost
 ALDRYN_BOILERPLATE_NAME = 'bootstrap3'
