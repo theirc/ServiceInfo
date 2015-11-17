@@ -8,6 +8,8 @@
 *.DS_Store
 .coverage
 */settings/local.py
+post_submit.png
+pre_submit.png
 public/static/
 public/media/
 secrets.sls*
@@ -15,6 +17,7 @@ secrets.sls*
 frontend/node_modules
 frontend/bundle.js
 frontend/bundle_min.js
+frontend/config.json
 frontend/styles/site.css
 frontend/styles/site-ltr.css
 frontend/styles/site-rtl.css
