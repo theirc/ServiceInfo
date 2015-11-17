@@ -412,7 +412,6 @@ SIGNED_URL_LIFETIME = 300
 CMS_TEMPLATES = (
     ('cms/content-types/page.html', 'Page'),
     ('cms/content-types/pages-index.html', 'Content Index'),
-    ('cms/content-types/faq.html', 'FAQ'),
     ('cms/content-types/full-width-image.html', 'Full Width Image'),
 )
 
