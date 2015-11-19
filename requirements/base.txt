@@ -77,3 +77,23 @@ git+git://github.com/caktus/aldryn-faq.git@1.0.7-146#egg=aldryn-faq
   # django-reversion
   django-sortedm2m==1.0.2
   django-taggit==0.17.3
+# Has missing migration: aldryn-newsblog==1.0.9
+git+git://github.com/caktus/aldryn-newsblog.git@1.0.9-323#egg=aldryn-newsblog
+  python-dateutil==2.4.2
+  # aldryn-apphooks-config
+  # aldry-boilerplates
+  aldryn-categories==1.0.1
+    # django-parler
+    # django-treebeard
+  # aldryn-common
+  aldryn-people==1.1.2
+    phonenumbers==7.1.1
+    django-phonenumber-field==0.7.2
+    # many others already listed
+  # aldryn-reversion
+  # django-sortedm2m
+  # django-taggit
+  # lxml
+  pytz
+  # six
+  backport-collections==0.1

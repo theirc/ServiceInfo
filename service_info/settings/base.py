@@ -247,9 +247,15 @@ INSTALLED_APPS = (
     'cmsplugin_filer_image',
     'cmsplugin_filer_teaser',
     'cmsplugin_filer_video',
+    # Aldryn news and blog
+    'aldryn_apphooks_config',
+    'aldryn_boilerplates',
+    'aldryn_categories',
+    'aldryn_common',
+    'aldryn_newsblog',
+    'aldryn_people',
     'aldryn_disqus',
     'adminsortable2',
-    'aldryn_boilerplates',
     'aldryn_reversion',
     'aldryn_translation_tools',
     'parler',
@@ -262,6 +268,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
 )
 
+# Extra config for multiple Aldryn CMS add-ons
 TEMPLATE_LOADERS = [
     'django.template.loaders.filesystem.Loader',
     # important! place right before django.template.loaders.app_directories.Loader
@@ -432,6 +439,7 @@ THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.autocrop',
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters',
+    'easy_thumbnails.processors.background',
 )
 
 # For easy_thumbnails to support retina displays (recent MacBooks, iOS)
