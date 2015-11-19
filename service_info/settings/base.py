@@ -90,6 +90,20 @@ CMS_LANGUAGES = {
     },
 }
 
+PARLER_LANGUAGES_FOR_SITE = (
+    {'code': 'en'},
+    {'code': 'ar'},
+    {'code': 'fr'},
+)
+
+PARLER_LANGUAGES = {
+    # in other settings files: SITE_ID: PARLER_LANGUAGES_FOR_SITE
+    'default': {
+        'fallback': 'en',             # defaults to PARLER_DEFAULT_LANGUAGE_CODE
+        'hide_untranslated': False,   # the default; let .active_translations() return fallbacks
+    }
+}
+
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
@@ -139,6 +153,7 @@ LOCALE_PATHS = (
 # various locations.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
+    # important! place right before django.contrib.staticfiles.finders.AppDirectoriesFinder
     'aldryn_boilerplates.staticfile_finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
@@ -239,16 +254,27 @@ INSTALLED_APPS = (
     'aldryn_common',
     'aldryn_newsblog',
     'aldryn_people',
+    'aldryn_disqus',
+    'adminsortable2',
+    'aldryn_boilerplates',
     'aldryn_reversion',
     'aldryn_translation_tools',
     'parler',
     'sortedm2m',
+    'aldryn_faq',
     'taggit',
     # End Django CMS
     # Load after easy_thumbnails so that its thumbnail template tag (unused
     # in this project) is hidden.
     'sorl.thumbnail',
 )
+
+TEMPLATE_LOADERS = [
+    'django.template.loaders.filesystem.Loader',
+    # important! place right before django.template.loaders.app_directories.Loader
+    'aldryn_boilerplates.template_loaders.AppDirectoriesLoader',
+    'django.template.loaders.app_directories.Loader',
+]
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -393,7 +419,6 @@ SIGNED_URL_LIFETIME = 300
 CMS_TEMPLATES = (
     ('cms/content-types/page.html', 'Page'),
     ('cms/content-types/pages-index.html', 'Content Index'),
-    ('cms/content-types/faq.html', 'FAQ'),
     ('cms/content-types/full-width-image.html', 'Full Width Image'),
 )
 
@@ -435,3 +460,5 @@ TEMPLATE_LOADERS = [
 ALDRYN_BOILERPLATE_NAME = 'bootstrap3'
 
 CMS_APP_NAME = 'cms'
+DISQUS_SHORTNAME = 'trawicktestsites'  # allowed only on localhost
+ALDRYN_BOILERPLATE_NAME = 'bootstrap3'

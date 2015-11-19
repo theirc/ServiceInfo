@@ -10,11 +10,13 @@ var gulp = require('gulp')
 
 var knownOptions = {
     default: {
-        config: "base",
-        fast: false,
-        port: 8000
+        config: "base"
+        , fast: false
+        , port: 8000
+        , app: true
+        , cms: true
     }
-}
+};
 
 var options = minimist(process.argv.slice(2), knownOptions);
 
@@ -22,6 +24,8 @@ var API_PORT = 4005;
 var EXPRESS_PORT = options.port;
 var EXPRESS_ROOT = __dirname + "/frontend";
 var LIVERELOAD_PORT = 3572;
+
+gulp.task('noop', function () {});
 
 gulp.task('startExpress', ['build'], function() {
     var express = require('express');
@@ -47,18 +51,38 @@ gulp.task('injectEnvConfig', function(cb) {
         .pipe(gulp.dest("frontend"))
         .on('end', function(){cb();})
     ;
-}
-);
-
-gulp.task('compile_less', function (cb) {
-    gulp.src('frontend/styles/site-*.less')
-        .pipe(less())
-        .pipe(gulp.dest('frontend/styles'))
-        .on('end', function(){cb();})
-    ;
 });
 
-gulp.task('browserify', function(cb) {
+function compile_less (src, dest, cb) {
+    gulp.src(src)
+        .pipe(less())
+        .pipe(gulp.dest(dest))
+        .on('end', function () { cb(); })
+        ;
+}
+
+gulp.task('compile_less_app', function (cb) {
+  compile_less(
+      'frontend/styles/site-*.less'
+      , 'frontend/styles'
+      , cb
+  );
+});
+
+gulp.task('compile_less_cms', function (cb) {
+  compile_less(
+      'service_info/static/less/site.less'
+      , 'service_info/static/css'
+      , cb
+  );
+});
+
+gulp.task('compile_less', [
+  options.app ? 'compile_less_app' : 'noop'
+  , options.cms ? 'compile_less_cms' : 'noop'
+], function () {});
+
+function browserify_wrap (src, dest, cb) {
     /* When the templates compile themselves, have them use our
        own 'compiler' module so we can register some helpers on it
        first:
@@ -76,38 +100,60 @@ gulp.task('browserify', function(cb) {
         }
     });
 
-    gulp.src('frontend/index.js')
+    gulp.src(src)
         .pipe(browserify({
             insertGlobals : true,
             debug : options.config !== 'production',
             transform: [hbsfy]
         }))
         .pipe(rename('bundle.js'))
-        .pipe(gulp.dest('frontend'))
+        .pipe(gulp.dest(dest))
         .on('end', function(){cb();})
+        ;
+}
+
+gulp.task('browserify_app', function (cb) {
+  browserify_wrap(
+      'frontend/index.js'
+      , 'frontend'
+      , cb
+  );
 });
 
-gulp.task('closure', ['browserify'], function(cb) {
+gulp.task('browserify_cms', function browserify_cms (cb) {
+  browserify_wrap(
+      'service_info/static/js/src/index.js'
+      , 'service_info/static/js/dist'
+      , cb
+  );
+});
+
+gulp.task('browserify', [
+  options.app ? 'browserify_app' : 'noop'
+  , options.cms ? 'browserify_cms' : 'noop'
+], function () {});
+
+function closure (src, dest, out, cb) {
     if (options.fast) {
-        sync_exec('cp frontend/bundle.js frontend/bundle_min.js');
+        sync_exec(['cp', src, dest + '/' + out].join(' '));
     } else {
         var res = sync_exec(
-            'ccjs frontend/bundle.js --language_in=ECMASCRIPT5'
+            ['ccjs', src, '--language_in=ECMASCRIPT5'].join(' ')
         );
         if (res.stderr) {
             console.error(res.stderr);
         }
         if (res.stdout) {
-            function string_src(filename, string) {
-              var src = require('stream').Readable({ objectMode: true })
+            var string_src = function(filename, string) {
+              var src = require('stream').Readable({ objectMode: true });
               src._read = function () {
-                this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }))
-                this.push(null)
-              }
-              return src
-            }
-            string_src("bundle_min.js", res.stdout)
-                .pipe(gulp.dest('frontend'))
+                this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }));
+                this.push(null);
+              };
+              return src;
+            };
+            string_src(out, res.stdout)
+                .pipe(gulp.dest(dest))
             ;
         } else {
             throw new gutil.PluginError({
@@ -117,7 +163,30 @@ gulp.task('closure', ['browserify'], function(cb) {
         }
     }
     cb();
+}
+
+gulp.task('closure_app', ['browserify_app'], function (cb) {
+  closure(
+      'frontend/bundle.js'
+      , 'frontend'
+      , 'bundle_min.js'
+      , cb
+  );
 });
+
+gulp.task('closure_cms', ['browserify_cms'], function (cb) {
+  closure(
+      'service_info/static/js/dist/bundle.js'
+      , 'service_info/static/js/dist'
+      , 'bundle.min.js'
+      , cb
+  );
+});
+
+gulp.task('closure', [
+  options.app ? 'closure_app' : 'noop'
+  , options.cms ? 'closure_cms' : 'noop'
+], function() {});
 
 gulp.task('build', ['closure', 'compile_less', 'injectEnvConfig'], function(){});
 
@@ -146,7 +215,18 @@ function notifyLivereload(event) {
 }
 
 gulp.task('default', ['startLiveReload', 'startDjango'], function() {
-    gulp.watch(['frontend/index.html', 'frontend/**/*.js',
-                'frontend/styles/site.less', 'frontend/templates/*.hbs', 'frontend/views/*.js'],
-                notifyLivereload);
+    gulp.watch(
+        [
+            'frontend/index.html'
+            , 'frontend/**/*.js'
+            , 'frontend/styles/site.less'
+            , 'frontend/templates/*.hbs'
+            , 'frontend/views/*.js'
+            , 'service_info/static/less/*.less'
+            , 'service_info/static/less/**/*.less'
+            , 'service_info/static/js/src/*.js'
+            , 'service_info/static/js/src/**/*.js'
+        ]
+        , notifyLivereload
+    );
 });
