@@ -268,6 +268,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
 )
 
+# Extra config for multiple Aldryn CMS add-ons
 TEMPLATE_LOADERS = [
     'django.template.loaders.filesystem.Loader',
     # important! place right before django.template.loaders.app_directories.Loader
@@ -448,14 +449,6 @@ THUMBNAIL_HIGH_RESOLUTION = True
 # cmsplugin_filer_image provides integration with djangocms-text-ckeditor
 # for DnD via this setting:
 TEXT_SAVE_IMAGE_FUNCTION = 'cmsplugin_filer_image.integrations.ckeditor.create_image_plugin'
-
-# Extra config for Aldryn blogs & news
-TEMPLATE_LOADERS = [
-    'django.template.loaders.filesystem.Loader',
-    # important! place right before django.template.loaders.app_directories.Loader
-    'aldryn_boilerplates.template_loaders.AppDirectoriesLoader',
-    'django.template.loaders.app_directories.Loader',
-]
 
 CMS_APP_NAME = 'cms'
 DISQUS_SHORTNAME = 'trawicktestsites'  # allowed only on localhost
