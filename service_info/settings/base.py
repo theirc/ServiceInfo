@@ -256,7 +256,6 @@ INSTALLED_APPS = (
     'aldryn_people',
     'aldryn_disqus',
     'adminsortable2',
-    'aldryn_boilerplates',
     'aldryn_reversion',
     'aldryn_translation_tools',
     'parler',
@@ -439,6 +438,7 @@ THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.autocrop',
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters',
+    'easy_thumbnails.processors.background',
 )
 
 # For easy_thumbnails to support retina displays (recent MacBooks, iOS)
