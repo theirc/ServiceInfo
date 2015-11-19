@@ -457,8 +457,6 @@ TEMPLATE_LOADERS = [
     'django.template.loaders.app_directories.Loader',
 ]
 
-ALDRYN_BOILERPLATE_NAME = 'bootstrap3'
-
 CMS_APP_NAME = 'cms'
 DISQUS_SHORTNAME = 'trawicktestsites'  # allowed only on localhost
 ALDRYN_BOILERPLATE_NAME = 'bootstrap3'
