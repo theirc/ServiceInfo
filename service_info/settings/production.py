@@ -11,6 +11,7 @@ DEFAULT_FROM_EMAIL = 'noreply@rescue.org'
 SITE_ID = PRODUCTION_SITE_ID
 
 CMS_LANGUAGES[SITE_ID] = CMS_LANGUAGES_FOR_SITE
+PARLER_LANGUAGES[SITE_ID] = PARLER_LANGUAGES_FOR_SITE
 DISQUS_SHORTNAME = 'serviceinfo'
 
 # Uncomment if using celery worker configuration

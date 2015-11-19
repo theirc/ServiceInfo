@@ -44,3 +44,36 @@ cmsplugin-filer==0.10.2
 djangocms-text-ckeditor==2.7.0
 django-reversion==1.8.5
 aldryn-disqus==1.0.0
+# Has missing migration: aldryn-faq==1.0.7
+git+git://github.com/caktus/aldryn-faq.git@1.0.7-146#egg=aldryn-faq
+  aldryn-apphooks-config==0.2.6
+    django-appdata==0.1.4
+      South==1.0.2
+  aldryn-boilerplates==0.7.3
+    YURL==0.13
+    # django-appconf
+  aldryn-reversion==1.0.1
+    # django-reversion
+  aldryn-search==0.2.10
+    lxml==3.5.0
+    # django-appconf
+    django-haystack==2.4.1
+    django-spurl==0.6.2
+      URLObject==2.4.0
+    django-standard-form==1.1.1
+      # django-classy-tags
+    aldryn-common==1.0.0
+      # aldry-boilerplates
+      # django-sortedm2m
+  aldryn-translation-tools==0.2.1
+    # django-parler
+    # Unidecode
+    python-slugify==1.1.4
+      # Unidecode
+  django-admin-sortable==2.0.5
+  # Has bug that breaks rich text editing of questions: django-admin-sortable2==0.6.0
+  git+git://github.com/caktus/django-admin-sortable2.git@0.6.0-50#egg=django-admin-sortable2
+  django-parler==1.5.1
+  # django-reversion
+  django-sortedm2m==1.0.2
+  django-taggit==0.17.3
