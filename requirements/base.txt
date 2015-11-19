@@ -1,6 +1,6 @@
 psycopg2==2.5.4
 Pillow==2.9.0
-Django==1.7.9
+Django==1.7.10
 six==1.6.1
 celery==3.1.17
 
@@ -26,3 +26,75 @@ xlrd==0.9.3
 
 # images / thumbnails
 sorl-thumbnail==12.3
+
+# CMS-related
+django-cms==3.1.3
+  djangocms-admin-style==0.2.2
+  django-classy-tags==0.6.2
+  django-treebeard==3.0
+  html5lib==0.999
+  django-sekizai==0.8.2
+cmsplugin-filer==0.10.2
+  easy-thumbnails==2.2
+  django-filer==0.9.12
+    django-mptt==0.6.1
+    django-polymorphic==0.7.2
+    Unidecode==0.4.18
+  django-appconf==1.0.1
+djangocms-text-ckeditor==2.7.0
+django-reversion==1.8.5
+aldryn-disqus==1.0.0
+# Has missing migration: aldryn-faq==1.0.7
+git+git://github.com/caktus/aldryn-faq.git@1.0.7-146#egg=aldryn-faq
+  aldryn-apphooks-config==0.2.6
+    django-appdata==0.1.4
+      South==1.0.2
+  aldryn-boilerplates==0.7.3
+    YURL==0.13
+    # django-appconf
+  aldryn-reversion==1.0.1
+    # django-reversion
+  aldryn-search==0.2.10
+    lxml==3.5.0
+    # django-appconf
+    django-haystack==2.4.1
+    django-spurl==0.6.2
+      URLObject==2.4.0
+    django-standard-form==1.1.1
+      # django-classy-tags
+    aldryn-common==1.0.0
+      # aldry-boilerplates
+      # django-sortedm2m
+  aldryn-translation-tools==0.2.1
+    # django-parler
+    # Unidecode
+    python-slugify==1.1.4
+      # Unidecode
+  django-admin-sortable==2.0.5
+  # Has bug that breaks rich text editing of questions: django-admin-sortable2==0.6.0
+  # Fails to deploy due to Unicode issue: git+git://github.com/caktus/django-admin-sortable2.git@0.6.0-50#egg=django-admin-sortable2
+  git+git://github.com/caktus/django-admin-sortable2.git@0.6.0-50-unicode#egg=django-admin-sortable2
+  django-parler==1.5.1
+  # django-reversion
+  django-sortedm2m==1.0.2
+  django-taggit==0.17.3
+# Has missing migration: aldryn-newsblog==1.0.9
+git+git://github.com/caktus/aldryn-newsblog.git@1.0.9-323#egg=aldryn-newsblog
+  python-dateutil==2.4.2
+  # aldryn-apphooks-config
+  # aldry-boilerplates
+  aldryn-categories==1.0.1
+    # django-parler
+    # django-treebeard
+  # aldryn-common
+  aldryn-people==1.1.2
+    phonenumbers==7.1.1
+    django-phonenumber-field==0.7.2
+    # many others already listed
+  # aldryn-reversion
+  # django-sortedm2m
+  # django-taggit
+  # lxml
+  pytz
+  # six
+  backport-collections==0.1

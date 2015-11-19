@@ -2,6 +2,20 @@ ServiceInfo
 
 Release Notes
 
+0.4.0 - Nov. 19, 2015
+---------------------
+
+* Upgrade to Django 1.7.10 (#70)
+* Update dev setup (#71, #72)
+* Prepare frontend for DjangoCMS (#73, #74, #78, #85)
+* Install Django CMS (#75)
+* Setup Transifex for CMS (#76, #82)
+* Google Analytics (#79)
+* Disqus plugin (#80)
+* FAQ plugin (#81)
+* News/blog plugin (#83, #84)
+
+
 0.3.3 - Aug. 20, 2015
 ---------------------
 

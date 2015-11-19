@@ -1,0 +1,85 @@
+{% load cms_tags staticfiles sekizai_tags menu_tags i18n %}
+
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        {% render_block "extra-meta" %}
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="{% if request.LANGUAGE_CODE == 'ar' %}{% static 'styles/site-rtl.css' %}{% else %}{% static 'styles/site-ltr.css' %}{% endif %}" type="text/css" class="load-style"/>
+        <link rel="stylesheet" href="{% static 'css/site.css' %}" type="text/css">
+        {% render_block "css" %}
+
+        <link rel="shortcut icon" href="{% static 'images/sm-favicon.png' %}">
+
+        <title>{% block title %}{% page_attribute "page_title" %}{% endblock title %}</title>
+    </head>
+    <body dir="{% if request.LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
+        {% cms_toolbar %}
+
+        <div id="cms">
+            <header id="cms-header">
+                {% block header %}
+                <div class="brand">
+                    <a href="#"><div id="logo"></div></a>
+                </div>
+                <div id=menu-container class="menu-closed">
+                    <button id=menu-toggle class="btn menu">{% trans "MENU" %}</button>
+                    <ul id="menu" class="menu">
+                        {% show_menu 0 0 0 100 "cms/includes/menu.html" %}
+                    </ul>
+                </div>
+                {% endblock header %}
+            </header>
+
+            <div id="page-container">
+                <div id="page">
+                    <div id="content" class="{% block content-class %}{% endblock content-class %}">
+                        {% block content %}{% endblock content %}
+                    </div>
+                </div>
+            </div>
+
+            <div id="footer">
+                {% block footer %}
+                <div class="row">
+                    <div id="about-si" class="two-third">
+                        <div class="page-title">{% trans "About ServiceInfo" %}</div>
+                        <div class="page-descr">
+                          <span class="sentence1">{% trans "Powered by the International Rescue Committee." %}</span>
+                          <span>{% trans "ServiceInfo is a tool that allows both service providers to register their services online and beneficiaries to both discover those services on a map and give feedback on them. ServiceInfo is open source and free to use." %}</span>
+                        </div>
+                    </div>
+                    <div id="contact-si" class="third">
+                        <div class="page-title">{% trans "Reach Us" %}</div>
+                        <div class="page-descr">{% trans "Contact us on one of our social networks below or drop us a mail at" %}</div>
+                        <div id="contact-icons">
+                            <div class="icon">
+                                <a href="mailto:serviceinfo@rescue.org">
+                                    <img src="{% static 'images/mail.svg' %}" alt="email link">
+                                </a>
+                            </div>
+                            <div class="icon">
+                                <a href="https://www.facebook.com/serviceinfolb">
+                                    <img src="{% static 'images/fbimage.svg' %}" alt="facebook link">
+                                </a>
+                            </div>
+                            <div class="icon">
+                                <a href="https://twitter.com/serviceinfolb">
+                                    <img src="{% static 'images/twimage.svg' %}" alt="twitter link">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endblock footer %}
+            </div>
+            <div id="language-toggle" class="language-toggle modal-bg hidden"></div>
+            <div id="report-tooltip"></div>
+        </div>
+
+        <script src="{% static 'js/dist/bundle.js' %}"></script>
+        {% render_block "js" %}
+    </body>
+</html>

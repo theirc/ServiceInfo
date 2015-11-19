@@ -4,9 +4,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-06-25 11:37+0000\n"
-"Last-Translator: Dan Poirier <dpoirier@caktusgroup.com>\n"
-"Language-Team: French (http://www.transifex.com/p/service-mapper/language/fr/)\n"
+"PO-Revision-Date: 2015-11-16 06:32+0000\n"
+"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
+"Language-Team: French (http://www.transifex.com/irc/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -142,6 +142,9 @@ msgstr "Recherche de services"
 msgid "Search-List##Page-Head##Description"
 msgstr "Utilisez la recherche filtrée ci-dessous pour trouver le service qui répond à vos besoins."
 
+msgid "Search-List##Service-Request"
+msgstr "Parlez-nous un service manquant"
+
 msgid "Feedback-Search##Page-Head##Title"
 msgstr "Envoyer des commentaires sur les services"
 
@@ -176,7 +179,7 @@ msgid "Service-Map##Results-Truncated"
 msgstr "Il y avait plus de résultats que pourrait être affichée. Essayez une recherche plus précise."
 
 msgid "Service-Map##More-Results"
-msgstr ""
+msgstr "Actuellement montrant {thecount} sur {total_results} de service, s'il vous plaît un zoom sur la zone désignée pour voir plus de services."
 
 msgid "Service-Map##Filtered-Search##Label"
 msgstr "Le terme de recherche"
@@ -261,6 +264,9 @@ msgstr "inconnu"
 
 msgid "Service-Map##List##Criteria"
 msgstr "les critères de sélection"
+
+msgid "Service-Map##List##Picture"
+msgstr "Adresse de service Image"
 
 msgid "Service-Remove-Change##Page-Head##Page-Title##Title"
 msgstr "Retirer Change"
@@ -357,6 +363,58 @@ msgstr "Valider les réponses"
 
 msgid "Service-Form##Form-Submit-Options##Clear"
 msgstr "Retirer Réponses"
+
+msgid "Service-Request-Form##Page-Head##Page-Title##Title"
+msgstr "Proposer un service"
+
+msgid "Service-Request-Form##Legend"
+msgstr "Pour suggérer un service, s'il vous plaît remplir le formulaire ci-dessous"
+
+msgid "Service-Request-Form##Provider-Name"
+msgstr "Nom de fournisseur de service"
+
+msgid "Service-Request-Form##Service-Name"
+msgstr "Nom du service"
+
+msgid "Service-Request-Form##Service-Area"
+msgstr "Zone de service"
+
+msgid "Service-Request-Form##Type"
+msgstr "type de service"
+
+msgid "Service-Request-Form##Service-Address"
+msgstr "Adresse de service Image"
+
+msgid "Service-Request-Form##Service-Address-Help"
+msgstr "Lorsque ce service est fourni."
+
+msgid "Service-Request-Form##Service-Contact"
+msgstr "Détail Contact"
+
+msgid "Service-Request-Form##Service-Contact-Help"
+msgstr "S'il vous plaît entrer les détails de contact personnelle, car elle sera utilisée pour vous contacter pour plus de détails."
+
+msgid "Service-Request-Form##Service-Description"
+msgstr "Description du service"
+
+msgid "Service-Request-Form##Service-Description-Help"
+msgstr "Entrez quelques détails sur ce service."
+
+msgid "Service-Request-Form##Rating"
+msgstr "Le taux de service (de 1 à 5, où 5 est la meilleure note possible):"
+
+msgid "Service-Request-Form##Form-Submit-Options##Submit"
+msgstr "Valider les réponses"
+
+msgid "Service-Request-Form##Form-Submit-Options##Clear"
+msgstr "Retirer Réponses"
+
+msgid "Service-Request-Confirmation##Page-Head##Page-Title##Title"
+msgstr "Votre information a été soumis avec succès"
+
+msgid ""
+"Service-Request-Confirmation##Page-Head##Page-Description##Page-Description"
+msgstr "Merci pour votre présentation."
 
 msgid "Provider-Registration-Form##Page-Head##Page-Title##Title"
 msgstr "Formulaire service fournisseur d'enregistrement"
@@ -901,7 +959,10 @@ msgstr "Des difficultés à contacter les fournisseurs de services par type de s
 msgid "Reports##Form##Stat##Options##Communication"
 msgstr "Satisfaction à l'égard du personnel de communication par type de service"
 
-msgid "Reports##Form##Stat##Options##NumServices"
+msgid "Reports##Form##Stat##Options##NumServicesByServiceType"
+msgstr "Nombre de services par emplacement et type de service"
+
+msgid "Reports##Form##Stat##Options##NumServicesByProviderType"
 msgstr "Nombre de services par emplacement et type de service"
 
 msgid "Reports##Form##Download"
@@ -912,3 +973,12 @@ msgstr "Chargement ..."
 
 msgid "Reports##Table##ServiceType"
 msgstr "Type de service"
+
+msgid "Reports##Chart##AverageResponse"
+msgstr "Réponse moyenne"
+
+msgid "Reports##Chart##NumberServices"
+msgstr "Nombre de services"
+
+msgid "Reports##Chart##NumberResponses"
+msgstr "Nombre de réponses"
