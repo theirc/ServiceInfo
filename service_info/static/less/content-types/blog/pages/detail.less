@@ -1,0 +1,32 @@
+@import "../../../includes/mixins.less";
+
+.aldryn-newsblog-detail {}
+
+.aldryn-newsblog-pager {
+  ul.pager {
+    list-style: none;
+    padding: 0;
+
+    .flex-layout();
+    .justify-content(space-between);
+    .flex-wrap(nowrap);
+
+    li.previous {
+      a {
+        span {}
+      }
+    }
+
+    li span.pager-back {
+      a {}
+    }
+
+    li.next {}
+
+    li {
+      span.text-muted {
+        color: grey;
+      }
+    }
+  }
+}
