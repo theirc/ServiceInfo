@@ -1,0 +1,27 @@
+@import "../../../includes/mixins.less";
+
+.aldryn-newsblog-list {
+  article {
+    padding: 2em 0;
+    border-bottom: 1px solid lightgray;
+
+    &:first-child {
+      padding-top: 0;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+
+    p.visual {
+      // .flex-layout();
+      // .align-items(center);
+      // .justify-content(center);
+      max-height: 150px;
+      overflow: hidden;
+    }
+
+    .lead + .aldryn-newsblog-meta {
+      margin-top: 20px;
+    }
+  }
+}
