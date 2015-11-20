@@ -4,6 +4,7 @@
 {% block newsblog_content %}
     {% render_placeholder view.config.list_view_placeholder language placeholder_language %}
     <div class="aldryn-newsblog-list">
+        <h2>Articles</h2>
         {% for article in article_list %}
             {% include "aldryn_newsblog/includes/article.html" %}
         {% empty %}
