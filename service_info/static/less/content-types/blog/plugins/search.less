@@ -1,0 +1,44 @@
+@import "../../../includes/mixins.less";
+
+.aldryn-newsblog-article-search {
+  form {
+    .input-group {
+      .flex-layout();
+      .flex-wrap(nowrap);
+      .flex-direction(row);
+
+      label {}
+
+      input[type="text"] {
+        border-radius: 4px 0 0 4px;
+      }
+
+      span.input-group-btn {
+        button.btn-primary {
+          border-radius: 0 4px 4px 0;
+        }
+      }
+    }
+  }
+  .search-results {
+    ul.results-list {
+      padding-left: 1em;
+
+      h3 {
+        margin: 0.5em 0 0.5em -1em;
+
+        strong {}
+      }
+
+      li {
+        a {
+          strong {}
+
+          span.text-muted {}
+        }
+      }
+
+      p.well { /* no results */ }
+    }
+  }
+}
