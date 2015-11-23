@@ -3,20 +3,6 @@
 
 {% block faq_content %}
     <article class="aldryn aldryn-faq aldryn-faq-detail">
-        {% block faq_detail_categories %}
-            <a href="{{ category_url }}" class="label label-primary">
-                {% render_model object "category" "category" %}
-            </a>
-        {% endblock faq_detail_categories %}
-
-        {% if object.tags.all %}
-            <div class="tags pull-right">
-                {% for tag in object.tags.all %}
-                    <span class="badge">{{ tag }}</span>
-                {% endfor %}
-            </div>
-        {% endif %}
-
         {% block faq_detail_title %}
             <h2>{% render_model object "title" %}</h2>
         {% endblock faq_detail_title %}
@@ -34,6 +20,26 @@
                 {% render_placeholder object.answer 800 %}
             </div>
         {% endblock faq_detail_content %}
+
+        {% block faq_detail_categories %}
+            <div class="categories">
+                Question category:
+                <a href="{{ category_url }}" class="label label-primary">
+                    {% render_model object "category" "category" %}
+                </a>
+            </div>
+        {% endblock faq_detail_categories %}
+
+        {% if object.tags.all %}
+            <div class="tags pull-right">
+                {% if object.tags.all|length > 0 %}
+                    Tags:
+                {% endif %}
+                {% for tag in object.tags.all %}
+                    <span class="badge">{{ tag }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
     </article>
 {% endblock %}
 

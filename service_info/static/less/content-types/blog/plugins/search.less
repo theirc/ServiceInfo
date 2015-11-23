@@ -1,0 +1,56 @@
+@import "../../../includes/mixins.less";
+
+.aldryn-newsblog-article-search {
+  form {
+    .input-group {
+      .flex-layout();
+      .flex-wrap(nowrap);
+      .flex-direction(row);
+
+      label {}
+
+      input[type="text"] {
+        border-radius: 4px 0 0 4px;
+        border-right: 0;
+      }
+
+      span.input-group-btn {
+        button.btn-primary {
+          border-radius: 0 4px 4px 0;
+          border-left: 0;
+          transition: all 0.15s;
+        }
+      }
+
+      input[type="text"]:focus + span.input-group-btn {
+        button {
+          border-color: #3cb879;
+          background-color: #3cb879;
+          color: white;
+          transition: all 0.15s;
+        }
+      }
+    }
+  }
+  .search-results {
+    ul.results-list {
+      padding-left: 1em;
+
+      h3 {
+        margin: 0.5em 0 0.5em -1em;
+
+        strong {}
+      }
+
+      li {
+        a {
+          strong {}
+
+          span.text-muted {}
+        }
+      }
+
+      p.well { /* no results */ }
+    }
+  }
+}
