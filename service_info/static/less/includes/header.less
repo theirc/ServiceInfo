@@ -40,6 +40,7 @@
         background-image: url(../images/logo-large.png);
         background-image: url(../images/logo-large.svg);
         background-size: 100%;
+        background-position: center;
         width: 100px;
         height: 100px;
         margin: 2em;
@@ -76,14 +77,28 @@
         .flex(1, 1, auto);
 
         box-sizing: border-box;
-        padding-right: 20px;
+        padding: 0 40px;
     }
     #menu {
         .flex-layout();
         .flex-direction(row);
 
         li {
+            .green-button();
+            .flex-layout();
+            .align-items(center);
+            .justify-content(center);
             border-top: none;
+            margin-right: 20px;
+            padding: 13px 24px!important;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            a {
+                padding-bottom: 0;
+            }
         }
     }
 }
