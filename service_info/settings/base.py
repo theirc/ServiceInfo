@@ -262,6 +262,7 @@ INSTALLED_APPS = (
     'sortedm2m',
     'aldryn_faq',
     'taggit',
+    'aldryn_locations',
     # End Django CMS
     # Load after easy_thumbnails so that its thumbnail template tag (unused
     # in this project) is hidden.
@@ -398,6 +399,9 @@ JIRA_SERVER = 'http://54.154.50.144:8080/'
 JIRA_USER = os.environ.get('JIRA_USER', '')
 JIRA_PASSWORD = os.environ.get('JIRA_PASSWORD', '')
 JIRA_DUEIN_DAYS = 2
+
+# Aldryn Locations settings
+ALDRYN_LOCATIONS_GOOGLEMAPS_APIKEY = os.environ.get('GOOGLEMAPS_APIKEY', '')
 
 # Regex string that will only match valid phone numbers
 # 12-123456

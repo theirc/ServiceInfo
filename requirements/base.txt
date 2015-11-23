@@ -91,6 +91,7 @@ git+git://github.com/caktus/aldryn-newsblog.git@1.0.9-323#egg=aldryn-newsblog
     phonenumbers==7.1.1
     django-phonenumber-field==0.7.2
     # many others already listed
+  git+https://github.com/aldryn/aldryn-locations.git@0.3.0#egg=aldryn-locations
   # aldryn-reversion
   # django-sortedm2m
   # django-taggit
