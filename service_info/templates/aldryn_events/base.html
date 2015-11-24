@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n cms_tags %}
+
+{% block extend_breadcrumb %}
+    {{ block.super }}
+    {% block events_breadcrumb %}{% endblock events_breadcrumb %}
+{% endblock extend_breadcrumb %}
+
+{% block content %}
+{% endblock content %}

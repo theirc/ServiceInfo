@@ -247,7 +247,7 @@ INSTALLED_APPS = (
     'cmsplugin_filer_image',
     'cmsplugin_filer_teaser',
     'cmsplugin_filer_video',
-    # Aldryn news and blog
+    # Aldryn news and blog, disqus, events, faq
     'aldryn_apphooks_config',
     'aldryn_boilerplates',
     'aldryn_categories',
@@ -255,6 +255,7 @@ INSTALLED_APPS = (
     'aldryn_newsblog',
     'aldryn_people',
     'aldryn_disqus',
+    'aldryn_events',
     'adminsortable2',
     'aldryn_reversion',
     'aldryn_translation_tools',
@@ -262,6 +263,10 @@ INSTALLED_APPS = (
     'sortedm2m',
     'aldryn_faq',
     'taggit',
+    'appconf',
+    'bootstrap3',
+    'extended_choices',
+    'standard_form',
     # End Django CMS
     # Load after easy_thumbnails so that its thumbnail template tag (unused
     # in this project) is hidden.

@@ -21,6 +21,7 @@ oauthlib==0.7.2
 
 # Excel with Python 3
 xlwt-future==0.8.0
+  future==0.15.2
 # xlrd already supports Python 3, go figure
 xlrd==0.9.3
 
@@ -98,3 +99,8 @@ git+git://github.com/caktus/aldryn-newsblog.git@1.0.9-323#egg=aldryn-newsblog
   pytz
   # six
   backport-collections==0.1
+# Does not support Python 3: aldryn-events==1.0.6
+git+git://github.com/trawick/aldryn-events.git@1.0.6-py3k-a#egg=aldryn-events
+  django-bootstrap3==6.2.2
+  django-extended-choices==1.0.5
+    # future
