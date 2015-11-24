@@ -1,0 +1,55 @@
+@import "../../includes/mixins.less";
+
+.aldryn-faq-pager {
+  ul.pager {
+    list-style: none;
+    padding: 0;
+
+    .flex-layout();
+    .justify-content(space-between);
+    .flex-wrap(nowrap);
+
+    a {
+      color: inherit;
+    }
+
+    li.previous {
+      a {
+        span {}
+      }
+    }
+
+    li span.pager-back {
+      a {}
+    }
+
+    li.next {}
+
+    li {
+      span.text-muted {
+        color: grey;
+      }
+    }
+  }
+}
+
+.pagination,
+.pager {
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: 414px) {
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
+    & > * {
+        .white-green-button();
+        margin-bottom: 1em;
+
+        @media (min-width: 414px) {
+            margin-bottom: 0;
+        }
+    }
+}
