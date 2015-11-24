@@ -71,7 +71,7 @@ gulp.task('compile_less_app', function (cb) {
 
 gulp.task('compile_less_cms', function (cb) {
   compile_less(
-      'service_info/static/less/site.less'
+      'service_info/static/less/site-*.less'
       , 'service_info/static/css'
       , cb
   );

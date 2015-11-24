@@ -14,14 +14,10 @@
         .flex-wrap(nowrap);
 
         position: absolute;
-        // width: 20%;
         height: 160px;
-        // display: inline-block;
-        // float: @start;
         overflow: auto;
     }
     @media (min-width: 1000px) {
-        // width: 15%;
     }
 }
 
@@ -89,11 +85,19 @@
             .align-items(center);
             .justify-content(center);
             border-top: none;
-            margin-right: 20px;
             padding: 13px 24px!important;
 
-            &:last-child {
-                margin-right: 0;
+            & when (@direction = ltr) {
+                margin-right: 20px;
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+            & when (@direction = rtl) {
+                margin-left: 20px;
+                &:last-child {
+                    margin-left: 0;
+                }
             }
 
             a {
