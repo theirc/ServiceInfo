@@ -100,7 +100,7 @@ git+git://github.com/caktus/aldryn-newsblog.git@1.0.9-323#egg=aldryn-newsblog
   # six
   backport-collections==0.1
 # Does not support Python 3: aldryn-events==1.0.6
-git+git://github.com/trawick/aldryn-events.git@1.0.6-py3k-a#egg=aldryn-events
+git+git://github.com/trawick/aldryn-events.git@1.0.6-py3k-b#egg=aldryn-events
   django-bootstrap3==6.2.2
   django-extended-choices==1.0.5
     # future
