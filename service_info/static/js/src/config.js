@@ -6,5 +6,9 @@ module.exports = {
             , closed_class: 'menu-closed'
             , open_class: 'menu-open'
         }
+        , language_toggle: {
+            root: '#language-toggle'
+            , shower: '#language-chooser'
+        }
     }
 };

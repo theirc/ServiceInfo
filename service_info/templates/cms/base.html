@@ -75,7 +75,9 @@
                 </div>
                 {% endblock footer %}
             </div>
-            <div id="language-toggle" class="language-toggle modal-bg hidden"></div>
+
+            {% language_chooser "cms/includes/language-chooser.html" %}
+
             <div id="report-tooltip"></div>
         </div>
 
