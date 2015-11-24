@@ -8,7 +8,7 @@
 
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
         <link rel="stylesheet" href="{% if request.LANGUAGE_CODE == 'ar' %}{% static 'styles/site-rtl.css' %}{% else %}{% static 'styles/site-ltr.css' %}{% endif %}" type="text/css" class="load-style"/>
-        <link rel="stylesheet" href="{% static 'css/site.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% if request.LANGUAGE_CODE == 'ar' %}{% static 'css/site-rtl.css' %}{% else %}{% static 'css/site-ltr.css' %}{% endif %}" type="text/css">
         {% render_block "css" %}
 
         <link rel="shortcut icon" href="{% static 'images/sm-favicon.png' %}">
