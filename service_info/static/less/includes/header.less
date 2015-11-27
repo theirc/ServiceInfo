@@ -67,6 +67,30 @@
     Menu style overrides
 */
 
+#menu {
+    > li {
+        padding: 12px 0;
+    }
+
+    > li.parent {
+        padding-bottom: 0;
+
+        > a {
+            padding: 0 0 12px 0;
+        }
+
+        > ul {
+            padding: 0;
+            margin: 0 -12px;
+            display: none;
+
+            > li {
+                text-align: right;
+            }
+        }
+    }
+}
+
 @media (min-width: 640px) {
     #menu-container {
         .flex-layout();
@@ -114,7 +138,7 @@
                 height: 100%;
             }
 
-            ul {
+            &.parent > ul {
                 position: absolute;
                 top: 100%;
                 left: 50%;
@@ -122,6 +146,7 @@
                 width:100%;
                 height: auto;
                 padding-left: 0;
+                margin: 0;
 
                 display: none;
 

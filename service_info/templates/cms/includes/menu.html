@@ -3,7 +3,7 @@
 {% for child in children %}
     <li{% if child.children %} class="parent"{% endif %}>
         <a href="{{ child.get_absolute_url }}">
-            {{ child.get_menu_title }}
+            {{ child.get_menu_title }}{% if child.children %} &#9662;{% endif %}
         </a>
         {% if child.children %}
             <ul>
