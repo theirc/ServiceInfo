@@ -6,5 +6,11 @@ module.exports = {
             , closed_class: 'menu-closed'
             , open_class: 'menu-open'
         }
+        , page: {
+            container: '#page-container'
+        }
+        , footer: {
+            container: '#footer'
+        }
     }
 };
