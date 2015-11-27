@@ -32,9 +32,9 @@
             {% endif %}
             <li>
                 <span class="pager-back">
-                    – <a href="{% namespace_url 'events_list' namespace=view.namespace %}">
+                    <a href="{% namespace_url 'events_list' namespace=view.namespace %}">
                         {% trans "Back to Overview" %}
-                    </a> –
+                    </a>
                 </span>
             </li>
             {% if next_event %}
