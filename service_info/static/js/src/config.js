@@ -5,6 +5,7 @@ module.exports = {
             , container: '#menu-container'
             , closed_class: 'menu-closed'
             , open_class: 'menu-open'
+            , top_items: '#menu > li.parent'
         }
     }
 };
