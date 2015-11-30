@@ -11,8 +11,9 @@ function init () {
 
     $(menu.top_items).click(function (e) {
         e.preventDefault();
+        console.log(e);
         $(this).toggleClass('active');
-        $(this).find('ul').slideToggle({
+        $(this).next('ul').slideToggle({
             duration: 200
         });
     });
