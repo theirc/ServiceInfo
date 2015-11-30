@@ -11,7 +11,7 @@ module.exports = {
         var app_margin_top = $app.css('margin-top');
         $app.css({
             'margin-top': (app_margin_top - $msg.outerHeight()) + 'px'
-        })
+        });
         $doc.scrollTop($doc.scrollTop() - $msg.outerHeight());
         $msg.html('');
     },
@@ -20,7 +20,7 @@ module.exports = {
         /* Add string 's' to the messages in the message area */
         $msg.append(template({message: s}));
         $app.css({
-            'margin-top': ($msg.outerHeight() + app_margin_top) 'px'
+            'margin-top': ($msg.outerHeight() + app_margin_top) + 'px'
         });
         $doc.scrollTop($doc.scrollTop() + $msg.outerHeight());
     },
