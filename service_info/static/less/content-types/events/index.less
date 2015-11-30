@@ -1,0 +1,16 @@
+table.table-calendar {
+  tr > * {
+    padding: 0.5em;
+    text-align: center;
+    border: 1px solid lightgray;
+
+    &:not(.events) {
+      color: darkgrey;
+    }
+
+    &.events {
+      font-weight: 800;
+      border-color: #3cb879;
+    }
+  }
+}
