@@ -181,7 +181,7 @@ var forms = module.exports = {
         if (e.status >= 500) {
             $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
         } else if (e.status === 400) {
-            messages.add(i18n.t('Global.FormValidationError'));
+            //messages.add(i18n.t('Global.FormValidationError'));
         }
         return missing;
     },
