@@ -7,5 +7,9 @@ module.exports = {
             , open_class: 'menu-open'
             , top_items: '#menu > li.parent > a'
         }
+        , language_toggle: {
+            root: '#language-toggle'
+            , shower: '#language-chooser'
+        }
     }
 };
