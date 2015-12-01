@@ -6,6 +6,7 @@
     background-color: #2A2A2A;
     z-index: 100;
     position: relative;
+
     @media (min-width: 640px) {
         .flex-layout();
         .flex-direction(row);
@@ -15,7 +16,7 @@
 
         position: absolute;
         height: 160px;
-        overflow: auto;
+        overflow: visible;
     }
     @media (min-width: 1000px) {
     }
@@ -66,6 +67,31 @@
     Menu style overrides
 */
 
+#menu {
+    > li {
+        padding: 12px 0;
+    }
+
+    > li.parent {
+        padding-bottom: 0;
+
+        > a {
+            padding: 0 0 12px 0;
+        }
+
+        > ul {
+            padding: 0;
+            margin: 0 -12px;
+            display: none;
+
+            > li {
+                text-align: right;
+                padding: 12px 24px;
+            }
+        }
+    }
+}
+
 @media (min-width: 640px) {
     #menu-container {
         .flex-layout();
@@ -78,14 +104,20 @@
     #menu {
         .flex-layout();
         .flex-direction(row);
+        .justify-content(flex-end);
+        width: 100%;
 
-        li {
+        > li {
             .green-button();
             .flex-layout();
-            .align-items(center);
+            .align-items(baseline);
             .justify-content(center);
+            .flex(0, 1, 150px);
+
             border-top: none;
-            padding: 13px 24px!important;
+            box-sizing: border-box;
+            padding: 0;
+            position: relative;
 
             & when (@direction = ltr) {
                 margin-right: 20px;
@@ -101,7 +133,55 @@
             }
 
             a {
-                padding-bottom: 0;
+                padding: 13px 24px !important;
+                box-sizing: border-box;
+                width: 100%;
+                height: 100%;
+            }
+
+            &.parent > ul {
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                .transform(translateX(-50%));
+                width:100%;
+                height: auto;
+                padding-left: 0;
+                margin: 0;
+
+                display: none;
+
+                background-color: #5A5A5A;
+                border-radius: 0 0 4px 4px;
+
+                li {
+                    padding: 0;
+
+                    > a {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
+                    &.primary {
+                        background-color: #F3F3F4;
+                        color: #5A5A5A;
+
+                        &:hover {
+                            background-color: white;
+                            color: black;
+                        }
+
+                        > a {
+                            color: inherit;
+                        }
+                    }
+                }
+            }
+
+            &.active {
+                border: none;
+                border-radius: 4px 4px 0 0;
+                ul {}
             }
         }
     }
