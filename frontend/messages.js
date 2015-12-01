@@ -2,12 +2,11 @@ var $ = require('jquery'),
     i18n = require('i18next-client'),
     template = require("./templates/message.hbs");
 
-var $app = $('#application');
-var $msg = $('#messages');
-var $doc = $(document);
-
 module.exports = {
     clear: function () {
+        var $app = $('#application');
+        var $msg = $('#messages');
+        var $doc = $(document);
         var app_margin_top = $app.css('margin-top');
         $app.css({
             'margin-top': (app_margin_top - $msg.outerHeight()) + 'px'
@@ -16,7 +15,10 @@ module.exports = {
         $msg.html('');
     },
     add: function (s) {
-        var app_margin_top = $('#application').css('margin-top');
+        var $app = $('#application');
+        var $msg = $('#messages');
+        var $doc = $(document);
+        var app_margin_top = $app.css('margin-top');
         /* Add string 's' to the messages in the message area */
         $msg.append(template({message: s}));
         $app.css({
