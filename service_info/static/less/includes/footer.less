@@ -6,10 +6,17 @@
 
   .row {
     .flex-layout();
-    .flex-direction(row);
     .flex-wrap(wrap);
     .justify-content(flex-start);
     .align-items(baseline);
+
+    & when (@direction = rtl) {
+      .flex-direction(row-reverse);
+    }
+
+    & when (@direction = ltr) {
+      .flex-direction(row);
+    }
 
     max-width: initial;
 
