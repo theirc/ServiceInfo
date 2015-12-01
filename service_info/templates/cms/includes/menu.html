@@ -1,7 +1,21 @@
 {% load menu_tags i18n %}
 
 {% for child in children %}
-    <li><a href="{{ child.get_absolute_url }}">{{ child.get_menu_title }}</a></li>
+    <li{% if child.children %} class="parent"{% endif %}>
+        <a href="{{ child.get_absolute_url }}">
+            {{ child.get_menu_title }}{% if child.children %} &#9662;{% endif %}
+        </a>
+        {% if child.children %}
+            <ul>
+                <li class="primary">
+                    <a href="{{ child.get_absolute_url }}">
+                        {{ child.get_menu_title }}
+                    </a>
+                </li>
+                {% show_menu from_level to_level extra_inactive extra_active template "" "" child %}
+            </ul>
+        {% endif %}
+    </li>
 {% endfor %}
 <li id="language-chooser">
     {% trans "Change language" %}
