@@ -17,6 +17,9 @@
         {% endif %}
     </li>
 {% endfor %}
-<li id="language-chooser">
-    {% trans "Change language" %}
-</li>
+
+{% if not child.children %}
+    <li id="language-chooser">
+        {% trans "Change language" %}
+    </li>
+{% endif %}
