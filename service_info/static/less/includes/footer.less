@@ -3,12 +3,23 @@
 #footer {
   max-height: initial;
   height: auto;
+  position:relative;
 
   .row {
     .flex-layout();
     .flex-wrap(wrap);
     .justify-content(flex-start);
     .align-items(baseline);
+
+    .cms_placeholder {
+      width: 100%;
+      /*
+        This fixes a weird display glitch.
+
+        Seemingly placeholder elements behave strangely when embedded
+        in a flex-layout container.
+      */
+    }
 
     & when (@direction = rtl) {
       .flex-direction(row-reverse);
@@ -19,10 +30,6 @@
     }
 
     max-width: initial;
-
-    > .cms_placeholder {
-      .flex(0, 0, 0);
-    }
 
     > *:not(.cms_placeholder) {
       padding-right: 2em;
