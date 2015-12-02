@@ -1,13 +1,13 @@
 {% load menu_tags i18n %}
 
 {% for child in children %}
-    <li{% if child.children %} class="parent"{% endif %}>
+    <li class="{% if child.children %}parent{% endif %} {% if child.selected %}selected{% endif %}">
         <a href="{{ child.get_absolute_url }}">
             {{ child.get_menu_title }}{% if child.children %} &#9662;{% endif %}
         </a>
         {% if child.children %}
             <ul>
-                <li class="primary">
+                <li class="primary {% if child.selected %}selected{% endif %}">
                     <a href="{{ child.get_absolute_url }}">
                         {{ child.get_menu_title }}
                     </a>
@@ -19,7 +19,7 @@
 {% endfor %}
 
 {% if not child.children %}
-    <li id="language-chooser">
+    <li class="language-chooser" id="language-chooser">
         {% trans "Change language" %}
     </li>
 {% endif %}

@@ -117,11 +117,21 @@
         width: 100%;
 
         > li {
-            .green-button();
             .flex-layout();
             .align-items(baseline);
             .justify-content(center);
             .flex(0, 1, 150px);
+
+            &:not(.selected),
+            &:not(.language-chooser) {
+                .green-button();
+                padding:0;
+            }
+
+            &.selected {
+                .white-green-button();
+                padding:0;
+            }
 
             border-top: none;
             box-sizing: border-box;
