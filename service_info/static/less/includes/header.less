@@ -85,7 +85,12 @@
             display: none;
 
             > li {
-                text-align: right;
+                & when (@direction = ltr) {
+                    text-align: right;
+                }
+                & when (@direction = rtl) {
+                    text-align: left;
+                }
                 padding: 12px 24px;
 
                 &.parent {
