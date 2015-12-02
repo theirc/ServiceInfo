@@ -72,7 +72,7 @@
         padding: 12px 0;
     }
 
-    > li.parent {
+    li.parent {
         padding-bottom: 0;
 
         > a {
@@ -85,8 +85,17 @@
             display: none;
 
             > li {
-                text-align: right;
+                & when (@direction = ltr) {
+                    text-align: right;
+                }
+                & when (@direction = rtl) {
+                    text-align: left;
+                }
                 padding: 12px 24px;
+
+                &.parent {
+                    padding-bottom: 4px;
+                }
             }
         }
     }
@@ -132,8 +141,14 @@
                 }
             }
 
+            li {
+                &:last-child {
+                    border-radius: 0 0 4px 4px;
+                }
+            }
+
             a {
-                padding: 13px 24px !important;
+                padding: 13px 24px;
                 box-sizing: border-box;
                 width: 100%;
                 height: 100%;
@@ -144,11 +159,20 @@
                 cursor: pointer;
             }
 
-            &.parent > ul {
-                position: absolute;
-                top: 100%;
-                left: 50%;
-                .transform(translateX(-50%));
+            &.active {
+                border: none;
+                border-radius: 4px 4px 0 0;
+                ul {}
+            }
+        }
+
+        li.parent {
+            > a {
+                padding: 13px;
+            }
+
+            > ul {
+                position: relative;
                 width:100%;
                 height: auto;
                 padding-left: 0;
@@ -162,31 +186,25 @@
                 li {
                     padding: 0;
 
+                    &.parent {
+                        padding-bottom: 0;
+                    }
+
                     > a {
                         overflow: hidden;
                         text-overflow: ellipsis;
-                    }
-
-                    &.primary {
-                        background-color: #F3F3F4;
-                        color: #5A5A5A;
-
-                        &:hover {
-                            background-color: white;
-                            color: black;
-                        }
-
-                        > a {
-                            color: inherit;
-                        }
+                        padding: 13px;
                     }
                 }
             }
+        }
 
-            &.active {
-                border: none;
-                border-radius: 4px 4px 0 0;
-                ul {}
+        > li.parent {
+            > ul {
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                .transform(translateX(-50%));
             }
         }
     }
