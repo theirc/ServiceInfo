@@ -262,6 +262,7 @@ INSTALLED_APPS = (
     'sortedm2m',
     'aldryn_faq',
     'taggit',
+    'djangocms_column',
     # End Django CMS
     # Load after easy_thumbnails so that its thumbnail template tag (unused
     # in this project) is hidden.
@@ -432,6 +433,7 @@ MIGRATION_MODULES = {
     'cmsplugin_filer_image': 'cmsplugin_filer_image.migrations_django',
     'cmsplugin_filer_teaser': 'cmsplugin_filer_teaser.migrations_django',
     'cmsplugin_filer_video': 'cmsplugin_filer_video.migrations_django',
+    'djangocms_column': 'djangocms_column.migrations_django',
 }
 
 THUMBNAIL_PROCESSORS = (
