@@ -11,5 +11,11 @@ module.exports = {
             root: '#language-toggle'
             , shower: '#language-chooser'
         }
+        , page: {
+            container: '#page-container'
+        }
+        , footer: {
+            container: '#footer'
+        }
     }
 };

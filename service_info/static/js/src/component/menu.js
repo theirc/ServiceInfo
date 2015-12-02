@@ -1,7 +1,4 @@
 var $ = require('jquery');
-window.jQuery = $;
-window.$ = $;
-
 var menu = require('../config').components.menu;
 
 function init () {
