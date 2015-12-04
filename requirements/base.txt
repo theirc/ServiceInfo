@@ -98,4 +98,4 @@ git+git://github.com/caktus/aldryn-newsblog.git@1.0.9-323#egg=aldryn-newsblog
   pytz
   # six
   backport-collections==0.1
-djangocms-column==1.5
+djangocms-column==1.6.0
