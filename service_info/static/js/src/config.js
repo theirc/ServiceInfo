@@ -5,11 +5,17 @@ module.exports = {
             , container: '#menu-container'
             , closed_class: 'menu-closed'
             , open_class: 'menu-open'
-            , top_items: '#menu > li.parent > a'
+            , parent_items: '#menu li.parent > a'
         }
         , language_toggle: {
             root: '#language-toggle'
             , shower: '#language-chooser'
+        }
+        , page: {
+            container: '#page-container'
+        }
+        , footer: {
+            container: '#footer'
         }
     }
 };
