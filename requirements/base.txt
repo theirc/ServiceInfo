@@ -44,8 +44,8 @@ cmsplugin-filer==0.10.2
 djangocms-text-ckeditor==2.7.0
 django-reversion==1.8.5
 aldryn-disqus==1.0.0
-# Has missing migration: aldryn-faq==1.0.7
-git+git://github.com/caktus/aldryn-faq.git@1.0.7-146#egg=aldryn-faq
+# Has missing migration: aldryn-faq==1.0.8
+git+git://github.com/caktus/aldryn-faq.git@1.0.8-146#egg=aldryn-faq
   aldryn-apphooks-config==0.2.6
     django-appdata==0.1.4
       South==1.0.2
