@@ -262,6 +262,7 @@ INSTALLED_APPS = (
     'sortedm2m',
     'aldryn_faq',
     'taggit',
+    'djangocms_googlemap',
     'djangocms_column',
     # End Django CMS
     # Load after easy_thumbnails so that its thumbnail template tag (unused
