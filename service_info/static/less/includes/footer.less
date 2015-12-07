@@ -1,8 +1,13 @@
 @import "./mixins.less";
 
+#page-container {
+  padding-bottom: 0;
+}
+
 #footer {
   max-height: initial;
   height: auto;
+  margin: 0;
   position:relative;
 
   .row {
@@ -12,7 +17,7 @@
     .align-items(baseline);
 
     .cms_placeholder {
-      width: 100%;
+      width: auto;
       /*
         This fixes a weird display glitch.
 

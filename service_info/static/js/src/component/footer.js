@@ -21,9 +21,11 @@ function init () {
 }
 
 function resize ($page, $footer) {
-  $page.css({
-    'padding-bottom': $footer.outerHeight() + 'px'
-  });
+  if ($(document).width() > 640) {
+    $page.css({
+      'padding-bottom': $footer.outerHeight() + 'px'
+    });
+  }
 }
 
 module.exports = init;
