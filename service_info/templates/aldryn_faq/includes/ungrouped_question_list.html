@@ -24,6 +24,10 @@
             </div>
         {% endif %}
     {% empty %}
-        <p class="list-group-item">{% trans "No entry found." %}</p>
+        <div class="list-group-item">
+            <p>
+                {% trans "No entry found." %}
+            </p>
+        </div>
     {% endfor %}
 </div>
