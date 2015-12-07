@@ -21,9 +21,3 @@ require('./component/footer')();
   Initializing Google Analytics
 */
 require('../../../../frontend/google-analytics.js')();
-
-/*
-  Making FAQ code available;
-*/
-
-window.__faq__ = require('./component/faq');
