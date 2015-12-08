@@ -31,3 +31,23 @@ ul.list-unstyled {
   list-style: none;
   padding-left: 0;
  }
+
+.clearfix {
+  overflow: hidden;
+
+  @media (max-width: 640px) {
+    /*
+      Column layouts are entirely useless on mobile devices. This disables
+      the column layout on mobile width, replacing it with a simple wrapped
+      flex row with automatically sized elements.
+    */
+    .flex-layout();
+    .flex-direction(row);
+    .flex-wrap(wrap);
+    > * {
+      .flex(0, 1, auto);
+      float: none !important;
+      width: auto !important;
+    }
+  }
+}
