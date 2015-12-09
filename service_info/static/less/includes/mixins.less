@@ -187,6 +187,12 @@
     -moz-flex-wrap: @wrap;
     flex-wrap: @wrap;
 }
+.order (@order) {
+    -webkit-box-ordinal-group: @order;
+    -moz-box-ordinal-group: @order;
+    -ms-flex-order: @order;
+    order: @order;
+}
 
 /*
     Headers for Aldryn pages
@@ -200,6 +206,41 @@
     & + * {
       margin-top: 30px;
       padding-top: 0 !important;
+    }
+    
+    > a {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: none;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+.white-header() {
+    color: #3cb879;
+    background-color: white;
+    border: 1px solid #3cb879;
+    border-radius: 4px;
+    padding: 10px 20px;
+
+    > a {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: none;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+.white-green-header() {
+    .white-header();
+    transition: all 0.25s ease;
+    &:hover {
+        .green-header();
+        transition: all 0.25s ease;
     }
 }
 

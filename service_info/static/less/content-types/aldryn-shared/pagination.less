@@ -14,6 +14,7 @@
     }
 
     li.previous {
+      .order(1);
       a {
         span {}
       }
@@ -23,7 +24,19 @@
       a {}
     }
 
-    li.next {}
+    li.overview {
+      .order(3);
+      @media (min-width: 640px) {
+        .order(2);
+      }
+    }
+
+    li.next {
+      .order(2);
+      @media (min-width: 640px) {
+        .order(3);
+      }
+    }
 
     li {
       span.text-muted {
