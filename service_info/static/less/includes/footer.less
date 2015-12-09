@@ -7,7 +7,6 @@
 #footer {
   max-height: initial;
   height: auto;
-  margin: 0;
   position: absolute;
 
   .row {
@@ -17,7 +16,9 @@
     .align-items(baseline);
 
     .cms_placeholder {
-      width: auto;
+      width: 100%;
+      .flex(0, 1, auto);
+      display: none;
       /*
         This fixes a weird display glitch.
 
