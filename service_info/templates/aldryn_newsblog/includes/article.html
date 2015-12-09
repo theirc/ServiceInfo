@@ -44,8 +44,6 @@
             </div>
         {% endif %}
 
-        {% include "aldryn_newsblog/includes/author.html" with author=article.author %}
-
         {% if article.tags and detail_view %}
             <p class="tags">
                 {% if article.tags|length > 0 %} Tags:{% endif %}
