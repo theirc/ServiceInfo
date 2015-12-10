@@ -63,6 +63,10 @@
       {% endblock footer %}
     </footer>
 
+    {% block modals %}
+      {% language_chooser "cms/includes/language-chooser.html" %}
+    {% endblock modals %}
+
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
     <script src="{% static 'js/dist/bundle.js' %}"></script>

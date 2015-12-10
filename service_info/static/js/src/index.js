@@ -10,4 +10,9 @@ jQuery(function ($) {
   $(".dropdown-button").each(function () {
     $(this).dropdown();
   });
+
+  /*
+    Activate Materialize modals.
+  */
+  $('.modal-trigger').leanModal();
 });
