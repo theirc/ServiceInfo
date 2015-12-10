@@ -22,6 +22,8 @@
       {% block header %}
         <nav id="cms-nav" class="{% block nav-class %}nav-wrapper amber lighten-2{% endblock nav-class %}">
           <div class="nav-wrapper">
+            <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+
             {% block brand %}
               <a href="/cms" class="{% block brand-class %}brand-logo{% endblock brand-class %}">
                 <img src="{% static 'images/logo-large.png' %}">
@@ -29,7 +31,7 @@
             {% endblock brand %}
 
             {% block search %}
-              <form id="cms-search" action="search" class="right amber lighten-1">
+              <form id="cms-search" action="search" class="right amber lighten-1 hide-on-med-and-down">
                 <div class="input-field">
                   <input id="search" type="search" required>
                   <label for="search"><i class="material-icons">search</i></label>
