@@ -79,7 +79,7 @@ git+git://github.com/caktus/aldryn-faq.git@1.0.8-146#egg=aldryn-faq
   django-sortedm2m==1.0.2
   django-taggit==0.17.3
 # Has missing migration: aldryn-newsblog==1.0.9
-git+git://github.com/caktus/aldryn-newsblog.git@1.0.9-323#egg=aldryn-newsblog
+git+git://github.com/caktus/aldryn-newsblog.git@1.0.9-323-ImproperlyConfigured#egg=aldryn-newsblog
   python-dateutil==2.4.2
   # aldryn-apphooks-config
   # aldry-boilerplates
