@@ -4,7 +4,7 @@
   {% for child in children %}
     <li class="{% if child.selected %}active{% endif %}">
       {% if child.children %}
-        <a class="dropdown-button" href="#!" data-activates="dropdown{{ forloop.counter0 }}">
+        <a class="dropdown-button" href="#!" data-activates="desktop-dropdown{{ forloop.counter0 }}">
           {% if child.get_menu_title == "Blog" %}
             <i class="material-icons left">description</i>
           {% elif child.get_menu_title == "Home" %}
@@ -39,25 +39,47 @@
 
 {% for child in children %}
   {% if child.children %}
-    {% show_menu from_level to_level extra_inactive extra_active "cms/includes/secondary_menu.html" "" "" child %}
+    {% with prefix="desktop" %}
+      {% show_menu from_level to_level extra_inactive extra_active "cms/includes/secondary_menu.html" "" "" child %}
+    {% endwith %}
+    {% with prefix="mobile" %}
+      {% show_menu from_level to_level extra_inactive extra_active "cms/includes/secondary_menu.html" "" "" child %}
+    {% endwith %}
   {% endif %}
 {% endfor %}
 
 <ul id="mobile-menu" class="side-nav">
   {% for child in children %}
     <li class="{% if child.selected %}active{% endif %}">
-      <a href="{{ child.get_absolute_url }}">
-        {% if child.get_menu_title == "Blog" %}
-          <i class="material-icons left">description</i>
-        {% elif child.get_menu_title == "Home" %}
-          <i class="material-icons left">home</i>
-        {% elif child.get_menu_title == "FAQ" %}
-          <i class="material-icons left">question_answer</i>
-        {% endif %}
-        {{ child.get_menu_title }}
-      </a>
+      {% if child.children %}
+        <a class="dropdown-button" href="#!" data-activates="mobile-dropdown{{ forloop.counter0 }}">
+          {% if child.get_menu_title == "Blog" %}
+            <i class="material-icons left">description</i>
+          {% elif child.get_menu_title == "Home" %}
+            <i class="material-icons left">home</i>
+          {% elif child.get_menu_title == "FAQ" %}
+            <i class="material-icons left">question_answer</i>
+          {% endif %}
+
+          {{ child.get_menu_title }}
+          <i class="material-icons right">arrow_drop_down</i>
+        </a>
+      {% else %}
+        <a href="{{ child.get_absolute_url }}">
+          {% if child.get_menu_title == "Blog" %}
+            <i class="material-icons left">description</i>
+          {% elif child.get_menu_title == "Home" %}
+            <i class="material-icons left">home</i>
+          {% elif child.get_menu_title == "FAQ" %}
+            <i class="material-icons left">question_answer</i>
+          {% endif %}
+
+          {{ child.get_menu_title }}
+        </a>
+      {% endif %}
     </li>
   {% endfor %}
+  
   <li id="language-picker-trigger">
     <a class="modal-trigger" href="#language-picker">Choose Language</a>
   </li>

@@ -1,16 +1,8 @@
 {% load menu_tags i18n %}
 
-<ul id="dropdown{{ forloop.counter0 }}" class="dropdown-content">
+<ul id="{{ prefix }}-dropdown{{ forloop.counter0 }}" class="dropdown-content">
   <li class="{% if child.selected %}active amber{% endif %}">
       <a class="truncate" href="{{ child.get_absolute_url }}">
-        {% if child.get_menu_title == "Blog" %}
-          <i class="material-icons left">description</i>
-        {% elif child.get_menu_title == "Home" %}
-          <i class="material-icons left">home</i>
-        {% elif child.get_menu_title == "FAQ" %}
-          <i class="material-icons left">question_answer</i>
-        {% endif %}
-
         {{ child.get_menu_title }}
       </a>
   </li>
@@ -18,14 +10,6 @@
   {% for child in child.children %}
     <li class="{% if child.selected %}active amber darken-1{% else %}grey lighten-4{% endif %}">
         <a class="truncate" href="{{ child.get_absolute_url }}">
-          {% if child.get_menu_title == "Blog" %}
-            <i class="material-icons left">description</i>
-          {% elif child.get_menu_title == "Home" %}
-            <i class="material-icons left">home</i>
-          {% elif child.get_menu_title == "FAQ" %}
-            <i class="material-icons left">question_answer</i>
-          {% endif %}
-
           {{ child.get_menu_title }}
         </a>
     </li>

@@ -2,7 +2,12 @@
 @mobile-menu-height: 64px;
 
 #cms-nav {
-  padding-left: 1em;
+  padding-left: 2em;
+
+  @media (max-width: 992px) {
+    padding-left: 1em;
+  }
+
   height: @nav-height;
   line-height: @nav-height;
 
@@ -27,6 +32,14 @@
   .amber {
     a {
       color: white;
+    }
+  }
+
+  .dropdown-content {
+    left: 0;
+    width: 100%;
+    li > a {
+      padding: 22px 16px;
     }
   }
 }
