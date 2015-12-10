@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <ul class="pagination">
-    <li class="waves-effect {% if not page_obj.has_prev_page %}disabled{% endif %}">
+    <li class="waves-effect {% if not page_obj.has_previous %}disabled{% endif %}">
         {% if page_obj.has_previous %}
             <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}" aria-label="{% trans "Previous" %}">
         {% endif %}
@@ -25,7 +25,7 @@
         <li class="active">1</li>
     {% endfor %}
 
-    <li class="waves-effect {% if not page_obj.has_next_page %} disabled{% endif %}">
+    <li class="waves-effect {% if not page_obj.has_next %}disabled{% endif %}">
         {% if page_obj.has_next %}
             <a href="{{ request.path }}?page={{ page_obj.next_page_number }}" aria-label="{% trans "Next" %}">
         {% endif %}
