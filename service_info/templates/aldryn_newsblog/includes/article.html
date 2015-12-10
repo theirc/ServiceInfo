@@ -17,8 +17,9 @@
     {% endblock newsblog_visual %}
 
     {% block newsblog_categories %}
-        {% if article.categories %}
+        {% if article.categories|length > 0 %}
             <p class="category">
+                Categories:
                 {% for category in article.categories.all %}
                     <a href="{% namespace_url 'article-list-by-category' category.slug namespace=namespace default='' %}">{{ category.name }}</a>{% if not forloop.last %}, {% endif %}
                 {% endfor %}
@@ -43,12 +44,11 @@
             </div>
         {% endif %}
 
-        {% include "aldryn_newsblog/includes/author.html" with author=article.author %}
-
         {% if article.tags and detail_view %}
             <p class="tags">
+                {% if article.tags|length > 0 %} Tags:{% endif %}
                 {% for tag in article.tags.all %}
-                    <a href="{% namespace_url 'article-list-by-tag' tag=tag.slug namespace=namespace default='' %}">{{ tag.name }}</a>
+                    <a href="{% namespace_url 'article-list-by-tag' tag=tag.slug namespace=namespace default='' %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
                 {% endfor %}
             </p>
         {% endif %}

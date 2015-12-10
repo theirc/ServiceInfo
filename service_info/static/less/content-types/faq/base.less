@@ -1,0 +1,36 @@
+@import "../../includes/mixins.less";
+
+.aldryn-faq {
+  .panel-heading {
+    padding: 0 0 20px 0;
+    
+    h3 {
+      .green-header();
+      a {
+        color: inherit !important;
+      }
+    }
+  }
+}
+
+.aldryn-faq .list-group {
+  .flex-layout();
+  .flex-direction(column);
+
+  > * {
+    margin: 0 0 10px 0;
+  }
+
+  a {
+    text-decoration: none;
+    border-bottom: none;
+  }
+
+  .list-group-item-text {
+    margin: 10px 20px;
+
+    p {
+      margin: 0;
+    }
+  }
+}

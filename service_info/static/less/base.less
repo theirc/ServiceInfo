@@ -1,4 +1,7 @@
 @import "includes/mixins.less";
+@import "includes/header.less";
+@import "includes/page.less";
+@import "includes/footer.less";
 
 /*
     Base styles
@@ -13,10 +16,38 @@
 
 #content {
     background-color: white;
-    padding: 2em;
+    padding: 30px;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-    ul {
-        list-style: initial;
-        padding-left: 40px;
+ul {
+    list-style: initial;
+    padding-left: 40px;
+}
+
+ul.list-unstyled {
+  list-style: none;
+  padding-left: 0;
+ }
+
+.clearfix {
+  overflow: hidden;
+
+  @media (max-width: 640px) {
+    /*
+      Column layouts are entirely useless on mobile devices. This disables
+      the column layout on mobile width, replacing it with a simple wrapped
+      flex row with automatically sized elements.
+    */
+    .flex-layout();
+    .flex-direction(row);
+    .flex-wrap(wrap);
+    > * {
+      .flex(0, 1, auto);
+      float: none !important;
+      width: auto !important;
     }
+  }
 }

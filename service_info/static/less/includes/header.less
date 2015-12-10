@@ -1,0 +1,220 @@
+@import "./mixins.less";
+
+#cms-header {
+    width: 100%;
+    height: 70px;
+    background-color: #2A2A2A;
+    z-index: 100;
+    position: relative;
+
+    @media (min-width: 640px) {
+        .flex-layout();
+        .flex-direction(row);
+        .align-items(center);
+        .justify-content(flex-start);
+        .flex-wrap(nowrap);
+
+        position: absolute;
+        height: 160px;
+        overflow: visible;
+    }
+}
+
+#cms-header .brand {
+    @media (min-width: 640px) {
+        background: white;
+        padding: .25em .25em 0.1em;
+        text-align: center;
+        height: 100%;
+    }
+}
+
+#cms-header .brand #logo {
+    height: 100%;
+    background-repeat: no-repeat;
+    @media (min-width: 640px){
+        background-image: url(../images/logo-large.png);
+        background-image: url(../images/logo-large.svg);
+        background-size: 100%;
+        background-position: center;
+        width: 100px;
+        height: 100px;
+        margin: 2em;
+    }
+}
+
+@media only screen and (max-width: 639px) {
+    #cms-header {
+        background-color: white;
+        .brand {
+            height: 100%;
+            margin: 0 10px;
+        }
+    }
+    #cms-header .brand #logo {
+        background-image: url(../images/logo-small.png);
+        background-image: url(../images/logo-small.svg);
+        background-size: 100%;
+        background-position: 0 10px;
+        width: 140px;
+        height: 60px;
+    }
+}
+
+
+/*
+    Menu style overrides
+*/
+
+#menu {
+    > li {
+        padding: 12px 0;
+    }
+
+    li.parent {
+        padding-bottom: 0;
+
+        > a {
+            padding: 0 0 12px 0;
+        }
+
+        > ul {
+            padding: 0;
+            margin: 0 -12px;
+            display: none;
+
+            > li {
+                & when (@direction = ltr) {
+                    text-align: right;
+                }
+                & when (@direction = rtl) {
+                    text-align: left;
+                }
+                padding: 12px 24px;
+
+                &.parent {
+                    padding-bottom: 4px;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 640px) {
+    #menu-container {
+        .flex-layout();
+        .justify-content(flex-end);
+        .flex(1, 1, auto);
+
+        box-sizing: border-box;
+        padding: 0 40px;
+    }
+    #menu {
+        .flex-layout();
+        .flex-direction(row);
+        .justify-content(flex-end);
+        width: 100%;
+
+        > li {
+            .flex-layout();
+            .align-items(center);
+            .justify-content(center);
+            .flex(0, 1, 150px);
+
+            &:not(.selected),
+            &:not(.language-chooser) {
+                .green-button();
+                padding:0;
+            }
+
+            &.selected {
+                .white-green-button();
+                padding:0;
+            }
+
+            border-top: none;
+            box-sizing: border-box;
+            padding: 0;
+            position: relative;
+
+            & when (@direction = ltr) {
+                margin-right: 20px;
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+            & when (@direction = rtl) {
+                margin-left: 20px;
+                &:last-child {
+                    margin-left: 0;
+                }
+            }
+
+            li {
+                &:last-child {
+                    border-radius: 0 0 4px 4px;
+                }
+            }
+
+            a {
+                padding: 13px 24px;
+                box-sizing: border-box;
+                width: 100%;
+                height: 100%;
+            }
+
+            &#language-chooser {
+                padding: 12px;
+                cursor: pointer;
+            }
+
+            &.active {
+                border: none;
+                border-radius: 4px 4px 0 0;
+                ul {}
+            }
+        }
+
+        li.parent {
+            > a {
+                padding: 13px;
+            }
+
+            > ul {
+                position: relative;
+                width:100%;
+                height: auto;
+                padding-left: 0;
+                margin: 0;
+
+                display: none;
+
+                background-color: #5A5A5A;
+                border-radius: 0 0 4px 4px;
+
+                li {
+                    padding: 0;
+
+                    &.parent {
+                        padding-bottom: 0;
+                    }
+
+                    > a {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        padding: 13px;
+                    }
+                }
+            }
+        }
+
+        > li.parent {
+            > ul {
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                .transform(translateX(-50%));
+            }
+        }
+    }
+}

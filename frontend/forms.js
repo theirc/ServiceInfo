@@ -163,7 +163,8 @@ var forms = module.exports = {
         // returns missing...
         var self = this,
             missing = {},
-            errors = e.responseJSON;
+            errors = e.responseJSON,
+            field_errors;
         $.each(errors, function(k) {
             if (k === 'non_field_errors') {
                 for (var i = 0; i < this.length; i++) {
@@ -176,11 +177,12 @@ var forms = module.exports = {
                 } else {
                     missing[k] = this[0];
                 }
+                field_errors = true;
             }
         })
         if (e.status >= 500) {
             $('.error-submission').text(i18n.t('Global.FormSubmissionError'));
-        } else if (e.status === 400) {
+        } else if (e.status === 400 && field_errors) {
             messages.add(i18n.t('Global.FormValidationError'));
         }
         return missing;

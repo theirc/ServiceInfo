@@ -1,5 +1,25 @@
-{% load menu_tags %}
+{% load menu_tags i18n %}
 
 {% for child in children %}
-    <li><a href="{{ child.get_absolute_url }}">{{ child.get_menu_title }}</a></li>
+    <li class="{% if child.children %}parent{% endif %} {% if child.selected %}selected{% endif %}">
+        <a href="{{ child.get_absolute_url }}">
+            {{ child.get_menu_title }}{% if child.children %} &#9662;{% endif %}
+        </a>
+        {% if child.children %}
+            <ul>
+                <li class="primary {% if child.selected %}selected{% endif %}">
+                    <a href="{{ child.get_absolute_url }}">
+                        {{ child.get_menu_title }}
+                    </a>
+                </li>
+                {% show_menu from_level to_level extra_inactive extra_active template "" "" child %}
+            </ul>
+        {% endif %}
+    </li>
 {% endfor %}
+
+{% if not child.children %}
+    <li class="language-chooser" id="language-chooser">
+        {% trans "Change language" %}
+    </li>
+{% endif %}

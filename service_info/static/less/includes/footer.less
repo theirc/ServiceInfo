@@ -1,0 +1,92 @@
+@import "./mixins.less";
+
+#page-container {
+  padding-bottom: 0;
+}
+
+#footer {
+  max-height: initial;
+  height: auto;
+  position: absolute;
+
+  .row {
+    .flex-layout();
+    .flex-wrap(wrap);
+    .justify-content(flex-start);
+    .align-items(baseline);
+
+    .cms_placeholder {
+      width: 100%;
+      .flex(0, 1, auto);
+      display: none;
+      /*
+        This fixes a weird display glitch.
+
+        Seemingly placeholder elements behave strangely when embedded
+        in a flex-layout container.
+      */
+    }
+
+    & when (@direction = rtl) {
+      .flex-direction(row-reverse);
+    }
+
+    & when (@direction = ltr) {
+      .flex-direction(row);
+    }
+
+    max-width: initial;
+
+    > *:not(.cms_placeholder) {
+      padding-right: 2em;
+      box-sizing: border-box;
+
+      .flex(0, 0, 100%);
+    }
+
+    .cms_plugin {
+      color: white;
+
+      &.third {
+        .flex(0, 1, 33%);
+      }
+
+      &.two-thirds {
+        .flex(0, 1, 66%);
+      }
+
+      h2 {
+        font-style: normal !important;
+        margin-bottom: 4px;
+        line-height: 1.3em;
+        color: white;
+        font-weight: 700;
+      }
+
+      p {
+        margin-top: 0;
+      }
+
+      * {
+        color: inherit;
+      }
+    }
+  }
+
+  @media (min-width: 640px) {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding: 20px;
+    box-sizing: border-box;
+
+    .row {
+      .flex-wrap(nowrap);
+
+      > *:not(.cms_placeholder) {
+        .flex(0, 1, auto);
+      }
+    }
+  }
+}

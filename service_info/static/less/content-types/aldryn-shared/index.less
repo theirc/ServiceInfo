@@ -1,0 +1,31 @@
+@import "../../includes/mixins.less";
+@import "./pagination.less";
+
+*:not(.aldryn) > .aldryn {
+  font-size: 115%;
+}
+
+.aldryn {
+  padding: 0 0 20px 0;
+
+  > h2 {
+    .green-header();
+    a {
+      color: inherit !important;
+    }
+  }
+
+  .panel-heading {
+  }
+}
+
+#content > .container > .row > *:first-child {
+  /*
+    Assume that the top item in an Aldryn page will always have a title.
+    That box should be shifted 30 pixels up to align with the top of the
+    content well.
+
+    TODO: get this working. It does not work well yet.
+  */
+  // margin-top: -30px;
+}

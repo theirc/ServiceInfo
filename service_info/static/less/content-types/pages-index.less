@@ -33,23 +33,3 @@
         }
     }
 }
-
-.pagination {
-    display: flex;
-    flex-direction: column;
-
-    @media (min-width: 414px) {
-        flex-direction: row;
-        justify-content: space-between;
-        flex-wrap: nowrap;
-    }
-
-    & > * {
-        .white-green-button();
-        margin-bottom: 1em;
-
-        @media (min-width: 414px) {
-            margin-bottom: 0;
-        }
-    }
-}
