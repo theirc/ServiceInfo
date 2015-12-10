@@ -42,9 +42,7 @@
 
             {% block nav %}
               {% block menu %}
-                <ul id="nav" class="right hide-on-med-and-down">
-                  {% show_menu 0 2 2 2 "cms/includes/menu_materialize.html" %}
-                </ul>
+                {% show_menu 0 2 2 2 "cms/includes/menu_materialize.html" %}
               {% endblock menu %}
             {% endblock nav %}
           </div>
@@ -65,7 +63,9 @@
       {% endblock footer %}
     </footer>
 
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="{% static 'js/dist/bundle.js' %}"></script>
     {% render_block "js" %}
   </body>
 </html>

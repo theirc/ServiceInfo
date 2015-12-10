@@ -1,11 +1,22 @@
 @nav-height: 96px;
+@mobile-menu-height: 64px;
 
 #cms-nav {
   padding-left: 1em;
   height: @nav-height;
   line-height: @nav-height;
-  i {
-    height: @nav-height;
-    line-height: @nav-height;
+
+  #nav, .button-collapse {
+    i {
+      height: @nav-height;
+      line-height: @nav-height;
+    }
+  }
+
+  #mobile-menu {
+    i {
+      height: @mobile-menu-height;
+      line-height: @mobile-menu-height;
+    }
   }
 }
