@@ -59,7 +59,42 @@
 
     <footer id="cms-footer" class="{% block footer-class %}page-footer grey darken-3{% endblock footer-class %}">
       {% block footer %}
-        {% static_placeholder "footer" %}
+        <div class="container white-text">
+          <div class="row">
+            <div class="col s12 m3">
+              {% static_placeholder "footer_column_1" %}
+            </div>
+            <div class="col s12 m3">
+              {% static_placeholder "footer_column_2" %}
+            </div>
+            <div class="col s12 m3">
+              {% static_placeholder "footer_column_3" %}
+            </div>
+            <div class="col s12 m3">
+              <h6 class="grey-text">Search for Services Nearby</h6>
+              <p>
+                <a href="#!" class="waves-effect waves-light btn-large">
+                  Services
+                  <i class="material-icons right">search</i>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright grey-text">
+          <div class="container">
+            <div class="hide-on-small-only">
+              International Rescue Committee Information Portal
+              <span id="more-links" class="right">
+                <a href="#!">Privacy</a> · <a href="#!">Github</a> · Created by the International Rescue Committee
+              </span>
+            </div>
+            <div class="hide-on-med-and-up">
+              IRC Info Portal
+              <span class="right">Created by the IRC</span>
+            </div>
+          </div>
+        </div>
       {% endblock footer %}
     </footer>
 
