@@ -1,3 +1,12 @@
+@import "../includes/mixins.less";
+
+body {
+  .flex-layout();
+  min-height: 100vh;
+  .flex-direction(column);
+}
+
 main {
   overflow: hidden;
+  .flex(1, 0, auto);
 }
