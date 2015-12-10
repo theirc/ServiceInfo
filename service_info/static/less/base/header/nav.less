@@ -6,10 +6,13 @@
   height: @nav-height;
   line-height: @nav-height;
 
-  #nav, .button-collapse, #cms-search {
-    i {
-      height: @nav-height;
-      line-height: @nav-height;
+  > .nav-wrapper {
+    form,
+    > ul > li > a {
+      i {
+        height: @nav-height;
+        line-height: @nav-height;
+      }
     }
   }
 
@@ -17,6 +20,12 @@
     i {
       height: @mobile-menu-height;
       line-height: @mobile-menu-height;
+    }
+  }
+
+  .amber {
+    a {
+      color: white;
     }
   }
 }
