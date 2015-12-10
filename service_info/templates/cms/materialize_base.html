@@ -1,0 +1,69 @@
+{% load cms_tags staticfiles sekizai_tags menu_tags i18n %}
+
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    {% render_block "extra-meta" %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link href="{% static 'css/site-ltr.css' %}" rel="stylesheet">
+    {% render_block "css" %}
+
+    <title>{% block title %}{% page_attribute "page_title" %}{% endblock title %}</title>
+
+  </head>
+  <body>
+    {% cms_toolbar %}
+
+    <header id="cms-header" class="{% block header-class %}{% endblock header-class %}">
+      {% block header %}
+        <nav id="cms-nav" class="{% block nav-class %}nav-wrapper amber lighten-2{% endblock nav-class %}">
+          <div class="nav-wrapper">
+            {% block brand %}
+              <a href="/cms" class="{% block brand-class %}brand-logo{% endblock brand-class %}">
+                <img src="{% static 'images/logo-large.png' %}">
+              </a>
+            {% endblock brand %}
+
+            {% block search %}
+              <form id="cms-search" action="search" class="right amber lighten-1">
+                <div class="input-field">
+                  <input id="search" type="search" required>
+                  <label for="search"><i class="material-icons">search</i></label>
+                  <i class="material-icons">close</i>
+                </div>
+              </form>
+            {% endblock search %}
+
+            {% block nav %}
+              {% block menu %}
+                <ul id="nav" class="right hide-on-med-and-down">
+                  {% show_menu 0 2 2 2 "cms/includes/menu_materialize.html" %}
+                </ul>
+              {% endblock menu %}
+            {% endblock nav %}
+          </div>
+        </nav>
+      {% endblock header %}
+    </header>
+
+    <main id="cms-main" class="{% block main-class %}main container{% endblock main-class %}">
+      <section class="section">
+        {% block content %}
+        {% endblock content %}
+      </section>
+    </main>
+
+    <footer id="cms-footer" class="{% block footer-class %}page-footer grey darken-3{% endblock footer-class %}">
+      {% block footer %}
+        {% static_placeholder "footer" %}
+      {% endblock footer %}
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    {% render_block "js" %}
+  </body>
+</html>
