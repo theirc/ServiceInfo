@@ -15,4 +15,11 @@ jQuery(function ($) {
     Activate Materialize modals.
   */
   $('.modal-trigger').leanModal();
+
+  /*
+    Activate Materialize parallax.
+  */
+  if (!$('.cms-toolbar-expanded').length) {
+    $('.parallax').parallax();
+  }
 });

@@ -420,8 +420,7 @@ SIGNED_URL_LIFETIME = 300
 # Django CMS settings
 CMS_TEMPLATES = (
     ('cms/content-types/page.html', 'Page'),
-    ('cms/content-types/pages-index.html', 'Content Index'),
-    ('cms/content-types/full-width-image.html', 'Full Width Image'),
+    ('cms/content-types/homepage.html', 'Homepage (with hero)'),
 )
 
 CMS_PERMISSION = True

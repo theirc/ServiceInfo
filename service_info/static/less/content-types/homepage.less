@@ -1,0 +1,103 @@
+@import "../includes/mixins.less";
+
+section.hero {
+  position: relative;
+  overflow: hidden;
+
+  @media (min-width: 992px) {
+    max-height: 45vw;
+  }
+
+  .hero-image {
+    img {
+      width: 100%;
+      height: auto;
+
+      @media (max-width: 992px) {
+        width: auto;
+        height: 100%;
+      }
+    }
+  }
+  .hero-text {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    padding: 20px 0;
+
+    text-shadow: 2px 2px 4px black;
+
+    .container {
+      text-align: right;
+      * { text-align: right; }
+
+      @media (max-width: 992px) {
+        text-align: center;
+        * { text-align: center; }
+      }
+    }
+  }
+}
+
+section.main-content {
+  padding: 0 20px;
+
+  .right-col {}
+
+  .left-col {
+    padding: 1.5em 1em;
+  }
+
+  /*
+    If a newsblog-articles list is added to the .main-content section of
+    the homepage, its cards will be arranged in a three-column layout.
+  */
+  .aldryn-newsblog-articles {
+    .flex-layout();
+    .flex-wrap(wrap);
+    .flex-direction(row);
+
+    .card-pad {
+      padding: 1em;
+      box-sizing: border-box;
+      .flex(1, 1, 33.333333%);
+
+      @media (max-width: 992px) {
+        .flex(1, 1, 50%);
+      }
+
+      @media (max-width: 720px) {
+        .flex(1, 1, 100%);
+      }
+
+      .flex-layout();
+      > * {
+        .flex(1, 1, auto);
+      }
+
+      .card {
+        .flex-layout();
+        .flex-direction(column);
+
+        > .card-image {
+          .card-title {
+            text-shadow: 2px 2px 4px black;
+          }
+        }
+
+        > .card-content {
+          .flex(1, 1, auto);
+        }
+      }
+    }
+
+    .card-title.truncate {
+      display: inline-block;
+      max-width: 100%;
+      > * {
+        white-space: normal;
+      }
+    }
+  }
+}
