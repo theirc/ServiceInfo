@@ -7,14 +7,14 @@
     {% render_block "extra-meta" %}
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css"> -->
-    {% if request.LANGUAGE_CODE == 'ar' %}
+    {% if request.LANGUAGE_CODE == 'en' %}
       <link href="{% static 'css/materialize.min-rtl.css' %}" rel="stylesheet">
     {% else %}
       <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
     {% endif %}
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    {% if request.LANGUAGE_CODE == 'ar' %}
+    {% if request.LANGUAGE_CODE == 'en' %}
       <link href="{% static 'css/site-rtl.css' %}" rel="stylesheet">
     {% else %}
       <link href="{% static 'css/site.css' %}" rel="stylesheet">
