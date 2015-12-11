@@ -5,7 +5,7 @@
         {% if page_obj.has_previous %}
             <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}" aria-label="{% trans "Previous" %}">
         {% endif %}
-            <i aria-hidden="true" class="material-icons">{% if request.LANGUAGE_CODE == 'en' %}chevron_right{% else %}chevron_left{% endif %}</i>
+            <i aria-hidden="true" class="material-icons">{% if request.LANGUAGE_CODE == 'ar' %}chevron_right{% else %}chevron_left{% endif %}</i>
         {% if page_obj.has_previous %}
             </a>
         {% endif %}
@@ -29,7 +29,7 @@
         {% if page_obj.has_next %}
             <a href="{{ request.path }}?page={{ page_obj.next_page_number }}" aria-label="{% trans "Next" %}">
         {% endif %}
-            <i aria-hidden="true" class="material-icons">{% if request.LANGUAGE_CODE == 'en' %}chevron_left{% else %}chevron_right{% endif %}</i>
+            <i aria-hidden="true" class="material-icons">{% if request.LANGUAGE_CODE == 'ar' %}chevron_left{% else %}chevron_right{% endif %}</i>
         {% if page_obj.has_next %}
             </a>
         {% endif %}
