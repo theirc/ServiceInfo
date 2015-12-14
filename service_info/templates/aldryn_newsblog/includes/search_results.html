@@ -1,5 +1,42 @@
 {% load i18n apphooks_config_tags %}
 
+<div class="results-list">
+    {% for article in object_list %}
+        <div class="card result-card">
+            <div class="card-content">
+                <span class="card-title">
+                    {{ article.title }}
+                </span>
+                <p>
+                    {{ article.lead_in|striptags|truncatewords:"10"|safe }}
+                </p>
+            </div>
+            <div class="card-action">
+                <a href="{{ article.get_absolute_url }}">
+                    Read More
+                </a>
+            </div>
+        </div>
+    {% empty %}
+        {% if query %}
+            <div class="card result-card no-results">
+                <div class="card-content">
+                    <span class="card-title">
+                        No articles found
+                    </span>
+                    <p>
+                        There were no results for your search. Please check
+                        your spelling and try again.
+                    </p>
+                </div>
+                <div class="card-action"></div>
+            </div>
+        {% else %}
+        {% endif %}
+    {% endfor %}
+</div>
+
+<!--
 <ul class="results-list list-unstyled">
     <h3>{% blocktrans with query=query %}Most recent articles containing "<strong>{{ query }}</strong>"{% endblocktrans %}</h3>
     {% for article in object_list %}
@@ -22,3 +59,4 @@
         {% endif %}
     {% endfor %}
 </ul>
+ -->

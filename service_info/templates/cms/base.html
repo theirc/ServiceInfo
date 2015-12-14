@@ -24,7 +24,7 @@
     <title>{% block title %}{% page_attribute "page_title" %}{% endblock title %}</title>
 
   </head>
-  <bod class="{% block body-class %}grey lighten-5{% endblock body-class %}">
+  <body class="{% block body-class %}grey lighten-5{% endblock body-class %}">
     {% cms_toolbar %}
 
     <header id="cms-header" class="{% block header-class %}{% endblock header-class %}">
@@ -59,7 +59,9 @@
       {% endblock header %}
     </header>
 
-    <main id="cms-main" class="{% block main-class %}main container{% endblock main-class %}">
+    <main id="cms-main" class="main {% block main-class %}container{% endblock main-class %}">
+      {% block hero %}{% endblock hero %}
+
       {% block content %}
       {% endblock content %}
     </main>

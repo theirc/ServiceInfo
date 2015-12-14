@@ -1,38 +1,35 @@
-{% extends "cms/content-types/page.html" %}
+{% extends "cms/content-types/two-column.html" %}
 {% load cms_tags %}
 
 {% block main-class %}main{% endblock main-class %}
 
-{% block content %}
-  {% block hero %}
-    <section class="hero">
-      <div class="hero-image">
-        {% placeholder "hero_image" %}
+{% block hero %}
+  <section class="hero">
+    <div class="hero-image">
+      {% placeholder "hero_image" %}
+    </div>
+    <div class="hero-text white-text">
+      <div class="container">
+        {% placeholder "hero_text" %}
       </div>
-      <div class="hero-text white-text">
-        <div class="container">
-          {% placeholder "hero_text" %}
-        </div>
-      </div>
-    </section>
-  {% endblock hero %}
+    </div>
+  </section>
+{% endblock hero %}
 
-  {% block main-content %}
-    <section class="row main-content">
-      <div class="col s12 m9 right-col">
-        {% static_placeholder "main-content" %}
-      </div>
-      <div class="col s12 m3 left-col">
-        
-        <!--
-          Placeholder Twitter timeline, put here pending the addition of a proper
-          Aldryn Twitter timeline plug-in (or suchlike).
-        -->
-        <a class="twitter-timeline" href="https://twitter.com/CaktusGroup" data-widget-id="616657501325541376">Tweets by @CaktusGroup</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+{% block main-column-class %}left-col{% endblock main-column-class %}
+{% block secondary-column-class %}right-col{% endblock secondary-column-class %}
 
-        {% static_placeholder "main-content-side" %}
-      </div>
-    </section>
-  {% endblock main-content %}
-{% endblock content %}
+{% block main-column-content %}
+  {% static_placeholder "main-content" %}
+{% endblock main-column-content %}
+
+{% block secondary-column-content %}
+  <!--
+    Placeholder Twitter timeline, put here pending the addition of a proper
+    Aldryn Twitter timeline plug-in (or suchlike).
+  -->
+  <a class="twitter-timeline" href="https://twitter.com/CaktusGroup" data-widget-id="616657501325541376">Tweets by @CaktusGroup</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  {% static_placeholder "main-content-side" %}
+{% endblock secondary-column-content %}

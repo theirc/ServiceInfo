@@ -420,6 +420,8 @@ SIGNED_URL_LIFETIME = 300
 # Django CMS settings
 CMS_TEMPLATES = (
     ('cms/content-types/page.html', 'Page'),
+    ('cms/content-types/wide-page.html', 'Wide Page'),
+    ('cms/content-types/two-column.html', 'Wide Page (two columns)'),
     ('cms/content-types/homepage.html', 'Homepage (with hero)'),
 )
 
