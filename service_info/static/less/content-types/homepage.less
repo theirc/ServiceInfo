@@ -13,9 +13,10 @@ section.hero {
       width: 100%;
       height: auto;
 
-      @media (max-width: 992px) {
-        width: auto;
-        height: 100%;
+      @media (max-width: 640px) {
+        max-width: none;
+        width: 200vw;
+        height: auto;
       }
     }
   }
@@ -28,13 +29,26 @@ section.hero {
 
     text-shadow: 2px 2px 4px black;
 
+    @media (max-width: 640px) {
+      top: 50%;
+      bottom: auto;
+      .transform(translateY(-50%));
+    }
+
     .container {
       text-align: right;
       * { text-align: right; }
 
-      @media (max-width: 992px) {
+      @media (max-width: 640px) {
         text-align: center;
         * { text-align: center; }
+
+        h1 {
+          font-size: 3rem;
+        }
+        h2 {
+          font-size: 2rem;
+        }
       }
     }
   }
@@ -47,5 +61,17 @@ section.main-content {
 
   .right-col {
     padding: 1.5em 1em;
+  }
+}
+
+.secondary-column {
+  /*
+    Expand height of contents of right column to match those of left column.
+  */
+  .flex-layout();
+  .flex-direction(column);
+
+  > *:not(.cms_placeholder) {
+    .flex(1, 1, auto);
   }
 }
