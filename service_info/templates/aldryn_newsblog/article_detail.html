@@ -22,7 +22,7 @@
                 {% else %}
                     <li class="previous">{% trans "Previous" %}</li>
                 {% endif %}
-                <li><a href="{% namespace_url "article-list" %}">{% trans "Back to Top" %}</a></li>
+                <li><a href="{% namespace_url "article-list" %}">{% trans "Back to List" %}</a></li>
                 {% if next_article %}
                     <li class="next"><a href="{{ next_article.get_absolute_url }}">{% trans "Next" %}</a></li>
                 {% else %}
