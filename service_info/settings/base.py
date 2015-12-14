@@ -143,6 +143,7 @@ STATIC_URL = '/app/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
     os.path.join(PROJECT_ROOT, 'frontend'),
+    os.path.join(PROJECT_ROOT, 'node_modules', 'materialize-css'),
 )
 
 LOCALE_PATHS = (
