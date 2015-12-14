@@ -1,6 +1,6 @@
 {% load menu_tags i18n %}
 
-<ul id="nav" class="right hide-on-med-and-down">
+<ul id="nav" class="hide-on-med-and-down">
   {% for child in children %}
     <li class="{% if child.selected %}active{% endif %}">
       {% if child.children %}
@@ -79,7 +79,7 @@
       {% endif %}
     </li>
   {% endfor %}
-  
+
   <li id="language-picker-trigger">
     <a class="modal-trigger" href="#language-picker">Choose Language</a>
   </li>

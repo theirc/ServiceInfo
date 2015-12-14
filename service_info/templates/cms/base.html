@@ -39,8 +39,14 @@
               </a>
             {% endblock brand %}
 
+            {% block nav %}
+              {% block menu %}
+                {% show_menu 0 2 2 2 "cms/includes/menu.html" %}
+              {% endblock menu %}
+            {% endblock nav %}
+
             {% block search %}
-              <form id="cms-search" action="search" class="right amber lighten-1 hide-on-med-and-down">
+              <form id="cms-search" action="search" class="amber lighten-1 hide-on-med-and-down">
                 <div class="input-field">
                   <input id="search" type="search" required>
                   <label for="search"><i class="material-icons">search</i></label>
@@ -48,12 +54,6 @@
                 </div>
               </form>
             {% endblock search %}
-
-            {% block nav %}
-              {% block menu %}
-                {% show_menu 0 2 2 2 "cms/includes/menu.html" %}
-              {% endblock menu %}
-            {% endblock nav %}
           </div>
         </nav>
       {% endblock header %}

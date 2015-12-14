@@ -1,15 +1,55 @@
+@import "../../includes/mixins.less";
+
 @nav-height: 96px;
 @mobile-menu-height: 64px;
 
 #cms-nav {
-  padding-left: 2em;
+  padding-left: 2rem;
 
   @media (max-width: 992px) {
-    padding-left: 1em;
+    padding: 0 1rem;
   }
 
   height: @nav-height;
   line-height: @nav-height;
+
+  > .nav-wrapper {
+    /*
+      Flexbox layout for nav menu.
+    */
+    .flex-layout();
+    .flex-direction(row);
+    .flex-wrap(nowrap);
+
+    @media (max-width: 992px) {
+      .justify-content(space-between);
+    }
+
+    /*
+      Elements of header.
+    */
+    .brand-logo {
+      position: relative;
+      .flex(0, 1, auto);
+
+      @media (max-width: 992px) {
+        left: auto;
+        .transform(none);
+      }
+    }
+
+    #nav {
+      .flex(1, 1, auto);
+      .flex-layout();
+      .flex-direction(row);
+      .flex-wrap(wrap); /* simulates truncation of items */
+      .justify-content(flex-end);
+    }
+
+    #cms-search {
+      .flex(0, 1, auto);
+    }
+  }
 
   > .nav-wrapper {
     form,
