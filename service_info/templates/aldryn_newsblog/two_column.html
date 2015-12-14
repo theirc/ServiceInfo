@@ -10,13 +10,13 @@
 {% block main-column-class %}aldryn aldryn-newsblog{% endblock main-column-class %}
 {% block secondary-column-class %}aldryn aldryn-newsblog-sidebar{% endblock secondary-column-class %}
 
-{% block main-column-content %}
+{% block content %}
     {% block newsblog_title %}{% endblock %}
     {% block newsblog_content %}{% endblock %}
     {% block newsblog_footer %}{% endblock %}
-{% endblock main-column-content %}
+{% endblock content %}
 
-{% block secondary-column-content %}
+{% block sidebar-content %}
     {% render_placeholder view.config.placeholder_base_sidebar %}
     {% block newsblog_sidebar %}{% endblock %}
-{% endblock secondary-column-content %}
+{% endblock sidebar-content %}

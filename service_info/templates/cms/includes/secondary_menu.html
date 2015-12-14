@@ -2,21 +2,21 @@
 
 <ul id="{{ prefix }}-dropdown{{ forloop.counter0 }}" class="dropdown-content">
   <li class="{% if child.selected %}active amber{% endif %}">
-      <a class="truncate" href="{{ child.get_absolute_url }}">
+      <a href="{{ child.get_absolute_url }}">
         {{ child.get_menu_title }}
       </a>
   </li>
 
   {% for child in child.children %}
     <li class="{% if child.selected %}active amber darken-1{% else %}grey lighten-4{% endif %}">
-        <a class="truncate" href="{{ child.get_absolute_url }}">
+        <a href="{{ child.get_absolute_url }}">
           {{ child.get_menu_title }}
         </a>
     </li>
     {% if child.children %}
       {% for child in child.children %}
       <li class="{% if child.selected %}active amber darken-2{% else %}grey lighten-3{% endif %}">
-          <a class="truncate lighten-4" href="{{ child.get_absolute_url }}">
+          <a class="lighten-4" href="{{ child.get_absolute_url }}">
             {% if child.get_menu_title == "Blog" %}
               <i class="material-icons left">description</i>
             {% elif child.get_menu_title == "Home" %}

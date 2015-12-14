@@ -3,8 +3,10 @@
 
 {% block main-class %}wide{% endblock main-class %}
 
-{% block content %}
+{% block wrap-content %}
   <section class="row main-content">
-    {% placeholder "content" %}
+    {% block content %}
+      {% placeholder "content" %}
+    {% endblock content %}
   </section>
-{% endblock content %}
+{% endblock wrap-content %}

@@ -4,3 +4,9 @@
     {{ block.super }}
     {% block newsblog_breadcrumb %}{% endblock newsblog_breadcrumb %}
 {% endblock extend_breadcrumb %}
+
+{% block content %}
+    {% block newsblog_title %}{% endblock %}
+    {% block newsblog_content %}{% endblock %}
+    {% block newsblog_footer %}{% endblock %}
+{% endblock content %}

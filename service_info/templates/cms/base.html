@@ -62,8 +62,10 @@
     <main id="cms-main" class="main {% block main-class %}container{% endblock main-class %}">
       {% block hero %}{% endblock hero %}
 
-      {% block content %}
-      {% endblock content %}
+      {% block wrap-content %}
+        {% block content %}
+        {% endblock content %}
+      {% endblock wrap-content %}
     </main>
 
     <footer id="cms-footer" class="{% block footer-class %}page-footer grey darken-3{% endblock footer-class %}">

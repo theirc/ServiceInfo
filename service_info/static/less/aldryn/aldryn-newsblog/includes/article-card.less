@@ -68,3 +68,16 @@
     white-space: normal;
   }
 }
+
+.secondary-column {
+  /*
+    Cards in the sidebar need special sizing.
+  */
+  .card-pad {
+    .flex(0, 1, 100%);
+    padding-bottom: 0;
+    &:first-child {
+      padding-top: 0;
+    }
+  }
+}

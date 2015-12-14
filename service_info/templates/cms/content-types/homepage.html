@@ -19,11 +19,11 @@
 {% block main-column-class %}left-col{% endblock main-column-class %}
 {% block secondary-column-class %}right-col{% endblock secondary-column-class %}
 
-{% block main-column-content %}
-  {% static_placeholder "main-content" %}
-{% endblock main-column-content %}
+{% block content %}
+  {% static_placeholder "content" %}
+{% endblock content %}
 
-{% block secondary-column-content %}
+{% block sidebar-content %}
   <!--
     Placeholder Twitter timeline, put here pending the addition of a proper
     Aldryn Twitter timeline plug-in (or suchlike).
@@ -32,4 +32,4 @@
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
   {% static_placeholder "main-content-side" %}
-{% endblock secondary-column-content %}
+{% endblock sidebar-content %}
