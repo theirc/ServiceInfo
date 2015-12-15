@@ -34,7 +34,7 @@
             <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
 
             {% block brand %}
-              <a href="/cms" class="{% block brand-class %}brand-logo{% endblock brand-class %}">
+              <a href="{% url 'pages-root' %}" class="{% block brand-class %}brand-logo{% endblock brand-class %}">
                 <img src="{% static 'images/logo-large.png' %}">
               </a>
             {% endblock brand %}
