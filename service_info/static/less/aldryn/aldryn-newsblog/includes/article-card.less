@@ -1,0 +1,83 @@
+@import "../../../includes/mixins.less";
+
+/*
+  Three-column layout for cards
+*/
+
+.aldryn-newsblog-articles {
+  .flex-layout();
+  .flex-wrap(wrap);
+  .flex-direction(row);
+}
+
+.blog-card.card-pad {
+  padding: 1em;
+  box-sizing: border-box;
+  .flex(0, 1, 33.333333%);
+
+  @media (max-width: 992px) {
+    .flex(0, 1, 50%);
+  }
+
+  @media (max-width: 720px) {
+    .flex(0, 1, 100%);
+  }
+
+  .flex-layout();
+  > * {
+    .flex(1, 1, auto);
+  }
+
+  .card {
+    .flex-layout();
+    .flex-direction(column);
+
+    .img-propfix {
+      height: 0;
+      width: 100%;
+      padding-bottom: 75%;
+      position: relative;
+
+      .img {
+        position: absolute;
+        top: 0; left: 0;
+        height: 100%;
+        width: 100%;
+        background-size: cover;
+        background-position: center;
+      }
+    }
+
+    > .card-image {
+      .card-title {
+        text-shadow: 2px 2px 4px black;
+      }
+    }
+
+    > .card-content {
+      .flex(1, 1, auto);
+    }
+  }
+}
+
+.card-title.truncate {
+  display: inline-block;
+  white-space: wrap;
+  max-width: 100%;
+  > * {
+    white-space: normal;
+  }
+}
+
+.secondary-column {
+  /*
+    Cards in the sidebar need special sizing.
+  */
+  .card-pad {
+    .flex(0, 1, 100%);
+    padding-bottom: 0;
+    &:first-child {
+      padding-top: 0;
+    }
+  }
+}

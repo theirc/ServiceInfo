@@ -1,23 +1,25 @@
-var $ = require('jquery');
-window.jQuery = $;
-window.$ = $;
+jQuery(function ($) {
+  /*
+    Activate Materialize mobile menu.
+  */
+  $(".button-collapse").sideNav();
 
-/*
-  UI COMPONENTS
-*/
+  /*
+    Activate Materialize dropdowns.
+  */
+  $(".dropdown-button").each(function () {
+    $(this).dropdown();
+  });
 
-/*
-  Mobile menu show/hide
-*/
-require('./component/menu')();
-require('./component/language-toggle')();
+  /*
+    Activate Materialize modals.
+  */
+  $('.modal-trigger').leanModal();
 
-/*
-  Set up footer
-*/
-require('./component/footer')();
-
-/*
-  Initializing Google Analytics
-*/
-require('../../../../frontend/google-analytics.js')();
+  /*
+    Activate Materialize parallax.
+  */
+  if (!$('.cms-toolbar-expanded').length) {
+    $('.parallax').parallax();
+  }
+});

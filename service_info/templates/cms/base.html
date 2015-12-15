@@ -2,59 +2,116 @@
 
 <!doctype html>
 <html>
-    <head>
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-        {% render_block "extra-meta" %}
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    {% render_block "extra-meta" %}
 
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="{% if request.LANGUAGE_CODE == 'ar' %}{% static 'styles/site-rtl.css' %}{% else %}{% static 'styles/site-ltr.css' %}{% endif %}" type="text/css" class="load-style"/>
-        <link rel="stylesheet" href="{% if request.LANGUAGE_CODE == 'ar' %}{% static 'css/site-rtl.css' %}{% else %}{% static 'css/site-ltr.css' %}{% endif %}" type="text/css">
-        {% render_block "css" %}
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css"> -->
+    {% if request.LANGUAGE_CODE == 'ar' %}
+      <link href="{% static 'css/materialize.min-rtl.css' %}" rel="stylesheet">
+    {% else %}
+      <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+    {% endif %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-        <link rel="shortcut icon" href="{% static 'images/sm-favicon.png' %}">
+    {% if request.LANGUAGE_CODE == 'ar' %}
+      <link href="{% static 'css/site-rtl.css' %}" rel="stylesheet">
+    {% else %}
+      <link href="{% static 'css/site.css' %}" rel="stylesheet">
+    {% endif %}
+    {% render_block "css" %}
 
-        <title>{% block title %}{% page_attribute "page_title" %}{% endblock title %}</title>
-    </head>
-    <body dir="{% if request.LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
-        {% cms_toolbar %}
+    <title>{% block title %}{% page_attribute "page_title" %}{% endblock title %}</title>
 
-        <div id="cms">
-            <header id="cms-header">
-                {% block header %}
-                <div class="brand">
-                    <a href="#"><div id="logo"></div></a>
+  </head>
+  <body class="{% block body-class %}grey lighten-5{% endblock body-class %}">
+    {% cms_toolbar %}
+
+    <header id="cms-header" class="{% block header-class %}{% endblock header-class %}">
+      {% block header %}
+        <nav id="cms-nav" class="{% block nav-class %}nav-wrapper amber lighten-2{% endblock nav-class %}">
+          <div class="nav-wrapper">
+            <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+
+            {% block brand %}
+              <a href="{% url 'pages-root' %}" class="{% block brand-class %}brand-logo{% endblock brand-class %}">
+                <img src="{% static 'images/logo-large.png' %}">
+              </a>
+            {% endblock brand %}
+
+            {% block nav %}
+              {% block menu %}
+                {% show_menu 0 2 2 2 "cms/includes/menu.html" %}
+              {% endblock menu %}
+            {% endblock nav %}
+
+            {% block search %}
+              <form id="cms-search" action="search" class="amber lighten-1 hide-on-med-and-down">
+                <div class="input-field">
+                  <input id="search" type="search" required>
+                  <label for="search"><i class="material-icons">search</i></label>
+                  <i class="material-icons">close</i>
                 </div>
-                <div id=menu-container class="menu-closed">
-                    <button id=menu-toggle class="btn menu">{% trans "MENU" %}</button>
-                    <ul id="menu" class="menu">
-                        {% show_menu 0 2 2 2 "cms/includes/menu.html" %}
-                    </ul>
-                </div>
-                {% endblock header %}
-            </header>
+              </form>
+            {% endblock search %}
+          </div>
+        </nav>
+      {% endblock header %}
+    </header>
 
-            <div id="page-container">
-                <div id="page">
-                    <div id="content" class="{% block content-class %}{% endblock content-class %}">
-                        {% block content %}{% endblock content %}
-                    </div>
-                </div>
+    <main id="cms-main" class="main {% block main-class %}container{% endblock main-class %}">
+      {% block hero %}{% endblock hero %}
+
+      {% block wrap-content %}
+        {% block content %}
+        {% endblock content %}
+      {% endblock wrap-content %}
+    </main>
+
+    <footer id="cms-footer" class="{% block footer-class %}page-footer grey darken-3{% endblock footer-class %}">
+      {% block footer %}
+        <div class="container white-text">
+          <div class="row">
+            <div class="col s12 m9">
+              {% static_placeholder "footer_content" %}
             </div>
-
-            <div id="footer">
-                {% block footer %}
-                <div class="row">
-                    {% static_placeholder "footer" %}
-                </div>
-                {% endblock footer %}
+            <div class="col s12 m3">
+              <h6 class="grey-text">{% trans "Search for Services Nearby" %}</h6>
+              <p>
+                <a href="/app/index.html" class="waves-effect waves-light btn-large">
+                  Services
+                  <i class="material-icons right">search</i>
+                </a>
+              </p>
             </div>
-
-            {% language_chooser "cms/includes/language-chooser.html" %}
-
-            <div id="report-tooltip"></div>
+          </div>
         </div>
+        <div class="footer-copyright grey-text">
+          <div class="container">
+            <div class="hide-on-small-only">
+              <span class="left">International Rescue Committee Information Portal</span>
+              <span id="more-links" class="right">
+                <a href="#!">Privacy</a> ·
+                <a href="#!">Github</a> ·
+                Created by the International Rescue Committee
+              </span>
+            </div>
+            <div class="hide-on-med-and-up">
+              <span class="left">IRC Info Portal</span>
+              <span class="right">Created by the IRC</span>
+            </div>
+          </div>
+        </div>
+      {% endblock footer %}
+    </footer>
 
-        <script src="{% static 'js/dist/bundle.js' %}"></script>
-        {% render_block "js" %}
-    </body>
+    {% block modals %}
+      {% language_chooser "cms/includes/language-chooser.html" %}
+    {% endblock modals %}
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="{% static 'js/dist/bundle.js' %}"></script>
+    {% render_block "js" %}
+  </body>
 </html>

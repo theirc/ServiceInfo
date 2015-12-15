@@ -6,6 +6,8 @@ var gulp = require('gulp')
 ,   browserify = require('gulp-browserify')
 ,   minimist = require('minimist')
 ,   sync_exec = require('sync-exec')
+,   rtlcss = require('gulp-rtlcss')
+,   rename = require('gulp-rename')
 ;
 
 var knownOptions = {
@@ -71,10 +73,24 @@ gulp.task('compile_less_app', function (cb) {
 
 gulp.task('compile_less_cms', function (cb) {
   compile_less(
-      'service_info/static/less/site-*.less'
+      'service_info/static/less/site.less'
       , 'service_info/static/css'
       , cb
   );
+
+  gulp.src('service_info/static/less/site.less')
+    .pipe(less())
+    .pipe(rtlcss())
+    .pipe(rename({ suffix: '-rtl' }))
+    .pipe(gulp.dest('service_info/static/css'))
+  ;
+
+  gulp.src('node_modules/materialize-css/dist/css/materialize.min.css')
+    .pipe(gulp.dest('service_info/static/css'))
+    .pipe(rtlcss())
+    .pipe(rename({ suffix: '-rtl' }))
+    .pipe(gulp.dest('service_info/static/css'))
+  ;
 });
 
 gulp.task('compile_less', [

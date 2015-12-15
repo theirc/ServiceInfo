@@ -1,5 +1,5 @@
-{% extends "aldryn_newsblog/fullwidth.html" %}
-{% load i18n cms_tags apphooks_config_tags %}
+{% extends "aldryn_newsblog/two_column.html" %}
+{% load i18n cms_tags apphooks_config_tags sekizai_tags %}
 
 {% block title %}{{ article.title }} - {{ block.super }}{% endblock %}
 
@@ -12,20 +12,23 @@
 {% endblock %}
 
 {% block newsblog_footer %}
-    <div class="aldryn-newsblog-pager">
-        <ul class="pager pagination">
-            {% if prev_article %}
-                <li class="previous"><a href="{{ prev_article.get_absolute_url }}"><span aria-hidden="true">&larr;</span> {% trans "Previous Article" %}</a></li>
-            {% else %}
-                <li class="previous inactive"><span class="text-muted"><span aria-hidden="true">&larr;</span> {% trans "Previous Article" %}</span></li>
-            {% endif %}
-            <li><span class="pager-back"><a href="{% namespace_url "article-list" %}">{% trans "Back to Overview" %}</a></span></li>
-            {% if next_article %}
-                <li class="next"><a href="{{ next_article.get_absolute_url }}">{% trans "Next Article" %} <span aria-hidden="true">&rarr;</span></a></li>
-            {% else %}
-                <li class="next inactive"><span class="text-muted">{% trans "Next Article" %} <span aria-hidden="true">&rarr;</span></span></li>
-            {% endif %}
-        </ul>
-    </div>
     {% render_placeholder view.config.placeholder_detail_footer %}
+
+    <nav class="aldryn-newsblog-pager grey darken-1">
+        <div class="nav-wrapper">
+            <ul class="pager">
+                {% if prev_article %}
+                    <li class="previous"><a href="{{ prev_article.get_absolute_url }}">{% trans "Previous" %}</a></li>
+                {% endif %}
+                <li><a href="{% namespace_url "article-list" %}">{% trans "Back to List" %}</a></li>
+                {% if next_article %}
+                    <li class="next"><a href="{{ next_article.get_absolute_url }}">{% trans "Next" %}</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
 {% endblock %}
+
+{% block sidebar-content %}
+    {% static_placeholder "article_detail_sidebar" %}
+{% endblock sidebar-content %}

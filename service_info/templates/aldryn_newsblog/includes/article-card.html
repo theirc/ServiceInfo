@@ -1,0 +1,41 @@
+{% load i18n apphooks_config_tags cms_tags sekizai_tags staticfiles thumbnail %}
+{% load url from future %}
+
+<div class="blog-card card-pad">
+    <div class="card{% if article.is_featured %} featured{% endif %}">
+        {% block newsblog_visual %}
+            {% if article.featured_image_id %}
+                <div class="card-image">
+                    <a href="{{ article.get_absolute_url }}">
+                        <div class="img-propfix">
+                            <div class="img" alt="{{ article.featured_image.alt }}" style="background-image: url({% thumbnail article.featured_image.image 800x450 crop subject_location=article.featured_image.subject_location %})" class="img-responsive"></div>
+                        </div>
+                        <span class="card-title truncate">
+                            {% render_model article "title" %}
+                        </span>
+                    </a>
+                </div>
+            {% endif %}
+        {% endblock %}
+
+        <div class="card-content">
+            {% block newsblog_title %}
+                {% if not article.featured_image_id %}
+                    <span class="card-title truncate">
+                        {% render_model article "title" %}
+                    </span>
+                {% endif %}
+            {% endblock newsblog_title %}
+
+            <p>
+                {% render_model article "lead_in" "" "" "truncatewords:'20'" %}
+            </p>
+        </div>
+
+        <div class="card-action">
+            <a href="{{ article.get_absolute_url }}">
+                {% trans "Read More" %}
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,33 +1,37 @@
 {% load i18n %}
 
 <ul class="pagination">
-    {% if page_obj.has_previous %}
-        <li>
+    <li class="waves-effect {% if not page_obj.has_previous %}disabled{% endif %}">
+        {% if page_obj.has_previous %}
             <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}" aria-label="{% trans "Previous" %}">
-                <span aria-hidden="true">&laquo;</span>
+        {% endif %}
+            <i aria-hidden="true" class="material-icons">{% if request.LANGUAGE_CODE == 'ar' %}chevron_right{% else %}chevron_left{% endif %}</i>
+        {% if page_obj.has_previous %}
             </a>
-        </li>
-    {% endif %}
+        {% endif %}
+    </li>
 
     {% for num in page_obj.paginator.page_range %}
         {% if num %}
             {% if page_obj.number == num %}
-                <li class="active"><span>{{ num }}</span></li>
+                <li class="active waves-effect">{{ num }}</li>
             {% else %}
-                <li><a href="{{ request.path }}?page={{ num }}">{{ num }}</a></li>
+                <li class="waves-effect"><a href="{{ request.path }}?page={{ num }}">{{ num }}</a></li>
             {% endif %}
         {% else %}
-            <li><span><a href="{{ request.path }}?page={{ num|add:"5" }}">...</a></span></li>
+            <li class="waves-effect"><a href="{{ request.path }}?page={{ num|add:"5" }}">...</a></li>
         {% endif %}
     {% empty %}
-        <li class="active"><span>1</span></li>
+        <li class="active">1</li>
     {% endfor %}
 
-    {% if page_obj.has_next %}
-        <li>
+    <li class="waves-effect {% if not page_obj.has_next %}disabled{% endif %}">
+        {% if page_obj.has_next %}
             <a href="{{ request.path }}?page={{ page_obj.next_page_number }}" aria-label="{% trans "Next" %}">
-                <span aria-hidden="true">&raquo;</span>
+        {% endif %}
+            <i aria-hidden="true" class="material-icons">{% if request.LANGUAGE_CODE == 'ar' %}chevron_left{% else %}chevron_right{% endif %}</i>
+        {% if page_obj.has_next %}
             </a>
-        </li>
-    {% endif %}
+        {% endif %}
+    </li>
 </ul>

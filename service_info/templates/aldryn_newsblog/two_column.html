@@ -1,23 +1,22 @@
 {% extends "aldryn_newsblog/base.html" %}
 {% load i18n cms_tags %}
 
+{% block hero %}
+    {% if view.show_header %}
+        {% render_placeholder view.config.placeholder_base_top %}
+    {% endif %}
+{% endblock hero %}
+
+{% block main-column-class %}aldryn aldryn-newsblog{% endblock main-column-class %}
+{% block secondary-column-class %}aldryn aldryn-newsblog-sidebar{% endblock secondary-column-class %}
+
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-17">
-                {% if view.show_header %}
-                    {% render_placeholder view.config.placeholder_base_top %}
-                {% endif %}
-                <div class="aldryn aldryn-newsblog">
-                    {% block newsblog_title %}{% endblock %}
-                    {% block newsblog_content %}{% endblock %}
-                    {% block newsblog_footer %}{% endblock %}
-                </div>
-            </div>
-            <div class="col-md-7 aldryn-newsblog aldryn-newsblog-sidebar">
-                {% render_placeholder view.config.placeholder_base_sidebar %}
-                {% block newsblog_sidebar %}{% endblock %}
-            </div>
-        </div>
-    </div>
+    {% block newsblog_title %}{% endblock %}
+    {% block newsblog_content %}{% endblock %}
+    {% block newsblog_footer %}{% endblock %}
 {% endblock content %}
+
+{% block sidebar-content %}
+    {% render_placeholder view.config.placeholder_base_sidebar %}
+    {% block newsblog_sidebar %}{% endblock %}
+{% endblock sidebar-content %}
