@@ -13,7 +13,7 @@
             </div>
             <div class="card-action">
                 <a href="{{ article.get_absolute_url }}">
-                    Read More
+                    {% trans "Read More" %}
                 </a>
             </div>
         </div>
@@ -22,11 +22,10 @@
             <div class="card result-card no-results grey lighten-4">
                 <div class="card-content">
                     <span class="card-title">
-                        No articles found
+                        {% trans "No articles found" %}
                     </span>
                     <p>
-                        There were no results for your search. Please check
-                        your spelling and try again.
+                        {% trans "There were no results for your search. Please check your spelling and try again." %}
                     </p>
                 </div>
             </div>
@@ -34,28 +33,3 @@
         {% endif %}
     {% endfor %}
 </div>
-
-<!--
-<ul class="results-list list-unstyled">
-    <h3>{% blocktrans with query=query %}Most recent articles containing "<strong>{{ query }}</strong>"{% endblocktrans %}</h3>
-    {% for article in object_list %}
-        <li{% if not article.is_published %} class="unpublished"{% endif %}>
-            <a href="{% namespace_url "article-detail" article.slug namespace=view.app_config.namespace default='' %}">
-                <strong>
-                    {% for category in article.categories.all %}
-                        {{ category.name }}{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-                </strong>
-                {{ article.title }}<br />
-                <span class="text-muted">{{ article.lead_in|striptags|truncatewords:"10"|safe }}</span>
-            </a>
-        </li>
-    {% empty %}
-        {% if query %}
-            <p class="well">{% blocktrans with query=query %}No articles found{% endblocktrans %}</p>
-        {% else %}
-            <p class="well">{% trans "Enter a query above" %}</p>
-        {% endif %}
-    {% endfor %}
-</ul>
- -->

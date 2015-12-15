@@ -19,14 +19,10 @@
             <ul class="pager">
                 {% if prev_article %}
                     <li class="previous"><a href="{{ prev_article.get_absolute_url }}">{% trans "Previous" %}</a></li>
-                {% else %}
-                    <li class="previous">{% trans "Previous" %}</li>
                 {% endif %}
                 <li><a href="{% namespace_url "article-list" %}">{% trans "Back to List" %}</a></li>
                 {% if next_article %}
                     <li class="next"><a href="{{ next_article.get_absolute_url }}">{% trans "Next" %}</a></li>
-                {% else %}
-                    <li class="next inactive">{% trans "Next" %}</li>
                 {% endif %}
             </ul>
         </div>
