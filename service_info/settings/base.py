@@ -424,9 +424,6 @@ CMS_TEMPLATES = (
     ('cms/content-types/wide-page.html', 'Wide Page'),
     ('cms/content-types/two-column.html', 'Wide Page (two columns)'),
     ('cms/content-types/homepage.html', 'Homepage (with hero)'),
-    # Legacy templates
-    ('cms/content-types/pages-index.html', 'Content Index'),
-    ('cms/content-types/full-width-image.html', 'Full Width Image'),
 )
 
 CMS_PERMISSION = True
