@@ -4,6 +4,8 @@
 @mobile-menu-height: 64px;
 
 #cms-nav {
+  overflow: hidden;
+
   padding-left: 2rem;
 
   @media (max-width: 992px) {
@@ -67,6 +69,10 @@
       height: @mobile-menu-height;
       line-height: @mobile-menu-height;
     }
+  }
+
+  #language-picker-trigger {
+    .flex(0, 0, auto);
   }
 
   .amber {
