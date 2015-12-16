@@ -4,7 +4,6 @@
 @mobile-menu-height: 64px;
 
 #cms-nav {
-  overflow: hidden;
 
   padding-left: 2rem;
 
@@ -32,7 +31,7 @@
     */
     .brand-logo {
       position: relative;
-      .flex(0, 1, auto);
+      .flex(0, 0, auto);
 
       @media (max-width: 992px) {
         left: auto;
@@ -46,6 +45,8 @@
       .flex-direction(row);
       .flex-wrap(wrap); /* simulates truncation of items */
       .justify-content(flex-end);
+
+      overflow: hidden;
     }
 
     #cms-search {
