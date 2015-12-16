@@ -4,6 +4,7 @@
 @mobile-menu-height: 64px;
 
 #cms-nav {
+
   padding-left: 2rem;
 
   @media (max-width: 992px) {
@@ -30,7 +31,7 @@
     */
     .brand-logo {
       position: relative;
-      .flex(0, 1, auto);
+      .flex(0, 0, auto);
 
       @media (max-width: 992px) {
         left: auto;
@@ -44,6 +45,8 @@
       .flex-direction(row);
       .flex-wrap(wrap); /* simulates truncation of items */
       .justify-content(flex-end);
+
+      overflow: hidden;
     }
 
     #cms-search {
@@ -67,6 +70,10 @@
       height: @mobile-menu-height;
       line-height: @mobile-menu-height;
     }
+  }
+
+  #language-picker-trigger {
+    .flex(0, 0, auto);
   }
 
   .amber {
