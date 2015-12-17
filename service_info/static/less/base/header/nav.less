@@ -6,6 +6,9 @@
 
 .side-nav, .side-nav.fixed {
   li {
+    &:not(.logo) {
+      .flex-layout();
+    }
     a {
       min-height: @side-nav-height;
       height: auto;
