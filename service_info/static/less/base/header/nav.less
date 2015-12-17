@@ -7,8 +7,9 @@
 .side-nav, .side-nav.fixed {
   li {
     a {
-      height: @side-nav-height;
-      line-height: @side-nav-height;
+      min-height: @side-nav-height;
+      height: auto;
+      line-height: 1;
       .flex-layout();
       .flex-direction(row);
       .align-items(center);
