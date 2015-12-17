@@ -34,25 +34,17 @@
             {% show_menu 0 2 2 2 "cms/includes/menu.html" %}
           {% endblock menu %}
         {% endblock nav %}
-        <nav id="cms-nav" class="hide-on-large-only {% block nav-class %}nav-wrapper amber lighten-2{% endblock nav-class %}">
+        <nav id="mobile-nav" class="hide-on-large-only {% block nav-class %}nav-wrapper amber lighten-2{% endblock nav-class %}">
           <div class="nav-wrapper">
             <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
 
-            <!-- {% block brand %}
-              <a href="{% url 'pages-root' %}" class="{% block brand-class %}brand-logo{% endblock brand-class %}">
-                <img src="{% static 'images/logo-large.png' %}">
-              </a>
-            {% endblock brand %}
+            <a href="{% url 'pages-root' %}" class="{% block brand-class %}brand-logo{% endblock brand-class %}">
+              <img src="{% static 'images/logo-large.png' %}">
+            </a>
 
-            {% block search %}
-              <form id="cms-search" action="search" class="amber lighten-1 hide-on-med-and-down">
-                <div class="input-field">
-                  <input id="search" type="search" required>
-                  <label for="search"><i class="material-icons">search</i></label>
-                  <i class="material-icons">close</i>
-                </div>
-              </form>
-            {% endblock search %} -->
+            {% with mobile=True %}
+              {% show_menu 0 2 2 2 "cms/includes/menu.html" %}
+            {% endwith %}
           </div>
         </nav>
       {% endblock header %}

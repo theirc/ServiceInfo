@@ -1,8 +1,12 @@
 @import "../../includes/mixins.less";
 
-#nav {
+.side-nav {
   .logo {
     padding: 2rem;
+    @media (max-width: 992px) {
+      height: 128px;
+      padding: 1rem;
+    }
     .brand-logo {
       .flex-layout();
       height: auto;

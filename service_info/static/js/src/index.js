@@ -25,12 +25,12 @@ jQuery(function ($) {
   */
   $(".button-collapse").sideNav();
 
-  // /*
-  //   Activate Materialize dropdowns.
-  // */
-  // $(".dropdown-button").each(function () {
-  //   $(this).dropdown();
-  // });
+  /*
+    Activate Materialize dropdowns.
+  */
+  $(".dropdown-button").each(function () {
+    $(this).dropdown();
+  });
 
   /*
     Activate Materialize modals.

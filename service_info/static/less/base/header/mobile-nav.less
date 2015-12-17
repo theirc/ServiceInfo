@@ -1,0 +1,20 @@
+@import "../../includes/mixins.less";
+
+#mobile-nav {
+  height: 64px;
+  padding-left: 1rem;
+
+  > .nav-wrapper > a.brand-logo {
+    .flex-layout();
+    .align-items(center);
+    .justify-content(center);
+
+    height: 100%;
+
+    padding: 6px;
+
+    > img {
+      height: 100%;
+    }
+  }
+}
