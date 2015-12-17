@@ -108,18 +108,6 @@
         -ms-flex-pack: end;
             justify-content: @justify;
 }
-.justify-content-rtl (@justify) when (@justify = flex-start) {
-    -webkit-box-pack: start/*rtl:end*/;
-    -webkit-justify-content: @justify/*rtl:flex-end*/;
-        -ms-flex-pack: start/*rtl:end*/;
-            justify-content: @justify/*rtl:flex-end*/;
-}
-.justify-content-rtl (@justify) when (@justify = flex-end) {
-    -webkit-box-pack: end/*rtl:start*/;
-    -webkit-justify-content: @justify/*rtl:flex-start*/;
-        -ms-flex-pack: end/*rtl:start*/;
-            justify-content: @justify/*rtl:flex-start*/;
-}
 .justify-content (@justify) when (@justify = space-between) {
     -webkit-box-pack: justify;
     -webkit-justify-content: @justify;
