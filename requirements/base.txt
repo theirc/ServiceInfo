@@ -100,3 +100,6 @@ git+git://github.com/caktus/aldryn-newsblog.git@1.0.9-323-ImproperlyConfigured#e
   backport-collections==0.1
 djangocms-googlemap==0.4.0
 djangocms-column==1.6.0
+git+git://github.com/aldryn/aldryn-video.git@0.5.1#egg=aldryn-video
+  jsonfield==1.0.3
+  micawber==0.3.3
