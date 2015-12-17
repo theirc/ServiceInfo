@@ -265,6 +265,7 @@ INSTALLED_APPS = (
     'taggit',
     'djangocms_googlemap',
     'djangocms_column',
+    'aldryn_video',
     # End Django CMS
     # Load after easy_thumbnails so that its thumbnail template tag (unused
     # in this project) is hidden.
