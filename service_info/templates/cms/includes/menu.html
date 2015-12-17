@@ -28,7 +28,18 @@
       </li>
     {% endif %}
   {% endfor %}
+
   <li>
     <a class="modal-trigger" href="#language-picker">Choose Language</a>
+  </li>
+
+  <li class="no-padding">
+    <form>
+      <div class="input-field">
+        <input id="search{% if mobile %}-mobile{% endif %}" type="search" required>
+        <label for="search{% if mobile %}-mobile{% endif %}"><i class="material-icons">search</i></label>
+        <i class="material-icons">close</i>
+      </div>
+    </form>
   </li>
 </ul>
