@@ -1,92 +1,49 @@
 @import "../../includes/mixins.less";
 
-@nav-height: 96px;
-@mobile-menu-height: 64px;
+@side-nav-height: 48px;
+@active-item-color: #ee6e73;
+@active-item-hover: #e57373;
 
-#cms-nav {
-
-  padding-left: 2rem;
-
-  @media (max-width: 992px) {
-    padding: 0 1rem;
-  }
-
-  height: @nav-height;
-  line-height: @nav-height;
-
-  > .nav-wrapper {
-    /*
-      Flexbox layout for nav menu.
-    */
-    .flex-layout();
-    .flex-direction(row);
-    .flex-wrap(nowrap);
-
-    @media (max-width: 992px) {
-      .justify-content(space-between);
+.side-nav, .side-nav.fixed {
+  li {
+    &:not(.logo) {
+      .flex-layout();
+      .flex-direction(column);
     }
-
-    /*
-      Elements of header.
-    */
-    .brand-logo {
-      position: relative;
-      .flex(0, 0, auto);
-
-      @media (max-width: 992px) {
-        left: auto;
-        .transform(none);
-      }
-    }
-
-    #nav {
-      .flex(1, 1, auto);
+    a {
+      min-height: @side-nav-height;
+      height: auto;
+      line-height: 1;
       .flex-layout();
       .flex-direction(row);
-      .flex-wrap(wrap); /* simulates truncation of items */
-      .justify-content(flex-end);
-
-      overflow: hidden;
+      .align-items(center);
     }
 
-    #cms-search {
-      .flex(0, 1, auto);
+    &.active {
+      background-color: #ffca28;
+    }
+
+    &:hover {
+      background-color: #ffca28;
+    }
+
+    &.logo:hover {
+      background-color: transparent;
     }
   }
 
-  > .nav-wrapper {
-    form,
-    > ul > li > a,
-    > a.button-collapse {
-      i {
-        height: @nav-height;
-        line-height: @nav-height;
+  .collapsible-body {
+    background-color: #ffe082;
+
+    li.active {
+      background-color: #ffca28;
+      a {
+        color: black;
       }
     }
-  }
 
-  #mobile-menu {
-    i {
-      height: @mobile-menu-height;
-      line-height: @mobile-menu-height;
-    }
-  }
-
-  #language-picker-trigger {
-    .flex(0, 0, auto);
-  }
-
-  .amber {
-    a {
-      color: white;
-    }
-  }
-
-  .dropdown-content {
-    left: 0;
-    width: 100%;
-    li > a {
-      padding: 22px 16px;
+    .collapsible-body {
+      background-color: #ffecb3;
     }
   }
 }

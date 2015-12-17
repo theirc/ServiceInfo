@@ -1,72 +1,19 @@
-{% load menu_tags i18n %}
+{% load menu_tags i18n staticfiles %}
 
-<ul id="nav" class="hide-on-med-and-down">
-  {% for child in children %}
-    <li class="{% if child.selected %}active{% endif %}">
-      {% if child.children %}
-        <a class="dropdown-button" href="#!" data-activates="desktop-dropdown{{ forloop.counter0 }}">
-          {% if child.get_menu_title == "Blog" %}
-            <i class="material-icons left">description</i>
-          {% elif child.get_menu_title == "Home" %}
-            <i class="material-icons left">home</i>
-          {% elif child.get_menu_title == "FAQ" %}
-            <i class="material-icons left">question_answer</i>
-          {% endif %}
-
-          {{ child.get_menu_title }}
-          <i class="material-icons right">arrow_drop_down</i>
-        </a>
-      {% else %}
-        <a href="{{ child.get_absolute_url }}">
-          {% if child.get_menu_title == "Blog" %}
-            <i class="material-icons left">description</i>
-          {% elif child.get_menu_title == "Home" %}
-            <i class="material-icons left">home</i>
-          {% elif child.get_menu_title == "FAQ" %}
-            <i class="material-icons left">question_answer</i>
-          {% endif %}
-
-          {{ child.get_menu_title }}
-        </a>
-      {% endif %}
-    </li>
-  {% endfor %}
-</ul>
-
-<ul class="hide-on-med-and-down" id="language-picker-trigger">
-  <li>
-    <a class="modal-trigger" href="#language-picker">Choose Language</a>
+<ul id="{% if mobile %}mobile-menu{% else %}nav{% endif %}" class="side-nav fixed amber lighten-2 {% if not mobile %}hide-on-med-and-down{% endif %}">
+  <li class="logo">
+    <a href="{% url 'pages-root' %}" class="{% block brand-class %}brand-logo{% endblock brand-class %}">
+      <img src="{% static 'images/logo-large.png' %}">
+    </a>
   </li>
-</ul>
 
-{% for child in children %}
-  {% if child.children %}
-    {% with prefix="desktop" %}
-      {% show_menu from_level to_level extra_inactive extra_active "cms/includes/secondary_menu.html" "" "" child %}
-    {% endwith %}
-    {% with prefix="mobile" %}
-      {% show_menu from_level to_level extra_inactive extra_active "cms/includes/secondary_menu.html" "" "" child %}
-    {% endwith %}
-  {% endif %}
-{% endfor %}
-
-<ul id="mobile-menu" class="side-nav">
   {% for child in children %}
-    <li class="{% if child.selected %}active{% endif %}">
-      {% if child.children %}
-        <a class="dropdown-button" href="#!" data-activates="mobile-dropdown{{ forloop.counter0 }}">
-          {% if child.get_menu_title == "Blog" %}
-            <i class="material-icons left">description</i>
-          {% elif child.get_menu_title == "Home" %}
-            <i class="material-icons left">home</i>
-          {% elif child.get_menu_title == "FAQ" %}
-            <i class="material-icons left">question_answer</i>
-          {% endif %}
-
-          {{ child.get_menu_title }}
-          <i class="material-icons right">arrow_drop_down</i>
-        </a>
-      {% else %}
+    {% if child.children %}
+      <li class="no-padding {% if child.selected %}active{% endif %}">
+        {% show_menu from_level to_level extra_inactive extra_active "cms/includes/sub_menu.html" "" "" child %}
+      </li>
+    {% else %}
+      <li class="{% if child.selected %}active{% endif %}">
         <a href="{{ child.get_absolute_url }}">
           {% if child.get_menu_title == "Blog" %}
             <i class="material-icons left">description</i>
@@ -78,11 +25,10 @@
 
           {{ child.get_menu_title }}
         </a>
-      {% endif %}
-    </li>
+      </li>
+    {% endif %}
   {% endfor %}
-
-  <li id="language-picker-trigger">
+  <li>
     <a class="modal-trigger" href="#language-picker">Choose Language</a>
   </li>
 </ul>

@@ -16,6 +16,12 @@ main {
   .flex(1, 0, auto);
 }
 
+main, footer {
+  @media (min-width: 992px) {
+    padding-left: 240px;
+  }
+}
+
 .multicolumn0,
 .multicolumn1,
 .multicolumn2,
@@ -46,10 +52,12 @@ img {
   left: 0.5rem;
 }
 
+/*rtl:ignore*/
 *[dir="RTL"] {
-  text-align: right/* rtl:right */;
+  text-align: right;
 }
 
+/*rtl:ignore*/
 *[dir="LTR"] {
-  text-align: left/* rtl:left */;
+  text-align: left;
 }

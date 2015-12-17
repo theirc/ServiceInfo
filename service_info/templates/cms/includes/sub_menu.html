@@ -1,0 +1,50 @@
+{% load menu_tags i18n %}
+
+<ul class="collapsible collapsible-accordion">
+  <li class="">
+    <a class="collapsible-header waves-effect">
+      {{ child.get_menu_title }}
+      {% if child.children %}
+        <i class="material-icons right">arrow_drop_down</i>
+      {% endif %}
+    </a>
+    <div class="collapsible-body">
+      <ul>
+        <li class="{% if child.selected %}active{% endif %}">
+          <a href="{{ child.get_absolute_url }}">
+            {% if child.get_menu_title == "Blog" %}
+              <i class="material-icons left">description</i>
+            {% elif child.get_menu_title == "Home" %}
+              <i class="material-icons left">home</i>
+            {% elif child.get_menu_title == "FAQ" %}
+              <i class="material-icons left">question_answer</i>
+            {% endif %}
+
+            {{ child.get_menu_title }}
+          </a>
+        </li>
+        {% for child in child.children %}
+          {% if child.children %}
+            <li class="no-padding">
+              {% show_menu from_level to_level extra_inactive extra_active "cms/includes/sub_menu.html" "" "" child %}
+            </li>
+          {% else %}
+            <li class="{% if child.selected %}active{% endif %}">
+              <a href="{{ child.get_absolute_url }}">
+                {% if child.get_menu_title == "Blog" %}
+                  <i class="material-icons left">description</i>
+                {% elif child.get_menu_title == "Home" %}
+                  <i class="material-icons left">home</i>
+                {% elif child.get_menu_title == "FAQ" %}
+                  <i class="material-icons left">question_answer</i>
+                {% endif %}
+
+                {{ child.get_menu_title }}
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </li>
+</ul>
