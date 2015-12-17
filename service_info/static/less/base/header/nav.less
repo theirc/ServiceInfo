@@ -1,92 +1,127 @@
 @import "../../includes/mixins.less";
 
-@nav-height: 96px;
-@mobile-menu-height: 64px;
+@side-nav-height: 48px;
+@active-item-color: #ee6e73;
+@active-item-hover: #e57373;
 
-#cms-nav {
-
-  padding-left: 2rem;
-
-  @media (max-width: 992px) {
-    padding: 0 1rem;
-  }
-
-  height: @nav-height;
-  line-height: @nav-height;
-
-  > .nav-wrapper {
-    /*
-      Flexbox layout for nav menu.
-    */
-    .flex-layout();
-    .flex-direction(row);
-    .flex-wrap(nowrap);
-
-    @media (max-width: 992px) {
-      .justify-content(space-between);
-    }
-
-    /*
-      Elements of header.
-    */
-    .brand-logo {
-      position: relative;
-      .flex(0, 0, auto);
-
-      @media (max-width: 992px) {
-        left: auto;
-        .transform(none);
-      }
-    }
-
-    #nav {
-      .flex(1, 1, auto);
-      .flex-layout();
-      .flex-direction(row);
-      .flex-wrap(wrap); /* simulates truncation of items */
-      .justify-content(flex-end);
-
-      overflow: hidden;
-    }
-
-    #cms-search {
-      .flex(0, 1, auto);
-    }
-  }
-
-  > .nav-wrapper {
-    form,
-    > ul > li > a,
-    > a.button-collapse {
-      i {
-        height: @nav-height;
-        line-height: @nav-height;
-      }
-    }
-  }
-
-  #mobile-menu {
-    i {
-      height: @mobile-menu-height;
-      line-height: @mobile-menu-height;
-    }
-  }
-
-  #language-picker-trigger {
-    .flex(0, 0, auto);
-  }
-
-  .amber {
+.side-nav, .side-nav.fixed {
+  li {
     a {
-      color: white;
+      height: @side-nav-height;
+      line-height: @side-nav-height;
+      .flex-layout();
+      .align-items(center);
+    }
+
+    &.logo:hover {
+      background-color: transparent;
     }
   }
 
-  .dropdown-content {
-    left: 0;
-    width: 100%;
-    li > a {
-      padding: 22px 16px;
+  .collapsible-body {
+    background-color: #ffe082;
+
+    .collapsible-body {
+      background-color: #ffecb3;
     }
   }
 }
+
+.side-nav .collapsible-body li.active a, .side-nav.fixed .collapsible-body li.active a {
+  color: black;
+}
+
+.side-nav .collapsible-body li.active > a, .side-nav.fixed .collapsible-body li.active > a {
+  color: white;
+}
+
+// @nav-height: 96px;
+// @mobile-menu-height: 64px;
+//
+// #cms-nav {
+//
+//   padding-left: 2rem;
+//
+//   @media (max-width: 992px) {
+//     padding: 0 1rem;
+//   }
+//
+//   height: @nav-height;
+//   line-height: @nav-height;
+//
+//   > .nav-wrapper {
+//     /*
+//       Flexbox layout for nav menu.
+//     */
+//     .flex-layout();
+//     .flex-direction(row);
+//     .flex-wrap(nowrap);
+//
+//     @media (max-width: 992px) {
+//       .justify-content(space-between);
+//     }
+//
+//     /*
+//       Elements of header.
+//     */
+//     .brand-logo {
+//       position: relative;
+//       .flex(0, 0, auto);
+//
+//       @media (max-width: 992px) {
+//         left: auto;
+//         .transform(none);
+//       }
+//     }
+//
+//     #nav {
+//       .flex(1, 1, auto);
+//       .flex-layout();
+//       .flex-direction(row);
+//       .flex-wrap(wrap); /* simulates truncation of items */
+//       .justify-content(flex-end);
+//
+//       overflow: hidden;
+//     }
+//
+//     #cms-search {
+//       .flex(0, 1, auto);
+//     }
+//   }
+//
+//   > .nav-wrapper {
+//     form,
+//     > ul > li > a,
+//     > a.button-collapse {
+//       i {
+//         height: @nav-height;
+//         line-height: @nav-height;
+//       }
+//     }
+//   }
+//
+//   #mobile-menu {
+//     i {
+//       height: @mobile-menu-height;
+//       line-height: @mobile-menu-height;
+//     }
+//   }
+//
+//   #language-picker-trigger {
+//     .flex(0, 0, auto);
+//   }
+//
+//   .amber {
+//     a {
+//       color: white;
+//     }
+//   }
+//
+//   .dropdown-content {
+//     left: 0;
+//     width: 100%;
+//     li > a {
+//       padding: 22px 16px;
+//     }
+//   }
+// }

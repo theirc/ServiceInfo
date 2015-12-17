@@ -1,7 +1,7 @@
 function getInternetExplorerVersion () {
 //http://stackoverflow.com/questions/17907445/how-to-detect-ie11
   var rv = NaN;
-  
+
   if (navigator.appName === 'Microsoft Internet Explorer') {
     var ua = navigator.userAgent;
     var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
@@ -25,12 +25,12 @@ jQuery(function ($) {
   */
   $(".button-collapse").sideNav();
 
-  /*
-    Activate Materialize dropdowns.
-  */
-  $(".dropdown-button").each(function () {
-    $(this).dropdown();
-  });
+  // /*
+  //   Activate Materialize dropdowns.
+  // */
+  // $(".dropdown-button").each(function () {
+  //   $(this).dropdown();
+  // });
 
   /*
     Activate Materialize modals.

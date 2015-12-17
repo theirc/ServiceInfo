@@ -29,21 +29,20 @@
 
     <header id="cms-header" class="{% block header-class %}{% endblock header-class %}">
       {% block header %}
-        <nav id="cms-nav" class="{% block nav-class %}nav-wrapper amber lighten-2{% endblock nav-class %}">
+        {% block nav %}
+          {% block menu %}
+            {% show_menu 0 2 2 2 "cms/includes/menu.html" %}
+          {% endblock menu %}
+        {% endblock nav %}
+        <nav id="cms-nav" class="hide-on-large-only {% block nav-class %}nav-wrapper amber lighten-2{% endblock nav-class %}">
           <div class="nav-wrapper">
             <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
 
-            {% block brand %}
+            <!-- {% block brand %}
               <a href="{% url 'pages-root' %}" class="{% block brand-class %}brand-logo{% endblock brand-class %}">
                 <img src="{% static 'images/logo-large.png' %}">
               </a>
             {% endblock brand %}
-
-            {% block nav %}
-              {% block menu %}
-                {% show_menu 0 2 2 2 "cms/includes/menu.html" %}
-              {% endblock menu %}
-            {% endblock nav %}
 
             {% block search %}
               <form id="cms-search" action="search" class="amber lighten-1 hide-on-med-and-down">
@@ -53,7 +52,7 @@
                   <i class="material-icons">close</i>
                 </div>
               </form>
-            {% endblock search %}
+            {% endblock search %} -->
           </div>
         </nav>
       {% endblock header %}
