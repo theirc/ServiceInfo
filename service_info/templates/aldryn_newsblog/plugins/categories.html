@@ -2,12 +2,12 @@
 
  <div class="aldryn aldryn-newsblog aldryn-newsblog-categories">
      <h2>Categories</h2>
-    <ul class="list-unstyled">
-        <li{% if not newsblog_category %} class="active"{% endif %}>
+    <ul class="list-unstyled collection">
+        <li class="collection-item {% if not newsblog_category %}grey lighten-5{% endif %}">
             <a href="{% namespace_url "article-list" namespace=instance.app_config.namespace default='' %}">{% trans "All" %}</a>
         </li>
         {% for category in categories %}
-            <li{% if newsblog_category.id == category.id %} class="active"{% endif %}>
+            <li class="collection-item {% if newsblog_category.id == category.id %}grey lighten-5{% endif %}">
                 <a href="{% namespace_url "article-list-by-category" category.slug namespace=instance.app_config.namespace default='' %}">{{ category.name }}</a>
                 <span class="badge"> ({{ category.article_count }})</span>
             </li>

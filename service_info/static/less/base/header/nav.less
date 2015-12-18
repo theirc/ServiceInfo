@@ -1,0 +1,85 @@
+@import "../../includes/mixins.less";
+
+@side-nav-height: 48px;
+@search-item-height: 56px;
+@active-item-color: #ee6e73;
+@active-item-hover: #e57373;
+
+.side-nav, .side-nav.fixed {
+  li {
+    &:not(.logo) {
+      .flex-layout();
+      .flex-direction(column);
+    }
+    form {
+      /*
+        Correcting for weird form behavior in the nav.
+      */
+      padding: 0 1rem;
+
+      i {
+        line-height: @search-item-height;
+      }
+      input {
+        margin: 0;
+        height: @search-item-height;
+      }
+      .input-field {
+        margin: 0;
+
+        input[type=search] ~ .material-icons {
+          right: 0.75rem;
+        }
+      }
+      label {
+        height: 100%;
+        top: 0;
+        &.active {
+          -webkit-transform: none!important;
+          -moz-transform: none!important;
+          -ms-transform: none!important;
+          transform: none!important;
+        }
+      }
+    }
+    a {
+      min-height: @side-nav-height;
+      height: auto;
+      line-height: 1;
+      .flex-layout();
+      .flex-direction(row);
+      .align-items(center);
+    }
+
+    &.active {
+      background-color: #ffca28;
+    }
+
+    &:hover {
+      background-color: #ffca28;
+    }
+
+    &.logo:hover {
+      background-color: transparent;
+    }
+  }
+
+  .collapsible-body {
+    background-color: #ffe082;
+
+    li.active {
+      background-color: #ffca28;
+      a {
+        color: black;
+      }
+    }
+
+    .collapsible-body {
+      background-color: #ffecb3;
+
+      .collapsible-body {
+        background-color: #fff8e1;
+      }
+    }
+  }
+}

@@ -25,6 +25,7 @@ service_info/static/js/dist/
 service_info/static/css/site.css
 service_info/static/css/site-ltr.css
 service_info/static/css/site-rtl.css
+service_info/static/css/materialize*
 node_modules
 bundle_min.js
 feedback-help.hbs

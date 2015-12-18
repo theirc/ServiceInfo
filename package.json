@@ -28,13 +28,15 @@
     "gulp-bg": "0.0.5",
     "gulp-browserify": "^0.5.1",
     "gulp-less": "^3.0.0",
-    "gulp-rename": "^1.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-rtlcss": "^0.1.4",
     "gulp-util": "^3.0.4",
     "i18next-conv": "^0.1.4",
     "less": "^2.2.0",
+    "materialize-css": "^0.97.3",
+    "phantomjs": "^1.9.16",
     "sync-exec": "^0.5.0",
-    "tiny-lr": "^0.1.4",
-    "phantomjs": "^1.9.16"
+    "tiny-lr": "^0.1.4"
   },
   "config": {},
   "scripts": {},

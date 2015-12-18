@@ -143,6 +143,7 @@ STATIC_URL = '/app/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
     os.path.join(PROJECT_ROOT, 'frontend'),
+    os.path.join(PROJECT_ROOT, 'node_modules', 'materialize-css'),
 )
 
 LOCALE_PATHS = (
@@ -264,6 +265,7 @@ INSTALLED_APPS = (
     'taggit',
     'djangocms_googlemap',
     'djangocms_column',
+    'aldryn_video',
     # End Django CMS
     # Load after easy_thumbnails so that its thumbnail template tag (unused
     # in this project) is hidden.
@@ -420,8 +422,9 @@ SIGNED_URL_LIFETIME = 300
 # Django CMS settings
 CMS_TEMPLATES = (
     ('cms/content-types/page.html', 'Page'),
-    ('cms/content-types/pages-index.html', 'Content Index'),
-    ('cms/content-types/full-width-image.html', 'Full Width Image'),
+    ('cms/content-types/wide-page.html', 'Wide Page'),
+    ('cms/content-types/two-column.html', 'Wide Page (two columns)'),
+    ('cms/content-types/homepage.html', 'Homepage (with hero)'),
 )
 
 CMS_PERMISSION = True

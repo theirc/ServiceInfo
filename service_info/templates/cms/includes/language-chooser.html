@@ -1,20 +1,21 @@
-{% load cms_tags menu_tags %}
+{% load cms_tags menu_tags i18n %}
 
-<div id="language-toggle" class="language-toggle modal-bg hidden">
-  <div class=language-toggle>
+<div id="language-picker" class="modal">
+  <div class="modal-content">
+    <h4>{% trans "Choose language" %}</h4>
+  </div>
+  <div class="modal-footer">
     {% for language in languages %}
-      <a href="{% page_language_url language.0 %}" class="{% ifequal lang language.0 %}current{% endifequal %}">
-        <button class="primary-button">
-          {% if language.0 == "ar" %}
-            &#x627;&#x644;&#x639;&#x631;&#x628;&#x64A;&#x629;
-          {% elif language.0 == "fr" %}
-            Français
-          {% elif language.0 == "en" %}
-            English
-          {% else %}
-            {{ language.0 }}
-          {% endif %}
-        </button>
+      <a class="modal-action modal-close waves-effect waves-green btn" href="{% page_language_url language.0 %}">
+        {% if language.0 == "ar" %}
+          &#x627;&#x644;&#x639;&#x631;&#x628;&#x64A;&#x629;
+        {% elif language.0 == "fr" %}
+          Français
+        {% elif language.0 == "en" %}
+          English
+        {% else %}
+          {{ language.0 }}
+        {% endif %}
       </a>
     {% endfor %}
   </div>

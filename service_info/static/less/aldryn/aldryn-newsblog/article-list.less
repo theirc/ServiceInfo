@@ -1,0 +1,15 @@
+@import "../../includes/mixins.less";
+
+.aldryn-newsblog-list {
+  .flex-layout();
+  .flex-direction(row);
+  .flex-wrap(wrap);
+
+  .blog-card {
+    .flex(0, 1, 50%);
+
+    @media (max-width: 720px) {
+      .flex(1, 1, 100%);
+    }
+  }
+}

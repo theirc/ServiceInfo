@@ -1,0 +1,77 @@
+@import "../includes/mixins.less";
+
+section.hero {
+  position: relative;
+  overflow: hidden;
+
+  @media (min-width: 992px) {
+    max-height: 45vw;
+  }
+
+  .hero-image {
+    img {
+      width: 100%;
+      height: auto;
+
+      @media (max-width: 640px) {
+        max-width: none;
+        width: 200vw;
+        height: auto;
+      }
+    }
+  }
+  .hero-text {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    padding: 20px 0;
+
+    text-shadow: 2px 2px 4px black;
+
+    @media (max-width: 640px) {
+      top: 50%;
+      bottom: auto;
+      .transform(translateY(-50%));
+    }
+
+    .container {
+      text-align: right;
+      * { text-align: right; }
+
+      @media (max-width: 640px) {
+        text-align: center;
+        * { text-align: center; }
+
+        h1 {
+          font-size: 3rem;
+        }
+        h2 {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+}
+
+section.main-content {
+  padding: 0 20px;
+
+  .main-col {}
+
+  .secondary-col {
+    padding: 1.5em 1em;
+  }
+}
+
+.homepage .secondary-column {
+  /*
+    Expand height of contents of right column to match those of left column.
+  */
+  .flex-layout();
+  .flex-direction(column);
+
+  > *:not(.cms_placeholder) {
+    .flex(1, 1, auto);
+  }
+}

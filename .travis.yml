@@ -29,7 +29,7 @@ notifications:
   - servicemap-team@caktusgroup.com
   hipchat:
     rooms:
-      secure: D7p6v31aICDDkeDFT4WtWztJWk9/Adcv6wBuBWfLFDZ9yHc0AI2pAPbwvSFd0c/a8lMyfV5GfWdkjDls4c9KxTVtjCn9PaNW/vBz21IJNfWaRDHpLPcYIqjazpxIC3ExwtU69VmFZmiZGH+/JdCwakrz5nfOvhIg9YsnaR1FEH6LIjdgK+DzWDdjwJrj+kvF1f7eiqI0HRs450+kd8cj7r0HiGvIr+JT5K3ZVIcXz35hv+ro7nsW7spjaxZYmZ+aPgVIQ/n2iVbX6YhKdXICJiNKsYtabev/lwmpYfHr7MsvexiKTWwKeujN16GGfcKsB3k2Ihnrd2SraKMXU/CqEKoPPc9ezMb+nv8WBdQiEkTyJWpyl7YM4U1zsKPz6OivDGH3H218Z9nedIMG/689qRExhgR84ezHMoeukChvP4fE/Wc9UDsXtlNY7juOOzJ4djUskymMby1pszXGL0dbc7sTZRjzACW/zxxL+E6MgFRuMEAVYvFFNmlFDefygv/LYzzwGvsGBx7Q9445SQh0OyUk1RD0WLNsBkCsgS0K/KaSscduNQhBURLS56RHcWdGoCAB7vbmZYIsBV+30F0AieWuy/THujQqdGei/9d/P+l89b2cSdfgsLHIPH13tNEsdcyednHQ0rzPYP192pPcGZKN7KlEKocFpHQQMdpkQpw=
+      secure: hzO52z0lmODDT8vulhP8HQt/9dFxXOtRq9g/+ejt65yeAyPQCNXjbU6h4vyR91klgFAhbGeUe77w0Cwra9IqwMmCo8TTeIL9WTct3NyspxoEGq2OJiyNvw3LoCyJdk1ZynzHF8Q0G2OowRHHpmp+5v/WlPhPcPUhZLn1/BJRZGno5878wHTAK3t2p1GNTQgdAyt92Y95H4eEmLsyAQF45jR8C0B6o2c3+WJKv9rrCQO8XL5KPCvLGD8mvV/swfD/GL4Yb6a7jtLmiJ2UYdMt46gR6q1yF7VlUzCR4juVLEoBb+OGfz0xuI+NA/5lThFhe98Xm73xNdEyncoo534B1Xk+DhT93COp3+avdB5ionf1E99saRWZ2TRUrh73SRnoe8shecZXwM2HA3fDdJQ1ioO2uk720TjCBLjbZ1SCdLjW0CjiPZjzSdep50SeKe+UrG/4Q3GVumG9p2yAkTUwNpC65a/UxxkB+IbIiF9ZswYfRyfU/WN4NnV28XsOVBOxRKrAZv86q9fSGqttrV09YSkpl3AcUDhOxtM5jAa5KVbBBj9aQ5/74GW6kE+v84nriCLUyNHJwB6q0XeGwHvTktVURubyGECsJZ91eY/otrpV793g+kQsAn5trxB5hXNfah9Q/8l7GGMa17aG3wdmR+0fc6oZvsnMLwo1Lhaly2A=
     template:
     - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}
       (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Change view</a>)'

@@ -1,3 +1,10 @@
 {% extends CMS_TEMPLATE %}
+{% load i18n cms_tags %}
 
-{% block content %}{% endblock %}
+{% block content %}
+  {% block faq_title %}{% endblock %}
+    {% block faq_content %}
+        {% render_placeholder view.config.placeholder_faq_content %}
+    {% endblock faq_content %}
+    {% block faq_footer %}{% endblock %}
+{% endblock content %}

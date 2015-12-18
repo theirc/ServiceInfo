@@ -1,24 +1,35 @@
 {% load i18n apphooks_config_tags %}
 
-<ul class="results-list list-unstyled">
-    <h3>{% blocktrans with query=query %}Most recent articles containing "<strong>{{ query }}</strong>"{% endblocktrans %}</h3>
+<div class="results-list">
     {% for article in object_list %}
-        <li{% if not article.is_published %} class="unpublished"{% endif %}>
-            <a href="{% namespace_url "article-detail" article.slug namespace=view.app_config.namespace default='' %}">
-                <strong>
-                    {% for category in article.categories.all %}
-                        {{ category.name }}{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-                </strong>
-                {{ article.title }}<br />
-                <span class="text-muted">{{ article.lead_in|striptags|truncatewords:"10"|safe }}</span>
-            </a>
-        </li>
+        <div class="card result-card">
+            <div class="card-content">
+                <span class="card-title">
+                    {{ article.title }}
+                </span>
+                <p>
+                    {{ article.lead_in|striptags|truncatewords:"10"|safe }}
+                </p>
+            </div>
+            <div class="card-action">
+                <a href="{{ article.get_absolute_url }}">
+                    {% trans "Read More" %}
+                </a>
+            </div>
+        </div>
     {% empty %}
         {% if query %}
-            <p class="well">{% blocktrans with query=query %}No articles found{% endblocktrans %}</p>
+            <div class="card result-card no-results grey lighten-4">
+                <div class="card-content">
+                    <span class="card-title">
+                        {% trans "No articles found" %}
+                    </span>
+                    <p>
+                        {% trans "There were no results for your search. Please check your spelling and try again." %}
+                    </p>
+                </div>
+            </div>
         {% else %}
-            <p class="well">{% trans "Enter a query above" %}</p>
         {% endif %}
     {% endfor %}
-</ul>
+</div>

@@ -1,25 +1,45 @@
-{% load menu_tags i18n %}
+{% load menu_tags i18n staticfiles %}
 
-{% for child in children %}
-    <li class="{% if child.children %}parent{% endif %} {% if child.selected %}selected{% endif %}">
+<ul id="{% if mobile %}mobile-menu{% else %}nav{% endif %}" class="side-nav fixed amber lighten-2 {% if not mobile %}hide-on-med-and-down{% endif %}">
+  <li class="logo">
+    <a href="{% url 'pages-root' %}" class="{% block brand-class %}brand-logo{% endblock brand-class %}">
+      <img src="{% static 'images/logo-large.png' %}">
+    </a>
+  </li>
+
+  {% for child in children %}
+    {% if child.children %}
+      <li class="no-padding {% if child.selected %}active{% endif %}">
+        {% show_menu from_level to_level extra_inactive extra_active "cms/includes/sub_menu.html" "" "" child %}
+      </li>
+    {% else %}
+      <li class="{% if child.selected %}active{% endif %}">
         <a href="{{ child.get_absolute_url }}">
-            {{ child.get_menu_title }}{% if child.children %} &#9662;{% endif %}
-        </a>
-        {% if child.children %}
-            <ul>
-                <li class="primary {% if child.selected %}selected{% endif %}">
-                    <a href="{{ child.get_absolute_url }}">
-                        {{ child.get_menu_title }}
-                    </a>
-                </li>
-                {% show_menu from_level to_level extra_inactive extra_active template "" "" child %}
-            </ul>
-        {% endif %}
-    </li>
-{% endfor %}
+          {% if child.get_menu_title == "Blog" %}
+            <i class="material-icons left">description</i>
+          {% elif child.get_menu_title == "Home" %}
+            <i class="material-icons left">home</i>
+          {% elif child.get_menu_title == "FAQ" %}
+            <i class="material-icons left">question_answer</i>
+          {% endif %}
 
-{% if not child.children %}
-    <li class="language-chooser" id="language-chooser">
-        {% trans "Change language" %}
-    </li>
-{% endif %}
+          {{ child.get_menu_title }}
+        </a>
+      </li>
+    {% endif %}
+  {% endfor %}
+
+  <li>
+    <a class="modal-trigger" href="#language-picker">Choose Language</a>
+  </li>
+
+  <li class="no-padding">
+    <form>
+      <div class="input-field">
+        <input id="search{% if mobile %}-mobile{% endif %}" type="search" required>
+        <label for="search{% if mobile %}-mobile{% endif %}"><i class="material-icons">search</i></label>
+        <i class="material-icons">close</i>
+      </div>
+    </form>
+  </li>
+</ul>
