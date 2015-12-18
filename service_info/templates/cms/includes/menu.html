@@ -42,4 +42,10 @@
       </div>
     </form>
   </li>
+
+  {% if user.is_authenticated %}
+    <li>
+      <a href="{% url 'logout' %}" title="{% trans "Logout" %}"><i class="material-icons">power_settings_new</i></a>
+    </li>
+  {% endif %}
 </ul>
