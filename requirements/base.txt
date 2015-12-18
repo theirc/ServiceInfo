@@ -103,3 +103,19 @@ djangocms-column==1.6.0
 git+git://github.com/aldryn/aldryn-video.git@0.5.1#egg=aldryn-video
   jsonfield==1.0.3
   micawber==0.3.3
+# latest version not yet on pypi
+git+git://github.com/aldryn/aldryn-forms.git@2.0.2#egg=aldryn-forms
+  django-emailit==0.2.2
+    premailer==2.9.6
+      cssselect==0.9.1
+      cssutils==1.0.1
+    django-absolute==0.3
+  # djangocms-text-ckeditor
+  django-simple-captcha==0.5.1
+    # Pillow
+  django-tablib==3.1.1
+    tablib==0.10.0
+  # Pillow
+  # django-filer
+  django-sizefield==0.9
+  # aldryn-boilerplates
