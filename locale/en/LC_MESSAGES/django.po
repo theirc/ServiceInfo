@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-11 17:29+0200\n"
+"POT-Creation-Date: 2015-12-18 16:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -278,25 +278,63 @@ msgstr ""
 msgid "Save and approve"
 msgstr ""
 
-msgid "MENU"
+msgid "Category"
 msgstr ""
 
-msgid "About ServiceInfo"
+msgid "No entry found."
 msgstr ""
 
-msgid "Powered by the International Rescue Committee."
+msgid "Back to Category"
+msgstr ""
+
+msgid "Back to Overview"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "Back to List"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "No items available"
+msgstr ""
+
+msgid "Read More"
+msgstr ""
+
+msgid "No articles found"
 msgstr ""
 
 msgid ""
-"ServiceInfo is a tool that allows both service providers to register their "
-"services online and beneficiaries to both discover those services on a map "
-"and give feedback on them. ServiceInfo is open source and free to use."
+"There were no results for your search. Please check your spelling and try "
+"again."
 msgstr ""
 
-msgid "Reach Us"
+msgid "Keyword"
 msgstr ""
 
-msgid "Contact us on one of our social networks below or drop us a mail at"
+msgid "Keyword search"
+msgstr ""
+
+msgid "Go"
+msgstr ""
+
+msgid "No authors available"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "by"
+msgstr ""
+
+msgid "Search for Services Nearby"
+msgstr ""
+
+msgid "Choose language"
 msgstr ""
 
 #, python-format
