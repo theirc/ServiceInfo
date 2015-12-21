@@ -9,7 +9,7 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 
 import api.urls
-from services.views import export_view, health_view
+from services.views import export_view, health_view, logout_view
 
 
 FRONTEND_DIR = os.path.join(settings.PROJECT_ROOT, 'frontend')
@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete',
         name='password_reset_complete'),
     url(r'^export/(?P<signature>.*)/$', export_view, name='export'),
+    url(r'^logout/$', logout_view, name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
@@ -53,5 +54,5 @@ urlpatterns += i18n_patterns(
     # Django admin
     url(r'^admin/', include(admin.site.urls)),
     # Django CMS
-    url(r'^cms/', include('cms.urls', app_name=settings.CMS_APP_NAME)),
+    url(r'^' + settings.CMS_TOP_REL, include('cms.urls', app_name=settings.CMS_APP_NAME)),
 )
