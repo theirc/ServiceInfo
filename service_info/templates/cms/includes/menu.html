@@ -33,6 +33,8 @@
     <a class="modal-trigger" href="#language-picker">Choose Language</a>
   </li>
 
+  {% comment %}
+  Don't enable until CMS search actually works.
   <li class="no-padding">
     <form>
       <div class="input-field">
@@ -42,6 +44,7 @@
       </div>
     </form>
   </li>
+  {% endcomment %}
 
   {% if user.is_authenticated %}
     <li>

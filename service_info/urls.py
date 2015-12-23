@@ -6,7 +6,6 @@ from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.views.generic import RedirectView
 
 import api.urls
 from services.views import export_view, health_view, logout_view
@@ -39,11 +38,6 @@ urlpatterns = [
   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
-    urlpatterns += [
-        # Redirect / to /index.html if running locally.
-        url(r'^$', RedirectView.as_view(url=settings.STATIC_URL + 'index.html'),
-            name='index-html-redirect'),
-    ]
     import debug_toolbar
     urlpatterns += [
         url(r'^__debug__/', include(debug_toolbar.urls)),
