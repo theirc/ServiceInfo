@@ -399,6 +399,10 @@ CELERYBEAT_SCHEDULE = {
         'task': 'services.tasks.process_jira_work',
         'schedule': crontab(minute='*/5'),
     },
+    'update-search-index': {
+        'task': 'services.tasks.update_search_index',
+        'schedule': crontab(hour='*', minute=30),
+    },
 }
 
 # JIRA settings
@@ -464,8 +468,6 @@ CMS_TOP = r'/'
 DISQUS_SHORTNAME = 'trawicktestsites'  # allowed only on localhost
 ALDRYN_BOILERPLATE_NAME = 'bootstrap3'
 
-ALDRYN_SEARCH_PAGINATION = 10
-ALDRYN_SEARCH_REGISTER_APPHOOK = True
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
@@ -489,6 +491,9 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 HAYSTACK_ROUTERS = ['aldryn_search.router.LanguageRouter', ]
+
+ALDRYN_SEARCH_PAGINATION = 10
+ALDRYN_SEARCH_REGISTER_APPHOOK = True
 
 # Control of indexing of content from Aldryn plugins:
 ALDRYN_PEOPLE_SEARCH = False  # People app purposefully not enabled on site
