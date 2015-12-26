@@ -463,6 +463,7 @@ CMS_APP_NAME = 'cms'
 CMS_TOP = r'/'
 DISQUS_SHORTNAME = 'trawicktestsites'  # allowed only on localhost
 ALDRYN_BOILERPLATE_NAME = 'bootstrap3'
+
 ALDRYN_SEARCH_PAGINATION = 10
 ALDRYN_SEARCH_REGISTER_APPHOOK = True
 HAYSTACK_CONNECTIONS = {
@@ -487,13 +488,13 @@ HAYSTACK_CONNECTIONS = {
         'INDEX_NAME': 'serviceinfo-fr',
     },
 }
-HAYSTACK_ROUTERS = ['aldryn_search.router.LanguageRouter',]
+HAYSTACK_ROUTERS = ['aldryn_search.router.LanguageRouter', ]
 
-# Index content from these Aldryn plugins:
+# Control of indexing of content from Aldryn plugins:
 ALDRYN_PEOPLE_SEARCH = False  # People app purposefully not enabled on site
-# default: ALDRYN_NEWSBLOG_SEARCH = True
-# default: ALDRYN_FAQ_CATEGORY_SEARCH = True
-# default: ALDRYN_FAQ_QUESTION_SEARCH" = True
+ALDRYN_NEWSBLOG_SEARCH = False  # See SC-95
+ALDRYN_FAQ_CATEGORY_SEARCH = False  # See SC-96
+ALDRYN_FAQ_QUESTION_SEARCH = False  # See SC-96
 
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
