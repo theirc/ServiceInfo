@@ -266,6 +266,10 @@ INSTALLED_APPS = (
     'djangocms_googlemap',
     'djangocms_column',
     'aldryn_video',
+    'aldryn_search',
+    'spurl',
+    'standard_form',
+    'haystack',
     # End Django CMS
     # Load after easy_thumbnails so that its thumbnail template tag (unused
     # in this project) is hidden.
@@ -460,3 +464,39 @@ CMS_TOP_REL = r'cms/'
 CMS_TOP = r'/' + CMS_TOP_REL
 DISQUS_SHORTNAME = 'trawicktestsites'  # allowed only on localhost
 ALDRYN_BOILERPLATE_NAME = 'bootstrap3'
+ALDRYN_SEARCH_PAGINATION = 10
+ALDRYN_SEARCH_REGISTER_APPHOOK = True
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'serviceinfo-default',
+    },
+    'en': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'serviceinfo-en',
+    },
+    'ar': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'serviceinfo-ar',
+    },
+    'fr': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'serviceinfo-fr',
+    },
+}
+HAYSTACK_ROUTERS = ['aldryn_search.router.LanguageRouter',]
+
+# Index content from these Aldryn plugins:
+ALDRYN_PEOPLE_SEARCH = False  # People app purposefully not enabled on site
+# default: ALDRYN_NEWSBLOG_SEARCH = True
+# default: ALDRYN_FAQ_CATEGORY_SEARCH = True
+# default: ALDRYN_FAQ_QUESTION_SEARCH" = True
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# aldryn-search requires ALLOWED_HOSTS to be set even with DEBUG=True
+ALLOWED_HOSTS = ('localhost', '127.0.0.1',)

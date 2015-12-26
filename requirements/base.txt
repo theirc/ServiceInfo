@@ -103,3 +103,4 @@ djangocms-column==1.6.0
 git+git://github.com/aldryn/aldryn-video.git@0.5.1#egg=aldryn-video
   jsonfield==1.0.3
   micawber==0.3.3
+elasticsearch==2.1.0
