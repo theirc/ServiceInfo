@@ -72,7 +72,7 @@ local development system:
 - git >= 1.7
 - node
 - npm
-- ElasticSearch 1.7.4
+- Elasticsearch 1.7.4
 
 The deployment uses SSH with agent forwarding so you'll need to enable agent
 forwarding if it is not already by adding ``ForwardAgent yes`` to your SSH config.
@@ -138,20 +138,27 @@ Now you can run the tests::
 Enabling the search engine
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Running ElasticSearch can be as simple as unpacking it and then::
+Running Elasticsearch can be as simple as unpacking it and then::
 
     cd elasticsearch-1.7.4 && bin/elasticsearch
 
 (This requires Java.)
+
+You should add this to the bottom of ``config/elasticsearch.yml``
+to limit it to a simple single-node configuration which only services the local
+machine::
+
+    network.bind_host: 127.0.0.1
+    discovery.zen.ping.multicast.enabled: false
 
 If you have less than 10% disk space free, you'll need to make more space available
 or add this to the bottom of ``config/elasticsearch.yml``::
 
     cluster.routing.allocation.disk.threshold_enabled: false
 
-Use the management commands ``rebuild_index``, ``clear_index``, or ``update_index``
-to maintain the search index.  (The index will be updated in real time after many
-types of changes.)
+Use the Django management commands ``rebuild_index``, ``clear_index``, or
+``update_index`` to maintain the search index.  (The index will be updated in real
+time after some types of changes.)
 
 Follow the instructions for "Search bar support" in the CMS setup document.
 
