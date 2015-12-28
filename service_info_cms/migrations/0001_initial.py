@@ -14,10 +14,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='IconNameExtension',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
-                ('icon_name', models.CharField(max_length=80, help_text='Please provide the name of a Materialize icon', verbose_name='Materialize icon name')),
-                ('extended_object', models.OneToOneField(editable=False, to='cms.Page')),
-                ('public_extension', models.OneToOneField(editable=False, null=True, to='service_info_cms.IconNameExtension', related_name='draft_extension')),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
+                ('icon_name', models.CharField(max_length=80, help_text='Choose an icon at http://materializecss.com/icons.html', verbose_name='Materialize icon name')),
+                ('extended_object', models.OneToOneField(to='cms.Page', editable=False)),
+                ('public_extension', models.OneToOneField(null=True, to='service_info_cms.IconNameExtension', editable=False, related_name='draft_extension')),
             ],
             options={
                 'abstract': False,
