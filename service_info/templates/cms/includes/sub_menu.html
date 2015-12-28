@@ -12,12 +12,8 @@
       <ul>
         <li class="{% if child.selected %}active{% endif %}">
           <a href="{{ child.get_absolute_url }}">
-            {% if child.get_menu_title == "Blog" %}
-              <i class="material-icons left">description</i>
-            {% elif child.get_menu_title == "Home" %}
-              <i class="material-icons left">home</i>
-            {% elif child.get_menu_title == "FAQ" %}
-              <i class="material-icons left">question_answer</i>
+            {% if child.iconnameextension.icon_name %}
+              <i class="material-icons left">{{ child.iconnameextension.icon_name }}</i>
             {% endif %}
 
             {{ child.get_menu_title }}
@@ -31,12 +27,8 @@
           {% else %}
             <li class="{% if child.selected %}active{% endif %}">
               <a href="{{ child.get_absolute_url }}">
-                {% if child.get_menu_title == "Blog" %}
-                  <i class="material-icons left">description</i>
-                {% elif child.get_menu_title == "Home" %}
-                  <i class="material-icons left">home</i>
-                {% elif child.get_menu_title == "FAQ" %}
-                  <i class="material-icons left">question_answer</i>
+                {% if child.iconnameextension.icon_name %}
+                  <i class="material-icons left">{{ child.iconnameextension.icon_name }}</i>
                 {% endif %}
 
                 {{ child.get_menu_title }}
