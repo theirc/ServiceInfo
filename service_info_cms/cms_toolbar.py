@@ -4,6 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 from .models import IconNameExtension
 
 
+# http://docs.django-cms.org/en/support-3.1.x/how_to/extending_page_title.html#simplified-toolbar-api
+# with flake8 fix and different menu title
 @toolbar_pool.register
 class IconExtensionToolbar(ExtensionToolbar):
     # defines the model for the current toolbar
@@ -18,5 +20,5 @@ class IconExtensionToolbar(ExtensionToolbar):
             page_extension, url = self.get_page_extension_admin()
             if url:
                 # adds a toolbar item
-                current_page_menu.add_modal_item(_('Set icon for page'), url=url,
-                    disabled=not self.toolbar.edit_mode)
+                current_page_menu.add_modal_item(
+                    _('Set icon for page'), url=url, disabled=not self.toolbar.edit_mode)
