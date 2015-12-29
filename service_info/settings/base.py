@@ -270,6 +270,7 @@ INSTALLED_APPS = (
     'spurl',
     'standard_form',
     'haystack',
+    'service_info_cms',
     # End Django CMS
     # Load after easy_thumbnails so that its thumbnail template tag (unused
     # in this project) is hidden.
