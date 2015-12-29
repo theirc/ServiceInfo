@@ -21,7 +21,7 @@ function init (id) {
     e.preventDefault();
 
     if (lg = $(e.target).data('lang')) {
-      localStorage.setItem('forever.language', lg);
+      localStorage.setItem('forever.language', JSON.stringify(lg));
     }
 
     window.location.href = e.target.href;
