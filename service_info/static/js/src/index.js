@@ -1,3 +1,5 @@
+var language_picker = window.language_picker = require('./language-picker.js');
+
 function getInternetExplorerVersion () {
 //http://stackoverflow.com/questions/17907445/how-to-detect-ie11
   var rv = NaN;
