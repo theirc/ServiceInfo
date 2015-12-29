@@ -10,10 +10,11 @@ function init (id, lg, urls) {
       navigating to new page.
   */
 
-  var app_lg, no_redirect;
+  var app_lg;
+  var no_redirect = localStorage.getItem('no_redirect');
   var $lp = $(id);
 
-  if (no_redirect = localStorage.getItem('no_redirect')) {
+  if (no_redirect) {
     localStorage.setItem('no_redirect', null);
   }
 
