@@ -52,8 +52,4 @@ jQuery(function ($) {
   if (!isNaN(getInternetExplorerVersion())) {
     $('body').addClass('InternetExplorer');
   }
-
-  /*
-    Initialize custom language-picker code.
-  */
 });
