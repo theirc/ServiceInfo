@@ -1,6 +1,6 @@
 var $ = window.jQuery;
 
-function init (id) {
+function init (id, lg, urls) {
   /*
     Custom functionality for the language picker modal:
 
@@ -10,6 +10,7 @@ function init (id) {
       navigating to new page.
   */
 
+  var app_lg;
   var $lp = $(id);
 
   $lp.click(function (e) {
@@ -27,8 +28,10 @@ function init (id) {
     window.location.href = e.target.href;
   });
 
-  if (!localStorage.getItem('forever.language')) {
+  if (!(app_lg = JSON.parse(localStorage.getItem('forever.language')))) {
     $lp.openModal();
+  } else if (app_lg !== lg) {
+    window.location.href = urls[app_lg];
   }
 }
 

@@ -1,4 +1,4 @@
-var language_picker = require('./language-picker.js');
+var language_picker = window.language_picker = require('./language-picker.js');
 
 function getInternetExplorerVersion () {
 //http://stackoverflow.com/questions/17907445/how-to-detect-ie11
@@ -56,6 +56,4 @@ jQuery(function ($) {
   /*
     Initialize custom language-picker code.
   */
-
-  language_picker('#language-picker');
 });
