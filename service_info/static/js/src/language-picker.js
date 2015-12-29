@@ -15,7 +15,7 @@ function init (id, lg, urls) {
   var $lp = $(id);
 
   if (no_redirect) {
-    localStorage.setItem('no_redirect', null);
+    localStorage.removeItem('no_redirect');
   }
 
   $lp.click(function (e) {
