@@ -1,6 +1,6 @@
 var $ = window.jQuery;
 
-function init (id, lg, urls) {
+function init (id, lg, urls, editing) {
   /*
     Custom functionality for the language picker modal:
 
@@ -35,7 +35,7 @@ function init (id, lg, urls) {
 
   if (!(app_lg = JSON.parse(localStorage.getItem('forever.language')))) {
     $lp.openModal();
-  } else if (app_lg !== lg && !no_redirect) {
+  } else if (app_lg !== lg && !no_redirect && !editing) {
     localStorage.setItem('no_redirect', true);
     window.location.href = urls[app_lg];
   }

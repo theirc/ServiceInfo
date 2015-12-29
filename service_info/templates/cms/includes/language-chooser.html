@@ -23,6 +23,7 @@
 
 <script>
   jQuery(function ($) {
+    console.log('{% if request.toolbar %}true{% else %}false{% endif %}');
     window.language_picker(
       '#language-picker'
       , '{{ request.LANGUAGE_CODE }}'
@@ -31,6 +32,7 @@
           '{{ language.0 }}': '{% page_language_url language.0 %}'{% if not forloop.last %},{% endif %}
         {% endfor %}
       }
+      , {% if request.toolbar.build_mode or request.toolbar.edit_mode %}true{% else %}false{% endif %}
     );
   });
 </script>
