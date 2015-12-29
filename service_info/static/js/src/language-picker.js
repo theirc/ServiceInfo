@@ -10,8 +10,12 @@ function init (id, lg, urls) {
       navigating to new page.
   */
 
-  var app_lg;
+  var app_lg, no_redirect;
   var $lp = $(id);
+
+  if (no_redirect = localStorage.getItem('no_redirect')) {
+    localStorage.setItem('no_redirect', null);
+  }
 
   $lp.click(function (e) {
     /*
@@ -30,7 +34,8 @@ function init (id, lg, urls) {
 
   if (!(app_lg = JSON.parse(localStorage.getItem('forever.language')))) {
     $lp.openModal();
-  } else if (app_lg !== lg) {
+  } else if (app_lg !== lg && !no_redirect) {
+    localStorage.setItem('no_redirect', true);
     window.location.href = urls[app_lg];
   }
 }
