@@ -15,12 +15,8 @@
     {% else %}
       <li class="{% if child.selected %}active{% endif %}">
         <a href="{{ child.get_absolute_url }}">
-          {% if child.get_menu_title == "Blog" %}
-            <i class="material-icons left">description</i>
-          {% elif child.get_menu_title == "Home" %}
-            <i class="material-icons left">home</i>
-          {% elif child.get_menu_title == "FAQ" %}
-            <i class="material-icons left">question_answer</i>
+          {% if child.iconnameextension.icon_name %}
+            <i class="material-icons left">{{ child.iconnameextension.icon_name }}</i>
           {% endif %}
 
           {{ child.get_menu_title }}
@@ -33,6 +29,8 @@
     <a class="modal-trigger" href="#language-picker">Choose Language</a>
   </li>
 
+  {% comment %}
+  Don't enable until CMS search actually works.
   <li class="no-padding">
     <form>
       <div class="input-field">
@@ -42,4 +40,11 @@
       </div>
     </form>
   </li>
+  {% endcomment %}
+
+  {% if user.is_authenticated %}
+    <li>
+      <a href="{% url 'logout' %}" title="{% trans "Logout" %}"><i class="material-icons">power_settings_new</i></a>
+    </li>
+  {% endif %}
 </ul>

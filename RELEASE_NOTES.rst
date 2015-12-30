@@ -2,6 +2,53 @@ ServiceInfo
 
 Release Notes
 
+0.4.4 - Dec. 30, 2015
+---------------------
+
+* Present language dialog to new user loading CMS page
+* Language selection integrated between front-end app and CMS
+* Fix an issue with table width on mobile devices
+* Allow specifying a Materialize icon for a page's menu entry
+* / now reaches the CMS, not the ServiceInfo app
+* Add logout button for logged-in users
+
+0.4.3 - Dec. 18, 2015
+---------------------
+
+* Support four tiers of menus
+* Use ServiceInfo twitter timeline
+* Add Aldryn Video plug-in
+* Introduce sidebar for navigation and search (search is just a placeholder for now)
+* RTL for Arabic on page with both Arabic and English
+* Make sure language chooser is available when top-level navigation has more elements than can be displayed
+* IE 11 navigation layout fix
+* Fix image template to be able to handle different image sizes
+
+0.4.2 - Dec. 10, 2015
+---------------------
+
+* Fix aldryn-newsblog issue
+
+0.4.1 - Dec. 10, 2015
+---------------------
+
+* Remove author from News/Blog detail page
+* Various style improvements
+* Upgrade aldryn-faq to 1.0.8 to fix a 500 error
+* Add column plug-in and make appropriate styling changes
+* Add Google Map plugin (djangocms-googlemap)
+* A language picker is now provided on CMS pages.
+* Front-end application fix: When adding a service failed, error messages which
+  weren't specific to a particular field were not displayed previously.
+* The CMS menu now shows pages under the top-level page.
+* SC-33 - the footer for CMS pages is now a static placeholder
+* SC-60 - the active menu item is now highlighted
+* SC-61 - the menu can now show up to three levels of pages
+* Horizontal layout for menu
+* Improved page templates, especially for FAQ and News/Blog
+* SC-53: update djangocms-admin-style package to resolve 500 error when trying
+  to delete FAQ question from list view
+
 0.4.0 - Nov. 19, 2015
 ---------------------
 

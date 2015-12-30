@@ -3,9 +3,11 @@ import logging
 from django.conf import settings
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.views import logout
 from django.core import signing
 from django.core.signing import BadSignature
 from django.http import HttpResponse, HttpResponseForbidden
+
 from services.import_export import get_export_workbook_for_user
 
 
@@ -48,3 +50,7 @@ def export_view(request, signature):
 
 def health_view(request):
     return HttpResponse("I am okay.", content_type="text/plain")
+
+
+def logout_view(request):
+    return logout(request, next_page=settings.CMS_TOP)
