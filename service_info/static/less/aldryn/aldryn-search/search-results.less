@@ -1,6 +1,11 @@
 @import "../../includes/flex.less";
+@highlight-color: #ffd54f;
 
 .aldryn-search-results {
   .flex-layout();
   .flex-wrap(wrap);
+
+  .highlighted {
+    background-color: @highlight-color;
+  }
 }
