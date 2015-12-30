@@ -148,7 +148,8 @@ You should add this to the bottom of ``config/elasticsearch.yml``
 to limit it to a simple single-node configuration which only services the local
 machine::
 
-    network.bind_host: 127.0.0.1
+    network.host: 127.0.0.1
+    node.local: true
     discovery.zen.ping.multicast.enabled: false
 
 If you have less than 10% disk space free, you'll need to make more space available
