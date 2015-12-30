@@ -190,3 +190,10 @@ If you need to debug the Javascript, you might prefer to skip running Closure.
 You can skip closure by adding the ``--fast`` option to gulp::
 
     gulp --fast
+
+Celery
+~~~~~~
+
+Use this to run a single worker with the "beat" task scheduler::
+
+    celery -B -A service_info worker -l debug
