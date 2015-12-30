@@ -469,25 +469,28 @@ CMS_TOP = r'/'
 DISQUS_SHORTNAME = 'trawicktestsites'  # allowed only on localhost
 ALDRYN_BOILERPLATE_NAME = 'bootstrap3'
 
+haystack_engine = 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine'
+elasticsearch_url = 'http://127.0.0.1:9200/'
+
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
+        'ENGINE': haystack_engine,
+        'URL': elasticsearch_url,
         'INDEX_NAME': 'serviceinfo-default',
     },
     'en': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
+        'ENGINE': haystack_engine,
+        'URL': elasticsearch_url,
         'INDEX_NAME': 'serviceinfo-en',
     },
     'ar': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
+        'ENGINE': haystack_engine,
+        'URL': elasticsearch_url,
         'INDEX_NAME': 'serviceinfo-ar',
     },
     'fr': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
+        'ENGINE': haystack_engine,
+        'URL': elasticsearch_url,
         'INDEX_NAME': 'serviceinfo-fr',
     },
 }
