@@ -2,6 +2,16 @@ ServiceInfo
 
 Release Notes
 
+0.4.4 - Dec. 30, 2015
+---------------------
+
+* Present language dialog to new user loading CMS page
+* Language selection integrated between front-end app and CMS
+* Fix an issue with table width on mobile devices
+* Allow specifying a Materialize icon for a page's menu entry
+* / now reaches the CMS, not the ServiceInfo app
+* Add logout button for logged-in users
+
 0.4.3 - Dec. 18, 2015
 ---------------------
 
