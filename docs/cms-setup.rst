@@ -1,6 +1,9 @@
 CMS Setup
 =========
 
+This document describes necessary page setup for the site to function
+properly.
+
 When adding a language
 ----------------------
 
@@ -18,3 +21,7 @@ Search bar support
 
     - Set title to "Search Results" (or equivalent) in the appropriate language
     - Publish.
+
+  The ``create_minimal_cms`` management command can create the page and
+  initial language variations.  After running the command, edit the page titles
+  and other data as appropriate.

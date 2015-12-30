@@ -161,8 +161,6 @@ Use the Django management commands ``rebuild_index``, ``clear_index``, or
 ``update_index`` to maintain the search index.  (The index will be updated in real
 time after some types of changes.)
 
-Follow the instructions for "Search bar support" in the CMS setup document.
-
 Disabling search indexing
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -183,7 +181,10 @@ You should now be able to build the frontend and run the development API server:
 
     gulp
 
-Now visit http://localhost:8000/ in your browser.
+Follow the instructions for CMS configuration in the CMS setup document or
+just run the ``create_minimal_cms`` management command.
+
+Now visit http://localhost:4005/ in your browser.
 
 If you need to debug the Javascript, you might prefer to skip running Closure.
 You can skip closure by adding the ``--fast`` option to gulp::
