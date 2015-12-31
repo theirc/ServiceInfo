@@ -1,10 +1,20 @@
-{% load menu_tags i18n staticfiles %}
+{% load cms_tags menu_tags i18n staticfiles %}
 
 <ul id="{% if mobile %}mobile-menu{% else %}nav{% endif %}" class="side-nav fixed amber lighten-2 {% if not mobile %}hide-on-med-and-down{% endif %}">
   <li class="logo">
     <a href="{% url 'pages-root' %}" class="{% block brand-class %}brand-logo{% endblock brand-class %}">
       <img src="{% static 'images/logo-large.png' %}">
     </a>
+  </li>
+
+  <li class="no-padding">
+    <form action="{% page_url 'search-results' %}" method="get">
+      <div class="input-field">
+        <input id="search{% if mobile %}-mobile{% endif %}" type="search" name="q" required>
+        <label for="search{% if mobile %}-mobile{% endif %}"><i class="material-icons">search</i></label>
+        <i class="material-icons">close</i>
+      </div>
+    </form>
   </li>
 
   {% for child in children %}
@@ -28,19 +38,6 @@
   <li>
     <a class="modal-trigger" href="#language-picker">Choose Language</a>
   </li>
-
-  {% comment %}
-  Don't enable until CMS search actually works.
-  <li class="no-padding">
-    <form>
-      <div class="input-field">
-        <input id="search{% if mobile %}-mobile{% endif %}" type="search" required>
-        <label for="search{% if mobile %}-mobile{% endif %}"><i class="material-icons">search</i></label>
-        <i class="material-icons">close</i>
-      </div>
-    </form>
-  </li>
-  {% endcomment %}
 
   {% if user.is_authenticated %}
     <li>
