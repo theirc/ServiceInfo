@@ -35,11 +35,74 @@ main, footer {
 .multicolumn8,
 .multicolumn9,
 .multicolumn10 {
-  .column {
-    float: left !important;
+  .flex-layout();
+  .flex-wrap(wrap);
+  .flex-direction(row);
+  .column, .cms_plugin {
+    float: none !important;
+    width: auto !important;
     min-width: 200px;
-    padding-right: 10px;
-    margin-bottom: 1em;
+  }
+}
+
+.multicolumn0,
+.multicolumn1 {
+  .column, .cms_plugin {
+    .flex(1, 1, 100%);
+  }
+}
+
+.multicolumn2 {
+  .column, .cms_plugin {
+    .flex(1, 1, 50%);
+  }
+}
+
+.multicolumn3 {
+  .column, .cms_plugin {
+    .flex(1, 1, 33.333333%);
+  }
+}
+
+.multicolumn4 {
+  .column, .cms_plugin {
+    .flex(1, 1, 25%);
+  }
+}
+
+.multicolumn5 {
+  .column, .cms_plugin {
+    .flex(1, 1, 20%);
+  }
+}
+
+.multicolumn6 {
+  .column, .cms_plugin {
+    .flex(1, 1, 16.6666667%);
+  }
+}
+
+.multicolumn7 {
+  .column, .cms_plugin {
+    .flex(1, 1, 14.285714%);
+  }
+}
+
+.multicolumn8 {
+  .column, .cms_plugin {
+    .flex(1, 1, 12.5%);
+  }
+}
+
+.multicolumn9 {
+  .column, .cms_plugin {
+    .flex(1, 1, 11.1111111%);
+  }
+}
+
+.multicolumn10 {
+  .column, .cms_plugin {
+    .flex(1, 1, 10%);
   }
 }
 
