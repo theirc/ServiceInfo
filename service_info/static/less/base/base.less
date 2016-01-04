@@ -1,5 +1,7 @@
 @import "../includes/mixins.less";
 
+@highlight-color: #ffd54f;
+
 * {
   text-align: left;
   box-sizing: border-box;
@@ -66,4 +68,8 @@ table {
   @media (max-width: 991px) {
     width: 100% !important;
   }
+}
+
+.highlighted {
+  background-color: @highlight-color;
 }

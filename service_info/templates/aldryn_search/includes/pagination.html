@@ -1,0 +1,38 @@
+{% load i18n spurl %}
+
+{% if page_obj.has_other_pages %}
+
+  <ul class="pagination">
+    <li class="waves-effect {% if not page_obj.has_previous %}disabled{% endif %}">
+        {% if page_obj.has_previous %}
+            <a href="{% spurl base='' query=request.GET set_query='page={{ page_obj.previous_page_number }}' %}" aria-label="{% trans 'Previous' %}">
+        {% endif %}
+              <i aria-hidden="true" class="material-icons">{% if request.LANGUAGE_CODE == 'ar' %}chevron_right{% else %}chevron_left{% endif %}</i>
+        {% if page_obj.has_previous %}
+            </a>
+        {% endif %}
+    </li>
+
+    {% for page_num in page_obj.page_range %}
+      {% if page_num %}
+        <li class="{% if page_obj.number == page_num %}active{% else %}waves-effect{% endif %}">
+          <a href="{% spurl base='' query=request.GET set_query='page={{ page_num }}' %}">{{ page_num }}</a>
+        </li>
+      {% else %}
+        <li class="waves-effect">
+          …
+        </li>
+      {% endif %}
+    {% endfor %}
+
+    <li class="waves-effect {% if not page_obj.has_next %}disabled{% endif %}">
+        {% if page_obj.has_next %}
+            <a href="{% spurl base='' query=request.GET set_query='page={{ page_obj.next_page_number }}' %}" aria-label="{% trans "Next" %}">
+        {% endif %}
+              <i aria-hidden="true" class="material-icons">{% if request.LANGUAGE_CODE == 'ar' %}chevron_left{% else %}chevron_right{% endif %}</i>
+        {% if page_obj.has_next %}
+            </a>
+        {% endif %}
+    </li>
+  </ul>
+{% endif %}
