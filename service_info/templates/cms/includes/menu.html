@@ -8,7 +8,7 @@
   </li>
 
   <li class="no-padding">
-    <form>
+    <form action="{% page_url 'search-results' %}" method="get">
       <div class="input-field">
         <input id="search{% if mobile %}-mobile{% endif %}" type="search" name="q" required>
         <label for="search{% if mobile %}-mobile{% endif %}"><i class="material-icons">search</i></label>
