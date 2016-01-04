@@ -65,6 +65,5 @@ jQuery(function ($) {
     .each(function () {
       $(this).trigger('click');
     })
-    .children('.collapsible-body')
   ;
 });
