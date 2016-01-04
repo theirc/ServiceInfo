@@ -3,10 +3,12 @@
 <ul class="collapsible collapsible-accordion">
   <li class="">
     <a class="collapsible-header waves-effect">
-      {{ child.get_menu_title }}
-      {% if child.children %}
-        <i class="material-icons right">arrow_drop_down</i>
-      {% endif %}
+      <div class="collapsible-header-wrap">
+        {{ child.get_menu_title }}
+        {% if child.children %}
+          <i class="material-icons right">arrow_drop_down</i>
+        {% endif %}
+      </div>
     </a>
     <div class="collapsible-body">
       <ul>
