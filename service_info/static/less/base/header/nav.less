@@ -49,8 +49,22 @@
       .flex-layout();
       .flex-direction(row);
       .align-items(center);
+
       &.collapsible-header {
-        .justify-content(space-between);
+        .collapsible-header-wrap {
+          .flex-layout();
+          .flex-direction(row);
+          .align-items(center);
+          .justify-content(space-between);
+          .flex(0, 1, 100%);
+        }
+        padding: 0 30px;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0;
+        i {
+          margin-right: 0;
+        }
       }
     }
 
@@ -69,19 +83,23 @@
 
   .collapsible-body {
     background-color: #ffe082;
-
-    li.active {
-      background-color: #ffca28;
-      a {
-        color: black;
+    .collapsible-body {
+      background-color: #ffecb3;
+      .collapsible-body {
+        background-color: #fff8e1;
       }
     }
 
-    .collapsible-body {
-      background-color: #ffecb3;
-
-      .collapsible-body {
-        background-color: #fff8e1;
+    li {
+      &.active {
+        background-color: #ffca28;
+      }
+      a {
+        color: black !important;
+        margin: 0 15px;
+        &.collapsible-header {
+          margin: 0;
+        }
       }
     }
   }

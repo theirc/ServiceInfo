@@ -5,8 +5,10 @@
     {% for question in object_list %}
     <li>
         <div class="collapsible-header{% if forloop.first %} active{% endif %}">
-            {% render_model question "title" %}
-            <i class="material-icons">info_outline</i>
+            <div class="collapsible-header-wrap">
+                {% render_model question "title" %}
+                <i class="material-icons">info_outline</i>
+            </div>
         </div>
         {% if view.config.app_data.config.show_description %}
             <div class="collapsible-body">
