@@ -1,26 +1,26 @@
 {% load menu_tags i18n %}
 
 <ul class="collapsible" data-collapsible="expandable">
-  <li class="">
+  <li class="{% if child.selected %}active{% endif %}">
+    {% if child.children %}
+      <div class="overlay">
+        <a href="{{ child.get_absolute_url }}" class="waves-effect">
+          {{ child.get_menu_title }}
+        </a>
+      </div>
+    {% endif %}
     <a class="collapsible-header waves-effect">
       <div class="collapsible-header-wrap">
-        {{ child.get_menu_title }}
         {% if child.children %}
+          &nbsp;
           <i class="material-icons right">arrow_drop_down</i>
+        {% else %}
+          {{ child.get_menu_title }}
         {% endif %}
       </div>
     </a>
     <div class="collapsible-body">
       <ul>
-        <li class="{% if child.selected %}active{% endif %}">
-          <a href="{{ child.get_absolute_url }}">
-            {% if child.iconnameextension.icon_name %}
-              <i class="material-icons left">{{ child.iconnameextension.icon_name }}</i>
-            {% endif %}
-
-            {{ child.get_menu_title }}
-          </a>
-        </li>
         {% for child in child.children %}
           {% if child.children %}
             <li class="no-padding">

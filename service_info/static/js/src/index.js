@@ -60,7 +60,10 @@ jQuery(function ($) {
   */
   $('#nav .collapsible-body, #mobile-menu .collapsible-body')
     .find('li.active')
-    .parents('#nav li')
+    .parents('#nav li, #mobile-menu li')
+    .each(function () {
+      $(this).addClass('active');
+    })
     .children('.collapsible-header')
     .each(function () {
       $(this).trigger('click');
