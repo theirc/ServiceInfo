@@ -62,7 +62,22 @@
     <footer id="cms-footer" class="{% block footer-class %}page-footer grey darken-3{% endblock footer-class %}">
       {% block footer %}
         <div class="container white-text">
-          {% static_placeholder "footer_content" %}
+          <div class="row">
+            <div class="col">
+              {% static_placeholder "footer_content" %}  
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h6 class="grey-text">Search for Services Nearby</h6>
+              <p>
+                <a href="/app/index.html" class="waves-effect waves-light btn-large">
+                  Services
+                  <i class="material-icons right">search</i>
+                </a>
+              </p>
+            </div>
+          </div>
         </div>
         <div class="footer-copyright grey-text">
           <div class="container">
