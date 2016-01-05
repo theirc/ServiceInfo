@@ -82,6 +82,8 @@
   }
 
   .collapsible-body {
+    border-left: 3px solid rgba(0,0,0,0.15)!important;
+    margin-left: 5px;
     background-color: #ffe082;
     .collapsible-body {
       background-color: #ffecb3;
@@ -91,8 +93,8 @@
     }
 
     li {
-      &.active {
-        background-color: #ffca28;
+      &.active, &:hover {
+        background-color: transparent;
       }
       a {
         color: black !important;
