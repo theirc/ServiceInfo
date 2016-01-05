@@ -98,12 +98,17 @@
       }
     }
 
-    &.active {
-      background-color: #ffca28;
+    &.active, &:hover {
+      background-color: transparent;
     }
 
-    &:hover {
-      background-color: #ffca28;
+    &.page-active {
+      > ul > li > .overlay {
+        font-weight: 800;
+      }
+      > a {
+        font-weight: 800;
+      }
     }
 
     &.logo:hover {

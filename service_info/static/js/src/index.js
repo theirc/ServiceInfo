@@ -59,11 +59,8 @@ jQuery(function ($) {
     collapsible elements.
   */
   $('#nav .collapsible-body, #mobile-menu .collapsible-body')
-    .find('li.active')
+    .find('li.page-active')
     .parents('#nav li, #mobile-menu li')
-    .each(function () {
-      $(this).addClass('active');
-    })
     .children('.collapsible-header')
     .each(function () {
       $(this).trigger('click');
