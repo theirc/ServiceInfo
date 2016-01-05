@@ -63,14 +63,16 @@
       {% block footer %}
         <div class="container white-text">
           <div class="row">
-            <div class="col s12 m9">
+            <div class="col">
               {% static_placeholder "footer_content" %}
             </div>
-            <div class="col s12 m3">
+          </div>
+          <div class="row">
+            <div class="col">
               <h6 class="grey-text">{% trans "Search for Services Nearby" %}</h6>
               <p>
                 <a href="/app/index.html" class="waves-effect waves-light btn-large">
-                  Services
+                  {% trans "Services" %}
                   <i class="material-icons right">search</i>
                 </a>
               </p>
