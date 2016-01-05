@@ -6,6 +6,10 @@
 @active-item-hover: #e57373;
 
 .side-nav, .side-nav.fixed {
+  > li > .collapsible > .page-active,
+  > li.page-active {
+    background-color: #ffca28;
+  }
   li {
     &:not(.logo) {
       .flex-layout();
@@ -98,7 +102,7 @@
       }
     }
 
-    &.active {
+    &.active, &:hover {
        background-color: #ffca28;
     }
 
