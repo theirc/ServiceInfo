@@ -4,7 +4,7 @@
 
 #mobile-nav {
   height: @mobile-nav-height;
-  padding-left: 1rem;
+  padding-left: 0;
 
   a.button-collapse {
     height: @mobile-nav-height;
@@ -15,12 +15,17 @@
   }
 
   > .nav-wrapper > a.brand-logo {
+    background-color: white;
+    left: 0;
+    height: 72px;
+    width: 72px;
+    box-sizing: border-box;
     .flex-layout();
     .align-items(center);
+    .justify-content(center);
+    padding: 10px;
 
     height: 100%;
-
-    padding: 6px;
 
     > img {
       height: 100%;
