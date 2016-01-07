@@ -47,6 +47,11 @@ jQuery(function ($) {
   }
 
   /*
+    Activate Materialize sliders.
+  */
+  $('.slider').slider({full_width: true});
+
+  /*
     Adjust for IE 11.
   */
   if (!isNaN(getInternetExplorerVersion())) {
