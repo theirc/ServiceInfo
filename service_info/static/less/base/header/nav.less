@@ -11,6 +11,8 @@
     background-color: #ffca28;
   }
   li {
+    position: relative;
+
     &:not(.logo) {
       .flex-layout();
       .flex-direction(column);
@@ -52,7 +54,9 @@
       position: absolute;
       left: 0;
       z-index: 2;
-      width: 190px;
+
+      width: 192px;
+
       .flex-layout();
       .align-items(center);
       a {
@@ -60,6 +64,7 @@
         .align-items(center);
         padding-left: 30px;
         width: 100%;
+        height: 100%;
         display: inline-flex;
       }
     }
@@ -83,6 +88,7 @@
           .align-items(center);
           .justify-content(space-between);
           .flex(0, 1, 100%);
+          flex-basis: 100% !important;
 
           i {
             .flex-layout();
@@ -121,6 +127,27 @@
     }
   }
 
+  .collapsible {
+    .overlay {
+      width: 192px;
+    }
+    .collapsible {
+      .overlay {
+        width: 184px;
+      }
+      .collapsible {
+        .overlay {
+          width: 176px;
+        }
+        .collapsible {
+          .overlay {
+            width: 168px;
+          }
+        }
+      }
+    }
+  }
+
   .collapsible-body {
     border-left: 3px solid rgba(0,0,0,0.15)!important;
     margin-left: 5px;
@@ -132,16 +159,19 @@
       }
     }
 
+    .overlay {
+      a {
+        padding: 0 0 0 15px;
+      }
+    }
+
     li {
       &.active, &:hover {
         background-color: transparent;
       }
-      a {
+      a, a.collapsible-header {
         color: black !important;
-        margin: 0 15px;
-        &.collapsible-header {
-          margin: 0;
-        }
+        margin: 0;
       }
       .overlay {
         a {
