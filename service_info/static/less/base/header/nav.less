@@ -6,7 +6,13 @@
 @active-item-hover: #e57373;
 
 .side-nav, .side-nav.fixed {
+  > li > .collapsible > .page-active,
+  > li.page-active {
+    background-color: #ffca28;
+  }
   li {
+    position: relative;
+
     &:not(.logo) {
       .flex-layout();
       .flex-direction(column);
@@ -42,6 +48,27 @@
         }
       }
     }
+
+    .overlay {
+      height: 48px;
+      position: absolute;
+      left: 0;
+      z-index: 2;
+
+      width: 192px;
+
+      .flex-layout();
+      .align-items(center);
+      a {
+        .flex-layout();
+        .align-items(center);
+        padding-left: 30px;
+        width: 100%;
+        height: 100%;
+        display: inline-flex;
+      }
+    }
+
     a {
       min-height: @side-nav-height;
       height: auto;
@@ -49,14 +76,50 @@
       .flex-layout();
       .flex-direction(row);
       .align-items(center);
+
+      &.collapsible-header {
+        &:not(.active) + .collapsible-body .overlay {
+          display: none;
+        }
+
+        .collapsible-header-wrap {
+          .flex-layout();
+          .flex-direction(row);
+          .align-items(center);
+          .justify-content(space-between);
+          .flex(0, 1, 100%);
+          flex-basis: 100% !important;
+
+          i {
+            .flex-layout();
+            .align-items(center);
+            .justify-content(center);
+            height: 48px;
+            width: 48px;
+            background-color: rgba(255,255,255,0.75);
+          }
+        }
+        padding: 0 0 0 30px;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0;
+        i {
+          margin-right: 0;
+        }
+      }
     }
 
-    &.active {
+    &.active, &:hover {
       background-color: #ffca28;
     }
 
-    &:hover {
-      background-color: #ffca28;
+    &.page-active {
+      > ul > li > .overlay {
+        font-weight: 800;
+      }
+      > a {
+        font-weight: 800;
+      }
     }
 
     &.logo:hover {
@@ -64,21 +127,56 @@
     }
   }
 
-  .collapsible-body {
-    background-color: #ffe082;
+  .collapsible {
+    .overlay {
+      width: 192px;
+    }
+    .collapsible {
+      .overlay {
+        width: 184px;
+      }
+      .collapsible {
+        .overlay {
+          width: 176px;
+        }
+        .collapsible {
+          .overlay {
+            width: 168px;
+          }
+        }
+      }
+    }
+  }
 
-    li.active {
-      background-color: #ffca28;
-      a {
-        color: black;
+  .collapsible-body {
+    border-left: 3px solid rgba(0,0,0,0.15)!important;
+    margin-left: 5px;
+    background-color: #ffe082;
+    .collapsible-body {
+      background-color: #ffecb3;
+      .collapsible-body {
+        background-color: #fff8e1;
       }
     }
 
-    .collapsible-body {
-      background-color: #ffecb3;
+    .overlay {
+      a {
+        padding: 0 0 0 15px;
+      }
+    }
 
-      .collapsible-body {
-        background-color: #fff8e1;
+    li {
+      &.active, &:hover {
+        background-color: transparent;
+      }
+      a, a.collapsible-header {
+        color: black !important;
+        margin: 0;
+      }
+      .overlay {
+        a {
+          margin: 0;
+        }
       }
     }
   }

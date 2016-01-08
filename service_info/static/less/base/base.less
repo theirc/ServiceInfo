@@ -1,5 +1,7 @@
 @import "../includes/mixins.less";
 
+@highlight-color: #ffd54f;
+
 * {
   text-align: left;
   box-sizing: border-box;
@@ -35,6 +37,9 @@ main, footer {
 .multicolumn10 {
   .column {
     float: left !important;
+    min-width: 200px;
+    padding-right: 0.5rem;
+    box-sizing: border-box;
   }
 }
 
@@ -60,4 +65,14 @@ img {
 /*rtl:ignore*/
 *[dir="LTR"] {
   text-align: left;
+}
+
+table {
+  @media (max-width: 991px) {
+    width: 100% !important;
+  }
+}
+
+.highlighted {
+  background-color: @highlight-color;
 }

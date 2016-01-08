@@ -72,6 +72,7 @@ local development system:
 - git >= 1.7
 - node
 - npm
+- Elasticsearch 1.7.4
 
 The deployment uses SSH with agent forwarding so you'll need to enable agent
 forwarding if it is not already by adding ``ForwardAgent yes`` to your SSH config.
@@ -134,6 +135,39 @@ Now you can run the tests::
 
     ./run_tests.sh
 
+Enabling the search engine
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Running Elasticsearch can be as simple as unpacking it and then::
+
+    cd elasticsearch-1.7.4 && bin/elasticsearch
+
+(This requires Java.)
+
+You should add this to the bottom of ``config/elasticsearch.yml``
+to limit it to a simple single-node configuration which only services the local
+machine::
+
+    network.host: 127.0.0.1
+    node.local: true
+    discovery.zen.ping.multicast.enabled: false
+
+If you have less than 10% disk space free, you'll need to make more space available
+or add this to the bottom of ``config/elasticsearch.yml``::
+
+    cluster.routing.allocation.disk.threshold_enabled: false
+
+Use the Django management commands ``rebuild_index``, ``clear_index``, or
+``update_index`` to maintain the search index.  (The index will be updated in real
+time after some types of changes.)
+
+Disabling search indexing
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Add this to ``local.py``::
+
+    HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.BaseSignalProcessor'
+
 Running locally
 ~~~~~~~~~~~~~~~
 
@@ -147,9 +181,19 @@ You should now be able to build the frontend and run the development API server:
 
     gulp
 
-Now visit http://localhost:8000/ in your browser.
+Follow the instructions for CMS configuration in the CMS setup document or
+just run the ``create_minimal_cms`` management command.
+
+Now visit http://localhost:4005/ in your browser.
 
 If you need to debug the Javascript, you might prefer to skip running Closure.
 You can skip closure by adding the ``--fast`` option to gulp::
 
     gulp --fast
+
+Celery
+~~~~~~
+
+Use this to run a single worker with the "beat" task scheduler::
+
+    celery -B -A service_info worker -l debug

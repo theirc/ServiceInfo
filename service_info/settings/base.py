@@ -248,6 +248,7 @@ INSTALLED_APPS = (
     'cmsplugin_filer_image',
     'cmsplugin_filer_teaser',
     'cmsplugin_filer_video',
+    'cmsplugin_iframe',
     # Aldryn news and blog
     'aldryn_apphooks_config',
     'aldryn_boilerplates',
@@ -266,6 +267,11 @@ INSTALLED_APPS = (
     'djangocms_googlemap',
     'djangocms_column',
     'aldryn_video',
+    'aldryn_search',
+    'spurl',
+    'standard_form',
+    'haystack',
+    'service_info_cms',
     'absolute',
     'aldryn_forms',
     'aldryn_forms.contrib.email_notifications',
@@ -400,6 +406,10 @@ CELERYBEAT_SCHEDULE = {
         'task': 'services.tasks.process_jira_work',
         'schedule': crontab(minute='*/5'),
     },
+    'update-search-index': {
+        'task': 'services.tasks.update_search_index',
+        'schedule': crontab(hour='*', minute=30),
+    },
 }
 
 # JIRA settings
@@ -456,10 +466,56 @@ THUMBNAIL_PROCESSORS = (
 # add to settings.py:
 THUMBNAIL_HIGH_RESOLUTION = True
 
+# CKEditor
+TEXT_ADDITIONAL_TAGS = ('iframe', 'src', 'width', 'height')
+TEXT_ADDITIONAL_ATTRIBUTES = ('scrolling', 'allowfullscreen', 'frameborder')
+
 # cmsplugin_filer_image provides integration with djangocms-text-ckeditor
 # for DnD via this setting:
 TEXT_SAVE_IMAGE_FUNCTION = 'cmsplugin_filer_image.integrations.ckeditor.create_image_plugin'
 
 CMS_APP_NAME = 'cms'
+CMS_TOP = r'/'
 DISQUS_SHORTNAME = 'trawicktestsites'  # allowed only on localhost
 ALDRYN_BOILERPLATE_NAME = 'bootstrap3'
+
+haystack_engine = 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine'
+elasticsearch_url = 'http://127.0.0.1:9200/'
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': haystack_engine,
+        'URL': elasticsearch_url,
+        'INDEX_NAME': 'serviceinfo-default',
+    },
+    'en': {
+        'ENGINE': haystack_engine,
+        'URL': elasticsearch_url,
+        'INDEX_NAME': 'serviceinfo-en',
+    },
+    'ar': {
+        'ENGINE': haystack_engine,
+        'URL': elasticsearch_url,
+        'INDEX_NAME': 'serviceinfo-ar',
+    },
+    'fr': {
+        'ENGINE': haystack_engine,
+        'URL': elasticsearch_url,
+        'INDEX_NAME': 'serviceinfo-fr',
+    },
+}
+HAYSTACK_ROUTERS = ['aldryn_search.router.LanguageRouter', ]
+
+ALDRYN_SEARCH_PAGINATION = 10
+ALDRYN_SEARCH_REGISTER_APPHOOK = True
+
+# Control of indexing of content from Aldryn plugins:
+ALDRYN_PEOPLE_SEARCH = False  # People app purposefully not enabled on site
+ALDRYN_NEWSBLOG_SEARCH = False  # See SC-95
+ALDRYN_FAQ_CATEGORY_SEARCH = False  # See SC-96
+ALDRYN_FAQ_QUESTION_SEARCH = False  # See SC-96
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# aldryn-search requires ALLOWED_HOSTS to be set even with DEBUG=True
+ALLOWED_HOSTS = ('localhost', '127.0.0.1',)

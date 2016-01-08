@@ -1,3 +1,5 @@
+var language_picker = window.language_picker = require('./language-picker.js');
+
 function getInternetExplorerVersion () {
 //http://stackoverflow.com/questions/17907445/how-to-detect-ie11
   var rv = NaN;
@@ -45,9 +47,28 @@ jQuery(function ($) {
   }
 
   /*
+    Activate Materialize sliders.
+  */
+  $('.slider').slider({full_width: true});
+
+  /*
     Adjust for IE 11.
   */
   if (!isNaN(getInternetExplorerVersion())) {
     $('body').addClass('InternetExplorer');
   }
+
+  /*
+    Ensure that submenus with active children are open on page load.
+    Easiest way to do this: trigger the 'click' behavior on the containing
+    collapsible elements.
+  */
+  $('#nav .collapsible-body, #mobile-menu .collapsible-body')
+    .find('li.page-active')
+    .parents('#nav li, #mobile-menu li')
+    .children('.collapsible-header')
+    .each(function () {
+      $(this).trigger('click');
+    })
+  ;
 });
