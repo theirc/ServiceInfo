@@ -113,7 +113,8 @@ aldryn-forms==2.0.3
   # djangocms-text-ckeditor
   django-simple-captcha==0.5.1
     # Pillow
-  django-tablib==3.1.1
+  # Needs simple Py3K fix others have posted: django-tablib==3.1.1
+  git+git://github.com/caktus/django-tablib.git@ServiceInfo/3.1.1-plus-additional-fixes#egg=django-tablib
     tablib==0.10.0
   # Pillow
   # django-filer
