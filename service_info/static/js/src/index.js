@@ -22,6 +22,7 @@ function getInternetExplorerVersion () {
 }
 
 jQuery(function ($) {
+
   /*
     Activate Materialize mobile menu.
   */
@@ -62,18 +63,4 @@ jQuery(function ($) {
   if (!isNaN(getInternetExplorerVersion())) {
     $('body').addClass('InternetExplorer');
   }
-
-  /*
-    Ensure that submenus with active children are open on page load.
-    Easiest way to do this: trigger the 'click' behavior on the containing
-    collapsible elements.
-  */
-  $('#nav .collapsible-body, #mobile-menu .collapsible-body')
-    .find('li.page-active')
-    .parents('#nav li, #mobile-menu li')
-    .children('.collapsible-header')
-    .each(function () {
-      $(this).trigger('click');
-    })
-  ;
 });
