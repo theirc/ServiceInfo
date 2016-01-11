@@ -1,0 +1,27 @@
+{% load aldryn_forms_tags i18n %}
+
+{% if field %}
+  <div class="input-field">
+    {% block form_field %}
+      {% render_form_widget field %}
+    {% endblock form_field %}
+
+    {% block form_field_label %}
+      <label for="{{ field.auto_id }}"></label>
+    {% endblock form_field_label %}
+
+    {% block form_field_errors %}
+      {% if field.errors %}
+        {% for error in field.errors %}
+          <span class="red darken-2 white-text">{{ error }}</span>
+        {% endfor %}
+      {% endif %}
+    {% endblock form_field_errors %}
+
+    {% block form_field_help_text %}
+      {% if field.help_text %}
+        <p class="help-block">{{ field.help_text }}</p>
+      {% endif %}
+    {% endblock form_field_help_text %}
+  </div>
+{% endif %}
