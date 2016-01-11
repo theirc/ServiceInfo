@@ -57,6 +57,17 @@
         {% block content %}
         {% endblock content %}
       {% endblock wrap-content %}
+
+      SMURFS: {{ request.iconnameextension.icon_name }}
+
+      {% if request.current_page.ratingextension.include_rating %}
+          <form action="?" method="POST">
+            <div class="g-recaptcha" data-sitekey="your_site_key"></div>
+            <br/>
+            <input type="submit" value="Submit">
+          </form>
+      {% endif %}
+
     </main>
 
     <footer id="cms-footer" class="{% block footer-class %}page-footer grey darken-3{% endblock footer-class %}">

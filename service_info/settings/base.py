@@ -462,8 +462,9 @@ THUMBNAIL_PROCESSORS = (
 THUMBNAIL_HIGH_RESOLUTION = True
 
 # CKEditor
-TEXT_ADDITIONAL_TAGS = ('iframe', 'src', 'width', 'height')
-TEXT_ADDITIONAL_ATTRIBUTES = ('scrolling', 'allowfullscreen', 'frameborder')
+
+TEXT_ADDITIONAL_TAGS = ('iframe', )
+TEXT_ADDITIONAL_ATTRIBUTES = ('scrolling', 'allowfullscreen', 'frameborder', )
 
 # cmsplugin_filer_image provides integration with djangocms-text-ckeditor
 # for DnD via this setting:

@@ -27,10 +27,10 @@ extension_pool.register(RatingExtension)
 
 
 class PageRating(PageExtension):
-    average_rating = models.DecimalField(default=False)
-    num_ratings = IntegerField()
-    rating_total = IntegerField()
-    page_id = IntegerField()
+    average_rating = models.DecimalField(default=False, max_digits=3, decimal_places=2)
+    num_ratings = models.IntegerField()
+    rating_total = models.IntegerField()
+    page_id = models.IntegerField()
 
     def update_rating_average(self):
         """find the average number of stars for this
