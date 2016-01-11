@@ -31,7 +31,7 @@ class PageRating(PageExtension):
     average_rating = models.DecimalField(default=False, max_digits=3, decimal_places=2)
     num_ratings = models.IntegerField()
     rating_total = models.IntegerField()
-    page_id = models.IntegerField()
+    page_title = models.ForeignKey('Title', on_delete=models.CASCADE,)
 
     def update_rating_average(self):
         """find the average number of stars for this

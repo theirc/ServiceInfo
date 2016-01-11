@@ -57,15 +57,18 @@
         {% block content %}
         {% endblock content %}
       {% endblock wrap-content %}
-
       {% if request.current_page.ratingextension.include_rating %}
           <form action="?" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="title_id" value="{{ request.current_title.id }}">
             <div class="g-recaptcha" data-sitekey="6Ld0EhUTAAAAAA2n-bmAB0FeU3QO3A8RhH3R2PDP"></div>
+
             <input type="radio" name="rating" value="1"> 1
             <input type="radio" name="rating" value="2"> 2
             <input type="radio" name="rating" value="3"> 3
             <input type="radio" name="rating" value="4"> 4
             <input type="radio" name="rating" value="5"> 5
+
             <input type="submit" value="Submit">
           </form>
       {% endif %}
