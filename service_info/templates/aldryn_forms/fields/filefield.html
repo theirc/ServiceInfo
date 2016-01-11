@@ -4,20 +4,16 @@
   <div class="file-field input-field col s12">
     {% block form_field %}
       <div class="btn waves-effect waves-light">
-        <span>{% trans "File" %}</span>
+        <span>{% trans "Upload" %}</span>
         <input type="file">
       </div>
 
-      <div class="file-path-wrapper">
-        <input type="text" class="file-path validate">
-      </div>
+      {% block form_field_label %}
+        <div class="file-path-wrapper">
+          <input type="text" class="file-path validate" placeholder="{{ field.label }}">
+        </div>
+      {% endblock form_field_label %}
     {% endblock form_field %}
-
-    {% block form_field_label %}
-      <label for="{{ field.auto_id }}">
-        {{ field.label }}
-      </label>
-    {% endblock form_field_label %}
 
     {% block form_field_errors %}
       {% if field.errors %}

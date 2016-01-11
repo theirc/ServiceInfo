@@ -2,6 +2,7 @@
 
 {% if field %}
   <div class="col s12">
+    <label>{{ field.label }}</label>
     {% for choice in field.field.choices %}
       <p>
         {% block form_field %}
