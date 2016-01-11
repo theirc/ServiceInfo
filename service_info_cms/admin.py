@@ -12,5 +12,5 @@ class RatingExtensionAdmin(PageExtensionAdmin):
     pass
 
 
-admin.site.register(IconNameExtension)
-admin.site.register(RatingExtension)
+admin.site.register(IconNameExtension, IconNameExtensionAdmin)
+admin.site.register(RatingExtension, RatingExtensionAdmin)

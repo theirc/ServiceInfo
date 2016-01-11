@@ -58,12 +58,14 @@
         {% endblock content %}
       {% endblock wrap-content %}
 
-      SMURFS: {{ request.iconnameextension.icon_name }}
-
       {% if request.current_page.ratingextension.include_rating %}
           <form action="?" method="POST">
-            <div class="g-recaptcha" data-sitekey="your_site_key"></div>
-            <br/>
+            <div class="g-recaptcha" data-sitekey="6Ld0EhUTAAAAAA2n-bmAB0FeU3QO3A8RhH3R2PDP"></div>
+            <input type="radio" name="rating" value="1"> 1
+            <input type="radio" name="rating" value="2"> 2
+            <input type="radio" name="rating" value="3"> 3
+            <input type="radio" name="rating" value="4"> 4
+            <input type="radio" name="rating" value="5"> 5
             <input type="submit" value="Submit">
           </form>
       {% endif %}
@@ -114,7 +116,7 @@
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
     <script src="{% static 'js/dist/bundle.js' %}"></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?hl=ar" async defer></script>
     {% render_block "js" %}
 
     {% language_chooser "cms/includes/language-chooser.html" %}
