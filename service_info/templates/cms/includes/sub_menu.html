@@ -9,7 +9,7 @@
         </a>
       </div>
     {% endif %}
-    <a class="collapsible-header waves-effect">
+    <a class="collapsible-header waves-effect {% if child.ancestor %}active{% endif %}">
       <div class="collapsible-header-wrap">
         {% if child.children %}
           &nbsp;
@@ -19,7 +19,7 @@
         {% endif %}
       </div>
     </a>
-    <div class="collapsible-body">
+    <div class="collapsible-body" {% if child.ancestor %}style="display:block;"{% endif %}>
       <ul>
         {% for child in child.children %}
           {% if child.children %}
