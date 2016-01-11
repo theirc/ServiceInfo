@@ -34,6 +34,7 @@ urlpatterns = [
         name='password_reset_complete'),
     url(r'^export/(?P<signature>.*)/$', export_view, name='export'),
     url(r'^logout/$', logout_view, name='logout'),
+    url(r'^captcha/', include('captcha.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
