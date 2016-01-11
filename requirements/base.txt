@@ -104,7 +104,8 @@ djangocms-column==1.6.0
 git+git://github.com/aldryn/aldryn-video.git@0.5.1#egg=aldryn-video
   jsonfield==1.0.3
   micawber==0.3.3
-aldryn-forms==2.0.3
+# missing Py3K and custom user model fixes: aldryn-forms==2.0.3
+git+git://github.com/aldryn/aldryn-forms.git@b121fe54bacef9ffea226489574fb6b288be25d5#egg=aldryn-forms
   django-emailit==0.2.2
     premailer==2.9.6
       cssselect==0.9.1
