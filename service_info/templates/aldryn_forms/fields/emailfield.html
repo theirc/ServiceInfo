@@ -7,7 +7,7 @@
     {% endblock form_field %}
 
     {% block form_field_label %}
-      <label for="{{ field.auto_id }}"></label>
+      <label for="{{ field.auto_id }}">{{ field.label }}</label>
     {% endblock form_field_label %}
 
     {% block form_field_errors %}

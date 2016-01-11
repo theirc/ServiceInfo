@@ -3,7 +3,7 @@
 {% if field %}
   <div class="input-field">
     {% block form_field %}
-      {% render_form_widget field class="form-control" %}
+      {% render_form_widget field class="materialize-textarea" %}
     {% endblock form_field %}
 
     <label for="{{ field.auto_id }}">
