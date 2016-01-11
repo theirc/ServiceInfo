@@ -1,8 +1,8 @@
 {% load cms_tags %}
 
-<fieldset{% if instance.custom_classes %} class="{{ instance.custom_classes }}"{% endif %}>
+<fieldset class="col s12 row{% if instance.custom_classes %} {{ instance.custom_classes }}{% endif %}">
     {% if instance.legend %}
-        <legend>{{ instance.legend }}</legend>
+        <legend class="col s12">{{ instance.legend }}</legend>
     {% endif %}
 
     {% for plugin in instance.child_plugin_instances %}

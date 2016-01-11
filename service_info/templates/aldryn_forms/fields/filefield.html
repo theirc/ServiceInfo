@@ -1,7 +1,7 @@
 {% load aldryn_forms_tags i18n %}
 
 {% if field %}
-  <div class="file-field input-field">
+  <div class="file-field input-field col s12">
     {% block form_field %}
       <div class="btn waves-effect waves-light">
         <span>{% trans "File" %}</span>
@@ -12,6 +12,12 @@
         <input type="text" class="file-path validate">
       </div>
     {% endblock form_field %}
+
+    {% block form_field_label %}
+      <label for="{{ field.auto_id }}">
+        {{ field.label }}
+      </label>
+    {% endblock form_field_label %}
 
     {% block form_field_errors %}
       {% if field.errors %}

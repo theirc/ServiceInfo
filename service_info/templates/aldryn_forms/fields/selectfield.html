@@ -1,16 +1,18 @@
 {% load aldryn_forms_tags i18n %}
 
 {% if field %}
-  <div class="input-field">
+  <div class="input-field col s12">
     {% block form_field %}
       <select {% block is-multiple %}multiple{% endblock is-multiple %} name="{{ field.name }}" id="{{ field.auto_id }}">
         {% for choice in field.field.choices %}
-          <option value="{{ choice.0 }}"{% if choice.0|force_text in field.value|force_text_list %} selected="selected"{% endif %}>
-            {{ choice.1 }}
-          </option>
+          <option value="{{ choice.0 }}"{% if choice.0|force_text in field.value|force_text_list %} selected="selected"{% endif %}>{{ choice.1 }}</option>
         {% endfor %}
       </select>
     {% endblock form_field %}
+
+    {% block form_field_label %}
+      <label for="{{ field.auto_id }}">{{ field.label }}</label>
+    {% endblock form_field_label %}
 
     {% block form_field_errors %}
       {% if field.errors %}
