@@ -1,7 +1,7 @@
 {% load aldryn_forms_tags i18n %}
 
 {% if field %}
-  <div class="col s12">
+  <div class="col s12 radio-select">
     <label>{{ field.label }}</label>
     {% for choice in field.field.choices %}
       <p>

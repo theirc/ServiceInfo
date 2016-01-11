@@ -3,7 +3,7 @@
 {% if field %}
   <div class="input-field col s12">
     {% block form_field %}
-      <select {% block is-multiple %}multiple{% endblock is-multiple %} name="{{ field.name }}" id="{{ field.auto_id }}">
+      <select {% block is-multiple %}{% endblock is-multiple %} name="{{ field.name }}" id="{{ field.auto_id }}">
         {% for choice in field.field.choices %}
           <option value="{{ choice.0 }}"{% if choice.0|force_text in field.value|force_text_list %} selected="selected"{% endif %}>{{ choice.1 }}</option>
         {% endfor %}
