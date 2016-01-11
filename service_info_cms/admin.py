@@ -1,10 +1,16 @@
 from django.contrib import admin
 from cms.extensions import PageExtensionAdmin
 
-from .models import IconNameExtension
+from .models import IconNameExtension, RatingExtension
 
 
 class IconNameExtensionAdmin(PageExtensionAdmin):
     pass
 
-admin.site.register(IconNameExtension, IconNameExtensionAdmin)
+
+class RatingExtensionAdmin(PageExtensionAdmin):
+    pass
+
+
+admin.site.register(IconNameExtension)
+admin.site.register(RatingExtension)
