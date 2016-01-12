@@ -57,20 +57,42 @@
         {% block content %}
         {% endblock content %}
       {% endblock wrap-content %}
+
       {% if request.current_page.ratingextension.include_rating %}
-          <form action="?" method="POST">
+        <section class="row rating">
+          <form action="?" method="POST" class="col s12 m8" id="page-rating">
             {% csrf_token %}
-            <input type="hidden" name="title_id" value="{{ request.current_title.id }}">
-            <div class="g-recaptcha" data-sitekey="6Ld0EhUTAAAAAA2n-bmAB0FeU3QO3A8RhH3R2PDP"></div>
+            <div class="card">
+              <div class="card-action stars-row">
+                <span class="left amber-text caption">
+                  {% trans "Rate This Page" %}:
+                </span>
+                <div class="stars">
+                  <input type="radio" name="rating" value="5" id="rating-5">
+                  <label for="rating-5"></label>
+                  <input type="radio" name="rating" value="4" id="rating-4">
+                  <label for="rating-4"></label>
+                  <input type="radio" name="rating" value="3" id="rating-3">
+                  <label for="rating-3"></label>
+                  <input type="radio" name="rating" value="2" id="rating-2">
+                  <label for="rating-2"></label>
+                  <input type="radio" name="rating" value="1" id="rating-1">
+                  <label for="rating-1"></label>
+                </div>
+              </div>
+            </div>
 
-            <input type="radio" name="rating" value="1"> 1
-            <input type="radio" name="rating" value="2"> 2
-            <input type="radio" name="rating" value="3"> 3
-            <input type="radio" name="rating" value="4"> 4
-            <input type="radio" name="rating" value="5"> 5
-
-            <input type="submit" value="Submit">
+            <div class="modal" id="captcha-modal">
+              <div class="modal-content captcha">
+                <h4>{% trans "Captcha Verification" %}</h4>
+                <input type="hidden" name="title_id" value="{{ request.current_title.id }}">
+                <div class="g-recaptcha" data-sitekey="6Ld0EhUTAAAAAA2n-bmAB0FeU3QO3A8RhH3R2PDP"
+                     data-callback="__submit_captcha__"
+                ></div>
+              </div>
+            </div>
           </form>
+        </section>
       {% endif %}
 
     </main>
