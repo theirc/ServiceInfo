@@ -49,4 +49,5 @@ urlpatterns += i18n_patterns(
     url(r'^admin/', include(admin.site.urls)),
     # Django CMS
     url(r'^', include('cms.urls', app_name=settings.CMS_APP_NAME)),
+    url(r'^service-info/', include('service_info_cms.urls'))
 )
