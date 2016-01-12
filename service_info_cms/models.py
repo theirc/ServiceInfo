@@ -12,6 +12,7 @@ RATING_CHOICES = [(1, '1 star'),
                   (5, '5 stars')
                   ]
 
+
 class IconNameExtension(PageExtension):
     icon_name = models.CharField(
         _('Materialize icon name'), max_length=80, null=False, blank=False,
