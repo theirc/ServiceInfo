@@ -54,6 +54,23 @@ jQuery(function ($) {
   }
 
   /*
+    Bind to rating radio buttons.
+  */
+  $('#page-rating .stars label').click(function () {
+    $('#captcha-modal').openModal();
+  });
+
+  /*
+    Set up captcha callback.
+  */
+  window.__submit_captcha__ = function () {
+    setTimeout(function () {
+      $('#captcha-modal').closeModal();
+      $('#page-rating').submit();
+    }, 1500);
+  }
+
+  /*
     Ensure that submenus with active children are open on page load.
     Easiest way to do this: trigger the 'click' behavior on the containing
     collapsible elements.
