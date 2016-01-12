@@ -12,7 +12,6 @@ RATING_CHOICES = [(1, '1 star'),
                   (5, '5 stars')
                   ]
 
-
 class IconNameExtension(PageExtension):
     icon_name = models.CharField(
         _('Materialize icon name'), max_length=80, null=False, blank=False,
@@ -27,18 +26,18 @@ class RatingExtension(PageExtension):
 extension_pool.register(RatingExtension)
 
 
-class PageRating(PageExtension):
+class PageRating(models.Model):
     average_rating = models.DecimalField(default=False, max_digits=3, decimal_places=2)
-    num_ratings = models.IntegerField()
-    rating_total = models.IntegerField()
-    page_title = models.ForeignKey('cms.Title', on_delete=models.CASCADE,)
+    num_ratings = models.IntegerField(default=0)
+    rating_total = models.IntegerField(default=0)
+    page_obj = models.ForeignKey('cms.Page', on_delete=models.CASCADE,)
 
     def update_rating_average(self, rating):
         """find the average number of stars for this
            page and round to the closest integer"""
         self.num_ratings += 1
         self.rating_total += rating
-        save(update_fields=["num_ratings", "rating_total"])
+        self.save(update_fields=["num_ratings", "rating_total"])
         self.average_rating = int(round(self.rating_total/self.num_ratings))
-        save(update_fields=["average_rating"])
+        self.save(update_fields=["average_rating"])
         return

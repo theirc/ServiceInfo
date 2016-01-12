@@ -57,7 +57,6 @@
         {% block content %}
         {% endblock content %}
       {% endblock wrap-content %}
-TITLE: {% page_attribute "title.id" %}
       {% if request.current_page.ratingextension.include_rating %}
         <section class="row rating">
           <form action="{% url 'update-page-rating' %}" method="POST" class="col s12 m8" id="page-rating">
@@ -85,7 +84,7 @@ TITLE: {% page_attribute "title.id" %}
             <div class="modal" id="captcha-modal">
               <div class="modal-content captcha">
                 <h4>{% trans "Captcha Verification" %}</h4>
-                <input type="hidden" name="title_id" value="{{ request.current_title.id }}">
+                <input type="hidden" name="page_id" value="{{ request.current_page.id }}">
                 <input type="hidden" name="return_url" value="{{ request.get_full_path }}" />
                 <div class="g-recaptcha" data-sitekey="6Ld0EhUTAAAAAA2n-bmAB0FeU3QO3A8RhH3R2PDP"
                      data-callback="__submit_captcha__"
