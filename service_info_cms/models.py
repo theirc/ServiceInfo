@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from cms.extensions import PageExtension
 from cms.extensions.extension_pool import extension_pool
+from cms.models.titlemodels import Title
 
 ICON_CATALOG = 'http://materializecss.com/icons.html'
 RATING_CHOICES = [(1, '1 star'),
@@ -31,7 +32,7 @@ class PageRating(PageExtension):
     average_rating = models.DecimalField(default=False, max_digits=3, decimal_places=2)
     num_ratings = models.IntegerField()
     rating_total = models.IntegerField()
-    # page_title = models.ForeignKey('Title', on_delete=models.CASCADE,)
+    page_title = models.ForeignKey('cms.Title', on_delete=models.CASCADE,)
 
     def update_rating_average(self):
         """find the average number of stars for this
