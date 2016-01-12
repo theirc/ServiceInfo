@@ -3,7 +3,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from cms.extensions import PageExtension
 from cms.extensions.extension_pool import extension_pool
-from cms.models.titlemodels import Title
 
 ICON_CATALOG = 'http://materializecss.com/icons.html'
 RATING_CHOICES = [(1, '1 star'),
@@ -34,7 +33,12 @@ class PageRating(PageExtension):
     rating_total = models.IntegerField()
     page_title = models.ForeignKey('cms.Title', on_delete=models.CASCADE,)
 
-    def update_rating_average(self):
+    def update_rating_average(self, rating):
         """find the average number of stars for this
            page and round to the closest integer"""
-        return 3  # <<< TODO: calculate average
+        self.num_ratings += 1
+        self.rating_total += rating
+        save(update_fields=["num_ratings", "rating_total"])
+        self.average_rating = int(round(self.rating_total/self.num_ratings))
+        save(update_fields=["average_rating"])
+        return

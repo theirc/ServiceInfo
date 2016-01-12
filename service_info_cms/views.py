@@ -1,6 +1,6 @@
-from django.core.urlresolvers import reverse_lazy, reverse
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, get_object_or_404
+
+# from django.http import HttpResponseRedirect
+from django.shortcuts import render
 
 from cms.models.titlemodels import Title
 
@@ -11,11 +11,9 @@ def update_page_rating(request):
     if request.method == 'POST':
         rating = int(request.POST.get("rating", ""))
         title_id = int(request.POST.get("title_id", ""))
-        title = cms.Title.objects.get(title_id=title_id)
+        title = Title.objects.get(title_id=title_id)
         page_rating = PageRating.objects.get(page_title=title)
-        page_rating.num_ratings += 1
-        page_rating.rating_total += rating
-        page_rating.save(update_fields=["num_ratings", "rating_total"])
-        return render(request, '<h2>Thanks!</h2>', context)
+        page_rating.update_rating_average(rating)
+        return render(request, '<h2>Thanks!</h2>')
     else:
-        return render(request, '<h2>No rating specified</h2>', context)
+        return render(request, '<h2>No rating specified</h2>')
