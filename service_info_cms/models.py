@@ -28,7 +28,7 @@ extension_pool.register(RatingExtension)
 
 
 class PageRating(models.Model):
-    average_rating = models.DecimalField(default=False, max_digits=3, decimal_places=2)
+    average_rating = models.IntegerField(default=0)
     num_ratings = models.IntegerField(default=0)
     rating_total = models.IntegerField(default=0)
     page_obj = models.ForeignKey('cms.Page', on_delete=models.CASCADE,)
