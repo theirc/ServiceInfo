@@ -7,11 +7,24 @@ from django.contrib.auth.views import logout
 from django.core import signing
 from django.core.signing import BadSignature
 from django.http import HttpResponse, HttpResponseForbidden
+from django.shortcuts import render
 
 from services.import_export import get_export_workbook_for_user
 
+from .models import Service
+
 
 logger = logging.getLogger(__name__)
+
+
+def service_detail_view(request, service_id):
+    try:
+        service = Service.objects.get(pk=service_id)
+    except Service.DoesNotExist:
+        logger.error("Service ID {0} does not exist.".format(service_id))
+        return HttpResponseForbidden('This service does not exist or is inaccessible.')
+    context = {'service': service, }
+    return render(request, 'services/service_detail.html', context)
 
 
 def export_view(request, signature):

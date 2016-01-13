@@ -1,0 +1,20 @@
+
+{% extends "cms/base.html" %}
+{% load i18n %}
+{% load cms_tags %}
+
+{% block wrap-content %}
+    <section class="section">
+        {% block content %}
+           <h5>{% trans "Service Information" %}</h5>
+
+            <table>
+                <tr>
+                    <th>{% trans "English Name" %}</th>
+                    <td>{{ service.name_en }}</td>
+                </tr>
+            </table>
+
+        {% endblock content %}
+    </section>
+{% endblock wrap-content %}
