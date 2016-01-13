@@ -9,10 +9,110 @@
 .side-nav, .side-nav.fixed {
   > li > .collapsible > .page-active,
   > li.page-active {
-    background-color: @amber-lighten-1;
+    // background-color: #ee6e73;
   }
+
+  /*
+    Enumeration of possible text areas needing colors.
+  */
+  li {
+    &.page-active {
+      > a,
+      > .overlay > a,
+      > .collapsible-header,
+      &.page-active > a {
+        color: white;
+      }
+    }
+  }
+
+  .collapsible-body {
+    li.active {
+      a {
+        color: black;
+      }
+    }
+    li.page-active {
+      > a {
+        color: white;
+      }
+    }
+  }
+
+  .collapsible {
+    .overlay {
+      &:hover {
+        & + .underlay {
+          color: white;
+        }
+      }
+    }
+    .collapsible-header {
+      &:hover + .underlay {
+        color: white;
+      }
+    }
+  }
+
+  /*
+    Enumeration of possible highlighted regions (either hover or active).
+  */
+
+  li {
+    &.page-active {
+      background-color: @active-item-color;
+      transition: none;
+    }
+
+    a {
+      &:hover {
+        background-color: @active-item-color;
+        transition: none;
+      }
+      transition: none;
+    }
+  }
+
+  .collapsible {
+    .overlay {
+      &:hover {
+        & + .underlay {
+          background-color: @active-item-color;
+          transition: none;
+        }
+      }
+    }
+    .collapsible-header {
+      &:hover + .underlay {
+        background-color: @active-item-color;
+        transition: none;
+      }
+    }
+  }
+
+
   li {
     position: relative;
+
+    &.active {
+      background-color: transparent;
+      a {
+        // color: black;
+      }
+    }
+
+    a {
+      -webkit-transition: all .3s ease-out;
+      transition: all .3s ease-out;
+    }
+
+    &:hover {
+      background-color: transparent;
+      // color: white;
+      // > a, > .overlay > a {
+      //   color: white;
+      // }
+    }
 
     &:not(.logo) {
       .flex-layout();
@@ -54,6 +154,7 @@
       height: 48px;
       position: absolute;
       left: 0;
+      top: 0;
       z-index: 2;
 
       width: 192px;
@@ -68,6 +169,15 @@
         height: 100%;
         display: inline-flex;
       }
+    }
+
+    .underlay {
+      height: 48px;
+      position: absolute;
+      z-index: 0;
+      width: 100%;
+      left: 0;
+      top: 0;
     }
 
     a {
@@ -97,7 +207,7 @@
             .justify-content(center);
             height: 48px;
             width: 48px;
-            background-color: rgba(255,255,255,0.75);
+            // background-color: rgba(255,255,255,0.75);
           }
         }
         padding: 0 0 0 30px;
@@ -110,27 +220,23 @@
       }
     }
 
-    &.active, &:hover {
-      background-color: @amber-lighten-1;
-    }
-
-    &.page-active {
-      > ul > li > .overlay {
-        font-weight: 800;
-      }
-      > a {
-        font-weight: 800;
-      }
-    }
-
     &.logo:hover {
-      background-color: transparent;
+      // background-color: transparent;
     }
   }
 
   .collapsible {
     .overlay {
       width: 192px;
+      &:hover {
+        & + .collapsible-header {
+          // background-color: @active-item-color;
+          color: white;
+        }
+        > a {
+          color: white;
+        }
+      }
     }
     .collapsible {
       .overlay {
@@ -150,13 +256,23 @@
   }
 
   .collapsible-body {
+    li:not(.page-active) {
+      &.active {
+        > .overlay > a {
+          // color: white;
+        }
+        > a {
+          color: black;
+        }
+      }
+    }
     border-left: 3px solid rgba(0,0,0,0.15)!important;
     margin-left: 5px;
-    background-color: @amber-lighten-3;
+    // background-color: @amber-lighten-3;
     .collapsible-body {
-      background-color: @amber-lighten-4;
+      // background-color: @amber-lighten-4;
       .collapsible-body {
-        background-color: @amber-lighten-5;
+        // background-color: @amber-lighten-5;
       }
     }
 
@@ -167,11 +283,10 @@
     }
 
     li {
-      &.active, &:hover {
+      &.active {
         background-color: transparent;
       }
       a, a.collapsible-header {
-        color: black !important;
         margin: 0;
       }
       .overlay {

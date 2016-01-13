@@ -2,13 +2,6 @@
 
 <ul class="collapsible" data-collapsible="expandable">
   <li class="{% if child.selected %}page-active{% endif %}">
-    {% if child.children %}
-      <div class="overlay">
-        <a href="{{ child.get_absolute_url }}" class="waves-effect">
-          {{ child.get_menu_title }}
-        </a>
-      </div>
-    {% endif %}
     <a class="collapsible-header waves-effect {% if child.ancestor %}active{% endif %}">
       <div class="collapsible-header-wrap">
         {% if child.children %}
@@ -19,6 +12,14 @@
         {% endif %}
       </div>
     </a>
+    {% if child.children %}
+      <div class="overlay">
+        <a href="{{ child.get_absolute_url }}" class="waves-effect">
+          {{ child.get_menu_title }}
+        </a>
+      </div>
+      <div class="underlay"></div>
+    {% endif %}
     <div class="collapsible-body" {% if child.ancestor %}style="display:block;"{% endif %}>
       <ul>
         {% for child in child.children %}

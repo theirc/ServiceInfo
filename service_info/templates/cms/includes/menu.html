@@ -1,6 +1,6 @@
 {% load cms_tags menu_tags i18n staticfiles %}
 
-<ul id="{% if mobile %}mobile-menu{% else %}nav{% endif %}" class="side-nav fixed amber lighten-2 {% if not mobile %}hide-on-med-and-down{% endif %}">
+<ul id="{% if mobile %}mobile-menu{% else %}nav{% endif %}" class="side-nav fixed {% if not mobile %}hide-on-med-and-down{% endif %}">
   <li class="logo">
     <a href="{% url 'pages-root' %}" class="{% block brand-class %}brand-logo{% endblock brand-class %}">
       <img src="{% static 'images/logo-large.png' %}">
