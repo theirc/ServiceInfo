@@ -462,7 +462,6 @@ THUMBNAIL_PROCESSORS = (
 THUMBNAIL_HIGH_RESOLUTION = True
 
 # CKEditor
-
 TEXT_ADDITIONAL_TAGS = ('iframe', )
 TEXT_ADDITIONAL_ATTRIBUTES = ('scrolling', 'allowfullscreen', 'frameborder', )
 

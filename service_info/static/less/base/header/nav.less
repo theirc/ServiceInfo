@@ -1,4 +1,5 @@
 @import "../../includes/mixins.less";
+@import "../../includes/variables.less";
 
 @side-nav-height: 48px;
 @search-item-height: 56px;
@@ -8,9 +9,11 @@
 .side-nav, .side-nav.fixed {
   > li > .collapsible > .page-active,
   > li.page-active {
-    background-color: #ffca28;
+    background-color: @amber-lighten-1;
   }
   li {
+    position: relative;
+
     &:not(.logo) {
       .flex-layout();
       .flex-direction(column);
@@ -52,7 +55,9 @@
       position: absolute;
       left: 0;
       z-index: 2;
-      width: 190px;
+
+      width: 192px;
+
       .flex-layout();
       .align-items(center);
       a {
@@ -60,6 +65,7 @@
         .align-items(center);
         padding-left: 30px;
         width: 100%;
+        height: 100%;
         display: inline-flex;
       }
     }
@@ -83,6 +89,7 @@
           .align-items(center);
           .justify-content(space-between);
           .flex(0, 1, 100%);
+          flex-basis: 100% !important;
 
           i {
             .flex-layout();
@@ -104,7 +111,7 @@
     }
 
     &.active, &:hover {
-      background-color: #ffca28;
+      background-color: @amber-lighten-1;
     }
 
     &.page-active {
@@ -121,14 +128,41 @@
     }
   }
 
+  .collapsible {
+    .overlay {
+      width: 192px;
+    }
+    .collapsible {
+      .overlay {
+        width: 184px;
+      }
+      .collapsible {
+        .overlay {
+          width: 176px;
+        }
+        .collapsible {
+          .overlay {
+            width: 168px;
+          }
+        }
+      }
+    }
+  }
+
   .collapsible-body {
     border-left: 3px solid rgba(0,0,0,0.15)!important;
     margin-left: 5px;
-    background-color: #ffe082;
+    background-color: @amber-lighten-3;
     .collapsible-body {
-      background-color: #ffecb3;
+      background-color: @amber-lighten-4;
       .collapsible-body {
-        background-color: #fff8e1;
+        background-color: @amber-lighten-5;
+      }
+    }
+
+    .overlay {
+      a {
+        padding: 0 0 0 15px;
       }
     }
 
@@ -136,12 +170,9 @@
       &.active, &:hover {
         background-color: transparent;
       }
-      a {
+      a, a.collapsible-header {
         color: black !important;
-        margin: 0 15px;
-        &.collapsible-header {
-          margin: 0;
-        }
+        margin: 0;
       }
       .overlay {
         a {

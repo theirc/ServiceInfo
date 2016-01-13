@@ -22,6 +22,7 @@ function getInternetExplorerVersion () {
 }
 
 jQuery(function ($) {
+
   /*
     Activate Materialize mobile menu.
   */
@@ -45,6 +46,11 @@ jQuery(function ($) {
   if (!$('.cms-toolbar-expanded').length) {
     $('.parallax').parallax();
   }
+
+  /*
+    Activate Materialize sliders.
+  */
+  $('.slider').slider({full_width: true});
 
   /*
     Adjust for IE 11.
