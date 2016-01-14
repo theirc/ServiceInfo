@@ -39,18 +39,10 @@
     font-size: 24px;
   }
 
-  [type="radio"]+label:after {
-
-  }
-
-  [type="radio"]:checked+label:before {
-  }
-
   [type="radio"]:checked~label:after,
   [type="radio"]:checked+label:after {
     background-color: transparent;
     content: "★";
-
     z-index: 0;
     -webkit-transform: scale(1.02);
     -moz-transform: scale(1.02);
@@ -59,9 +51,4 @@
     transform: scale(1.02);
   }
 
-  [type="radio"]:checked+label:before,
-  [type="radio"]:checked+label:after {}
-
-  [type="radio"]:not(:checked)+label,
-  [type="radio"]:checked+label {}
 }
