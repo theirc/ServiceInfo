@@ -6,54 +6,9 @@
 {% block wrap-content %}
     <section class="section">
         {% block content %}
-           <h5>{% trans "Service Information" %}</h5>
+            <h5>{% trans "Service Information" %}</h5>
 
-           {{ service.image}}
-
-            <table class="table-condensed">
-
-                <tr><td colspan="3">{% trans "Hours" %}</td></tr>
-                <tr>
-                  <td><span> </span></td>
-                  <th>Open</th>
-                  <th>Closed</th>
-                </tr>
-                <tr>
-                  <th>{% trans "Sunday" %}</th>
-                  <td>{{ service.sunday_open }}</td>
-                  <td>{{ service.sunday_close }}</td>
-                </tr>
-                <tr>
-                  <th>{% trans "Monday" %}</th>
-                  <td>{{ service.monday_open }}</td>
-                  <td>{{ service.monday_close }}</td>
-                </tr>
-                <tr>
-                  <th>{% trans "Tuesday" %}</th>
-                  <td>{{ service.tuesday_open }}</td>
-                  <td>{{ service.tuesday_close }}</td>
-                </tr>
-                <tr>
-                  <th>{% trans "Wednesday" %}</th>
-                  <td>{{ service.wednesday_open }}</td>
-                  <td>{{ service.wednesday_close }}</td>
-                </tr>
-                <tr>
-                  <th>{% trans "Thursday" %}</th>
-                  <td>{{ service.thursday_open }}</td>
-                  <td>{{ service.thursday_close }}</td>
-                </tr>
-                <tr>
-                  <th>{% trans "Friday" %}</th>
-                  <td>{{ service.friday_open }}</td>
-                  <td>{{ service.friday_close }}</td>
-                </tr>
-                <tr>
-                  <th>{% trans "Saturday" %}</th>
-                  <td>{{ service.saturday_open }}</td>
-                  <td>{{ service.saturday_close }}</td>
-                </tr>
-            </table>
+            {{ service.image}}
 
             <br>
 
@@ -131,6 +86,52 @@
                     <td>{{ service.location }}</td>
                 </tr>
 
+            </table>
+
+            <br>
+
+             <table class="table-condensed">
+                <tr><td colspan="3">{% trans "Hours" %}</td></tr>
+                <tr>
+                  <td><span> </span></td>
+                  <th>Open</th>
+                  <th>Closed</th>
+                </tr>
+                <tr>
+                  <th>{% trans "Sunday" %}</th>
+                  <td>{{ service.sunday_open }}</td>
+                  <td>{{ service.sunday_close }}</td>
+                </tr>
+                <tr>
+                  <th>{% trans "Monday" %}</th>
+                  <td>{{ service.monday_open }}</td>
+                  <td>{{ service.monday_close }}</td>
+                </tr>
+                <tr>
+                  <th>{% trans "Tuesday" %}</th>
+                  <td>{{ service.tuesday_open }}</td>
+                  <td>{{ service.tuesday_close }}</td>
+                </tr>
+                <tr>
+                  <th>{% trans "Wednesday" %}</th>
+                  <td>{{ service.wednesday_open }}</td>
+                  <td>{{ service.wednesday_close }}</td>
+                </tr>
+                <tr>
+                  <th>{% trans "Thursday" %}</th>
+                  <td>{{ service.thursday_open }}</td>
+                  <td>{{ service.thursday_close }}</td>
+                </tr>
+                <tr>
+                  <th>{% trans "Friday" %}</th>
+                  <td>{{ service.friday_open }}</td>
+                  <td>{{ service.friday_close }}</td>
+                </tr>
+                <tr>
+                  <th>{% trans "Saturday" %}</th>
+                  <td>{{ service.saturday_open }}</td>
+                  <td>{{ service.saturday_close }}</td>
+                </tr>
             </table>
 
         {% endblock content %}
