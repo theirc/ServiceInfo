@@ -11,7 +11,9 @@ EXPECTED_CHANGES = {
         # migrations.AlterField(
         #     model_name='faqconfig',
         #     name='app_data',
-        #     field=app_data.fields.AppDataField(default=b'{}', editable=False),
+        #     field=app_data.fields.AppDataField(default='{}', editable=False),
+        #     preserve_default=True,
+        # ),
         '- Alter field app_data on faqconfig',
     ],
 }
