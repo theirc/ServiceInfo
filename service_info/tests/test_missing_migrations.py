@@ -46,7 +46,9 @@ class MigrationCommandOutput(object):
                 continue
             else:
                 if state != self.READING:
-                    raise ValueError('State is <%s> instead of <R>' % state)
+                    raise ValueError('State is <%s> instead of <%s>' % (
+                        state, self.READING
+                    ))
                 actual_changes.append(l.strip())
         if state != self.INITIAL:
             yield module, actual_changes
