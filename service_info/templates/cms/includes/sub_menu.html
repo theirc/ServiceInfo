@@ -4,7 +4,7 @@
   <li class="parent {% if child.selected %}page-active{% endif %}">
     {% if child.children %}
       <div class="overlay">
-        <a href="{{ child.get_absolute_url }}" class="waves-effect">
+        <a href="{{ child.get_absolute_url }}">
         </a>
       </div>
     {% endif %}
@@ -27,7 +27,7 @@
             </li>
           {% else %}
             <li class="no-padding {% if child.selected %}page-active{% endif %}">
-              <a href="{{ child.get_absolute_url }}">
+              <a href="{{ child.get_absolute_url }}" class="waves-effect">
                 {% if child.iconnameextension.icon_name %}
                   <i class="material-icons left">{{ child.iconnameextension.icon_name }}</i>
                 {% endif %}

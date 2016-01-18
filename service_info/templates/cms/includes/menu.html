@@ -24,7 +24,7 @@
       </li>
     {% else %}
       <li class="no-padding {% if child.selected %}page-active{% endif %}">
-        <a href="{{ child.get_absolute_url }}">
+        <a href="{{ child.get_absolute_url }}" class="waves-effect">
           {% if child.iconnameextension.icon_name %}
             <i class="material-icons left">{{ child.iconnameextension.icon_name }}</i>
           {% endif %}
@@ -36,14 +36,14 @@
   {% endfor %}
 
   <li class="no-padding">
-    <a class="modal-trigger" href="#language-picker">
+    <a class="modal-trigger waves-effect" href="#language-picker">
       <i class="material-icons left">language</i>
       {% trans "Choose Language" %}
     </a>
   </li>
 
   {% if user.is_authenticated %}
-    <li class="no-padding">
+    <li class="no-padding waves-effect">
       <a href="{% url 'logout' %}" title="{% trans "Logout" %}"><i class="material-icons">power_settings_new</i></a>
     </li>
   {% endif %}
