@@ -14,7 +14,7 @@ class RatingExtensionAdmin(PageExtensionAdmin):
 
 class PageRatingAdmin(admin.ModelAdmin):
     list_display = ('page_obj', 'num_ratings', 'average_rating',)
-    readonly_fields = ('page_obj', 'num_ratings', 'average_rating', )
+    readonly_fields = ('page_obj', 'num_ratings', 'average_rating', 'rating_total')
     list_filter = ('average_rating', )
     search_fields = ()
     ordering = ('page_obj', 'num_ratings', 'average_rating', '-num_ratings', '-average_rating', )

@@ -514,3 +514,7 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # aldryn-search requires ALLOWED_HOSTS to be set even with DEBUG=True
 ALLOWED_HOSTS = ('localhost', '127.0.0.1',)
+
+# google recaptcha key
+
+CAPTCHA_SITEKEY = os.environ.get('CAPTCHA_SITEKEY', '')
