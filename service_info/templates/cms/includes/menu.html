@@ -19,11 +19,11 @@
 
   {% for child in children %}
     {% if child.children %}
-      <li class="no-padding {% if child.selected %}page-active{% endif %}">
+      <li class="parent no-padding {% if child.selected %}page-active{% endif %}">
         {% show_menu from_level to_level extra_inactive extra_active "cms/includes/sub_menu.html" "" "" child %}
       </li>
     {% else %}
-      <li class="{% if child.selected %}page-active{% endif %}">
+      <li class="no-padding {% if child.selected %}page-active{% endif %}">
         <a href="{{ child.get_absolute_url }}">
           {% if child.iconnameextension.icon_name %}
             <i class="material-icons left">{{ child.iconnameextension.icon_name }}</i>
@@ -35,12 +35,12 @@
     {% endif %}
   {% endfor %}
 
-  <li>
+  <li class="no-padding">
     <a class="modal-trigger" href="#language-picker">Choose Language</a>
   </li>
 
   {% if user.is_authenticated %}
-    <li>
+    <li class="no-padding">
       <a href="{% url 'logout' %}" title="{% trans "Logout" %}"><i class="material-icons">power_settings_new</i></a>
     </li>
   {% endif %}

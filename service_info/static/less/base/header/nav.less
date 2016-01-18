@@ -24,12 +24,29 @@
         color: white;
       }
     }
+
+    &:hover {
+      > a:not(.collapsible-header) {
+        color: white;
+      }
+    }
+
+    &:not(.parent):hover {
+      > a {
+        color: white;
+      }
+    }
   }
 
   .collapsible-body {
     li.active {
       a {
         color: black;
+      }
+      li:hover {
+        a {
+          color: white;
+        }
       }
     }
     li.page-active {
@@ -42,13 +59,14 @@
   .collapsible {
     .overlay {
       &:hover {
-        & + .underlay {
+        color: white;
+        & + .collapsible-header {
           color: white;
         }
       }
     }
     .collapsible-header {
-      &:hover + .underlay {
+      &:hover {
         color: white;
       }
     }
@@ -59,33 +77,40 @@
   */
 
   li {
-    &.page-active {
-      background-color: @active-item-color;
-      transition: none;
+    &:hover:not(.parent) {
+      background-color: @amber-lighten-2;
+      -webkit-transition: all 0.3s ease-out;
+      transition: all 0.3s ease-out;
     }
 
-    a {
-      &:hover {
-        background-color: @active-item-color;
-        transition: none;
+    &.page-active {
+      > a {
+        background-color: @amber-lighten-2;
       }
-      transition: none;
+    }
+
+    a:not(.collapsible-header, .overlay) {
+      &:hover {
+        // background-color: @amber-lighten-2;
+      }
     }
   }
 
   .collapsible {
     .overlay {
       &:hover {
-        & + .underlay {
-          background-color: @active-item-color;
-          transition: none;
+        & + .collapsible-header {
+          background-color: @amber-lighten-2;
+          -webkit-transition: all 0.3s ease-out;
+          transition: all 0.3s ease-out;
         }
       }
     }
     .collapsible-header {
-      &:hover + .underlay {
-        background-color: @active-item-color;
-        transition: none;
+      &:hover {
+        background-color: @amber-lighten-2;
+        -webkit-transition: all 0.3s ease-out;
+        transition: all 0.3s ease-out;
       }
     }
   }
@@ -101,6 +126,12 @@
       }
     }
 
+    &.no-padding {
+      > a {
+        padding: 0 30px;
+      }
+    }
+
     a {
       -webkit-transition: all .3s ease-out;
       transition: all .3s ease-out;
@@ -112,6 +143,10 @@
       // > a, > .overlay > a {
       //   color: white;
       // }
+
+      > a:not(.collapsible-header) {
+        background-color: @amber-lighten-2;
+      }
     }
 
     &:not(.logo) {
@@ -178,6 +213,8 @@
       width: 100%;
       left: 0;
       top: 0;
+      -webkit-transition: all 0.3s ease-out;
+      transition: all 0.3s ease-out;
     }
 
     a {
@@ -230,7 +267,7 @@
       width: 192px;
       &:hover {
         & + .collapsible-header {
-          // background-color: @active-item-color;
+          // background-color: @amber-lighten-2;
           color: white;
         }
         > a {
@@ -262,7 +299,7 @@
           // color: white;
         }
         > a {
-          color: black;
+          // color: black;
         }
       }
     }
