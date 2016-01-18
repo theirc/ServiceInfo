@@ -86,7 +86,7 @@
                 <h4>{% trans "Captcha Verification" %}</h4>
                 <input type="hidden" name="page_id" value="{{ request.current_page.id }}">
                 <input type="hidden" name="return_url" value="{{ request.get_full_path }}" />
-                <div class="g-recaptcha" data-sitekey="{{ settings.CAPTCHA_SITEKEY }}"
+                <div class="g-recaptcha" data-sitekey="{{ CAPTCHA_SITEKEY }}"
                      data-callback="__submit_captcha__"
                 ></div>
               </div>

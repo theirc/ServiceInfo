@@ -174,6 +174,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'sekizai.context_processors.sekizai',
     'cms.context_processors.cms_settings',
     'aldryn_boilerplates.context_processors.boilerplate',
+    'service_info_cms.context_processors.captcha_key',
 )
 
 MIDDLEWARE_CLASSES = (
