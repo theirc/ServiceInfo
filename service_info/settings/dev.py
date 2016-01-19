@@ -29,6 +29,8 @@ PARLER_LANGUAGES[SITE_ID] = PARLER_LANGUAGES_FOR_SITE
 # Generally True, we'll change to False in dev.py for running locally
 SECURE_LINKS = False
 
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.BaseSignalProcessor'
+
 # Special test settings
 if 'test' in sys.argv:
     PASSWORD_HASHERS = (

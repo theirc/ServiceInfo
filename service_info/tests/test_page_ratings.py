@@ -1,7 +1,9 @@
+
 from django.test import TestCase
 
 from cms.models import Page
 from email_user.tests.factories import EmailUserFactory
+from service_info_cms.models import PageRating
 from service_info_cms.utils import create_essential_pages
 
 
@@ -13,10 +15,10 @@ class PageRatingsTest(TestCase):
     url_name = 'update-page-rating'
 
     def setUp(self):
-        password = 'abc123'
-        user = EmailUserFactory(password=password)
-        create_essential_pages(user)
+        self.user = EmailUserFactory(is_superuser=True)
+        create_essential_pages(self.user)
         self.page = Page.objects.latest('id')
+        PageRating.objects.create(page_obj=self.page)
 
     def test_good_page_rating(self):
         self.assertEqual(self.page.average_rating, 0)
