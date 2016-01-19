@@ -61,6 +61,7 @@ class MigrationCommandOutput(object):
                     yield module, actual_changes
                 state = self.READING
                 module = re.match(r'^Migrations for \'(.+)\'', l).group(1)
+                actual_changes = []
             elif re.search(r'^ +.*\.py:', l):
                 continue
             else:
