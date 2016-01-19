@@ -1,0 +1,24 @@
+{% load cms_tags menu_tags i18n staticfiles %}
+
+<ul class="collection black">
+  {% for child in children %}
+    <li class="collection-item {% if child.selected %}white black-text{% else %}black{% endif %}">
+      <a href="{{ child.get_absolute_url }}" class="{% if child.selected %}black-text{% else %}white-text{% endif %}">
+        {% if child.iconnameextension.icon_name %}
+          <i class="material-icons left {% if child.selected %}black-text{% else %}white-text{% endif %}">{{ child.iconnameextension.icon_name }}</i>
+        {% endif %}
+
+        {{ child.get_menu_title }}
+      </a>
+
+      {% if child.children %}
+        <i class="child-activate material-icons right {% if child.selected %}black-text{% else %}white-text{% endif %}">arrow_drop_down</i>
+      {% endif %}
+    </li>
+    {% if child.children %}
+      <li class="collection-item black white-text child-item {% if child.ancestor %}open{% endif %}">
+        {% show_menu from_level to_level extra_inactive extra_active "cms/includes/menu-mini.html" "" "" child %}
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>

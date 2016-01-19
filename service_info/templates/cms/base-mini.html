@@ -1,0 +1,93 @@
+{% load cms_tags staticfiles sekizai_tags menu_tags i18n %}
+
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    {% render_block "extra-meta" %}
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css"> -->
+    {% if request.LANGUAGE_CODE == 'ar' %}
+      <link href="{% static 'css/materialize.min-rtl.css' %}" rel="stylesheet">
+    {% else %}
+      <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+    {% endif %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    {% if request.LANGUAGE_CODE == 'ar' %}
+      <link href="{% static 'css/site-mini-rtl.css' %}" rel="stylesheet">
+    {% else %}
+      <link href="{% static 'css/site-mini.css' %}" rel="stylesheet">
+    {% endif %}
+    {% render_block "css" %}
+
+    <title>{% block title %}{% page_attribute "page_title" %}{% endblock title %}</title>
+
+  </head>
+  <body class="black white-text {% block body-class %}{% endblock body-class %}">
+    {% cms_toolbar %}
+
+    <header>
+      {% block header %}
+        {% static_placeholder 'header' %}
+      {% endblock header %}
+    </header>
+
+    <div class="black white-text container" id="nav">
+      {% block navigation %}
+        {% show_menu 0 3 3 3 "cms/includes/menu-mini.html" %}
+      {% endblock navigation %}
+    </div>
+
+    <main id="cms-main" class="main {% block main-class %}container{% endblock main-class %}">
+      {% block hero %}{% endblock hero %}
+
+      {% block wrap-content %}
+        {% block content %}
+        {% endblock content %}
+      {% endblock wrap-content %}
+    </main>
+
+    <footer id="cms-footer" class="{% block footer-class %}page-footer black{% endblock footer-class %}">
+      {% block footer %}
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              {% static_placeholder "footer_content" %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <a href="/app/index.html">
+                {% trans "Search for Services Nearby" %}
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <div class="container">
+            <div class="hide-on-small-only">
+              <span class="left">{% trans "International Rescue Committee Information Portal" %}</span>
+              <span id="more-links" class="right">
+                <a href="#!">{% trans "Privacy" %}</a> ·
+                <a href="#!">{% trans "Github" %}</a> ·
+                {% trans "Created by the International Rescue Committee" %}
+              </span>
+            </div>
+            <div class="hide-on-med-and-up">
+              <span class="left">{% trans "IRC Info Portal" %}</span>
+              <span class="right">{% trans "Created by the IRC" %}</span>
+            </div>
+          </div>
+        </div>
+      {% endblock footer %}
+    </footer>
+
+    {% block modals %}{% endblock modals %}
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="{% static 'js/dist/bundle.js' %}"></script>
+    {% render_block "js" %}
+  </body>
+</html>
