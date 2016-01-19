@@ -16,6 +16,25 @@ EXPECTED_CHANGES = {
         # ),
         '- Alter field app_data on faqconfig',
     ],
+    'aldryn_newsblog': [
+        # newsblogconfig.app_data is same story as faqconfig.app_data above
+        # migrations.AlterField(
+        #     model_name='newsblogconfig',
+        #     name='app_data',
+        #     field=app_data.fields.AppDataField(default='{}', editable=False),
+        #     preserve_default=True,
+        # ),
+        '- Alter field app_data on newsblogconfig',
+        # Removing choices since choices has a different value since the last
+        # time (now: [], before: [(b'dummy', b'dummy')])
+        # migrations.AlterField(
+        #     model_name='newsblogconfig',
+        #     name='template_prefix',
+        #     field=models.CharField(blank=True, verbose_name='Prefix for template dirs', max_length=20, null=True),
+        #     preserve_default=True,
+        # ),
+        '- Alter field template_prefix on newsblogconfig',
+    ],
 }
 
 
