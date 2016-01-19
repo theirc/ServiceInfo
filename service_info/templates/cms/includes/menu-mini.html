@@ -20,5 +20,14 @@
         {% show_menu from_level to_level extra_inactive extra_active "cms/includes/menu-mini.html" "" "" child %}
       </li>
     {% endif %}
+
+    {% if child.level == 0 and forloop.last %}
+      <li class="collection-item black white-text">
+        <a class="modal-trigger white-text" href="#language-picker">
+          <i class="material-icons left">language</i>
+          {% trans "Choose Language" %}
+        </a>
+      </li>
+    {% endif %}
   {% endfor %}
 </ul>

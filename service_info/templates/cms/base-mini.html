@@ -39,6 +39,18 @@
       {% endblock navigation %}
     </div>
 
+    <nav>
+      <div class="nav-wrapper black white-text">
+        <form action="{% page_url 'search-results' %}" method="get" id="search-form">
+          <div class="input-field">
+            <input id="search" type="search" name="q" required>
+            <label for="search" class="search-label"><i class="material-icons">search</i></label>
+            <i class="material-icons close">close</i>
+          </div>
+        </form>
+      </div>
+    </nav>
+
     <main id="cms-main" class="main {% block main-class %}container{% endblock main-class %}">
       {% block hero %}{% endblock hero %}
 
@@ -89,5 +101,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
     <script src="{% static 'js/dist/bundle.js' %}"></script>
     {% render_block "js" %}
+
+    {% language_chooser "cms/includes/language-chooser-mini.html" %}
   </body>
 </html>
