@@ -30,7 +30,8 @@ EXPECTED_CHANGES = {
         # migrations.AlterField(
         #     model_name='newsblogconfig',
         #     name='template_prefix',
-        #     field=models.CharField(blank=True, verbose_name='Prefix for template dirs', max_length=20, null=True),
+        #     field=models.CharField(blank=True, verbose_name='Prefix for template dirs',
+        #         max_length=20, null=True),
         #     preserve_default=True,
         # ),
         '- Alter field template_prefix on newsblogconfig',
