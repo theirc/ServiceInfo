@@ -1,18 +1,18 @@
 {% load cms_tags menu_tags i18n staticfiles %}
 
 <ul id="{% if mobile %}mobile-menu{% else %}nav{% endif %}" class="side-nav fixed {% if not mobile %}hide-on-med-and-down{% endif %}">
-  <li class="logo">
+  <li class="logo no-hover">
     <a href="{% url 'pages-root' %}" class="{% block brand-class %}brand-logo{% endblock brand-class %}">
       <img src="{% static 'images/logo-large.png' %}">
     </a>
   </li>
 
-  <li class="no-padding">
-    <form action="{% page_url 'search-results' %}" method="get">
-      <div class="input-field">
+  <li class="no-padding no-hover">
+    <form action="{% page_url 'search-results' %}" method="get" id="search-field{% if mobile %}-mobile{% endif %}">
+      <div class="input-field z-depth-1">
         <input id="search{% if mobile %}-mobile{% endif %}" type="search" name="q" required>
-        <label for="search{% if mobile %}-mobile{% endif %}"><i class="material-icons">search</i></label>
-        <i class="material-icons">close</i>
+        <label for="search{% if mobile %}-mobile{% endif %}" class="search-label"><i class="material-icons">search</i></label>
+        <i class="material-icons close">close</i>
       </div>
     </form>
   </li>

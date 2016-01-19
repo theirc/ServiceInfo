@@ -1,5 +1,26 @@
-#cms-search {
-  #search {
-    margin-bottom: 0;
+#search-field, #search-field-mobile {
+  #search, #search-mobile {
+    margin-bottom: 1rem;
+    border-bottom: none;
+  }
+
+  input[type="search"]:focus + label i {
+    color: #444;
+  }
+
+  label.search-label {
+    left: auto;
+    right: 1rem;
+
+    i {
+      color: #9e9e9e;
+      -webkit-transition: color .3s;
+      transition: color .3s;
+    }
+  }
+
+  i.close {
+    right: auto;
+    left: 0.75rem;
   }
 }
