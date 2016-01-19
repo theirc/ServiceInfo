@@ -112,12 +112,12 @@
     &:hover {
       background-color: transparent;
 
-      > a:not(.collapsible-header) {
+     &:not(.no-hover) > a:not(.collapsible-header) {
         background-color: @amber-lighten-2;
       }
     }
 
-    &:hover:not(.parent) {
+    &:hover:not(.parent, .no-hover) {
       background-color: @amber-lighten-2;
       -webkit-transition: all 0.3s ease-out;
       transition: all 0.3s ease-out;
