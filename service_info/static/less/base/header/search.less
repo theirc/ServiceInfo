@@ -4,9 +4,19 @@
     border-bottom: none;
   }
 
+  input[type="search"]:focus + label i {
+    color: #444;
+  }
+
   label.search-label {
     left: auto;
     right: 1rem;
+
+    i {
+      color: #9e9e9e;
+      -webkit-transition: color .3s;
+      transition: color .3s;
+    }
   }
 
   i.close {
