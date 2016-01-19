@@ -1,5 +1,14 @@
+@import "../includes/flex.less";
+
 body {
   padding: 1rem;
+  .flex-layout();
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  .flex(1, 0, auto);
 }
 
 header, #nav, footer, main {
