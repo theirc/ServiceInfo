@@ -1,9 +1,27 @@
+@import "../../includes/flex.less";
+
 #nav {
   text-transform: uppercase;
   max-width: 540px;
 
   a {
     border-bottom: none;
+  }
+
+  .child-activate {
+    .flex-layout();
+    .align-items(center);
+    .justify-content(center);
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 42px;
+    width: 42px;
+    cursor: pointer;
+  }
+
+  .collection-item {
+    position: relative;
   }
 
   .collection-item.child-item {
