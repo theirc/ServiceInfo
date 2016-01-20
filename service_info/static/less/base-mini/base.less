@@ -29,11 +29,19 @@ header, #nav, footer, main, #language-picker {
     font-weight: 800;
   }
 
-  .container {
+  .container, &.container {
     max-width: 650px;
+
+    @media (max-width: 639px) {
+      width: 100%;
+    }
   }
 }
 
 #nav, #cms-main {
   margin: 0 auto 0 0;
+
+  @media (max-width: 639px) {
+    margin: 0 auto;
+  }
 }
