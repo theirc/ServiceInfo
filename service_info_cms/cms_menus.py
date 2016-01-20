@@ -1,4 +1,4 @@
-from cms.menu import CMSMenu
+from cms.cms_menus import CMSMenu
 from cms.models import Page
 from menus.base import Modifier
 from menus.menu_pool import menu_pool
