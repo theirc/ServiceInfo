@@ -33,13 +33,7 @@
       {% endblock header %}
     </header>
 
-    <div class="black white-text container" id="nav">
-      {% block navigation %}
-        {% show_menu 0 3 3 3 "cms/includes/menu-mini.html" %}
-      {% endblock navigation %}
-    </div>
-
-    <nav>
+    <nav id="search-nav">
       <div class="nav-wrapper black white-text">
         <form action="{% page_url 'search-results' %}" method="get" id="search-form">
           <div class="input-field">
@@ -50,6 +44,12 @@
         </form>
       </div>
     </nav>
+
+    <div class="black white-text container" id="nav">
+      {% block navigation %}
+        {% show_menu 0 3 3 3 "cms/includes/menu-mini.html" %}
+      {% endblock navigation %}
+    </div>
 
     <main id="cms-main" class="main {% block main-class %}container{% endblock main-class %}">
       {% block hero %}{% endblock hero %}
