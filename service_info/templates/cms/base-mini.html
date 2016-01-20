@@ -47,7 +47,7 @@
 
     <div class="black white-text container" id="nav">
       {% block navigation %}
-        {% show_menu 0 3 3 3 "cms/includes/menu-mini.html" %}
+        {% show_menu 0 3 3 3 "cms/includes/mini/menu-mini.html" %}
       {% endblock navigation %}
     </div>
 
@@ -64,7 +64,7 @@
       {% block footer %}
         <div class="container">
           <div class="row">
-            <div class="col">
+            <div class="col footer_placeholder">
               {% static_placeholder "footer_content" %}
             </div>
           </div>
@@ -102,6 +102,6 @@
     <script src="{% static 'js/dist/bundle.js' %}"></script>
     {% render_block "js" %}
 
-    {% language_chooser "cms/includes/language-chooser-mini.html" %}
+    {% language_chooser "cms/includes/mini/language-chooser-mini.html" %}
   </body>
 </html>
