@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-11 17:29+0200\n"
-"PO-Revision-Date: 2015-11-11 15:31+0000\n"
-"Last-Translator: Vinod Kurup <vkurup@caktusgroup.com>\n"
+"POT-Creation-Date: 2016-01-13 19:04+0200\n"
+"PO-Revision-Date: 2016-01-13 17:05+0000\n"
+"Last-Translator: Jeff Trawick\n"
 "Language-Team: French (http://www.transifex.com/irc/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -279,25 +279,96 @@ msgstr "Enregistrer et rejeter"
 msgid "Save and approve"
 msgstr "Enregistrer et approuver"
 
-msgid "MENU"
+msgid "Category"
 msgstr ""
 
-msgid "About ServiceInfo"
+msgid "No entry found."
 msgstr ""
 
-msgid "Powered by the International Rescue Committee."
+msgid "Back to Category"
+msgstr ""
+
+msgid "Back to Overview"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "Back to List"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "No items available"
+msgstr ""
+
+msgid "Read More"
+msgstr ""
+
+msgid "No articles found"
 msgstr ""
 
 msgid ""
-"ServiceInfo is a tool that allows both service providers to register their "
-"services online and beneficiaries to both discover those services on a map "
-"and give feedback on them. ServiceInfo is open source and free to use."
+"There were no results for your search. Please check your spelling and try "
+"again."
 msgstr ""
 
-msgid "Reach Us"
+msgid "Keyword"
 msgstr ""
 
-msgid "Contact us on one of our social networks below or drop us a mail at"
+msgid "Keyword search"
+msgstr ""
+
+msgid "Go"
+msgstr ""
+
+msgid "No authors available"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "by"
+msgstr ""
+
+msgid "No results"
+msgstr ""
+
+msgid "No results found for"
+msgstr ""
+
+msgid "results"
+msgstr ""
+
+msgid "Search for Services Nearby"
+msgstr ""
+
+msgid "Services"
+msgstr ""
+
+msgid "International Rescue Committee Information Portal"
+msgstr ""
+
+msgid "Privacy"
+msgstr ""
+
+msgid "Github"
+msgstr ""
+
+msgid "Created by the International Rescue Committee"
+msgstr ""
+
+msgid "IRC Info Portal"
+msgstr ""
+
+msgid "Created by the IRC"
+msgstr ""
+
+msgid "Choose Language"
+msgstr ""
+
+msgid "Logout"
 msgstr ""
 
 #, python-format
@@ -340,6 +411,15 @@ msgid ""
 "You can type an address, a place name, or even a latitude and longitude into"
 " the search box (e.g. \"33.8869, 35.5131\")."
 msgstr "Vous pouvez saisir une adresse, un nom de lieu, ou même une latitude et la longitude dans la boîte de recherche (par exemple \"33,8869, 35,5131\")."
+
+msgid "Set icon for page"
+msgstr ""
+
+msgid "Materialize icon name"
+msgstr ""
+
+msgid "Choose an icon at "
+msgstr ""
 
 msgid "Description and Additional Information"
 msgstr "Description et Informations supplémentaires"
