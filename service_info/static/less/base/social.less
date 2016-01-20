@@ -1,0 +1,20 @@
+@import "../includes/flex.less";
+
+#social {
+  padding-top: 1rem;
+  .row {
+    margin: 0;
+    max-width: 100%;
+
+    .align-items(flex-end);
+    .justify-content(space-between);
+
+    &:after {
+      display: none;
+    }
+  }
+
+  .homepage &, .wide & {
+    padding: 0 20px;
+  }
+}
