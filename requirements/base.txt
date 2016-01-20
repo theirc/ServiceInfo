@@ -100,11 +100,11 @@ aldryn-newsblog==1.0.12
   backport-collections==0.1
 djangocms-googlemap==0.4.0
 djangocms-column==1.6.0
+# aldryn-video not on PyPI
 git+git://github.com/aldryn/aldryn-video.git@0.5.1#egg=aldryn-video
   jsonfield==1.0.3
   micawber==0.3.3
-# missing Py3K and custom user model fixes: aldryn-forms==2.0.3
-git+git://github.com/aldryn/aldryn-forms.git@f9089d2a00ecc9dcd9ac216350c6c248157e4cd6#egg=aldryn-forms
+aldryn-forms==2.0.4
   django-emailit==0.2.2
     premailer==2.9.6
       cssselect==0.9.1
