@@ -41,11 +41,11 @@ cmsplugin-filer==0.10.2
     django-polymorphic==0.7.2
     Unidecode==0.4.18
   django-appconf==1.0.1
+cmsplugin-iframe==0.1.3
 djangocms-text-ckeditor==2.7.0
 django-reversion==1.8.5
 aldryn-disqus==1.0.0
-# Has missing migration: aldryn-faq==1.0.8
-git+git://github.com/caktus/aldryn-faq.git@1.0.8-146#egg=aldryn-faq
+aldryn-faq==1.0.11
   aldryn-apphooks-config==0.2.6
     django-appdata==0.1.4
       South==1.0.2
@@ -78,8 +78,7 @@ git+git://github.com/caktus/aldryn-faq.git@1.0.8-146#egg=aldryn-faq
   # django-reversion
   django-sortedm2m==1.0.2
   django-taggit==0.17.6
-# Has missing migration: aldryn-newsblog==1.0.9
-git+git://github.com/caktus/aldryn-newsblog.git@1.0.9-323-ImproperlyConfigured#egg=aldryn-newsblog
+aldryn-newsblog==1.0.12
   python-dateutil==2.4.2
   # aldryn-apphooks-config
   # aldry-boilerplates
@@ -103,3 +102,4 @@ djangocms-column==1.6.0
 git+git://github.com/aldryn/aldryn-video.git@0.5.1#egg=aldryn-video
   jsonfield==1.0.3
   micawber==0.3.3
+elasticsearch==2.1.0

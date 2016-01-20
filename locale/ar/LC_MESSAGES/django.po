@@ -6,14 +6,14 @@
 # Dan Poirier <dpoirier@caktusgroup.com>, 2015
 # Hasnaa Yazbek <hasnaa.yazbek@rescue.org>, 2015
 # Nizar Najjar <ozogorgor@gmail.com>, 2015
-# Omar Meksassi <omar.meksassi@gmail.com>, 2015
+# Omar Meksassi <omar.meksassi@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-11 17:29+0200\n"
-"PO-Revision-Date: 2015-11-11 15:31+0000\n"
-"Last-Translator: Vinod Kurup <vkurup@caktusgroup.com>\n"
+"POT-Creation-Date: 2016-01-13 19:04+0200\n"
+"PO-Revision-Date: 2016-01-14 14:28+0000\n"
+"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/irc/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -252,13 +252,13 @@ msgid "French"
 msgstr "الفرنسية"
 
 msgid "en"
-msgstr ""
+msgstr "en"
 
 msgid "ar"
-msgstr ""
+msgstr "ar"
 
 msgid "fr"
-msgstr ""
+msgstr "fr"
 
 msgid "Save"
 msgstr "حفظ"
@@ -281,26 +281,97 @@ msgstr "حفظ وإلغاء"
 msgid "Save and approve"
 msgstr "حفظ والموافقة عليها"
 
-msgid "MENU"
-msgstr ""
+msgid "Category"
+msgstr "فئة"
 
-msgid "About ServiceInfo"
-msgstr ""
+msgid "No entry found."
+msgstr "لم يتم العثور على دخول."
 
-msgid "Powered by the International Rescue Committee."
-msgstr ""
+msgid "Back to Category"
+msgstr "عودة إلى صفحة الفئة"
+
+msgid "Back to Overview"
+msgstr "العودة إلى النظرة الشاملة"
+
+msgid "Previous"
+msgstr "سابق"
+
+msgid "Back to List"
+msgstr "عد إلى القائمة"
+
+msgid "Next"
+msgstr "التالى"
+
+msgid "No items available"
+msgstr "لا المنتجات المتاحة"
+
+msgid "Read More"
+msgstr "اقرأ المزيد"
+
+msgid "No articles found"
+msgstr "لم يتم العثور على مقالات"
 
 msgid ""
-"ServiceInfo is a tool that allows both service providers to register their "
-"services online and beneficiaries to both discover those services on a map "
-"and give feedback on them. ServiceInfo is open source and free to use."
-msgstr ""
+"There were no results for your search. Please check your spelling and try "
+"again."
+msgstr "لا توجد نتائج لبحثك. يرجى التدقيق الإملائي وحاول مرة أخرى."
 
-msgid "Reach Us"
-msgstr ""
+msgid "Keyword"
+msgstr "الكلمة"
 
-msgid "Contact us on one of our social networks below or drop us a mail at"
-msgstr ""
+msgid "Keyword search"
+msgstr "بحث بكلمة مفتاحية"
+
+msgid "Go"
+msgstr "اذهب"
+
+msgid "No authors available"
+msgstr "لا مؤلفين المتاحة"
+
+msgid "All"
+msgstr "الجميع"
+
+msgid "by"
+msgstr "بواسطة"
+
+msgid "No results"
+msgstr "لا نتائج"
+
+msgid "No results found for"
+msgstr "لا توجد نتائج ل"
+
+msgid "results"
+msgstr "النتائج"
+
+msgid "Search for Services Nearby"
+msgstr "بحث عن خدمات قريبة"
+
+msgid "Services"
+msgstr "الخدمات"
+
+msgid "International Rescue Committee Information Portal"
+msgstr "بوابة المعلومات لجنة الإنقاذ الدولية "
+
+msgid "Privacy"
+msgstr "خصوصية"
+
+msgid "Github"
+msgstr "Github"
+
+msgid "Created by the International Rescue Committee"
+msgstr "مدعومة من لجنة الإنقاذ الدولية "
+
+msgid "IRC Info Portal"
+msgstr "بوابة المعلومات لجنة الإنقاذ الدولية "
+
+msgid "Created by the IRC"
+msgstr "مدعومة من لجنة الإنقاذ الدولية "
+
+msgid "Choose Language"
+msgstr "اختر اللغة"
+
+msgid "Logout"
+msgstr "تسجيل الخروج"
 
 #, python-format
 msgid "Dear %(provider_name)s"
@@ -342,6 +413,15 @@ msgid ""
 "You can type an address, a place name, or even a latitude and longitude into"
 " the search box (e.g. \"33.8869, 35.5131\")."
 msgstr "يمكنك كتابة عنوان، اسم مكان، أو حتى خطوط الطول والعرض في خانة البحث (مثلاً: \"33.8869, 35.5131\")"
+
+msgid "Set icon for page"
+msgstr "تعيين رمز الصفحة"
+
+msgid "Materialize icon name"
+msgstr "رمز"
+
+msgid "Choose an icon at "
+msgstr "اختيار أيقونة في"
 
 msgid "Description and Additional Information"
 msgstr "وصف ومعلومات إضافية"

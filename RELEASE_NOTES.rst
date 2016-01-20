@@ -2,6 +2,15 @@ ServiceInfo
 
 Release Notes
 
+0.5.0 - Jan. 20, 2016
+---------------------
+
+* integrate translation changes made on Transifex
+* Upgrade aldryn-newsblog and aldryn-faq (stop using Caktus forks of these)
+* Various menu improvements
+* Support for integrating Google maps and Google calendar
+* Add search of CMS content
+
 0.4.4 - Dec. 30, 2015
 ---------------------
 

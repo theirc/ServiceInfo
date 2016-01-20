@@ -20,7 +20,9 @@
 {% block secondary-column-class %}secondary-col{% endblock secondary-column-class %}
 
 {% block content %}
-  {% static_placeholder "content" %}
+  <div class="main-container">
+    {% static_placeholder "content" %}
+  </div>
 {% endblock content %}
 
 {% block sidebar-content %}

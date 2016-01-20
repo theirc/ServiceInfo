@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-18 16:57+0200\n"
+"POT-Creation-Date: 2016-01-13 19:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -331,10 +331,43 @@ msgstr ""
 msgid "by"
 msgstr ""
 
+msgid "No results"
+msgstr ""
+
+msgid "No results found for"
+msgstr ""
+
+msgid "results"
+msgstr ""
+
 msgid "Search for Services Nearby"
 msgstr ""
 
-msgid "Choose language"
+msgid "Services"
+msgstr ""
+
+msgid "International Rescue Committee Information Portal"
+msgstr ""
+
+msgid "Privacy"
+msgstr ""
+
+msgid "Github"
+msgstr ""
+
+msgid "Created by the International Rescue Committee"
+msgstr ""
+
+msgid "IRC Info Portal"
+msgstr ""
+
+msgid "Created by the IRC"
+msgstr ""
+
+msgid "Choose Language"
+msgstr ""
+
+msgid "Logout"
 msgstr ""
 
 #, python-format
@@ -380,6 +413,15 @@ msgstr ""
 msgid ""
 "You can type an address, a place name, or even a latitude and longitude into "
 "the search box (e.g. \"33.8869, 35.5131\")."
+msgstr ""
+
+msgid "Set icon for page"
+msgstr ""
+
+msgid "Materialize icon name"
+msgstr ""
+
+msgid "Choose an icon at "
 msgstr ""
 
 msgid "Description and Additional Information"

@@ -541,8 +541,8 @@
                     "Failure": "تعليل سبب فشل تقديم الخدمة بحسب نوع الخدمة",
                     "Contact": "صعوبات الاتصال بمقدمي الخدمات بحسب نوع الخدمة",
                     "Communication": "الرضى عن التواصل مع الموظفين بحسب نوع الخدمة",
-                    "NumServicesByServiceType": "",
-                    "NumServicesByProviderType": ""
+                    "NumServicesByServiceType": "عدد الخدمات بحسب الموقع ونوع الخدمة",
+                    "NumServicesByProviderType": "عدد الخدمات بحسب الموقع ونوع الخدمة"
                 }
             },
             "Download": "تحميل التقرير بصيغة CSV"
@@ -552,9 +552,9 @@
             "ServiceType": "نوع الخدمة"
         },
         "Chart": {
-            "AverageResponse": "",
-            "NumberServices": "",
-            "NumberResponses": ""
+            "AverageResponse": "متوسط الاستجابة",
+            "NumberServices": "عدد الخدمات",
+            "NumberResponses": "عدد الردود"
         }
     }
 }

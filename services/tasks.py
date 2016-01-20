@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 
 from celery.task import task
+from haystack.management.commands import update_index
 
 from . import jira_support
 
@@ -58,3 +59,8 @@ def process_jira_work():
 
     logger.info('process_jira_work successfully handled %s of %s pending work requests.' % (
         done_count, todo_count))
+
+
+@task
+def update_search_index():
+    update_index.Command().handle()

@@ -1,4 +1,7 @@
 @import "../includes/mixins.less";
+@import "../includes/variables.less";
+
+@highlight-color: @amber-lighten-2;
 
 * {
   text-align: left;
@@ -35,6 +38,9 @@ main, footer {
 .multicolumn10 {
   .column {
     float: left !important;
+    min-width: 200px;
+    padding-right: 0.5rem;
+    box-sizing: border-box;
   }
 }
 
@@ -66,4 +72,13 @@ table {
   @media (max-width: 991px) {
     width: 100% !important;
   }
+}
+
+.highlighted {
+  background-color: @highlight-color;
+}
+
+.centered-iframe {
+  margin: 0 auto;
+  max-width: 820px;
 }

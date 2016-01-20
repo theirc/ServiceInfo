@@ -1,0 +1,12 @@
+{% extends "aldryn_search/base.html" %}
+{% load i18n standard_form %}
+
+{% block content_search %}
+    <div class="aldryn-search-results">
+        {% include "aldryn_search/includes/search_items.html" %}
+    </div>
+
+    <div class="aldryn-search-pagination">
+        {% include "aldryn_search/includes/pagination.html" with obj_string=_('results') %}
+    </div>
+{% endblock %}

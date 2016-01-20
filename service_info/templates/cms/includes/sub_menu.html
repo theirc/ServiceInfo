@@ -1,32 +1,33 @@
 {% load menu_tags i18n %}
 
-<ul class="collapsible collapsible-accordion">
-  <li class="">
-    <a class="collapsible-header waves-effect">
-      {{ child.get_menu_title }}
-      {% if child.children %}
-        <i class="material-icons right">arrow_drop_down</i>
-      {% endif %}
+<ul class="collapsible" data-collapsible="expandable">
+  <li class="parent {% if child.selected %}page-active{% endif %}">
+    {% if child.children %}
+      <div class="overlay">
+        <a href="{{ child.get_absolute_url }}">
+        </a>
+      </div>
+    {% endif %}
+    <a class="collapsible-header waves-effect {% if child.ancestor %}active{% endif %}">
+      <div class="collapsible-header-wrap">
+        {% if child.children %}
+          {{ child.get_menu_title }}
+          <i class="material-icons right">arrow_drop_down</i>
+        {% else %}
+          {{ child.get_menu_title }}
+        {% endif %}
+      </div>
     </a>
-    <div class="collapsible-body">
+    <div class="collapsible-body" {% if child.ancestor %}style="display:block;"{% endif %}>
       <ul>
-        <li class="{% if child.selected %}active{% endif %}">
-          <a href="{{ child.get_absolute_url }}">
-            {% if child.iconnameextension.icon_name %}
-              <i class="material-icons left">{{ child.iconnameextension.icon_name }}</i>
-            {% endif %}
-
-            {{ child.get_menu_title }}
-          </a>
-        </li>
         {% for child in child.children %}
           {% if child.children %}
-            <li class="no-padding">
+            <li class="parent no-padding {% if child.selected %}page-active{% endif %}">
               {% show_menu from_level to_level extra_inactive extra_active "cms/includes/sub_menu.html" "" "" child %}
             </li>
           {% else %}
-            <li class="{% if child.selected %}active{% endif %}">
-              <a href="{{ child.get_absolute_url }}">
+            <li class="no-padding {% if child.selected %}page-active{% endif %}">
+              <a href="{{ child.get_absolute_url }}" class="waves-effect">
                 {% if child.iconnameextension.icon_name %}
                   <i class="material-icons left">{{ child.iconnameextension.icon_name }}</i>
                 {% endif %}

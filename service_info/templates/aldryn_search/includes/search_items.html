@@ -1,0 +1,34 @@
+{% load i18n highlight %}
+
+{% for result in page_obj.object_list %}
+  <div class="card-pad blog-card">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">
+          {{ result.title }}
+        </span>
+        {% if result.text %}
+          <p>
+            {% highlight result.text with request.GET.q %}
+          </p>
+        {% endif %}
+      </div>
+      <div class="card-action">
+        <a href="{{ result.url }}">{% trans "Read More" %}</a>
+      </div>
+    </div>
+  </div>
+{% empty %}
+  <div class="card-pad no-results blog-card">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">
+          {% trans "No results" %}
+        </span>
+        <p>
+          {% trans "No results found for" %} "{{ request.GET.q }}".
+        </p>
+      </div>
+    </div>
+  </div>
+{% endfor %}

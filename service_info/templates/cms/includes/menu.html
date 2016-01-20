@@ -1,20 +1,30 @@
-{% load menu_tags i18n staticfiles %}
+{% load cms_tags menu_tags i18n staticfiles %}
 
-<ul id="{% if mobile %}mobile-menu{% else %}nav{% endif %}" class="side-nav fixed amber lighten-2 {% if not mobile %}hide-on-med-and-down{% endif %}">
-  <li class="logo">
+<ul id="{% if mobile %}mobile-menu{% else %}nav{% endif %}" class="side-nav fixed {% if not mobile %}hide-on-med-and-down{% endif %}">
+  <li class="logo no-hover">
     <a href="{% url 'pages-root' %}" class="{% block brand-class %}brand-logo{% endblock brand-class %}">
       <img src="{% static 'images/logo-large.png' %}">
     </a>
   </li>
 
+  <li class="no-padding no-hover">
+    <form action="{% page_url 'search-results' %}" method="get" id="search-field{% if mobile %}-mobile{% endif %}">
+      <div class="input-field z-depth-1">
+        <input id="search{% if mobile %}-mobile{% endif %}" type="search" name="q" required>
+        <label for="search{% if mobile %}-mobile{% endif %}" class="search-label"><i class="material-icons">search</i></label>
+        <i class="material-icons close">close</i>
+      </div>
+    </form>
+  </li>
+
   {% for child in children %}
     {% if child.children %}
-      <li class="no-padding {% if child.selected %}active{% endif %}">
+      <li class="parent no-padding {% if child.selected %}page-active{% endif %}">
         {% show_menu from_level to_level extra_inactive extra_active "cms/includes/sub_menu.html" "" "" child %}
       </li>
     {% else %}
-      <li class="{% if child.selected %}active{% endif %}">
-        <a href="{{ child.get_absolute_url }}">
+      <li class="no-padding {% if child.selected %}page-active{% endif %}">
+        <a href="{{ child.get_absolute_url }}" class="waves-effect">
           {% if child.iconnameextension.icon_name %}
             <i class="material-icons left">{{ child.iconnameextension.icon_name }}</i>
           {% endif %}
@@ -25,25 +35,15 @@
     {% endif %}
   {% endfor %}
 
-  <li>
-    <a class="modal-trigger" href="#language-picker">Choose Language</a>
-  </li>
-
-  {% comment %}
-  Don't enable until CMS search actually works.
   <li class="no-padding">
-    <form>
-      <div class="input-field">
-        <input id="search{% if mobile %}-mobile{% endif %}" type="search" required>
-        <label for="search{% if mobile %}-mobile{% endif %}"><i class="material-icons">search</i></label>
-        <i class="material-icons">close</i>
-      </div>
-    </form>
+    <a class="modal-trigger waves-effect" href="#language-picker">
+      <i class="material-icons left">language</i>
+      {% trans "Choose Language" %}
+    </a>
   </li>
-  {% endcomment %}
 
   {% if user.is_authenticated %}
-    <li>
+    <li class="no-padding waves-effect">
       <a href="{% url 'logout' %}" title="{% trans "Logout" %}"><i class="material-icons">power_settings_new</i></a>
     </li>
   {% endif %}

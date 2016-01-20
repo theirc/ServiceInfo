@@ -34,11 +34,11 @@
             {% show_menu 0 3 3 3 "cms/includes/menu.html" %}
           {% endblock menu %}
         {% endblock nav %}
-        <nav id="mobile-nav" class="hide-on-large-only {% block nav-class %}nav-wrapper amber lighten-2{% endblock nav-class %}">
+        <nav id="mobile-nav" class="amber lighten-2 hide-on-large-only {% block nav-class %}nav-wrapper {% endblock nav-class %}">
           <div class="nav-wrapper">
-            <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+            <a href="#" data-activates="mobile-menu" class="button-collapse right"><i class="material-icons">menu</i></a>
 
-            <a href="{% url 'pages-root' %}" class="{% block brand-class %}brand-logo{% endblock brand-class %}">
+            <a href="{% url 'pages-root' %}" class="{% block brand-class %}brand-logo{% endblock brand-class %} left">
               <img src="{% static 'images/logo-large.png' %}">
             </a>
 
@@ -63,14 +63,16 @@
       {% block footer %}
         <div class="container white-text">
           <div class="row">
-            <div class="col s12 m9">
+            <div class="col">
               {% static_placeholder "footer_content" %}
             </div>
-            <div class="col s12 m3">
+          </div>
+          <div class="row">
+            <div class="col">
               <h6 class="grey-text">{% trans "Search for Services Nearby" %}</h6>
               <p>
                 <a href="/app/index.html" class="waves-effect waves-light btn-large">
-                  Services
+                  {% trans "Services" %}
                   <i class="material-icons right">search</i>
                 </a>
               </p>
@@ -80,16 +82,16 @@
         <div class="footer-copyright grey-text">
           <div class="container">
             <div class="hide-on-small-only">
-              <span class="left">International Rescue Committee Information Portal</span>
+              <span class="left">{% trans "International Rescue Committee Information Portal" %}</span>
               <span id="more-links" class="right">
-                <a href="#!">Privacy</a> ·
-                <a href="#!">Github</a> ·
-                Created by the International Rescue Committee
+                <a href="#!">{% trans "Privacy" %}</a> ·
+                <a href="#!">{% trans "Github" %}</a> ·
+                {% trans "Created by the International Rescue Committee" %}
               </span>
             </div>
             <div class="hide-on-med-and-up">
-              <span class="left">IRC Info Portal</span>
-              <span class="right">Created by the IRC</span>
+              <span class="left">{% trans "IRC Info Portal" %}</span>
+              <span class="right">{% trans "Created by the IRC" %}</span>
             </div>
           </div>
         </div>
