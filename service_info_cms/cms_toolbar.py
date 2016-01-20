@@ -36,6 +36,7 @@ class RatingExtensionToolbar(ExtensionToolbar):
                 current_page_menu.add_modal_item(
                     _('Allow ratings for page'), url=url, disabled=not self.toolbar.edit_mode)
 
+
 @toolbar_pool.register
 class SocialMediaExtensionToolbar(ExtensionToolbar):
     model = SocialMediaExtension
@@ -46,4 +47,6 @@ class SocialMediaExtensionToolbar(ExtensionToolbar):
             page_extension, url = self.get_page_extension_admin()
             if url:
                 current_page_menu.add_modal_item(
-                    _('Include social media for page'), url=url, disabled=not self.toolbar.edit_mode)
+                    _('Include social media for page'),
+                    url=url,
+                    disabled=not self.toolbar.edit_mode)
