@@ -7,17 +7,182 @@
 @active-item-hover: #e57373;
 
 .side-nav, .side-nav.fixed {
-  > li > .collapsible > .page-active,
-  > li.page-active {
-    background-color: @amber-lighten-1;
+  /*
+    Enumeration of possible text areas needing colors.
+  */
+  li {
+    &.page-active {
+      /*
+        The .page-active class indicates that a list item's immediate
+        contents are the nav link to the current page.
+
+        The text contained in the immediate child links of the list item
+        should be white, since it will be on a dark background.
+      */
+      > a {
+        color: white;
+      }
+    }
+
+    /*
+      The same dark background color applies to items on mouseover.
+      However, it's necessary to not set the text white on *all* links
+      contained in hovering li items; otherwise the text will be set white
+      (incorrectly) on li items that contain items that are being hovered
+      over. These restricted rules enforce the correct behavior.
+    */
+    &:hover {
+      > a:not(.collapsible-header) {
+        color: white;
+      }
+    }
+
+    &:not(.parent):hover {
+      > a {
+        color: white;
+      }
+    }
   }
+
+  .collapsible-body {
+    /*
+      Similarly, it's not the case that *all* the links under an active list
+      item should be white; links beneath the first tier should be black.
+
+      This has cascading effects that require a couple of overrides to fix.
+    */
+    li.active {
+      a {
+        color: black;
+      }
+      li:hover {
+        a {
+          color: white;
+        }
+      }
+    }
+    li.page-active {
+      > a {
+        color: white;
+      }
+    }
+  }
+
+  .collapsible {
+    /*
+      The link to the page of a parent page is contained in an .overlay
+      container, and the text of that ostensible link is contained in an
+      adjacent .collapsible-header element. (This is because the width of the
+      .collapsible-header determins the width of the .collapsible-body, so
+      it must be as wide as possible, even though it only governs the behavior
+      of the button that drops down the menu. Hence it is given the full width
+      of the container, and an overlay is placed on top of it.)
+
+      The .collapsible-header is always what gets colored dark on hover and
+      has its text set white, but it is not always what is being hovered
+      over. Hence the rules under .overlay:hover determine the styling on its
+      adjacent element.
+    */
+    .overlay {
+      &:hover {
+        & + .collapsible-header {
+          color: white;
+        }
+      }
+    }
+    .collapsible-header {
+      &:hover {
+        color: white;
+      }
+    }
+  }
+
+  /*
+    Enumeration of possible highlighted regions (either hover or active).
+
+    These rules are closely related to the rules spelled out in comments
+    above; for clarification, see those comments.
+  */
+
+  li {
+    &.active {
+      background-color: transparent;
+    }
+
+    &:hover {
+      background-color: transparent;
+
+     &:not(.no-hover) > a:not(.collapsible-header) {
+        background-color: @amber-lighten-2;
+      }
+    }
+
+    &:hover:not(.parent, .no-hover) {
+      background-color: @amber-lighten-2;
+      -webkit-transition: all 0.3s ease-out;
+      transition: all 0.3s ease-out;
+    }
+
+    &.page-active {
+      > a {
+        background-color: @amber-lighten-2;
+      }
+    }
+  }
+
+  .collapsible {
+    .overlay {
+      &:hover {
+        & + .collapsible-header {
+          background-color: @amber-lighten-2;
+          -webkit-transition: all 0.3s ease-out;
+          transition: all 0.3s ease-out;
+        }
+      }
+    }
+    .collapsible-header {
+      &:hover {
+        background-color: @amber-lighten-2;
+        -webkit-transition: all 0.3s ease-out;
+        transition: all 0.3s ease-out;
+      }
+    }
+  }
+
+  .collapsible-body {
+    li {
+      &.active {
+        background-color: transparent;
+      }
+    }
+  }
+
+  /*
+    General rules.
+  */
+
   li {
     position: relative;
+
+    &.no-padding {
+      > a {
+        padding: 0 30px;
+      }
+    }
+
+    a {
+      /*
+        Enables transitions on background color and text color for mouseover.
+      */
+      -webkit-transition: all .3s ease-out;
+      transition: all .3s ease-out;
+    }
 
     &:not(.logo) {
       .flex-layout();
       .flex-direction(column);
     }
+
     form {
       /*
         Correcting for weird form behavior in the nav.
@@ -54,6 +219,7 @@
       height: 48px;
       position: absolute;
       left: 0;
+      top: 0;
       z-index: 2;
 
       width: 192px;
@@ -92,12 +258,12 @@
           flex-basis: 100% !important;
 
           i {
+            .flex(0, 0, 48px);
             .flex-layout();
             .align-items(center);
             .justify-content(center);
             height: 48px;
             width: 48px;
-            background-color: rgba(255,255,255,0.75);
           }
         }
         padding: 0 0 0 30px;
@@ -110,25 +276,13 @@
       }
     }
 
-    &.active, &:hover {
-      background-color: @amber-lighten-1;
-    }
-
-    &.page-active {
-      > ul > li > .overlay {
-        font-weight: 800;
-      }
-      > a {
-        font-weight: 800;
-      }
-    }
-
-    &.logo:hover {
-      background-color: transparent;
-    }
   }
 
   .collapsible {
+    /*
+      The many levels of embedding call for many levels of manual width
+      adjustments on absolute-positioned elements.
+    */
     .overlay {
       width: 192px;
     }
@@ -152,13 +306,6 @@
   .collapsible-body {
     border-left: 3px solid rgba(0,0,0,0.15)!important;
     margin-left: 5px;
-    background-color: @amber-lighten-3;
-    .collapsible-body {
-      background-color: @amber-lighten-4;
-      .collapsible-body {
-        background-color: @amber-lighten-5;
-      }
-    }
 
     .overlay {
       a {
@@ -167,11 +314,7 @@
     }
 
     li {
-      &.active, &:hover {
-        background-color: transparent;
-      }
       a, a.collapsible-header {
-        color: black !important;
         margin: 0;
       }
       .overlay {
