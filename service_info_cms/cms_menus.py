@@ -25,4 +25,5 @@ class AddIconNameExtension(Modifier):
             self._modify_nodes(nodes)
         return nodes
 
+
 menu_pool.register_modifier(AddIconNameExtension)

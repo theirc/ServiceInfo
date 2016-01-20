@@ -1,0 +1,54 @@
+@import "../includes/flex.less";
+@import "../includes/mixins.less";
+
+#page-rating {
+  .captcha {
+    > .g-recaptcha > div > div {
+      margin: 0 auto;
+    }
+  }
+
+  .stars-row {
+    .flex-layout();
+    .flex-direction(row);
+    .justify-content(space-between);
+    .align-items(center);
+
+    .caption {
+      text-transform: uppercase;
+    }
+
+    .stars {
+      .flex-layout();
+      .flex-direction(row-reverse);
+      .justify-content(flex-end);
+
+      margin-top: -5px;
+    }
+  }
+
+  .spacer {
+    .flex-grow(1);
+  }
+
+  [type="radio"]+label:before,
+  [type="radio"]+label:after {
+    content: "☆";
+    color: #ffc107;
+    border: none;
+    font-size: 24px;
+  }
+
+  [type="radio"]:checked~label:after,
+  [type="radio"]:checked+label:after {
+    background-color: transparent;
+    content: "★";
+    z-index: 0;
+    -webkit-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    transform: scale(1.02);
+  }
+
+}
