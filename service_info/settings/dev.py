@@ -29,7 +29,7 @@ PARLER_LANGUAGES[SITE_ID] = PARLER_LANGUAGES_FOR_SITE
 # Generally True, we'll change to False in dev.py for running locally
 SECURE_LINKS = False
 
-HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.BaseSignalProcessor'
+CAPTCHA_SITEKEY = '6Ld0EhUTAAAAAA2n-bmAB0FeU3QO3A8RhH3R2PDP'
 
 # Special test settings
 if 'test' in sys.argv:
@@ -42,5 +42,4 @@ if 'test' in sys.argv:
     # and we can't test it)
     JIRA_SERVICES_PROJECT_KEY = 'DUMMYSM'
     JIRA_FEEDBACK_PROJECT_KEY = 'DUMMYLBF'
-
-CAPTCHA_SITEKEY = '6Ld0EhUTAAAAAA2n-bmAB0FeU3QO3A8RhH3R2PDP'
+    HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.BaseSignalProcessor'
