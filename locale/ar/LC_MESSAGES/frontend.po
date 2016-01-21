@@ -2,12 +2,12 @@
 # Translators:
 # Hasnaa Yazbek <hasnaa.yazbek@rescue.org>, 2015
 # Nizar Najjar <ozogorgor@gmail.com>, 2015
-# Omar Meksassi <omar.meksassi@gmail.com>, 2015
+# Omar Meksassi <omar.meksassi@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
-"PO-Revision-Date: 2015-11-11 15:31+0000\n"
-"Last-Translator: Vinod Kurup <vkurup@caktusgroup.com>\n"
+"PO-Revision-Date: 2016-01-14 14:18+0000\n"
+"Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/irc/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -962,10 +962,10 @@ msgid "Reports##Form##Stat##Options##Communication"
 msgstr "الرضى عن التواصل مع الموظفين بحسب نوع الخدمة"
 
 msgid "Reports##Form##Stat##Options##NumServicesByServiceType"
-msgstr ""
+msgstr "عدد الخدمات بحسب الموقع ونوع الخدمة"
 
 msgid "Reports##Form##Stat##Options##NumServicesByProviderType"
-msgstr ""
+msgstr "عدد الخدمات بحسب الموقع ونوع الخدمة"
 
 msgid "Reports##Form##Download"
 msgstr "تحميل التقرير بصيغة CSV"
@@ -977,10 +977,10 @@ msgid "Reports##Table##ServiceType"
 msgstr "نوع الخدمة"
 
 msgid "Reports##Chart##AverageResponse"
-msgstr ""
+msgstr "متوسط الاستجابة"
 
 msgid "Reports##Chart##NumberServices"
-msgstr ""
+msgstr "عدد الخدمات"
 
 msgid "Reports##Chart##NumberResponses"
-msgstr ""
+msgstr "عدد الردود"
