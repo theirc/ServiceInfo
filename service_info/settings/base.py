@@ -174,6 +174,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'sekizai.context_processors.sekizai',
     'cms.context_processors.cms_settings',
     'aldryn_boilerplates.context_processors.boilerplate',
+    'service_info_cms.context_processors.captcha_key',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -464,7 +465,7 @@ THUMBNAIL_HIGH_RESOLUTION = True
 
 # CKEditor
 TEXT_ADDITIONAL_TAGS = ('iframe', )
-TEXT_ADDITIONAL_ATTRIBUTES = ('auto', 'scrolling', 'allowfullscreen', 'frameborder', )
+TEXT_ADDITIONAL_ATTRIBUTES = ('scrolling', 'allowfullscreen', 'frameborder', )
 
 # cmsplugin_filer_image provides integration with djangocms-text-ckeditor
 # for DnD via this setting:
@@ -515,3 +516,7 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # aldryn-search requires ALLOWED_HOSTS to be set even with DEBUG=True
 ALLOWED_HOSTS = ('localhost', '127.0.0.1',)
+
+# google recaptcha key
+
+CAPTCHA_SITEKEY = os.environ.get('CAPTCHA_SITEKEY', '')

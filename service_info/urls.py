@@ -24,6 +24,7 @@ NO_404_LOCALE_REDIRECTS = (re.compile(r'^/api/'),)
 urlpatterns = [
     url(r'^health/$', health_view),
     url(r'^api/', include(api.urls)),
+    url(r'^', include('service_info_cms.urls')),
     url(r'^password_reset/$', 'django.contrib.auth.views.password_reset', name='password_reset'),
     url(r'^password_reset/done/$', 'django.contrib.auth.views.password_reset_done',
         name='password_reset_done'),
