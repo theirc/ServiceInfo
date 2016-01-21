@@ -58,6 +58,8 @@ EXPECTED_CHANGES = {
         '- Alter field app_data on faqconfig',
     ],
     'aldryn_forms': [
+        # generates no SQL, detailed analysis is expected to be similar to
+        # fields in other packages
         '- Change Meta options on formsubmission',
         '- Alter field email_body on emailfieldplugin',
         '- Alter field email_send_notification on emailfieldplugin',
