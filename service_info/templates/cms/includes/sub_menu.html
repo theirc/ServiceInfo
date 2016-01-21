@@ -8,7 +8,7 @@
         </a>
       </div>
     {% endif %}
-    <a class="collapsible-header waves-effect {% if child.ancestor %}active{% endif %}">
+    <a class="collapsible-header waves-effect {% if child.ancestor %}active{% endif %} {% if child.iconnameextension.icon_name %}has_icon{% endif %}">
       <div class="collapsible-header-wrap">
         {% if child.iconnameextension.icon_name %}
           <i class="material-icons left">{{ child.iconnameextension.icon_name }}</i>
@@ -30,7 +30,7 @@
               {% show_menu from_level to_level extra_inactive extra_active "cms/includes/sub_menu.html" "" "" child %}
             </li>
           {% else %}
-            <li class="no-padding {% if child.selected %}page-active{% endif %}">
+            <li class="no-padding {% if child.selected %}page-active{% endif %}  {% if child.iconnameextension.icon_name %}has_icon{% endif %}">
               <a href="{{ child.get_absolute_url }}" class="waves-effect">
                 {% if child.iconnameextension.icon_name %}
                   <i class="material-icons left">{{ child.iconnameextension.icon_name }}</i>
