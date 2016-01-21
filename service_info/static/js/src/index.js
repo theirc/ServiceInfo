@@ -63,4 +63,35 @@ jQuery(function ($) {
   if (!isNaN(getInternetExplorerVersion())) {
     $('body').addClass('InternetExplorer');
   }
+
+  /*
+    Bind to rating radio buttons.
+  */
+  $('#page-rating .stars label').click(function () {
+    $('#captcha-modal').openModal();
+  });
+
+  /*
+    Set up captcha callback.
+  */
+  window.__submit_captcha__ = function () {
+    setTimeout(function () {
+      $('#captcha-modal').closeModal();
+      $('#page-rating').submit();
+    }, 1500);
+  }
+
+  /*
+    Ensure that submenus with active children are open on page load.
+    Easiest way to do this: trigger the 'click' behavior on the containing
+    collapsible elements.
+  */
+  $('#nav .collapsible-body, #mobile-menu .collapsible-body')
+    .find('li.page-active')
+    .parents('#nav li, #mobile-menu li')
+    .children('.collapsible-header')
+    .each(function () {
+      $(this).trigger('click');
+    })
+  ;
 });
