@@ -17,6 +17,20 @@
     </form>
   </li>
 
+  <li class="no-padding">
+    <a href="{% url 'pages-root' %}" title="{% trans 'Home' %}">
+      <i class="material-icons left">home</i>
+      <span>{% trans 'Home' %}</span>
+    </a>
+  </li>
+
+  <li class="no-padding">
+    <a href="/app/index.html" title="{% trans 'Services' %}">
+      <i class="material-icons left">info</i>
+      <span>{% trans 'Services' %}</span>
+    </a>
+  </li>
+
   {% for child in children %}
     {% if child.children %}
       <li class="parent no-padding {% if child.selected %}page-active{% endif %}">
