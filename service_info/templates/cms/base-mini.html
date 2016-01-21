@@ -47,7 +47,9 @@
 
     <div class="black white-text container" id="nav">
       {% block navigation %}
-        {% show_menu 0 3 3 3 "cms/includes/mini/menu-mini.html" %}
+        {% with top=True %}
+          {% show_menu 0 3 3 3 "cms/includes/mini/menu-mini.html" %}
+        {% endwith %}
       {% endblock navigation %}
     </div>
 
