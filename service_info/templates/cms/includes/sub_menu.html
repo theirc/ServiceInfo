@@ -10,11 +10,15 @@
     {% endif %}
     <a class="collapsible-header waves-effect {% if child.ancestor %}active{% endif %}">
       <div class="collapsible-header-wrap">
+        {% if child.iconnameextension.icon_name %}
+          <i class="material-icons left">{{ child.iconnameextension.icon_name }}</i>
+        {% endif %}
+
         {% if child.children %}
-          {{ child.get_menu_title }}
+          <span>{{ child.get_menu_title }}</span>
           <i class="material-icons right">arrow_drop_down</i>
         {% else %}
-          {{ child.get_menu_title }}
+          <span>{{ child.get_menu_title }}</span>
         {% endif %}
       </div>
     </a>
@@ -32,7 +36,7 @@
                   <i class="material-icons left">{{ child.iconnameextension.icon_name }}</i>
                 {% endif %}
 
-                {{ child.get_menu_title }}
+                <span>{{ child.get_menu_title }}</span>
               </a>
             </li>
           {% endif %}
