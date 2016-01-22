@@ -473,6 +473,84 @@ main.container,
   -o-transform: scale(1.02);
   transform: scale(1.02);
 }
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=url],
+input[type=time],
+input[type=date],
+input[type=datetime-local],
+input[type=tel],
+input[type=number],
+input[type=search],
+textarea.materialize-textarea {
+  border-bottom: 1px dashed white;
+}
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]),
+input[type=url]:focus:not([readonly]),
+input[type=time]:focus:not([readonly]),
+input[type=date]:focus:not([readonly]),
+input[type=datetime-local]:focus:not([readonly]),
+input[type=tel]:focus:not([readonly]),
+input[type=number]:focus:not([readonly]),
+input[type=search]:focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid white;
+}
+input[type=text]:focus:not([readonly]) + label,
+input[type=password]:focus:not([readonly]) + label,
+input[type=email]:focus:not([readonly]) + label,
+input[type=url]:focus:not([readonly]) + label,
+input[type=time]:focus:not([readonly]) + label,
+input[type=date]:focus:not([readonly]) + label,
+input[type=datetime-local]:focus:not([readonly]) + label,
+input[type=tel]:focus:not([readonly]) + label,
+input[type=number]:focus:not([readonly]) + label,
+input[type=search]:focus:not([readonly]) + label,
+textarea.materialize-textarea:focus:not([readonly]) + label {
+  color: white;
+}
+[type="checkbox"]:checked + label:before {
+  border-right-color: white;
+  border-bottom-color: white;
+}
+.select-wrapper [type="checkbox"]:checked + label:before {
+  border-right-color: black;
+  border-bottom-color: black;
+}
+[type="radio"]:checked + label:after {
+  border-color: white;
+  background-color: white;
+}
+.input-field .btn {
+  background-color: white;
+}
+.input-field .btn > span {
+  color: black;
+}
+.input-field .select-wrapper > ul {
+  padding-left: 0!important;
+}
+.input-field .select-wrapper > ul > li {
+  list-style-type: none!important;
+}
+.input-field .select-wrapper > ul > li > span {
+  color: black;
+}
+.input-field .select-wrapper > ul > li > span > label {
+  padding-right: 0.5rem;
+}
+.input-field textarea::-webkit-scrollbar,
+.input-field textarea::-webkit-scrollbar-button,
+.input-field textarea::-webkit-scrollbar-track,
+.input-field textarea::-webkit-scrollbar-track-piece,
+.input-field textarea::-webkit-scrollbar-thumb,
+.input-field textarea::-webkit-scrollbar-corner,
+.input-field textarea::-webkit-resizer {
+  background-color: black;
+}
 .aldryn-newsblog-article .tags a {
   color: white;
 }
