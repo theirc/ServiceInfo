@@ -1,0 +1,23 @@
+{% load aldryn_forms_tags i18n %}
+
+{% if field %}
+  <div class="input-field col s12">
+    {% block form_field %}
+      {% render_form_widget field class="form-control" %}
+    {% endblock form_field %}
+
+    {% block form_field_label %}
+      <label for="{{ field.auto_id }}">
+        {{ field.label }}
+      </label>
+    {% endblock form_field_label %}
+
+    {% block form_field_errors %}
+      {% if field.errors %}
+        {% for error in field.errors %}
+          <span class="red darken-2 white-text">{{ error }}</span>
+        {% endfor %}
+      {% endif %}
+    {% endblock form_field_errors %}
+  </div>
+{% endif %}

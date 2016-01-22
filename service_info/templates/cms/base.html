@@ -34,7 +34,7 @@
             {% show_menu 0 3 3 3 "cms/includes/menu.html" %}
           {% endblock menu %}
         {% endblock nav %}
-        <nav id="mobile-nav" class="hide-on-large-only {% block nav-class %}nav-wrapper amber lighten-2{% endblock nav-class %}">
+        <nav id="mobile-nav" class="amber lighten-2 hide-on-large-only {% block nav-class %}nav-wrapper {% endblock nav-class %}">
           <div class="nav-wrapper">
             <a href="#" data-activates="mobile-menu" class="button-collapse right"><i class="material-icons">menu</i></a>
 
@@ -86,7 +86,7 @@
                 <h4>{% trans "Captcha Verification" %}</h4>
                 <input type="hidden" name="page_id" value="{{ request.current_page.id }}">
                 <input type="hidden" name="return_url" value="{{ request.get_full_path }}" />
-                <div class="g-recaptcha" data-sitekey="6Ld0EhUTAAAAAA2n-bmAB0FeU3QO3A8RhH3R2PDP"
+                <div class="g-recaptcha" data-sitekey="{{ CAPTCHA_SITEKEY }}"
                      data-callback="__submit_captcha__"
                 ></div>
               </div>

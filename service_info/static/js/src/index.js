@@ -53,6 +53,24 @@ jQuery(function ($) {
   $('.slider').slider({full_width: true});
 
   /*
+    Activate custom show-hide code.
+  */
+  $('.child-activate').click(function () {
+    var $this = $(this);
+
+    $this
+      .parent()
+      .next('.child-item')
+      .toggleClass('open')
+    ;
+  });
+
+  /*
+    Activate Materialize select inputs.
+  */
+  $('select').material_select();
+
+  /*
     Adjust for IE 11.
   */
   if (!isNaN(getInternetExplorerVersion())) {
@@ -75,18 +93,4 @@ jQuery(function ($) {
       $('#page-rating').submit();
     }, 1500);
   }
-
-  /*
-    Ensure that submenus with active children are open on page load.
-    Easiest way to do this: trigger the 'click' behavior on the containing
-    collapsible elements.
-  */
-  $('#nav .collapsible-body, #mobile-menu .collapsible-body')
-    .find('li.page-active')
-    .parents('#nav li, #mobile-menu li')
-    .children('.collapsible-header')
-    .each(function () {
-      $(this).trigger('click');
-    })
-  ;
 });

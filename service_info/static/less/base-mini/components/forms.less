@@ -1,0 +1,74 @@
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+  border-bottom: 1px dashed white;
+}
+
+input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid white;
+
+  + label {
+    color: white;
+  }
+}
+
+[type="checkbox"]:checked+label:before {
+  border-right-color: white;
+  border-bottom-color: white;
+  .select-wrapper & {
+    border-right-color: black;
+    border-bottom-color: black;
+  }
+}
+
+[type="radio"]:checked+label:after {
+  border-color: white;
+  background-color: white;
+}
+
+.input-field {
+  .btn {
+    background-color: white;
+
+    > span {
+      color: black;
+    }
+  }
+
+  .select-wrapper {
+    > ul {
+      padding-left: 0!important;
+      > li {
+        list-style-type: none!important;
+        > span {
+          color: black;
+          > label {
+            padding-right: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  textarea {
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-button,
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-track-piece,
+    &::-webkit-scrollbar-thumb,
+    &::-webkit-scrollbar-corner,
+    &::-webkit-resizer {
+      background-color: black;
+    }
+  }
+}
+
+form {
+  button.btn {
+    background-color: white;
+    color: black;
+    border-radius: 0;
+
+    &:hover {
+      background-color: white;
+    }
+  }
+}

@@ -28,7 +28,7 @@ xlrd==0.9.3
 sorl-thumbnail==12.3
 
 # CMS-related
-django-cms==3.1.4
+django-cms==3.2.0
   djangocms-admin-style==0.2.3
   django-classy-tags==0.6.2
   django-treebeard==3.0
@@ -41,12 +41,12 @@ cmsplugin-filer==0.10.2
     django-polymorphic==0.7.2
     Unidecode==0.4.18
   django-appconf==1.0.1
+  django-formtools==1.0
 cmsplugin-iframe==0.1.3
 djangocms-text-ckeditor==2.7.0
 django-reversion==1.8.5
 aldryn-disqus==1.0.0
-# Has missing migration: aldryn-faq==1.0.8
-git+git://github.com/caktus/aldryn-faq.git@1.0.8-146#egg=aldryn-faq
+aldryn-faq==1.0.11
   aldryn-apphooks-config==0.2.6
     django-appdata==0.1.4
       South==1.0.2
@@ -79,8 +79,7 @@ git+git://github.com/caktus/aldryn-faq.git@1.0.8-146#egg=aldryn-faq
   # django-reversion
   django-sortedm2m==1.0.2
   django-taggit==0.17.6
-# Has missing migration and other issues: aldryn-newsblog==1.0.9
-git+git://github.com/caktus/aldryn-newsblog.git@1.0.9-323-ImproperlyConfigured-334#egg=aldryn-newsblog
+aldryn-newsblog==1.0.12
   python-dateutil==2.4.2
   # aldryn-apphooks-config
   # aldry-boilerplates
@@ -101,7 +100,24 @@ git+git://github.com/caktus/aldryn-newsblog.git@1.0.9-323-ImproperlyConfigured-3
   backport-collections==0.1
 djangocms-googlemap==0.4.0
 djangocms-column==1.6.0
+# aldryn-video not on PyPI
 git+git://github.com/aldryn/aldryn-video.git@0.5.1#egg=aldryn-video
   jsonfield==1.0.3
   micawber==0.3.3
+aldryn-forms==2.0.4
+  django-emailit==0.2.2
+    premailer==2.9.6
+      cssselect==0.9.1
+      cssutils==1.0.1
+    django-absolute==0.3
+  # djangocms-text-ckeditor
+  django-simple-captcha==0.5.1
+    # Pillow
+  # Needs simple Py3K fix others have posted: django-tablib==3.1.1
+  git+git://github.com/caktus/django-tablib.git@ServiceInfo/3.1.1-plus-additional-fixes#egg=django-tablib
+    tablib==0.10.0
+  # Pillow
+  # django-filer
+  django-sizefield==0.9
+  # aldryn-boilerplates
 elasticsearch==2.1.0
