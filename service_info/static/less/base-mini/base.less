@@ -1,0 +1,70 @@
+@import "../includes/flex.less";
+
+body {
+  padding: 1rem;
+  .flex-layout();
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  .flex(1, 0, auto);
+}
+
+header, #nav, footer, main, #language-picker {
+  * {
+    color: white;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  a {
+    font-weight: 800;
+    color: white;
+    border-bottom: 2px solid white;
+    text-transform: uppercase;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 800;
+  }
+
+  .container, &.container {
+    max-width: 650px;
+
+    @media (max-width: 639px) {
+      width: 100%;
+    }
+  }
+}
+
+#nav.container, #search-form {
+  max-width: 540px;
+}
+
+#nav, #cms-main {
+  margin: 0 auto 0 0;
+
+  @media (max-width: 639px) {
+    margin: 0 auto;
+  }
+}
+
+.multicolumn0,
+.multicolumn1,
+.multicolumn2,
+.multicolumn3,
+.multicolumn4,
+.multicolumn5,
+.multicolumn6,
+.multicolumn7,
+.multicolumn8,
+.multicolumn9,
+.multicolumn10 {
+  .column {
+    float: left !important;
+    min-width: 200px;
+    padding-right: 0.5rem;
+    box-sizing: border-box;
+  }
+}

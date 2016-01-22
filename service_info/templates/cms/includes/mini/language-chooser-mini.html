@@ -1,0 +1,37 @@
+{% load cms_tags menu_tags i18n %}
+
+<div id="language-picker" class="modal black white-text">
+  <div class="modal-content black white-text">
+    <h4>{% trans "Choose Language" %}</h4>
+  </div>
+  <div class="modal-footer black white-text">
+    {% for language in languages %}
+      <a class="modal-action modal-close white-text" href="{% page_language_url language.0 %}" data-lang="{{ language.0 }}">
+        {% if language.0 == "ar" %}
+          &#x627;&#x644;&#x639;&#x631;&#x628;&#x64A;&#x629;
+        {% elif language.0 == "fr" %}
+          Français
+        {% elif language.0 == "en" %}
+          English
+        {% else %}
+          {{ language.0 }}
+        {% endif %}
+      </a>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  jQuery(function ($) {
+    window.language_picker(
+      '#language-picker'
+      , '{{ request.LANGUAGE_CODE }}'
+      , {
+        {% for language in languages %}
+          '{{ language.0 }}': '{% page_language_url language.0 %}'{% if not forloop.last %},{% endif %}
+        {% endfor %}
+      }
+      , {% if request.toolbar.build_mode or request.toolbar.edit_mode %}true{% else %}false{% endif %}
+    );
+  });
+</script>
