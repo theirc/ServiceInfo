@@ -34,6 +34,13 @@
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+        {% if request.LANGUAGE_CODE == 'ar' %}
+        js.src = "//connect.facebook.net/ar_AR/sdk.js#xfbml=1&version=v2.5";
+        {% endif %}
+        {% if request.LANGUAGE_CODE == 'fr' %}
+        js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.5";
+        {% endif %}
+
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
       </script>
@@ -117,7 +124,10 @@
               data-show-faces="false"
               data-share="false"></div>
 
-            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="ServiceinfoLB" data-size="large">
+            <a href="https://twitter.com/share"
+               class="twitter-share-button"{count}
+               data-via="ServiceinfoLB"
+               data-lang="{{ request.LANGUAGE_CODE }}">
               Tweet
             </a>
             <script>
