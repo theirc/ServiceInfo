@@ -1,0 +1,19 @@
+@import "../../includes/flex.less";
+
+#language-picker {
+  text-align: center;
+  .modal-footer {
+    .flex-layout();
+    .flex-direction(row);
+    .align-items(center);
+    .justify-content(center);
+
+    a {
+      margin-right: 2rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

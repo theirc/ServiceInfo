@@ -53,6 +53,24 @@ jQuery(function ($) {
   $('.slider').slider({full_width: true});
 
   /*
+    Activate custom show-hide code.
+  */
+  $('.child-activate').click(function () {
+    var $this = $(this);
+
+    $this
+      .parent()
+      .next('.child-item')
+      .toggleClass('open')
+    ;
+  });
+
+  /*
+    Activate Materialize select inputs.
+  */
+  $('select').material_select();
+
+  /*
     Adjust for IE 11.
   */
   if (!isNaN(getInternetExplorerVersion())) {
