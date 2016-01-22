@@ -190,6 +190,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'cms.middleware.utils.ApphookReloadMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
@@ -273,6 +274,11 @@ INSTALLED_APPS = (
     'standard_form',
     'haystack',
     'service_info_cms',
+    'absolute',
+    'aldryn_forms',
+    'aldryn_forms.contrib.email_notifications',
+    'captcha',
+    'emailit',
     # End Django CMS
     # Load after easy_thumbnails so that its thumbnail template tag (unused
     # in this project) is hidden.
