@@ -53,6 +53,11 @@ jQuery(function ($) {
   $('.slider').slider({full_width: true});
 
   /*
+    Activate Materialize select inputs.
+  */
+  $('select').material_select();
+
+  /*
     Adjust for IE 11.
   */
   if (!isNaN(getInternetExplorerVersion())) {

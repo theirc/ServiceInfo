@@ -2,13 +2,16 @@
   .collapsible-body {
     padding: 2rem;
 
-    > *, > .cms_plugin > * {
+    > *, > .cms_plugin > *,
+    > *, > .cms-plugin > * {
       padding: 0;
     }
 
     > p + p,
     > .cms_plugin + .cms_plugin,
-    > .cms_plugin > p + p {
+    > .cms-plugin + .cms-plugin,
+    > .cms_plugin > p + p,
+     > .cms-plugin > p + p {
       padding: 0;
       margin-top: 1em;
     }

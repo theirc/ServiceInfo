@@ -1,0 +1,11 @@
+{% load cms_tags %}
+
+<fieldset class="col s12 row{% if instance.custom_classes %} {{ instance.custom_classes }}{% endif %}">
+    {% if instance.legend %}
+        <legend class="col s12">{{ instance.legend }}</legend>
+    {% endif %}
+
+    {% for plugin in instance.child_plugin_instances %}
+        {% render_plugin plugin %}
+    {% endfor %}
+</fieldset>
