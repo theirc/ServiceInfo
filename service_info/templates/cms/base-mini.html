@@ -1,0 +1,148 @@
+{% load cms_tags staticfiles sekizai_tags menu_tags i18n %}
+
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    {% render_block "extra-meta" %}
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css"> -->
+    {% if request.LANGUAGE_CODE == 'ar' %}
+      <link href="{% static 'css/materialize.min-rtl.css' %}" rel="stylesheet">
+    {% else %}
+      <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+    {% endif %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    {% if request.LANGUAGE_CODE == 'ar' %}
+      <link href="{% static 'css/site-mini-rtl.css' %}" rel="stylesheet">
+    {% else %}
+      <link href="{% static 'css/site-mini.css' %}" rel="stylesheet">
+    {% endif %}
+    {% render_block "css" %}
+
+    <title>{% block title %}{% page_attribute "page_title" %}{% endblock title %}</title>
+
+  </head>
+  <body class="black white-text {% block body-class %}{% endblock body-class %}">
+    {% cms_toolbar %}
+
+    <header>
+      {% block header %}
+        {% static_placeholder 'header' %}
+      {% endblock header %}
+    </header>
+
+    <nav id="search-nav">
+      <div class="nav-wrapper black white-text">
+        <form action="{% page_url 'search-results' %}" method="get" id="search-form">
+          <div class="input-field">
+            <input id="search" type="search" name="q" required>
+            <label for="search" class="search-label"><i class="material-icons">search</i></label>
+            <i class="material-icons close">close</i>
+          </div>
+        </form>
+      </div>
+    </nav>
+
+    <div class="black white-text container" id="nav">
+      {% block navigation %}
+        {% with top=True %}
+          {% show_menu 0 3 3 3 "cms/includes/mini/menu-mini.html" %}
+        {% endwith %}
+      {% endblock navigation %}
+    </div>
+
+    <main id="cms-main" class="main {% block main-class %}container{% endblock main-class %}">
+      {% block hero %}{% endblock hero %}
+
+      {% block wrap-content %}
+        {% block content %}
+        {% endblock content %}
+      {% endblock wrap-content %}
+
+      {% if request.current_page.ratingextension.include_rating %}
+        <section class="row rating">
+          <form action="{% url 'update-page-rating' %}" method="POST" class="col s12" id="page-rating">
+            {% csrf_token %}
+            <div class="card">
+              <div class="card-action stars-row">
+                <span class="left white-text caption">
+                  {% trans "Rate This Page" %}
+                </span>
+                <div class="stars">
+                  <input type="radio" name="rating" value="5" id="rating-5">
+                  <label for="rating-5"></label>
+                  <input type="radio" name="rating" value="4" id="rating-4">
+                  <label for="rating-4"></label>
+                  <input type="radio" name="rating" value="3" id="rating-3">
+                  <label for="rating-3"></label>
+                  <input type="radio" name="rating" value="2" id="rating-2">
+                  <label for="rating-2"></label>
+                  <input type="radio" name="rating" value="1" id="rating-1">
+                  <label for="rating-1"></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal black white-text" id="captcha-modal">
+              <div class="modal-content captcha">
+                <h4>{% trans "Captcha Verification" %}</h4>
+                <input type="hidden" name="page_id" value="{{ request.current_page.id }}">
+                <input type="hidden" name="return_url" value="{{ request.get_full_path }}" />
+                <div class="g-recaptcha" data-sitekey="{{ CAPTCHA_SITEKEY }}"
+                     data-callback="__submit_captcha__"
+                ></div>
+              </div>
+            </div>
+          </form>
+        </section>
+      {% endif %}
+    </main>
+
+    <footer id="cms-footer" class="{% block footer-class %}page-footer black{% endblock footer-class %}">
+      {% block footer %}
+        <div class="container">
+          <div class="row">
+            <div class="col footer_placeholder">
+              {% static_placeholder "footer_content" %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <a href="/app/index.html">
+                {% trans "Search for Services Nearby" %}
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <div class="container">
+            <div class="hide-on-small-only">
+              <span class="left">{% trans "International Rescue Committee Information Portal" %}</span>
+              <span id="more-links" class="right">
+                <a href="#!">{% trans "Privacy" %}</a> ·
+                <a href="#!">{% trans "Github" %}</a> ·
+                {% trans "Created by the International Rescue Committee" %}
+              </span>
+            </div>
+            <div class="hide-on-med-and-up">
+              <span class="left">{% trans "IRC Info Portal" %}</span>
+              <span class="right">{% trans "Created by the IRC" %}</span>
+            </div>
+          </div>
+        </div>
+      {% endblock footer %}
+    </footer>
+
+    {% block modals %}{% endblock modals %}
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="{% static 'js/dist/bundle.js' %}"></script>
+    <script src="https://www.google.com/recaptcha/api.js?hl={{ request.LANGUAGE_CODE }}" async defer></script>
+    {% render_block "js" %}
+
+    {% language_chooser "cms/includes/mini/language-chooser-mini.html" %}
+  </body>
+</html>

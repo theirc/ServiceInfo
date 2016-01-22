@@ -767,12 +767,62 @@ ul.pagination > * {
   padding: 2rem;
 }
 .aldryn-faq-list .collapsible-body > *,
-.aldryn-faq-list .collapsible-body > .cms_plugin > * {
+.aldryn-faq-list .collapsible-body > .cms_plugin > *,
+.aldryn-faq-list .collapsible-body > *,
+.aldryn-faq-list .collapsible-body > .cms-plugin > * {
   padding: 0;
 }
 .aldryn-faq-list .collapsible-body > p + p,
 .aldryn-faq-list .collapsible-body > .cms_plugin + .cms_plugin,
-.aldryn-faq-list .collapsible-body > .cms_plugin > p + p {
+.aldryn-faq-list .collapsible-body > .cms-plugin + .cms-plugin,
+.aldryn-faq-list .collapsible-body > .cms_plugin > p + p,
+.aldryn-faq-list .collapsible-body > .cms-plugin > p + p {
   padding: 0;
   margin-top: 1em;
+}
+.aldryn-form .radio-select {
+  margin-bottom: 2.5rem;
+}
+.aldryn-form textarea {
+  max-height: 10rem;
+  overflow: scroll;
+}
+.aldryn-form fieldset.col.s12.row {
+  padding: 1.5rem;
+}
+.aldryn-form fieldset.col.s12.row > legend {
+  display: inline-block;
+  width: auto;
+}
+.aldryn-form fieldset.col.s12.row > * {
+  padding: 0.75rem 0;
+  height: auto;
+}
+.aldryn-form fieldset.col.s12.row > *:last-child {
+  padding-bottom: 0;
+}
+.aldryn-form fieldset.col.s12.row > *:first-child {
+  padding-top: 0;
+}
+.aldryn-form > .row {
+  max-width: 100%;
+  margin: auto;
+}
+.aldryn-form > .row > .cms_plugin,
+.aldryn-form > .row > .cms-plugin {
+  width: 100%;
+  display: block;
+}
+.aldryn-form .captcha ~ label {
+  top: 3.5rem;
+}
+.aldryn-form .captcha ~ label.active {
+  transform: translateY(-425%);
+}
+.aldryn-form label {
+  right: 0;
+}
+.cms_plugin .aldryn-form label,
+.cms-plugin .aldryn-form label {
+  right: 0.85rem;
 }
