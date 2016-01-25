@@ -118,6 +118,13 @@ SERVICE_LANGUAGE_CODES = {
     }
 }
 
+# Language names for CMS language picker; intentionally not translated
+MENU_LANGUAGE_NAMES = {
+    'ar': '&#x627;&#x644;&#x639;&#x631;&#x628;&#x64A;&#x629;',
+    'en': 'English',
+    'fr': 'Français',
+}
+
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
