@@ -33,14 +33,7 @@
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
-        {% if request.LANGUAGE_CODE == 'ar' %}
-        js.src = "//connect.facebook.net/ar_AR/sdk.js#xfbml=1&version=v2.5";
-        {% endif %}
-        {% if request.LANGUAGE_CODE == 'fr' %}
-        js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.5";
-        {% endif %}
-
+        js.src = "//connect.facebook.net/{{ request.LANGUAGE_CODE }}_{% if request.LANGUAGE_CODE == 'en' %}US{% else %}{{ request.LANGUAGE_CODE|upper }}{% endif %}/sdk.js#xfbml=1&version=v2.5";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
       </script>
