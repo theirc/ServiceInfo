@@ -2455,16 +2455,23 @@ table#report-table {
     position: absolute;
     bottom: 0;
     @{start}: 0;
-    height: 320px;
+    height: 380px;
     z-index: 98;
+    @media (min-width: 480px) {
+        height: 320px;
+    }
     @media (min-width: 640px) {
         width: 80%;
         margin-@{start}: 20%;
         background-color: #5A5A5A;
-        height: 180px;
+        height: 240px;
+    }
+    @media (min-width: 800px) {
+        height: 210px;
     }
     @media (min-width: 1000px) {
         width: 85%;
+        height: 190px;
         margin-@{start}: 15%;
         margin-top: 50px;
     }
@@ -2498,6 +2505,11 @@ table#report-table {
     .page-descr {
         letter-spacing: .05em;
         font-size: 1em;
+    }
+    .cms-link {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        display: inline-block;
     }
     #contact-icons > .icon {
         width: 32px;
