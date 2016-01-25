@@ -1,4 +1,4 @@
-{% load cms_tags menu_tags i18n %}
+{% load cms_tags menu_tags i18n si_cms_language_tags %}
 
 <div id="language-picker" class="modal">
   <div class="modal-content">
@@ -7,15 +7,7 @@
   <div class="modal-footer">
     {% for language in languages %}
       <a class="modal-action modal-close waves-effect waves-green btn" href="{% page_language_url language.0 %}" data-lang="{{ language.0 }}">
-        {% if language.0 == "ar" %}
-          &#x627;&#x644;&#x639;&#x631;&#x628;&#x64A;&#x629;
-        {% elif language.0 == "fr" %}
-          Français
-        {% elif language.0 == "en" %}
-          English
-        {% else %}
-          {{ language.0 }}
-        {% endif %}
+        {% menu_language_name language.0 %}
       </a>
     {% endfor %}
   </div>
