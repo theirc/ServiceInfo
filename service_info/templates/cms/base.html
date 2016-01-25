@@ -1,4 +1,4 @@
-{% load cms_tags staticfiles sekizai_tags menu_tags i18n %}
+{% load cms_tags staticfiles sekizai_tags menu_tags i18n si_cms_language_tags %}
 
 <!doctype html>
 <html>
@@ -33,7 +33,7 @@
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/{{ request.LANGUAGE_CODE }}_{% if request.LANGUAGE_CODE == 'en' %}US{% else %}{{ request.LANGUAGE_CODE|upper }}{% endif %}/sdk.js#xfbml=1&version=v2.5";
+        js.src = "//connect.facebook.net/{% service_language_code 'Facebook' %}/sdk.js#xfbml=1&version=v2.5";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
       </script>
@@ -120,7 +120,7 @@
             <a href="https://twitter.com/share"
                class="twitter-share-button"{count}
                data-via="ServiceinfoLB"
-               data-lang="{{ request.LANGUAGE_CODE }}">
+               data-lang="{% service_language_code 'Twitter' %}">
               Tweet
             </a>
             <script>

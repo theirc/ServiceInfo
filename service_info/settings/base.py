@@ -104,6 +104,20 @@ PARLER_LANGUAGES = {
     }
 }
 
+# Map Django language codes to the equivalent language code needed for a third-party service
+SERVICE_LANGUAGE_CODES = {
+    'facebook': {
+        'ar': 'ar_AR',
+        'en': 'en_US',
+        'fr': 'fr_FR',
+    },
+    'twitter': {
+        'ar': 'ar',
+        'en': 'en',
+        'fr': 'fr',
+    }
+}
+
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
