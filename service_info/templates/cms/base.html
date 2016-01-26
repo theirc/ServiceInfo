@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <meta property="og:url" content="{{ request.get_full_path }}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="{% page_attribute 'page_title' %}" />
-    <meta property="og:site_name" content="Service Info" />
-    <meta property="og:locale" content="{% service_language_code 'Facebook' %}" />
+    {% if request.current_page.ratingextension.include_rating %}
+      <meta property="og:url" content="{{ request.get_full_path }}" />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="{% page_attribute 'page_title' %}" />
+      <meta property="og:site_name" content="Service Info" />
+      <meta property="og:locale" content="{% service_language_code 'Facebook' %}" />
+    {% endif %}
     {% render_block "extra-meta" %}
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css"> -->
