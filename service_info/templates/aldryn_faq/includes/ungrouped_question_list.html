@@ -6,8 +6,8 @@
     <li>
         <div class="collapsible-header{% if forloop.first %} active{% endif %}">
             <div class="collapsible-header-wrap">
-                {% render_model question "title" %}
                 <i class="material-icons">info_outline</i>
+                <span>{% render_model question "title" %}</span>
             </div>
         </div>
         {% if view.config.app_data.config.show_description %}

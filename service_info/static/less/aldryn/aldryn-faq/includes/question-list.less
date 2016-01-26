@@ -1,3 +1,5 @@
+@import "../../../includes/flex.less";
+
 .aldryn-faq-list {
   .collapsible-body {
     padding: 2rem;
@@ -15,5 +17,21 @@
       padding: 0;
       margin-top: 1em;
     }
+  }
+}
+
+.collapsible-header-wrap {
+  .flex-layout();
+  .flex-direction(row);
+  .flex-wrap(nowrap);
+  .align-items(center);
+
+  > i {
+    .flex(0, 0, auto);
+  }
+
+  > span {
+    padding: 1rem 0;
+    line-height: 1.5rem;
   }
 }
