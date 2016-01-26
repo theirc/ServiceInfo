@@ -27,6 +27,12 @@ class RatingExtension(PageExtension):
 extension_pool.register(RatingExtension)
 
 
+class SocialMediaExtension(PageExtension):
+    include_social_media = models.BooleanField(default=False)
+
+extension_pool.register(SocialMediaExtension)
+
+
 class PageRating(models.Model):
     average_rating = models.IntegerField(default=0)
     num_ratings = models.IntegerField(default=0)

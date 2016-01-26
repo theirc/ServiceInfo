@@ -1,7 +1,7 @@
 from django.contrib import admin
 from cms.extensions import PageExtensionAdmin
 
-from .models import IconNameExtension, RatingExtension, PageRating
+from .models import IconNameExtension, RatingExtension, SocialMediaExtension, PageRating
 
 
 class IconNameExtensionAdmin(PageExtensionAdmin):
@@ -9,6 +9,10 @@ class IconNameExtensionAdmin(PageExtensionAdmin):
 
 
 class RatingExtensionAdmin(PageExtensionAdmin):
+    pass
+
+
+class SocialMediaExtensionAdmin(PageExtensionAdmin):
     pass
 
 
@@ -22,4 +26,5 @@ class PageRatingAdmin(admin.ModelAdmin):
 
 admin.site.register(IconNameExtension, IconNameExtensionAdmin)
 admin.site.register(RatingExtension, RatingExtensionAdmin)
+admin.site.register(SocialMediaExtension, SocialMediaExtensionAdmin)
 admin.site.register(PageRating, PageRatingAdmin)

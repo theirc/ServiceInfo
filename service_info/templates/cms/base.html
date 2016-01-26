@@ -1,4 +1,4 @@
-{% load cms_tags staticfiles sekizai_tags menu_tags i18n %}
+{% load cms_tags staticfiles sekizai_tags menu_tags i18n si_cms_language_tags %}
 
 <!doctype html>
 <html>
@@ -26,6 +26,18 @@
   </head>
   <body class="{% block body-class %}grey lighten-5{% endblock body-class %}">
     {% cms_toolbar %}
+
+    {% if request.current_page.socialmediaextension.include_social_media %}
+      <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/{% service_language_code 'Facebook' %}/sdk.js#xfbml=1&version=v2.5";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+      </script>
+    {% endif %}
 
     <header id="cms-header" class="{% block header-class %}{% endblock header-class %}">
       {% block header %}
@@ -95,6 +107,28 @@
         </section>
       {% endif %}
 
+      {% if request.current_page.socialmediaextension.include_social_media %}
+        <section id="social">
+          <div class="row">
+            <div class="fb-like"
+              data-href="{{ request.get_full_path }}"
+              data-layout="standard"
+              data-action="like"
+              data-show-faces="false"
+              data-share="false"></div>
+
+            <a href="https://twitter.com/share"
+               class="twitter-share-button"{count}
+               data-via="ServiceinfoLB"
+               data-lang="{% service_language_code 'Twitter' %}">
+              Tweet
+            </a>
+            <script>
+              !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+            </script>
+          </div>
+        </section>
+      {% endif %}
     </main>
 
     <footer id="cms-footer" class="{% block footer-class %}page-footer grey darken-3{% endblock footer-class %}">
