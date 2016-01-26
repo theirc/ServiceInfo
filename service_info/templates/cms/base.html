@@ -77,7 +77,7 @@
         {% endblock content %}
       {% endblock wrap-content %}
       {% if request.current_page.ratingextension.include_rating %}
-        <section class="row rating{% block rating-class %}{% endblock rating-class %}">
+        <section class="row rating {% block rating-class %}{% endblock rating-class %}">
           <form action="{% url 'update-page-rating' %}" method="POST" class="col s12 m8" id="page-rating">
             {% csrf_token %}
             <div class="card">
