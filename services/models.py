@@ -492,6 +492,10 @@ class Service(NameInCurrentLanguageMixin, models.Model):
     def get_api_url(self):
         return reverse('service-detail', args=[self.id])
 
+    def get_absolute_url(self):
+        """Used from CMS-related code to get backend view"""
+        return reverse('backend-service-detail', args=[self.id])
+
     def get_provider_fetch_url(self):
         # For convenience of the serializer
         return self.provider.get_fetch_url()
@@ -690,9 +694,6 @@ class Service(NameInCurrentLanguageMixin, models.Model):
             thumbnail = get_thumbnail(self.image, size, upscale=False, format=frmt, crop='center')
             return thumbnail.url
         return None
-
-    def get_absolute_url(self):
-        return '/{}/service'.format(self.id)
 
 
 class JiraUpdateRecord(models.Model):
