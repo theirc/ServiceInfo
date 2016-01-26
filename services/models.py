@@ -691,6 +691,9 @@ class Service(NameInCurrentLanguageMixin, models.Model):
             return thumbnail.url
         return None
 
+    def get_absolute_url(self):
+        return '/{}/service'.format(self.id)
+
 
 class JiraUpdateRecord(models.Model):
     service = models.ForeignKey(Service, blank=True, null=True, related_name='jira_records')
