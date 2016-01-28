@@ -85,6 +85,23 @@ jQuery(function ($) {
   });
 
   /*
+    Initialize calendar.
+  */
+  (function () {
+    var $calendar = $('.fullcalendar');
+    var key = $calendar.data('api-key');
+    var id = $calendar.data('calendar-id');
+    if (key && id) {
+      $calendar.fullCalendar({
+        googleCalendarApiKey: key
+        , events: {
+          googleCalendarId: id
+        }
+      });
+    }
+  })();
+
+  /*
     Set up captcha callback.
   */
   window.__submit_captcha__ = function () {
