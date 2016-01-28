@@ -28,6 +28,7 @@ service_info/static/css/site-ltr.css
 service_info/static/css/site-rtl.css
 service_info/static/css/site-mini-rtl.css
 service_info/static/css/materialize*
+service_info/static/css/fullcalendar*
 node_modules
 bundle_min.js
 feedback-help.hbs
