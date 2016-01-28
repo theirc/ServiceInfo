@@ -4,6 +4,14 @@
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    {% if request.current_page.ratingextension.include_rating %}
+      <meta property="og:url" content="{{ request.get_full_path }}" />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="{% page_attribute 'page_title' %}" />
+      <meta property="og:description" content="{% page_attribute meta_description %}" />
+      <meta property="og:site_name" content="Service Info" />
+      <meta property="og:locale" content="{% service_language_code 'Facebook' %}" />
+    {% endif %}
     {% render_block "extra-meta" %}
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css"> -->
@@ -70,7 +78,7 @@
         {% endblock content %}
       {% endblock wrap-content %}
       {% if request.current_page.ratingextension.include_rating %}
-        <section class="row rating">
+        <section class="row rating {% block rating-class %}{% endblock rating-class %}">
           <form action="{% url 'update-page-rating' %}" method="POST" class="col s12 m8" id="page-rating">
             {% csrf_token %}
             <div class="card">
@@ -110,22 +118,30 @@
       {% if request.current_page.socialmediaextension.include_social_media %}
         <section id="social">
           <div class="row">
-            <div class="fb-like"
-              data-href="{{ request.get_full_path }}"
-              data-layout="standard"
-              data-action="like"
-              data-show-faces="false"
-              data-share="false"></div>
+            <div class="col s6">
+              <div class="fb-like"
+                data-href="{{ request.get_full_path }}"
+                data-layout="standard"
+                data-action="like"
+                data-show-faces="false"
+                data-share="false"></div>
 
-            <a href="https://twitter.com/share"
-               class="twitter-share-button"{count}
-               data-via="ServiceinfoLB"
-               data-lang="{% service_language_code 'Twitter' %}">
-              Tweet
-            </a>
-            <script>
-              !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-            </script>
+              <div class="fb-share-button"
+                data-href="{{ request.get_full_path }}"
+                data-layout="button_count"></div>
+            </div>
+
+            <div class="col s6">
+              <a href="https://twitter.com/share"
+                 class="twitter-share-button"{count}
+                 data-via="ServiceinfoLB"
+                 data-lang="{% service_language_code 'Twitter' %}">
+                Tweet
+              </a>
+              <script>
+                !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+              </script>
+            </div>
           </div>
         </section>
       {% endif %}
