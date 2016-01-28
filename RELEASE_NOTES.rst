@@ -2,6 +2,17 @@ ServiceInfo
 
 Release Notes
 
+0.5.1 - Jan. 28, 2016
+---------------------
+
+* SC-107 Social sharing via Facebook and Twitter can now be easily enabled for a particular page (only "Like" for Facebook at this time)
+* SC-142 Links from front-end app to CMS
+* SC-42 Minimal page theme
+* SC-65 Upgrade to Django CMS 3.2.0
+* SC-34 Addition of aldryn-forms plugin
+* SC-144 Show menu icons for child menu entries
+* SC-114 Page rating feature
+
 0.5.0 - Jan. 20, 2016
 ---------------------
 

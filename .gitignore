@@ -23,8 +23,10 @@ frontend/styles/site-ltr.css
 frontend/styles/site-rtl.css
 service_info/static/js/dist/
 service_info/static/css/site.css
+service_info/static/css/site-mini.css
 service_info/static/css/site-ltr.css
 service_info/static/css/site-rtl.css
+service_info/static/css/site-mini-rtl.css
 service_info/static/css/materialize*
 node_modules
 bundle_min.js

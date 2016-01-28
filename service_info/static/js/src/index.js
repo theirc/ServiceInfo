@@ -53,9 +53,44 @@ jQuery(function ($) {
   $('.slider').slider({full_width: true});
 
   /*
+    Activate custom show-hide code.
+  */
+  $('.child-activate').click(function () {
+    var $this = $(this);
+
+    $this
+      .parent()
+      .next('.child-item')
+      .toggleClass('open')
+    ;
+  });
+
+  /*
+    Activate Materialize select inputs.
+  */
+  $('select').material_select();
+
+  /*
     Adjust for IE 11.
   */
   if (!isNaN(getInternetExplorerVersion())) {
     $('body').addClass('InternetExplorer');
+  }
+
+  /*
+    Bind to rating radio buttons.
+  */
+  $('#page-rating .stars label').click(function () {
+    $('#captcha-modal').openModal();
+  });
+
+  /*
+    Set up captcha callback.
+  */
+  window.__submit_captcha__ = function () {
+    setTimeout(function () {
+      $('#captcha-modal').closeModal();
+      $('#page-rating').submit();
+    }, 1500);
   }
 });

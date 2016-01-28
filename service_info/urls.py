@@ -24,6 +24,7 @@ NO_404_LOCALE_REDIRECTS = (re.compile(r'^/api/'),)
 urlpatterns = [
     url(r'^health/$', health_view),
     url(r'^api/', include(api.urls)),
+    url(r'^', include('service_info_cms.urls')),
     url(r'^password_reset/$', 'django.contrib.auth.views.password_reset', name='password_reset'),
     url(r'^password_reset/done/$', 'django.contrib.auth.views.password_reset_done',
         name='password_reset_done'),
@@ -34,6 +35,7 @@ urlpatterns = [
         name='password_reset_complete'),
     url(r'^export/(?P<signature>.*)/$', export_view, name='export'),
     url(r'^logout/$', logout_view, name='logout'),
+    url(r'^captcha/', include('captcha.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

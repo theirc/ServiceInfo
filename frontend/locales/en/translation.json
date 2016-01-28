@@ -8,6 +8,7 @@
   "Menu": {
     "Menu-Toggle": "MENU",
     "Home": "Home",
+    "Service-Info": "Services",
     "Login": "Login",
     "Logout": "Logout",
     "Services": "Manage Services",
@@ -430,7 +431,8 @@
     "Contact": {
       "Title": "Reach Us",
       "Paragraph": "Contact us on one of our social networks below or drop us a mail at"
-    }
+    },
+    "Information-Portal": "Information Portal"
   },
   "Feedback-Form": {
     "Title": "Feedback form",
