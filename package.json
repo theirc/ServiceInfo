@@ -9,6 +9,7 @@
     "backbone": "=1.2.0",
     "browserify": "^8.0.2",
     "es6-promise": "^2.0.1",
+    "fullcalendar": "^2.6.0",
     "handlebars": "^2.0.0",
     "hbsfy": "^2.2.1",
     "i18next-client": ">=1.7.7 <1.8.0",

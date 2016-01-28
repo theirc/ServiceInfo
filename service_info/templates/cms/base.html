@@ -4,11 +4,14 @@
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <meta property="og:url" content="{{ request.get_full_path }}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="{% page_attribute 'page_title' %}" />
-    <meta property="og:site_name" content="Service Info" />
-    <meta property="og:locale" content="{% service_language_code 'Facebook' %}" />
+    {% if request.current_page.ratingextension.include_rating %}
+      <meta property="og:url" content="{{ request.get_full_path }}" />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="{% page_attribute 'page_title' %}" />
+      <meta property="og:description" content="{% page_attribute meta_description %}" />
+      <meta property="og:site_name" content="Service Info" />
+      <meta property="og:locale" content="{% service_language_code 'Facebook' %}" />
+    {% endif %}
     {% render_block "extra-meta" %}
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css"> -->
@@ -17,7 +20,10 @@
     {% else %}
       <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
     {% endif %}
+    <link href="{% static 'css/fullcalendar.min.css' %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="shortcut icon" href="{% static 'images/sm-favicon.png' %}">
 
     {% if request.LANGUAGE_CODE == 'ar' %}
       <link href="{% static 'css/site-rtl.css' %}" rel="stylesheet">
@@ -75,7 +81,7 @@
         {% endblock content %}
       {% endblock wrap-content %}
       {% if request.current_page.ratingextension.include_rating %}
-        <section class="row rating{% block rating-class %}{% endblock rating-class %}">
+        <section class="row rating {% block rating-class %}{% endblock rating-class %}">
           <form action="{% url 'update-page-rating' %}" method="POST" class="col s12 m8" id="page-rating">
             {% csrf_token %}
             <div class="card">
@@ -197,6 +203,13 @@
 
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="{% static 'moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'fullcalendar/dist/fullcalendar.min.js' %}"></script>
+    {% if request.LANGUAGE_CODE != 'en' %}
+      {% with 'fullcalendar/dist/lang/'|add:request.LANGUAGE_CODE|add:'.js' as calendar_lg %}
+        <script src="{% static calendar_lg %}"></script>
+      {% endwith %}
+    {% endif %}
     <script src="{% static 'js/dist/bundle.js' %}"></script>
     <script src="https://www.google.com/recaptcha/api.js?hl={{ request.LANGUAGE_CODE }}" async defer></script>
     {% render_block "js" %}

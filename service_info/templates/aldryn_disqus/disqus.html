@@ -1,0 +1,22 @@
+{% load sekizai_tags %}
+
+<div id="disqus_thread"></div>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+{% addtoblock "js" %}
+    <script type="text/javascript">
+        var disqus_shortname = '{{ DISQUS_SHORTNAME }}';
+        var disqus_identifier = '{{ instance.page.pk }}';
+        var disqus_title = '{{ instance.page.get_page_title|escapejs }}';
+        var disqus_config = function () {
+            this.language = '{{ request.LANGUAGE_CODE }}';
+        };
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http{% if request.is_secure %}s{% endif %}://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+{% endaddtoblock %}
