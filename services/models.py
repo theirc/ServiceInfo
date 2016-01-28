@@ -493,8 +493,9 @@ class Service(NameInCurrentLanguageMixin, models.Model):
         return reverse('service-detail', args=[self.id])
 
     def get_absolute_url(self):
-        """Used from CMS-related code to get backend view"""
-        return reverse('backend-service-detail', args=[self.id])
+        """Used from CMS-related code to get app view"""
+        # FIXME!!!
+        return '/app/index.html#/service/%d' % self.id
 
     def get_provider_fetch_url(self):
         # For convenience of the serializer
