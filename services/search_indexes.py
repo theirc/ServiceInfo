@@ -8,23 +8,26 @@ class ServiceIndex(get_index_base()):
     index_title = True
 
     def get_title(self, obj):
-        # XXX what about language?  concatenate all available languages?
-        return obj.name_en
+        return obj.name
 
     def get_index_queryset(self, language):
-        # XXX exclude objects with blank name for the selected language, not simply for EN
-        return Service.objects.filter(status=Service.STATUS_CURRENT).exclude(name_en='')
+        # For this language's index, don't include services with no name
+        # provided in this language.
+        return Service.objects.filter(status=Service.STATUS_CURRENT).exclude(**{
+            'name_%s' % language: ''
+        })
 
     def get_model(self):
         return Service
 
     def get_search_data(self, service, language, request):
-        # XXX return data for the selected language, not simply for EN
+        description = getattr(service, 'description_%s' % language, '')
+        additional_info = getattr(service, 'additional_info_%s' % language, '')
         return ' '.join((
-            service.provider.name_en,
-            service.name_en,
-            service.area_of_service.name_en,
-            service.description_en,
-            service.additional_info_en,
-            service.type.name_en,
+            service.provider.name,
+            service.name,
+            service.area_of_service.name,
+            description,
+            additional_info,
+            service.type.name,
         ))
