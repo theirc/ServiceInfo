@@ -20,7 +20,7 @@
     {% else %}
       <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
     {% endif %}
-    <link href="{% static 'css/fullcalendar.min.css' %}" rel="stylesheet">
+    <link href="{% static 'fullcalendar/dist/fullcalendar.min.css' %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link rel="shortcut icon" href="{% static 'images/sm-favicon.png' %}">
@@ -112,6 +112,16 @@
                 <div class="g-recaptcha" data-sitekey="{{ CAPTCHA_SITEKEY }}"
                      data-callback="__submit_captcha__"
                 ></div>
+              </div>
+            </div>
+
+            <div class="modal" id="rating-fail-modal">
+              <div class="modal-content">
+                <h4>{% trans "Error submitting rating" %}</h4>
+                <p>{% blocktrans %}
+                  There was an error submitting your page rating.
+                  Please check your connection and try again.
+                {% endblocktrans %}</p>
               </div>
             </div>
           </form>
