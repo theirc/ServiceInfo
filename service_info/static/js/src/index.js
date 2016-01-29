@@ -23,6 +23,9 @@ function getInternetExplorerVersion () {
 
 jQuery(function ($) {
 
+  var page_id = $('input[name="page_id"]').val();
+  var page_ratings = JSON.parse(localStorage.getItem('page_ratings') || '{}');
+
   /*
     Activate Materialize mobile menu.
   */
@@ -85,6 +88,18 @@ jQuery(function ($) {
   });
 
   /*
+    Check for existing rating value and set buttons
+    accordingly.
+  */
+
+  if (typeof page_ratings[page_id] !== 'undefined') {
+    $('input:radio[name="rating"]')
+      .filter('[value="' + page_ratings[page_id] + '"]')
+      .prop('checked', true)
+    ;
+  }
+
+  /*
     Initialize calendar.
   */
   (function () {
@@ -105,9 +120,23 @@ jQuery(function ($) {
     Set up captcha callback.
   */
   window.__submit_captcha__ = function () {
+    var $rating = $('#page-rating');
+
     setTimeout(function () {
       $('#captcha-modal').closeModal();
-      $('#page-rating').submit();
     }, 1500);
+
+    console.log($rating.serialize());
+
+    $.post($rating.attr('action'), $rating.serialize())
+     .fail(function () {
+       $('#rating-fail-modal').openModal();
+     })
+     .done(function () {
+       var value = $rating.find('input:radio[name="rating"]:checked').val();
+       page_ratings[page_id] = value;
+       localStorage.setItem('page_ratings', JSON.stringify(page_ratings));
+     })
+    ;
   }
 });

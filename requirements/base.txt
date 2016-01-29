@@ -63,7 +63,8 @@ aldryn-faq==1.0.11
       URLObject==2.4.0
     django-standard-form==1.1.1
       # django-classy-tags
-    aldryn-common==1.0.0
+    # Has Py3K issue with pagination: aldryn-common==1.0.0
+    git+git://github.com/caktus/aldryn-common.git@d8287f8863744f3279fc89e55405f13c59ad20dc#egg=aldryn-common
       # aldry-boilerplates
       # django-sortedm2m
   aldryn-translation-tools==0.2.1
