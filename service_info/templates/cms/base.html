@@ -114,6 +114,16 @@
                 ></div>
               </div>
             </div>
+
+            <div class="modal" id="rating-fail-modal">
+              <div class="modal-content">
+                <h4>{% trans "Error submitting rating" %}</h4>
+                <p>{% blocktrans %}
+                  There was an error submitting your page rating.
+                  Please check your connection and try again.
+                {% endblocktrans %}</p>
+              </div>
+            </div>
           </form>
         </section>
       {% endif %}
