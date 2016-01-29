@@ -208,7 +208,7 @@ class FeedbackTest(TestCase):
         self.assertIn('non_delivery_explained', e.exception.message_dict)
 
 
-def RequestForServiceTest(TestCase):
+class RequestForServiceTest(TestCase):
     def test_good_validation(self):
         # Factory ought to create a valid instance
         rfs = RequestForServiceFactory()
