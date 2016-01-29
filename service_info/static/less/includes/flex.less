@@ -102,6 +102,12 @@
         -ms-flex-pack: start;
             justify-content: @justify;
 }
+.justify-content (@justify) when (@justify = flex-start-rtl) {
+    -webkit-box-pack: start/*rtl:end*/;
+    -webkit-justify-content: flex-start/*rtl:flex-end*/;
+        -ms-flex-pack: start/*rtl:end*/;
+            justify-content: flex-start/*rtl:flex-end*/;
+}
 .justify-content (@justify) when (@justify = flex-end) {
     -webkit-box-pack: end;
     -webkit-justify-content: @justify;
