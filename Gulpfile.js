@@ -109,7 +109,26 @@ gulp.task('compile_less_cms_materialize', function () {
     .pipe(rename({ suffix: '-rtl' }))
     .pipe(gulp.dest('service_info/static/css'))
   ;
-})
+});
+
+gulp.task('copy_legacy_dependencies', function () {
+  var legacy_dirs = [
+    /*
+      Pairs specifying dependencies to copy:
+        1. path (relative to project root) of dependencies to use as src
+        2. path (relative to service_info/static/lib/) to use as dest
+    */
+    ['node_modules/fullcalendar/**/*', 'fullcalendar']
+    , ['node_modules/fullcalendar/node_modules/moment/**/*', 'moment']
+  ];
+
+  legacy_dirs.forEach(function (src_dest) {
+    gulp.src(src_dest[0])
+      .pipe(gulp.dest('service_info/static/lib/' + src_dest[1]))
+    ;
+
+  });
+});
 
 gulp.task('compile_less', [
   options.app ? 'compile_less_app' : 'noop'
@@ -223,7 +242,7 @@ gulp.task('closure', [
   , options.cms ? 'closure_cms' : 'noop'
 ], function() {});
 
-gulp.task('build', ['closure', 'compile_less', 'injectEnvConfig'], function(){});
+gulp.task('build', ['closure', 'compile_less', 'injectEnvConfig', 'copy_legacy_dependencies'], function(){});
 
 // Notifies livereload of changes detected
 // by `gulp.watch()`

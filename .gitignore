@@ -21,6 +21,7 @@ frontend/config.json
 frontend/styles/site.css
 frontend/styles/site-ltr.css
 frontend/styles/site-rtl.css
+service_info/static/lib/
 service_info/static/js/dist/
 service_info/static/css/site.css
 service_info/static/css/site-mini.css
