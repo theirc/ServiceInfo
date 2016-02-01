@@ -15,7 +15,7 @@ from sorl.thumbnail.shortcuts import get_thumbnail
 
 from . import jira_support
 from .tasks import email_provider_about_service_approval_task
-from .utils import absolute_url
+from .utils import absolute_url, get_path_to_service
 
 
 class NameInCurrentLanguageMixin(object):
@@ -491,6 +491,10 @@ class Service(NameInCurrentLanguageMixin, models.Model):
 
     def get_api_url(self):
         return reverse('service-detail', args=[self.id])
+
+    def get_absolute_url(self):
+        """Called from CMS-related code to get app view from a search hit"""
+        return get_path_to_service(self.id)
 
     def get_provider_fetch_url(self):
         # For convenience of the serializer

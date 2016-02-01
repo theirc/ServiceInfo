@@ -66,6 +66,11 @@ def absolute_url(path):
     return '%s://%s%s' % (scheme, site.domain, path)
 
 
+def get_path_to_service(service_id):
+    """In lieu of a url-reversing mechanism for routes in the app"""
+    return '/app/index.html#/service/%d' % service_id
+
+
 def update_postgres_sequence_generator(model, db='default'):
     """
     Update the sequence generator for a model's primary key
