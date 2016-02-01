@@ -2,6 +2,19 @@ ServiceInfo
 
 Release Notes
 
+0.5.2 - Feb. 1, 2016
+--------------------
+
+* Resolve misalignment of menu icons
+* SC-148 - Allow large tables to be scrolled on mobile
+* Add Facebook share feature
+* SC-86 - Allow searching of services
+* Fullcalendar widget added to improve calendar display and responsiveness
+* Improve ratings submission: ratings submission mechanism tweaked to eliminate page reloads and save page ratings between visits
+* SC-149 - Resolve problem with language buttons in IE
+* Use ServiceInfo logo as favicon
+* Disqus localization: Disqus plugin now correctly detects page's language
+
 0.5.1 - Jan. 28, 2016
 ---------------------
 
