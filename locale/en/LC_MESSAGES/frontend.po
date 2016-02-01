@@ -18,6 +18,9 @@ msgstr "MENU"
 msgid "Menu##Home"
 msgstr "Home"
 
+msgid "Menu##Service-Info"
+msgstr "Services"
+
 msgid "Menu##Login"
 msgstr "Login"
 
@@ -701,6 +704,9 @@ msgstr "Reach Us"
 
 msgid "Footer##Contact##Paragraph"
 msgstr "Contact us on one of our social networks below or drop us a mail at"
+
+msgid "Footer##Information-Portal"
+msgstr "Information Portal"
 
 msgid "Feedback-Form##Title"
 msgstr "Feedback form"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-13 19:04+0200\n"
+"POT-Creation-Date: 2016-02-01 21:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -290,6 +290,23 @@ msgstr ""
 msgid "Back to Overview"
 msgstr ""
 
+#, python-format
+msgid "Form name: %(form_name)s"
+msgstr ""
+
+#, python-format
+msgid "[Form submission] %(form_name)s"
+msgstr ""
+
+msgid "Upload"
+msgstr ""
+
+#, python-format
+msgid ""
+"Thank you for submitting your information, you will be <a href="
+"\"%(form_success_url)s\">redirected shortly</a>."
+msgstr ""
+
 msgid "Previous"
 msgstr ""
 
@@ -340,10 +357,13 @@ msgstr ""
 msgid "results"
 msgstr ""
 
-msgid "Search for Services Nearby"
+msgid "Rate This Page"
 msgstr ""
 
-msgid "Services"
+msgid "Captcha Verification"
+msgstr ""
+
+msgid "Search for Services Nearby"
 msgstr ""
 
 msgid "International Rescue Committee Information Portal"
@@ -362,6 +382,19 @@ msgid "IRC Info Portal"
 msgstr ""
 
 msgid "Created by the IRC"
+msgstr ""
+
+msgid "Error submitting rating"
+msgstr ""
+
+msgid ""
+"\n"
+"                  There was an error submitting your page rating.\n"
+"                  Please check your connection and try again.\n"
+"                "
+msgstr ""
+
+msgid "Services"
 msgstr ""
 
 msgid "Choose Language"
@@ -416,6 +449,12 @@ msgid ""
 msgstr ""
 
 msgid "Set icon for page"
+msgstr ""
+
+msgid "Allow ratings for page"
+msgstr ""
+
+msgid "Include social media for page"
 msgstr ""
 
 msgid "Materialize icon name"
