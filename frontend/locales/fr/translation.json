@@ -8,6 +8,7 @@
     "Menu": {
         "Menu-Toggle": "Menu",
         "Home": "Principale",
+        "Service-Info": "",
         "Login": "Login",
         "Logout": "Logout",
         "Services": "Gérer les services",
@@ -415,7 +416,8 @@
         "Contact": {
             "Title": "Contactez nous",
             "Paragraph": "Contactez-nous sur l'un de nos réseaux sociaux ci-dessous ou à nous envoyer un mail à"
-        }
+        },
+        "Information-Portal": ""
     },
     "Feedback-Form": {
         "Title": "Outil de Commentaire",
