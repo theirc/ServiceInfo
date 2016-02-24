@@ -126,8 +126,6 @@ jQuery(function ($) {
       $('#captcha-modal').closeModal();
     }, 1500);
 
-    console.log($rating.serialize());
-
     $.post($rating.attr('action'), $rating.serialize())
      .fail(function () {
        $('#rating-fail-modal').openModal();
