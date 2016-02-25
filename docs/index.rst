@@ -40,8 +40,6 @@ Contents:
    import_export
    lifecycle
    translation
-   provisioning
-   server-setup
 
 
 Indices and tables
