@@ -13,7 +13,7 @@ class Command(BaseCommand):
     args = '< --from original_site_domain --to new_site_domain | --list >'
 
     option_list = BaseCommand.option_list + (
-        make_option('--from', default=None,
+        make_option('--from', default=None, dest='orig',
                     help='Domain of original site'),
         make_option('--to', default=None,
                     help='Domain of new site'),
@@ -28,7 +28,7 @@ class Command(BaseCommand):
                 self.stdout.write('  {0}\n'.format(site))
             return
 
-        from_site_domain = options['from']
+        from_site_domain = options['orig']
         to_site_domain = options['to']
 
         if not from_site_domain or not to_site_domain:
