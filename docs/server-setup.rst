@@ -62,7 +62,7 @@ New server on AWS
  * Put it in a region close to where most users will be, e.g. Ireland (eu-west-1).
    (To switch regions in the AWS EC2 console, look near the top-right of the window for
    a light-gray selector on a black background.)
- * Use an AMI (image) of Ubuntu 12.04 server, 64-bit, EBS - e.g. ubuntu-trusty-14.04-amd64-server-20140927 (ami-b83c0aa5)
+ * Use an AMI (image) of Ubuntu 14.04 server, 64-bit, EBS - e.g. ubuntu-trusty-14.04-amd64-server-20140927 (ami-b83c0aa5)
  * Be sure to save the private key that is created, or use
    an existing one you already own. (Caktus: key pairs are stored
    in LastPass, search for CTS.) The AWS private key is only
