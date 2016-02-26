@@ -14,62 +14,23 @@ This project is deployed on the following stack.
 - Frontend Server: Nginx
 - Cache: Memcached
 
-These services can configured to run together on a single machine or on different machines.
+These services can be configured to run together on a single machine or on different machines.
 `Supervisord <http://supervisord.org/>`_ manages the application server process.
 
+We've used this AWS AMI::
+
+    ubuntu-trusty-14.04-amd64-server-20140927 (ami-b83c0aa5)
 
 Initial Setup
 ------------------------
 
-Before your project can be deployed to a server, the code needs to be
-accessible in a git repository. Once that is done you should update
-``conf/pillar/<environment>/env.sls`` to set the repo and branch for the environment.
-E.g., change this::
-
-    # FIXME: Update to the correct project repo
-    repo:
-      url: git@github.com:CHANGEME/CHANGEME.git
-      branch: master
-
-to this::
-
-    repo:
-      url: git@github.com:account/reponame.git
-      branch: master
-
-The repo will also need a deployment key generated so that the Salt minion can
-access the repository. You can generate a deployment key locally for the new
-server like so::
-
-    ssh-keygen -t rsa -b 4096 -f <servername>
-
-This will generate two files named ``<servername>`` and ``<servername>.pub``.
-The first file contains the private key and the second file contains the public
-key. The public key needs to be added to the "Deploy keys" in the GitHub repository.
-For more information, see the Github docs on managing deploy keys:
-https://help.github.com/articles/managing-deploy-keys
-
-The text in the private key file should be added to `conf/pillar/<environment>/secrets.sls``
-under the label `github_deploy_key`, e.g.::
-
-    github_deploy_key: |
-      -----BEGIN RSA PRIVATE KEY-----
-      foobar
-      -----END RSA PRIVATE KEY-----
-
-There will be more information on the secrets in a later section. You may choose
-to include the public SSH key inside the repo itself as well, but this is not
-strictly required.
-
-You also need to set ``project_name`` and ``python_version`` in ``conf/pillar/project.sls``.
-Currently we support using Python 2.7 or Python 3.3. The project template is set up for 2.7 by
-default. If you want to use 3.3, you will need to change ``python_version`` and make a few changes
-to requirements. In ``requirements/production.txt``, change python-memcached to python3-memcached.
-In ``requirements/dev.txt``, remove Fabric and all its dependencies. Instead you will need Fabric
+This project uses Python 3.3.  Because Fabric does not support Python 3, you will need Fabric
 installed on your laptop "globally" so that when you run ``fab``, it will not be found in your
-virtualenv, but will then be found in your global environment.
+virtualenv, but will then be found in your global environment::
 
-For the environment you want to setup you will need to set the ``domain`` in
+    sudo pip install fabric
+
+For the environment you want to setup, you will need to set the ``domain`` in
 ``conf/pillar/<environment>/env.sls``.
 
 You will also need add the developer's user names and SSH keys to ``conf/pillar/devs.sls``. Each
@@ -111,7 +72,7 @@ Environment Variables
 ------------------------
 
 Other environment variables which need to be configured but aren't secret can be added
-to the ``env`` dictionary in ``conf/pillar/<environment>/env.sls``:
+to the ``env`` dictionary in ``conf/pillar/<environment>/env.sls``::
 
   # Additional public environment variables to set for the project
   env:
@@ -146,13 +107,18 @@ a single Master which manages both staging and production. The master is configu
 You will need to be able to connect to the server as a root user.
 How this is done will depend on where the server is hosted.
 VPS providers such as Linode will give you a username/password combination. Amazon's
-EC2 uses a private key. These credentials will be passed as command line arguments.::
+EC2 uses a private key. These credentials will be passed as command line arguments.
 
-    # Template of the command
+Template of the command::
+
     fab -H <fresh-server-ip> -u <root-user> setup_master
-    # Example of provisioning 33.33.33.10 as the Salt Master
+
+Example of provisioning 33.33.33.10 as the Salt Master::
+
     fab -H 33.33.33.10 -u root setup_master
-    # Example AWS setup
+
+Example AWS setup::
+
     fab -H 54.235.72.124 -u ubuntu -i ~/.ssh/caktus-deployment.pem setup_master
 
 This will install salt-master and update the master configuration file. The master will use a
@@ -196,14 +162,17 @@ as a root user. This is to install the Salt Minion which will connect to the Mas
 to complete the provisioning. To setup a minion you call the Fabric command::
 
     fab <environment> setup_minion:<roles> -H <ip-of-new-server> -u <root-user>
-    fab staging setup_minion:web,balancer,db-master,cache -H  33.33.33.10 -u root
+    fab staging setup_minion:web,balancer,cache -H  33.33.33.10 -u root
     # Example AWS setup
-    fab staging setup_minion:web,balancer,db-master,cache,queue,worker -H 54.235.72.124
+    fab staging setup_minion:web,balancer,cache,queue,worker -H 54.235.72.124
 
-The available roles are ``salt-master``, ``web``, ``worker``, ``balancer``, ``db-master``,
+The available roles are ``salt-master``, ``web``, ``worker``, ``balancer``,
 ``queue`` and ``cache``. If you are running everything on a single server you need to enable
-the ``web``, ``balancer``, ``db-master``, and ``cache`` roles. The ``worker``
+the ``web``, ``balancer``, and ``cache`` roles. The ``worker``
 and ``queue`` roles are only needed to run Celery which is explained in more detail later.
+
+The IRC deploy uses a database on another server, so a ``db-master`` role is not
+needed.
 
 Additional roles can be added later to a server via ``add_role``. Note that there is no
 corresponding ``delete_role`` command because deleting a role does not disable the services or
@@ -314,5 +283,5 @@ match the domain for which the certificate is going to be deployed (i.e example.
 
 This signing request (.csr) will be handed off to a trusted Certificate Authority (CA) such as
 StartSSL, NameCheap, GoDaddy, etc. to purchase the signed certificate. The contents of
-the *.key file will be added to the ``ssl_key`` pillar and the signed certificate
+the ``*.key`` file will be added to the ``ssl_key`` pillar and the signed certificate
 from the CA will be added to the ``ssl_cert`` pillar.

@@ -23,6 +23,7 @@ script:
 - coverage run manage.py test
 - coverage report -m --fail-under 60
 - flake8 .
+- (cd docs; make html)
 notifications:
   email:
   - servicemap-team@caktusgroup.com
