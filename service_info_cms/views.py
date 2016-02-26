@@ -46,7 +46,7 @@ def verify_captcha(secret, response, remoteip=None):
         if not result['success']:
             logger.error('Google reCAPTCHA -> %s', r.content)
             return False
-    except:
+    except Exception:
         logger.exception('Error fetching or parsing Google reCAPTCHA verification')
         return False
 
