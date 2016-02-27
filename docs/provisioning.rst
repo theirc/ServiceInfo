@@ -285,3 +285,16 @@ This signing request (.csr) will be handed off to a trusted Certificate Authorit
 StartSSL, NameCheap, GoDaddy, etc. to purchase the signed certificate. The contents of
 the ``*.key`` file will be added to the ``ssl_key`` pillar and the signed certificate
 from the CA will be added to the ``ssl_cert`` pillar.
+
+
+Copying production database and media to staging
+________________________________________________
+
+The server should be stopped before performing this procedure and restarted
+afterwards.  The procedure uses commands in the ServiceInfo-ircdeploy repository::
+
+    $ cd ServiceInfo-ircdeploy
+    $ workon virtualenv-with-fab
+    $ fab staging refresh_environment
+    $ fab staging "manage_run:change_cms_site --from=serviceinfo.rescue.org --to=serviceinfo-staging.rescue.org"
+    $ fab staging "manage_run:rebuild_index --noinput"
