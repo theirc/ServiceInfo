@@ -7,10 +7,16 @@
     <section class="row main-content">
         <div class="col s12 m9 main-column {% block main-column-class %}{% endblock main-column-class %}">
             {% block content %}
+                <section>
+                    {% placeholder "content" %}
+                </section>
             {% endblock content %}
         </div>
         <div class="col s12 m3 secondary-column {% block secondary-column-class %}{% endblock secondary-column-class %}">
             {% block sidebar-content %}
+                <section>
+                    {% placeholder "sidebar_content" %}
+                </section>
             {% endblock sidebar-content %}
         </div>
     </section>

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-13 19:04+0200\n"
-"PO-Revision-Date: 2016-01-13 17:05+0000\n"
+"POT-Creation-Date: 2016-02-01 21:44+0200\n"
+"PO-Revision-Date: 2016-02-01 19:40+0000\n"
 "Last-Translator: Jeff Trawick\n"
 "Language-Team: French (http://www.transifex.com/irc/service-mapper/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -291,6 +291,23 @@ msgstr ""
 msgid "Back to Overview"
 msgstr ""
 
+#, python-format
+msgid "Form name: %(form_name)s"
+msgstr ""
+
+#, python-format
+msgid "[Form submission] %(form_name)s"
+msgstr ""
+
+msgid "Upload"
+msgstr ""
+
+#, python-format
+msgid ""
+"Thank you for submitting your information, you will be <a "
+"href=\"%(form_success_url)s\">redirected shortly</a>."
+msgstr ""
+
 msgid "Previous"
 msgstr ""
 
@@ -341,10 +358,13 @@ msgstr ""
 msgid "results"
 msgstr ""
 
-msgid "Search for Services Nearby"
+msgid "Rate This Page"
 msgstr ""
 
-msgid "Services"
+msgid "Captcha Verification"
+msgstr ""
+
+msgid "Search for Services Nearby"
 msgstr ""
 
 msgid "International Rescue Committee Information Portal"
@@ -363,6 +383,19 @@ msgid "IRC Info Portal"
 msgstr ""
 
 msgid "Created by the IRC"
+msgstr ""
+
+msgid "Error submitting rating"
+msgstr ""
+
+msgid ""
+"\n"
+"                  There was an error submitting your page rating.\n"
+"                  Please check your connection and try again.\n"
+"                "
+msgstr ""
+
+msgid "Services"
 msgstr ""
 
 msgid "Choose Language"
@@ -413,6 +446,12 @@ msgid ""
 msgstr "Vous pouvez saisir une adresse, un nom de lieu, ou même une latitude et la longitude dans la boîte de recherche (par exemple \"33,8869, 35,5131\")."
 
 msgid "Set icon for page"
+msgstr ""
+
+msgid "Allow ratings for page"
+msgstr ""
+
+msgid "Include social media for page"
 msgstr ""
 
 msgid "Materialize icon name"

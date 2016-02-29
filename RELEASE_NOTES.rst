@@ -2,6 +2,18 @@ ServiceInfo
 
 Release Notes
 
+0.5.3 - Feb. 29, 2016
+---------------------
+
+* SC-152 - Fix issue in reCAPTCHA validation
+* SC-151 - Use official aldryn-common package instead of Caktus fork
+* SC-119 (partial) - Add management command to update site association of
+  CMS pages, for using a database on one site on a different site
+* Add infrastructure for generating documentation for RTD
+* Add placeholders to "wide (two column)" template
+* Fix styling issue
+* Update translations from Transifex
+
 0.5.2 - Feb. 1, 2016
 --------------------
 

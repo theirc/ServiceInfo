@@ -87,12 +87,6 @@ If you need Python 3.4 installed on Ubuntu, you can use this PPA::
     sudo apt-get update
     sudo apt-get install python3.4-dev
 
-The tool that we use to deploy code is called `Fabric
-<http://docs.fabfile.org/>`_, which is not yet Python 3.x compatible. So,
-we need to install that globally in our Python 2.x environment::
-
-    sudo pip install fabric==1.10.1
-
 To setup your local environment you should create a virtualenv and install the
 necessary requirements::
 

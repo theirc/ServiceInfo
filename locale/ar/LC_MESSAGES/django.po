@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ServiceInfo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-13 19:04+0200\n"
-"PO-Revision-Date: 2016-01-14 14:28+0000\n"
+"POT-Creation-Date: 2016-02-01 21:44+0200\n"
+"PO-Revision-Date: 2016-02-02 08:06+0000\n"
 "Last-Translator: Omar Meksassi <omar.meksassi@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/irc/service-mapper/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -293,6 +293,23 @@ msgstr "عودة إلى صفحة الفئة"
 msgid "Back to Overview"
 msgstr "العودة إلى النظرة الشاملة"
 
+#, python-format
+msgid "Form name: %(form_name)s"
+msgstr "Form submission %(form_name)s"
+
+#, python-format
+msgid "[Form submission] %(form_name)s"
+msgstr "[Form submission] %(form_name)s"
+
+msgid "Upload"
+msgstr "الرفع"
+
+#, python-format
+msgid ""
+"Thank you for submitting your information, you will be <a "
+"href=\"%(form_success_url)s\">redirected shortly</a>."
+msgstr "Thank you for submitting our information, you will be <a href=\"%(form_success_url)s\">redirected shortly</a>."
+
 msgid "Previous"
 msgstr "سابق"
 
@@ -343,11 +360,14 @@ msgstr "لا توجد نتائج ل"
 msgid "results"
 msgstr "النتائج"
 
+msgid "Rate This Page"
+msgstr "قيم هذه الصفحة"
+
+msgid "Captcha Verification"
+msgstr "التحقق من Captcha"
+
 msgid "Search for Services Nearby"
 msgstr "بحث عن خدمات قريبة"
-
-msgid "Services"
-msgstr "الخدمات"
 
 msgid "International Rescue Committee Information Portal"
 msgstr "بوابة المعلومات لجنة الإنقاذ الدولية "
@@ -366,6 +386,19 @@ msgstr "بوابة المعلومات لجنة الإنقاذ الدولية "
 
 msgid "Created by the IRC"
 msgstr "مدعومة من لجنة الإنقاذ الدولية "
+
+msgid "Error submitting rating"
+msgstr "الخطأ تصنيف المقدمة"
+
+msgid ""
+"\n"
+"                  There was an error submitting your page rating.\n"
+"                  Please check your connection and try again.\n"
+"                "
+msgstr "\nThere was an error submitting your page rating.\nPlease check your connection and try again."
+
+msgid "Services"
+msgstr "الخدمات"
 
 msgid "Choose Language"
 msgstr "اختر اللغة"
@@ -416,6 +449,12 @@ msgstr "يمكنك كتابة عنوان، اسم مكان، أو حتى خطو�
 
 msgid "Set icon for page"
 msgstr "تعيين رمز الصفحة"
+
+msgid "Allow ratings for page"
+msgstr "السماح تصنيفات الصفحة"
+
+msgid "Include social media for page"
+msgstr "شمل وسائل الاعلام الاجتماعية لصفحة"
 
 msgid "Materialize icon name"
 msgstr "رمز"
