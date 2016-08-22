@@ -36,11 +36,14 @@ from django.core import management
 #     - Alter field form_template on formplugin
 #     - Alter field redirect_type on formplugin
 #     - Alter field language on formsubmission
-#
+# Migrations for 'djangocms_snippet':
+#   0006_auto_20160823_0131.py:
+#     - Alter field slug on snippet#
 # $ python manage.py sqlmigrate aldryn_faq 0011
 # $ python manage.py sqlmigrate email_notifications 0002
 # $ python manage.py sqlmigrate aldryn_newsblog 0009
 # $ python manage.py sqlmigrate aldryn_forms 0005
+# $ python manage.py sqlmigrate djangocms_snippet 0006
 # $
 #
 # If this is a third-party package and the "missing" migration doesn't affect
@@ -88,6 +91,16 @@ EXPECTED_CHANGES = {
         #     preserve_default=True,
         # ),
         '- Alter field template_prefix on newsblogconfig',
+    ],
+    'djangocms_snippet': [
+        # This is Py3K-izing default=b''
+        # migrations.AlterField(
+        #     model_name='snippet',
+        #     name='slug',
+        #     field=models.SlugField(max_length=75, default='', verbose_name='slug', unique=True),
+        #     preserve_default=True,
+        # ),
+        '- Alter field slug on snippet',
     ],
     'email_notifications': [  # part of aldryn_forms package
         # Changing choices= because the project version has b'default' instead of 'default'
