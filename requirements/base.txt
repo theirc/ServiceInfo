@@ -120,4 +120,5 @@ aldryn-forms==2.0.4
   # django-filer
   django-sizefield==0.9
   # aldryn-boilerplates
+djangocms-snippet==1.8.2
 elasticsearch==2.1.0
