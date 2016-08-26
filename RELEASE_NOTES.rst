@@ -2,6 +2,11 @@ ServiceInfo
 
 Release Notes
 
+0.5.4 - Aug. 26, 2016
+---------------------
+
+* Integrate djangocms-snippet CMS plugin
+
 0.5.3 - Feb. 29, 2016
 ---------------------
 
