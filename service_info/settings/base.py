@@ -301,6 +301,7 @@ INSTALLED_APPS = (
     'aldryn_forms.contrib.email_notifications',
     'captcha',
     'emailit',
+    'djangocms_snippet',
     # End Django CMS
     # Load after easy_thumbnails so that its thumbnail template tag (unused
     # in this project) is hidden.
