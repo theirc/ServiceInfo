@@ -67,7 +67,7 @@ local development system:
 - `pip >= 6.1.0 <http://www.pip-installer.org/>`_
 - `virtualenv >= 1.11 <http://www.virtualenv.org/>`_
 - `virtualenvwrapper >= 3.0 <http://pypi.python.org/pypi/virtualenvwrapper>`_
-- Postgres >= 9.1 (9.3 recommended)
+- Postgres >= 9.1 (9.4 recommended)
 - PostGIS
 - git >= 1.7
 - node
