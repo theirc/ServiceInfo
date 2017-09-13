@@ -5,7 +5,10 @@ python:
 services:
   - postgresql
 addons:
-  postgresql: '9.4'
+  postgresql: '9.5'
+  apt:
+    packages:
+    - postgresql-9.5-postgis-2.3cache:
 cache:
   directories:
     - $HOME/.cache/pip
