@@ -24,7 +24,7 @@ install:
 before_script:
 - createdb -E UTF-8 service_info -U postgres -O $USER
 - psql service_info -c "CREATE EXTENSION postgis;" -U postgres
-- $TRAVIS_BUILD_DIR/node_modules/.bin/gulp build
+- gulp build
 script:
 - coverage run manage.py test
 - coverage report -m --fail-under 60
