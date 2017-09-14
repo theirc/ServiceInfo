@@ -8,7 +8,7 @@ Overview
 This project is deployed on the following stack.
 
 - OS: Ubuntu 14.04 LTS
-- Python: 3.4
+- Python: 3
 - Database: Postgres 9.4
 - Application Server: Gunicorn
 - Frontend Server: Nginx
@@ -24,7 +24,7 @@ We've used this AWS AMI::
 Initial Setup
 ------------------------
 
-This project uses Python 3.4.  Because Fabric does not support Python 3, you will need Fabric
+This project uses Python 3.  Because Fabric does not support Python 3, you will need Fabric
 installed on your laptop "globally" so that when you run ``fab``, it will not be found in your
 virtualenv, but will then be found in your global environment::
 
