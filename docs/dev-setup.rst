@@ -191,3 +191,23 @@ Celery
 Use this to run a single worker with the "beat" task scheduler::
 
     celery -B -A service_info worker -l debug
+
+Using the staging or production database and media locally
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Changes relating to the CMS, such as those affecting page templates and styles
+or CMS plugins, should be tested locally with the staging and/or production
+databases and media in order to check how the existing content will be affected.
+The procedure uses commands in both the ServiceInfo and ServiceInfo-ircdeploy
+repositories::
+
+    $ cd ServiceInfo-ircdeploy
+    $ workon virtualenv-with-fab
+    $ fab production reset_local_db
+    $ fab production reset_local_media:../ServiceInfo
+    $ cd ../ServiceInfo
+    $ workon virtualenv-for-ServiceInfo
+    $ ./manage.py migrate
+    $ ./manage.py change_cms_site --from=serviceinfo.rescue.org --to=localhost:8000
+    # If using search locally
+    $ ./manage.py rebuild_index --noinput
