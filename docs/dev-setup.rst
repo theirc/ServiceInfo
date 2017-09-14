@@ -49,7 +49,7 @@ http://nodejs.org/download/ and follow the standard build instructions::
     cd ..
 
 WARNING: Do not build node while your ServiceInfo virtualenv is active.
-Node expects Python 2.7 and our virtualenv uses 3.4.
+Node expects Python 2.7 and our virtualenv uses Python 3.
 
 With Node installed, you can install all frontend dependencies with `npm`::
 
@@ -63,11 +63,11 @@ Below you will find basic setup instructions for the
 project. To begin you should have the following applications installed on your
 local development system:
 
-- Python == 3.4
+- Python == 3
 - `pip >= 6.1.0 <http://www.pip-installer.org/>`_
 - `virtualenv >= 1.11 <http://www.virtualenv.org/>`_
 - `virtualenvwrapper >= 3.0 <http://pypi.python.org/pypi/virtualenvwrapper>`_
-- Postgres >= 9.1 (9.3 recommended)
+- Postgres >= 9.1 (9.5 recommended)
 - PostGIS
 - git >= 1.7
 - node
@@ -81,16 +81,16 @@ forwarding if it is not already by adding ``ForwardAgent yes`` to your SSH confi
 Getting Started
 ~~~~~~~~~~~~~~~
 
-If you need Python 3.4 installed on Ubuntu, you can use this PPA::
+If you need Python 3 installed on Ubuntu, you can use this PPA::
 
     sudo add-apt-repository ppa:fkrull/deadsnakes
     sudo apt-get update
-    sudo apt-get install python3.4-dev
+    sudo apt-get install python3-dev
 
 To setup your local environment you should create a virtualenv and install the
 necessary requirements::
 
-    mkvirtualenv --python=<path>/python3.4 serviceinfo
+    mkvirtualenv --python=<path>/python3 serviceinfo
     pip install -U pip
     pip install -U -r requirements/dev.txt
 

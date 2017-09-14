@@ -2,14 +2,19 @@ language: python
 sudo: false
 python:
 - '3.4'
+services:
+  - postgresql
 addons:
-  postgresql: '9.3'
+  postgresql: '9.5'
+  apt:
+    packages:
+    - postgresql-9.5-postgis-2.3
 cache:
   directories:
     - $HOME/.cache/pip
     - node_modules
 env:
-- DJANGO_SETTINGS_MODULE="service_info.settings.dev"
+- DJANGO_SETTINGS_MODULE="service_info.settings.dev" PATH="$TRAVIS_BUILD_DIR/node_modules/.bin:$PATH"
 install:
 - pip install -U pip
 - pip install -r requirements/dev.txt
