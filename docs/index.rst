@@ -38,6 +38,7 @@ Contents:
    provisioning
    server-setup
    vagrant
+   backups
 
 
 Indices and tables
