@@ -45,10 +45,14 @@ Drop your existing local database and restore from the backup::
 There will be a bunch of errors related to the fact that the production dump has roles which your
 local DB doesn't have. It's OK to ignore them.
 
-Migrate and update the CMS 'site' so that your local server uses production content::
+Migrate the database::
 
     $ workon serviceinfo
     $ ./manage.py migrate --noinput
+
+Next, we need to copy the production CMS content to your local site. The value 'localhost:8000' is
+special because the 'Domain Name' is hard-coded to that value in the Django admin ("Sites" app)::
+
     $ ./manage.py change_cms_site --from=serviceinfo.rescue.org --to=localhost:8000
 
 Update your media directory with the media from production::
@@ -80,6 +84,7 @@ Run the ``refresh_from_backup`` command. It takes one parameter, which is an abs
 path to the main ServiceInfo project directory on your laptop (Mine is in a sibling directory named
 ``serviceinfo``)::
 
+    $ workon virtualenv-with-fab
     $ fab staging refresh_from_backup:../serviceinfo
 
 This command uploads the database dump and media to staging, stops the web server, imports the dump,
