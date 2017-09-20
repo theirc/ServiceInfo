@@ -88,7 +88,7 @@ aldryn-newsblog==1.0.12
     # django-treebeard
   # aldryn-common
   aldryn-people==1.1.3
-    phonenumbers==8.8.1
+    phonenumbers==7.1.1
     django-phonenumber-field==0.7.2
     # many others already listed
   # aldryn-reversion
