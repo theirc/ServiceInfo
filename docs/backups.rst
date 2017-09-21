@@ -50,8 +50,8 @@ Migrate the database::
     $ workon serviceinfo
     $ ./manage.py migrate --noinput
 
-Next, we need to copy the production CMS content to your local site. The value 'localhost:8000' is
-special because the 'Domain Name' is hard-coded to that value in the Django admin ("Sites" app)::
+Next, we need to update the site name in the CMS data. The value 'localhost:8000' is special because
+the 'Domain Name' is hard-coded to that value in the Django admin ("Sites" app)::
 
     $ ./manage.py change_cms_site --from=serviceinfo.rescue.org --to=localhost:8000
 
