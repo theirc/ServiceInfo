@@ -34,4 +34,5 @@ node_modules
 bundle_min.js
 feedback-help.hbs
 service_info.log.*
+service_info*.sql
 _build/

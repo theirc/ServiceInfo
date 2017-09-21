@@ -2,6 +2,11 @@ ServiceInfo
 
 Release Notes
 
+0.6.0 - Sept. 21, 2017
+----------------------
+
+* Add documentation for restoring site from backups
+
 0.5.4 - Aug. 26, 2016
 ---------------------
 
